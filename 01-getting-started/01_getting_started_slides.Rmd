@@ -1,7 +1,7 @@
 ---
 title: Getting Started with R and Rstudio
 author: Meike Niederhausen, PhD & Jessica Minnier, PhD
-date: BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd01
+date: 'BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd01'
 output: 
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts]
@@ -29,6 +29,7 @@ knitr::opts_chunk$set(
   comment=NA, 
   rows.print=16,
   echo=TRUE)
+
 theme_set(theme_bw(base_size = 24))
 ```
 
@@ -40,17 +41,28 @@ theme_set(theme_bw(base_size = 24))
 - Who has used R?
 - Why do you want to learn R?
 
+---
+
 # What is R?
 
-
+---
 # What is Rstudio?
+---
 
+# Rstudio map
+
+![pic](http://www-users.york.ac.uk/~er13/RStudio%20Anatomy.svg)
+
+---
 
 # Stuff
 
 - tour of Rstudio
-- show cheatsheet
+- use console
+- make an R file and save it
 
+---
 
 # Resources
 
+- [Rstudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
