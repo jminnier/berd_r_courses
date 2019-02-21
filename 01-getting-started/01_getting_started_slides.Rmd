@@ -1,7 +1,7 @@
 ---
-title: '<font style="color: darkblue;">Getting Started with R and Rstudio</font>'
-author: "<br> Meike Niederhausen, PhD & Jessica Minnier, PhD" 
-date: 'BERD Workshop <br><br> 2019/02/26 <br> Slides available at  <font style="text-transform: lowercase;"><http://bit.ly/berd01></font> <br>'
+title: Getting Started with R and Rstudio
+author: Meike Niederhausen, PhD & Jessica Minnier, PhD
+date: BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd01
 output: 
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts]
@@ -11,13 +11,46 @@ output:
       highlightLines: true
       highlightLanguage: r
       countIncrementalSlides: false
+    includes:
+      in_header: ../header.html   
     #css: ../jminnier.css
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  fig.width=10.5, 
+  fig.height=4, 
+  comment=NA, 
+  rows.print=16,
+  echo=TRUE)
+theme_set(theme_bw(base_size = 24))
 ```
 
-## R
 
-## More R
+# Introduction 
+
+## Questions
+
+- Who has used R?
+- Why do you want to learn R?
+
+# What is R?
+
+
+# What is Rstudio?
+
+
+# Stuff
+
+- tour of Rstudio
+- show cheatsheet
+
+
+# Resources
+
