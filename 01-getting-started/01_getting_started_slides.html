@@ -34,25 +34,73 @@ class: center, middle, inverse, title-slide
 
 # Learning Objectives
 
+- Basic operations in R/Rstudio
+- Understand data structures
+- Be able to load in data
+- Basic operations on data
+- Be able to make a plot
+- Know how to get help
 
 ---
 
-# What is R?
+# What is R? 
+
+.pull-left[
+- A programming language
+- Focus on statistical modeling and data analysis
+    + import data, maniupulate data, run statistics, make plots
+- Useful for "Data Science"
+- Great visualizations
+- Also useful for most anything else you'd want to tell a computer to do
+- Interfaces with other languages i.e. python, C++, bash
+
+]
+
+
+.pull-right[
+![](img/R_logo.png)
+]
+
+
+For the history and details: [Wikipedia](https://bit.ly/1efFmaY)
+
+- an interpreted language (run it through a command line)
+- proceduaral programming with functions
+- Why "R"?? Scheme (?) inspired S (invented at Bell Labs in 1976) which inspired R (**free and open source!** in 1993)
+
+
 
 ---
+
 # What is Rstudio?
+
+![](img/01_md_rstudio.png)
+
+- R is a programming language
+- Rstudio is an integrated developement environment (IDE) = an interface to use R (with perks!)
+
+from [Modern Dive](https://moderndive.com/2-getting-started.html); see also [DataCamp's video discussion on the difference](https://campus.datacamp.com/courses/working-with-the-rstudio-ide-part-1/orientation?ex=1)
 ---
 
-# Rstudio map
+# Open Rstudio
+
+![](img/01_md_r.png)
+
+from [Modern Dive](https://moderndive.com/2-getting-started.html)
+
+---
+
+# Rstudio anatomy
 
 ![pic](http://www-users.york.ac.uk/~er13/RStudio%20Anatomy.svg)
 
 ---
 
-# Stuff
+# Show stuff
 
 - tour of Rstudio
 - use console
+- run some code
 - make an R file and save it
 - add some code
 
@@ -76,14 +124,27 @@ class: center, middle, inverse, title-slide
 Interactive lessons
 
 - [DataCamp](www.datacamp.com)
+    + [Introduction to R (free course)](https://www.datacamp.com/courses/free-introduction-to-r)
+    + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+    + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
 
 Much of this is drawn from materials in online books/lessons:
 
 - [Intro to R/Rstudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+
+---
+
+# Possible Future Workshop Topics?
+
+- data wrangling with the tidyverse
+- reproducible reports in R
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr
+- statistical modeling in R
     </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "tomorrow-night-bright",
@@ -94,57 +155,16 @@ Much of this is drawn from materials in online books/lessons:
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
-})(document);
-
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
 })();</script>
 
 <script>
 (function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
-
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
+  var i, text, code, codes = document.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -158,8 +178,7 @@ slideshow._releaseMath = function(el) {
     }
     i++;
   }
-};
-slideshow._releaseMath(document);
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

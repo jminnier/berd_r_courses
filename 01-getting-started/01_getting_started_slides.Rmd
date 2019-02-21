@@ -45,25 +45,73 @@ theme_set(theme_bw(base_size = 24))
 
 # Learning Objectives
 
+- Basic operations in R/Rstudio
+- Understand data structures
+- Be able to load in data
+- Basic operations on data
+- Be able to make a plot
+- Know how to get help
 
 ---
 
-# What is R?
+# What is R? 
+
+.pull-left[
+- A programming language
+- Focus on statistical modeling and data analysis
+    + import data, maniupulate data, run statistics, make plots
+- Useful for "Data Science"
+- Great visualizations
+- Also useful for most anything else you'd want to tell a computer to do
+- Interfaces with other languages i.e. python, C++, bash
+
+]
+
+
+.pull-right[
+![](img/R_logo.png)
+]
+
+
+For the history and details: [Wikipedia](https://bit.ly/1efFmaY)
+
+- an interpreted language (run it through a command line)
+- proceduaral programming with functions
+- Why "R"?? Scheme (?) inspired S (invented at Bell Labs in 1976) which inspired R (**free and open source!** in 1993)
+
+
 
 ---
+
 # What is Rstudio?
+
+![](img/01_md_rstudio.png)
+
+- R is a programming language
+- Rstudio is an integrated developement environment (IDE) = an interface to use R (with perks!)
+
+from [Modern Dive](https://moderndive.com/2-getting-started.html); see also [DataCamp's video discussion on the difference](https://campus.datacamp.com/courses/working-with-the-rstudio-ide-part-1/orientation?ex=1)
 ---
 
-# Rstudio map
+# Open Rstudio
+
+![](img/01_md_r.png)
+
+from [Modern Dive](https://moderndive.com/2-getting-started.html)
+
+---
+
+# Rstudio anatomy
 
 ![pic](http://www-users.york.ac.uk/~er13/RStudio%20Anatomy.svg)
 
 ---
 
-# Stuff
+# Show stuff
 
 - tour of Rstudio
 - use console
+- run some code
 - make an R file and save it
 - add some code
 
@@ -87,10 +135,25 @@ theme_set(theme_bw(base_size = 24))
 Interactive lessons
 
 - [DataCamp](www.datacamp.com)
+    + [Introduction to R (free course)](https://www.datacamp.com/courses/free-introduction-to-r)
+    + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+    + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
 
 Much of this is drawn from materials in online books/lessons:
 
 - [Intro to R/Rstudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+
+---
+
+# Possible Future Workshop Topics?
+
+- data wrangling with the tidyverse
+- reproducible reports in R
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr
+- statistical modeling in R
+
 
