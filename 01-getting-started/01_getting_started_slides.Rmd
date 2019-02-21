@@ -1,6 +1,6 @@
 ---
 title: '<font style="color: darkblue;">Getting Started with R and Rstudio</font>'
-author: "<br> Meike Niederhausen, PhD <br> & Jessica Minnier, PhD" 
+author: "<br> Meike Niederhausen, PhD & Jessica Minnier, PhD" 
 date: 'BERD Workshop <br><br> 2019/02/26 <br> Slides available at  <font style="text-transform: lowercase;"><http://bit.ly/berd01></font> <br>'
 output: 
   xaringan::moon_reader:
