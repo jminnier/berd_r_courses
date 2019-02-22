@@ -1,7 +1,7 @@
 ---
 title: Getting Started with R and Rstudio
 author: Meike Niederhausen, PhD & Jessica Minnier, PhD
-date: 'BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_01'
+date: 'BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r01'
 output: 
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts]

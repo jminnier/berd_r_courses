@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 
 # Getting Started with R and Rstudio
 ### Meike Niederhausen, PhD &amp; Jessica Minnier, PhD
-### BERD Workshop <br><br> 2019/02/26 <br> Slides available at <a href="http://bit.ly/berd_r_01" class="uri">http://bit.ly/berd_r_01</a>
+### BERD Workshop <br><br> 2019/02/26 <br> Slides available at <a href="http://bit.ly/berd_r01" class="uri">http://bit.ly/berd_r01</a>
 
 ---
 
@@ -312,19 +312,13 @@ Built in datasets like `iris`
 6          5.4         3.9          1.7         0.4  setosa
 ```
 
-
-## From a package
-
-Copy this code and run:
-
+From a file
 
 
 ```r
-install.packages("devtools") # only do this once
-library(devtools)
-install_github("hadley/yrbss")
-library(yrbss)
+&gt; mydata &lt;- read_csv("data.csv")
 ```
+
 ---
 
 # Types of objects
