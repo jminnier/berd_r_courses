@@ -244,18 +244,12 @@ Built in datasets like `iris`
 head(iris)
 ```
 
+From a file
 
-## From a package
-
-Copy this code and run:
-
-
-```{r, prompt=FALSE, eval=FALSE}
-install.packages("devtools") # only do this once
-library(devtools)
-install_github("hadley/yrbss")
-library(yrbss)
+```{r, eval=FALSE}
+mydata <- read_csv("data.csv")
 ```
+
 ---
 
 # Types of objects
