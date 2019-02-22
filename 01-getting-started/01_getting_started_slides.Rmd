@@ -1,0 +1,300 @@
+---
+title: Getting Started with R and Rstudio
+author: Meike Niederhausen, PhD & Jessica Minnier, PhD
+date: 'BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_01'
+output: 
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts]
+    lib_dir: libs
+    nature:
+      highlightStyle: rainbow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+    includes:
+      in_header: ../header.html   
+    #css: ../jminnier.css
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  fig.width=10.5, 
+  fig.height=4, 
+  comment=NA, 
+  rows.print=16,
+  echo=TRUE,
+  prompt = TRUE # adds a > before each code
+  )
+
+theme_set(theme_bw(base_size = 24))
+```
+
+
+# Questions
+
+- Who has used R?
+- Why do you want to learn R?
+
+---
+
+# Learning Objectives
+
+- Basic operations in R/Rstudio
+- Understand data structures
+- Be able to load in data
+- Basic operations on data
+- Be able to make a plot
+- Know how to get help
+
+---
+class: center, inverse, middle
+
+# Introduction
+
+Rrrrrr?
+
+---
+
+# What is R? 
+
+.pull-left[
+- A programming language
+- Focus on statistical modeling and data analysis
+    + import data, maniupulate data, run statistics, make plots
+- Useful for "Data Science"
+- Great visualizations
+- Also useful for most anything else you'd want to tell a computer to do
+- Interfaces with other languages i.e. python, C++, bash
+
+]
+
+
+.pull-right[
+![](img/R_logo.png)
+]
+
+
+For the history and details: [Wikipedia](https://bit.ly/1efFmaY)
+
+- an interpreted language (run it through a command line)
+- proceduaral programming with functions
+- Why "R"?? Scheme (?) inspired S (invented at Bell Labs in 1976) which inspired R (**free and open source!** in 1993)
+
+
+
+---
+
+# What is Rstudio?
+
+![](img/01_md_rstudio.png)
+
+- R is a programming language
+- Rstudio is an integrated developement environment (IDE) = an interface to use R (with perks!)
+
+from [Modern Dive](https://moderndive.com/2-getting-started.html); see also [DataCamp's video discussion on the difference](https://campus.datacamp.com/courses/working-with-the-rstudio-ide-part-1/orientation?ex=1)
+---
+
+# Start Rstudio
+
+![](img/01_md_r.png)
+
+from [Modern Dive](https://moderndive.com/2-getting-started.html)
+
+---
+
+# Rstudio anatomy
+
+![](img/RStudio_Anatomy.svg)
+
+---
+
+# Show stuff
+
+- tour of Rstudio
+- use console
+- run some code
+- make an R file and save it
+- add some code
+
+---
+
+# Practice on your own
+
+- create a folder on your computer
+- set your working directory in Rstudio to that folder
+- make a new script and save it as `practice.R` in your folder
+
+(Note: later using `Projects` will make this easier)
+
+---
+
+class: center, inverse, middle
+
+# Coding and Data Structures
+
+We are real coders, now...
+
+---
+
+# Code
+
+Type code in the console, or in an R script
+
+```{r}
+"hello"
+
+3 + 5
+
+# this is a comment
+# nothing happens
+# y = 5
+```
+
+
+---
+
+# Variables
+
+Data, information, everything is stored as a variable
+
+```{r}
+x = 5
+x
+x <- 5
+x
+
+y <- 1:5
+y
+```
+
+---
+
+# We can do math
+
+```{r}
+x <- 5
+x
+
+x + 3
+
+y <- x^2
+y
+
+log2(y)
+```
+
+
+
+---
+
+# Data
+
+```{r}
+head(iris)
+```
+
+```{r}
+# Quickly make a plot
+hist(iris$Sepal.Length)
+```
+
+---
+
+# Installing and using packages
+
+Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
+
+## CRAN = package mothership
+
+[Comprehensive R Archive Network](https://cran.r-project.org/)
+
+```{r, eval = FALSE}
+# Install a package from CRAN (main package repository)
+install.packages("tidyverse")
+# Load the package
+library(tidyverse)
+```
+
+## Other places (i.e. github) = wild west
+
+```{r, eval=FALSE}
+install.packages("devtools")
+library(devtools)
+# Install a package from github (often in development, no testing)
+# https://github.com/hadley/yrbss
+install_github("hadley/yrbss")
+library(yrbss)
+```
+
+
+---
+
+# Load a data set
+
+Built in datasets like `iris`
+
+```{r}
+# head function shows the top 6 rows
+head(iris)
+```
+
+
+## From a package
+
+Copy this code and run:
+
+
+```{r, prompt=FALSE, eval=FALSE}
+install.packages("devtools") # only do this once
+library(devtools)
+install_github("hadley/yrbss")
+library(yrbss)
+```
+---
+
+# Types of objects
+
+
+
+
+
+
+---
+
+# Resources
+
+- [Rstudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
+- Install R/Rstudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&feature=youtu.be)
+- [Basic Basics](http://rladiessydney.org/post/2018/11/05/basicbasics/)
+
+Interactive lessons
+
+- [DataCamp](www.datacamp.com)
+    + [Introduction to R (free course)](https://www.datacamp.com/courses/free-introduction-to-r)
+    + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+    + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
+
+Much of this is drawn from materials in online books/lessons:
+
+- [Intro to R/Rstudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
+- [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+
+---
+
+# Possible Future Workshop Topics?
+
+- data wrangling with the tidyverse
+- reproducible reports in R
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr
+- statistical modeling in R
+
+
