@@ -1,7 +1,7 @@
 ---
 title: Getting Started with R and Rstudio
-author: Meike Niederhausen, PhD & Jessica Minnier, PhD
-date: 'BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r01'
+author: Jessica Minnier, PhD & Meike Niederhausen, PhD
+date: 'OHSU BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_intro'
 output: 
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts]
@@ -26,10 +26,12 @@ knitr::opts_chunk$set(
   message=FALSE, 
   fig.width=10.5, 
   fig.height=4, 
-  comment=NA, 
   rows.print=16,
   echo=TRUE,
-  prompt = TRUE # adds a > before each code
+  highlight = TRUE,
+  prompt = TRUE, # IF TRUE adds a > before each code input
+  comment=NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  #comment=NA
   )
 
 theme_set(theme_bw(base_size = 24))
@@ -248,6 +250,7 @@ From a file
 
 ```{r, eval=FALSE}
 mydata <- read_csv("data.csv")
+mydata <- read_csv("http://bit.ly/berd_data_csv")
 ```
 
 ---
