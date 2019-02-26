@@ -132,6 +132,8 @@ from [Modern Dive](https://moderndive.com/2-getting-started.html)
 
 ![](img/RStudio_Anatomy.svg)
 
+from [Emma Rand](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html#what_are_r_and_rstudio)
+
 ---
 
 # Rstudio demo
