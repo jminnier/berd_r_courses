@@ -349,7 +349,7 @@ Example:
 
 --
 
-__Obejct is not found__
+__Object is not found__
 
 * This happens when text is entered for a non-existent variable (object)
 

@@ -1,0 +1,280 @@
+---
+title: Getting Started with R and RStudio
+author: Jessica Minnier, PhD & Meike Niederhausen, PhD
+date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_intro <br> pdf version: http://bit.ly/berd_r_intro_pdf'
+output: 
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, mycss.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: rainbow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+    includes:
+      in_header: ../header.html   
+    #css: ../jminnier.css
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  fig.width=10.5, 
+  fig.height=4,
+  fig.align = "center",
+  rows.print=16,
+  echo=TRUE,
+  highlight = TRUE,
+  prompt = TRUE, # IF TRUE adds a > before each code input
+  comment=NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  #comment=NA
+  )
+
+theme_set(theme_bw(base_size = 24))
+```
+
+
+---
+
+# Practice questions
+
+1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+2. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+3. What is the sum of `a1` and `a2`? 
+
+4. What does the command `sum(a1)` do?
+
+5. What does the command `length(a1)` do?
+
+6. Use the commands to calculate the average of the values in `a1`.
+
+7. The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
+
+8. Compute the sum of the squares of all integers from 1 to 100.
+
+9. Take a break!
+
+
+---
+
+# Answers to practice questions (1/4)
+
+__#1__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+__#2__ Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+```{r}
+a1 <- 4:10
+a2 <- c(4, 6, 8, 10)
+```
+
+
+__#3__ What is the sum of `a1` and `a2`? 
+
+````{r warning=TRUE}
+a1+a2
+````
+
+Note that instead of giving an error, the terms of `a1` are repeated as needed since `a2` is longer than `a1`
+
+
+---
+
+# Answers to practice questions (2/4)
+
+__#4__ What does the command `sum(a1)` do?
+
+```{r}
+sum(a1)
+```
+
+`sum` adds up the values in the vector
+
+<br>
+
+__#5__ What does the command `length(a1)` do?
+
+```{r}
+length(a1)
+```
+
+`length` is the number of values in the vector
+
+---
+
+# Answers to practice questions (3/4)
+
+__#6__ Use the commands to calculate the average of the values in `a1`.
+
+```{r}
+sum(a1) / length(a1)
+```
+
+
+__#7__ The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
+
+```{r}
+sum(1:100)
+# verify formula for n=100:
+n=100
+n * (n+1) / 2
+```
+
+
+---
+
+# Answers to practice questions (4/4)
+
+__#8__ Compute the sum of the squares of all integers from 1 to 100.
+
+```{r}
+# The following code creates a vector of the squares of all integers from 1 to 100
+(1:100)^2
+
+# Now add the squares:
+sum((1:100)^2)
+```
+
+
+---
+
+```{r echo=FALSE}
+mydata <- read.csv(url("http://bit.ly/berd_data_csv"))
+
+# Add height column to data frame
+mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi)
+
+```
+
+
+# Practice
+
+1. Create data frames for males and females separately.
+
+2. Do males and females have similar BMI's? Weights? Compares means, standard deviations, range, and boxplots.
+
+3. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+4. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+5. Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
+
+
+---
+
+# Practice Answers (1/7)
+
+__#1__ Create data frames for males and females separately.
+
+```{r}
+boys <- mydata[mydata$sex == "Male", ]
+girls <- mydata[mydata$sex == "Female", ]
+```
+
+
+---
+
+# Practice Answers (2/7)
+
+__#2__ Do males and females have similar BMI's? Weights? Compares means, standard deviations, range, and boxplots.
+
+```{r}
+summary(boys$bmi); sd(boys$bmi)
+summary(girls$bmi); sd(girls$bmi)
+```
+
+---
+
+# Practice Answers (3/7)
+
+__#2__ cont'd
+
+```{r fig.height=5}
+boxplot(mydata$bmi ~ mydata$sex)
+```
+
+
+---
+
+# Practice Answers (4/7)
+
+__#3__ Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+.pull-left[
+```{r fig.height=5, fig.width=4}
+plot(boys$bmi, boys$weight)
+```
+
+]
+
+.pull-right[
+
+```{r fig.height=5, fig.width=4}
+plot(girls$bmi, girls$weight)
+```
+
+]
+
+
+
+---
+
+# Practice Answers (5/7)
+
+__#4__ Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+```{r}
+bullied_boys <- boys[boys$bullied_past_12mo == TRUE,]
+nrow(bullied_boys)
+bullied_boys_prct <- nrow(bullied_boys) / nrow(boys) * 100; bullied_boys_prct
+
+bullied_girls <- girls[girls$bullied_past_12mo == TRUE,]
+nrow(bullied_girls)
+bullied_girls_prct <- nrow(bullied_girls) / nrow(girls) * 100; bullied_girls_prct
+```
+
+
+---
+
+# Practice Answers (6/7)
+
+__#5__ Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
+
+```{r}
+bullied_yes <- mydata[mydata$bullied_past_12mo == TRUE,]
+bullied_no <- mydata[mydata$bullied_past_12mo == FALSE,]
+
+# Not bullied students have higher proportion of smokers
+summary(bullied_yes$smoked_ever)
+summary(bullied_no$smoked_ever)
+```
+ 
+---
+
+# Practice Answers (7/7)
+
+__#5__ cont'd
+
+```{r}
+# Vary by gender? Not really.
+summary(bullied_yes[bullied_yes$sex == "Male", "smoked_ever"])
+summary(bullied_yes[bullied_yes$sex == "Female", "smoked_ever"])
+
+summary(bullied_no[bullied_no$sex == "Male", "smoked_ever"])
+summary(bullied_no[bullied_no$sex == "Female", "smoked_ever"])
+```
+
+
+```{r, include=FALSE}
+#knitr::purl("01-getting-started/01_getting_started_Practice_Answers.Rmd")
+```
+
