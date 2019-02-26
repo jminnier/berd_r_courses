@@ -1,7 +1,7 @@
 ---
 title: Getting Started with R and RStudio
 author: Jessica Minnier, PhD & Meike Niederhausen, PhD
-date: 'OHSU BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_intro <br> pdf version: http://bit.ly/berd_r_intro_pdf'
+date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_intro <br> pdf version: http://bit.ly/berd_r_intro_pdf'
 output: 
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts, mycss.css]
@@ -990,3 +990,9 @@ Some of this is drawn from materials in online books/lessons:
 <br> <br>
 
 Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+
+
+```{r}
+#knitr::purl("01-getting-started/01_getting_started_slides.Rmd")
+```
+
