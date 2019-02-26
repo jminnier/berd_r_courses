@@ -989,10 +989,12 @@ Some of this is drawn from materials in online books/lessons:
 
 <br> <br>
 
-Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+## This workshop info:
 
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.R)
 
-```{r}
+```{r, include=FALSE}
 #knitr::purl("01-getting-started/01_getting_started_slides.Rmd")
 ```
 
