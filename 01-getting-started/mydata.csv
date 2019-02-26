@@ -1,0 +1,21 @@
+"id","age","sex","grade","race4","bmi","weight","text_while_driving_30d","smoked_ever","bullied_past_12mo","weight_kg","height_m"
+335340,"17 years old","Female","10th","White",27.5671,3.1945,NA,NA,NA,3.1945,0.340412818500358
+638618,"16 years old","Female","9th",NA,29.3495,1.0206,NA,"Yes",NA,1.0206,0.186477925216707
+922382,"14 years old","Male","9th","White",18.1827,2.0312,NA,"Yes",FALSE,2.0312,0.334231330124468
+923122,"15 years old","Male","9th","White",21.3754,0.5954,NA,"Yes",FALSE,0.5954,0.166896523353177
+923963,"15 years old","Male","10th","Black or African American",19.5988,0.6833,NA,"No",TRUE,0.6833,0.186720056372644
+925603,"16 years old","Male","10th","All other races",22.191,0.8456,NA,"No",TRUE,0.8456,0.195206399181188
+933724,"16 years old","Female","10th","All other races",20.9913,0.4695,NA,"Yes",TRUE,0.4695,0.149554033515806
+935435,"17 years old","Female","12th","All other races",17.4814,0.8511,NA,"No",FALSE,0.8511,0.220649115137963
+1096564,"15 years old","Male","10th","All other races",22.4593,1.2463,NA,NA,TRUE,1.2463,0.235566315607898
+1108114,"17 years old","Female","9th","Black or African American",26.5781,0.8134,NA,"No",FALSE,0.8134,0.174940401318004
+1306150,"16 years old","Male","10th","Hispanic/Latino",21.1874,2.322,"0 days",NA,FALSE,2.322,0.331048995783321
+1307481,"17 years old","Male","12th","Hispanic/Latino",19.4637,0.2678,"1 or 2 days","No",FALSE,0.2678,0.117298534265201
+1307872,"17 years old","Male","11th","Hispanic/Latino",20.6121,0.8173,"1 or 2 days","No",FALSE,0.8173,0.199126760775256
+1311617,"15 years old","Female","10th","Hispanic/Latino",27.4648,0.4251,"0 days","No",TRUE,0.4251,0.124410584959857
+1313153,"16 years old","Female","11th","Hispanic/Latino",26.5781,0.5173,"0 days","No",TRUE,0.5173,0.139511264037406
+1313291,"16 years old","Female","11th","White",24.8047,1.1997,"3 to 5 days","No",FALSE,1.1997,0.219922336051577
+1313477,"16 years old","Female","10th","All other races",25.0318,0.9901,"0 days","No",TRUE,0.9901,0.198881089370593
+1315121,"17 years old","Female","11th",NA,22.2687,4.4926,"I did not drive the past 30 days","Yes",FALSE,4.4926,0.449160383635344
+1315850,"17 years old","Female","12th","Hispanic/Latino",19.4922,0.8376,"0 days",NA,FALSE,0.8376,0.207294559908535
+1316123,"18 years old or older","Female","12th","Black or African American",27.4894,0.2913,"All 30 days","Yes",FALSE,0.2913,0.102940817278798

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Getting Started with R and Rstudio</title>
+    <title>Getting Started with R and RStudio</title>
     <meta charset="utf-8">
     <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
@@ -13,7 +13,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Getting Started with R and Rstudio
+# Getting Started with R and RStudio
 ### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD
 ### OHSU BERD Workshop <br><br> 2019/02/26 <br> Slides available at <a href="http://bit.ly/berd_r_intro" class="uri">http://bit.ly/berd_r_intro</a>
 
@@ -32,7 +32,7 @@ class: center, middle, inverse, title-slide
 
 # Learning Objectives
 
-- Basic operations in R/Rstudio
+- Basic operations in R/RStudio
 - Understand data structures
 - Be able to load in data
 - Basic operations on data
@@ -53,7 +53,7 @@ Rrrrrr?
 .pull-left[
 - A programming language
 - Focus on statistical modeling and data analysis
-    + import data, maniupulate data, run statistics, make plots
+    + import data, manipulate data, run statistics, make plots
 - Useful for "Data Science"
 - Great visualizations
 - Also useful for most anything else you'd want to tell a computer to do
@@ -70,24 +70,24 @@ Rrrrrr?
 For the history and details: [Wikipedia](https://bit.ly/1efFmaY)
 
 - an interpreted language (run it through a command line)
-- proceduaral programming with functions
+- procedural programming with functions
 - Why "R"?? Scheme (?) inspired S (invented at Bell Labs in 1976) which inspired R (**free and open source!** in 1993)
 
 
 
 ---
 
-# What is Rstudio?
+# What is RStudio?
 
 ![](img/01_md_rstudio.png)
 
 - R is a programming language
-- Rstudio is an integrated developement environment (IDE) = an interface to use R (with perks!)
+- RStudio is an integrated development environment (IDE) = an interface to use R (with perks!)
 
 from [Modern Dive](https://moderndive.com/2-getting-started.html); see also [DataCamp's video discussion on the difference](https://campus.datacamp.com/courses/working-with-the-rstudio-ide-part-1/orientation?ex=1)
 ---
 
-# Start Rstudio
+# Start RStudio
 
 ![](img/01_md_r.png)
 
@@ -95,7 +95,7 @@ from [Modern Dive](https://moderndive.com/2-getting-started.html)
 
 ---
 
-# Rstudio anatomy
+# RStudio anatomy
 
 ![](img/RStudio_Anatomy.svg)
 
@@ -103,7 +103,7 @@ from [Modern Dive](https://moderndive.com/2-getting-started.html)
 
 # Show stuff
 
-- tour of Rstudio
+- tour of RStudio
 - use console
 - run some code
 - make an R file and save it
@@ -121,7 +121,7 @@ __Typing and execting code in the console __
 &lt;br&gt;
 
 _Coding in the console is not advisable for most situations!_
-* We only reccomend this for short pieces of code that you don't need to save
+* We only recommend this for short pieces of code that you don't need to save
 ]
 
 
@@ -198,6 +198,7 @@ _Coding in the console is not advisable for most situations!_
 ```
 ]
 
+--
 
 .pull-right[
 R follows the rules for order of operations and ignores spaces between numbers (or objects)
@@ -210,6 +211,7 @@ R follows the rules for order of operations and ignores spaces between numbers (
 ```
 [1] 54.5
 ```
+
 
 The equation above is computed as `$$4^3 − (2 \cdot 7) + \frac{9}{2}$$` 
 ]
@@ -241,6 +243,7 @@ Logarithms: `log()` is base `\(e\)`
 
 ]
 
+--
 
 .pull-right[
 Exponentials
@@ -263,6 +266,8 @@ Exponentials
 ]
 
 &lt;br&gt;
+
+--
 
 Check that `log()` is base `\(e\)`
 
@@ -306,6 +311,7 @@ Assigning just one value:
 ```
 ]
 
+--
 
 .pull-right[
 Assigning a __vector__ of values
@@ -369,6 +375,7 @@ Math on variables with just one value
 ```
 ]
 
+--
 
 .pull-right[
 Math on vectors of values: element-wise computation
@@ -436,23 +443,37 @@ Math on vectors of values: element-wise computation
 
 # Common console errors 
  
-&lt;!-- UPDATE  --&gt;
-* A command was not completed 
-  _ When R is waiting for a new command the prompt line will begin with `&gt;`
+__Incomplete commands__ 
+
+.pull-left[
+* When the console is waiting for a new command, the prompt line begins with `&gt;`
+  + If the console prompt is `+`, then a previous command is incomplete
+  + You can finish typing the command in the console window
+]
+   
+.pull-right[
+Example:
 
 
 ```r
 &gt; 3 + (2*6
++ )
 ```
 
 ```
-Error: &lt;text&gt;:2:0: unexpected end of input
-1: 3 + (2*6
-   ^
+[1] 15
 ```
+]
 
 
-* Text was entered for a non-existant variable (object)
+
+--
+
+__Obejct is not found__
+
+* This happens when text is entered for a non-existent variable (object)
+
+Example:
 
 
 ```r
@@ -465,209 +486,234 @@ Error in eval(expr, envir, enclos): object 'hello' not found
 
 ---
 
-# Coding in a script
+# Coding in a script (1/3)
 
-* Create a script
+&lt;!-- * Note that both of these options show the keyboard shortcut for your operating system   --&gt;
+
+* __Create a new script__ by 
+    + selecting `File -&gt; New File -&gt; R Script`, 
+    + or clicking on ![](img/01_Script_create.png) (the left most button at the top of the scripting window), and then selecting the first option `R Script` 
+
+  
+* __Type code__ in the script
+    - Type each R command on its own line
+    - Use `#` to convert text to comments so that text doesn't accidentally get executed as an R command
+
+![](img/01_Scripting_practice1.png)
+---
+
+# Coding in a script (2/3)
 
 
-.pull-left[
-Type code in an R script
-* To execute code from the __script__, press 
-    - __Windows__:  __ctrl + r__
-    - __Mac__:  __command + return__
-* To do this you need to either have your cursor at the line you want to execute or highlight the code
-* Add a screenshot!
-
-&lt;!-- UPDATE --&gt;
-
-]
+* __Select code__ you want to execute, by 
+    - placing the cursor in the line of code you want to execute, 
+    - or highlighting the code you want to execute
 
 
-.pull-right[
 
-```r
-# UPDATE!
 
-7
-3 + 5
-"hello"
-```
+* __Execute code__ in the script, by
+    - clicking on the ![](img/01_Script_Run.png) button in the top right corner of the scripting window, 
+    - or typing one of the following key combinations to execute the code
+          + __Windows__:  __ctrl + r__
+          + __Mac__:  __command + return__
 
-```
-[1] 7
-[1] 8
-[1] "hello"
-```
-]
+
+![](img/01_Scripting_practice2.png)
+
+
+
+---
+
+# Coding in a script (3/3)
+
+* The screenshot below shows code in the scripting window (top left window)
+* The executed highlighted code and its output appear in the console window (bottom left window)
+
+![](img/01_Scripting_practice3.png)
+
 
 ---
 
 # Saving a script
 
-UPDATE: add instructions
+* __Save a script__ by 
+    + selecting `File -&gt; Save`, 
+    + or clicking on ![](img/01_Script_Save.png) (towards the left above the scripting window)
 
-
----
-
-# Practice on your own
-
-- create a folder on your computer
-- set your working directory in Rstudio to that folder
-- make a new script and save it as `practice.R` in your folder
-
-(Note: later using `Projects` will make this easier)
-
-
-## Practice the commands we just learned. 
-
-* UPDATE
-* Create a vector of numbers. DO some math
-* Create a vector of text. 
+* You will need to specify
+    + a __filename__ to save the script as
+        - ALWAYS use __.R__ as the filename extension for R scripts
+    + the __folder__ to save the script in
 
 ---
 
 class: center, inverse, middle
 
-# Coding and Data Structures
+# Practice time!
 
-We are real coders, now...
+---
+
+# Practice questions
+
+1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+2. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+3. What is the sum of `a1` and `a2`? 
+
+4. What does the command `sum(a1)` do?
+
+5. What does the command `length(a1)` do?
+
+6. Use the commands to calculate the average of the values in `a1`.
+
+7. The formula for the first `\(n\)` integers is `\(n(n+1)/2\)`. Compute the sum of all integers from 1 to 100 to verify that this formula holds for `\(n=100\)`. 
+
+8. Compute the sum of the squares of all integers from 1 to 100.
+
+
 
 
 ---
 
-# Types of objects
+# Data frames
 
-* Vectors vs. data frames
+__Vectors__ vs. __data frames__: a data frame is a collection (or array or table) of vectors
 
-A data frame is a bunch of vectors
-
-UPDATE: cut down to one example
 
 ```r
-&gt; dat &lt;- data.frame(x=1:3, y=c("one", "two", "three"), z=c(1, "zwei", 3))
-&gt; dat
+&gt; df &lt;- data.frame(IDs=1:3, 
++                  gender=c("male", "female", "Male"), 
++                  age=c(28, 35.5, 31),
++                  trt = c("control", "1", "1"),
++                  Veteran = c(FALSE, TRUE, TRUE))
+&gt; df
 ```
 
 ```
-  x     y    z
-1 1   one    1
-2 2   two zwei
-3 3 three    3
+  IDs gender  age     trt Veteran
+1   1   male 28.0 control   FALSE
+2   2 female 35.5       1    TRUE
+3   3   Male 31.0       1    TRUE
 ```
 
 
 
+* A data frame allows different columns to be of different data types (i.e. numeric vs. text), and even allows both numeric and text within a column.
 
-* There are other types of objects, such as matrices, lists, and tibbles.
+* Vectors and data frames are examples of what are more generally referred to as _objects_ in R. 
+  + There are other types of R objects to sotre data, such as matrices, lists, and tibbles.
+  + These will be discussed in future R workshops.
 
 
 ---
 
 # Variable types
 
-* `num`: numeric
-* `int`: integer
-* `fct`: factor
-* `chr`: character
-* `logi`: logical (TRUE, FALSE)
+* integer: integer-valued numbers
+* numeric: numbers that are decimals
+* factor: how categorical variables are stored
+* character: text 
+* logical (TRUE, FALSE)
 
+Each variable (column) in a data frame can be of a different type.
 
-View the _structure_ of our data frame:
+* View the __structure__ of our data frame to see what the variable types are:
 
 
 ```r
-&gt; str(dat)
+&gt; str(df)
 ```
 
 ```
-'data.frame':	3 obs. of  3 variables:
- $ x: int  1 2 3
- $ y: Factor w/ 3 levels "one","three",..: 1 3 2
- $ z: Factor w/ 3 levels "1","3","zwei": 1 3 2
+'data.frame':	3 obs. of  5 variables:
+ $ IDs    : int  1 2 3
+ $ gender : Factor w/ 3 levels "female","male",..: 2 1 3
+ $ age    : num  28 35.5 31
+ $ trt    : Factor w/ 2 levels "1","control": 2 1 1
+ $ Veteran: logi  FALSE TRUE TRUE
 ```
+
+&lt;!-- * Note that the ID column is _integer_ type since the values are all whole numbers, although we likely would think of it as being a categorical variable and thus prefer it to be a factor. --&gt;
 
 ---
 
-# Data
+# Data frame cells, rows, or columns
+
+
+&lt;!-- * Our data frame `df` --&gt;
 
 
 ```r
-&gt; head(iris)
+&gt; df
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa
+  IDs gender  age     trt Veteran
+1   1   male 28.0 control   FALSE
+2   2 female 35.5       1    TRUE
+3   3   Male 31.0       1    TRUE
 ```
+
+Specific cell value: `DatSetName[row#, column#]`
 
 
 ```r
-&gt; # Quickly make a plot
-&gt; hist(iris$Sepal.Length)
+&gt; # Fourth row, Third column
+&gt; df[2, 3]
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+```
+[1] 35.5
+```
 
 
-
-
----
-
-# Installing and using packages
-
-Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
-
-## CRAN = package mothership
-
-[Comprehensive R Archive Network](https://cran.r-project.org/)
+.pull-left[
+Entire column
 
 
 ```r
-&gt; # Install a package from CRAN (main package repository)
-&gt; install.packages("tidyverse")
-&gt; # Load the package
-&gt; library(tidyverse)
+&gt; # Third column
+&gt; df[, 3]
 ```
 
-## Other places (i.e. github) = wild west
+```
+[1] 28.0 35.5 31.0
+```
+]
 
+.pull-right[
+Entire row
 
 ```r
-&gt; install.packages("devtools")
-&gt; library(devtools)
-&gt; # Install a package from github (often in development, no testing)
-&gt; # https://github.com/hadley/yrbss
-&gt; install_github("hadley/yrbss")
-&gt; library(yrbss)
+&gt; # Second row
+&gt; df[2,]
 ```
+
+```
+  IDs gender  age trt Veteran
+2   2 female 35.5   1    TRUE
+```
+]
+
+
 
 
 ---
 
 # Load a data set
 
-&lt;!-- UPDATE: does readr come with RStudio? --&gt;
-&lt;!-- Can load url with Import Dataset button --&gt;
-
-&lt;!-- Built in datasets like `iris` --&gt;
-
-
-
-## have them download txt file to computer and used base R to open so that get factor levels
-
-* csv file on the internet
-
-
+* Open csv file directly from the internet:
 
 
 ```r
-&gt; mydata &lt;- read_csv("http://bit.ly/berd_data_csv")
+&gt; mydata &lt;- read.csv(url("http://bit.ly/berd_data_csv"))
 ```
+
+* Or, download file and open saved file using Import Dataset button in Environment window:  ![](img/01_Import_Dataset.png). 
+  + If you use this option, then copy and paste the code from the console importing the data to your script so that you have a record of from where and how you loaded the data set.
+
 
 
 ```r
@@ -678,12 +724,12 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 
 &lt;!-- ![](img/01_View_data_screenshot.png) --&gt;
 
-&lt;img src="img/01_View_data_screenshot.png" width="80%" height="80%"&gt;
+&lt;img src="img/01_View_data_screenshot.png" width="110%" height="110%"&gt;
 
 
 ---
 
-# Data set summary and info
+# Data set summary
 
 
 ```r
@@ -691,27 +737,27 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 ```
 
 ```
-       id              age                sex           
- Min.   : 335340   Length:20          Length:20         
- 1st Qu.: 925193   Class :character   Class :character  
- Median :1207132   Mode  :character   Mode  :character  
- Mean   :1093150                                        
- 3rd Qu.:1313188                                        
- Max.   :1316123                                        
-    grade              race4                bmi       
- Length:20          Length:20          Min.   :17.48  
- Class :character   Class :character   1st Qu.:20.36  
- Mode  :character   Mode  :character   Median :22.23  
-                                       Mean   :23.01  
-                                       3rd Qu.:26.58  
-                                       Max.   :29.35  
- text_while_driving_30d smoked_ever        bullied_past_12mo
- Length:20              Length:20          Mode :logical    
- Class :character       Class :character   FALSE:11         
- Mode  :character       Mode  :character   TRUE :7          
-                                           NA's :2          
-                                                            
-                                                            
+       id                             age        sex      grade  
+ Min.   : 335340   14 years old         :1   Female:12   10th:8  
+ 1st Qu.: 925193   15 years old         :4   Male  : 8   11th:4  
+ Median :1207132   16 years old         :7               12th:4  
+ Mean   :1093150   17 years old         :7               9th :4  
+ 3rd Qu.:1313188   18 years old or older:1                       
+ Max.   :1316123                                                 
+                       race4        bmi            weight      
+ All other races          :5   Min.   :17.48   Min.   :0.2678  
+ Black or African American:3   1st Qu.:20.36   1st Qu.:0.5759  
+ Hispanic/Latino          :6   Median :22.23   Median :0.8416  
+ White                    :4   Mean   :23.01   Mean   :1.1956  
+ NA's                     :2   3rd Qu.:26.58   3rd Qu.:1.2113  
+                               Max.   :29.35   Max.   :4.4926  
+                      text_while_driving_30d smoked_ever bullied_past_12mo
+ 0 days                          : 5         No  :10     Mode :logical    
+ 1 or 2 days                     : 2         Yes : 6     FALSE:11         
+ 3 to 5 days                     : 1         NA's: 4     TRUE :7          
+ All 30 days                     : 1                     NA's :2          
+ I did not drive the past 30 days: 1                                      
+ NA's                            :10                                      
 ```
 
 ---
@@ -724,7 +770,7 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 ```
 
 ```
-[1] 20  9
+[1] 20 10
 ```
 
 ```r
@@ -740,7 +786,7 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 ```
 
 ```
-[1] 9
+[1] 10
 ```
 
 ```r
@@ -748,12 +794,41 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 ```
 
 ```
-[1] "id"                     "age"                   
-[3] "sex"                    "grade"                 
-[5] "race4"                  "bmi"                   
-[7] "text_while_driving_30d" "smoked_ever"           
-[9] "bullied_past_12mo"     
+ [1] "id"                     "age"                   
+ [3] "sex"                    "grade"                 
+ [5] "race4"                  "bmi"                   
+ [7] "weight"                 "text_while_driving_30d"
+ [9] "smoked_ever"            "bullied_past_12mo"     
 ```
+
+
+
+---
+
+# Data structure
+
+* What are the differenct __variable types__ in this data set?
+
+
+
+```r
+&gt; str(mydata)   # structure of data
+```
+
+```
+'data.frame':	20 obs. of  10 variables:
+ $ id                    : int  335340 638618 922382 923122 923963 925603 933724 935435 1096564 1108114 ...
+ $ age                   : Factor w/ 5 levels "14 years old",..: 4 3 1 2 2 3 3 4 2 4 ...
+ $ sex                   : Factor w/ 2 levels "Female","Male": 1 1 2 2 2 2 1 1 2 1 ...
+ $ grade                 : Factor w/ 4 levels "10th","11th",..: 1 4 4 4 1 1 1 3 1 4 ...
+ $ race4                 : Factor w/ 4 levels "All other races",..: 4 NA 4 4 2 1 1 1 1 2 ...
+ $ bmi                   : num  27.6 29.3 18.2 21.4 19.6 ...
+ $ weight                : num  3.195 1.021 2.031 0.595 0.683 ...
+ $ text_while_driving_30d: Factor w/ 5 levels "0 days","1 or 2 days",..: NA NA NA NA NA NA NA NA NA NA ...
+ $ smoked_ever           : Factor w/ 2 levels "No","Yes": NA 2 2 2 1 1 2 1 NA 1 ...
+ $ bullied_past_12mo     : logi  NA NA FALSE FALSE TRUE TRUE ...
+```
+
 
 ---
 
@@ -765,30 +840,33 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 ```
 
 ```
-# A tibble: 6 x 9
-      id age     sex   grade race4       bmi text_while_drivi… smoked_ever
-   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;      
-1 335340 17 yea… Fema… 10th  White      27.6 &lt;NA&gt;              &lt;NA&gt;       
-2 638618 16 yea… Fema… 9th   &lt;NA&gt;       29.3 &lt;NA&gt;              Yes        
-3 922382 14 yea… Male  9th   White      18.2 &lt;NA&gt;              Yes        
-4 923122 15 yea… Male  9th   White      21.4 &lt;NA&gt;              Yes        
-5 923963 15 yea… Male  10th  Black or…  19.6 &lt;NA&gt;              No         
-6 925603 16 yea… Male  10th  All othe…  22.2 &lt;NA&gt;              No         
-# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+      id          age    sex grade                     race4     bmi
+1 335340 17 years old Female  10th                     White 27.5671
+2 638618 16 years old Female   9th                      &lt;NA&gt; 29.3495
+3 922382 14 years old   Male   9th                     White 18.1827
+4 923122 15 years old   Male   9th                     White 21.3754
+5 923963 15 years old   Male  10th Black or African American 19.5988
+6 925603 16 years old   Male  10th           All other races 22.1910
+  weight text_while_driving_30d smoked_ever bullied_past_12mo
+1 3.1945                   &lt;NA&gt;        &lt;NA&gt;                NA
+2 1.0206                   &lt;NA&gt;         Yes                NA
+3 2.0312                   &lt;NA&gt;         Yes             FALSE
+4 0.5954                   &lt;NA&gt;         Yes             FALSE
+5 0.6833                   &lt;NA&gt;          No              TRUE
+6 0.8456                   &lt;NA&gt;          No              TRUE
 ```
 
 ```r
-&gt; head(mydata, 3)
+&gt; head(mydata, 2)
 ```
 
 ```
-# A tibble: 3 x 9
-      id age       sex   grade race4   bmi text_while_driving… smoked_ever
-   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;      
-1 335340 17 years… Fema… 10th  White  27.6 &lt;NA&gt;                &lt;NA&gt;       
-2 638618 16 years… Fema… 9th   &lt;NA&gt;   29.3 &lt;NA&gt;                Yes        
-3 922382 14 years… Male  9th   White  18.2 &lt;NA&gt;                Yes        
-# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+      id          age    sex grade race4     bmi weight
+1 335340 17 years old Female  10th White 27.5671 3.1945
+2 638618 16 years old Female   9th  &lt;NA&gt; 29.3495 1.0206
+  text_while_driving_30d smoked_ever bullied_past_12mo
+1                   &lt;NA&gt;        &lt;NA&gt;                NA
+2                   &lt;NA&gt;         Yes                NA
 ```
 
 ---
@@ -801,234 +879,64 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 ```
 
 ```
-# A tibble: 6 x 9
-       id age     sex   grade race4     bmi text_while_drivin… smoked_ever
-    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;      
-1 1313153 16 yea… Fema… 11th  Hispan…  26.6 0 days             No         
-2 1313291 16 yea… Fema… 11th  White    24.8 3 to 5 days        No         
-3 1313477 16 yea… Fema… 10th  All ot…  25.0 0 days             No         
-4 1315121 17 yea… Fema… 11th  &lt;NA&gt;     22.3 I did not drive t… Yes        
-5 1315850 17 yea… Fema… 12th  Hispan…  19.5 0 days             &lt;NA&gt;       
-6 1316123 18 yea… Fema… 12th  Black …  27.5 All 30 days        Yes        
-# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
-```
-
-```r
-&gt; tail(mydata, 4)
-```
-
-```
-# A tibble: 4 x 9
-       id age     sex   grade race4     bmi text_while_drivin… smoked_ever
-    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;      
-1 1313477 16 yea… Fema… 10th  All ot…  25.0 0 days             No         
-2 1315121 17 yea… Fema… 11th  &lt;NA&gt;     22.3 I did not drive t… Yes        
-3 1315850 17 yea… Fema… 12th  Hispan…  19.5 0 days             &lt;NA&gt;       
-4 1316123 18 yea… Fema… 12th  Black …  27.5 All 30 days        Yes        
-# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+        id                   age    sex grade                     race4
+15 1313153          16 years old Female  11th           Hispanic/Latino
+16 1313291          16 years old Female  11th                     White
+17 1313477          16 years old Female  10th           All other races
+18 1315121          17 years old Female  11th                      &lt;NA&gt;
+19 1315850          17 years old Female  12th           Hispanic/Latino
+20 1316123 18 years old or older Female  12th Black or African American
+       bmi weight           text_while_driving_30d smoked_ever
+15 26.5781 0.5173                           0 days          No
+16 24.8047 1.1997                      3 to 5 days          No
+17 25.0318 0.9901                           0 days          No
+18 22.2687 4.4926 I did not drive the past 30 days         Yes
+19 19.4922 0.8376                           0 days        &lt;NA&gt;
+20 27.4894 0.2913                      All 30 days         Yes
+   bullied_past_12mo
+15              TRUE
+16             FALSE
+17              TRUE
+18             FALSE
+19             FALSE
+20             FALSE
 ```
 
 ---
 
-# Access specific values in data set
+# The $
 
-* Specific value: DatSetName[row#, column#]
+Suppose we want to single out the column of BMI values.
+* How did we previously learn to do this?
 
-
-```r
-&gt; # Fourth row, Third column
-&gt; mydata[4, 3]
-```
-
-```
-# A tibble: 1 x 1
-  sex  
-  &lt;chr&gt;
-1 Male 
-```
-
-
-.pull-left[
-* Entire column
+--
 
 
 ```r
-&gt; # Third column
-&gt; mydata[, 3]
+&gt; mydata[, 6]
 ```
 
 ```
-# A tibble: 20 x 1
-   sex   
-   &lt;chr&gt; 
- 1 Female
- 2 Female
- 3 Male  
- 4 Male  
- 5 Male  
- 6 Male  
- 7 Female
- 8 Female
- 9 Male  
-10 Female
-11 Male  
-12 Male  
-13 Male  
-14 Female
-15 Female
-16 Female
-17 Female
-18 Female
-19 Female
-20 Female
-```
-]
-
-.pull-right[
-* Entire row
-
-```r
-&gt; # Fourth row
-&gt; mydata[4,]
+ [1] 27.5671 29.3495 18.1827 21.3754 19.5988 22.1910 20.9913 17.4814
+ [9] 22.4593 26.5781 21.1874 19.4637 20.6121 27.4648 26.5781 24.8047
+[17] 25.0318 22.2687 19.4922 27.4894
 ```
 
-```
-# A tibble: 1 x 9
-      id age       sex   grade race4   bmi text_while_driving… smoked_ever
-   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;      
-1 923122 15 years… Male  9th   White  21.4 &lt;NA&gt;                Yes        
-# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
-```
-]
+The problem with this method, is that we need to know the column number which can change as we make changes to the data set. 
 
 
-
-
-
-
-
-
----
-
-# Data structure
-
-&lt;!-- # Should we include str? --&gt;
-&lt;!-- # Lots of attributed included for this data set --&gt;
-
+* Use the `$` instead: `DatSetName$VariableName`
 
 
 ```r
-&gt; str(mydata)   # structure of data
+&gt; mydata$bmi
 ```
 
 ```
-Classes 'tbl_df', 'tbl' and 'data.frame':	20 obs. of  9 variables:
- $ id                    : int  335340 638618 922382 923122 923963 925603 933724 935435 1096564 1108114 ...
- $ age                   : chr  "17 years old" "16 years old" "14 years old" "15 years old" ...
- $ sex                   : chr  "Female" "Female" "Male" "Male" ...
- $ grade                 : chr  "10th" "9th" "9th" "9th" ...
- $ race4                 : chr  "White" NA "White" "White" ...
- $ bmi                   : num  27.6 29.3 18.2 21.4 19.6 ...
- $ text_while_driving_30d: chr  NA NA NA NA ...
- $ smoked_ever           : chr  NA "Yes" "Yes" "Yes" ...
- $ bullied_past_12mo     : logi  NA NA FALSE FALSE TRUE TRUE ...
- - attr(*, "spec")=List of 2
-  ..$ cols   :List of 9
-  .. ..$ id                    : list()
-  .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
-  .. ..$ age                   : list()
-  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
-  .. ..$ sex                   : list()
-  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
-  .. ..$ grade                 : list()
-  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
-  .. ..$ race4                 : list()
-  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
-  .. ..$ bmi                   : list()
-  .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
-  .. ..$ text_while_driving_30d: list()
-  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
-  .. ..$ smoked_ever           : list()
-  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
-  .. ..$ bullied_past_12mo     : list()
-  .. .. ..- attr(*, "class")= chr  "collector_logical" "collector"
-  ..$ default: list()
-  .. ..- attr(*, "class")= chr  "collector_guess" "collector"
-  ..- attr(*, "class")= chr "col_spec"
+ [1] 27.5671 29.3495 18.1827 21.3754 19.5988 22.1910 20.9913 17.4814
+ [9] 22.4593 26.5781 21.1874 19.4637 20.6121 27.4648 26.5781 24.8047
+[17] 25.0318 22.2687 19.4922 27.4894
 ```
-
----
-
-# Convert sex into a factor level variable
-
-
-
-```r
-&gt; summary(mydata$sex)
-```
-
-```
-   Length     Class      Mode 
-       20 character character 
-```
-
-```r
-&gt; mydata$sex &lt;- as.factor(mydata$sex)
-&gt; summary(mydata$sex)
-```
-
-```
-Female   Male 
-    12      8 
-```
-
-
----
-
-&lt;!-- class: inverse --&gt;
-
-# What other variables could we &lt;br&gt; convert to factor?
-&lt;!-- QQ: how to prevent title being cut off? --&gt;
-
-
-```r
-&gt; mydata$smoked_ever &lt;- as.factor(mydata$smoked_ever)
-&gt; mydata$race4 &lt;- as.factor(mydata$race4)
-&gt; mydata$text_while_driving_30d &lt;- as.factor(mydata$text_while_driving_30d)
-&gt; mydata$grade &lt;- as.factor(mydata$grade)
-```
-
-&lt;!-- ## New summary of data set --&gt;
-
-
-```r
-&gt; summary(mydata[,c("sex", "smoked_ever", "race4", "text_while_driving_30d", "grade")])
-```
-
-```
-     sex     smoked_ever                       race4  
- Female:12   No  :10     All other races          :5  
- Male  : 8   Yes : 6     Black or African American:3  
-             NA's: 4     Hispanic/Latino          :6  
-                         White                    :4  
-                         NA's                     :2  
-                                                      
-                      text_while_driving_30d  grade  
- 0 days                          : 5         10th:8  
- 1 or 2 days                     : 2         11th:4  
- 3 to 5 days                     : 1         12th:4  
- All 30 days                     : 1         9th :4  
- I did not drive the past 30 days: 1                 
- NA's                            :10                 
-```
-
-
----
-
-# Reordering factor levels
-
-
-
 
 
 ---
@@ -1043,13 +951,16 @@ Female   Male
 &gt; hist(mydata$bmi)
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+
+With extra features: 
+
 
 ```r
 &gt; hist(mydata$bmi, xlab = "BMI", main="BMI's of students")
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-39-2.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1063,20 +974,22 @@ Female   Male
 &gt; boxplot(mydata$bmi)
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
+
+--
 
 .pull-right[
 
 ```r
-&gt; boxplot(mydata$bmi, 
-+         horizontal = TRUE, 
-+         xlab = "BMI")
-&gt; title("BMI's of students")
+&gt; boxplot(mydata$bmi ~ mydata$sex, 
++   horizontal = TRUE, 
++   xlab = "BMI", ylab = "sex",
++   main = "BMI's of students by sex")
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1088,27 +1001,27 @@ Female   Male
 .pull-left[
 
 ```r
-&gt; plot(mydata$grade, mydata$bmi)
+&gt; plot(mydata$weight, mydata$bmi)
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
 
 ```r
-&gt; plot(mydata$grade, mydata$bmi, 
-+      xlab = "Grade", ylab = "BMI", 
+&gt; plot(mydata$weight, mydata$bmi, 
++      xlab = "weight", ylab = "BMI", 
 +      main = 
-+        "BMI vs. Grade of Students")
++        "BMI vs. Weight")
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-# Summary statistics of numeric data (1/2)
+# Summary stats of numeric data (1/2)
 
 ## Standard R `summary` command
 
@@ -1143,7 +1056,7 @@ Female   Male
 
 ---
 
-# Summary statistics of numeric data (2/2)
+# Summary stats of numeric data (2/2)
 &lt;!-- QQ: Why is (2/2) being cut off? It's not cut off for (1/2).--&gt;
 ## Min, max, &amp; median
 
@@ -1189,18 +1102,276 @@ Female   Male
 17.48140 20.35878 22.22985 26.57810 29.34950 
 ```
 
+---
+
+# Add height column to data frame
+
+Since `\(\textrm{BMI} = \frac{kg}{m^2}\)`, we have
+`\(\textrm{height}(m) = \sqrt{\frac{\textrm{weight}(kg)}{\textrm{BMI}}}\)`
+
+&lt;!-- * UPDATE: need correct units! --&gt;
+
+```r
+&gt; mydata$weight_kg &lt;- mydata$weight  # UPDATE
+&gt; 
+&gt; mydata$height_m &lt;- sqrt( mydata$weight_kg / mydata$bmi)
+&gt; mydata$height_m
+```
+
+```
+ [1] 0.3404128 0.1864779 0.3342313 0.1668965 0.1867201 0.1952064 0.1495540
+ [8] 0.2206491 0.2355663 0.1749404 0.3310490 0.1172985 0.1991268 0.1244106
+[15] 0.1395113 0.2199223 0.1988811 0.4491604 0.2072946 0.1029408
+```
+
+```r
+&gt; dim(mydata); names(mydata)
+```
+
+```
+[1] 20 12
+```
+
+```
+ [1] "id"                     "age"                   
+ [3] "sex"                    "grade"                 
+ [5] "race4"                  "bmi"                   
+ [7] "weight"                 "text_while_driving_30d"
+ [9] "smoked_ever"            "bullied_past_12mo"     
+[11] "weight_kg"              "height_m"              
+```
 
 
+---
 
+# Access specific columns in data set
+
+.pull-left[
+Previosuly we used `DatSetName[, column#]`
+
+
+```r
+&gt; mydata[, c(2, 6)]   # sixth column
+```
+
+```
+                     age     bmi
+1           17 years old 27.5671
+2           16 years old 29.3495
+3           14 years old 18.1827
+4           15 years old 21.3754
+5           15 years old 19.5988
+6           16 years old 22.1910
+7           16 years old 20.9913
+8           17 years old 17.4814
+9           15 years old 22.4593
+10          17 years old 26.5781
+11          16 years old 21.1874
+12          17 years old 19.4637
+13          17 years old 20.6121
+14          15 years old 27.4648
+15          16 years old 26.5781
+16          16 years old 24.8047
+17          16 years old 25.0318
+18          17 years old 22.2687
+19          17 years old 19.4922
+20 18 years old or older 27.4894
+```
+]
+
+
+.pull-right[
+The code below uses _column names_ instead of numbers.
+
+
+```r
+&gt; mydata[, c("age", "bmi")]
+```
+
+```
+                     age     bmi
+1           17 years old 27.5671
+2           16 years old 29.3495
+3           14 years old 18.1827
+4           15 years old 21.3754
+5           15 years old 19.5988
+6           16 years old 22.1910
+7           16 years old 20.9913
+8           17 years old 17.4814
+9           15 years old 22.4593
+10          17 years old 26.5781
+11          16 years old 21.1874
+12          17 years old 19.4637
+13          17 years old 20.6121
+14          15 years old 27.4648
+15          16 years old 26.5781
+16          16 years old 24.8047
+17          16 years old 25.0318
+18          17 years old 22.2687
+19          17 years old 19.4922
+20 18 years old or older 27.4894
+```
+]
+
+
+&lt;!-- This is the same as `mydata$bmi`. --&gt;
+
+---
+
+# Access specific rows in data set
+
+
+&lt;!-- Below is code that uses the column names instead of row and column numbers. --&gt;
+
+* Rows for 14 year olds only
+
+```r
+&gt; mydata[mydata$age == "14 years old",]
+```
+
+```
+      id          age  sex grade race4     bmi weight
+3 922382 14 years old Male   9th White 18.1827 2.0312
+  text_while_driving_30d smoked_ever bullied_past_12mo weight_kg  height_m
+3                   &lt;NA&gt;         Yes             FALSE    2.0312 0.3342313
+```
+
+In this case the output is only one row since there is only one 14 year old.
+
+* Rows for teens with BMI less than 19
+
+```r
+&gt; mydata[mydata$bmi &lt; 19,]
+```
+
+```
+      id          age    sex grade           race4     bmi weight
+3 922382 14 years old   Male   9th           White 18.1827 2.0312
+8 935435 17 years old Female  12th All other races 17.4814 0.8511
+  text_while_driving_30d smoked_ever bullied_past_12mo weight_kg  height_m
+3                   &lt;NA&gt;         Yes             FALSE    2.0312 0.3342313
+8                   &lt;NA&gt;          No             FALSE    0.8511 0.2206491
+```
+
+---
+
+# Access specific values in data set 
+
+* Grade and race for 15 year olds only
+
+
+```r
+&gt; mydata[mydata$age == "15 years old", c("grade", "race4")]
+```
+
+```
+   grade                     race4
+4    9th                     White
+5   10th Black or African American
+9   10th           All other races
+14  10th           Hispanic/Latino
+```
+
+
+* Age, sex, and BMI for students with BMI less than 19
+
+
+```r
+&gt; mydata[mydata$bmi &lt; 19, c("age", "sex", "bmi")]
+```
+
+```
+           age    sex     bmi
+3 14 years old   Male 18.1827
+8 17 years old Female 17.4814
+```
+
+
+---
+
+# Practice
+
+1. Create data frames for males and females separately.
+
+2. Do males and females have similar BMI's? Weights? Compares means, standard deviations, range, and boxplots.
+
+3. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+4. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+5. Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
+
+
+---
+
+# Save data frame
+
+* Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
+
+```r
+&gt; save(mydata, file = "mydata.RData")
+```
+
+You can load .RData files using the load() command:
+
+
+```r
+&gt; load("mydata.RData")
+```
+  
+
+&lt;br&gt;
+
+* Save __csv__ file: comma-separated values
+
+
+```r
+&gt; write.csv(mydata, file = "mydata.csv", col.names = TRUE, row.names = FALSE)
+```
+
+
+---
+
+# Installing and using packages
+
+Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
+
+## CRAN = package mothership
+
+[Comprehensive R Archive Network](https://cran.r-project.org/)
+
+
+```r
+&gt; # Install a package from CRAN (main package repository)
+&gt; install.packages("tidyverse")
+&gt; # Load the package
+&gt; library(tidyverse)
+```
+
+## Other places (i.e. github) = wild west
+
+
+```r
+&gt; install.packages("devtools")
+&gt; library(devtools)
+&gt; # Install a package from github (often in development, no testing)
+&gt; # https://github.com/hadley/yrbss
+&gt; install_github("hadley/yrbss")
+&gt; library(yrbss)
+```
 
 
 
 ---
 
+# How to get help
+
+---
+
 # Resources
 
-- [Rstudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
-- Install R/Rstudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&amp;feature=youtu.be)
+- [RStudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
+- Install R/RStudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&amp;feature=youtu.be)
 - [Basic Basics](http://rladiessydney.org/post/2018/11/05/basicbasics/)
 
 Interactive lessons
@@ -1212,7 +1383,7 @@ Interactive lessons
 
 Much of this is drawn from materials in online books/lessons:
 
-- [Intro to R/Rstudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
+- [Intro to R/RStudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
 
