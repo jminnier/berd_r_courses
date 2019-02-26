@@ -910,7 +910,7 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 
 ```{r, eval = FALSE}
 # Install a package from CRAN (main package repository)
-install.packages("tidyverse")
+install.packages("tidyverse") # only do this ONCE
 # Load the package
 library(tidyverse)
 ```
@@ -918,7 +918,7 @@ library(tidyverse)
 ## Other places (i.e. github) = wild west
 
 ```{r, eval=FALSE}
-install.packages("devtools")
+install.packages("devtools") # only do this ONCE
 library(devtools)
 # Install a package from github (often in development, no testing)
 # https://github.com/hadley/yrbss
