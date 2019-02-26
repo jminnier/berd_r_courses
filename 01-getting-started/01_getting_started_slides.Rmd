@@ -44,6 +44,8 @@ theme_set(theme_bw(base_size = 24))
 # Questions
 
 - Who has used R?
+- What other statistical software have you used?
+- Has anyone used other programming languages (C, java, python, etc)?
 - Why do you want to learn R?
 
 ---
@@ -119,7 +121,7 @@ from [Modern Dive](https://moderndive.com/2-getting-started.html)
 
 ---
 
-# Show stuff
+# Rstudio demo
 
 - tour of RStudio
 - use console
@@ -482,29 +484,29 @@ str(df)
 
 
 <!-- * Our data frame `df` -->
-
+.pull-left[
+Show whole data frame
 ```{r}
 df
 ```
 
-Specific cell value: `DatSetName[row#, column#]`
+Specific cell value: 
+
+`DatSetName[row#, column#]`
 
 ```{r}
 # Fourth row, Third column
 df[2, 3]
 ```
+]
 
-
-.pull-left[
+.pull-right[
 Entire column
-
 ```{r}
 # Third column
 df[, 3]
 ```
-]
 
-.pull-right[
 Entire row
 ```{r}
 # Second row
@@ -606,6 +608,7 @@ mydata[, 6]
 
 The problem with this method, is that we need to know the column number which can change as we make changes to the data set. 
 
+--
 
 * Use the `$` instead: `DatSetName$VariableName`
 
