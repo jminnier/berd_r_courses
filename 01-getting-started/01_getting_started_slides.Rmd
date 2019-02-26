@@ -1,10 +1,10 @@
 ---
 title: Getting Started with R and RStudio
 author: Jessica Minnier, PhD & Meike Niederhausen, PhD
-date: 'OHSU BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_intro'
+date: 'OHSU BERD Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_intro <br> pdf version: http://bit.ly/berd_r_intro_pdf'
 output: 
   xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts]
+    css: [default, metropolis, metropolis-fonts, mycss.css]
     lib_dir: libs
     nature:
       highlightStyle: rainbow #http://arm.rbind.io/slides/xaringan.html#77
@@ -277,7 +277,7 @@ b
 # We can do math with variables
 
 .pull-left[
-Math on variables with just one value
+Math using variables with just one value
 ```{r}
 x <- 5
 x
@@ -723,9 +723,8 @@ plot(mydata$weight_kg, mydata$bmi)
 .pull-right[
 ```{r fig.height=5, fig.width=5}
 plot(mydata$weight_kg, mydata$bmi, 
-     xlab = "weight (kg)", ylab = "BMI", 
-     main = 
-       "BMI vs. Weight")
+   xlab = "weight (kg)", ylab = "BMI", 
+   main = "BMI vs. Weight")
 ```
 ]
 
