@@ -41,6 +41,19 @@ theme_set(theme_bw(base_size = 24))
 ```
 
 
+# Pre-course installation
+
+## Install R
+
+- Windows : Download from https://cran.rstudio.com/bin/windows/base/
+- Mac OS X: Download the latest .pkg file (currently R-3.5.2.pkg) from https://cran.rstudio.com/bin/macosx/
+
+## Install RStudio Desktop Open Source License
+
+- Select download file corresponding to your operating system  from https://www.rstudio.com/products/rstudio/download/#download
+
+---
+
 # Questions
 
 - Who has used R?
@@ -123,11 +136,6 @@ from [Modern Dive](https://moderndive.com/2-getting-started.html)
 
 # Rstudio demo
 
-- tour of RStudio
-- use console
-- run some code
-- make an R file and save it
-- add some code
 
 ---
 
@@ -451,10 +459,10 @@ df
 
 
 
-* A data frame allows different columns to be of different data types (i.e. numeric vs. text), and even allows both numeric and text within a column.
+* A data frame allows different columns to be of different data types (i.e. numeric vs. text), and even allows both numeric and text within a column (stored together as text).
 
-* Vectors and data frames are examples of what are more generally referred to as _objects_ in R. 
-  + There are other types of R objects to sotre data, such as matrices, lists, and tibbles.
+* Vectors and data frames are examples of _objects_ in R. 
+  + There are other types of R objects to store data, such as matrices, lists, and tibbles.
   + These will be discussed in future R workshops.
 
 
@@ -539,7 +547,22 @@ View(mydata)
 
 <!-- ![](img/01_View_data_screenshot.png) -->
 
-<img src="img/01_View_data_screenshot.png" width="110%" height="110%">
+<img src="img/01_View_data_screenshot2.png" width="110%" height="110%">
+
+
+---
+
+# About the data
+
+Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+
+- complex survey data
+- national school-based survey conducted by CDC and state, territorial, tribal, and local surveys conducted by state, territorial, and local education and health agencies and tribal governments
+- monitors six categories of health-related behaviors that contribute to the leading causes of death and disability among youth and adults (including alcohol & drug use, unhealthy & dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
+- this data is a small subset (20 rows) of data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
+- we will use the full R data set in a future workshop teaching data cleaning
+
+<img src="img/01_yrbss.png" width="110%" height="110%">
 
 
 ---
@@ -666,14 +689,14 @@ boxplot(mydata$bmi ~ mydata$sex,
 
 .pull-left[
 ```{r fig.height=5, fig.width=5}
-plot(mydata$weight, mydata$bmi)
+plot(mydata$weight_kg, mydata$bmi)
 ```
 ]
 
 .pull-right[
 ```{r fig.height=5, fig.width=5}
-plot(mydata$weight, mydata$bmi, 
-     xlab = "weight", ylab = "BMI", 
+plot(mydata$weight_kg, mydata$bmi, 
+     xlab = "weight (kg)", ylab = "BMI", 
      main = 
        "BMI vs. Weight")
 ```
@@ -731,8 +754,6 @@ $\textrm{height}(m) = \sqrt{\frac{\textrm{weight}(kg)}{\textrm{BMI}}}$
 
 <!-- * UPDATE: need correct units! -->
 ```{r}
-mydata$weight_kg <- mydata$weight  # UPDATE
-
 mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi)
 mydata$height_m
 dim(mydata); names(mydata)
@@ -872,7 +893,21 @@ library(yrbss)
 
 ---
 
-# How to get help
+# How to get help (1/2)
+
+Use `?` in front of function name in console. Try this:
+
+![](img/01_help_screenshot.png)
+---
+
+# How to get help (2/2)
+
+- Use `??` (i.e `??dplyr` or `??read_csv`) for searching all documentation in installed packages (including unloaded packages)
+- search [Stack Overflow #r tag](https://stackoverflow.com/questions/tagged/r)
+- google your question + rcran or + r (i.e. "make a boxplot rcran" "make a boxplot r")
+- google the error in quotes (i.e. "Evaluation error: invalid type (closure) for variable '***'")
+- [Rstudio community](https://community.rstudio.com/)
+- [twitter #rstats](https://twitter.com/search?q=%23rstats&src=typd)
 
 ---
 
@@ -889,7 +924,7 @@ Interactive lessons
     + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
     + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
 
-Much of this is drawn from materials in online books/lessons:
+Some of this is drawn from materials in online books/lessons:
 
 - [Intro to R/RStudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim

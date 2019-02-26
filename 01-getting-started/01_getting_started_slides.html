@@ -23,6 +23,19 @@ class: center, middle, inverse, title-slide
 
 
 
+# Pre-course installation
+
+## Install R
+
+- Windows : Download from https://cran.rstudio.com/bin/windows/base/
+- Mac OS X: Download the latest .pkg file (currently R-3.5.2.pkg) from https://cran.rstudio.com/bin/macosx/
+
+## Install RStudio Desktop Open Source License
+
+- Select download file corresponding to your operating system  from https://www.rstudio.com/products/rstudio/download/#download
+
+---
+
 # Questions
 
 - Who has used R?
@@ -105,11 +118,6 @@ from [Modern Dive](https://moderndive.com/2-getting-started.html)
 
 # Rstudio demo
 
-- tour of RStudio
-- use console
-- run some code
-- make an R file and save it
-- add some code
 
 ---
 
@@ -602,10 +610,10 @@ __Vectors__ vs. __data frames__: a data frame is a collection (or array or table
 
 
 
-* A data frame allows different columns to be of different data types (i.e. numeric vs. text), and even allows both numeric and text within a column.
+* A data frame allows different columns to be of different data types (i.e. numeric vs. text), and even allows both numeric and text within a column (stored together as text).
 
-* Vectors and data frames are examples of what are more generally referred to as _objects_ in R. 
-  + There are other types of R objects to sotre data, such as matrices, lists, and tibbles.
+* Vectors and data frames are examples of _objects_ in R. 
+  + There are other types of R objects to store data, such as matrices, lists, and tibbles.
   + These will be discussed in future R workshops.
 
 
@@ -726,7 +734,22 @@ Entire row
 
 &lt;!-- ![](img/01_View_data_screenshot.png) --&gt;
 
-&lt;img src="img/01_View_data_screenshot.png" width="110%" height="110%"&gt;
+&lt;img src="img/01_View_data_screenshot2.png" width="110%" height="110%"&gt;
+
+
+---
+
+# About the data
+
+Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+
+- complex survey data
+- national school-based survey conducted by CDC and state, territorial, tribal, and local surveys conducted by state, territorial, and local education and health agencies and tribal governments
+- monitors six categories of health-related behaviors that contribute to the leading causes of death and disability among youth and adults (including alcohol &amp; drug use, unhealthy &amp; dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
+- this data is a small subset (20 rows) of data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
+- we will use the full R data set in a future workshop teaching data cleaning
+
+&lt;img src="img/01_yrbss.png" width="110%" height="110%"&gt;
 
 
 ---
@@ -746,13 +769,13 @@ Entire row
  Mean   :1093150   17 years old         :7               9th :4  
  3rd Qu.:1313188   18 years old or older:1                       
  Max.   :1316123                                                 
-                       race4        bmi            weight      
- All other races          :5   Min.   :17.48   Min.   :0.2678  
- Black or African American:3   1st Qu.:20.36   1st Qu.:0.5759  
- Hispanic/Latino          :6   Median :22.23   Median :0.8416  
- White                    :4   Mean   :23.01   Mean   :1.1956  
- NA's                     :2   3rd Qu.:26.58   3rd Qu.:1.2113  
-                               Max.   :29.35   Max.   :4.4926  
+                       race4        bmi          weight_kg    
+ All other races          :5   Min.   :17.48   Min.   :43.09  
+ Black or African American:3   1st Qu.:20.36   1st Qu.:57.27  
+ Hispanic/Latino          :6   Median :22.23   Median :64.86  
+ White                    :4   Mean   :23.01   Mean   :64.09  
+ NA's                     :2   3rd Qu.:26.58   3rd Qu.:70.31  
+                               Max.   :29.35   Max.   :84.82  
                       text_while_driving_30d smoked_ever bullied_past_12mo
  0 days                          : 5         No  :10     Mode :logical    
  1 or 2 days                     : 2         Yes : 6     FALSE:11         
@@ -799,7 +822,7 @@ Entire row
  [1] "id"                     "age"                   
  [3] "sex"                    "grade"                 
  [5] "race4"                  "bmi"                   
- [7] "weight"                 "text_while_driving_30d"
+ [7] "weight_kg"              "text_while_driving_30d"
  [9] "smoked_ever"            "bullied_past_12mo"     
 ```
 
@@ -825,7 +848,7 @@ Entire row
  $ grade                 : Factor w/ 4 levels "10th","11th",..: 1 4 4 4 1 1 1 3 1 4 ...
  $ race4                 : Factor w/ 4 levels "All other races",..: 4 NA 4 4 2 1 1 1 1 2 ...
  $ bmi                   : num  27.6 29.3 18.2 21.4 19.6 ...
- $ weight                : num  3.195 1.021 2.031 0.595 0.683 ...
+ $ weight_kg             : num  66.2 84.8 57.6 60.3 63.5 ...
  $ text_while_driving_30d: Factor w/ 5 levels "0 days","1 or 2 days",..: NA NA NA NA NA NA NA NA NA NA ...
  $ smoked_ever           : Factor w/ 2 levels "No","Yes": NA 2 2 2 1 1 2 1 NA 1 ...
  $ bullied_past_12mo     : logi  NA NA FALSE FALSE TRUE TRUE ...
@@ -849,13 +872,13 @@ Entire row
 4 923122 15 years old   Male   9th                     White 21.3754
 5 923963 15 years old   Male  10th Black or African American 19.5988
 6 925603 16 years old   Male  10th           All other races 22.1910
-  weight text_while_driving_30d smoked_ever bullied_past_12mo
-1 3.1945                   &lt;NA&gt;        &lt;NA&gt;                NA
-2 1.0206                   &lt;NA&gt;         Yes                NA
-3 2.0312                   &lt;NA&gt;         Yes             FALSE
-4 0.5954                   &lt;NA&gt;         Yes             FALSE
-5 0.6833                   &lt;NA&gt;          No              TRUE
-6 0.8456                   &lt;NA&gt;          No              TRUE
+  weight_kg text_while_driving_30d smoked_ever bullied_past_12mo
+1     66.23                   &lt;NA&gt;        &lt;NA&gt;                NA
+2     84.82                   &lt;NA&gt;         Yes                NA
+3     57.61                   &lt;NA&gt;         Yes             FALSE
+4     60.33                   &lt;NA&gt;         Yes             FALSE
+5     63.50                   &lt;NA&gt;          No              TRUE
+6     70.31                   &lt;NA&gt;          No              TRUE
 ```
 
 ```r
@@ -863,9 +886,9 @@ Entire row
 ```
 
 ```
-      id          age    sex grade race4     bmi weight
-1 335340 17 years old Female  10th White 27.5671 3.1945
-2 638618 16 years old Female   9th  &lt;NA&gt; 29.3495 1.0206
+      id          age    sex grade race4     bmi weight_kg
+1 335340 17 years old Female  10th White 27.5671     66.23
+2 638618 16 years old Female   9th  &lt;NA&gt; 29.3495     84.82
   text_while_driving_30d smoked_ever bullied_past_12mo
 1                   &lt;NA&gt;        &lt;NA&gt;                NA
 2                   &lt;NA&gt;         Yes                NA
@@ -888,13 +911,13 @@ Entire row
 18 1315121          17 years old Female  11th                      &lt;NA&gt;
 19 1315850          17 years old Female  12th           Hispanic/Latino
 20 1316123 18 years old or older Female  12th Black or African American
-       bmi weight           text_while_driving_30d smoked_ever
-15 26.5781 0.5173                           0 days          No
-16 24.8047 1.1997                      3 to 5 days          No
-17 25.0318 0.9901                           0 days          No
-18 22.2687 4.4926 I did not drive the past 30 days         Yes
-19 19.4922 0.8376                           0 days        &lt;NA&gt;
-20 27.4894 0.2913                      All 30 days         Yes
+       bmi weight_kg           text_while_driving_30d smoked_ever
+15 26.5781     68.04                           0 days          No
+16 24.8047     63.50                      3 to 5 days          No
+17 25.0318     76.66                           0 days          No
+18 22.2687     54.89 I did not drive the past 30 days         Yes
+19 19.4922     49.90                           0 days        &lt;NA&gt;
+20 27.4894     74.84                      All 30 days         Yes
    bullied_past_12mo
 15              TRUE
 16             FALSE
@@ -1004,7 +1027,7 @@ With extra features:
 .pull-left[
 
 ```r
-&gt; plot(mydata$weight, mydata$bmi)
+&gt; plot(mydata$weight_kg, mydata$bmi)
 ```
 
 &lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
@@ -1013,8 +1036,8 @@ With extra features:
 .pull-right[
 
 ```r
-&gt; plot(mydata$weight, mydata$bmi, 
-+      xlab = "weight", ylab = "BMI", 
+&gt; plot(mydata$weight_kg, mydata$bmi, 
++      xlab = "weight (kg)", ylab = "BMI", 
 +      main = 
 +        "BMI vs. Weight")
 ```
@@ -1115,16 +1138,14 @@ Since `\(\textrm{BMI} = \frac{kg}{m^2}\)`, we have
 &lt;!-- * UPDATE: need correct units! --&gt;
 
 ```r
-&gt; mydata$weight_kg &lt;- mydata$weight  # UPDATE
-&gt; 
 &gt; mydata$height_m &lt;- sqrt( mydata$weight_kg / mydata$bmi)
 &gt; mydata$height_m
 ```
 
 ```
- [1] 0.3404128 0.1864779 0.3342313 0.1668965 0.1867201 0.1952064 0.1495540
- [8] 0.2206491 0.2355663 0.1749404 0.3310490 0.1172985 0.1991268 0.1244106
-[15] 0.1395113 0.2199223 0.1988811 0.4491604 0.2072946 0.1029408
+ [1] 1.550000 1.699999 1.779999 1.680001 1.799998 1.780000 1.469998
+ [8] 1.570002 1.879998 1.600001 1.779998 1.699999 1.730001 1.600001
+[15] 1.600001 1.600000 1.750001 1.569998 1.599999 1.650001
 ```
 
 ```r
@@ -1132,16 +1153,16 @@ Since `\(\textrm{BMI} = \frac{kg}{m^2}\)`, we have
 ```
 
 ```
-[1] 20 12
+[1] 20 11
 ```
 
 ```
  [1] "id"                     "age"                   
  [3] "sex"                    "grade"                 
  [5] "race4"                  "bmi"                   
- [7] "weight"                 "text_while_driving_30d"
+ [7] "weight_kg"              "text_while_driving_30d"
  [9] "smoked_ever"            "bullied_past_12mo"     
-[11] "weight_kg"              "height_m"              
+[11] "height_m"              
 ```
 
 
@@ -1233,10 +1254,10 @@ The code below uses _column names_ instead of numbers.
 ```
 
 ```
-      id          age  sex grade race4     bmi weight
-3 922382 14 years old Male   9th White 18.1827 2.0312
-  text_while_driving_30d smoked_ever bullied_past_12mo weight_kg  height_m
-3                   &lt;NA&gt;         Yes             FALSE    2.0312 0.3342313
+      id          age  sex grade race4     bmi weight_kg
+3 922382 14 years old Male   9th White 18.1827     57.61
+  text_while_driving_30d smoked_ever bullied_past_12mo height_m
+3                   &lt;NA&gt;         Yes             FALSE 1.779999
 ```
 
 In this case the output is only one row since there is only one 14 year old.
@@ -1248,12 +1269,12 @@ In this case the output is only one row since there is only one 14 year old.
 ```
 
 ```
-      id          age    sex grade           race4     bmi weight
-3 922382 14 years old   Male   9th           White 18.1827 2.0312
-8 935435 17 years old Female  12th All other races 17.4814 0.8511
-  text_while_driving_30d smoked_ever bullied_past_12mo weight_kg  height_m
-3                   &lt;NA&gt;         Yes             FALSE    2.0312 0.3342313
-8                   &lt;NA&gt;          No             FALSE    0.8511 0.2206491
+      id          age    sex grade           race4     bmi weight_kg
+3 922382 14 years old   Male   9th           White 18.1827     57.61
+8 935435 17 years old Female  12th All other races 17.4814     43.09
+  text_while_driving_30d smoked_ever bullied_past_12mo height_m
+3                   &lt;NA&gt;         Yes             FALSE 1.779999
+8                   &lt;NA&gt;          No             FALSE 1.570002
 ```
 
 ---
@@ -1367,7 +1388,21 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 
 ---
 
-# How to get help
+# How to get help (1/2)
+
+Use `?` in front of function name in console. Try this:
+
+![](img/01_help_screenshot.png)
+---
+
+# How to get help (2/2)
+
+- Use `??` (i.e `??dplyr` or `??read_csv`) for searching all documentation in installed packages (including unloaded packages)
+- search [Stack Overflow #r tag](https://stackoverflow.com/questions/tagged/r)
+- google your question + rcran or + r (i.e. "make a boxplot rcran" "make a boxplot r")
+- google the error in quotes (i.e. "Evaluation error: invalid type (closure) for variable '***'")
+- [Rstudio community](https://community.rstudio.com/)
+- [twitter #rstats](https://twitter.com/search?q=%23rstats&amp;src=typd)
 
 ---
 
@@ -1384,7 +1419,7 @@ Interactive lessons
     + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
     + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
 
-Much of this is drawn from materials in online books/lessons:
+Some of this is drawn from materials in online books/lessons:
 
 - [Intro to R/RStudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
