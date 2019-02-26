@@ -9,15 +9,16 @@ library(openxlsx)
 glimpse(survey)
 
 
-# view(summarytools::dfSummary(survey))
+# summarytools::view(summarytools::dfSummary(survey))
 
-mydata <- survey %>% select(record, age, sex, grade, race4, bmi, weight, q12, q31, qn24) %>%
+mydata <- survey %>% select(record, age, sex, grade, race4, bmi, stweight, q12, q31, qn24) %>%
   group_by(age, sex, grade, race4, q12, q31, qn24) %>%
   slice(3) %>%
   rename(id=record, 
          text_while_driving_30d = q12,
          smoked_ever = q31,
-         bullied_past_12mo = qn24) %>%
+         bullied_past_12mo = qn24,
+         weight_kg = stweight) %>%
   filter(!is.na(bmi)) %>%
   ungroup()
 
