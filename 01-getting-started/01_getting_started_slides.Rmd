@@ -613,7 +613,7 @@ names(mydata)
 
 # Data structure
 
-* What are the differenct __variable types__ in this data set?
+* What are the different __variable types__ in this data set?
 
 
 ```{r}
@@ -793,7 +793,7 @@ dim(mydata); names(mydata)
 # Access specific columns in data set
 
 .pull-left[
-Previosuly we used `DatSetName[, column#]`
+Previously we used `DatSetName[, column#]`
 
 ```{r}
 mydata[, c(2, 6)]   # sixth column
