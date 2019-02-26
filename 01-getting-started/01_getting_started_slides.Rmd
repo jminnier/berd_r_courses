@@ -988,4 +988,6 @@ Some of this is drawn from materials in online books/lessons:
 - advanced tidyverse: functions, purrr
 - statistical modeling in R
 
+<br> <br>
 
+Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
