@@ -11,7 +11,7 @@ glimpse(survey)
 
 # view(summarytools::dfSummary(survey))
 
-mydata <- survey %>% select(record, age, sex, grade, race4, bmi, q12, q31, qn24) %>%
+mydata <- survey %>% select(record, age, sex, grade, race4, bmi, weight, q12, q31, qn24) %>%
   group_by(age, sex, grade, race4, q12, q31, qn24) %>%
   slice(3) %>%
   rename(id=record, 

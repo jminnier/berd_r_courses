@@ -1,21 +1,21 @@
-id	age	sex	grade	race4	bmi	text_while_driving_30d	smoked_ever	bullied_past_12mo
-335340	17 years old	Female	10th	White	27.5671	NA	NA	NA
-638618	16 years old	Female	9th	NA	29.3495	NA	Yes	NA
-922382	14 years old	Male	9th	White	18.182699999999997	NA	Yes	FALSE
-923122	15 years old	Male	9th	White	21.3754	NA	Yes	FALSE
-923963	15 years old	Male	10th	Black or African American	19.5988	NA	No	TRUE
-925603	16 years old	Male	10th	All other races	22.191000000000003	NA	No	TRUE
-933724	16 years old	Female	10th	All other races	20.9913	NA	Yes	TRUE
-935435	17 years old	Female	12th	All other races	17.481399999999997	NA	No	FALSE
-1096564	15 years old	Male	10th	All other races	22.4593	NA	NA	TRUE
-1108114	17 years old	Female	9th	Black or African American	26.5781	NA	No	FALSE
-1306150	16 years old	Male	10th	Hispanic/Latino	21.1874	0 days	NA	FALSE
-1307481	17 years old	Male	12th	Hispanic/Latino	19.463699999999996	1 or 2 days	No	FALSE
-1307872	17 years old	Male	11th	Hispanic/Latino	20.6121	1 or 2 days	No	FALSE
-1311617	15 years old	Female	10th	Hispanic/Latino	27.4648	0 days	No	TRUE
-1313153	16 years old	Female	11th	Hispanic/Latino	26.5781	0 days	No	TRUE
-1313291	16 years old	Female	11th	White	24.8047	3 to 5 days	No	FALSE
-1313477	16 years old	Female	10th	All other races	25.031800000000004	0 days	No	TRUE
-1315121	17 years old	Female	11th	NA	22.268699999999995	I did not drive the past 30 days	Yes	FALSE
-1315850	17 years old	Female	12th	Hispanic/Latino	19.492199999999997	0 days	NA	FALSE
-1316123	18 years old or older	Female	12th	Black or African American	27.489399999999996	All 30 days	Yes	FALSE
+id	age	sex	grade	race4	bmi	weight	text_while_driving_30d	smoked_ever	bullied_past_12mo
+335340	17 years old	Female	10th	White	27.5671	3.1945	NA	NA	NA
+638618	16 years old	Female	9th	NA	29.3495	1.0206	NA	Yes	NA
+922382	14 years old	Male	9th	White	18.182699999999997	2.0312	NA	Yes	FALSE
+923122	15 years old	Male	9th	White	21.3754	0.5954	NA	Yes	FALSE
+923963	15 years old	Male	10th	Black or African American	19.5988	0.6833	NA	No	TRUE
+925603	16 years old	Male	10th	All other races	22.191000000000003	0.8456	NA	No	TRUE
+933724	16 years old	Female	10th	All other races	20.9913	0.4695	NA	Yes	TRUE
+935435	17 years old	Female	12th	All other races	17.481399999999997	0.8511	NA	No	FALSE
+1096564	15 years old	Male	10th	All other races	22.4593	1.2463	NA	NA	TRUE
+1108114	17 years old	Female	9th	Black or African American	26.5781	0.8134	NA	No	FALSE
+1306150	16 years old	Male	10th	Hispanic/Latino	21.1874	2.322	0 days	NA	FALSE
+1307481	17 years old	Male	12th	Hispanic/Latino	19.463699999999996	0.2678	1 or 2 days	No	FALSE
+1307872	17 years old	Male	11th	Hispanic/Latino	20.6121	0.8173	1 or 2 days	No	FALSE
+1311617	15 years old	Female	10th	Hispanic/Latino	27.4648	0.4251	0 days	No	TRUE
+1313153	16 years old	Female	11th	Hispanic/Latino	26.5781	0.5173	0 days	No	TRUE
+1313291	16 years old	Female	11th	White	24.8047	1.1997	3 to 5 days	No	FALSE
+1313477	16 years old	Female	10th	All other races	25.031800000000004	0.9901	0 days	No	TRUE
+1315121	17 years old	Female	11th	NA	22.268699999999995	4.4926	I did not drive the past 30 days	Yes	FALSE
+1315850	17 years old	Female	12th	Hispanic/Latino	19.492199999999997	0.8376	0 days	NA	FALSE
+1316123	18 years old or older	Female	12th	Black or African American	27.489399999999996	0.2913	All 30 days	Yes	FALSE

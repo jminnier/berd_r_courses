@@ -14,6 +14,8 @@ output:
     includes:
       in_header: ../header.html   
     #css: ../jminnier.css
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -25,7 +27,8 @@ knitr::opts_chunk$set(
   warning=FALSE, 
   message=FALSE, 
   fig.width=10.5, 
-  fig.height=4, 
+  fig.height=4,
+  fig.align = "center",
   rows.print=16,
   echo=TRUE,
   highlight = TRUE,
@@ -126,6 +129,231 @@ from [Modern Dive](https://moderndive.com/2-getting-started.html)
 
 ---
 
+# Coding in the console 
+ 
+.pull-left[
+__Typing and execting code in the console __
+* Type code in the console
+* Press __return__ to execute the code
+
+<br>
+
+_Coding in the console is not advisable for most situations!_
+* We only reccomend this for short pieces of code that you don't need to save
+]
+
+
+.pull-right[
+```{r}
+7
+3 + 5
+"hello"
+
+# this is a comment, nothing happens
+# 5 - 8
+```
+]
+
+
+---
+
+# We can do math
+
+
+.pull-left[
+```{r}
+10^2
+3 ^ 7
+6/9
+9-43
+```
+]
+
+
+.pull-right[
+R follows the rules for order of operations and ignores spaces between numbers (or objects)
+
+```{r}
+4^3-2* 7+9 /2
+```
+
+The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$ 
+]
+
+
+---
+
+# Logarithms and exponentials
+
+.pull-left[
+
+Logarithms: `log()` is base $e$
+```{r}
+log(10)
+log10(10)
+```
+
+]
+
+
+.pull-right[
+Exponentials
+```{r}
+exp(1)
+exp(0)
+```
+]
+
+<br>
+
+Check that `log()` is base $e$
+
+```{r}
+log(exp(1))
+```
+
+---
+
+# Variables
+
+Data, information, everything is stored as a variable
+
+* Can assign a variable using either `=` or `<-`
+    - Using `<-` is preferable
+
+.pull-left[
+Assigning just one value:
+```{r}
+x = 5
+x
+x <- 5
+x
+```
+]
+
+
+.pull-right[
+Assigning a __vector__ of values
+* Consecutive integers
+
+```{r}
+a <- 3:10
+a
+```
+
+* __Concatenate__ a string of numbers
+
+```{r}
+b <- c(5, 12, 2, 100, 8)
+b
+```
+]
+
+
+---
+
+# We can do math with variables
+
+.pull-left[
+Math on variables with just one value
+```{r}
+x <- 5
+x
+
+x + 3
+
+y <- x^2
+y
+```
+]
+
+
+.pull-right[
+Math on vectors of values: element-wise computation
+```{r}
+a <- 3:6
+a
+
+a+2
+
+a*3
+
+a*a
+```
+]
+
+
+---
+
+# Variable can include text (characters)
+
+```{r}
+hi <- "hello"
+hi
+
+greetings <- c("Guten Tag", "Hola", hi)
+greetings
+```
+
+
+---
+
+# Common console errors 
+ 
+<!-- UPDATE  -->
+* A command was not completed 
+  _ When R is waiting for a new command the prompt line will begin with `>`
+
+```{r error=TRUE}
+3 + (2*6
+```
+
+
+* Text was entered for a non-existant variable (object)
+
+```{r error=TRUE}
+hello
+```
+
+---
+
+# Coding in a script
+
+* Create a script
+
+
+.pull-left[
+Type code in an R script
+* To execute code from the __script__, press 
+    - __Windows__:  __ctrl + r__
+    - __Mac__:  __command + return__
+* To do this you need to either have your cursor at the line you want to execute or highlight the code
+* Add a screenshot!
+
+<!-- UPDATE -->
+
+]
+
+
+.pull-right[
+```{r, prompt=FALSE, results="hold"}
+# UPDATE!
+
+7
+3 + 5
+"hello"
+```
+]
+
+---
+
+# Saving a script
+
+UPDATE: add instructions
+
+
+---
+
 # Practice on your own
 
 - create a folder on your computer
@@ -133,6 +361,13 @@ from [Modern Dive](https://moderndive.com/2-getting-started.html)
 - make a new script and save it as `practice.R` in your folder
 
 (Note: later using `Projects` will make this easier)
+
+
+## Practice the commands we just learned. 
+
+* UPDATE
+* Create a vector of numbers. DO some math
+* Create a vector of text. 
 
 ---
 
@@ -142,56 +377,48 @@ class: center, inverse, middle
 
 We are real coders, now...
 
----
-
-# Code
-
-Type code in the console, or in an R script
-
-```{r}
-"hello"
-
-3 + 5
-
-# this is a comment
-# nothing happens
-# y = 5
-```
-
 
 ---
 
-# Variables
+# Types of objects
 
-Data, information, everything is stored as a variable
+* Vectors vs. data frames
 
+A data frame is a bunch of vectors
+
+UPDATE: cut down to one example
 ```{r}
-x = 5
-x
-x <- 5
-x
-
-y <- 1:5
-y
+dat <- data.frame(x=1:3, y=c("one", "two", "three"), z=c(1, "zwei", 3))
+dat
 ```
+
+```{r eval=FALSE, echo=FALSE}
+heights=c(68,69,72,60)
+weights=c(130,147,219,105)
+dat2 <- data.frame(x=heights, y=weights)
+dat2
+```
+
+
+* There are other types of objects, such as matrices, lists, and tibbles.
+
 
 ---
 
-# We can do math
+# Variable types
+
+* `num`: numeric
+* `int`: integer
+* `fct`: factor
+* `chr`: character
+* `logi`: logical (TRUE, FALSE)
+
+
+View the _structure_ of our data frame:
 
 ```{r}
-x <- 5
-x
-
-x + 3
-
-y <- x^2
-y
-
-log2(y)
+str(dat)
 ```
-
-
 
 ---
 
@@ -205,6 +432,9 @@ head(iris)
 # Quickly make a plot
 hist(iris$Sepal.Length)
 ```
+
+
+
 
 ---
 
@@ -239,23 +469,267 @@ library(yrbss)
 
 # Load a data set
 
-Built in datasets like `iris`
+<!-- UPDATE: does readr come with RStudio? -->
+<!-- Can load url with Import Dataset button -->
 
-```{r}
+<!-- Built in datasets like `iris` -->
+
+```{r, echo=FALSE, eval=FALSE}
 # head function shows the top 6 rows
 head(iris)
 ```
 
-From a file
+## have them download txt file to computer and used base R to open so that get factor levels
+
+* csv file on the internet
+
+```{r, echo=FALSE, eval=FALSE}
+# mydata <- read_csv("data.csv")
+```
+
+```{r}
+mydata <- read_csv("http://bit.ly/berd_data_csv")
+```
 
 ```{r, eval=FALSE}
-mydata <- read_csv("data.csv")
-mydata <- read_csv("http://bit.ly/berd_data_csv")
+View(mydata) 
+# Can also view the data by clicking on its name in the Environment tab
+```
+
+
+<!-- ![](img/01_View_data_screenshot.png) -->
+
+<img src="img/01_View_data_screenshot.png" width="80%" height="80%">
+
+
+---
+
+# Data set summary and info
+
+```{r}
+summary(mydata)
 ```
 
 ---
 
-# Types of objects
+# Data set info
+
+```{r}
+dim(mydata)
+nrow(mydata)
+ncol(mydata)
+
+names(mydata)
+```
+
+---
+
+# View the beginning of a data set
+
+```{r}
+head(mydata)
+head(mydata, 3)
+```
+
+---
+
+# View the end of a data set
+
+```{r}
+tail(mydata)
+tail(mydata, 4)
+```
+
+---
+
+# Access specific values in data set
+
+* Specific value: DatSetName[row#, column#]
+
+```{r}
+# Fourth row, Third column
+mydata[4, 3]
+```
+
+
+.pull-left[
+* Entire column
+
+```{r}
+# Third column
+mydata[, 3]
+```
+]
+
+.pull-right[
+* Entire row
+```{r}
+# Fourth row
+mydata[4,]
+```
+]
+
+
+
+
+
+
+
+
+---
+
+# Data structure
+
+<!-- # Should we include str? -->
+<!-- # Lots of attributed included for this data set -->
+
+
+```{r}
+str(mydata)   # structure of data
+```
+
+---
+
+# Convert sex into a factor level variable
+
+
+```{r}
+summary(mydata$sex)
+mydata$sex <- as.factor(mydata$sex)
+summary(mydata$sex)
+```
+
+
+---
+
+<!-- class: inverse -->
+
+# What other variables could we <br> convert to factor?
+<!-- QQ: how to prevent title being cut off? -->
+
+```{r}
+mydata$smoked_ever <- as.factor(mydata$smoked_ever)
+mydata$race4 <- as.factor(mydata$race4)
+mydata$text_while_driving_30d <- as.factor(mydata$text_while_driving_30d)
+mydata$grade <- as.factor(mydata$grade)
+```
+
+<!-- ## New summary of data set -->
+
+```{r}
+summary(mydata[,c("sex", "smoked_ever", "race4", "text_while_driving_30d", "grade")])
+```
+
+
+---
+
+# Reordering factor levels
+
+```{r}
+
+```
+
+
+
+---
+
+# Basic plots of numeric data (1/3)
+
+
+## Histogram
+
+```{r fig.height=2.5, fig.width=7}
+hist(mydata$bmi)
+
+hist(mydata$bmi, xlab = "BMI", main="BMI's of students")
+```
+
+---
+
+# Basic plots of numeric data (2/3)
+
+## Boxplot
+
+.pull-left[
+```{r fig.height=5, fig.width=5}
+boxplot(mydata$bmi)
+```
+
+]
+
+.pull-right[
+```{r fig.height=5, fig.width=5}
+boxplot(mydata$bmi, 
+        horizontal = TRUE, 
+        xlab = "BMI")
+title("BMI's of students")
+```
+]
+
+---
+
+# Basic plots of numeric data (3/3)
+
+## Scatterplot
+
+.pull-left[
+```{r fig.height=5, fig.width=5}
+plot(mydata$grade, mydata$bmi)
+```
+]
+
+.pull-right[
+```{r fig.height=5, fig.width=5}
+plot(mydata$grade, mydata$bmi, 
+     xlab = "Grade", ylab = "BMI", 
+     main = 
+       "BMI vs. Grade of Students")
+```
+]
+
+---
+
+# Summary statistics of numeric data (1/2)
+
+## Standard R `summary` command
+
+```{r}
+summary(mydata$bmi)
+```
+
+## Mean and standard deviation
+
+```{r}
+mean(mydata$bmi)
+sd(mydata$bmi)
+```
+
+---
+
+# Summary statistics of numeric data (2/2)
+<!-- QQ: Why is (2/2) being cut off? It's not cut off for (1/2).-->
+## Min, max, & median
+
+.pull-left[
+```{r}
+min(mydata$bmi)
+max(mydata$bmi)
+
+```
+]
+
+.pull-right[
+```{r}
+median(mydata$bmi)
+```
+]
+
+## Quantiles
+
+```{r}
+quantile(mydata$bmi, prob=c(0, .25, .5, .75, 1))  
+```
+
 
 
 

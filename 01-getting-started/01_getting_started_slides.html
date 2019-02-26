@@ -111,35 +111,28 @@ from [Modern Dive](https://moderndive.com/2-getting-started.html)
 
 ---
 
-# Practice on your own
+# Coding in the console 
+ 
+.pull-left[
+__Typing and execting code in the console __
+* Type code in the console
+* Press __return__ to execute the code
 
-- create a folder on your computer
-- set your working directory in Rstudio to that folder
-- make a new script and save it as `practice.R` in your folder
+&lt;br&gt;
 
-(Note: later using `Projects` will make this easier)
+_Coding in the console is not advisable for most situations!_
+* We only reccomend this for short pieces of code that you don't need to save
+]
 
----
 
-class: center, inverse, middle
-
-# Coding and Data Structures
-
-We are real coders, now...
-
----
-
-# Code
-
-Type code in the console, or in an R script
-
+.pull-right[
 
 ```r
-&gt; "hello"
+&gt; 7
 ```
 
 ```
-[1] "hello"
+[1] 7
 ```
 
 ```r
@@ -151,11 +144,136 @@ Type code in the console, or in an R script
 ```
 
 ```r
-&gt; # this is a comment
-&gt; # nothing happens
-&gt; # y = 5
+&gt; "hello"
 ```
 
+```
+[1] "hello"
+```
+
+```r
+&gt; # this is a comment, nothing happens
+&gt; # 5 - 8
+```
+]
+
+
+---
+
+# We can do math
+
+
+.pull-left[
+
+```r
+&gt; 10^2
+```
+
+```
+[1] 100
+```
+
+```r
+&gt; 3 ^ 7
+```
+
+```
+[1] 2187
+```
+
+```r
+&gt; 6/9
+```
+
+```
+[1] 0.6666667
+```
+
+```r
+&gt; 9-43
+```
+
+```
+[1] -34
+```
+]
+
+
+.pull-right[
+R follows the rules for order of operations and ignores spaces between numbers (or objects)
+
+
+```r
+&gt; 4^3-2* 7+9 /2
+```
+
+```
+[1] 54.5
+```
+
+The equation above is computed as `$$4^3 − (2 \cdot 7) + \frac{9}{2}$$` 
+]
+
+
+---
+
+# Logarithms and exponentials
+
+.pull-left[
+
+Logarithms: `log()` is base `\(e\)`
+
+```r
+&gt; log(10)
+```
+
+```
+[1] 2.302585
+```
+
+```r
+&gt; log10(10)
+```
+
+```
+[1] 1
+```
+
+]
+
+
+.pull-right[
+Exponentials
+
+```r
+&gt; exp(1)
+```
+
+```
+[1] 2.718282
+```
+
+```r
+&gt; exp(0)
+```
+
+```
+[1] 1
+```
+]
+
+&lt;br&gt;
+
+Check that `log()` is base `\(e\)`
+
+
+```r
+&gt; log(exp(1))
+```
+
+```
+[1] 1
+```
 
 ---
 
@@ -163,6 +281,11 @@ Type code in the console, or in an R script
 
 Data, information, everything is stored as a variable
 
+* Can assign a variable using either `=` or `&lt;-`
+    - Using `&lt;-` is preferable
+
+.pull-left[
+Assigning just one value:
 
 ```r
 &gt; x = 5
@@ -181,20 +304,43 @@ Data, information, everything is stored as a variable
 ```
 [1] 5
 ```
+]
+
+
+.pull-right[
+Assigning a __vector__ of values
+* Consecutive integers
+
 
 ```r
-&gt; y &lt;- 1:5
-&gt; y
+&gt; a &lt;- 3:10
+&gt; a
 ```
 
 ```
-[1] 1 2 3 4 5
+[1]  3  4  5  6  7  8  9 10
 ```
+
+* __Concatenate__ a string of numbers
+
+
+```r
+&gt; b &lt;- c(5, 12, 2, 100, 8)
+&gt; b
+```
+
+```
+[1]   5  12   2 100   8
+```
+]
+
 
 ---
 
-# We can do math
+# We can do math with variables
 
+.pull-left[
+Math on variables with just one value
 
 ```r
 &gt; x &lt;- 5
@@ -221,16 +367,224 @@ Data, information, everything is stored as a variable
 ```
 [1] 25
 ```
+]
+
+
+.pull-right[
+Math on vectors of values: element-wise computation
 
 ```r
-&gt; log2(y)
+&gt; a &lt;- 3:6
+&gt; a
 ```
 
 ```
-[1] 4.643856
+[1] 3 4 5 6
+```
+
+```r
+&gt; a+2
+```
+
+```
+[1] 5 6 7 8
+```
+
+```r
+&gt; a*3
+```
+
+```
+[1]  9 12 15 18
+```
+
+```r
+&gt; a*a
+```
+
+```
+[1]  9 16 25 36
+```
+]
+
+
+---
+
+# Variable can include text (characters)
+
+
+```r
+&gt; hi &lt;- "hello"
+&gt; hi
+```
+
+```
+[1] "hello"
+```
+
+```r
+&gt; greetings &lt;- c("Guten Tag", "Hola", hi)
+&gt; greetings
+```
+
+```
+[1] "Guten Tag" "Hola"      "hello"    
 ```
 
 
+---
+
+# Common console errors 
+ 
+&lt;!-- UPDATE  --&gt;
+* A command was not completed 
+  _ When R is waiting for a new command the prompt line will begin with `&gt;`
+
+
+```r
+&gt; 3 + (2*6
+```
+
+```
+Error: &lt;text&gt;:2:0: unexpected end of input
+1: 3 + (2*6
+   ^
+```
+
+
+* Text was entered for a non-existant variable (object)
+
+
+```r
+&gt; hello
+```
+
+```
+Error in eval(expr, envir, enclos): object 'hello' not found
+```
+
+---
+
+# Coding in a script
+
+* Create a script
+
+
+.pull-left[
+Type code in an R script
+* To execute code from the __script__, press 
+    - __Windows__:  __ctrl + r__
+    - __Mac__:  __command + return__
+* To do this you need to either have your cursor at the line you want to execute or highlight the code
+* Add a screenshot!
+
+&lt;!-- UPDATE --&gt;
+
+]
+
+
+.pull-right[
+
+```r
+# UPDATE!
+
+7
+3 + 5
+"hello"
+```
+
+```
+[1] 7
+[1] 8
+[1] "hello"
+```
+]
+
+---
+
+# Saving a script
+
+UPDATE: add instructions
+
+
+---
+
+# Practice on your own
+
+- create a folder on your computer
+- set your working directory in Rstudio to that folder
+- make a new script and save it as `practice.R` in your folder
+
+(Note: later using `Projects` will make this easier)
+
+
+## Practice the commands we just learned. 
+
+* UPDATE
+* Create a vector of numbers. DO some math
+* Create a vector of text. 
+
+---
+
+class: center, inverse, middle
+
+# Coding and Data Structures
+
+We are real coders, now...
+
+
+---
+
+# Types of objects
+
+* Vectors vs. data frames
+
+A data frame is a bunch of vectors
+
+UPDATE: cut down to one example
+
+```r
+&gt; dat &lt;- data.frame(x=1:3, y=c("one", "two", "three"), z=c(1, "zwei", 3))
+&gt; dat
+```
+
+```
+  x     y    z
+1 1   one    1
+2 2   two zwei
+3 3 three    3
+```
+
+
+
+
+* There are other types of objects, such as matrices, lists, and tibbles.
+
+
+---
+
+# Variable types
+
+* `num`: numeric
+* `int`: integer
+* `fct`: factor
+* `chr`: character
+* `logi`: logical (TRUE, FALSE)
+
+
+View the _structure_ of our data frame:
+
+
+```r
+&gt; str(dat)
+```
+
+```
+'data.frame':	3 obs. of  3 variables:
+ $ x: int  1 2 3
+ $ y: Factor w/ 3 levels "one","three",..: 1 3 2
+ $ z: Factor w/ 3 levels "1","3","zwei": 1 3 2
+```
 
 ---
 
@@ -257,7 +611,10 @@ Data, information, everything is stored as a variable
 &gt; hist(iris$Sepal.Length)
 ```
 
-![](01_getting_started_slides_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
 
 ---
 
@@ -294,35 +651,544 @@ Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
 
 # Load a data set
 
-Built in datasets like `iris`
+&lt;!-- UPDATE: does readr come with RStudio? --&gt;
+&lt;!-- Can load url with Import Dataset button --&gt;
+
+&lt;!-- Built in datasets like `iris` --&gt;
+
+
+
+## have them download txt file to computer and used base R to open so that get factor levels
+
+* csv file on the internet
+
+
 
 
 ```r
-&gt; # head function shows the top 6 rows
-&gt; head(iris)
-```
-
-```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa
-```
-
-From a file
-
-
-```r
-&gt; mydata &lt;- read_csv("data.csv")
 &gt; mydata &lt;- read_csv("http://bit.ly/berd_data_csv")
+```
+
+
+```r
+&gt; View(mydata) 
+&gt; # Can also view the data by clicking on its name in the Environment tab
+```
+
+
+&lt;!-- ![](img/01_View_data_screenshot.png) --&gt;
+
+&lt;img src="img/01_View_data_screenshot.png" width="80%" height="80%"&gt;
+
+
+---
+
+# Data set summary and info
+
+
+```r
+&gt; summary(mydata)
+```
+
+```
+       id              age                sex           
+ Min.   : 335340   Length:20          Length:20         
+ 1st Qu.: 925193   Class :character   Class :character  
+ Median :1207132   Mode  :character   Mode  :character  
+ Mean   :1093150                                        
+ 3rd Qu.:1313188                                        
+ Max.   :1316123                                        
+    grade              race4                bmi       
+ Length:20          Length:20          Min.   :17.48  
+ Class :character   Class :character   1st Qu.:20.36  
+ Mode  :character   Mode  :character   Median :22.23  
+                                       Mean   :23.01  
+                                       3rd Qu.:26.58  
+                                       Max.   :29.35  
+ text_while_driving_30d smoked_ever        bullied_past_12mo
+ Length:20              Length:20          Mode :logical    
+ Class :character       Class :character   FALSE:11         
+ Mode  :character       Mode  :character   TRUE :7          
+                                           NA's :2          
+                                                            
+                                                            
 ```
 
 ---
 
-# Types of objects
+# Data set info
+
+
+```r
+&gt; dim(mydata)
+```
+
+```
+[1] 20  9
+```
+
+```r
+&gt; nrow(mydata)
+```
+
+```
+[1] 20
+```
+
+```r
+&gt; ncol(mydata)
+```
+
+```
+[1] 9
+```
+
+```r
+&gt; names(mydata)
+```
+
+```
+[1] "id"                     "age"                   
+[3] "sex"                    "grade"                 
+[5] "race4"                  "bmi"                   
+[7] "text_while_driving_30d" "smoked_ever"           
+[9] "bullied_past_12mo"     
+```
+
+---
+
+# View the beginning of a data set
+
+
+```r
+&gt; head(mydata)
+```
+
+```
+# A tibble: 6 x 9
+      id age     sex   grade race4       bmi text_while_drivi… smoked_ever
+   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;      
+1 335340 17 yea… Fema… 10th  White      27.6 &lt;NA&gt;              &lt;NA&gt;       
+2 638618 16 yea… Fema… 9th   &lt;NA&gt;       29.3 &lt;NA&gt;              Yes        
+3 922382 14 yea… Male  9th   White      18.2 &lt;NA&gt;              Yes        
+4 923122 15 yea… Male  9th   White      21.4 &lt;NA&gt;              Yes        
+5 923963 15 yea… Male  10th  Black or…  19.6 &lt;NA&gt;              No         
+6 925603 16 yea… Male  10th  All othe…  22.2 &lt;NA&gt;              No         
+# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+```r
+&gt; head(mydata, 3)
+```
+
+```
+# A tibble: 3 x 9
+      id age       sex   grade race4   bmi text_while_driving… smoked_ever
+   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;      
+1 335340 17 years… Fema… 10th  White  27.6 &lt;NA&gt;                &lt;NA&gt;       
+2 638618 16 years… Fema… 9th   &lt;NA&gt;   29.3 &lt;NA&gt;                Yes        
+3 922382 14 years… Male  9th   White  18.2 &lt;NA&gt;                Yes        
+# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+---
+
+# View the end of a data set
+
+
+```r
+&gt; tail(mydata)
+```
+
+```
+# A tibble: 6 x 9
+       id age     sex   grade race4     bmi text_while_drivin… smoked_ever
+    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;      
+1 1313153 16 yea… Fema… 11th  Hispan…  26.6 0 days             No         
+2 1313291 16 yea… Fema… 11th  White    24.8 3 to 5 days        No         
+3 1313477 16 yea… Fema… 10th  All ot…  25.0 0 days             No         
+4 1315121 17 yea… Fema… 11th  &lt;NA&gt;     22.3 I did not drive t… Yes        
+5 1315850 17 yea… Fema… 12th  Hispan…  19.5 0 days             &lt;NA&gt;       
+6 1316123 18 yea… Fema… 12th  Black …  27.5 All 30 days        Yes        
+# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+```r
+&gt; tail(mydata, 4)
+```
+
+```
+# A tibble: 4 x 9
+       id age     sex   grade race4     bmi text_while_drivin… smoked_ever
+    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;      
+1 1313477 16 yea… Fema… 10th  All ot…  25.0 0 days             No         
+2 1315121 17 yea… Fema… 11th  &lt;NA&gt;     22.3 I did not drive t… Yes        
+3 1315850 17 yea… Fema… 12th  Hispan…  19.5 0 days             &lt;NA&gt;       
+4 1316123 18 yea… Fema… 12th  Black …  27.5 All 30 days        Yes        
+# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+---
+
+# Access specific values in data set
+
+* Specific value: DatSetName[row#, column#]
+
+
+```r
+&gt; # Fourth row, Third column
+&gt; mydata[4, 3]
+```
+
+```
+# A tibble: 1 x 1
+  sex  
+  &lt;chr&gt;
+1 Male 
+```
+
+
+.pull-left[
+* Entire column
+
+
+```r
+&gt; # Third column
+&gt; mydata[, 3]
+```
+
+```
+# A tibble: 20 x 1
+   sex   
+   &lt;chr&gt; 
+ 1 Female
+ 2 Female
+ 3 Male  
+ 4 Male  
+ 5 Male  
+ 6 Male  
+ 7 Female
+ 8 Female
+ 9 Male  
+10 Female
+11 Male  
+12 Male  
+13 Male  
+14 Female
+15 Female
+16 Female
+17 Female
+18 Female
+19 Female
+20 Female
+```
+]
+
+.pull-right[
+* Entire row
+
+```r
+&gt; # Fourth row
+&gt; mydata[4,]
+```
+
+```
+# A tibble: 1 x 9
+      id age       sex   grade race4   bmi text_while_driving… smoked_ever
+   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;      
+1 923122 15 years… Male  9th   White  21.4 &lt;NA&gt;                Yes        
+# ... with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+]
+
+
+
+
+
+
+
+
+---
+
+# Data structure
+
+&lt;!-- # Should we include str? --&gt;
+&lt;!-- # Lots of attributed included for this data set --&gt;
+
+
+
+```r
+&gt; str(mydata)   # structure of data
+```
+
+```
+Classes 'tbl_df', 'tbl' and 'data.frame':	20 obs. of  9 variables:
+ $ id                    : int  335340 638618 922382 923122 923963 925603 933724 935435 1096564 1108114 ...
+ $ age                   : chr  "17 years old" "16 years old" "14 years old" "15 years old" ...
+ $ sex                   : chr  "Female" "Female" "Male" "Male" ...
+ $ grade                 : chr  "10th" "9th" "9th" "9th" ...
+ $ race4                 : chr  "White" NA "White" "White" ...
+ $ bmi                   : num  27.6 29.3 18.2 21.4 19.6 ...
+ $ text_while_driving_30d: chr  NA NA NA NA ...
+ $ smoked_ever           : chr  NA "Yes" "Yes" "Yes" ...
+ $ bullied_past_12mo     : logi  NA NA FALSE FALSE TRUE TRUE ...
+ - attr(*, "spec")=List of 2
+  ..$ cols   :List of 9
+  .. ..$ id                    : list()
+  .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+  .. ..$ age                   : list()
+  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+  .. ..$ sex                   : list()
+  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+  .. ..$ grade                 : list()
+  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+  .. ..$ race4                 : list()
+  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+  .. ..$ bmi                   : list()
+  .. .. ..- attr(*, "class")= chr  "collector_double" "collector"
+  .. ..$ text_while_driving_30d: list()
+  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+  .. ..$ smoked_ever           : list()
+  .. .. ..- attr(*, "class")= chr  "collector_character" "collector"
+  .. ..$ bullied_past_12mo     : list()
+  .. .. ..- attr(*, "class")= chr  "collector_logical" "collector"
+  ..$ default: list()
+  .. ..- attr(*, "class")= chr  "collector_guess" "collector"
+  ..- attr(*, "class")= chr "col_spec"
+```
+
+---
+
+# Convert sex into a factor level variable
+
+
+
+```r
+&gt; summary(mydata$sex)
+```
+
+```
+   Length     Class      Mode 
+       20 character character 
+```
+
+```r
+&gt; mydata$sex &lt;- as.factor(mydata$sex)
+&gt; summary(mydata$sex)
+```
+
+```
+Female   Male 
+    12      8 
+```
+
+
+---
+
+&lt;!-- class: inverse --&gt;
+
+# What other variables could we &lt;br&gt; convert to factor?
+&lt;!-- QQ: how to prevent title being cut off? --&gt;
+
+
+```r
+&gt; mydata$smoked_ever &lt;- as.factor(mydata$smoked_ever)
+&gt; mydata$race4 &lt;- as.factor(mydata$race4)
+&gt; mydata$text_while_driving_30d &lt;- as.factor(mydata$text_while_driving_30d)
+&gt; mydata$grade &lt;- as.factor(mydata$grade)
+```
+
+&lt;!-- ## New summary of data set --&gt;
+
+
+```r
+&gt; summary(mydata[,c("sex", "smoked_ever", "race4", "text_while_driving_30d", "grade")])
+```
+
+```
+     sex     smoked_ever                       race4  
+ Female:12   No  :10     All other races          :5  
+ Male  : 8   Yes : 6     Black or African American:3  
+             NA's: 4     Hispanic/Latino          :6  
+                         White                    :4  
+                         NA's                     :2  
+                                                      
+                      text_while_driving_30d  grade  
+ 0 days                          : 5         10th:8  
+ 1 or 2 days                     : 2         11th:4  
+ 3 to 5 days                     : 1         12th:4  
+ All 30 days                     : 1         9th :4  
+ I did not drive the past 30 days: 1                 
+ NA's                            :10                 
+```
+
+
+---
+
+# Reordering factor levels
+
+
+
+
+
+---
+
+# Basic plots of numeric data (1/3)
+
+
+## Histogram
+
+
+```r
+&gt; hist(mydata$bmi)
+```
+
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+
+```r
+&gt; hist(mydata$bmi, xlab = "BMI", main="BMI's of students")
+```
+
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-39-2.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Basic plots of numeric data (2/3)
+
+## Boxplot
+
+.pull-left[
+
+```r
+&gt; boxplot(mydata$bmi)
+```
+
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+```r
+&gt; boxplot(mydata$bmi, 
++         horizontal = TRUE, 
++         xlab = "BMI")
+&gt; title("BMI's of students")
+```
+
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Basic plots of numeric data (3/3)
+
+## Scatterplot
+
+.pull-left[
+
+```r
+&gt; plot(mydata$grade, mydata$bmi)
+```
+
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+&gt; plot(mydata$grade, mydata$bmi, 
++      xlab = "Grade", ylab = "BMI", 
++      main = 
++        "BMI vs. Grade of Students")
+```
+
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Summary statistics of numeric data (1/2)
+
+## Standard R `summary` command
+
+
+```r
+&gt; summary(mydata$bmi)
+```
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  17.48   20.36   22.23   23.01   26.58   29.35 
+```
+
+## Mean and standard deviation
+
+
+```r
+&gt; mean(mydata$bmi)
+```
+
+```
+[1] 23.00838
+```
+
+```r
+&gt; sd(mydata$bmi)
+```
+
+```
+[1] 3.56471
+```
+
+---
+
+# Summary statistics of numeric data (2/2)
+&lt;!-- QQ: Why is (2/2) being cut off? It's not cut off for (1/2).--&gt;
+## Min, max, &amp; median
+
+.pull-left[
+
+```r
+&gt; min(mydata$bmi)
+```
+
+```
+[1] 17.4814
+```
+
+```r
+&gt; max(mydata$bmi)
+```
+
+```
+[1] 29.3495
+```
+]
+
+.pull-right[
+
+```r
+&gt; median(mydata$bmi)
+```
+
+```
+[1] 22.22985
+```
+]
+
+## Quantiles
+
+
+```r
+&gt; quantile(mydata$bmi, prob=c(0, .25, .5, .75, 1))  
+```
+
+```
+      0%      25%      50%      75%     100% 
+17.48140 20.35878 22.22985 26.57810 29.34950 
+```
+
 
 
 
