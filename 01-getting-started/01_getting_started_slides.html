@@ -488,7 +488,7 @@ Example:
 
 --
 
-__Obejct is not found__
+__Object is not found__
 
 * This happens when text is entered for a non-existent variable (object)
 
@@ -540,7 +540,7 @@ class: inverse, center, middle
 * __Execute code__ in the script, by
     - clicking on the ![](img/01_Script_Run.png) button in the top right corner of the scripting window, 
     - or typing one of the following key combinations to execute the code
-          + __Windows__:  __ctrl + r__
+          + __Windows__:  __ctrl + return__
           + __Mac__:  __command + return__
 
 
@@ -1314,17 +1314,16 @@ In this case the output is only one row since there is only one 14 year old.
 
 
 ```r
-&gt; mydata[mydata$age == "15 years old", c("grade", "race4")]
+&gt; mydata[mydata$age == "15 years old", c("age", "grade", "race4")]
 ```
 
 ```
-   grade                     race4
-4    9th                     White
-5   10th Black or African American
-9   10th           All other races
-14  10th           Hispanic/Latino
+            age grade                     race4
+4  15 years old   9th                     White
+5  15 years old  10th Black or African American
+9  15 years old  10th           All other races
+14 15 years old  10th           Hispanic/Latino
 ```
-
 
 * Age, sex, and BMI for students with BMI less than 19
 
@@ -1485,14 +1484,18 @@ Some of this is drawn from materials in online books/lessons:
 - advanced tidyverse: functions, purrr
 - statistical modeling in R
 
-&lt;br&gt; &lt;br&gt;
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
 
 ## This workshop info:
 
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
 - all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.R)
     </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "rainbow",
@@ -1503,57 +1506,16 @@ Some of this is drawn from materials in online books/lessons:
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
-})(document);
-
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
 })();</script>
 
 <script>
 (function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
-
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
+  var i, text, code, codes = document.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -1567,8 +1529,7 @@ slideshow._releaseMath = function(el) {
     }
     i++;
   }
-};
-slideshow._releaseMath(document);
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

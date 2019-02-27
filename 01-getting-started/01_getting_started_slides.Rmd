@@ -396,7 +396,7 @@ class: inverse, center, middle
 * __Execute code__ in the script, by
     - clicking on the ![](img/01_Script_Run.png) button in the top right corner of the scripting window, 
     - or typing one of the following key combinations to execute the code
-          + __Windows__:  __ctrl + r__
+          + __Windows__:  __ctrl + return__
           + __Mac__:  __command + return__
 
 
@@ -838,9 +838,8 @@ mydata[mydata$bmi < 19,]
 * Grade and race for 15 year olds only
 
 ```{r}
-mydata[mydata$age == "15 years old", c("grade", "race4")]
+mydata[mydata$age == "15 years old", c("age", "grade", "race4")]
 ```
-
 
 * Age, sex, and BMI for students with BMI less than 19
 
@@ -989,7 +988,12 @@ Some of this is drawn from materials in online books/lessons:
 - advanced tidyverse: functions, purrr
 - statistical modeling in R
 
-<br> <br>
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
 
 ## This workshop info:
 
