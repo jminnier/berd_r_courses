@@ -216,7 +216,7 @@ mydata[mydata$age == "14 years old",]
 mydata[mydata$bmi < 19,]
 
 ## ------------------------------------------------------------------------
-mydata[mydata$age == "15 years old", c("grade", "race4")]
+mydata[mydata$age == "15 years old", c("age", "grade", "race4")]
 
 ## ------------------------------------------------------------------------
 mydata[mydata$bmi < 19, c("age", "sex", "bmi")]
@@ -232,15 +232,19 @@ write.csv(mydata, file = "mydata.csv", col.names = TRUE, row.names = FALSE)
 
 ## ---- eval = FALSE-------------------------------------------------------
 ## # Install a package from CRAN (main package repository)
-## install.packages("tidyverse")
+## install.packages("tidyverse") # only do this ONCE
 ## # Load the package
 ## library(tidyverse)
 
 ## ---- eval=FALSE---------------------------------------------------------
-## install.packages("devtools")
+## install.packages("devtools") # only do this ONCE
 ## library(devtools)
 ## # Install a package from github (often in development, no testing)
 ## # https://github.com/hadley/yrbss
 ## install_github("hadley/yrbss")
 ## library(yrbss)
+
+## ---- include=FALSE------------------------------------------------------
+#knitr::purl("01-getting-started/01_getting_started_slides.Rmd", out = "01-getting-started/01_getting_started_slides.R")
+#knitr::purl("01_getting_started_slides.Rmd")
 
