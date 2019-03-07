@@ -321,6 +321,45 @@ greetings
 ```
 
 
+
+---
+
+# Viewing list of defined variables
+
+ 
+<!-- __List of defined variables (and other objects)__ -->
+
+* The R command to see what objects have been defined is `ls()`. 
+* This list includes all defined objects (including dataframes, functions, etc.)
+```{r}
+ls()
+```
+
+* You can also look at the list in the Environment window:
+
+![](img/01_ls_screenshot.png)
+
+---
+
+# Removing defined variables
+
+
+* The R command to delete an object is `rm()`. 
+
+```{r}
+ls()
+rm("greetings", hi)  # Can run with or without quotes
+ls()
+```
+
+* Remove EVERYTHING - _Be careful!!_
+```{r}
+rm(list=ls())
+ls()
+```
+ 
+ * Can also remove everything using the _Clear Workspace_ option in the _Session_ menu.
+
 ---
 
 # Common console errors 
@@ -523,19 +562,19 @@ Specific cell value:
 `DatSetName[row#, column#]`
 
 ```{r}
-# Fourth row, Third column
+# Second row, Third column
 df[2, 3]
 ```
 ]
 
 .pull-right[
-Entire column
+Entire column: `DatSetName[, column#]`
 ```{r}
 # Third column
 df[, 3]
 ```
 
-Entire row
+Entire row: `DatSetName[row#, ]`
 ```{r}
 # Second row
 df[2,]
@@ -796,7 +835,7 @@ dim(mydata); names(mydata)
 Previously we used `DatSetName[, column#]`
 
 ```{r}
-mydata[, c(2, 6)]   # sixth column
+mydata[, c(2, 6)] # 2nd & 6th columns
 ```
 ]
 

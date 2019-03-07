@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Getting Started with R and RStudio</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
@@ -458,6 +458,67 @@ Math on vectors of values: element-wise computation
 ```
 
 
+
+---
+
+# Viewing list of defined variables
+
+ 
+&lt;!-- __List of defined variables (and other objects)__ --&gt;
+
+* The R command to see what objects have been defined is `ls()`. 
+* This list includes all defined objects (including dataframes, functions, etc.)
+
+```r
+&gt; ls()
+```
+
+```
+[1] "a"         "b"         "greetings" "hi"        "x"         "y"        
+```
+
+* You can also look at the list in the Environment window:
+
+![](img/01_ls_screenshot.png)
+
+---
+
+# Removing defined variables
+
+
+* The R command to delete an object is `rm()`. 
+
+
+```r
+&gt; ls()
+```
+
+```
+[1] "a"         "b"         "greetings" "hi"        "x"         "y"        
+```
+
+```r
+&gt; rm("greetings", hi)  # Can run with or without quotes
+&gt; ls()
+```
+
+```
+[1] "a" "b" "x" "y"
+```
+
+* Remove EVERYTHING - _Be careful!!_
+
+```r
+&gt; rm(list=ls())
+&gt; ls()
+```
+
+```
+character(0)
+```
+ 
+ * Can also remove everything using the _Clear Workspace_ option in the _Session_ menu.
+
 ---
 
 # Common console errors 
@@ -694,7 +755,7 @@ Specific cell value:
 
 
 ```r
-&gt; # Fourth row, Third column
+&gt; # Second row, Third column
 &gt; df[2, 3]
 ```
 
@@ -704,7 +765,7 @@ Specific cell value:
 ]
 
 .pull-right[
-Entire column
+Entire column: `DatSetName[, column#]`
 
 ```r
 &gt; # Third column
@@ -715,7 +776,7 @@ Entire column
 [1] 28.0 35.5 31.0
 ```
 
-Entire row
+Entire row: `DatSetName[row#, ]`
 
 ```r
 &gt; # Second row
@@ -1007,7 +1068,7 @@ The problem with this method, is that we need to know the column number which ca
 &gt; hist(mydata$bmi)
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
 
 With extra features: 
 
@@ -1016,7 +1077,7 @@ With extra features:
 &gt; hist(mydata$bmi, xlab = "BMI", main="BMI's of students")
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1030,7 +1091,7 @@ With extra features:
 &gt; boxplot(mydata$bmi)
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1045,7 +1106,7 @@ With extra features:
 +   main = "BMI's of students by sex")
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1060,7 +1121,7 @@ With extra features:
 &gt; plot(mydata$weight_kg, mydata$bmi)
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1071,7 +1132,7 @@ With extra features:
 +    main = "BMI vs. Weight")
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1204,7 +1265,7 @@ Previously we used `DatSetName[, column#]`
 
 
 ```r
-&gt; mydata[, c(2, 6)]   # sixth column
+&gt; mydata[, c(2, 6)] # 2nd &amp; 6th columns
 ```
 
 ```
