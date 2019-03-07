@@ -1,7 +1,7 @@
 ---
 title: Getting Started with R and RStudio
 author: Jessica Minnier, PhD & Meike Niederhausen, PhD
-date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_intro <br> pdf version: http://bit.ly/berd_r_intro_pdf'
+date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2019/02/26 & 2019/03/07 <br> Slides available at http://bit.ly/berd_r_intro <br> pdf version: http://bit.ly/berd_r_intro_pdf'
 output: 
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts, mycss.css]
