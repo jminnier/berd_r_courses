@@ -1,0 +1,171 @@
+---
+title: Data Wrangling in R with the Tidyverse
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+date: "<span style = 'font-size: 80%;'>2019/04/18 (Part 1) & 2019/04/25 (Part 2) <br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_tidy](http://bit.ly/berd_tidy) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_tidy_pdf](http://bit.ly/berd_tidy_pdf)</span>"
+output: 
+  xaringan::moon_reader:
+    css: [css/xaringan-themer.css, css/my-theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: rainbow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:9"
+    includes:
+      in_header: ../header.html   
+editor_options: 
+  chunk_output_type: console
+---
+
+layout: true
+  
+<div class="my-footer"><span>bit.ly/berd_tidy</span></div> 
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  fig.width=10.5, 
+  fig.height=4,
+  fig.align = "center",
+  rows.print=16,
+  echo=TRUE,
+  highlight = TRUE,
+  prompt = TRUE, # IF TRUE adds a > before each code input
+  comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  #comment=NA
+  )
+
+# set ggplot theme
+theme_set(theme_bw(base_size = 24))
+```
+
+
+
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#3A6185", ## OHSU Marquam
+  code_highlight_color = "#c0e8f5",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = google_font("Droid Mono"),
+  text_font_size = "26px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  outfile = "css/xaringan-themer.css"
+)
+```
+
+
+
+# Pre-course homework
+
+## If new to R
+
+- Look over previous workshop [slides](http://bit.ly/berd_r_intro) and [video](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public)
+- Know how to install packages
+
+## Install packages
+
+---
+
+# Questions
+
+
+
+---
+
+# Learning Objectives
+
+- stuff
+
+---
+
+
+
+
+---
+
+![](img/r4ds_tidyverse.png)
+
+[G. Grolemond & H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
+
+---
+
+# Resources - R Basics
+
+- [RStudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
+- Install R/RStudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&feature=youtu.be)
+- [Basic Basics](http://rladiessydney.org/post/2018/11/05/basicbasics/)
+
+Interactive lessons
+
+- [DataCamp](www.datacamp.com)
+    + [Introduction to R (free course)](https://www.datacamp.com/courses/free-introduction-to-r)
+    + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+    + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
+
+Online books/lessons:
+
+- [Intro to R/RStudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
+- [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+
+---
+
+# Resources - Tidyverse & Data Wrangling
+
+Interactive lessons
+
+- [DataCamp](www.datacamp.com)
+    + [Introduction to R (free course)](https://www.datacamp.com/courses/free-introduction-to-r)
+    + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+    + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
+
+Some of this is drawn from materials in online books/lessons:
+
+- [R for Data Science](https://r4ds.had.co.nz/index.html) - by Garrett Grolemund & Hadley Wickham
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
+- [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+
+---
+
+# Possible Future Workshop Topics?
+
+- reproducible reports in R
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr
+- statistical modeling in R
+
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_Practice_Answers.pdf)
+
+```{r, include=FALSE}
+#knitr::purl("01-getting-started/01_getting_started_slides.Rmd", out = "01-getting-started/01_getting_started_slides.R")
+#knitr::purl("01_getting_started_slides.Rmd")
+```
