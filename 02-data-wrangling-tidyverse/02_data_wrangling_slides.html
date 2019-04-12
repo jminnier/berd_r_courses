@@ -110,6 +110,37 @@ Projects standardize file paths, keep everything together, whole folder can be s
 
 ---
 
+# Useful keyboard shortcuts
+
+.pull-left[
+action | mac | windows/linux
+---| ---| ---
+run line of code | cmd+enter | ctrl+enter 
+`&lt;-`| option + - | alt+ -
+`%&gt;%` | cmd+shift+m | ctrl+shift+m
+]
+.pull-right[
+Try typing and running
+
+```r
+y &lt;- iris %&gt;% count(Species)
+y
+```
+
+Now, in console, press up arrow multiple times.
+
+]
+## Others: ([see list](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
+
+action | mac | windows/linux
+---| ---| ---
+interrupt currently executing command | esc | esc
+in console, go to previously run code | up/down | up/down
+keyboard shortcut help | option+shift+k | alt+shift+k
+
+
+---
+
 # Tibbles
 
 .pull-left[
@@ -118,13 +149,13 @@ We learned about *data frames*
 ```r
 data.frame(name = c("Sarah","Ana","Jose"), 
            rank = 1:3,
-           age = c(35.1, 25, 58),
-           city = c("","New York","LA"))
+           age = c(35.5, 25, 58),
+           city = c(NA,"New York","LA"))
 ```
 
 ```
    name rank  age     city
-1 Sarah    1 35.1         
+1 Sarah    1 35.5     &lt;NA&gt;
 2   Ana    2 25.0 New York
 3  Jose    3 58.0       LA
 ```
@@ -135,15 +166,15 @@ A *tibble* is a data frame but with perks
 ```r
 tibble(name = c("Sarah","Ana","Jose"), 
        rank = 1:3,
-       age = c(35.1, 25, 58),
-       city = c("","New York","LA"))
+       age = c(35.5, 25, 58),
+       city = c(NA,"New York","LA"))
 ```
 
 ```
 # A tibble: 3 x 4
   name   rank   age city    
   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   
-1 Sarah     1  35.1 ""      
+1 Sarah     1  35.5 &lt;NA&gt;    
 2 Ana       2  25   New York
 3 Jose      3  58   LA      
 ```
@@ -159,8 +190,8 @@ Base R functions import `data.frame`
 
 
 ```r
-mydata &lt;- read.csv("mydata.csv")
-mydata
+mydata_df &lt;- read.csv("mydata.csv")
+mydata_df
 ```
 
 ```
@@ -233,11 +264,12 @@ mydata
 
 # Import as `tibble` (try this)
 
+`tidyverse` functions import as tibbles (`read_csv`, `read_excel()`, etc)
 
 
 ```r
-mydata &lt;- read_csv("mydata.csv")
-mydata
+mydata_tib &lt;- read_csv("mydata.csv")
+mydata_tib
 ```
 
 ```
@@ -279,6 +311,127 @@ mydata
 glimpse(mydata)
 str(mydata)
 ```
+
+
+---
+
+# Tidy Data
+
+1. Each variable forms a column.
+2. Each observation forms a row.
+3. Each type of observational unit forms a table.
+
+![](img/r4ds_tidy_data.png)
+[G. Grolemond &amp; H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
+
+---
+
+# Untidy data: example 1
+
+
+```r
+untidy_data &lt;- tibble(
+  name = c("Ana","Bob","Cara"),
+  wt_07_01_2018 = c(100, 150, 140),
+  wt_08_01_2018 = c(104, 155, 138),
+  wt_09_01_2018 = c(NA, 160, 142)
+)
+untidy_data
+```
+
+```
+# A tibble: 3 x 4
+  name  wt_07_01_2018 wt_08_01_2018 wt_09_01_2018
+  &lt;chr&gt;         &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
+1 Ana             100           104            NA
+2 Bob             150           155           160
+3 Cara            140           138           142
+```
+
+
+
+---
+
+# Tidy data: example 1
+
+You will learn how to do this!
+
+```r
+untidy_data %&gt;% gather(key = "date", value = "weight", -name) %&gt;%
+  mutate(date = str_replace(date,"wt_",""),
+         date = dmy(date))
+```
+
+```
+# A tibble: 9 x 3
+  name  date       weight
+  &lt;chr&gt; &lt;date&gt;      &lt;dbl&gt;
+1 Ana   2018-01-07    100
+2 Bob   2018-01-07    150
+3 Cara  2018-01-07    140
+4 Ana   2018-01-08    104
+5 Bob   2018-01-08    155
+6 Cara  2018-01-08    138
+7 Ana   2018-01-09     NA
+8 Bob   2018-01-09    160
+9 Cara  2018-01-09    142
+```
+
+---
+
+# Untidy data: example 2
+
+
+```r
+untidy_data &lt;- tibble(
+  name = c("Ana","Bob","Cara"),
+  meds = c("advil 500mg 2xday","tylenol 1000mg 1xday", "advil 200mg 3xday")
+)
+untidy_data
+```
+
+```
+# A tibble: 3 x 2
+  name  meds                
+  &lt;chr&gt; &lt;chr&gt;               
+1 Ana   advil 500mg 2xday   
+2 Bob   tylenol 1000mg 1xday
+3 Cara  advil 200mg 3xday   
+```
+
+---
+
+# Tidy data: example 2
+
+You will learn how to do this!
+
+```r
+untidy_data %&gt;% 
+  separate(col = meds, into = c("med_name","dose_mg","times_per_day"), sep=" ") %&gt;%
+  mutate(times_per_day = as.numeric(str_replace(times_per_day, "xday", "")),
+         dose_mg = as.numeric(str_replace(dose_mg, "mg","")))
+```
+
+```
+# A tibble: 3 x 4
+  name  med_name dose_mg times_per_day
+  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+1 Ana   advil        500             2
+2 Bob   tylenol     1000             1
+3 Cara  advil        200             3
+```
+
+---
+
+class: center, middle, inverse
+
+# How to tidy?
+
+---
+
+# The pipe `%&gt;%`
+
+
 
 ---
 

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # If new to R
 
 - Look over previous workshop [slides](http://bit.ly/berd_r_intro) and [video](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public)
-- Know how to install packages
+- Read [this chapter in Modern Dive](https://moderndive.com/2-getting-started.html#package-installation) to learn how to install packages and load packages
 
 # Everyone
 
