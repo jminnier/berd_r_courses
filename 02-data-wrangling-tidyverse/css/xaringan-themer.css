@@ -33,11 +33,11 @@ h1, h2, h3 {
 }
 .remark-slide-content {
   background-color: #EBEFF2;
-  font-size: 26px;
+  font-size: 24px;
   
   
   
-  padding: 1em 4em 1em 4em;
+  padding: 0em 2em 1em 2em;
 }
 .remark-slide-content h1 {
     font-size: 45px;
@@ -52,7 +52,7 @@ h1, h2, h3 {
   font-family: Droid Mono, 'Lucida Console', Monaco, monospace;
 }
 .remark-code {
-  font-size: 0.9em;
+  font-size: 20px;
 }
 .remark-inline-code {
   font-size: 1em;

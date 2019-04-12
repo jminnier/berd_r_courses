@@ -35,35 +35,247 @@ layout: true
 
 # Pre-course homework
 
-## If new to R
-
-- Look over previous workshop [slides](http://bit.ly/berd_r_intro) and [video](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public)
-- Know how to install packages
-
-## Install packages
-
----
-
-# Questions
-
-
+[find it here](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
 
 ---
 
 # Learning Objectives
 
-- stuff
+- What is data wrangling?
+- A few good practices in R/Rstudio
+- What is tidy data?
+- What is tidyverse?
+- Reshape and manipulate data frames
+- Some data cleaning
+
 
 ---
 
+class: center, middle, inverse
 
+# Getting started
 
 
 ---
+
+# What is data wrangling?
+
+.pull-left[
+- "data janitor work"
+- importing data
+- cleaning data
+- changing shape of data
+- fixing errors and poorly formatted data elements
+- transforming columns and rows
+- filtering, subsetting
+]
+.pull-right[
 
 ![](img/r4ds_tidyverse.png)
 
 [G. Grolemond &amp; H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
+
+]
+
+---
+
+# Good practices in Rstudio
+
+- Use "projects" ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+    + Create an RStudio project for each data analysis project.
+    + Keep data files there; we’ll talk about loading them into R in data import.
+    + Keep scripts there; edit them, run them in bits or as a whole.
+    + Save your outputs (plots and cleaned data) there.
+- Only ever use relative paths, not absolute paths.
+    + i.e. `read_csv("data/mydata.csv")` not `read_csv("/home/yourname/Documents/stuff/this file is where again FINAL.csv")`
+    
+Projects standardize file paths, keep everything together, whole folder can be shared and run in another place.
+
+
+---
+
+# Rstudio Projects
+
+## New new project
+
+- Open Rstudio
+- File -&gt; New Project
+
+## Existing project
+
+- click on `.Rproj` file in your folder
+
+---
+
+# Tibbles
+
+.pull-left[
+We learned about *data frames*
+
+```r
+data.frame(name = c("Sarah","Ana","Jose"), 
+           rank = 1:3,
+           age = c(35.1, 25, 58),
+           city = c("","New York","LA"))
+```
+
+```
+   name rank  age     city
+1 Sarah    1 35.1         
+2   Ana    2 25.0 New York
+3  Jose    3 58.0       LA
+```
+]
+.pull-right[
+A *tibble* is a data frame but with perks
+
+```r
+tibble(name = c("Sarah","Ana","Jose"), 
+       rank = 1:3,
+       age = c(35.1, 25, 58),
+       city = c("","New York","LA"))
+```
+
+```
+# A tibble: 3 x 4
+  name   rank   age city    
+  &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   
+1 Sarah     1  35.1 ""      
+2 Ana       2  25   New York
+3 Jose      3  58   LA      
+```
+]
+
+
+---
+
+# Import as `data.frame` (try this)
+
+
+Base R functions import `data.frame`
+
+
+```r
+mydata &lt;- read.csv("mydata.csv")
+mydata
+```
+
+```
+        id                   age    sex grade                     race4
+1   335340          17 years old Female  10th                     White
+2   638618          16 years old Female   9th                      &lt;NA&gt;
+3   922382          14 years old   Male   9th                     White
+4   923122          15 years old   Male   9th                     White
+5   923963          15 years old   Male  10th Black or African American
+6   925603          16 years old   Male  10th           All other races
+7   933724          16 years old Female  10th           All other races
+8   935435          17 years old Female  12th           All other races
+9  1096564          15 years old   Male  10th           All other races
+10 1108114          17 years old Female   9th Black or African American
+11 1306150          16 years old   Male  10th           Hispanic/Latino
+12 1307481          17 years old   Male  12th           Hispanic/Latino
+13 1307872          17 years old   Male  11th           Hispanic/Latino
+14 1311617          15 years old Female  10th           Hispanic/Latino
+15 1313153          16 years old Female  11th           Hispanic/Latino
+16 1313291          16 years old Female  11th                     White
+17 1313477          16 years old Female  10th           All other races
+18 1315121          17 years old Female  11th                      &lt;NA&gt;
+19 1315850          17 years old Female  12th           Hispanic/Latino
+20 1316123 18 years old or older Female  12th Black or African American
+       bmi weight_kg           text_while_driving_30d smoked_ever
+1  27.5671     66.23                             &lt;NA&gt;        &lt;NA&gt;
+2  29.3495     84.82                             &lt;NA&gt;         Yes
+3  18.1827     57.61                             &lt;NA&gt;         Yes
+4  21.3754     60.33                             &lt;NA&gt;         Yes
+5  19.5988     63.50                             &lt;NA&gt;          No
+6  22.1910     70.31                             &lt;NA&gt;          No
+7  20.9913     45.36                             &lt;NA&gt;         Yes
+8  17.4814     43.09                             &lt;NA&gt;          No
+9  22.4593     79.38                             &lt;NA&gt;        &lt;NA&gt;
+10 26.5781     68.04                             &lt;NA&gt;          No
+11 21.1874     67.13                           0 days        &lt;NA&gt;
+12 19.4637     56.25                      1 or 2 days          No
+13 20.6121     61.69                      1 or 2 days          No
+14 27.4648     70.31                           0 days          No
+15 26.5781     68.04                           0 days          No
+16 24.8047     63.50                      3 to 5 days          No
+17 25.0318     76.66                           0 days          No
+18 22.2687     54.89 I did not drive the past 30 days         Yes
+19 19.4922     49.90                           0 days        &lt;NA&gt;
+20 27.4894     74.84                      All 30 days         Yes
+   bullied_past_12mo height_m
+1                 NA 1.550000
+2                 NA 1.699999
+3              FALSE 1.779999
+4              FALSE 1.680001
+5               TRUE 1.799998
+6               TRUE 1.780000
+7               TRUE 1.469998
+8              FALSE 1.570002
+9               TRUE 1.879998
+10             FALSE 1.600001
+11             FALSE 1.779998
+12             FALSE 1.699999
+13             FALSE 1.730001
+14              TRUE 1.600001
+15              TRUE 1.600001
+16             FALSE 1.600000
+17              TRUE 1.750001
+18             FALSE 1.569998
+19             FALSE 1.599999
+20             FALSE 1.650001
+```
+
+---
+
+# Import as `tibble` (try this)
+
+
+
+```r
+mydata &lt;- read_csv("mydata.csv")
+mydata
+```
+
+```
+# A tibble: 20 x 11
+       id age   sex   grade race4   bmi weight_kg text_while_driv…
+    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           
+ 1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;            
+ 2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;            
+ 3 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;            
+ 4 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;            
+ 5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;            
+ 6 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;            
+ 7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;            
+ 8 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;            
+ 9 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;            
+10 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;            
+11 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days          
+12 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days     
+13 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days     
+14 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days          
+15 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days          
+16 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days     
+17 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days          
+18 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive…
+19 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days          
+20 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days     
+# … with 3 more variables: smoked_ever &lt;chr&gt;, bullied_past_12mo &lt;lgl&gt;,
+#   height_m &lt;dbl&gt;
+```
+
+---
+
+# Run this code
+
+
+```r
+mydata &lt;- read_csv("mydata.csv")
+mydata
+glimpse(mydata)
+str(mydata)
+```
 
 ---
 
@@ -90,10 +302,13 @@ Online books/lessons:
 
 # Resources - Tidyverse &amp; Data Wrangling
 
+Links
+
+- [Learn the tidyverse](https://www.tidyverse.org/learn/)
+
 Interactive lessons
 
 - [DataCamp](www.datacamp.com)
-    + [Introduction to R (free course)](https://www.datacamp.com/courses/free-introduction-to-r)
     + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
     + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
 
@@ -101,6 +316,7 @@ Some of this is drawn from materials in online books/lessons:
 
 - [R for Data Science](https://r4ds.had.co.nz/index.html) - by Garrett Grolemund &amp; Hadley Wickham
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
+- [A gRadual intRoduction to the tidyverse](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse) - Workshop for Cascadia R 2017 by Chester Ismay and Ted Laderas
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
 
 ---
@@ -113,6 +329,7 @@ Some of this is drawn from materials in online books/lessons:
 - advanced tidyverse: functions, purrr
 - statistical modeling in R
 
+---
 
 ## Contact info:
 
@@ -124,8 +341,8 @@ Meike Niederhausen: _niederha@ohsu.edu_
 ## This workshop info:
 
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.R)
-- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_Practice_Answers.pdf)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.pdf)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

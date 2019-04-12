@@ -33,13 +33,13 @@ library(tidyverse)
 knitr::opts_chunk$set(
   warning=FALSE, 
   message=FALSE, 
-  fig.width=10.5, 
-  fig.height=4,
+  #fig.width=10.5, 
+  #fig.height=4,
   fig.align = "center",
   rows.print=16,
   echo=TRUE,
   highlight = TRUE,
-  prompt = TRUE, # IF TRUE adds a > before each code input
+  prompt = FALSE, # IF TRUE adds a > before each code input
   comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
   #comment=NA
   )
@@ -61,10 +61,12 @@ mono_light(
   header_font_google = google_font("Josefin Sans"),
   text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
   code_font_google   = google_font("Droid Mono"),
-  text_font_size = "26px",
+  text_font_size = "24px",
+  code_font_size = "20px",
   header_h1_font_size = "45px",
   header_h2_font_size = "40px",
   header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
   outfile = "css/xaringan-themer.css"
 )
 ```
@@ -73,35 +75,132 @@ mono_light(
 
 # Pre-course homework
 
-## If new to R
-
-- Look over previous workshop [slides](http://bit.ly/berd_r_intro) and [video](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public)
-- Know how to install packages
-
-## Install packages
-
----
-
-# Questions
-
-
+[find it here](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
 
 ---
 
 # Learning Objectives
 
-- stuff
+- What is data wrangling?
+- A few good practices in R/Rstudio
+- What is tidy data?
+- What is tidyverse?
+- Reshape and manipulate data frames
+- Some data cleaning
+
 
 ---
 
+class: center, middle, inverse
 
+# Getting started
 
 
 ---
+
+# What is data wrangling?
+
+.pull-left[
+- "data janitor work"
+- importing data
+- cleaning data
+- changing shape of data
+- fixing errors and poorly formatted data elements
+- transforming columns and rows
+- filtering, subsetting
+]
+.pull-right[
 
 ![](img/r4ds_tidyverse.png)
 
 [G. Grolemond & H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
+
+]
+
+---
+
+# Good practices in Rstudio
+
+- Use "projects" ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+    + Create an RStudio project for each data analysis project.
+    + Keep data files there; we’ll talk about loading them into R in data import.
+    + Keep scripts there; edit them, run them in bits or as a whole.
+    + Save your outputs (plots and cleaned data) there.
+- Only ever use relative paths, not absolute paths.
+    + i.e. `read_csv("data/mydata.csv")` not `read_csv("/home/yourname/Documents/stuff/this file is where again FINAL.csv")`
+    
+Projects standardize file paths, keep everything together, whole folder can be shared and run in another place.
+
+
+---
+
+# Rstudio Projects
+
+## New new project
+
+- Open Rstudio
+- File -> New Project
+
+## Existing project
+
+- click on `.Rproj` file in your folder
+
+---
+
+# Tibbles
+
+.pull-left[
+We learned about *data frames*
+```{r}
+data.frame(name = c("Sarah","Ana","Jose"), 
+           rank = 1:3,
+           age = c(35.1, 25, 58),
+           city = c("","New York","LA"))
+```
+]
+.pull-right[
+A *tibble* is a data frame but with perks
+```{r}
+tibble(name = c("Sarah","Ana","Jose"), 
+       rank = 1:3,
+       age = c(35.1, 25, 58),
+       city = c("","New York","LA"))
+```
+]
+
+
+---
+
+# Import as `data.frame` (try this)
+
+
+Base R functions import `data.frame`
+
+```{r}
+mydata <- read.csv("mydata.csv")
+mydata
+```
+
+---
+
+# Import as `tibble` (try this)
+
+
+```{r}
+mydata <- read_csv("mydata.csv")
+mydata
+```
+
+---
+
+# Run this code
+
+```{r, eval=FALSE}
+mydata <- read_csv("mydata.csv")
+mydata
+glimpse(mydata)
+str(mydata)
+```
 
 ---
 
@@ -128,10 +227,13 @@ Online books/lessons:
 
 # Resources - Tidyverse & Data Wrangling
 
+Links
+
+- [Learn the tidyverse](https://www.tidyverse.org/learn/)
+
 Interactive lessons
 
 - [DataCamp](www.datacamp.com)
-    + [Introduction to R (free course)](https://www.datacamp.com/courses/free-introduction-to-r)
     + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
     + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
 
@@ -139,6 +241,7 @@ Some of this is drawn from materials in online books/lessons:
 
 - [R for Data Science](https://r4ds.had.co.nz/index.html) - by Garrett Grolemund & Hadley Wickham
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
+- [A gRadual intRoduction to the tidyverse](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse) - Workshop for Cascadia R 2017 by Chester Ismay and Ted Laderas
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
 
 ---
@@ -151,6 +254,7 @@ Some of this is drawn from materials in online books/lessons:
 - advanced tidyverse: functions, purrr
 - statistical modeling in R
 
+---
 
 ## Contact info:
 
@@ -162,10 +266,9 @@ Meike Niederhausen: _niederha@ohsu.edu_
 ## This workshop info:
 
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.R)
-- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_Practice_Answers.pdf)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.pdf)
 
 ```{r, include=FALSE}
-#knitr::purl("01-getting-started/01_getting_started_slides.Rmd", out = "01-getting-started/01_getting_started_slides.R")
-#knitr::purl("01_getting_started_slides.Rmd")
+#knitr::purl("02-data-wrangling-tidyverse/02_data_wrangling_slides.Rmd", out = "02-data-wrangling-tidyverse/02_data_wrangling_slides.R")
 ```

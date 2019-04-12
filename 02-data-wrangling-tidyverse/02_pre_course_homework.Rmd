@@ -1,0 +1,39 @@
+---
+title: "Pre-course homework"
+author: "Data Wrangling in R with the Tidyverse"
+date: "4/18/2019"
+output:   
+  html_document:
+    code_folding: hide
+    highlight: pygments
+    keep_md: no
+    number_sections: yes
+    smart: yes
+    theme: yeti
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# If new to R
+
+- Look over previous workshop [slides](http://bit.ly/berd_r_intro) and [video](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public)
+- Know how to install packages
+
+# Everyone
+
+## Download and open an Rstudio project
+
+- Go to [https://github.com/jminnier/berd_tidyverse_project](https://github.com/jminnier/berd_tidyverse_project)
+- Click "Clone or Download" (upper right), then "Download as zip"
+
+![](img/github_download.png)
+
+- Unzip folder
+- Inside folder, click on `berd_tidyverse_project.Rproj`
+- Rstudio should open this folder as a project
+- Open and run R script `pre_class_homework.R`
+
