@@ -314,6 +314,15 @@ mydata_tib
 # Run this code
 
 
+```r
+mydata &lt;- read_csv("data/small_data.csv")
+mydata
+glimpse(mydata)
+str(mydata)
+head(mydata)
+summary(mydata)
+class(mydata)
+```
 
 
 ---
@@ -361,7 +370,7 @@ You will learn how to do this!
 
 ```r
 untidy_data %&gt;% gather(key = "date", value = "weight", -name) %&gt;%
-  mutate(date = str_replace(date,"wt_",""),
+  mutate(date = str_remove(date,"wt_"),
          date = dmy(date))
 ```
 
@@ -411,8 +420,8 @@ You will learn how to do this!
 ```r
 untidy_data %&gt;% 
   separate(col = meds, into = c("med_name","dose_mg","times_per_day"), sep=" ") %&gt;%
-  mutate(times_per_day = as.numeric(str_replace(times_per_day, "xday", "")),
-         dose_mg = as.numeric(str_replace(dose_mg, "mg","")))
+  mutate(times_per_day = as.numeric(str_remove(times_per_day, "xday")),
+         dose_mg = as.numeric(str_remove(dose_mg, "mg")))
 ```
 
 ```
@@ -529,6 +538,13 @@ Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://w
 Run this in your project
 
 
+```r
+demo_data &lt;- read_csv("data/yrbss_demo.csv")
+qn_data &lt;- read_csv("data/yrbss_qn.csv")
+
+glimpse(demo_data)
+glimpse(qn_data)
+```
 
 Look at your "Environment" tab, you should have the data there.
 
@@ -993,7 +1009,7 @@ Try these:
 ```r
 demo_data %&gt;% mutate(bmi_high = bmi &gt; 30)
 demo_data %&gt;% mutate(male = 1*(sex=="Male"))
-demo_data %&gt;% mutate(grade_num = as.numeric(str_replace(grade,"th","")))
+demo_data %&gt;% mutate(grade_num = as.numeric(str_remove(grade,"th")))
 ```
 
 ---
@@ -1009,7 +1025,7 @@ demo_data2 &lt;- demo_data %&gt;%
     age_int = case_when(
       age=="12 years old or younger" ~ 12,
       age=="18 years old or older" ~ 18,
-      TRUE ~ as.numeric(str_replace(age, " years old",""))
+      TRUE ~ as.numeric(str_remove(age, " years old"))
   ))
 demo_data2 %&gt;% tabyl(age,age_int)
 ```

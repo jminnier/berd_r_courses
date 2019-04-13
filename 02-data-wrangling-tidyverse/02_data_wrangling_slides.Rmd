@@ -239,7 +239,7 @@ mydata_tib
 
 # Run this code
 
-```{r, include=FALSE}
+```{r, results=FALSE}
 mydata <- read_csv("data/small_data.csv")
 mydata
 glimpse(mydata)
@@ -284,7 +284,7 @@ untidy_data
 You will learn how to do this!
 ```{r}
 untidy_data %>% gather(key = "date", value = "weight", -name) %>%
-  mutate(date = str_replace(date,"wt_",""),
+  mutate(date = str_remove(date,"wt_"),
          date = dmy(date))
 ```
 
@@ -308,8 +308,8 @@ You will learn how to do this!
 ```{r}
 untidy_data %>% 
   separate(col = meds, into = c("med_name","dose_mg","times_per_day"), sep=" ") %>%
-  mutate(times_per_day = as.numeric(str_replace(times_per_day, "xday", "")),
-         dose_mg = as.numeric(str_replace(dose_mg, "mg","")))
+  mutate(times_per_day = as.numeric(str_remove(times_per_day, "xday")),
+         dose_mg = as.numeric(str_remove(dose_mg, "mg")))
 ```
 
 ---
@@ -403,7 +403,7 @@ Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://w
 
 Run this in your project
 
-```{r, include=FALSE}
+```{r, results=FALSE}
 demo_data <- read_csv("data/yrbss_demo.csv")
 qn_data <- read_csv("data/yrbss_qn.csv")
 
@@ -614,7 +614,7 @@ Try these:
 ```{r, eval=FALSE}
 demo_data %>% mutate(bmi_high = bmi > 30)
 demo_data %>% mutate(male = 1*(sex=="Male"))
-demo_data %>% mutate(grade_num = as.numeric(str_replace(grade,"th","")))
+demo_data %>% mutate(grade_num = as.numeric(str_remove(grade,"th")))
 ```
 
 ---
@@ -630,7 +630,7 @@ demo_data2 <- demo_data %>%
     age_int = case_when(
       age=="12 years old or younger" ~ 12,
       age=="18 years old or older" ~ 18,
-      TRUE ~ as.numeric(str_replace(age, " years old",""))
+      TRUE ~ as.numeric(str_remove(age, " years old"))
   ))
 demo_data2 %>% tabyl(age,age_int)
 ```
