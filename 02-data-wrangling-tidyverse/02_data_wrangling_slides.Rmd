@@ -522,12 +522,28 @@ demo_data %>% filter((bmi<15)|(bmi>50))
 # `select()` $\sim$ columns
 
 - select columns/variables
-- uses special syntax: `var1:var20`, `one_of(c("a","b","c"))`, `-var1`, `contains("date")`
+- uses special syntax (next slide), no quotes needed
 - can be used to rearrange columns (useful to use `everything()`)
 
 ```{r}
 demo_data %>% select(record, grade)
 ```
+
+---
+
+# special syntax:
+
+There are many ways to select a set of variable names:
+
+- `var1:var20`: all the columns from `var1` to `var20`
+- `one_of(c("a","b","c"))`: if you have a character vector of column names, you can use it here
+- `-var1`: *not* `var1`, remove it
+- `-(var1:var20)`: remove all the columns from `var1` to `var20`
+- `contains("date")`, `contains("_")`: all variable names that contain a specified string
+- `starts_with("a")` or `ends_with("last")`: all variable names that start or end with a string
+- `demo_data %>% select(1:3)`: can still use column numbers
+
+See other examples in the [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
 
 ---
 
@@ -540,7 +556,7 @@ demo_data[, c("record","age","sex")]
 ```
 ]
 .pull-right[
-No quotes needed, easier to read. More flexible. Either work:
+No quotes needed, easier to read. More flexible. Either of these work:
 ```{r, results="hold"}
 demo_data %>% select(record, age, sex)
 demo_data %>% select(record:sex)
