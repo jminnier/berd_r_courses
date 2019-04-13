@@ -571,20 +571,20 @@ demo_data %&gt;% select(record)
 Output:
 
 ```
-# A tibble: 40,068 x 1
+# A tibble: 20,000 x 1
     record
      &lt;dbl&gt;
- 1  506901
- 2  635425
- 3  506905
- 4 1102227
- 5   36586
- 6  767512
- 7  506907
- 8  930386
- 9 1310476
-10  930393
-# … with 40,058 more rows
+ 1  931897
+ 2  333862
+ 3   36253
+ 4 1095530
+ 5 1303997
+ 6  261619
+ 7  926649
+ 8 1309082
+ 9  506337
+10  180494
+# … with 19,990 more rows
 ```
 ]
 
@@ -620,20 +620,20 @@ demo_data %&gt;% filter(bmi &gt; 20)
 ```
 
 ```
-# A tibble: 20,818 x 8
-    record age           sex   grade race4     race7           bmi stweight
-     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
- 1  506901 12 years old… Fema… 9th   All othe… Am Indian / …  23.9     69.0
- 2 1310476 12 years old… Fema… 9th   Hispanic… Hispanic/Lat…  28       90.7
- 3  767508 12 years old… Fema… 9th   Hispanic… Hispanic/Lat…  29.9     79.4
- 4  930385 12 years old… Fema… 9th   Hispanic… Hispanic/Lat…  35.9     95.3
- 5  767513 12 years old… Fema… 9th   Hispanic… Hispanic/Lat…  31.4     90.7
- 6 1102222 12 years old… Fema… 10th  Hispanic… Hispanic/Lat…  31.2    104. 
- 7 1102223 12 years old… Fema… 11th  Hispanic… Hispanic/Lat…  22.8     65.8
- 8  402813 12 years old… Fema… 12th  Hispanic… Hispanic/Lat…  32.0     45.4
- 9  767510 12 years old… Fema… 12th  White     White          20.0     63.5
-10 1310484 12 years old… Fema… &lt;NA&gt;  Hispanic… Hispanic/Lat…  24.3     70.3
-# … with 20,808 more rows
+# A tibble: 10,375 x 8
+    record age         sex   grade race4        race7          bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+ 1  333862 17 years o… Fema… 12th  White        White         20.2     57.2
+ 2 1095530 15 years o… Male  10th  Black or Af… Black or Af…  28.0     85.7
+ 3 1303997 14 years o… Male  9th   All other r… Multiple - …  24.5     66.7
+ 4  926649 16 years o… Male  11th  All other r… Asian         20.5     70.3
+ 5  506337 18 years o… Male  12th  Hispanic/La… Hispanic/La…  33.1    123. 
+ 6 1307180 16 years o… Male  10th  Hispanic/La… Hispanic/La…  21.8     66.7
+ 7 1312128 15 years o… Fema… 10th  White        White         22.0     65.8
+ 8  770177 16 years o… Fema… 10th  White        White         32.4     86.2
+ 9  938291 18 years o… Fema… 12th  White        White         21.7     64.9
+10 1306691 16 years o… Male  11th  White        White         28.3    102. 
+# … with 10,365 more rows
 ```
 
 ---
@@ -677,20 +677,20 @@ demo_data %&gt;% select(record, grade)
 ```
 
 ```
-# A tibble: 40,068 x 2
+# A tibble: 20,000 x 2
     record grade
      &lt;dbl&gt; &lt;chr&gt;
- 1  506901 9th  
- 2  635425 9th  
- 3  506905 9th  
- 4 1102227 9th  
- 5   36586 9th  
- 6  767512 9th  
- 7  506907 9th  
- 8  930386 9th  
- 9 1310476 9th  
-10  930393 9th  
-# … with 40,058 more rows
+ 1  931897 10th 
+ 2  333862 12th 
+ 3   36253 11th 
+ 4 1095530 10th 
+ 5 1303997 9th  
+ 6  261619 9th  
+ 7  926649 11th 
+ 8 1309082 12th 
+ 9  506337 12th 
+10  180494 10th 
+# … with 19,990 more rows
 ```
 
 ---
@@ -705,20 +705,20 @@ demo_data %&gt;% select(-grade,-sex)
 ```
 
 ```
-# A tibble: 40,068 x 6
+# A tibble: 20,000 x 6
     record age             race4            race7              bmi stweight
      &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;
- 1  506901 12 years old o… All other races  Am Indian / Ala…  23.9     69.0
- 2  635425 12 years old o… All other races  Am Indian / Ala…  NA       NA  
- 3  506905 12 years old o… All other races  Am Indian / Ala…  NA       NA  
- 4 1102227 12 years old o… All other races  Asian             NA       NA  
- 5   36586 12 years old o… Black or Africa… Black or Africa…  NA       NA  
- 6  767512 12 years old o… Black or Africa… Black or Africa…  NA       NA  
- 7  506907 12 years old o… Black or Africa… Black or Africa…  NA       NA  
- 8  930386 12 years old o… Black or Africa… Black or Africa…  NA       NA  
- 9 1310476 12 years old o… Hispanic/Latino  Hispanic/Latino   28       90.7
-10  930393 12 years old o… Hispanic/Latino  Hispanic/Latino   NA       NA  
-# … with 40,058 more rows
+ 1  931897 15 years old    White            White             17.2     54.4
+ 2  333862 17 years old    White            White             20.2     57.2
+ 3   36253 18 years old o… Hispanic/Latino  Hispanic/Latino   NA       NA  
+ 4 1095530 15 years old    Black or Africa… Black or Africa…  28.0     85.7
+ 5 1303997 14 years old    All other races  Multiple - Non-…  24.5     66.7
+ 6  261619 17 years old    All other races  &lt;NA&gt;              NA       NA  
+ 7  926649 16 years old    All other races  Asian             20.5     70.3
+ 8 1309082 17 years old    White            White             19.3     59.0
+ 9  506337 18 years old o… Hispanic/Latino  Hispanic/Latino   33.1    123. 
+10  180494 14 years old    Black or Africa… Black or Africa…  NA       NA  
+# … with 19,990 more rows
 ```
 
 ```r
@@ -726,20 +726,20 @@ demo_data %&gt;% select(record:sex)
 ```
 
 ```
-# A tibble: 40,068 x 3
-    record age                     sex   
-     &lt;dbl&gt; &lt;chr&gt;                   &lt;chr&gt; 
- 1  506901 12 years old or younger Female
- 2  635425 12 years old or younger Female
- 3  506905 12 years old or younger Female
- 4 1102227 12 years old or younger Female
- 5   36586 12 years old or younger Female
- 6  767512 12 years old or younger Female
- 7  506907 12 years old or younger Female
- 8  930386 12 years old or younger Female
- 9 1310476 12 years old or younger Female
-10  930393 12 years old or younger Female
-# … with 40,058 more rows
+# A tibble: 20,000 x 3
+    record age                   sex   
+     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+ 1  931897 15 years old          Female
+ 2  333862 17 years old          Female
+ 3   36253 18 years old or older Male  
+ 4 1095530 15 years old          Male  
+ 5 1303997 14 years old          Male  
+ 6  261619 17 years old          Male  
+ 7  926649 16 years old          Male  
+ 8 1309082 17 years old          Male  
+ 9  506337 18 years old or older Male  
+10  180494 14 years old          Male  
+# … with 19,990 more rows
 ```
 
 ```r
@@ -747,20 +747,20 @@ demo_data %&gt;% select(-(record:sex))
 ```
 
 ```
-# A tibble: 40,068 x 5
+# A tibble: 20,000 x 5
    grade race4                     race7                       bmi stweight
    &lt;chr&gt; &lt;chr&gt;                     &lt;chr&gt;                     &lt;dbl&gt;    &lt;dbl&gt;
- 1 9th   All other races           Am Indian / Alaska Native  23.9     69.0
- 2 9th   All other races           Am Indian / Alaska Native  NA       NA  
- 3 9th   All other races           Am Indian / Alaska Native  NA       NA  
- 4 9th   All other races           Asian                      NA       NA  
- 5 9th   Black or African American Black or African American  NA       NA  
- 6 9th   Black or African American Black or African American  NA       NA  
- 7 9th   Black or African American Black or African American  NA       NA  
- 8 9th   Black or African American Black or African American  NA       NA  
- 9 9th   Hispanic/Latino           Hispanic/Latino            28       90.7
-10 9th   Hispanic/Latino           Hispanic/Latino            NA       NA  
-# … with 40,058 more rows
+ 1 10th  White                     White                      17.2     54.4
+ 2 12th  White                     White                      20.2     57.2
+ 3 11th  Hispanic/Latino           Hispanic/Latino            NA       NA  
+ 4 10th  Black or African American Black or African American  28.0     85.7
+ 5 9th   All other races           Multiple - Non-Hispanic    24.5     66.7
+ 6 9th   All other races           &lt;NA&gt;                       NA       NA  
+ 7 11th  All other races           Asian                      20.5     70.3
+ 8 12th  White                     White                      19.3     59.0
+ 9 12th  Hispanic/Latino           Hispanic/Latino            33.1    123. 
+10 10th  Black or African American Black or African American  NA       NA  
+# … with 19,990 more rows
 ```
 
 ```r
@@ -768,20 +768,20 @@ demo_data %&gt;% select(contains("race"))
 ```
 
 ```
-# A tibble: 40,068 x 2
+# A tibble: 20,000 x 2
    race4                     race7                    
    &lt;chr&gt;                     &lt;chr&gt;                    
- 1 All other races           Am Indian / Alaska Native
- 2 All other races           Am Indian / Alaska Native
- 3 All other races           Am Indian / Alaska Native
- 4 All other races           Asian                    
- 5 Black or African American Black or African American
- 6 Black or African American Black or African American
- 7 Black or African American Black or African American
- 8 Black or African American Black or African American
+ 1 White                     White                    
+ 2 White                     White                    
+ 3 Hispanic/Latino           Hispanic/Latino          
+ 4 Black or African American Black or African American
+ 5 All other races           Multiple - Non-Hispanic  
+ 6 All other races           &lt;NA&gt;                     
+ 7 All other races           Asian                    
+ 8 White                     White                    
  9 Hispanic/Latino           Hispanic/Latino          
-10 Hispanic/Latino           Hispanic/Latino          
-# … with 40,058 more rows
+10 Black or African American Black or African American
+# … with 19,990 more rows
 ```
 
 ```r
@@ -789,20 +789,20 @@ demo_data %&gt;% select(record, race4, race7, everything())
 ```
 
 ```
-# A tibble: 40,068 x 8
-    record race4        race7        age         sex   grade   bmi stweight
-     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;
- 1  506901 All other r… Am Indian /… 12 years o… Fema… 9th    23.9     69.0
- 2  635425 All other r… Am Indian /… 12 years o… Fema… 9th    NA       NA  
- 3  506905 All other r… Am Indian /… 12 years o… Fema… 9th    NA       NA  
- 4 1102227 All other r… Asian        12 years o… Fema… 9th    NA       NA  
- 5   36586 Black or Af… Black or Af… 12 years o… Fema… 9th    NA       NA  
- 6  767512 Black or Af… Black or Af… 12 years o… Fema… 9th    NA       NA  
- 7  506907 Black or Af… Black or Af… 12 years o… Fema… 9th    NA       NA  
- 8  930386 Black or Af… Black or Af… 12 years o… Fema… 9th    NA       NA  
- 9 1310476 Hispanic/La… Hispanic/La… 12 years o… Fema… 9th    28       90.7
-10  930393 Hispanic/La… Hispanic/La… 12 years o… Fema… 9th    NA       NA  
-# … with 40,058 more rows
+# A tibble: 20,000 x 8
+    record race4         race7        age        sex   grade   bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;
+ 1  931897 White         White        15 years … Fema… 10th   17.2     54.4
+ 2  333862 White         White        17 years … Fema… 12th   20.2     57.2
+ 3   36253 Hispanic/Lat… Hispanic/La… 18 years … Male  11th   NA       NA  
+ 4 1095530 Black or Afr… Black or Af… 15 years … Male  10th   28.0     85.7
+ 5 1303997 All other ra… Multiple - … 14 years … Male  9th    24.5     66.7
+ 6  261619 All other ra… &lt;NA&gt;         17 years … Male  9th    NA       NA  
+ 7  926649 All other ra… Asian        16 years … Male  11th   20.5     70.3
+ 8 1309082 White         White        17 years … Male  12th   19.3     59.0
+ 9  506337 Hispanic/Lat… Hispanic/La… 18 years … Male  12th   33.1    123. 
+10  180494 Black or Afr… Black or Af… 14 years … Male  10th   NA       NA  
+# … with 19,990 more rows
 ```
 
 ```r
@@ -810,20 +810,20 @@ demo_data %&gt;% select(one_of(c("age","stweight")))
 ```
 
 ```
-# A tibble: 40,068 x 2
-   age                     stweight
-   &lt;chr&gt;                      &lt;dbl&gt;
- 1 12 years old or younger     69.0
- 2 12 years old or younger     NA  
- 3 12 years old or younger     NA  
- 4 12 years old or younger     NA  
- 5 12 years old or younger     NA  
- 6 12 years old or younger     NA  
- 7 12 years old or younger     NA  
- 8 12 years old or younger     NA  
- 9 12 years old or younger     90.7
-10 12 years old or younger     NA  
-# … with 40,058 more rows
+# A tibble: 20,000 x 2
+   age                   stweight
+   &lt;chr&gt;                    &lt;dbl&gt;
+ 1 15 years old              54.4
+ 2 17 years old              57.2
+ 3 18 years old or older     NA  
+ 4 15 years old              85.7
+ 5 14 years old              66.7
+ 6 17 years old              NA  
+ 7 16 years old              70.3
+ 8 17 years old              59.0
+ 9 18 years old or older    123. 
+10 14 years old              NA  
+# … with 19,990 more rows
 ```
 
 ```r
@@ -831,20 +831,20 @@ demo_data %&gt;% select(starts_with("r"))
 ```
 
 ```
-# A tibble: 40,068 x 3
+# A tibble: 20,000 x 3
     record race4                     race7                    
      &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;                    
- 1  506901 All other races           Am Indian / Alaska Native
- 2  635425 All other races           Am Indian / Alaska Native
- 3  506905 All other races           Am Indian / Alaska Native
- 4 1102227 All other races           Asian                    
- 5   36586 Black or African American Black or African American
- 6  767512 Black or African American Black or African American
- 7  506907 Black or African American Black or African American
- 8  930386 Black or African American Black or African American
- 9 1310476 Hispanic/Latino           Hispanic/Latino          
-10  930393 Hispanic/Latino           Hispanic/Latino          
-# … with 40,058 more rows
+ 1  931897 White                     White                    
+ 2  333862 White                     White                    
+ 3   36253 Hispanic/Latino           Hispanic/Latino          
+ 4 1095530 Black or African American Black or African American
+ 5 1303997 All other races           Multiple - Non-Hispanic  
+ 6  261619 All other races           &lt;NA&gt;                     
+ 7  926649 All other races           Asian                    
+ 8 1309082 White                     White                    
+ 9  506337 Hispanic/Latino           Hispanic/Latino          
+10  180494 Black or African American Black or African American
+# … with 19,990 more rows
 ```
 
 ```r
@@ -852,20 +852,20 @@ demo_data %&gt;% select(-contains("r"))
 ```
 
 ```
-# A tibble: 40,068 x 4
-   age                     sex      bmi stweight
-   &lt;chr&gt;                   &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;
- 1 12 years old or younger Female  23.9     69.0
- 2 12 years old or younger Female  NA       NA  
- 3 12 years old or younger Female  NA       NA  
- 4 12 years old or younger Female  NA       NA  
- 5 12 years old or younger Female  NA       NA  
- 6 12 years old or younger Female  NA       NA  
- 7 12 years old or younger Female  NA       NA  
- 8 12 years old or younger Female  NA       NA  
- 9 12 years old or younger Female  28       90.7
-10 12 years old or younger Female  NA       NA  
-# … with 40,058 more rows
+# A tibble: 20,000 x 4
+   age                   sex      bmi stweight
+   &lt;chr&gt;                 &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+ 1 15 years old          Female  17.2     54.4
+ 2 17 years old          Female  20.2     57.2
+ 3 18 years old or older Male    NA       NA  
+ 4 15 years old          Male    28.0     85.7
+ 5 14 years old          Male    24.5     66.7
+ 6 17 years old          Male    NA       NA  
+ 7 16 years old          Male    20.5     70.3
+ 8 17 years old          Male    19.3     59.0
+ 9 18 years old or older Male    33.1    123. 
+10 14 years old          Male    NA       NA  
+# … with 19,990 more rows
 ```
 
 ```r
@@ -873,20 +873,20 @@ demo_data %&gt;% select(1:3)
 ```
 
 ```
-# A tibble: 40,068 x 3
-    record age                     sex   
-     &lt;dbl&gt; &lt;chr&gt;                   &lt;chr&gt; 
- 1  506901 12 years old or younger Female
- 2  635425 12 years old or younger Female
- 3  506905 12 years old or younger Female
- 4 1102227 12 years old or younger Female
- 5   36586 12 years old or younger Female
- 6  767512 12 years old or younger Female
- 7  506907 12 years old or younger Female
- 8  930386 12 years old or younger Female
- 9 1310476 12 years old or younger Female
-10  930393 12 years old or younger Female
-# … with 40,058 more rows
+# A tibble: 20,000 x 3
+    record age                   sex   
+     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+ 1  931897 15 years old          Female
+ 2  333862 17 years old          Female
+ 3   36253 18 years old or older Male  
+ 4 1095530 15 years old          Male  
+ 5 1303997 14 years old          Male  
+ 6  261619 17 years old          Male  
+ 7  926649 16 years old          Male  
+ 8 1309082 17 years old          Male  
+ 9  506337 18 years old or older Male  
+10  180494 14 years old          Male  
+# … with 19,990 more rows
 ```
 
 
@@ -902,20 +902,20 @@ demo_data %&gt;% rename(id = record)
 ```
 
 ```
-# A tibble: 40,068 x 8
+# A tibble: 20,000 x 8
         id age         sex   grade race4        race7          bmi stweight
      &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
- 1  506901 12 years o… Fema… 9th   All other r… Am Indian /…  23.9     69.0
- 2  635425 12 years o… Fema… 9th   All other r… Am Indian /…  NA       NA  
- 3  506905 12 years o… Fema… 9th   All other r… Am Indian /…  NA       NA  
- 4 1102227 12 years o… Fema… 9th   All other r… Asian         NA       NA  
- 5   36586 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
- 6  767512 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
- 7  506907 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
- 8  930386 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
- 9 1310476 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  28       90.7
-10  930393 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  NA       NA  
-# … with 40,058 more rows
+ 1  931897 15 years o… Fema… 10th  White        White         17.2     54.4
+ 2  333862 17 years o… Fema… 12th  White        White         20.2     57.2
+ 3   36253 18 years o… Male  11th  Hispanic/La… Hispanic/La…  NA       NA  
+ 4 1095530 15 years o… Male  10th  Black or Af… Black or Af…  28.0     85.7
+ 5 1303997 14 years o… Male  9th   All other r… Multiple - …  24.5     66.7
+ 6  261619 17 years o… Male  9th   All other r… &lt;NA&gt;          NA       NA  
+ 7  926649 16 years o… Male  11th  All other r… Asian         20.5     70.3
+ 8 1309082 17 years o… Male  12th  White        White         19.3     59.0
+ 9  506337 18 years o… Male  12th  Hispanic/La… Hispanic/La…  33.1    123. 
+10  180494 14 years o… Male  10th  Black or Af… Black or Af…  NA       NA  
+# … with 19,990 more rows
 ```
 
 ---
@@ -983,20 +983,20 @@ newdata
 ```
 
 ```
-# A tibble: 40,068 x 4
+# A tibble: 20,000 x 4
     record   bmi stweight height_m
      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
- 1  506901  23.9     69.0     1.70
- 2  635425  NA       NA      NA   
- 3  506905  NA       NA      NA   
- 4 1102227  NA       NA      NA   
- 5   36586  NA       NA      NA   
- 6  767512  NA       NA      NA   
- 7  506907  NA       NA      NA   
- 8  930386  NA       NA      NA   
- 9 1310476  28       90.7     1.8 
-10  930393  NA       NA      NA   
-# … with 40,058 more rows
+ 1  931897  17.2     54.4     1.78
+ 2  333862  20.2     57.2     1.68
+ 3   36253  NA       NA      NA   
+ 4 1095530  28.0     85.7     1.75
+ 5 1303997  24.5     66.7     1.65
+ 6  261619  NA       NA      NA   
+ 7  926649  20.5     70.3     1.85
+ 8 1309082  19.3     59.0     1.75
+ 9  506337  33.1    123.      1.93
+10  180494  NA       NA      NA   
+# … with 19,990 more rows
 ```
 
 ---
@@ -1031,15 +1031,15 @@ demo_data2 %&gt;% tabyl(age,age_int)
 ```
 
 ```
-                     age  12  13   14   15    16    17   18 NA_
- 12 years old or younger 241   0    0    0     0     0    0   0
-            13 years old   0 193    0    0     0     0    0   0
-            14 years old   0   0 4101    0     0     0    0   0
-            15 years old   0   0    0 8507     0     0    0   0
-            16 years old   0   0    0    0 10019     0    0   0
-            17 years old   0   0    0    0     0 10029    0   0
-   18 years old or older   0   0    0    0     0     0 6550   0
-                    &lt;NA&gt;   0   0    0    0     0     0    0 428
+                     age  12 13   14   15   16   17   18 NA_
+ 12 years old or younger 137  0    0    0    0    0    0   0
+            13 years old   0 96    0    0    0    0    0   0
+            14 years old   0  0 2026    0    0    0    0   0
+            15 years old   0  0    0 4290    0    0    0   0
+            16 years old   0  0    0    0 4924    0    0   0
+            17 years old   0  0    0    0    0 4988    0   0
+   18 years old or older   0  0    0    0    0    0 3334   0
+                    &lt;NA&gt;   0  0    0    0    0    0    0 205
 ```
 
 ---
@@ -1056,20 +1056,20 @@ demo_data %&gt;% distinct()
 ```
 
 ```
-# A tibble: 40,068 x 8
+# A tibble: 20,000 x 8
     record age         sex   grade race4        race7          bmi stweight
      &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
- 1  506901 12 years o… Fema… 9th   All other r… Am Indian /…  23.9     69.0
- 2  635425 12 years o… Fema… 9th   All other r… Am Indian /…  NA       NA  
- 3  506905 12 years o… Fema… 9th   All other r… Am Indian /…  NA       NA  
- 4 1102227 12 years o… Fema… 9th   All other r… Asian         NA       NA  
- 5   36586 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
- 6  767512 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
- 7  506907 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
- 8  930386 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
- 9 1310476 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  28       90.7
-10  930393 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  NA       NA  
-# … with 40,058 more rows
+ 1  931897 15 years o… Fema… 10th  White        White         17.2     54.4
+ 2  333862 17 years o… Fema… 12th  White        White         20.2     57.2
+ 3   36253 18 years o… Male  11th  Hispanic/La… Hispanic/La…  NA       NA  
+ 4 1095530 15 years o… Male  10th  Black or Af… Black or Af…  28.0     85.7
+ 5 1303997 14 years o… Male  9th   All other r… Multiple - …  24.5     66.7
+ 6  261619 17 years o… Male  9th   All other r… &lt;NA&gt;          NA       NA  
+ 7  926649 16 years o… Male  11th  All other r… Asian         20.5     70.3
+ 8 1309082 17 years o… Male  12th  White        White         19.3     59.0
+ 9  506337 18 years o… Male  12th  Hispanic/La… Hispanic/La…  33.1    123. 
+10  180494 14 years o… Male  10th  Black or Af… Black or Af…  NA       NA  
+# … with 19,990 more rows
 ```
 
 Removes *all* rows with *any* missing (`NA`) values in *any* row
@@ -1080,20 +1080,20 @@ demo_data %&gt;% na.omit()
 ```
 
 ```
-# A tibble: 25,948 x 8
+# A tibble: 12,897 x 8
     record age         sex   grade race4        race7          bmi stweight
      &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
- 1  506901 12 years o… Fema… 9th   All other r… Am Indian /…  23.9     69.0
- 2 1310476 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  28       90.7
- 3  767508 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  29.9     79.4
- 4  930385 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  35.9     95.3
- 5  767513 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  31.4     90.7
- 6 1102222 12 years o… Fema… 10th  Hispanic/La… Hispanic/La…  31.2    104. 
- 7 1102231 12 years o… Fema… 10th  Hispanic/La… Hispanic/La…  18.7     50.8
- 8 1102233 12 years o… Fema… 11th  Black or Af… Black or Af…  19.4     58.1
- 9 1102223 12 years o… Fema… 11th  Hispanic/La… Hispanic/La…  22.8     65.8
-10  402813 12 years o… Fema… 12th  Hispanic/La… Hispanic/La…  32.0     45.4
-# … with 25,938 more rows
+ 1  931897 15 years o… Fema… 10th  White        White         17.2     54.4
+ 2  333862 17 years o… Fema… 12th  White        White         20.2     57.2
+ 3 1095530 15 years o… Male  10th  Black or Af… Black or Af…  28.0     85.7
+ 4 1303997 14 years o… Male  9th   All other r… Multiple - …  24.5     66.7
+ 5  926649 16 years o… Male  11th  All other r… Asian         20.5     70.3
+ 6 1309082 17 years o… Male  12th  White        White         19.3     59.0
+ 7  506337 18 years o… Male  12th  Hispanic/La… Hispanic/La…  33.1    123. 
+ 8 1307180 16 years o… Male  10th  Hispanic/La… Hispanic/La…  21.8     66.7
+ 9 1312128 15 years o… Fema… 10th  White        White         22.0     65.8
+10  770177 16 years o… Fema… 10th  White        White         32.4     86.2
+# … with 12,887 more rows
 ```
 
 

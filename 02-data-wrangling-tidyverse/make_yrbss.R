@@ -17,6 +17,9 @@ mydata <- survey %>%
   group_by(age, sex, grade, race7, q8, q12, q31, qn24) %>%
   slice(1:10) %>% ungroup() %>%
   mutate_if(is.factor,as.character)
+set.seed(5)
+mydata <- mydata %>% sample_n(20000)
+
 mydata %>% tabyl(age)
 
 demo_data <- mydata %>% 
