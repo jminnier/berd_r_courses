@@ -7,7 +7,7 @@ output:
     code_folding: hide
     highlight: pygments
     keep_md: no
-    number_sections: yes
+    number_sections: no
     smart: yes
     theme: yeti
     toc: yes
@@ -25,15 +25,24 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Everyone
 
-## Download and open an Rstudio project
+## 1. Download and open an Rstudio project
 
-- Go to [https://github.com/jminnier/berd_tidyverse_project](https://github.com/jminnier/berd_tidyverse_project)
-- Click "Clone or Download" (upper right), then "Download as zip"
+## 2. Go to [https://github.com/jminnier/berd_tidyverse_project](https://github.com/jminnier/berd_tidyverse_project)
+
+## 3. Click "Clone or Download" (upper right), then "Download as zip"
 
 ![](img/github_download.png)
 
-- Unzip folder
-- Inside folder, click on `berd_tidyverse_project.Rproj`
-- Rstudio should open this folder as a project
-- Open and run R script `pre_class_homework.R`
+### 4. Unzip folder
 
+### 4. Inside folder, double click on (to open) `berd_tidyverse_project.Rproj`
+
+![](img/homework_rproj.png)
+
+### 6. Rstudio should then open this whole folder as a "project".
+
+### 7. Open `pre_class_homework.R`
+
+![](img/homework_file.png)
+
+### 8. Complete the instructions in `pre_class_homework.R`

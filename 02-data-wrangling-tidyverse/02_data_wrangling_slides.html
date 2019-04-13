@@ -4,7 +4,6 @@
     <title>Data Wrangling in R with the Tidyverse</title>
     <meta charset="utf-8">
     <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
-    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
     <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
@@ -15,7 +14,7 @@ class: left, middle, inverse, title-slide
 
 # Data Wrangling in R with the Tidyverse
 ### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
-### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_tidy">bit.ly/berd_tidy</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_tidy_pdf">bit.ly/berd_tidy_pdf</a></span>
+### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> slides: <a href="http://bit.ly/berd_tidy">bit.ly/berd_tidy</a> <br> pdf: <a href="http://bit.ly/berd_tidy_pdf">bit.ly/berd_tidy_pdf</a></span>
 
 ---
 
@@ -85,7 +84,7 @@ class: center, middle, inverse
 
 - Use "projects" ([read this](https://r4ds.had.co.nz/workflow-projects.html))
     + Create an RStudio project for each data analysis project.
-    + Keep data files there; we’ll talk about loading them into R in data import.
+    + Keep data files there
     + Keep scripts there; edit them, run them in bits or as a whole.
     + Save your outputs (plots and cleaned data) there.
 - Only ever use relative paths, not absolute paths.
@@ -702,191 +701,14 @@ What do these commands do? Try:
 
 ```r
 demo_data %&gt;% select(-grade,-sex)
-```
-
-```
-# A tibble: 20,000 x 6
-    record age             race4            race7              bmi stweight
-     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;
- 1  931897 15 years old    White            White             17.2     54.4
- 2  333862 17 years old    White            White             20.2     57.2
- 3   36253 18 years old o… Hispanic/Latino  Hispanic/Latino   NA       NA  
- 4 1095530 15 years old    Black or Africa… Black or Africa…  28.0     85.7
- 5 1303997 14 years old    All other races  Multiple - Non-…  24.5     66.7
- 6  261619 17 years old    All other races  &lt;NA&gt;              NA       NA  
- 7  926649 16 years old    All other races  Asian             20.5     70.3
- 8 1309082 17 years old    White            White             19.3     59.0
- 9  506337 18 years old o… Hispanic/Latino  Hispanic/Latino   33.1    123. 
-10  180494 14 years old    Black or Africa… Black or Africa…  NA       NA  
-# … with 19,990 more rows
-```
-
-```r
 demo_data %&gt;% select(record:sex)
-```
-
-```
-# A tibble: 20,000 x 3
-    record age                   sex   
-     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
- 1  931897 15 years old          Female
- 2  333862 17 years old          Female
- 3   36253 18 years old or older Male  
- 4 1095530 15 years old          Male  
- 5 1303997 14 years old          Male  
- 6  261619 17 years old          Male  
- 7  926649 16 years old          Male  
- 8 1309082 17 years old          Male  
- 9  506337 18 years old or older Male  
-10  180494 14 years old          Male  
-# … with 19,990 more rows
-```
-
-```r
 demo_data %&gt;% select(-(record:sex))
-```
-
-```
-# A tibble: 20,000 x 5
-   grade race4                     race7                       bmi stweight
-   &lt;chr&gt; &lt;chr&gt;                     &lt;chr&gt;                     &lt;dbl&gt;    &lt;dbl&gt;
- 1 10th  White                     White                      17.2     54.4
- 2 12th  White                     White                      20.2     57.2
- 3 11th  Hispanic/Latino           Hispanic/Latino            NA       NA  
- 4 10th  Black or African American Black or African American  28.0     85.7
- 5 9th   All other races           Multiple - Non-Hispanic    24.5     66.7
- 6 9th   All other races           &lt;NA&gt;                       NA       NA  
- 7 11th  All other races           Asian                      20.5     70.3
- 8 12th  White                     White                      19.3     59.0
- 9 12th  Hispanic/Latino           Hispanic/Latino            33.1    123. 
-10 10th  Black or African American Black or African American  NA       NA  
-# … with 19,990 more rows
-```
-
-```r
 demo_data %&gt;% select(contains("race"))
-```
-
-```
-# A tibble: 20,000 x 2
-   race4                     race7                    
-   &lt;chr&gt;                     &lt;chr&gt;                    
- 1 White                     White                    
- 2 White                     White                    
- 3 Hispanic/Latino           Hispanic/Latino          
- 4 Black or African American Black or African American
- 5 All other races           Multiple - Non-Hispanic  
- 6 All other races           &lt;NA&gt;                     
- 7 All other races           Asian                    
- 8 White                     White                    
- 9 Hispanic/Latino           Hispanic/Latino          
-10 Black or African American Black or African American
-# … with 19,990 more rows
-```
-
-```r
 demo_data %&gt;% select(record, race4, race7, everything())
-```
-
-```
-# A tibble: 20,000 x 8
-    record race4         race7        age        sex   grade   bmi stweight
-     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;
- 1  931897 White         White        15 years … Fema… 10th   17.2     54.4
- 2  333862 White         White        17 years … Fema… 12th   20.2     57.2
- 3   36253 Hispanic/Lat… Hispanic/La… 18 years … Male  11th   NA       NA  
- 4 1095530 Black or Afr… Black or Af… 15 years … Male  10th   28.0     85.7
- 5 1303997 All other ra… Multiple - … 14 years … Male  9th    24.5     66.7
- 6  261619 All other ra… &lt;NA&gt;         17 years … Male  9th    NA       NA  
- 7  926649 All other ra… Asian        16 years … Male  11th   20.5     70.3
- 8 1309082 White         White        17 years … Male  12th   19.3     59.0
- 9  506337 Hispanic/Lat… Hispanic/La… 18 years … Male  12th   33.1    123. 
-10  180494 Black or Afr… Black or Af… 14 years … Male  10th   NA       NA  
-# … with 19,990 more rows
-```
-
-```r
 demo_data %&gt;% select(one_of(c("age","stweight")))
-```
-
-```
-# A tibble: 20,000 x 2
-   age                   stweight
-   &lt;chr&gt;                    &lt;dbl&gt;
- 1 15 years old              54.4
- 2 17 years old              57.2
- 3 18 years old or older     NA  
- 4 15 years old              85.7
- 5 14 years old              66.7
- 6 17 years old              NA  
- 7 16 years old              70.3
- 8 17 years old              59.0
- 9 18 years old or older    123. 
-10 14 years old              NA  
-# … with 19,990 more rows
-```
-
-```r
 demo_data %&gt;% select(starts_with("r"))
-```
-
-```
-# A tibble: 20,000 x 3
-    record race4                     race7                    
-     &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;                    
- 1  931897 White                     White                    
- 2  333862 White                     White                    
- 3   36253 Hispanic/Latino           Hispanic/Latino          
- 4 1095530 Black or African American Black or African American
- 5 1303997 All other races           Multiple - Non-Hispanic  
- 6  261619 All other races           &lt;NA&gt;                     
- 7  926649 All other races           Asian                    
- 8 1309082 White                     White                    
- 9  506337 Hispanic/Latino           Hispanic/Latino          
-10  180494 Black or African American Black or African American
-# … with 19,990 more rows
-```
-
-```r
 demo_data %&gt;% select(-contains("r"))
-```
-
-```
-# A tibble: 20,000 x 4
-   age                   sex      bmi stweight
-   &lt;chr&gt;                 &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;
- 1 15 years old          Female  17.2     54.4
- 2 17 years old          Female  20.2     57.2
- 3 18 years old or older Male    NA       NA  
- 4 15 years old          Male    28.0     85.7
- 5 14 years old          Male    24.5     66.7
- 6 17 years old          Male    NA       NA  
- 7 16 years old          Male    20.5     70.3
- 8 17 years old          Male    19.3     59.0
- 9 18 years old or older Male    33.1    123. 
-10 14 years old          Male    NA       NA  
-# … with 19,990 more rows
-```
-
-```r
 demo_data %&gt;% select(1:3)
-```
-
-```
-# A tibble: 20,000 x 3
-    record age                   sex   
-     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
- 1  931897 15 years old          Female
- 2  333862 17 years old          Female
- 3   36253 18 years old or older Male  
- 4 1095530 15 years old          Male  
- 5 1303997 14 years old          Male  
- 6  261619 17 years old          Male  
- 7  926649 16 years old          Male  
- 8 1309082 17 years old          Male  
- 9  506337 18 years old or older Male  
-10  180494 14 years old          Male  
-# … with 19,990 more rows
 ```
 
 

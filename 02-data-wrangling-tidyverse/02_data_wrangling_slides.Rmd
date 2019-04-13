@@ -126,7 +126,7 @@ class: center, middle, inverse
 
 - Use "projects" ([read this](https://r4ds.had.co.nz/workflow-projects.html))
     + Create an RStudio project for each data analysis project.
-    + Keep data files there; we’ll talk about loading them into R in data import.
+    + Keep data files there
     + Keep scripts there; edit them, run them in bits or as a whole.
     + Save your outputs (plots and cleaned data) there.
 - Only ever use relative paths, not absolute paths.
@@ -512,7 +512,7 @@ demo_data %>% select(record, grade)
 
 What do these commands do? Try:
 
-```{r}
+```{r, eval=FALSE}
 demo_data %>% select(-grade,-sex)
 demo_data %>% select(record:sex)
 demo_data %>% select(-(record:sex))
