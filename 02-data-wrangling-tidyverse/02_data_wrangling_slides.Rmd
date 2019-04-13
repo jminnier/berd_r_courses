@@ -522,7 +522,7 @@ demo_data %>% filter((bmi<15)|(bmi>50))
 # `select()` $\sim$ columns
 
 - select columns/variables
-- uses special syntax (next slide), no quotes needed
+- uses special syntax (next slide) that is flexible, no quotes needed
 - can be used to rearrange columns (useful to use `everything()`)
 
 ```{r}
@@ -531,7 +531,7 @@ demo_data %>% select(record, grade)
 
 ---
 
-# special syntax:
+# Column selection syntax:
 
 There are many ways to select a set of variable names:
 
