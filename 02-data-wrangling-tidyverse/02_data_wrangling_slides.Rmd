@@ -38,7 +38,7 @@ knitr::opts_chunk$set(
   #fig.width=10.5, 
   #fig.height=4,
   fig.align = "center",
-  rows.print=16,
+  rows.print=7,
   echo=TRUE,
   highlight = TRUE,
   prompt = FALSE, # IF TRUE adds a > before each code input
