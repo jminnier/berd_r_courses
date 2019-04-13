@@ -534,7 +534,7 @@ Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://w
 
 # Import Data
 
-Run this in your project
+Open your Rstudio project. Open a new script, copy and paste this code, and run.
 
 
 ```r
@@ -635,6 +635,65 @@ demo_data %&gt;% filter(bmi &gt; 20)
 # … with 10,365 more rows
 ```
 
+
+---
+
+# Compare to base R
+
+.pull-left[
+
+Bracket method, need for repeating data frame names, need to use `$`. Very nested and confusing to read.
+
+
+```r
+demo_data[demo_data$grade=="9th",]
+```
+
+```
+# A tibble: 5,625 x 8
+    record age       sex    grade race4      race7             bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+ 1 1303997 14 years… Male   9th   All other… Multiple - Non…  24.5     66.7
+ 2  261619 17 years… Male   9th   All other… &lt;NA&gt;             NA       NA  
+ 3 1096939 15 years… Male   9th   &lt;NA&gt;       &lt;NA&gt;             17.1     45.4
+ 4  180968 15 years… Male   9th   White      White            NA       NA  
+ 5  924270 15 years… Male   9th   All other… Asian            30.7     81.6
+ 6  330828 15 years… Female 9th   Hispanic/… Hispanic/Latino  20.4     52.2
+ 7 1311252 15 years… Female 9th   Hispanic/… Hispanic/Latino  NA       NA  
+ 8   36853 14 years… Female 9th   All other… &lt;NA&gt;             NA       NA  
+ 9 1310689 14 years… Female 9th   Hispanic/… Hispanic/Latino  22.5     55.3
+10 1310726 14 years… Female 9th   All other… Asian            30.7     81.6
+# … with 5,615 more rows
+```
+
+]
+.pull-right[
+No `$` needed. Uses "non-standard evaluation" so `filter()` knows `grade` is a column in `demo_data`.
+
+```r
+demo_data %&gt;% filter(grade=="9th")
+```
+
+```
+# A tibble: 5,219 x 8
+    record age       sex    grade race4      race7             bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+ 1 1303997 14 years… Male   9th   All other… Multiple - Non…  24.5     66.7
+ 2  261619 17 years… Male   9th   All other… &lt;NA&gt;             NA       NA  
+ 3 1096939 15 years… Male   9th   &lt;NA&gt;       &lt;NA&gt;             17.1     45.4
+ 4  180968 15 years… Male   9th   White      White            NA       NA  
+ 5  924270 15 years… Male   9th   All other… Asian            30.7     81.6
+ 6  330828 15 years… Female 9th   Hispanic/… Hispanic/Latino  20.4     52.2
+ 7 1311252 15 years… Female 9th   Hispanic/… Hispanic/Latino  NA       NA  
+ 8   36853 14 years… Female 9th   All other… &lt;NA&gt;             NA       NA  
+ 9 1310689 14 years… Female 9th   Hispanic/… Hispanic/Latino  22.5     55.3
+10 1310726 14 years… Female 9th   All other… Asian            30.7     81.6
+# … with 5,209 more rows
+```
+
+]
+
+
 ---
 
 # `filter()` practice
@@ -691,6 +750,74 @@ demo_data %&gt;% select(record, grade)
 10  180494 10th 
 # … with 19,990 more rows
 ```
+
+---
+
+# Compare to base R
+
+.pull-left[
+Need brackets, quotes around column names.
+
+```r
+demo_data[, c("record","age","sex")]
+```
+
+```
+# A tibble: 20,000 x 3
+    record age                   sex   
+     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+ 1  931897 15 years old          Female
+ 2  333862 17 years old          Female
+ 3   36253 18 years old or older Male  
+ 4 1095530 15 years old          Male  
+ 5 1303997 14 years old          Male  
+ 6  261619 17 years old          Male  
+ 7  926649 16 years old          Male  
+ 8 1309082 17 years old          Male  
+ 9  506337 18 years old or older Male  
+10  180494 14 years old          Male  
+# … with 19,990 more rows
+```
+]
+.pull-right[
+No quotes needed, easier to read. More flexible. Either work:
+
+```r
+demo_data %&gt;% select(record, age, sex)
+demo_data %&gt;% select(record:sex)
+```
+
+```
+# A tibble: 20,000 x 3
+    record age                   sex   
+     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+ 1  931897 15 years old          Female
+ 2  333862 17 years old          Female
+ 3   36253 18 years old or older Male  
+ 4 1095530 15 years old          Male  
+ 5 1303997 14 years old          Male  
+ 6  261619 17 years old          Male  
+ 7  926649 16 years old          Male  
+ 8 1309082 17 years old          Male  
+ 9  506337 18 years old or older Male  
+10  180494 14 years old          Male  
+# … with 19,990 more rows
+# A tibble: 20,000 x 3
+    record age                   sex   
+     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+ 1  931897 15 years old          Female
+ 2  333862 17 years old          Female
+ 3   36253 18 years old or older Male  
+ 4 1095530 15 years old          Male  
+ 5 1303997 14 years old          Male  
+ 6  261619 17 years old          Male  
+ 7  926649 16 years old          Male  
+ 8 1309082 17 years old          Male  
+ 9  506337 18 years old or older Male  
+10  180494 14 years old          Male  
+# … with 19,990 more rows
+```
+]
 
 ---
 

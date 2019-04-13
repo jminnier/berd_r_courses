@@ -401,7 +401,7 @@ Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://w
 
 # Import Data
 
-Run this in your project
+Open your Rstudio project. Open a new script, copy and paste this code, and run.
 
 ```{r, results=FALSE}
 demo_data <- read_csv("data/yrbss_demo.csv")
@@ -468,6 +468,29 @@ class: center, middle, inverse
 demo_data %>% filter(bmi > 20)
 ```
 
+
+---
+
+# Compare to base R
+
+.pull-left[
+
+Bracket method, need for repeating data frame names, need to use `$`. Very nested and confusing to read.
+
+```{r}
+demo_data[demo_data$grade=="9th",]
+```
+
+]
+.pull-right[
+No `$` needed. Uses "non-standard evaluation" so `filter()` knows `grade` is a column in `demo_data`.
+```{r}
+demo_data %>% filter(grade=="9th")
+```
+
+]
+
+
 ---
 
 # `filter()` practice
@@ -505,6 +528,24 @@ demo_data %>% filter((bmi<15)|(bmi>50))
 ```{r}
 demo_data %>% select(record, grade)
 ```
+
+---
+
+# Compare to base R
+
+.pull-left[
+Need brackets, quotes around column names.
+```{r}
+demo_data[, c("record","age","sex")]
+```
+]
+.pull-right[
+No quotes needed, easier to read. More flexible. Either work:
+```{r, results="hold"}
+demo_data %>% select(record, age, sex)
+demo_data %>% select(record:sex)
+```
+]
 
 ---
 
