@@ -7,7 +7,7 @@ output:
     css: [css/xaringan-themer.css, css/my-theme.css]
     lib_dir: libs
     nature:
-      highlightStyle: rainbow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
       highlightLines: true
       highlightLanguage: r
       countIncrementalSlides: false
@@ -30,6 +30,7 @@ options(htmltools.dir.version = FALSE)
 
 library(tidyverse)
 library(lubridate)
+library(janitor)
 
 knitr::opts_chunk$set(
   warning=FALSE, 
@@ -108,17 +109,16 @@ class: center, middle, inverse
 - importing data
 - cleaning data
 - changing shape of data
+]
+.pull-right[
 - fixing errors and poorly formatted data elements
 - transforming columns and rows
 - filtering, subsetting
 ]
-.pull-right[
 
-![](img/r4ds_tidyverse.png)
+<img src="img/r4ds_tidyverse.png" width="80%" height="80%">
 
 [G. Grolemond & H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
-
-]
 
 ---
 
@@ -204,13 +204,23 @@ tibble(name = c("Sarah","Ana","Jose"),
 
 ---
 
+# Tibble perks
+
+- better printing methods
+- doesn't print 10000 rows
+- tells you the variable type (character, factor, double, integer, boolean, date)
+- can be used anywhere a `data.frame` is needed
+- `read_*()` functions don't read character columns as factors (no surprises)
+
+---
+
 # Import as `data.frame` (try this)
 
 
 Base R functions import `data.frame`
 
 ```{r}
-mydata_df <- read.csv("mydata.csv")
+mydata_df <- read.csv("data/small_data.csv")
 mydata_df
 ```
 
@@ -221,7 +231,7 @@ mydata_df
 `tidyverse` functions import as tibbles (`read_csv`, `read_excel()`, etc)
 
 ```{r}
-mydata_tib <- read_csv("mydata.csv")
+mydata_tib <- read_csv("data/small_data.csv")
 mydata_tib
 ```
 
@@ -229,11 +239,14 @@ mydata_tib
 
 # Run this code
 
-```{r, eval=FALSE}
-mydata <- read_csv("mydata.csv")
+```{r, include=FALSE}
+mydata <- read_csv("data/small_data.csv")
 mydata
 glimpse(mydata)
 str(mydata)
+head(mydata)
+summary(mydata)
+class(mydata)
 ```
 
 
@@ -307,8 +320,346 @@ class: center, middle, inverse
 
 ---
 
-# The pipe `%>%`
+# The pipe operator `%>%`
 
+- a function performed on (usually) a data frame or tibble used somewhat like a `+`
+- "add" functions together
+- the result is a transformed data set as a `tibble`
+- Suppose you want to perform a series of operations on a data.frame or tibble `mydata` using hypothetical functions `f()`, `g()`, `h()`:
+    + Perform `f(mydata)`
+    + use the output as an argument to `g()`
+    + use the output as an argument to `h()`
+
+.pull-left[
+One option:
+
+```{r, eval=FALSE}
+h(g(f(mydata)))
+```
+]
+.pull-right[
+
+A long tedious option:
+
+```{r, eval=FALSE}
+fout <- f(mydata)
+gout <- g(fout)
+h(gout)
+```
+]
+
+---
+
+# Use the pipe `%>%`
+
+Instead, we can use the pipe operator (pronounced "then")
+
+- Take `mydata` then
+- perform `f()` then
+- perform `g()` then
+- perform `h()`
+
+```{r, eval=FALSE}
+mydata %>% 
+  f() %>% 
+  g() %>% 
+  h()
+```
+
+---
+
+# Why use the pipe?
+
+- makes code more readable
+- `h(f(g(mydata)))` can get complicated with multiple arguments
+    + i.e. `h(f(g(mydata, na.rm=T), print=FALSE), type = "mean")`
+
+A real example:
+```{r}
+mydata_new <- mydata %>% select(id, weight_kg, bmi) %>%
+  mutate(height_m = sqrt(weight_kg /bmi))
+mydata_new %>% head(n=3)
+```
+
+---
+class: center, inverse, middle
+
+# Let's wrangle!
+
+---
+
+# About the data
+
+Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+
+- complex survey data
+- national school-based survey conducted by CDC and state, territorial, tribal, and local surveys conducted by state, territorial, and local education and health agencies and tribal governments
+- monitors six categories of health-related behaviors that contribute to the leading causes of death and disability among youth and adults (including alcohol & drug use, unhealthy & dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
+- this data is a subset of data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
+
+---
+
+# Import Data
+
+Run this in your project
+
+```{r, include=FALSE}
+demo_data <- read_csv("data/yrbss_demo.csv")
+qn_data <- read_csv("data/yrbss_qn.csv")
+
+glimpse(demo_data)
+glimpse(qn_data)
+```
+
+Look at your "Environment" tab, you should have the data there.
+
+---
+
+# Tidyverse functions
+
+- `tidyverse` is a suite of packages that implement `tidy` methods for data importing, cleaning and wrangling 
+- functions like `filter()`, `select()`, `mutate()` are part of the `tidyverse`
+    + first argument is always the data frame
+    + can be used in pipes `%>%`
+
+.pull-left[
+All equivalent:
+```{r, eval = FALSE}
+select(.data = demo_data, "record")
+select(demo_data, "record")
+select(demo_data, record)
+demo_data %>% select(record)
+```
+]
+.pull-right[
+Output:
+```{r, echo = FALSE}
+demo_data %>% select(record)
+```
+]
+
+---
+
+class: center, middle, inverse
+
+# Subsetting data
+
+---
+
+# Subset by rows
+
+<img src="img/datawrangle_cheatsheet_subset_rows.png" width="100%" height="100%">
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+---
+
+# `filter()` $\sim$ rows
+
+- filter data based on rows
+- use logical cues:
+    + double = for "is equal to"
+    + use `&` (and) or `|` (or)
+    + `!` in front negates the statement, as in `!=` or `!(grade=="9th")`
+- use math
+    + `>` `<` `>=` `<=`
+- use the `is.na()` function to filter based on missing values
+
+```{r}
+demo_data %>% filter(bmi > 20)
+```
+
+---
+
+# `filter()` practice
+
+What do these commands do? Try:
+
+```{r, eval=FALSE}
+demo_data %>% filter(record==506901)
+demo_data %>% filter(sex=="Male")
+demo_data %>% filter(grade %in% c("10th","11th"))
+demo_data %>% filter(!(grade=="9th"))
+demo_data %>% filter(bmi < 20, stweight < 50, sex=="Female") # filter on multiple
+demo_data %>% filter(is.na(bmi))
+demo_data %>% filter(!is.na(bmi))
+demo_data %>% filter(bmi < 5)
+demo_data %>% filter(bmi/stweight < 0.5) # can do math
+demo_data %>% filter((bmi<15)|(bmi>50))
+```
+
+---
+
+# Subset by columns
+
+<img src="img/datawrangle_cheatsheet_subset_cols.png" width="100%" height="100%">
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+---
+
+# `select()` $\sim$ columns
+
+- select columns/variables
+- uses special syntax: `var1:var20`, `one_of(c("a","b","c"))`, `-var1`, `contains("date")`
+- can be used to rearrange columns (useful to use `everything()`)
+
+```{r}
+demo_data %>% select(record, grade)
+```
+
+---
+
+# `select()` practice
+
+What do these commands do? Try:
+
+```{r}
+demo_data %>% select(-grade,-sex)
+demo_data %>% select(record:sex)
+demo_data %>% select(-(record:sex))
+demo_data %>% select(contains("race"))
+demo_data %>% select(record, race4, race7, everything())
+demo_data %>% select(one_of(c("age","stweight")))
+demo_data %>% select(starts_with("r"))
+demo_data %>% select(-contains("r"))
+demo_data %>% select(1:3)
+```
+
+
+---
+
+# `rename()` $\sim$ columns
+
+- renames column variables
+
+```{r}
+demo_data %>% rename(id = record)
+```
+
+---
+
+# `select_*()` and `rename_*()` practice
+
+- scoped variants of `select()` and `rename()` operate on a selection of columns
+- which columns depends on a predicate, can be:
+    + variable names through `vars()`, or
+    + a function that returns TRUE/FALSE like `is.numeric()`
+
+What do these commands do? Try:
+
+```{r,eval=FALSE}
+demo_data %>% select_if(is.numeric)
+demo_data %>% rename_if(is.character, toupper) # toupper() is a function
+demo_data %>% rename_all(toupper)
+demo_data %>% rename_at(vars(contains("race")), toupper)
+demo_data %>% rename_if(is.numeric, funs(paste0(.,"_num")))
+```
+
+
+---
+
+# Practice
+
+1. Import `demo_data.csv` in the `data/` folder
+1. Convert all column names to upper case, save the result as `newdata`
+1. For `newdata`, select only character variables, save again as `newdata`.
+1. Filter this data to only keep Asian or Native Hawaiian/other PI subjects in the 9th grade.
+1. Filter this data to remove subjects younger than 13.
+1. Remove the column `RACE4`.
+1. How many rows does the resulting `newdata` have? How many columns?
+
+```{r, include=FALSE}
+newdata <- demo_data %>%
+  rename_all(toupper) %>%
+  select_if(is.character) %>%
+  filter(RACE7%in%c("Asian","Native Hawaiin/other PI"), GRADE=="9th") %>%
+  filter(AGE!="12 years old or younger") %>%
+  select(-RACE4)
+dim(newdata)
+```
+
+
+---
+
+class: center, middle, inverse
+
+# Changing the data
+
+---
+
+# Make new variables
+
+<img src="img/datawrangle_cheatsheet_makenewvars.png" width="100%" height="100%">
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+---
+
+# `mutate()`
+
+EXPLAIN MUTATE
+
+```{r}
+newdata <- demo_data %>% 
+  select(record, bmi:stweight) %>%
+  mutate(height_m = sqrt(stweight /bmi))
+newdata
+```
+
+---
+
+# `mutate()` practice
+
+Try these:
+
+```{r, eval=FALSE}
+demo_data %>% mutate(bmi_high = bmi > 30)
+demo_data %>% mutate(male = 1*(sex=="Male"))
+demo_data %>% mutate(grade_num = as.numeric(str_replace(grade,"th","")))
+```
+
+---
+
+# `case_when()` with `mutate()`
+
+EXPLAIN CASE WHEN
+
+```{r}
+
+demo_data2 <- demo_data %>%
+  mutate(
+    age_int = case_when(
+      age=="12 years old or younger" ~ 12,
+      age=="18 years old or older" ~ 18,
+      TRUE ~ as.numeric(str_replace(age, " years old",""))
+  ))
+demo_data2 %>% tabyl(age,age_int)
+```
+
+---
+
+# `separate()` and `unite()`
+
+---
+
+# Dealing with missing or duplicated data
+
+```{r}
+demo_data %>% distinct()
+```
+
+Removes *all* rows with *any* missing (`NA`) values in *any* row
+
+```{r}
+demo_data %>% na.omit()
+```
+
+
+
+---
+
+class: center, middle, inverse
+
+# Joining/merging data
 
 
 ---
@@ -339,6 +690,7 @@ Online books/lessons:
 Links
 
 - [Learn the tidyverse](https://www.tidyverse.org/learn/)
+- [Data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
 Interactive lessons
 
@@ -352,7 +704,7 @@ Some of this is drawn from materials in online books/lessons:
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
 - [A gRadual intRoduction to the tidyverse](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse) - Workshop for Cascadia R 2017 by Chester Ismay and Ted Laderas
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
-
+- ["Tidy Data" by Hadley Wickham](https://vita.had.co.nz/papers/tidy-data.pdf)
 ---
 
 # Possible Future Workshop Topics?

@@ -68,17 +68,16 @@ class: center, middle, inverse
 - importing data
 - cleaning data
 - changing shape of data
+]
+.pull-right[
 - fixing errors and poorly formatted data elements
 - transforming columns and rows
 - filtering, subsetting
 ]
-.pull-right[
 
-![](img/r4ds_tidyverse.png)
+&lt;img src="img/r4ds_tidyverse.png" width="80%" height="80%"&gt;
 
 [G. Grolemond &amp; H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
-
-]
 
 ---
 
@@ -183,6 +182,16 @@ tibble(name = c("Sarah","Ana","Jose"),
 
 ---
 
+# Tibble perks
+
+- better printing methods
+- doesn't print 10000 rows
+- tells you the variable type (character, factor, double, integer, boolean, date)
+- can be used anywhere a `data.frame` is needed
+- `read_*()` functions don't read character columns as factors (no surprises)
+
+---
+
 # Import as `data.frame` (try this)
 
 
@@ -190,7 +199,7 @@ Base R functions import `data.frame`
 
 
 ```r
-mydata_df &lt;- read.csv("mydata.csv")
+mydata_df &lt;- read.csv("data/small_data.csv")
 mydata_df
 ```
 
@@ -268,7 +277,7 @@ mydata_df
 
 
 ```r
-mydata_tib &lt;- read_csv("mydata.csv")
+mydata_tib &lt;- read_csv("data/small_data.csv")
 mydata_tib
 ```
 
@@ -305,12 +314,6 @@ mydata_tib
 # Run this code
 
 
-```r
-mydata &lt;- read_csv("mydata.csv")
-mydata
-glimpse(mydata)
-str(mydata)
-```
 
 
 ---
@@ -429,8 +432,661 @@ class: center, middle, inverse
 
 ---
 
-# The pipe `%&gt;%`
+# The pipe operator `%&gt;%`
 
+- a function performed on (usually) a data frame or tibble used somewhat like a `+`
+- "add" functions together
+- the result is a transformed data set as a `tibble`
+- Suppose you want to perform a series of operations on a data.frame or tibble `mydata` using hypothetical functions `f()`, `g()`, `h()`:
+    + Perform `f(mydata)`
+    + use the output as an argument to `g()`
+    + use the output as an argument to `h()`
+
+.pull-left[
+One option:
+
+
+```r
+h(g(f(mydata)))
+```
+]
+.pull-right[
+
+A long tedious option:
+
+
+```r
+fout &lt;- f(mydata)
+gout &lt;- g(fout)
+h(gout)
+```
+]
+
+---
+
+# Use the pipe `%&gt;%`
+
+Instead, we can use the pipe operator (pronounced "then")
+
+- Take `mydata` then
+- perform `f()` then
+- perform `g()` then
+- perform `h()`
+
+
+```r
+mydata %&gt;% 
+  f() %&gt;% 
+  g() %&gt;% 
+  h()
+```
+
+---
+
+# Why use the pipe?
+
+- makes code more readable
+- `h(f(g(mydata)))` can get complicated with multiple arguments
+    + i.e. `h(f(g(mydata, na.rm=T), print=FALSE), type = "mean")`
+
+A real example:
+
+```r
+mydata_new &lt;- mydata %&gt;% select(id, weight_kg, bmi) %&gt;%
+  mutate(height_m = sqrt(weight_kg /bmi))
+mydata_new %&gt;% head(n=3)
+```
+
+```
+# A tibble: 3 x 4
+      id weight_kg   bmi height_m
+   &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 335340      66.2  27.6     1.55
+2 638618      84.8  29.3     1.70
+3 922382      57.6  18.2     1.78
+```
+
+---
+class: center, inverse, middle
+
+# Let's wrangle!
+
+---
+
+# About the data
+
+Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+
+- complex survey data
+- national school-based survey conducted by CDC and state, territorial, tribal, and local surveys conducted by state, territorial, and local education and health agencies and tribal governments
+- monitors six categories of health-related behaviors that contribute to the leading causes of death and disability among youth and adults (including alcohol &amp; drug use, unhealthy &amp; dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
+- this data is a subset of data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
+
+---
+
+# Import Data
+
+Run this in your project
+
+
+
+Look at your "Environment" tab, you should have the data there.
+
+---
+
+# Tidyverse functions
+
+- `tidyverse` is a suite of packages that implement `tidy` methods for data importing, cleaning and wrangling 
+- functions like `filter()`, `select()`, `mutate()` are part of the `tidyverse`
+    + first argument is always the data frame
+    + can be used in pipes `%&gt;%`
+
+.pull-left[
+All equivalent:
+
+```r
+select(.data = demo_data, "record")
+select(demo_data, "record")
+select(demo_data, record)
+demo_data %&gt;% select(record)
+```
+]
+.pull-right[
+Output:
+
+```
+# A tibble: 40,068 x 1
+    record
+     &lt;dbl&gt;
+ 1  506901
+ 2  635425
+ 3  506905
+ 4 1102227
+ 5   36586
+ 6  767512
+ 7  506907
+ 8  930386
+ 9 1310476
+10  930393
+# … with 40,058 more rows
+```
+]
+
+---
+
+class: center, middle, inverse
+
+# Subsetting data
+
+---
+
+# Subset by rows
+
+&lt;img src="img/datawrangle_cheatsheet_subset_rows.png" width="100%" height="100%"&gt;
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+---
+
+# `filter()` `\(\sim\)` rows
+
+- filter data based on rows
+- use logical cues:
+    + double = for "is equal to"
+    + use `&amp;` (and) or `|` (or)
+    + `!` in front negates the statement, as in `!=` or `!(grade=="9th")`
+- use math
+    + `&gt;` `&lt;` `&gt;=` `&lt;=`
+- use the `is.na()` function to filter based on missing values
+
+
+```r
+demo_data %&gt;% filter(bmi &gt; 20)
+```
+
+```
+# A tibble: 20,818 x 8
+    record age           sex   grade race4     race7           bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
+ 1  506901 12 years old… Fema… 9th   All othe… Am Indian / …  23.9     69.0
+ 2 1310476 12 years old… Fema… 9th   Hispanic… Hispanic/Lat…  28       90.7
+ 3  767508 12 years old… Fema… 9th   Hispanic… Hispanic/Lat…  29.9     79.4
+ 4  930385 12 years old… Fema… 9th   Hispanic… Hispanic/Lat…  35.9     95.3
+ 5  767513 12 years old… Fema… 9th   Hispanic… Hispanic/Lat…  31.4     90.7
+ 6 1102222 12 years old… Fema… 10th  Hispanic… Hispanic/Lat…  31.2    104. 
+ 7 1102223 12 years old… Fema… 11th  Hispanic… Hispanic/Lat…  22.8     65.8
+ 8  402813 12 years old… Fema… 12th  Hispanic… Hispanic/Lat…  32.0     45.4
+ 9  767510 12 years old… Fema… 12th  White     White          20.0     63.5
+10 1310484 12 years old… Fema… &lt;NA&gt;  Hispanic… Hispanic/Lat…  24.3     70.3
+# … with 20,808 more rows
+```
+
+---
+
+# `filter()` practice
+
+What do these commands do? Try:
+
+
+```r
+demo_data %&gt;% filter(record==506901)
+demo_data %&gt;% filter(sex=="Male")
+demo_data %&gt;% filter(grade %in% c("10th","11th"))
+demo_data %&gt;% filter(!(grade=="9th"))
+demo_data %&gt;% filter(bmi &lt; 20, stweight &lt; 50, sex=="Female") # filter on multiple
+demo_data %&gt;% filter(is.na(bmi))
+demo_data %&gt;% filter(!is.na(bmi))
+demo_data %&gt;% filter(bmi &lt; 5)
+demo_data %&gt;% filter(bmi/stweight &lt; 0.5) # can do math
+demo_data %&gt;% filter((bmi&lt;15)|(bmi&gt;50))
+```
+
+---
+
+# Subset by columns
+
+&lt;img src="img/datawrangle_cheatsheet_subset_cols.png" width="100%" height="100%"&gt;
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+---
+
+# `select()` `\(\sim\)` columns
+
+- select columns/variables
+- uses special syntax: `var1:var20`, `one_of(c("a","b","c"))`, `-var1`, `contains("date")`
+- can be used to rearrange columns (useful to use `everything()`)
+
+
+```r
+demo_data %&gt;% select(record, grade)
+```
+
+```
+# A tibble: 40,068 x 2
+    record grade
+     &lt;dbl&gt; &lt;chr&gt;
+ 1  506901 9th  
+ 2  635425 9th  
+ 3  506905 9th  
+ 4 1102227 9th  
+ 5   36586 9th  
+ 6  767512 9th  
+ 7  506907 9th  
+ 8  930386 9th  
+ 9 1310476 9th  
+10  930393 9th  
+# … with 40,058 more rows
+```
+
+---
+
+# `select()` practice
+
+What do these commands do? Try:
+
+
+```r
+demo_data %&gt;% select(-grade,-sex)
+```
+
+```
+# A tibble: 40,068 x 6
+    record age             race4            race7              bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;
+ 1  506901 12 years old o… All other races  Am Indian / Ala…  23.9     69.0
+ 2  635425 12 years old o… All other races  Am Indian / Ala…  NA       NA  
+ 3  506905 12 years old o… All other races  Am Indian / Ala…  NA       NA  
+ 4 1102227 12 years old o… All other races  Asian             NA       NA  
+ 5   36586 12 years old o… Black or Africa… Black or Africa…  NA       NA  
+ 6  767512 12 years old o… Black or Africa… Black or Africa…  NA       NA  
+ 7  506907 12 years old o… Black or Africa… Black or Africa…  NA       NA  
+ 8  930386 12 years old o… Black or Africa… Black or Africa…  NA       NA  
+ 9 1310476 12 years old o… Hispanic/Latino  Hispanic/Latino   28       90.7
+10  930393 12 years old o… Hispanic/Latino  Hispanic/Latino   NA       NA  
+# … with 40,058 more rows
+```
+
+```r
+demo_data %&gt;% select(record:sex)
+```
+
+```
+# A tibble: 40,068 x 3
+    record age                     sex   
+     &lt;dbl&gt; &lt;chr&gt;                   &lt;chr&gt; 
+ 1  506901 12 years old or younger Female
+ 2  635425 12 years old or younger Female
+ 3  506905 12 years old or younger Female
+ 4 1102227 12 years old or younger Female
+ 5   36586 12 years old or younger Female
+ 6  767512 12 years old or younger Female
+ 7  506907 12 years old or younger Female
+ 8  930386 12 years old or younger Female
+ 9 1310476 12 years old or younger Female
+10  930393 12 years old or younger Female
+# … with 40,058 more rows
+```
+
+```r
+demo_data %&gt;% select(-(record:sex))
+```
+
+```
+# A tibble: 40,068 x 5
+   grade race4                     race7                       bmi stweight
+   &lt;chr&gt; &lt;chr&gt;                     &lt;chr&gt;                     &lt;dbl&gt;    &lt;dbl&gt;
+ 1 9th   All other races           Am Indian / Alaska Native  23.9     69.0
+ 2 9th   All other races           Am Indian / Alaska Native  NA       NA  
+ 3 9th   All other races           Am Indian / Alaska Native  NA       NA  
+ 4 9th   All other races           Asian                      NA       NA  
+ 5 9th   Black or African American Black or African American  NA       NA  
+ 6 9th   Black or African American Black or African American  NA       NA  
+ 7 9th   Black or African American Black or African American  NA       NA  
+ 8 9th   Black or African American Black or African American  NA       NA  
+ 9 9th   Hispanic/Latino           Hispanic/Latino            28       90.7
+10 9th   Hispanic/Latino           Hispanic/Latino            NA       NA  
+# … with 40,058 more rows
+```
+
+```r
+demo_data %&gt;% select(contains("race"))
+```
+
+```
+# A tibble: 40,068 x 2
+   race4                     race7                    
+   &lt;chr&gt;                     &lt;chr&gt;                    
+ 1 All other races           Am Indian / Alaska Native
+ 2 All other races           Am Indian / Alaska Native
+ 3 All other races           Am Indian / Alaska Native
+ 4 All other races           Asian                    
+ 5 Black or African American Black or African American
+ 6 Black or African American Black or African American
+ 7 Black or African American Black or African American
+ 8 Black or African American Black or African American
+ 9 Hispanic/Latino           Hispanic/Latino          
+10 Hispanic/Latino           Hispanic/Latino          
+# … with 40,058 more rows
+```
+
+```r
+demo_data %&gt;% select(record, race4, race7, everything())
+```
+
+```
+# A tibble: 40,068 x 8
+    record race4        race7        age         sex   grade   bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;
+ 1  506901 All other r… Am Indian /… 12 years o… Fema… 9th    23.9     69.0
+ 2  635425 All other r… Am Indian /… 12 years o… Fema… 9th    NA       NA  
+ 3  506905 All other r… Am Indian /… 12 years o… Fema… 9th    NA       NA  
+ 4 1102227 All other r… Asian        12 years o… Fema… 9th    NA       NA  
+ 5   36586 Black or Af… Black or Af… 12 years o… Fema… 9th    NA       NA  
+ 6  767512 Black or Af… Black or Af… 12 years o… Fema… 9th    NA       NA  
+ 7  506907 Black or Af… Black or Af… 12 years o… Fema… 9th    NA       NA  
+ 8  930386 Black or Af… Black or Af… 12 years o… Fema… 9th    NA       NA  
+ 9 1310476 Hispanic/La… Hispanic/La… 12 years o… Fema… 9th    28       90.7
+10  930393 Hispanic/La… Hispanic/La… 12 years o… Fema… 9th    NA       NA  
+# … with 40,058 more rows
+```
+
+```r
+demo_data %&gt;% select(one_of(c("age","stweight")))
+```
+
+```
+# A tibble: 40,068 x 2
+   age                     stweight
+   &lt;chr&gt;                      &lt;dbl&gt;
+ 1 12 years old or younger     69.0
+ 2 12 years old or younger     NA  
+ 3 12 years old or younger     NA  
+ 4 12 years old or younger     NA  
+ 5 12 years old or younger     NA  
+ 6 12 years old or younger     NA  
+ 7 12 years old or younger     NA  
+ 8 12 years old or younger     NA  
+ 9 12 years old or younger     90.7
+10 12 years old or younger     NA  
+# … with 40,058 more rows
+```
+
+```r
+demo_data %&gt;% select(starts_with("r"))
+```
+
+```
+# A tibble: 40,068 x 3
+    record race4                     race7                    
+     &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;                    
+ 1  506901 All other races           Am Indian / Alaska Native
+ 2  635425 All other races           Am Indian / Alaska Native
+ 3  506905 All other races           Am Indian / Alaska Native
+ 4 1102227 All other races           Asian                    
+ 5   36586 Black or African American Black or African American
+ 6  767512 Black or African American Black or African American
+ 7  506907 Black or African American Black or African American
+ 8  930386 Black or African American Black or African American
+ 9 1310476 Hispanic/Latino           Hispanic/Latino          
+10  930393 Hispanic/Latino           Hispanic/Latino          
+# … with 40,058 more rows
+```
+
+```r
+demo_data %&gt;% select(-contains("r"))
+```
+
+```
+# A tibble: 40,068 x 4
+   age                     sex      bmi stweight
+   &lt;chr&gt;                   &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+ 1 12 years old or younger Female  23.9     69.0
+ 2 12 years old or younger Female  NA       NA  
+ 3 12 years old or younger Female  NA       NA  
+ 4 12 years old or younger Female  NA       NA  
+ 5 12 years old or younger Female  NA       NA  
+ 6 12 years old or younger Female  NA       NA  
+ 7 12 years old or younger Female  NA       NA  
+ 8 12 years old or younger Female  NA       NA  
+ 9 12 years old or younger Female  28       90.7
+10 12 years old or younger Female  NA       NA  
+# … with 40,058 more rows
+```
+
+```r
+demo_data %&gt;% select(1:3)
+```
+
+```
+# A tibble: 40,068 x 3
+    record age                     sex   
+     &lt;dbl&gt; &lt;chr&gt;                   &lt;chr&gt; 
+ 1  506901 12 years old or younger Female
+ 2  635425 12 years old or younger Female
+ 3  506905 12 years old or younger Female
+ 4 1102227 12 years old or younger Female
+ 5   36586 12 years old or younger Female
+ 6  767512 12 years old or younger Female
+ 7  506907 12 years old or younger Female
+ 8  930386 12 years old or younger Female
+ 9 1310476 12 years old or younger Female
+10  930393 12 years old or younger Female
+# … with 40,058 more rows
+```
+
+
+---
+
+# `rename()` `\(\sim\)` columns
+
+- renames column variables
+
+
+```r
+demo_data %&gt;% rename(id = record)
+```
+
+```
+# A tibble: 40,068 x 8
+        id age         sex   grade race4        race7          bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+ 1  506901 12 years o… Fema… 9th   All other r… Am Indian /…  23.9     69.0
+ 2  635425 12 years o… Fema… 9th   All other r… Am Indian /…  NA       NA  
+ 3  506905 12 years o… Fema… 9th   All other r… Am Indian /…  NA       NA  
+ 4 1102227 12 years o… Fema… 9th   All other r… Asian         NA       NA  
+ 5   36586 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
+ 6  767512 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
+ 7  506907 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
+ 8  930386 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
+ 9 1310476 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  28       90.7
+10  930393 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  NA       NA  
+# … with 40,058 more rows
+```
+
+---
+
+# `select_*()` and `rename_*()` practice
+
+- scoped variants of `select()` and `rename()` operate on a selection of columns
+- which columns depends on a predicate, can be:
+    + variable names through `vars()`, or
+    + a function that returns TRUE/FALSE like `is.numeric()`
+
+What do these commands do? Try:
+
+
+```r
+demo_data %&gt;% select_if(is.numeric)
+demo_data %&gt;% rename_if(is.character, toupper) # toupper() is a function
+demo_data %&gt;% rename_all(toupper)
+demo_data %&gt;% rename_at(vars(contains("race")), toupper)
+demo_data %&gt;% rename_if(is.numeric, funs(paste0(.,"_num")))
+```
+
+
+---
+
+# Practice
+
+1. Import `demo_data.csv` in the `data/` folder
+1. Convert all column names to upper case, save the result as `newdata`
+1. For `newdata`, select only character variables, save again as `newdata`.
+1. Filter this data to only keep Asian or Native Hawaiian/other PI subjects in the 9th grade.
+1. Filter this data to remove subjects younger than 13.
+1. Remove the column `RACE4`.
+1. How many rows does the resulting `newdata` have? How many columns?
+
+
+
+
+---
+
+class: center, middle, inverse
+
+# Changing the data
+
+---
+
+# Make new variables
+
+&lt;img src="img/datawrangle_cheatsheet_makenewvars.png" width="100%" height="100%"&gt;
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+---
+
+# `mutate()`
+
+EXPLAIN MUTATE
+
+
+```r
+newdata &lt;- demo_data %&gt;% 
+  select(record, bmi:stweight) %&gt;%
+  mutate(height_m = sqrt(stweight /bmi))
+newdata
+```
+
+```
+# A tibble: 40,068 x 4
+    record   bmi stweight height_m
+     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1  506901  23.9     69.0     1.70
+ 2  635425  NA       NA      NA   
+ 3  506905  NA       NA      NA   
+ 4 1102227  NA       NA      NA   
+ 5   36586  NA       NA      NA   
+ 6  767512  NA       NA      NA   
+ 7  506907  NA       NA      NA   
+ 8  930386  NA       NA      NA   
+ 9 1310476  28       90.7     1.8 
+10  930393  NA       NA      NA   
+# … with 40,058 more rows
+```
+
+---
+
+# `mutate()` practice
+
+Try these:
+
+
+```r
+demo_data %&gt;% mutate(bmi_high = bmi &gt; 30)
+demo_data %&gt;% mutate(male = 1*(sex=="Male"))
+demo_data %&gt;% mutate(grade_num = as.numeric(str_replace(grade,"th","")))
+```
+
+---
+
+# `case_when()` with `mutate()`
+
+EXPLAIN CASE WHEN
+
+
+```r
+demo_data2 &lt;- demo_data %&gt;%
+  mutate(
+    age_int = case_when(
+      age=="12 years old or younger" ~ 12,
+      age=="18 years old or older" ~ 18,
+      TRUE ~ as.numeric(str_replace(age, " years old",""))
+  ))
+demo_data2 %&gt;% tabyl(age,age_int)
+```
+
+```
+                     age  12  13   14   15    16    17   18 NA_
+ 12 years old or younger 241   0    0    0     0     0    0   0
+            13 years old   0 193    0    0     0     0    0   0
+            14 years old   0   0 4101    0     0     0    0   0
+            15 years old   0   0    0 8507     0     0    0   0
+            16 years old   0   0    0    0 10019     0    0   0
+            17 years old   0   0    0    0     0 10029    0   0
+   18 years old or older   0   0    0    0     0     0 6550   0
+                    &lt;NA&gt;   0   0    0    0     0     0    0 428
+```
+
+---
+
+# `separate()` and `unite()`
+
+---
+
+# Dealing with missing or duplicated data
+
+
+```r
+demo_data %&gt;% distinct()
+```
+
+```
+# A tibble: 40,068 x 8
+    record age         sex   grade race4        race7          bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+ 1  506901 12 years o… Fema… 9th   All other r… Am Indian /…  23.9     69.0
+ 2  635425 12 years o… Fema… 9th   All other r… Am Indian /…  NA       NA  
+ 3  506905 12 years o… Fema… 9th   All other r… Am Indian /…  NA       NA  
+ 4 1102227 12 years o… Fema… 9th   All other r… Asian         NA       NA  
+ 5   36586 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
+ 6  767512 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
+ 7  506907 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
+ 8  930386 12 years o… Fema… 9th   Black or Af… Black or Af…  NA       NA  
+ 9 1310476 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  28       90.7
+10  930393 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  NA       NA  
+# … with 40,058 more rows
+```
+
+Removes *all* rows with *any* missing (`NA`) values in *any* row
+
+
+```r
+demo_data %&gt;% na.omit()
+```
+
+```
+# A tibble: 25,948 x 8
+    record age         sex   grade race4        race7          bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+ 1  506901 12 years o… Fema… 9th   All other r… Am Indian /…  23.9     69.0
+ 2 1310476 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  28       90.7
+ 3  767508 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  29.9     79.4
+ 4  930385 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  35.9     95.3
+ 5  767513 12 years o… Fema… 9th   Hispanic/La… Hispanic/La…  31.4     90.7
+ 6 1102222 12 years o… Fema… 10th  Hispanic/La… Hispanic/La…  31.2    104. 
+ 7 1102231 12 years o… Fema… 10th  Hispanic/La… Hispanic/La…  18.7     50.8
+ 8 1102233 12 years o… Fema… 11th  Black or Af… Black or Af…  19.4     58.1
+ 9 1102223 12 years o… Fema… 11th  Hispanic/La… Hispanic/La…  22.8     65.8
+10  402813 12 years o… Fema… 12th  Hispanic/La… Hispanic/La…  32.0     45.4
+# … with 25,938 more rows
+```
+
+
+
+---
+
+class: center, middle, inverse
+
+# Joining/merging data
 
 
 ---
@@ -461,6 +1117,7 @@ Online books/lessons:
 Links
 
 - [Learn the tidyverse](https://www.tidyverse.org/learn/)
+- [Data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
 Interactive lessons
 
@@ -474,7 +1131,7 @@ Some of this is drawn from materials in online books/lessons:
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
 - [A gRadual intRoduction to the tidyverse](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse) - Workshop for Cascadia R 2017 by Chester Ismay and Ted Laderas
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
-
+- ["Tidy Data" by Hadley Wickham](https://vita.had.co.nz/papers/tidy-data.pdf)
 ---
 
 # Possible Future Workshop Topics?
@@ -503,7 +1160,7 @@ Meike Niederhausen: _niederha@ohsu.edu_
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "rainbow",
+"highlightStyle": "tomorrow",
 "highlightLines": true,
 "highlightLanguage": "r",
 "countIncrementalSlides": false,
