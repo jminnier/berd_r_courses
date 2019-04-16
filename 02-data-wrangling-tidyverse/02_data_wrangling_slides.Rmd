@@ -83,13 +83,16 @@ Open the homework: [find it here](https://jminnier-berd-r-courses.netlify.com/02
 
 ---
 
-# Learning Objectives
+# Learning objectives
 
+Part 1:
 - What is data wrangling?
-- A few good practices in R/Rstudio
+- A few good practices in R/RStudio
 - What is tidy data?
 - What is tidyverse?
 - Reshape and manipulate data frames
+
+Part 2:
 - Some data cleaning
 
 
@@ -122,29 +125,36 @@ class: center, middle, inverse
 
 ---
 
-# Good practices in Rstudio
+# Good practices in RStudio
 
 - Use "projects" ([read this](https://r4ds.had.co.nz/workflow-projects.html))
-    + Create an RStudio project for each data analysis project.
-    + Keep data files there
-    + Keep scripts there; edit them, run them in bits or as a whole.
-    + Save your outputs (plots and cleaned data) there.
-- Only ever use relative paths, not absolute paths.
-    + i.e. `read_csv("data/mydata.csv")` not `read_csv("/home/yourname/Documents/stuff/this file is where again FINAL.csv")`
+    + Create an RStudio project for each data analysis project
+    + A project is associated with a directory folder
+        * Keep data files there
+        * Keep scripts there; edit them, run them in bits or as a whole
+        * Save your outputs (plots and cleaned data) there
+
+- Only use relative paths, never absolute paths
+    + realtive (good): `read_csv("data/mydata.csv")`
+    + absolute (bad): `read_csv("/home/yourname/Documents/stuff/mydata.csv")`
     
-Projects standardize file paths, keep everything together, whole folder can be shared and run in another place.
+__Advantages of using projects__
+- standardize file paths
+- keep everything together
+- a whole folder can be shared and run on another computer
 
 
 ---
 
-# Rstudio Projects
+# RStudio projects
 
-## New new project
+## Create new project
 
-- Open Rstudio
+- Open RStudio
 - File -> New Project
+- Choose which folder you want to create the project in
 
-## Existing project
+## Open existing project
 
 - click on `.Rproj` file in your folder
 
@@ -155,9 +165,9 @@ Projects standardize file paths, keep everything together, whole folder can be s
 .pull-left[
 action | mac | windows/linux
 ---| ---| ---
-run line of code | cmd+enter | ctrl+enter 
-`<-`| option + - | alt+ -
-`%>%` | cmd+shift+m | ctrl+shift+m
+run line of code | cmd + enter | ctrl + enter 
+`<-`| option + - | alt + -
+`%>%` | cmd+shift+m | ctrl + shift + m
 ]
 .pull-right[
 Try typing and running
@@ -401,7 +411,7 @@ Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://w
 
 # Import Data
 
-Open your Rstudio project. Open a new script, copy and paste this code, and run.
+Open your RStudio project. Open a new script, copy and paste this code, and run.
 
 ```{r, results=FALSE}
 demo_data <- read_csv("data/yrbss_demo.csv")
