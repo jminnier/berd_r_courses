@@ -20,8 +20,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # If new to R
 
-- Look over previous workshop [slides](http://bit.ly/berd_r_intro) and [video](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public)
-- Read [this chapter in Modern Dive](https://moderndive.com/2-getting-started.html#package-installation) to learn how to install packages and load packages
+- Look over previous workshop [slides](http://bit.ly/berd_r_intro) and [video](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public). Finish up any practice problems you did not complete during the previous workshop. The last page of the slides has a link to the practice problems answers.
+- Read [this chapter in Modern Dive](https://moderndive.com/2-getting-started.html#package-installation) to learn how to install packages and load packages.
 
 # Everyone
 
@@ -46,3 +46,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ![](img/homework_file.png)
 
 ## 8. Complete the instructions in `pre_class_homework.R`
+
+## 9. Check your answers with the file `pre_class_homework_answers.R`
+
+
