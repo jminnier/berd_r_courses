@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   #fig.width=10.5, 
   #fig.height=4,
   fig.align = "center",
-  rows.print=16,
+  rows.print=7,
   echo=TRUE,
   highlight = TRUE,
   prompt = FALSE, # IF TRUE adds a > before each code input
@@ -32,7 +32,7 @@ mono_light(
   link_color = "#38BDDE",
   header_font_google = google_font("Josefin Sans"),
   text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
-  code_font_google   = google_font("Droid Mono"),
+  code_font_google   = NULL,
   text_font_size = "24px",
   code_font_size = "20px",
   header_h1_font_size = "45px",
@@ -140,6 +140,12 @@ demo_data %>% select(record)
 ## ------------------------------------------------------------------------
 demo_data %>% filter(bmi > 20)
 
+## ------------------------------------------------------------------------
+demo_data[demo_data$grade=="9th",]
+
+## ------------------------------------------------------------------------
+demo_data %>% filter(grade=="9th")
+
 ## ---- eval=FALSE---------------------------------------------------------
 ## demo_data %>% filter(record==506901)
 ## demo_data %>% filter(sex=="Male")
@@ -156,15 +162,22 @@ demo_data %>% filter(bmi > 20)
 demo_data %>% select(record, grade)
 
 ## ------------------------------------------------------------------------
-demo_data %>% select(-grade,-sex)
+demo_data[, c("record","age","sex")]
+
+## ---- results="hold"-----------------------------------------------------
+demo_data %>% select(record, age, sex)
 demo_data %>% select(record:sex)
-demo_data %>% select(-(record:sex))
-demo_data %>% select(contains("race"))
-demo_data %>% select(record, race4, race7, everything())
-demo_data %>% select(one_of(c("age","stweight")))
-demo_data %>% select(starts_with("r"))
-demo_data %>% select(-contains("r"))
-demo_data %>% select(1:3)
+
+## ---- eval=FALSE---------------------------------------------------------
+## demo_data %>% select(-grade,-sex)
+## demo_data %>% select(record:sex)
+## demo_data %>% select(-(record:sex))
+## demo_data %>% select(contains("race"))
+## demo_data %>% select(record, race4, race7, everything())
+## demo_data %>% select(one_of(c("age","stweight")))
+## demo_data %>% select(starts_with("r"))
+## demo_data %>% select(-contains("r"))
+## demo_data %>% select(1:3)
 
 ## ------------------------------------------------------------------------
 demo_data %>% rename(id = record)
@@ -213,6 +226,8 @@ demo_data %>% distinct()
 ## ------------------------------------------------------------------------
 demo_data %>% na.omit()
 
-## ---- include=FALSE------------------------------------------------------
-#knitr::purl("02-data-wrangling-tidyverse/02_data_wrangling_slides.Rmd", out = "02-data-wrangling-tidyverse/02_data_wrangling_slides.R")
+## ---- eval=FALSE, echo=FALSE---------------------------------------------
+## # RUN THESE AFTER KNITTING
+## knitr::purl(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.Rmd"), out = here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.R"))
+## pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.Rmd"))
 

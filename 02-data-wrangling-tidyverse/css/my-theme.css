@@ -3,12 +3,6 @@
     text-decoration: none;
 }
 
-.title-slide {
-    background-image: url(img/CAN-RGB-4C-REV.png);
-    background-position: 80% 65%;
-    background-size: 400px;
-  }
-
 div.my-footer {
     background-color: #E7EEF0;
     position: absolute;

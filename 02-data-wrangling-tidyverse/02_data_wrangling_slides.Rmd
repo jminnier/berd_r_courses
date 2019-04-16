@@ -21,7 +21,7 @@ editor_options:
 
 layout: true
   
-<div class="my-footer"><span>bit.ly/berd_tidy</span></div> 
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
 
 ---
 
@@ -62,7 +62,7 @@ mono_light(
   link_color = "#38BDDE",
   header_font_google = google_font("Josefin Sans"),
   text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
-  code_font_google   = google_font("Droid Mono"),
+  code_font_google   = NULL,
   text_font_size = "24px",
   code_font_size = "20px",
   header_h1_font_size = "45px",
@@ -770,6 +770,8 @@ Meike Niederhausen: _niederha@ohsu.edu_
 - all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides.R)
 - answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.pdf)
 
-```{r, include=FALSE}
-#knitr::purl("02-data-wrangling-tidyverse/02_data_wrangling_slides.Rmd", out = "02-data-wrangling-tidyverse/02_data_wrangling_slides.R")
+```{r, eval=FALSE, echo=FALSE}
+# RUN THESE AFTER KNITTING
+knitr::purl(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.Rmd"), out = here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.R"))
+pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.html"))
 ```
