@@ -4,7 +4,6 @@
     <title>Data Wrangling in R with the Tidyverse (Part 1)</title>
     <meta charset="utf-8">
     <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
-    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
     <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
@@ -15,7 +14,7 @@ class: left, middle, inverse, title-slide
 
 # Data Wrangling in R with the Tidyverse (Part 1)
 ### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
-### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_tidy1">bit.ly/berd_tidy</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_tidy1_pdf">bit.ly/berd_tidy_pdf</a></span>
+### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> slides: <a href="http://bit.ly/berd_tidy1">bit.ly/berd_tidy</a> <br> pdf: <a href="http://bit.ly/berd_tidy1_pdf">bit.ly/berd_tidy_pdf</a></span>
 
 ---
 
@@ -37,10 +36,10 @@ layout: true
 # Load files for today's workshop
 
 .pull-left[
-- Open the slides of this workshop: [bit.ly/berd_tidy]()
-- Open the pre-workshop homework: [find it here](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
-- Dowlonad &amp; open the HW project file `berd_tidyverse_project.Rproj`
-- Open a new script and run the commands to the right
+- Open the slides of this workshop: [bit.ly/berd_tidy1](https://bit.ly/berd_tidy1)
+- Open the [pre-workshop homework](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
+- Follow steps 1-5: Download zip folder, open `berd_tidyverse_project.Rproj`
+- Open a new R script and run the commands to the right
 ]
 
 .pull-right[
@@ -63,10 +62,16 @@ Part 1:
 - A few good practices in R/RStudio
 - What is tidy data?
 - What is tidyverse?
-- Reshape and manipulate data frames
+- Manipulate data frames
 
 Part 2:
-- Some data cleaning
+- Reshaping (long/wide format) data
+- Join/merge data sets
+- Data cleaning, including examples for dealing with:
+  + Missing data
+  + Strings/character vectors
+  + Factors/categorical variables
+  + Dates
 
 
 ---
@@ -128,29 +133,26 @@ __Advantages of using projects__
 
 # Useful keyboard shortcuts
 
-.pull-left[
+.pull-left-60[
+
 action | mac | windows/linux
 ---| ---| ---
 run code in script | cmd + enter | ctrl + enter 
 `&lt;-`| option + - | alt + -
-`%&gt;%` | cmd+shift+m | ctrl + shift + m
+`%&gt;%` &lt;br&gt;&lt;font color="red"&gt;(covered later)&lt;/font&gt;| cmd + shift + m | ctrl + shift + m
 ]
-.pull-right[
-Try typing and running
+
+.pull-right-40[
+Try typing (with shortcut) and running
 
 ```r
 y &lt;- 5
 y
 ```
-
 Now, in the console, press the up arrow.
-
-&lt;!-- TO-DO: can we add a comment that %&gt;% will be covered later in slides? --&gt;
-&lt;!-- TO-DO: can we make pull left wider so that cmd+shift+m can include spaces? --&gt;
-
-
 ]
-## Others: ([see list](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
+
+## Others: ([see full list](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
 
 action | mac | windows/linux
 ---| ---| ---
@@ -512,7 +514,7 @@ class: center, middle, inverse
 # Tools for tidying data
 
 - `tidyverse` functions
-    + `tidyverse` is a suite of packages that implement `tidy` methods for data importing, cleaning, and wrangling  
+    + `tidyverse` is a suite of packages that implement `tidy` methods for data importing, cleaning, and wrangling
     + load the `tidyverse` packages by running the code `library(tidyverse)` 
         * see pre-workshop homework for code to install `tidyverse`
 

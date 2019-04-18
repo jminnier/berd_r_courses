@@ -23,3 +23,14 @@ div.my-footer span {
   display: none;
 }
 
+.pull-left-60 {
+  float: left;
+  width: 57%;
+}
+.pull-right-40 {
+  float: right;
+  width: 37%;
+}
+.pull-right-40 ~ * {
+  clear: both;
+}

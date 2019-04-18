@@ -78,10 +78,10 @@ mono_light(
 # Load files for today's workshop
 
 .pull-left[
-- Open the slides of this workshop: [bit.ly/berd_tidy]()
-- Open the pre-workshop homework: [find it here](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
-- Dowlonad & open the HW project file `berd_tidyverse_project.Rproj`
-- Open a new script and run the commands to the right
+- Open the slides of this workshop: [bit.ly/berd_tidy1](https://bit.ly/berd_tidy1)
+- Open the [pre-workshop homework](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
+- Follow steps 1-5: Download zip folder, open `berd_tidyverse_project.Rproj`
+- Open a new R script and run the commands to the right
 ]
 
 .pull-right[
@@ -104,10 +104,16 @@ Part 1:
 - A few good practices in R/RStudio
 - What is tidy data?
 - What is tidyverse?
-- Reshape and manipulate data frames
+- Manipulate data frames
 
 Part 2:
-- Some data cleaning
+- Reshaping (long/wide format) data
+- Join/merge data sets
+- Data cleaning, including examples for dealing with:
+  + Missing data
+  + Strings/character vectors
+  + Factors/categorical variables
+  + Dates
 
 
 ---
@@ -169,28 +175,25 @@ __Advantages of using projects__
 
 # Useful keyboard shortcuts
 
-.pull-left[
+.pull-left-60[
+
 action | mac | windows/linux
 ---| ---| ---
 run code in script | cmd + enter | ctrl + enter 
 `<-`| option + - | alt + -
-`%>%` | cmd+shift+m | ctrl + shift + m
+`%>%` <br><font color="red">(covered later)</font>| cmd + shift + m | ctrl + shift + m
 ]
-.pull-right[
-Try typing and running
+
+.pull-right-40[
+Try typing (with shortcut) and running
 ```{r, eval=FALSE}
 y <- 5
 y
 ```
-
 Now, in the console, press the up arrow.
-
-<!-- TO-DO: can we add a comment that %>% will be covered later in slides? -->
-<!-- TO-DO: can we make pull left wider so that cmd+shift+m can include spaces? -->
-
-
 ]
-## Others: ([see list](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
+
+## Others: ([see full list](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
 
 action | mac | windows/linux
 ---| ---| ---
@@ -390,7 +393,7 @@ class: center, middle, inverse
 # Tools for tidying data
 
 - `tidyverse` functions
-    + `tidyverse` is a suite of packages that implement `tidy` methods for data importing, cleaning, and wrangling  
+    + `tidyverse` is a suite of packages that implement `tidy` methods for data importing, cleaning, and wrangling
     + load the `tidyverse` packages by running the code `library(tidyverse)` 
         * see pre-workshop homework for code to install `tidyverse`
 
