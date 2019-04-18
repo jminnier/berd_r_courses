@@ -119,7 +119,7 @@ class: center, middle, inverse
 - filtering, subsetting
 ]
 
-<img src="img/r4ds_tidyverse.png" width="80%" height="80%">
+<center><img src="img/r4ds_tidyverse.png" width="80%" height="80%"/></center>
 
 [G. Grolemond & H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
 
@@ -135,7 +135,7 @@ class: center, middle, inverse
         * Save your outputs (plots and cleaned data) there
 
 - Only use relative paths, never absolute paths
-    + realtive (good): `read_csv("data/mydata.csv")`
+    + relative (good): `read_csv("data/mydata.csv")`
     + absolute (bad): `read_csv("/home/yourname/Documents/stuff/mydata.csv")`
     
 __Advantages of using projects__
@@ -264,8 +264,10 @@ class(mydata)
 
 # Tidy Data
 
+<!-- ???: 3. Each type of observational unit forms a table. -->
+
 1. Each variable forms a column.
-2. Each observation forms a row.
+2. Each observation forms a row.  
 3. Each type of observational unit forms a table.
 
 ![](img/r4ds_tidy_data.png)
@@ -274,6 +276,8 @@ class(mydata)
 ---
 
 # Untidy data: example 1
+
+<!-- ??? Wondering if showing the code that created the tibble will just throw people off when trying to get them to focus on why the data aren't tidy. Ditto for the 2nd example too.  -->
 
 ```{r}
 untidy_data <- tibble(
@@ -533,7 +537,7 @@ demo_data %>% filter((bmi<15)|(bmi>50))
 
 - select columns/variables
 - uses special syntax (next slide) that is flexible, no quotes needed
-- can be used to rearrange columns (useful to use `everything()`)
+- can be used to rearrange columns
 
 ```{r}
 demo_data %>% select(record, grade)
@@ -552,6 +556,7 @@ There are many ways to select a set of variable names:
 - `contains("date")`, `contains("_")`: all variable names that contain a specified string
 - `starts_with("a")` or `ends_with("last")`: all variable names that start or end with a string
 - `demo_data %>% select(1:3)`: can still use column numbers
+- `everything()`: everything else not named, as in `select(var1, var20, everything())`; useful for rearranging columns
 
 See other examples in the [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
 
@@ -638,7 +643,7 @@ demo_data %>% rename_if(is.numeric, funs(paste0(.,"_num")))
 newdata <- demo_data %>%
   rename_all(toupper) %>%
   select_if(is.character) %>%
-  filter(RACE7%in%c("Asian","Native Hawaiin/other PI"), GRADE=="9th") %>%
+  filter(RACE7%in%c("Asian","Native Hawaiian/other PI"), GRADE=="9th") %>%
   filter(AGE!="12 years old or younger") %>%
   select(-RACE4)
 dim(newdata)
