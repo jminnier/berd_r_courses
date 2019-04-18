@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Wrangling in R with the Tidyverse (Part 1)</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# Data Wrangling in R with the Tidyverse (Part 1)
+### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
+### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_tidy">bit.ly/berd_tidy</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_tidy_pdf">bit.ly/berd_tidy_pdf</a></span>
+
+---
+
+
+layout: true
+  
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/berd_tidy&lt;/span&gt;&lt;/div&gt;  --&gt;
+
+---
+
+
+
+
+
+
+
+
+
+# Load files for today's workshop
+
+.pull-left[
+- Open the slides of this workshop: [bit.ly/berd_tidy]()
+- Open the pre-workshop homework: [find it here](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
+- Dowlonad &amp; open the HW project file `berd_tidyverse_project.Rproj`
+- Open a new script and run the commands to the right
+]
+
+.pull-right[
+`# install.packages("tidyverse")`  
+`library(tidyverse)`  
+`library(lubridate)`  
+`demo_data &lt;- read_csv("data/yrbss_demo.csv")`
+]
+
+&lt;center&gt;&lt;img src="../../images/Horst/tidyverse DxzqktwUcAAYCLT.jpg" width="50%" height="50%"&gt;&lt;/center&gt;[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# Learning objectives
+
+&lt;!-- TO-DO: update after finishing rest of slides --&gt;
+
+Part 1:
+- What is data wrangling?
+- A few good practices in R/RStudio
+- What is tidy data?
+- What is tidyverse?
+- Reshape and manipulate data frames
+
+Part 2:
+- Some data cleaning
+
+
+---
+
+class: center, middle, inverse
+
+# Getting started
+
+&lt;center&gt;&lt;img src="../../images/Horst/stats-illustrations-master/rstats-artwork/dplyr_wrangling.png" width="55%" height="55%"&gt;&lt;/center&gt;
+
+[Alison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+
+---
+
+# What is data wrangling?
+
+.pull-left[
+- "data janitor work"
+- importing data
+- cleaning data
+- changing shape of data
+]
+.pull-right[
+- fixing errors and poorly formatted data elements
+- transforming columns and rows
+- filtering, subsetting
+]
+
+
+&lt;center&gt;&lt;img src="img/r4ds_tidyverse.png" width="80%" height="80%"&gt;&lt;/center&gt;
+
+[G. Grolemond &amp; H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
+
+---
+
+# Good practices in RStudio
+
+__Use projects__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+- Create an RStudio project for each data analysis project
+- A project is associated with a directory folder
+    + Keep data files there
+    + Keep scripts there; edit them, run them in bits or as a whole
+    + Save your outputs (plots and cleaned data) there
+
+- Only use relative paths, never absolute paths
+    + relative (good): `read_csv("data/mydata.csv")`
+    + absolute (bad): `read_csv("/home/yourname/Documents/stuff/mydata.csv")`
+    
+__Advantages of using projects__
+- standardize file paths
+- keep everything together
+- a whole folder can be shared and run on another computer
+
+
+
+
+---
+
+# Useful keyboard shortcuts
+
+.pull-left[
+action | mac | windows/linux
+---| ---| ---
+run code in script | cmd + enter | ctrl + enter 
+`&lt;-`| option + - | alt + -
+`%&gt;%` | cmd+shift+m | ctrl + shift + m
+]
+.pull-right[
+Try typing and running
+
+```r
+y &lt;- 5
+y
+```
+
+Now, in the console, press the up arrow.
+
+&lt;!-- TO-DO: can we add a comment that %&gt;% will be covered later in slides? --&gt;
+&lt;!-- TO-DO: can we make pull left wider so that cmd+shift+m can include spaces? --&gt;
+
+
+]
+## Others: ([see list](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
+
+action | mac | windows/linux
+---| ---| ---
+interrupt currently executing command | esc | esc
+in console, go to previously run code | up/down | up/down
+keyboard shortcut help | option+shift+k | alt+shift+k
+
+---
+
+class: center, middle, inverse
+
+# Tibbles
+
+&lt;center&gt;&lt;img src="../../images/tibble.png" width="30%" height="30%"&gt;&lt;/center&gt;
+
+[hexbin](https://pkg.earo.me/hexbin/)
+
+---
+
+# Data frames vs. tibbles
+
+.pull-left[
+Previously we learned about *data frames*
+
+```r
+data.frame(name = c("Sarah","Ana","Jose"), 
+           rank = 1:3,
+           age = c(35.5, 25, 58),
+           city = c(NA,"New York","LA"))
+```
+
+```
+   name rank  age     city
+1 Sarah    1 35.5     &lt;NA&gt;
+2   Ana    2 25.0 New York
+3  Jose    3 58.0       LA
+```
+]
+.pull-right[
+A *tibble* is a data frame but with perks
+
+```r
+tibble(name = c("Sarah","Ana","Jose"), 
+       rank = 1:3,
+       age = c(35.5, 25, 58),
+       city = c(NA,"New York","LA"))
+```
+
+```
+# A tibble: 3 x 4
+  name   rank   age city    
+  &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   
+1 Sarah     1  35.5 &lt;NA&gt;    
+2 Ana       2  25   New York
+3 Jose      3  58   LA      
+```
+]
+
+How are these two datasets different?
+
+
+---
+
+# Import data as a data frame (try this)
+
+
+Base R functions import data as data frames (`read.csv`, `read.table`, etc)
+
+
+```r
+mydata_df &lt;- read.csv("data/small_data.csv")
+mydata_df
+```
+
+```
+        id                   age    sex grade                     race4
+1   335340          17 years old Female  10th                     White
+2   638618          16 years old Female   9th                      &lt;NA&gt;
+3   922382          14 years old   Male   9th                     White
+4   923122          15 years old   Male   9th                     White
+5   923963          15 years old   Male  10th Black or African American
+6   925603          16 years old   Male  10th           All other races
+7   933724          16 years old Female  10th           All other races
+8   935435          17 years old Female  12th           All other races
+9  1096564          15 years old   Male  10th           All other races
+10 1108114          17 years old Female   9th Black or African American
+11 1306150          16 years old   Male  10th           Hispanic/Latino
+12 1307481          17 years old   Male  12th           Hispanic/Latino
+13 1307872          17 years old   Male  11th           Hispanic/Latino
+14 1311617          15 years old Female  10th           Hispanic/Latino
+15 1313153          16 years old Female  11th           Hispanic/Latino
+16 1313291          16 years old Female  11th                     White
+17 1313477          16 years old Female  10th           All other races
+18 1315121          17 years old Female  11th                      &lt;NA&gt;
+19 1315850          17 years old Female  12th           Hispanic/Latino
+20 1316123 18 years old or older Female  12th Black or African American
+       bmi weight_kg           text_while_driving_30d smoked_ever
+1  27.5671     66.23                             &lt;NA&gt;        &lt;NA&gt;
+2  29.3495     84.82                             &lt;NA&gt;         Yes
+3  18.1827     57.61                             &lt;NA&gt;         Yes
+4  21.3754     60.33                             &lt;NA&gt;         Yes
+5  19.5988     63.50                             &lt;NA&gt;          No
+6  22.1910     70.31                             &lt;NA&gt;          No
+7  20.9913     45.36                             &lt;NA&gt;         Yes
+8  17.4814     43.09                             &lt;NA&gt;          No
+9  22.4593     79.38                             &lt;NA&gt;        &lt;NA&gt;
+10 26.5781     68.04                             &lt;NA&gt;          No
+11 21.1874     67.13                           0 days        &lt;NA&gt;
+12 19.4637     56.25                      1 or 2 days          No
+13 20.6121     61.69                      1 or 2 days          No
+14 27.4648     70.31                           0 days          No
+15 26.5781     68.04                           0 days          No
+16 24.8047     63.50                      3 to 5 days          No
+17 25.0318     76.66                           0 days          No
+18 22.2687     54.89 I did not drive the past 30 days         Yes
+19 19.4922     49.90                           0 days        &lt;NA&gt;
+20 27.4894     74.84                      All 30 days         Yes
+   bullied_past_12mo height_m
+1                 NA 1.550000
+2                 NA 1.699999
+3              FALSE 1.779999
+4              FALSE 1.680001
+5               TRUE 1.799998
+6               TRUE 1.780000
+7               TRUE 1.469998
+8              FALSE 1.570002
+9               TRUE 1.879998
+10             FALSE 1.600001
+11             FALSE 1.779998
+12             FALSE 1.699999
+13             FALSE 1.730001
+14              TRUE 1.600001
+15              TRUE 1.600001
+16             FALSE 1.600000
+17              TRUE 1.750001
+18             FALSE 1.569998
+19             FALSE 1.599999
+20             FALSE 1.650001
+```
+
+---
+
+# Import data as a tibble (try this)
+
+`tidyverse` functions import data as tibbles (`read_csv`, `read_excel()`, etc)
+
+
+```r
+mydata_tib &lt;- read_csv("data/small_data.csv")
+mydata_tib
+```
+
+```
+# A tibble: 20 x 11
+       id age   sex   grade race4   bmi weight_kg text_while_driv…
+    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           
+ 1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;            
+ 2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;            
+ 3 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;            
+ 4 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;            
+ 5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;            
+ 6 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;            
+ 7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;            
+ 8 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;            
+ 9 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;            
+10 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;            
+11 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days          
+12 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days     
+13 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days     
+14 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days          
+15 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days          
+16 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days     
+17 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days          
+18 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive…
+19 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days          
+20 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days     
+# … with 3 more variables: smoked_ever &lt;chr&gt;, bullied_past_12mo &lt;lgl&gt;,
+#   height_m &lt;dbl&gt;
+```
+
+---
+
+# Compare &amp; contrast data frame and tibble
+
+__Run the code below__
+
+data frame
+
+
+```r
+glimpse(mydata_df)
+str(mydata_df)       # How are glimpse() and str() different?
+head(mydata_df)
+summary(mydata_df)
+class(mydata_df)     # What information does class() give?
+```
+
+
+tibble 
+
+
+```r
+glimpse(mydata_tib)
+str(mydata_tib)       
+head(mydata_tib)
+summary(mydata_tib)
+class(mydata_tib)     
+```
+
+
+---
+
+# Tibble perks
+
+
+Viewing tibbles:
+- variable types are given (character, factor, double, integer, boolean, date)
+- number of rows &amp; columns shown are limited for easier viewing
+
+
+Other perks:
+- tibbles can typically be used anywhere a `data.frame` is needed
+- `read_*()` functions don't read character columns as factors (no surprises)
+
+
+---
+
+class: center, middle, inverse
+
+# Tidy Data
+
+
+&lt;img src="../../images/Horst/tidyverse DxzqktwUcAAYCLT.jpg" width="70%" height="70%"&gt;
+
+[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# What are tidy data?
+
+1. Each variable forms a column
+2. Each observation forms a row 
+3. Each value has its own cell
+
+![](img/r4ds_tidy_data.png)
+[G. Grolemond &amp; H. Wickham's R for Data Science](https://r4ds.had.co.nz/tidy-data.html)
+
+---
+
+# Untidy data: example 1
+
+
+```r
+untidy_data &lt;- tibble(
+  name = c("Ana","Bob","Cara"),
+  meds = c("advil 500mg 2xday","tylenol 1000mg 1xday", "advil 200mg 3xday")
+)
+untidy_data
+```
+
+```
+# A tibble: 3 x 2
+  name  meds                
+  &lt;chr&gt; &lt;chr&gt;               
+1 Ana   advil 500mg 2xday   
+2 Bob   tylenol 1000mg 1xday
+3 Cara  advil 200mg 3xday   
+```
+
+---
+
+# Tidy data: example 1
+
+You will learn how to do this!
+
+```r
+untidy_data %&gt;% 
+  separate(col = meds, into = c("med_name","dose_mg","times_per_day"), sep=" ") %&gt;%
+  mutate(times_per_day = as.numeric(str_remove(times_per_day, "xday")),
+         dose_mg = as.numeric(str_remove(dose_mg, "mg")))
+```
+
+```
+# A tibble: 3 x 4
+  name  med_name dose_mg times_per_day
+  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+1 Ana   advil        500             2
+2 Bob   tylenol     1000             1
+3 Cara  advil        200             3
+```
+
+
+---
+
+# Untidy data: example 2
+
+
+```r
+untidy_data2 &lt;- tibble(
+  name = c("Ana","Bob","Cara"),
+  wt_07_01_2018 = c(100, 150, 140),
+  wt_08_01_2018 = c(104, 155, 138),
+  wt_09_01_2018 = c(NA, 160, 142)
+)
+untidy_data2
+```
+
+```
+# A tibble: 3 x 4
+  name  wt_07_01_2018 wt_08_01_2018 wt_09_01_2018
+  &lt;chr&gt;         &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
+1 Ana             100           104            NA
+2 Bob             150           155           160
+3 Cara            140           138           142
+```
+
+
+---
+
+# Tidy data: example 2
+
+You will learn how to do this!
+
+```r
+untidy_data2 %&gt;% 
+  gather(key = "date", value = "weight", -name) %&gt;%
+  mutate(date = str_remove(date,"wt_"),
+         date = dmy(date))     # dmy() is a function in the lubridate package
+```
+
+```
+# A tibble: 9 x 3
+  name  date       weight
+  &lt;chr&gt; &lt;date&gt;      &lt;dbl&gt;
+1 Ana   2018-01-07    100
+2 Bob   2018-01-07    150
+3 Cara  2018-01-07    140
+4 Ana   2018-01-08    104
+5 Bob   2018-01-08    155
+6 Cara  2018-01-08    138
+7 Ana   2018-01-09     NA
+8 Bob   2018-01-09    160
+9 Cara  2018-01-09    142
+```
+
+
+---
+
+class: center, middle, inverse
+
+# How to tidy?
+
+&lt;img src="../../images/Horst/stats-illustrations-master/rstats-artwork/tidyverse_celestial.png" width="40%" height="40%"&gt;
+
+[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# Tools for tidying data
+
+- `tidyverse` functions
+    + `tidyverse` is a suite of packages that implement `tidy` methods for data importing, cleaning, and wrangling  
+    + load the `tidyverse` packages by running the code `library(tidyverse)` 
+        * see pre-workshop homework for code to install `tidyverse`
+
+- Functions to easily work with rows and columns, such as
+    + subset rows/columns
+    + add new rows/columns
+    + split apart or unite columns
+    + join together different data sets (part 2)
+    + make data _long_ or _wide_ (part 2)
+
+- Often many steps to tidy data
+    + string together commands to be performed sequentially 
+    + do this using pipes `%&gt;%`
+
+
+&lt;!-- TO-DO: are we adding new rows in this talk?--&gt;
+
+---
+
+# How to use the pipe `%&gt;%`
+
+The pipe operator `%&gt;%` strings together commands to be performed sequentially
+
+
+```r
+mydata_tib %&gt;% head(n=3)      # prounounce %&gt;% as "then"
+```
+
+```
+# A tibble: 3 x 11
+      id age   sex   grade race4   bmi weight_kg text_while_driv…
+   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           
+1 335340 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;            
+2 638618 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;            
+3 922382 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;            
+# … with 3 more variables: smoked_ever &lt;chr&gt;, bullied_past_12mo &lt;lgl&gt;,
+#   height_m &lt;dbl&gt;
+```
+
+- Always _first list the tibble_ that the commands are being applied to
+- Can use __multiple pipes__ to run multiple commands in sequence
+    + What does the following code do?
+
+
+```r
+mydata_tib %&gt;% head(n=3) %&gt;% summary()
+```
+
+
+---
+
+# About the data
+
+Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+
+- complex survey data
+- national school-based survey 
+    + conducted by CDC and state, territorial, and local education and health agencies and tribal governments
+- monitors six categories of health-related behaviors 
+    + that contribute to the leading causes of death and disability among youth and adults 
+    + including alcohol &amp; drug use, unhealthy &amp; dangerous behaviors, sexuality, and physical activity
+    + see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
+- the data in `yrbss_demo.csv` are a subset of data in the R package [`yrbss`](https://github.com/hadley/yrbss), which includes YRBSS from 1991-2013
+
+- Look at your _Environment_ tab to make sure `demo_data` is already loaded
+
+
+```r
+demo_data &lt;- read_csv("data/yrbss_demo.csv")
+```
+
+
+
+---
+
+class: center, middle, inverse
+
+# Subsetting data
+
+&lt;img src="img/datawrangle_cheatsheet_subset_rows.png" width="75%" height="75%"&gt;
+
+&lt;img src="img/datawrangle_cheatsheet_subset_cols.png" width="75%" height="75%"&gt;
+
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+---
+
+# `filter()` `\(\sim\)` rows
+
+filter data based on rows
+
+.pull-left[
+- math: `&gt;`,  `&lt;`,  `&gt;=`,  `&lt;=`
+-  double = for "is equal to":  `==`
+-  `&amp;` (and) 
+-  `|` (or)
+]
+.pull-right[
+- `!` in front negates the statement, as in `!=` or `!(grade=="9th")`
+- `is.na()` function to filter based on missing values
+- `%in%` to filter based on group membership
+]
+
+
+
+```r
+demo_data %&gt;% filter(bmi &gt; 20)
+```
+
+```
+# A tibble: 10,375 x 8
+    record age         sex   grade race4        race7          bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+ 1  333862 17 years o… Fema… 12th  White        White         20.2     57.2
+ 2 1095530 15 years o… Male  10th  Black or Af… Black or Af…  28.0     85.7
+ 3 1303997 14 years o… Male  9th   All other r… Multiple - …  24.5     66.7
+ 4  926649 16 years o… Male  11th  All other r… Asian         20.5     70.3
+ 5  506337 18 years o… Male  12th  Hispanic/La… Hispanic/La…  33.1    123. 
+ 6 1307180 16 years o… Male  10th  Hispanic/La… Hispanic/La…  21.8     66.7
+ 7 1312128 15 years o… Fema… 10th  White        White         22.0     65.8
+ 8  770177 16 years o… Fema… 10th  White        White         32.4     86.2
+ 9  938291 18 years o… Fema… 12th  White        White         21.7     64.9
+10 1306691 16 years o… Male  11th  White        White         28.3    102. 
+# … with 10,365 more rows
+```
+
+
+---
+
+# Compare to base R
+
+.pull-left[
+
+- __Bracket method__: need to repeat tibble name
+- Need to use `$` 
+- Very nested and confusing to read
+
+
+```r
+demo_data[demo_data$grade=="9th",]
+```
+
+```
+# A tibble: 5,625 x 8
+    record age       sex    grade race4      race7             bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+ 1 1303997 14 years… Male   9th   All other… Multiple - Non…  24.5     66.7
+ 2  261619 17 years… Male   9th   All other… &lt;NA&gt;             NA       NA  
+ 3 1096939 15 years… Male   9th   &lt;NA&gt;       &lt;NA&gt;             17.1     45.4
+ 4  180968 15 years… Male   9th   White      White            NA       NA  
+ 5  924270 15 years… Male   9th   All other… Asian            30.7     81.6
+ 6  330828 15 years… Female 9th   Hispanic/… Hispanic/Latino  20.4     52.2
+ 7 1311252 15 years… Female 9th   Hispanic/… Hispanic/Latino  NA       NA  
+ 8   36853 14 years… Female 9th   All other… &lt;NA&gt;             NA       NA  
+ 9 1310689 14 years… Female 9th   Hispanic/… Hispanic/Latino  22.5     55.3
+10 1310726 14 years… Female 9th   All other… Asian            30.7     81.6
+# … with 5,615 more rows
+```
+
+]
+.pull-right[
+- __Pipe method__: list tibble name once
+- No `$` needed since uses "non-standard evaluation": `filter()` knows `grade` is a column in `demo_data`
+
+```r
+demo_data %&gt;% filter(grade=="9th")
+```
+
+```
+# A tibble: 5,219 x 8
+    record age       sex    grade race4      race7             bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+ 1 1303997 14 years… Male   9th   All other… Multiple - Non…  24.5     66.7
+ 2  261619 17 years… Male   9th   All other… &lt;NA&gt;             NA       NA  
+ 3 1096939 15 years… Male   9th   &lt;NA&gt;       &lt;NA&gt;             17.1     45.4
+ 4  180968 15 years… Male   9th   White      White            NA       NA  
+ 5  924270 15 years… Male   9th   All other… Asian            30.7     81.6
+ 6  330828 15 years… Female 9th   Hispanic/… Hispanic/Latino  20.4     52.2
+ 7 1311252 15 years… Female 9th   Hispanic/… Hispanic/Latino  NA       NA  
+ 8   36853 14 years… Female 9th   All other… &lt;NA&gt;             NA       NA  
+ 9 1310689 14 years… Female 9th   Hispanic/… Hispanic/Latino  22.5     55.3
+10 1310726 14 years… Female 9th   All other… Asian            30.7     81.6
+# … with 5,209 more rows
+```
+
+]
+
+
+---
+
+# `filter()` practice
+
+What do these commands do? Try them out:
+
+
+```r
+demo_data %&gt;% filter(bmi &lt; 5)
+demo_data %&gt;% filter(bmi/stweight &lt; 0.5)    # can do math
+demo_data %&gt;% filter((bmi &lt; 15) | (bmi &gt; 50))
+demo_data %&gt;% filter(bmi &lt; 20, stweight &lt; 50, sex == "Female") # filter on multiple variables
+
+demo_data %&gt;% filter(record == 506901)      # note the use of == instead of just =
+demo_data %&gt;% filter(sex == "Male")
+demo_data %&gt;% filter(!(grade == "9th"))
+demo_data %&gt;% filter(grade %in% c("10th", "11th"))
+
+demo_data %&gt;% filter(is.na(bmi))
+demo_data %&gt;% filter(!is.na(bmi))
+```
+
+
+---
+
+# Subset by columns
+
+&lt;img src="img/datawrangle_cheatsheet_subset_cols.png" width="100%" height="100%"&gt;
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+---
+
+# `select()` `\(\sim\)` columns
+
+- select columns (variables)
+- no quotes needed around variable names
+- can be used to rearrange columns
+- uses special syntax that is flexible and has many options
+
+
+```r
+demo_data %&gt;% select(record, grade)
+```
+
+```
+# A tibble: 20,000 x 2
+    record grade
+     &lt;dbl&gt; &lt;chr&gt;
+ 1  931897 10th 
+ 2  333862 12th 
+ 3   36253 11th 
+ 4 1095530 10th 
+ 5 1303997 9th  
+ 6  261619 9th  
+ 7  926649 11th 
+ 8 1309082 12th 
+ 9  506337 12th 
+10  180494 10th 
+# … with 19,990 more rows
+```
+
+---
+
+# Compare to base R
+
+.pull-left[
+- Need brackets 
+- Need quotes around column names
+
+```r
+demo_data[, c("record","age","sex")]
+```
+
+```
+# A tibble: 20,000 x 3
+    record age                   sex   
+     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+ 1  931897 15 years old          Female
+ 2  333862 17 years old          Female
+ 3   36253 18 years old or older Male  
+ 4 1095530 15 years old          Male  
+ 5 1303997 14 years old          Male  
+ 6  261619 17 years old          Male  
+ 7  926649 16 years old          Male  
+ 8 1309082 17 years old          Male  
+ 9  506337 18 years old or older Male  
+10  180494 14 years old          Male  
+# … with 19,990 more rows
+```
+]
+.pull-right[
+- No quotes needed and easier to read. 
+- More flexible, either of following work:
+
+```r
+demo_data %&gt;% select(record, age, sex)
+demo_data %&gt;% select(record:sex)
+```
+
+```
+# A tibble: 20,000 x 3
+    record age                   sex   
+     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+ 1  931897 15 years old          Female
+ 2  333862 17 years old          Female
+ 3   36253 18 years old or older Male  
+ 4 1095530 15 years old          Male  
+ 5 1303997 14 years old          Male  
+ 6  261619 17 years old          Male  
+ 7  926649 16 years old          Male  
+ 8 1309082 17 years old          Male  
+ 9  506337 18 years old or older Male  
+10  180494 14 years old          Male  
+# … with 19,990 more rows
+# A tibble: 20,000 x 3
+    record age                   sex   
+     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+ 1  931897 15 years old          Female
+ 2  333862 17 years old          Female
+ 3   36253 18 years old or older Male  
+ 4 1095530 15 years old          Male  
+ 5 1303997 14 years old          Male  
+ 6  261619 17 years old          Male  
+ 7  926649 16 years old          Male  
+ 8 1309082 17 years old          Male  
+ 9  506337 18 years old or older Male  
+10  180494 14 years old          Male  
+# … with 19,990 more rows
+```
+]
+
+
+---
+
+# Column selection syntax options
+
+There are many ways to select a set of variable names (columns):
+
+- `var1:var20`: all columns from `var1` to `var20`
+- `one_of(c("a", "b", "c"))`: all columns with names in the specified character vector of names
+- __Removing columns__
+    + `-var1`: remove the column`var1`
+    + `-(var1:var20)`: remove all columns from `var1` to `var20`
+- __Select using text within column names__
+    + `contains("date")`, `contains("_")`: all variable names that contain the specified string
+    + `starts_with("a")` or `ends_with("last")`: all variable names that start or end with the specificed string
+- __Rearranging columns__
+    + use `everything()` to select all columns not already named
+    + example: `select(var1, var20, everything())` moves the column `var20` to the second position
+
+See other examples in the [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
+
+
+---
+
+# `select()` practice
+
+Which columns are selected &amp; in what order using these commands?  
+First guess and then try them out.
+
+
+```r
+demo_data %&gt;% select(record:sex)
+demo_data %&gt;% select(one_of(c("age","stweight")))
+
+demo_data %&gt;% select(-grade,-sex)
+demo_data %&gt;% select(-(record:sex))
+
+demo_data %&gt;% select(contains("race"))
+demo_data %&gt;% select(starts_with("r"))
+demo_data %&gt;% select(-contains("r"))
+
+demo_data %&gt;% select(record, race4, race7, everything())
+```
+
+
+---
+
+# `rename()` `\(\sim\)` columns
+
+- renames column variables
+
+
+```r
+demo_data %&gt;% rename(id = record)   # order: new_name = old_name
+```
+
+```
+# A tibble: 20,000 x 8
+        id age         sex   grade race4        race7          bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+ 1  931897 15 years o… Fema… 10th  White        White         17.2     54.4
+ 2  333862 17 years o… Fema… 12th  White        White         20.2     57.2
+ 3   36253 18 years o… Male  11th  Hispanic/La… Hispanic/La…  NA       NA  
+ 4 1095530 15 years o… Male  10th  Black or Af… Black or Af…  28.0     85.7
+ 5 1303997 14 years o… Male  9th   All other r… Multiple - …  24.5     66.7
+ 6  261619 17 years o… Male  9th   All other r… &lt;NA&gt;          NA       NA  
+ 7  926649 16 years o… Male  11th  All other r… Asian         20.5     70.3
+ 8 1309082 17 years o… Male  12th  White        White         19.3     59.0
+ 9  506337 18 years o… Male  12th  Hispanic/La… Hispanic/La…  33.1    123. 
+10  180494 14 years o… Male  10th  Black or Af… Black or Af…  NA       NA  
+# … with 19,990 more rows
+```
+
+---
+
+# Practice
+
+Do the following data wrangling steps in order so that the output from the previous step is the input for the next step.
+Save the results in each step as `newdata`.
+
+&lt;!-- removed following since uses `rename_all(toupper)` that we moved to end --&gt;
+&lt;!-- 1. Convert all column names to upper case, save the result as `newdata`. --&gt;
+&lt;!-- I updated the instructions so not using all caps, as well as the solution in the code chunk below --&gt;
+
+1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
+
+1. Subset the data so that only character variables are included and save the result as `newdata`.
+
+1. Filter `newdata` to only keep Asian or Native Hawaiian/other PI subjects that are in the 9th grade, and save again as `newdata`.
+
+1. Filter `newdata` to remove subjects younger than 13, and save as `newdata`.
+
+1. Remove the column `race4`, and save as `newdata`.
+
+1. How many rows does the resulting `newdata` have? How many columns?
+
+
+
+
+
+---
+
+class: center, middle, inverse
+
+# Changing the data
+
+&lt;center&gt;&lt;img src="../../images/Horst/mutate DtCqPtHVsAAl_Xy.jpg" width="50%" height="50%"&gt;&lt;/center&gt;
+
+[Alison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+
+---
+
+# Make new variables
+
+&lt;img src="img/datawrangle_cheatsheet_makenewvars.png" width="100%" height="100%"&gt;
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+---
+
+# `mutate()`
+
+Use `mutate()` to add new columns to a tibble
+* many options in how to define new column of data
+
+
+
+```r
+newdata &lt;- demo_data %&gt;% 
+  mutate(height_m = sqrt(stweight / bmi))   # use = (not &lt;- or ==) to define new variable
+
+newdata %&gt;% select(record, bmi, stweight)
+```
+
+```
+# A tibble: 20,000 x 3
+    record   bmi stweight
+     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+ 1  931897  17.2     54.4
+ 2  333862  20.2     57.2
+ 3   36253  NA       NA  
+ 4 1095530  28.0     85.7
+ 5 1303997  24.5     66.7
+ 6  261619  NA       NA  
+ 7  926649  20.5     70.3
+ 8 1309082  19.3     59.0
+ 9  506337  33.1    123. 
+10  180494  NA       NA  
+# … with 19,990 more rows
+```
+
+
+---
+
+# `mutate()` practice
+
+What do the following commands do?  
+First guess and then try them out.
+
+
+```r
+demo_data %&gt;% mutate(bmi_high = (bmi &gt; 30))
+
+demo_data %&gt;% mutate(male = (sex == "Male"))
+demo_data %&gt;% mutate(male = 1 * (sex == "Male"))
+
+demo_data %&gt;% mutate(grade_num = as.numeric(str_remove(grade, "th")))
+```
+
+
+---
+
+# `case_when()` with `mutate()`
+
+Use `case_when()` to create multi-valued variables that depend on an existing column 
+- Example: create BMI groups based off of the `bmi` variable
+
+```r
+demo_data2 &lt;- demo_data %&gt;%
+  mutate(
+    bmi_group = case_when(
+      bmi &lt; 18.5 ~ "underweight",               # condition ~ new_value
+      bmi &gt;= 18.5 &amp; bmi &lt;= 24.9 ~ "normal",
+      bmi &gt; 24.9 &amp; bmi &lt;= 29.9 ~ "overweight",
+      bmi &gt; 29.9 ~ "obese")
+    )
+demo_data2 %&gt;% select(bmi, bmi_group) %&gt;% head()
+```
+
+```
+# A tibble: 6 x 2
+    bmi bmi_group  
+  &lt;dbl&gt; &lt;chr&gt;      
+1  17.2 underweight
+2  20.2 normal     
+3  NA   &lt;NA&gt;       
+4  28.0 overweight 
+5  24.5 normal     
+6  NA   &lt;NA&gt;       
+```
+
+
+---
+
+# `separate()` and `unite()`
+
+
+
+
+
+---
+
+class: center, middle, inverse
+
+# More commands to filter rows
+
+&lt;!-- TO-DO: rename? --&gt;
+
+---
+
+# Remove rows with missing data
+
+`na.omit` removes *all* rows with *any* missing (`NA`) values in *any* column
+
+
+```r
+demo_data %&gt;% na.omit()
+```
+
+```
+# A tibble: 12,897 x 8
+    record age         sex   grade race4        race7          bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+ 1  931897 15 years o… Fema… 10th  White        White         17.2     54.4
+ 2  333862 17 years o… Fema… 12th  White        White         20.2     57.2
+ 3 1095530 15 years o… Male  10th  Black or Af… Black or Af…  28.0     85.7
+ 4 1303997 14 years o… Male  9th   All other r… Multiple - …  24.5     66.7
+ 5  926649 16 years o… Male  11th  All other r… Asian         20.5     70.3
+ 6 1309082 17 years o… Male  12th  White        White         19.3     59.0
+ 7  506337 18 years o… Male  12th  Hispanic/La… Hispanic/La…  33.1    123. 
+ 8 1307180 16 years o… Male  10th  Hispanic/La… Hispanic/La…  21.8     66.7
+ 9 1312128 15 years o… Fema… 10th  White        White         22.0     65.8
+10  770177 16 years o… Fema… 10th  White        White         32.4     86.2
+# … with 12,887 more rows
+```
+
+We will discuss dealing with missing data more in part 2
+
+---
+
+# Remove rows with duplicated data
+
+`distinct()` removes rows that are duplicates of other rows
+
+
+```r
+data_dups &lt;- tibble(
+  name = c("Ana","Bob","Cara", "Ana"),
+  race = c("Hispanic","Other", "White", "Hispanic")
+)
+```
+
+.pull-left[
+
+```r
+data_dups
+```
+
+```
+# A tibble: 4 x 2
+  name  race    
+  &lt;chr&gt; &lt;chr&gt;   
+1 Ana   Hispanic
+2 Bob   Other   
+3 Cara  White   
+4 Ana   Hispanic
+```
+]
+.pull-right[
+
+```r
+data_dups %&gt;% distinct()
+```
+
+```
+# A tibble: 3 x 2
+  name  race    
+  &lt;chr&gt; &lt;chr&gt;   
+1 Ana   Hispanic
+2 Bob   Other   
+3 Cara  White   
+```
+]
+
+---
+
+# Order rows: `arrange()`
+
+Use `arrange()` to order the rows by the values in specified columns
+
+
+```r
+demo_data %&gt;% arrange(bmi, stweight) %&gt;% head(n=3)
+```
+
+```
+# A tibble: 3 x 8
+   record age       sex    grade race4         race7           bmi stweight
+    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
+1  635432 13 years… Female 9th   Hispanic/Lat… Hispanic/Lat…  13.2     27.7
+2  501608 15 years… Male   9th   All other ra… Asian          13.2     47.6
+3 1097740 16 years… Male   9th   Black or Afr… Black or Afr…  13.3     45.4
+```
+
+```r
+demo_data %&gt;% arrange(desc(bmi), stweight) %&gt;% head(n=3)
+```
+
+```
+# A tibble: 3 x 8
+   record age          sex   grade race4        race7          bmi stweight
+    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+1  324452 16 years old Male  11th  Black or Af… Black or Af…  53.9     91.2
+2 1310082 18 years ol… Male  11th  Black or Af… Black or Af…  53.5    160. 
+3  328160 18 years ol… Male  &lt;NA&gt;  Black or Af… Black or Af…  53.4    128. 
+```
+
+
+---
+
+# practice slide
+
+&lt;!-- TO-DO: Add practice problems --&gt;
+
+
+---
+
+class: center, middle, inverse
+
+# more column commands
+
+&lt;!-- TO-DO: rename --&gt;
+
+---
+
+# `mutate_`
+
+&lt;!-- TO-DO: Add mutate_ --&gt;
+
+
+---
+
+# `select_*()` and `rename_*()` practice
+
+- variants of `select()` and `rename()` that operate on a selection of columns
+- which columns depends on a predicate, can be:
+    + a function that returns TRUE/FALSE like `is.numeric()`, or
+    + variable names through `vars()`
+
+
+What do these commands do? Try them out:
+
+
+```r
+demo_data %&gt;% select_if(is.numeric)
+
+demo_data %&gt;% rename_all(toupper) # toupper() is a function
+demo_data %&gt;% rename_if(is.character, toupper)
+
+demo_data %&gt;% rename_at(vars(contains("race")), toupper)
+```
+
+
+---
+
+
+# The pipe operator `%&gt;%` revisited
+
+- a function performed on (usually) a data frame or tibble
+- the result is a transformed data set as a `tibble`
+- Suppose you want to perform a series of operations on a data.frame or tibble `mydata` using hypothetical functions `f()`, `g()`, `h()`:
+    + Perform `f(mydata)`
+    + use the output as an argument to `g()`
+    + use the output as an argument to `h()`
+
+.pull-left[
+One option:
+
+
+```r
+h(g(f(mydata)))
+```
+]
+.pull-right[
+
+A long tedious option:
+
+
+```r
+fout &lt;- f(mydata)
+gout &lt;- g(fout)
+h(gout)
+```
+]
+
+&lt;!-- ??? Include function composition image, such as https://www.google.com/imgres?imgurl=http%3A%2F%2F3.bp.blogspot.com%2F-VoYjsWxjZC4%2FVjjGdkmVLPI%2FAAAAAAAACGA%2FZP7vnSa8x4s%2Fs640%2Fcomp%252Bfunction%252Bbox.JPG&amp;imgrefurl=http%3A%2F%2Fbeautifulhighschoolmath.blogspot.com%2F2015%2F11%2Fprecalculus-composition-of-functions.html&amp;docid=NvxyNrA8MhPH5M&amp;tbnid=Ip8VFKhlDweR6M%3A&amp;vet=10ahUKEwiXnb_e2dfhAhUTFnwKHRvIAn4QMwiWASgtMC0..i&amp;w=615&amp;h=396&amp;bih=1088&amp;biw=1203&amp;q=function%20composition&amp;ved=0ahUKEwiXnb_e2dfhAhUTFnwKHRvIAn4QMwiWASgtMC0&amp;iact=mrc&amp;uact=8 --&gt;
+
+&lt;!-- ??? Concerned that we'll lose non-mathy people with the function composition --&gt;
+&lt;!-- Also, function composition is different than adding functions --&gt;
+
+
+&lt;!-- ??? Sequential operations? --&gt;
+---
+
+# Use the pipe `%&gt;%`
+
+Instead, we can use the pipe operator (pronounced "then")
+
+- Take `mydata` then
+- perform `f()` then
+- perform `g()` then
+- perform `h()`
+
+
+```r
+mydata %&gt;% 
+  f() %&gt;% 
+  g() %&gt;% 
+  h()
+```
+
+---
+
+# Why use the pipe?
+
+&lt;!-- TO-DO: create more complicated example and compare w/ and w/o pipe --&gt;
+
+- makes code more readable
+- `h(f(g(mydata)))` can get complicated with multiple arguments
+    + i.e. `h(f(g(mydata, na.rm=T), print=FALSE), type = "mean")`
+
+A real example:
+
+```r
+mydata_new &lt;- mydata_tib %&gt;% select(id, weight_kg, bmi) %&gt;%
+  mutate(height_m = sqrt(weight_kg /bmi))
+mydata_new %&gt;% head(n=3)
+```
+
+```
+# A tibble: 3 x 4
+      id weight_kg   bmi height_m
+   &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 335340      66.2  27.6     1.55
+2 638618      84.8  29.3     1.70
+3 922382      57.6  18.2     1.78
+```
+
+---
+
+# Resources - Tidyverse &amp; Data Wrangling
+
+Links
+
+- [Learn the tidyverse](https://www.tidyverse.org/learn/)
+- [Data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+Some of this is drawn from materials in online books/lessons:
+
+- [R for Data Science](https://r4ds.had.co.nz/index.html) - by Garrett Grolemund &amp; Hadley Wickham
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
+- [A gRadual intRoduction to the tidyverse](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse) - Workshop for Cascadia R 2017 by Chester Ismay and Ted Laderas
+- [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+- ["Tidy Data" by Hadley Wickham](https://vita.had.co.nz/papers/tidy-data.pdf)
+---
+
+# Possible Future Workshop Topics?
+
+- reproducible reports in R
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr
+- statistical modeling in R
+
+---
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+&lt;!-- TO-DO: Update??? Create file with jsut the R code--&gt;
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.pdf)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

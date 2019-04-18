@@ -1,0 +1,782 @@
+---
+title: Data Wrangling in R with the Tidyverse
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+date: "<span style = 'font-size: 80%;'>2019/04/18 (Part 1) & 2019/04/25 (Part 2) <br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_tidy](http://bit.ly/berd_tidy) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_tidy_pdf](http://bit.ly/berd_tidy_pdf)</span>"
+output: 
+  xaringan::moon_reader:
+    css: [css/xaringan-themer.css, css/my-theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:9"
+    includes:
+      in_header: ../header.html   
+editor_options: 
+  chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+library(lubridate)
+library(janitor)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  #fig.width=10.5, 
+  #fig.height=4,
+  fig.align = "center",
+  rows.print=7,
+  echo=TRUE,
+  highlight = TRUE,
+  prompt = FALSE, # IF TRUE adds a > before each code input
+  comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  #comment=NA
+  )
+
+# set ggplot theme
+theme_set(theme_bw(base_size = 24))
+```
+
+
+
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#3A6185", ## OHSU Marquam
+  code_highlight_color = "#c0e8f5",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = NULL,
+  text_font_size = "24px",
+  code_font_size = "20px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
+  outfile = "css/xaringan-themer.css"
+)
+```
+
+
+
+# Pre-course homework
+
+Open these slides [bit.ly/berd_tidy]()
+
+Open the homework: [find it here](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
+
+---
+
+# Learning objectives
+
+Part 1:
+- What is data wrangling?
+- A few good practices in R/RStudio
+- What is tidy data?
+- What is tidyverse?
+- Reshape and manipulate data frames
+
+Part 2:
+- Some data cleaning
+
+
+---
+
+class: center, middle, inverse
+
+# Getting started
+
+
+---
+
+# What is data wrangling?
+
+.pull-left[
+- "data janitor work"
+- importing data
+- cleaning data
+- changing shape of data
+]
+.pull-right[
+- fixing errors and poorly formatted data elements
+- transforming columns and rows
+- filtering, subsetting
+]
+
+<center><img src="img/r4ds_tidyverse.png" width="80%" height="80%"/></center>
+
+[G. Grolemond & H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
+
+---
+
+# Good practices in RStudio
+
+- Use "projects" ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+    + Create an RStudio project for each data analysis project
+    + A project is associated with a directory folder
+        * Keep data files there
+        * Keep scripts there; edit them, run them in bits or as a whole
+        * Save your outputs (plots and cleaned data) there
+
+- Only use relative paths, never absolute paths
+    + relative (good): `read_csv("data/mydata.csv")`
+    + absolute (bad): `read_csv("/home/yourname/Documents/stuff/mydata.csv")`
+    
+__Advantages of using projects__
+- standardize file paths
+- keep everything together
+- a whole folder can be shared and run on another computer
+
+
+---
+
+# RStudio projects
+
+## Create new project
+
+- Open RStudio
+- File -> New Project
+- Choose which folder you want to create the project in
+
+## Open existing project
+
+- click on `.Rproj` file in your folder
+
+---
+
+# Useful keyboard shortcuts
+
+.pull-left[
+action | mac | windows/linux
+---| ---| ---
+run line of code | cmd + enter | ctrl + enter 
+`<-`| option + - | alt + -
+`%>%` | cmd+shift+m | ctrl + shift + m
+]
+.pull-right[
+Try typing and running
+```{r, eval=FALSE}
+y <- iris %>% count(Species)
+y
+```
+
+Now, in console, press up arrow multiple times.
+
+]
+## Others: ([see list](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
+
+action | mac | windows/linux
+---| ---| ---
+interrupt currently executing command | esc | esc
+in console, go to previously run code | up/down | up/down
+keyboard shortcut help | option+shift+k | alt+shift+k
+
+
+---
+
+# Tibbles
+
+.pull-left[
+We learned about *data frames*
+```{r}
+data.frame(name = c("Sarah","Ana","Jose"), 
+           rank = 1:3,
+           age = c(35.5, 25, 58),
+           city = c(NA,"New York","LA"))
+```
+]
+.pull-right[
+A *tibble* is a data frame but with perks
+```{r}
+tibble(name = c("Sarah","Ana","Jose"), 
+       rank = 1:3,
+       age = c(35.5, 25, 58),
+       city = c(NA,"New York","LA"))
+```
+]
+
+
+---
+
+# Tibble perks
+
+- better printing methods
+- doesn't print 10000 rows
+- tells you the variable type (character, factor, double, integer, boolean, date)
+- can be used anywhere a `data.frame` is needed
+- `read_*()` functions don't read character columns as factors (no surprises)
+
+---
+
+# Import as `data.frame` (try this)
+
+
+Base R functions import `data.frame`
+
+```{r}
+mydata_df <- read.csv("data/small_data.csv")
+mydata_df
+```
+
+---
+
+# Import as `tibble` (try this)
+
+`tidyverse` functions import as tibbles (`read_csv`, `read_excel()`, etc)
+
+```{r}
+mydata_tib <- read_csv("data/small_data.csv")
+mydata_tib
+```
+
+---
+
+# Run this code
+
+```{r, results=FALSE}
+mydata <- read_csv("data/small_data.csv")
+mydata
+glimpse(mydata)
+str(mydata)
+head(mydata)
+summary(mydata)
+class(mydata)
+```
+
+
+---
+
+# Tidy Data
+
+<!-- ???: 3. Each type of observational unit forms a table. -->
+
+1. Each variable forms a column.
+2. Each observation forms a row.  
+3. Each type of observational unit forms a table.
+
+![](img/r4ds_tidy_data.png)
+[G. Grolemond & H. Wickham's R for Data Science](https://r4ds.had.co.nz/introduction.html)
+
+---
+
+# Untidy data: example 1
+
+<!-- ??? Wondering if showing the code that created the tibble will just throw people off when trying to get them to focus on why the data aren't tidy. Ditto for the 2nd example too.  -->
+
+```{r}
+untidy_data <- tibble(
+  name = c("Ana","Bob","Cara"),
+  wt_07_01_2018 = c(100, 150, 140),
+  wt_08_01_2018 = c(104, 155, 138),
+  wt_09_01_2018 = c(NA, 160, 142)
+)
+untidy_data
+```
+
+
+
+---
+
+# Tidy data: example 1
+
+You will learn how to do this!
+```{r}
+untidy_data %>% gather(key = "date", value = "weight", -name) %>%
+  mutate(date = str_remove(date,"wt_"),
+         date = dmy(date))
+```
+
+---
+
+# Untidy data: example 2
+
+```{r}
+untidy_data <- tibble(
+  name = c("Ana","Bob","Cara"),
+  meds = c("advil 500mg 2xday","tylenol 1000mg 1xday", "advil 200mg 3xday")
+)
+untidy_data
+```
+
+---
+
+# Tidy data: example 2
+
+You will learn how to do this!
+```{r}
+untidy_data %>% 
+  separate(col = meds, into = c("med_name","dose_mg","times_per_day"), sep=" ") %>%
+  mutate(times_per_day = as.numeric(str_remove(times_per_day, "xday")),
+         dose_mg = as.numeric(str_remove(dose_mg, "mg")))
+```
+
+---
+
+class: center, middle, inverse
+
+# How to tidy?
+
+---
+
+# The pipe operator `%>%`
+
+- a function performed on (usually) a data frame or tibble used somewhat like a `+`
+- "add" functions together
+- the result is a transformed data set as a `tibble`
+- Suppose you want to perform a series of operations on a data.frame or tibble `mydata` using hypothetical functions `f()`, `g()`, `h()`:
+    + Perform `f(mydata)`
+    + use the output as an argument to `g()`
+    + use the output as an argument to `h()`
+
+.pull-left[
+One option:
+
+```{r, eval=FALSE}
+h(g(f(mydata)))
+```
+]
+.pull-right[
+
+A long tedious option:
+
+```{r, eval=FALSE}
+fout <- f(mydata)
+gout <- g(fout)
+h(gout)
+```
+]
+
+---
+
+# Use the pipe `%>%`
+
+Instead, we can use the pipe operator (pronounced "then")
+
+- Take `mydata` then
+- perform `f()` then
+- perform `g()` then
+- perform `h()`
+
+```{r, eval=FALSE}
+mydata %>% 
+  f() %>% 
+  g() %>% 
+  h()
+```
+
+---
+
+# Why use the pipe?
+
+- makes code more readable
+- `h(f(g(mydata)))` can get complicated with multiple arguments
+    + i.e. `h(f(g(mydata, na.rm=T), print=FALSE), type = "mean")`
+
+A real example:
+```{r}
+mydata_new <- mydata %>% select(id, weight_kg, bmi) %>%
+  mutate(height_m = sqrt(weight_kg /bmi))
+mydata_new %>% head(n=3)
+```
+
+---
+class: center, inverse, middle
+
+# Let's wrangle!
+
+---
+
+# About the data
+
+Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+
+- complex survey data
+- national school-based survey conducted by CDC and state, territorial, tribal, and local surveys conducted by state, territorial, and local education and health agencies and tribal governments
+- monitors six categories of health-related behaviors that contribute to the leading causes of death and disability among youth and adults (including alcohol & drug use, unhealthy & dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
+- this data is a subset of data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
+
+---
+
+# Import Data
+
+Open your RStudio project. Open a new script, copy and paste this code, and run.
+
+```{r, results=FALSE}
+demo_data <- read_csv("data/yrbss_demo.csv")
+qn_data <- read_csv("data/yrbss_qn.csv")
+
+glimpse(demo_data)
+glimpse(qn_data)
+```
+
+Look at your "Environment" tab, you should have the data there.
+
+---
+
+# Tidyverse functions
+
+- `tidyverse` is a suite of packages that implement `tidy` methods for data importing, cleaning and wrangling 
+- functions like `filter()`, `select()`, `mutate()` are part of the `tidyverse`
+    + first argument is always the data frame
+    + can be used in pipes `%>%`
+
+.pull-left[
+All equivalent:
+```{r, eval = FALSE}
+select(.data = demo_data, "record")
+select(demo_data, "record")
+select(demo_data, record)
+demo_data %>% select(record)
+```
+]
+.pull-right[
+Output:
+```{r, echo = FALSE}
+demo_data %>% select(record)
+```
+]
+
+---
+
+class: center, middle, inverse
+
+# Subsetting data
+
+---
+
+# Subset by rows
+
+<img src="img/datawrangle_cheatsheet_subset_rows.png" width="100%" height="100%">
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+---
+
+# `filter()` $\sim$ rows
+
+- filter data based on rows
+- use logical cues:
+    + double = for "is equal to"
+    + use `&` (and) or `|` (or)
+    + `!` in front negates the statement, as in `!=` or `!(grade=="9th")`
+- use math
+    + `>` `<` `>=` `<=`
+- use the `is.na()` function to filter based on missing values
+
+```{r}
+demo_data %>% filter(bmi > 20)
+```
+
+
+---
+
+# Compare to base R
+
+.pull-left[
+
+Bracket method, need for repeating data frame names, need to use `$`. Very nested and confusing to read.
+
+```{r}
+demo_data[demo_data$grade=="9th",]
+```
+
+]
+.pull-right[
+No `$` needed. Uses "non-standard evaluation" so `filter()` knows `grade` is a column in `demo_data`.
+```{r}
+demo_data %>% filter(grade=="9th")
+```
+
+]
+
+
+---
+
+# `filter()` practice
+
+What do these commands do? Try:
+
+```{r, eval=FALSE}
+demo_data %>% filter(record==506901)
+demo_data %>% filter(sex=="Male")
+demo_data %>% filter(grade %in% c("10th","11th"))
+demo_data %>% filter(!(grade=="9th"))
+demo_data %>% filter(bmi < 20, stweight < 50, sex=="Female") # filter on multiple
+demo_data %>% filter(is.na(bmi))
+demo_data %>% filter(!is.na(bmi))
+demo_data %>% filter(bmi < 5)
+demo_data %>% filter(bmi/stweight < 0.5) # can do math
+demo_data %>% filter((bmi<15)|(bmi>50))
+```
+
+---
+
+# Subset by columns
+
+<img src="img/datawrangle_cheatsheet_subset_cols.png" width="100%" height="100%">
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+---
+
+# `select()` $\sim$ columns
+
+- select columns/variables
+- uses special syntax (next slide) that is flexible, no quotes needed
+- can be used to rearrange columns
+
+```{r}
+demo_data %>% select(record, grade)
+```
+
+---
+
+# Column selection syntax:
+
+There are many ways to select a set of variable names:
+
+- `var1:var20`: all the columns from `var1` to `var20`
+- `one_of(c("a","b","c"))`: if you have a character vector of column names, you can use it here
+- `-var1`: *not* `var1`, remove it
+- `-(var1:var20)`: remove all the columns from `var1` to `var20`
+- `contains("date")`, `contains("_")`: all variable names that contain a specified string
+- `starts_with("a")` or `ends_with("last")`: all variable names that start or end with a string
+- `demo_data %>% select(1:3)`: can still use column numbers
+- `everything()`: everything else not named, as in `select(var1, var20, everything())`; useful for rearranging columns
+
+See other examples in the [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
+
+---
+
+# Compare to base R
+
+.pull-left[
+Need brackets, quotes around column names.
+```{r}
+demo_data[, c("record","age","sex")]
+```
+]
+.pull-right[
+No quotes needed, easier to read. More flexible. Either of these work:
+```{r, results="hold"}
+demo_data %>% select(record, age, sex)
+demo_data %>% select(record:sex)
+```
+]
+
+---
+
+# `select()` practice
+
+What do these commands do? Try:
+
+```{r, eval=FALSE}
+demo_data %>% select(-grade,-sex)
+demo_data %>% select(record:sex)
+demo_data %>% select(-(record:sex))
+demo_data %>% select(contains("race"))
+demo_data %>% select(record, race4, race7, everything())
+demo_data %>% select(one_of(c("age","stweight")))
+demo_data %>% select(starts_with("r"))
+demo_data %>% select(-contains("r"))
+demo_data %>% select(1:3)
+```
+
+
+---
+
+# `rename()` $\sim$ columns
+
+- renames column variables
+
+```{r}
+demo_data %>% rename(id = record)
+```
+
+---
+
+# `select_*()` and `rename_*()` practice
+
+- scoped variants of `select()` and `rename()` operate on a selection of columns
+- which columns depends on a predicate, can be:
+    + variable names through `vars()`, or
+    + a function that returns TRUE/FALSE like `is.numeric()`
+
+What do these commands do? Try:
+
+```{r,eval=FALSE}
+demo_data %>% select_if(is.numeric)
+demo_data %>% rename_if(is.character, toupper) # toupper() is a function
+demo_data %>% rename_all(toupper)
+demo_data %>% rename_at(vars(contains("race")), toupper)
+demo_data %>% rename_if(is.numeric, funs(paste0(.,"_num")))
+```
+
+
+---
+
+# Practice
+
+1. Import `demo_data.csv` in the `data/` folder
+1. Convert all column names to upper case, save the result as `newdata`
+1. For `newdata`, select only character variables, save again as `newdata`.
+1. Filter this data to only keep Asian or Native Hawaiian/other PI subjects in the 9th grade.
+1. Filter this data to remove subjects younger than 13.
+1. Remove the column `RACE4`.
+1. How many rows does the resulting `newdata` have? How many columns?
+
+```{r, include=FALSE}
+newdata <- demo_data %>%
+  rename_all(toupper) %>%
+  select_if(is.character) %>%
+  filter(RACE7%in%c("Asian","Native Hawaiian/other PI"), GRADE=="9th") %>%
+  filter(AGE!="12 years old or younger") %>%
+  select(-RACE4)
+dim(newdata)
+```
+
+
+---
+
+class: center, middle, inverse
+
+# Changing the data
+
+---
+
+# Make new variables
+
+<img src="img/datawrangle_cheatsheet_makenewvars.png" width="100%" height="100%">
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+---
+
+# `mutate()`
+
+EXPLAIN MUTATE
+
+```{r}
+newdata <- demo_data %>% 
+  select(record, bmi:stweight) %>%
+  mutate(height_m = sqrt(stweight /bmi))
+newdata
+```
+
+---
+
+# `mutate()` practice
+
+Try these:
+
+```{r, eval=FALSE}
+demo_data %>% mutate(bmi_high = bmi > 30)
+demo_data %>% mutate(male = 1*(sex=="Male"))
+demo_data %>% mutate(grade_num = as.numeric(str_remove(grade,"th")))
+```
+
+---
+
+# `case_when()` with `mutate()`
+
+EXPLAIN CASE WHEN
+
+```{r}
+
+demo_data2 <- demo_data %>%
+  mutate(
+    age_int = case_when(
+      age=="12 years old or younger" ~ 12,
+      age=="18 years old or older" ~ 18,
+      TRUE ~ as.numeric(str_remove(age, " years old"))
+  ))
+demo_data2 %>% tabyl(age,age_int)
+```
+
+---
+
+# `separate()` and `unite()`
+
+---
+
+# Dealing with missing or duplicated data
+
+```{r}
+demo_data %>% distinct()
+```
+
+Removes *all* rows with *any* missing (`NA`) values in *any* row
+
+```{r}
+demo_data %>% na.omit()
+```
+
+
+
+---
+
+class: center, middle, inverse
+
+# Joining/merging data
+
+
+---
+
+# Resources - Tidyverse & Data Wrangling
+
+Links
+
+- [Learn the tidyverse](https://www.tidyverse.org/learn/)
+- [Data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+Some of this is drawn from materials in online books/lessons:
+
+- [R for Data Science](https://r4ds.had.co.nz/index.html) - by Garrett Grolemund & Hadley Wickham
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
+- [A gRadual intRoduction to the tidyverse](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse) - Workshop for Cascadia R 2017 by Chester Ismay and Ted Laderas
+- [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+- ["Tidy Data" by Hadley Wickham](https://vita.had.co.nz/papers/tidy-data.pdf)
+---
+
+# Possible Future Workshop Topics?
+
+- reproducible reports in R
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr
+- statistical modeling in R
+
+---
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.pdf)
+
+```{r, eval=FALSE, echo=FALSE}
+# RUN THESE AFTER KNITTING
+knitr::purl(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.Rmd"), out = here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.R"))
+pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.html"))
+```
