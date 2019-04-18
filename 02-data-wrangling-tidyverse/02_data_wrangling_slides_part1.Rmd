@@ -91,7 +91,7 @@ mono_light(
 `demo_data <- read_csv("data/yrbss_demo.csv")`
 ]
 
-<center><img src="../../images/Horst/tidyverse DxzqktwUcAAYCLT.jpg" width="50%" height="50%"></center>[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+<center><img src="img/horst_tidyverse.jpg" width="50%" height="50%"></center>[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
 ---
 
@@ -122,7 +122,7 @@ class: center, middle, inverse
 
 # Getting started
 
-<center><img src="../../images/Horst/stats-illustrations-master/rstats-artwork/dplyr_wrangling.png" width="55%" height="55%"></center>
+<center><img src="img/dplyr_wrangling.png" width="55%" height="55%"></center>
 
 [Alison Horst](https://github.com/allisonhorst/stats-illustrations)
 
@@ -207,7 +207,7 @@ class: center, middle, inverse
 
 # Tibbles
 
-<center><img src="../../images/tibble.png" width="30%" height="30%"></center>
+<center><img src="img/tibble.png" width="30%" height="30%"></center>
 
 [hexbin](https://pkg.earo.me/hexbin/)
 
@@ -309,8 +309,7 @@ class: center, middle, inverse
 
 # Tidy Data
 
-
-<img src="../../images/Horst/tidyverse DxzqktwUcAAYCLT.jpg" width="70%" height="70%">
+<img src="img/horst_tidyverse.jpg" width="70%" height="70%">
 
 [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
@@ -384,7 +383,7 @@ class: center, middle, inverse
 
 # How to tidy?
 
-<img src="../../images/Horst/stats-illustrations-master/rstats-artwork/tidyverse_celestial.png" width="40%" height="40%">
+<img src="img/horst_tidyverse_celestial.png" width="40%" height="40%">
 
 [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
@@ -681,7 +680,7 @@ class: center, middle, inverse
 
 # Changing the data
 
-<center><img src="../../images/Horst/mutate DtCqPtHVsAAl_Xy.jpg" width="50%" height="50%"></center>
+<center><img src="img/horst_mutate.jpg" width="50%" height="50%"></center>
 
 [Alison Horst](https://github.com/allisonhorst/stats-illustrations)
 

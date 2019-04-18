@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 # set ggplot theme
 theme_set(theme_bw(base_size = 24))
 
+
 ## ----xaringan-themer, include = FALSE------------------------------------
 # creates xaringan theme
 # devtools::install_github("gadenbuie/xaringanthemer")
@@ -42,9 +43,11 @@ mono_light(
   outfile = "css/xaringan-themer.css"
 )
 
+
 ## ---- eval=FALSE---------------------------------------------------------
 ## y <- 5
 ## y
+
 
 ## ------------------------------------------------------------------------
 data.frame(name = c("Sarah","Ana","Jose"), 
@@ -52,19 +55,23 @@ data.frame(name = c("Sarah","Ana","Jose"),
            age = c(35.5, 25, 58),
            city = c(NA,"New York","LA"))
 
+
 ## ------------------------------------------------------------------------
 tibble(name = c("Sarah","Ana","Jose"), 
        rank = 1:3,
        age = c(35.5, 25, 58),
        city = c(NA,"New York","LA"))
 
+
 ## ------------------------------------------------------------------------
 mydata_df <- read.csv("data/small_data.csv")
 mydata_df
 
+
 ## ------------------------------------------------------------------------
 mydata_tib <- read_csv("data/small_data.csv")
 mydata_tib
+
 
 ## ---- results=FALSE------------------------------------------------------
 glimpse(mydata_df)
@@ -73,12 +80,14 @@ head(mydata_df)
 summary(mydata_df)
 class(mydata_df)     # What information does class() give?
 
+
 ## ---- results=FALSE------------------------------------------------------
 glimpse(mydata_tib)
 str(mydata_tib)       
 head(mydata_tib)
 summary(mydata_tib)
 class(mydata_tib)     
+
 
 ## ------------------------------------------------------------------------
 untidy_data <- tibble(
@@ -87,11 +96,13 @@ untidy_data <- tibble(
 )
 untidy_data
 
+
 ## ------------------------------------------------------------------------
 untidy_data %>% 
   separate(col = meds, into = c("med_name","dose_mg","times_per_day"), sep=" ") %>%
   mutate(times_per_day = as.numeric(str_remove(times_per_day, "xday")),
          dose_mg = as.numeric(str_remove(dose_mg, "mg")))
+
 
 ## ------------------------------------------------------------------------
 untidy_data2 <- tibble(
@@ -102,29 +113,37 @@ untidy_data2 <- tibble(
 )
 untidy_data2
 
+
 ## ------------------------------------------------------------------------
 untidy_data2 %>% 
   gather(key = "date", value = "weight", -name) %>%
   mutate(date = str_remove(date,"wt_"),
          date = dmy(date))     # dmy() is a function in the lubridate package
 
+
 ## ------------------------------------------------------------------------
 mydata_tib %>% head(n=3)      # prounounce %>% as "then"
+
 
 ## ---- eval=FALSE---------------------------------------------------------
 ## mydata_tib %>% head(n=3) %>% summary()
 
+
 ## ---- results=FALSE------------------------------------------------------
 demo_data <- read_csv("data/yrbss_demo.csv")
+
 
 ## ------------------------------------------------------------------------
 demo_data %>% filter(bmi > 20)
 
+
 ## ------------------------------------------------------------------------
 demo_data[demo_data$grade=="9th",]
 
+
 ## ------------------------------------------------------------------------
 demo_data %>% filter(grade=="9th")
+
 
 ## ---- eval=FALSE---------------------------------------------------------
 ## demo_data %>% filter(bmi < 5)
@@ -140,15 +159,19 @@ demo_data %>% filter(grade=="9th")
 ## demo_data %>% filter(is.na(bmi))
 ## demo_data %>% filter(!is.na(bmi))
 
+
 ## ------------------------------------------------------------------------
 demo_data %>% select(record, grade)
+
 
 ## ------------------------------------------------------------------------
 demo_data[, c("record","age","sex")]
 
+
 ## ---- results="hold"-----------------------------------------------------
 demo_data %>% select(record, age, sex)
 demo_data %>% select(record:sex)
+
 
 ## ---- eval=FALSE---------------------------------------------------------
 ## demo_data %>% select(record:sex)
@@ -163,12 +186,15 @@ demo_data %>% select(record:sex)
 ## 
 ## demo_data %>% select(record, race4, race7, everything())
 
+
 ## ------------------------------------------------------------------------
 demo_data %>% rename(id = record)   # order: new_name = old_name
+
 
 ## ---- eval=FALSE---------------------------------------------------------
 ## # Remember: to save output into the same tibble you would use <-
 ## newdata <- newdata %>% select(-record)
+
 
 ## ---- include=FALSE------------------------------------------------------
 newdata <- demo_data %>%
@@ -179,11 +205,13 @@ newdata <- demo_data %>%
   select(-race4)
 dim(newdata)
 
+
 ## ------------------------------------------------------------------------
 newdata <- demo_data %>% 
   mutate(height_m = sqrt(stweight / bmi))   # use = (not <- or ==) to define new variable
 
 newdata %>% select(record, bmi, stweight)
+
 
 ## ---- eval=FALSE---------------------------------------------------------
 ## demo_data %>% mutate(bmi_high = (bmi > 30))
@@ -192,6 +220,7 @@ newdata %>% select(record, bmi, stweight)
 ## demo_data %>% mutate(male = 1 * (sex == "Male"))
 ## 
 ## demo_data %>% mutate(grade_num = as.numeric(str_remove(grade, "th")))
+
 
 ## ------------------------------------------------------------------------
 demo_data2 <- demo_data %>%
@@ -204,31 +233,37 @@ demo_data2 <- demo_data %>%
     )
 demo_data2 %>% select(bmi, bmi_group) %>% head()
 
+
 ## ------------------------------------------------------------------------
 demo_data %>% 
-  separate(age,c("a","y","o","w","w2")) %>%
+  separate(age,c("a","y","o","w","w2"),
+           sep = " ") %>%
   select(a:w2)
+
 
 ## ------------------------------------------------------------------------
 demo_data %>% 
   unite("sexgr", sex, grade, sep=":") %>%
   select(sexgr)
 
+
 ## ---- eval=FALSE---------------------------------------------------------
-## demo_data %>% separate(age, c("agenum","yrs"))
-## demo_data %>% separate(age, c("agenum","yrs"), remove = FALSE)
+## demo_data %>% separate(age, c("agenum","yrs"), sep = " ")
+## demo_data %>% separate(age, c("agenum","yrs"), sep = " ", remove = FALSE)
 ## 
 ## demo_data %>% separate(grade, c("grade_n"), sep = "th")
 ## demo_data %>% separate(grade, c("grade_n"), sep = "t")
-## demo_data %>% separate(race4, c("race4_1","race4_2"), sep="/")
+## demo_data %>% separate(race4, c("race4_1", "race4_2"), sep = "/")
 ## 
-## demo_data %>% unite("sex_grade",sex, grade, sep="::::")
-## demo_data %>% unite("sex_grade",sex, grade) # what is the default `sep`?
-## demo_data %>% unite("race", race4, race7) # what happens to NA values?
+## demo_data %>% unite("sex_grade", sex, grade, sep = "::::")
+## demo_data %>% unite("sex_grade", sex, grade)       # what is the default `sep` for unite?
+## demo_data %>% unite("race", race4, race7)          # what happens to NA values?
 ## 
+
 
 ## ------------------------------------------------------------------------
 demo_data %>% na.omit()
+
 
 ## ------------------------------------------------------------------------
 data_dups <- tibble(
@@ -236,39 +271,50 @@ data_dups <- tibble(
   race = c("Hispanic","Other", "White", "Hispanic")
 )
 
+
 ## ------------------------------------------------------------------------
 data_dups
 
+
 ## ------------------------------------------------------------------------
 data_dups %>% distinct()
+
 
 ## ------------------------------------------------------------------------
 demo_data %>% arrange(bmi, stweight) %>% head(n=3)
 
 demo_data %>% arrange(desc(bmi), stweight) %>% head(n=3)
 
+
 ## ---- eval=FALSE, echo=FALSE---------------------------------------------
 ## demo_data %>%
-##   separate(grade, c("grade_num"), sep="th") %>%
+##   separate(grade, c("grade_num"), sep = "th") %>%
 ##   mutate(grade_num = as.numeric(grade_num)) %>%
+##   filter(grade_num >= 11) %>%
 ##   filter(!is.na(bmi)) %>%
-##   mutate(bmi_normal = case_when(
-##     (18.5 <= bmi) & (bmi <= 24.9) ~ 1,
-##     TRUE ~ 0
-##   )) %>%
+##   mutate(
+##     bmi_normal = case_when(
+##       (18.5 <= bmi) & (bmi <= 24.9) ~ 1,
+##       TRUE ~ 0
+##       )
+##     ) %>%
 ##   arrange(desc(grade_num))
 
+
 ## ---- eval=FALSE---------------------------------------------------------
-## demo_data %>% mutate_if(is.numeric, as.character) # as.character() is a function
-## demo_data %>% mutate_if(is.character, toupper) # toupper() is a function
+## # mutate_if
+## demo_data %>% mutate_if(is.numeric, as.character)   # as.character() is a function
+## demo_data %>% mutate_if(is.character, tolower)      # tolower() is a function
 ## demo_data %>% mutate_if(is.double, round, digits=0) # arguments to function can go after
 ## 
-## demo_data %>% mutate_at(vars(age:grade), toupper)
-## demo_data %>% mutate_at(vars(bmi,stweight), floor)
+## # mutate_at
+## demo_data %>% mutate_at(vars(age:grade), toupper)  # toupper() is a function
+## demo_data %>% mutate_at(vars(bmi,stweight), log)
 ## demo_data %>% mutate_at(vars(contains("race")), str_detect, pattern = "White")
 ## 
+## # mutate_all
 ## demo_data %>% mutate_all(as.character)
-## 
+
 
 ## ----eval=FALSE----------------------------------------------------------
 ## demo_data %>% select_if(is.numeric)
@@ -278,33 +324,23 @@ demo_data %>% arrange(desc(bmi), stweight) %>% head(n=3)
 ## 
 ## demo_data %>% rename_at(vars(contains("race")), toupper)
 
-## ---- eval=FALSE---------------------------------------------------------
-## demo_data %>%
-##   mutate(
-##     age_int = case_when(
-##       age=="12 years old or younger" ~ 12,
-##       age=="18 years old or older" ~ 18,
-##       TRUE ~ as.numeric(str_remove(age, " years old"))
-##       # TRUE is like "else", everything else is categorized last
-##   ))
-## 
-## # your own function with list(~) and .
-## demo_data %>% mutate_if(is.double,list(~(.^2)))
-## demo_data %>% mutate_at(vars(bmi, stweight),list(~(.-100)))
 
 ## ---- eval=FALSE---------------------------------------------------------
 ## h(g(f(mydata)))
+
 
 ## ---- eval=FALSE---------------------------------------------------------
 ## fout <- f(mydata)
 ## gout <- g(fout)
 ## h(gout)
 
+
 ## ---- eval=FALSE---------------------------------------------------------
 ## mydata %>%
 ##   f() %>%
 ##   g() %>%
 ##   h()
+
 
 ## ---- eval = FALSE-------------------------------------------------------
 ## demo_data2 <- demo_data %>%
@@ -316,12 +352,14 @@ demo_data %>% arrange(desc(bmi), stweight) %>% head(n=3)
 ##   select_if(is.numeric)
 ## demo_data2
 
+
 ## ---- eval = FALSE-------------------------------------------------------
 ## demo_data3 <- na.omit(demo_data)
 ## demo_data3$height_m <- sqrt(demo_data3$stweight/demo_data3$bmi)
 ## demo_data3$bmi_high <- 1*(demo_data3$bmi>30)
 ## demo_data3 <- demo_data3[,c("record","bmi","stweight","height_m","bmi_high")]
 ## demo_data3
+
 
 ## ---- eval=FALSE, echo=FALSE---------------------------------------------
 ## # RUN THESE AFTER KNITTING
