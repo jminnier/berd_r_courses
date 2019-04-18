@@ -4,6 +4,7 @@
     <title>Data Wrangling in R with the Tidyverse (Part 1)</title>
     <meta charset="utf-8">
     <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
     <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
@@ -14,7 +15,7 @@ class: left, middle, inverse, title-slide
 
 # Data Wrangling in R with the Tidyverse (Part 1)
 ### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
-### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> slides: <a href="http://bit.ly/berd_tidy1">bit.ly/berd_tidy</a> <br> pdf: <a href="http://bit.ly/berd_tidy1_pdf">bit.ly/berd_tidy_pdf</a></span>
+### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_tidy1">bit.ly/berd_tidy</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_tidy1_pdf">bit.ly/berd_tidy_pdf</a></span>
 
 ---
 
@@ -408,18 +409,18 @@ class: center, middle, inverse
 ```r
 untidy_data &lt;- tibble(
   name = c("Ana","Bob","Cara"),
-  meds = c("advil 500mg 2xday","tylenol 1000mg 1xday", "advil 200mg 3xday")
+  meds = c("advil 600mg 2xday","tylenol 650mg 4xday", "advil 200mg 3xday")
 )
 untidy_data
 ```
 
 ```
 # A tibble: 3 x 2
-  name  meds                
-  &lt;chr&gt; &lt;chr&gt;               
-1 Ana   advil 500mg 2xday   
-2 Bob   tylenol 1000mg 1xday
-3 Cara  advil 200mg 3xday   
+  name  meds               
+  &lt;chr&gt; &lt;chr&gt;              
+1 Ana   advil 600mg 2xday  
+2 Bob   tylenol 650mg 4xday
+3 Cara  advil 200mg 3xday  
 ```
 
 ---
@@ -439,8 +440,8 @@ untidy_data %&gt;%
 # A tibble: 3 x 4
   name  med_name dose_mg times_per_day
   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;
-1 Ana   advil        500             2
-2 Bob   tylenol     1000             1
+1 Ana   advil        600             2
+2 Bob   tylenol      650             4
 3 Cara  advil        200             3
 ```
 
@@ -606,17 +607,17 @@ class: center, middle, inverse
 # `filter()` `\(\sim\)` rows
 
 filter data based on rows
-
-.pull-left[
+.pull-left-40[
 - math: `&gt;`,  `&lt;`,  `&gt;=`,  `&lt;=`
 -  double = for "is equal to":  `==`
 -  `&amp;` (and) 
 -  `|` (or)
+- != (not equal)
 ]
-.pull-right[
-- `!` in front negates the statement, as in `!=` or `!(grade=="9th")`
-- `is.na()` function to filter based on missing values
+.pull-right-60[
+- `is.na()` to filter based on missing values
 - `%in%` to filter based on group membership
+- `!` in front negates the statement, as in `!is.na(age)` or `!(grade%in%c("9th","10th"))`
 ]
 
 
@@ -715,10 +716,10 @@ What do these commands do? Try them out:
 demo_data %&gt;% filter(bmi &lt; 5)
 demo_data %&gt;% filter(bmi/stweight &lt; 0.5)    # can do math
 demo_data %&gt;% filter((bmi &lt; 15) | (bmi &gt; 50))
-demo_data %&gt;% filter(bmi &lt; 20, stweight &lt; 50, sex == "Female") # filter on multiple variables
+demo_data %&gt;% filter(bmi &lt; 20, stweight &lt; 50, sex == "Male") # filter on multiple variables
 
 demo_data %&gt;% filter(record == 506901)      # note the use of == instead of just =
-demo_data %&gt;% filter(sex == "Male")
+demo_data %&gt;% filter(sex == "Female")
 demo_data %&gt;% filter(!(grade == "9th"))
 demo_data %&gt;% filter(grade %in% c("10th", "11th"))
 
@@ -912,6 +913,12 @@ demo_data %&gt;% rename(id = record)   # order: new_name = old_name
 
 # Practice
 
+
+```r
+# Remember: to save output into the same tibble you would use &lt;-
+newdata &lt;- newdata %&gt;% select(-record)
+```
+
 Do the following data wrangling steps in order so that the output from the previous step is the input for the next step.
 Save the results in each step as `newdata`.
 
@@ -930,6 +937,8 @@ Save the results in each step as `newdata`.
 1. Remove the column `race4`, and save as `newdata`.
 
 1. How many rows does the resulting `newdata` have? How many columns?
+
+
 
 
 
@@ -1042,12 +1051,91 @@ demo_data2 %&gt;% select(bmi, bmi_group) %&gt;% head()
 
 # `separate()` and `unite()`
 
+.pull-left[
+`separate()`: one column to many
+- when one column has multiple types of information
+- removes original column by default
+
+
+```r
+demo_data %&gt;% 
+  separate(age,c("a","y","o","w","w2")) %&gt;%
+  select(a:w2)
+```
+
+```
+# A tibble: 20,000 x 5
+   a     y     o     w     w2   
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 15    years old   &lt;NA&gt;  &lt;NA&gt; 
+ 2 17    years old   &lt;NA&gt;  &lt;NA&gt; 
+ 3 18    years old   or    older
+ 4 15    years old   &lt;NA&gt;  &lt;NA&gt; 
+ 5 14    years old   &lt;NA&gt;  &lt;NA&gt; 
+ 6 17    years old   &lt;NA&gt;  &lt;NA&gt; 
+ 7 16    years old   &lt;NA&gt;  &lt;NA&gt; 
+ 8 17    years old   &lt;NA&gt;  &lt;NA&gt; 
+ 9 18    years old   or    older
+10 14    years old   &lt;NA&gt;  &lt;NA&gt; 
+# … with 19,990 more rows
+```
+
+]
+.pull-right[
+`unite()`: many columns to one
+- paste columns together using a separator
+- removes original columns by default
+
+```r
+demo_data %&gt;% 
+  unite("sexgr", sex, grade, sep=":") %&gt;%
+  select(sexgr)
+```
+
+```
+# A tibble: 20,000 x 1
+   sexgr      
+   &lt;chr&gt;      
+ 1 Female:10th
+ 2 Female:12th
+ 3 Male:11th  
+ 4 Male:10th  
+ 5 Male:9th   
+ 6 Male:9th   
+ 7 Male:11th  
+ 8 Male:12th  
+ 9 Male:12th  
+10 Male:10th  
+# … with 19,990 more rows
+```
+
+]
+---
+
+# `separate()` and `unite()` practice
+
+What do the following commands do?
+
+First guess and then try them out.
+
+
+```r
+demo_data %&gt;% separate(age, c("agenum","yrs"))
+demo_data %&gt;% separate(age, c("agenum","yrs"), remove = FALSE)
+
+demo_data %&gt;% separate(grade, c("grade_n"), sep = "th")
+demo_data %&gt;% separate(grade, c("grade_n"), sep = "t")
+demo_data %&gt;% separate(race4, c("race4_1","race4_2"), sep="/")
+
+demo_data %&gt;% unite("sex_grade",sex, grade, sep="::::")
+demo_data %&gt;% unite("sex_grade",sex, grade) # what is the default `sep`?
+demo_data %&gt;% unite("race", race4, race7) # what happens to NA values?
+```
 
 
 
 
 ---
-
 class: center, middle, inverse
 
 # More commands to filter rows
@@ -1166,34 +1254,69 @@ demo_data %&gt;% arrange(desc(bmi), stweight) %&gt;% head(n=3)
 
 ---
 
-# practice slide
+# Practice
 
 &lt;!-- TO-DO: Add practice problems --&gt;
+
+Do the following data wrangling steps in order so that the output from the previous step is the input for the next step.
+Save the results in each step as `newdata`.
+
+&lt;!-- removed following since uses `rename_all(toupper)` that we moved to end --&gt;
+&lt;!-- 1. Convert all column names to upper case, save the result as `newdata`. --&gt;
+&lt;!-- I updated the instructions so not using all caps, as well as the solution in the code chunk below --&gt;
+
+1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
+1. Create a variable called `grade_num` that has the numeric grade number.
+1. Filter the data to keep only students in grade 11 or higher.
+1. Filter out rows when `bmi` is `NA`.
+1. Create a binary variable called `bmi_normal` that is equal to 1 when `bmi` is between 18.5 to 24.9 and 0 when it is outside that range.
+1. Arrange by `grade_num` from highest to lowest
+1. Save all output to `newdata`.
+
+
 
 
 ---
 
 class: center, middle, inverse
 
-# more column commands
+# advanced column commands
 
 &lt;!-- TO-DO: rename --&gt;
 
 ---
 
-# `mutate_`
+# `mutate_*` practice
 
 &lt;!-- TO-DO: Add mutate_ --&gt;
+- `mutate_at()`, `mutate_if()`, `mutate_all()` etc.
+- variants of `mutate()` that are useful for mutating multiple columns at once
+- which columns depends on a predicate, can be:
+    + a function that returns TRUE/FALSE like `is.numeric()`, or
+    + variable names through `vars()`
+
+What do these commands do? Try them out:
+
+
+```r
+demo_data %&gt;% mutate_if(is.numeric, as.character) # as.character() is a function
+demo_data %&gt;% mutate_if(is.character, toupper) # toupper() is a function
+demo_data %&gt;% mutate_if(is.double, round, digits=0) # arguments to function can go after
+
+demo_data %&gt;% mutate_at(vars(age:grade), toupper)
+demo_data %&gt;% mutate_at(vars(bmi,stweight), floor)
+demo_data %&gt;% mutate_at(vars(contains("race")), str_detect, pattern = "White")
+
+demo_data %&gt;% mutate_all(as.character)
+```
 
 
 ---
 
 # `select_*()` and `rename_*()` practice
 
-- variants of `select()` and `rename()` that operate on a selection of columns
-- which columns depends on a predicate, can be:
-    + a function that returns TRUE/FALSE like `is.numeric()`, or
-    + variable names through `vars()`
+- variants of `select()` and `rename()` 
+- use like `mutate_*()`
 
 
 What do these commands do? Try them out:
@@ -1202,10 +1325,30 @@ What do these commands do? Try them out:
 ```r
 demo_data %&gt;% select_if(is.numeric)
 
-demo_data %&gt;% rename_all(toupper) # toupper() is a function
+demo_data %&gt;% rename_all(toupper)
 demo_data %&gt;% rename_if(is.character, toupper)
 
 demo_data %&gt;% rename_at(vars(contains("race")), toupper)
+```
+
+---
+
+# Advanced `mutate_*()` and `case_when()` examples
+
+
+```r
+demo_data %&gt;%
+  mutate(
+    age_int = case_when(
+      age=="12 years old or younger" ~ 12,
+      age=="18 years old or older" ~ 18,
+      TRUE ~ as.numeric(str_remove(age, " years old"))
+      # TRUE is like "else", everything else is categorized last
+  ))
+
+# your own function with list(~) and .
+demo_data %&gt;% mutate_if(is.double,list(~(.^2)))
+demo_data %&gt;% mutate_at(vars(bmi, stweight),list(~(.-100)))
 ```
 
 
@@ -1277,23 +1420,32 @@ mydata %&gt;%
 - `h(f(g(mydata)))` can get complicated with multiple arguments
     + i.e. `h(f(g(mydata, na.rm=T), print=FALSE), type = "mean")`
 
-A real example:
+.pull-left-40[
+## tidyverse way:
 
 ```r
-mydata_new &lt;- mydata_tib %&gt;% select(id, weight_kg, bmi) %&gt;%
-  mutate(height_m = sqrt(weight_kg /bmi))
-mydata_new %&gt;% head(n=3)
+demo_data2 &lt;- demo_data %&gt;% 
+  na.omit %&gt;%
+  mutate(
+    height_m = sqrt(stweight/bmi),
+    bmi_high = 1*(bmi&gt;30)
+  ) %&gt;%
+  select_if(is.numeric)
+demo_data2
 ```
+]
+.pull-right-60[
+## base R way:
 
+```r
+demo_data3 &lt;- na.omit(demo_data)
+demo_data3$height_m &lt;- sqrt(demo_data3$stweight/demo_data3$bmi)
+demo_data3$bmi_high &lt;- 1*(demo_data3$bmi&gt;30)
+demo_data3 &lt;- demo_data3[,c("record","bmi","stweight","height_m","bmi_high")]
+demo_data3
 ```
-# A tibble: 3 x 4
-      id weight_kg   bmi height_m
-   &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-1 335340      66.2  27.6     1.55
-2 638618      84.8  29.3     1.70
-3 922382      57.6  18.2     1.78
-```
-
+]
+&lt;!-- TO DO: fix, doesn't even fit =( --&gt;
 ---
 
 # Resources - Tidyverse &amp; Data Wrangling
@@ -1336,6 +1488,9 @@ Meike Niederhausen: _niederha@ohsu.edu_
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
 - all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides.R)
 - answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.pdf)
+
+
+&lt;!-- TO DO: move all images to project folder so print pdf below works? --&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

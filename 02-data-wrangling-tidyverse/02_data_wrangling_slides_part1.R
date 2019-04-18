@@ -83,7 +83,7 @@ class(mydata_tib)
 ## ------------------------------------------------------------------------
 untidy_data <- tibble(
   name = c("Ana","Bob","Cara"),
-  meds = c("advil 500mg 2xday","tylenol 1000mg 1xday", "advil 200mg 3xday")
+  meds = c("advil 600mg 2xday","tylenol 650mg 4xday", "advil 200mg 3xday")
 )
 untidy_data
 
@@ -130,10 +130,10 @@ demo_data %>% filter(grade=="9th")
 ## demo_data %>% filter(bmi < 5)
 ## demo_data %>% filter(bmi/stweight < 0.5)    # can do math
 ## demo_data %>% filter((bmi < 15) | (bmi > 50))
-## demo_data %>% filter(bmi < 20, stweight < 50, sex == "Female") # filter on multiple variables
+## demo_data %>% filter(bmi < 20, stweight < 50, sex == "Male") # filter on multiple variables
 ## 
 ## demo_data %>% filter(record == 506901)      # note the use of == instead of just =
-## demo_data %>% filter(sex == "Male")
+## demo_data %>% filter(sex == "Female")
 ## demo_data %>% filter(!(grade == "9th"))
 ## demo_data %>% filter(grade %in% c("10th", "11th"))
 ## 
@@ -165,6 +165,10 @@ demo_data %>% select(record:sex)
 
 ## ------------------------------------------------------------------------
 demo_data %>% rename(id = record)   # order: new_name = old_name
+
+## ---- eval=FALSE---------------------------------------------------------
+## # Remember: to save output into the same tibble you would use <-
+## newdata <- newdata %>% select(-record)
 
 ## ---- include=FALSE------------------------------------------------------
 newdata <- demo_data %>%
@@ -201,6 +205,29 @@ demo_data2 <- demo_data %>%
 demo_data2 %>% select(bmi, bmi_group) %>% head()
 
 ## ------------------------------------------------------------------------
+demo_data %>% 
+  separate(age,c("a","y","o","w","w2")) %>%
+  select(a:w2)
+
+## ------------------------------------------------------------------------
+demo_data %>% 
+  unite("sexgr", sex, grade, sep=":") %>%
+  select(sexgr)
+
+## ---- eval=FALSE---------------------------------------------------------
+## demo_data %>% separate(age, c("agenum","yrs"))
+## demo_data %>% separate(age, c("agenum","yrs"), remove = FALSE)
+## 
+## demo_data %>% separate(grade, c("grade_n"), sep = "th")
+## demo_data %>% separate(grade, c("grade_n"), sep = "t")
+## demo_data %>% separate(race4, c("race4_1","race4_2"), sep="/")
+## 
+## demo_data %>% unite("sex_grade",sex, grade, sep="::::")
+## demo_data %>% unite("sex_grade",sex, grade) # what is the default `sep`?
+## demo_data %>% unite("race", race4, race7) # what happens to NA values?
+## 
+
+## ------------------------------------------------------------------------
 demo_data %>% na.omit()
 
 ## ------------------------------------------------------------------------
@@ -220,13 +247,50 @@ demo_data %>% arrange(bmi, stweight) %>% head(n=3)
 
 demo_data %>% arrange(desc(bmi), stweight) %>% head(n=3)
 
+## ---- eval=FALSE, echo=FALSE---------------------------------------------
+## demo_data %>%
+##   separate(grade, c("grade_num"), sep="th") %>%
+##   mutate(grade_num = as.numeric(grade_num)) %>%
+##   filter(!is.na(bmi)) %>%
+##   mutate(bmi_normal = case_when(
+##     (18.5 <= bmi) & (bmi <= 24.9) ~ 1,
+##     TRUE ~ 0
+##   )) %>%
+##   arrange(desc(grade_num))
+
+## ---- eval=FALSE---------------------------------------------------------
+## demo_data %>% mutate_if(is.numeric, as.character) # as.character() is a function
+## demo_data %>% mutate_if(is.character, toupper) # toupper() is a function
+## demo_data %>% mutate_if(is.double, round, digits=0) # arguments to function can go after
+## 
+## demo_data %>% mutate_at(vars(age:grade), toupper)
+## demo_data %>% mutate_at(vars(bmi,stweight), floor)
+## demo_data %>% mutate_at(vars(contains("race")), str_detect, pattern = "White")
+## 
+## demo_data %>% mutate_all(as.character)
+## 
+
 ## ----eval=FALSE----------------------------------------------------------
 ## demo_data %>% select_if(is.numeric)
 ## 
-## demo_data %>% rename_all(toupper) # toupper() is a function
+## demo_data %>% rename_all(toupper)
 ## demo_data %>% rename_if(is.character, toupper)
 ## 
 ## demo_data %>% rename_at(vars(contains("race")), toupper)
+
+## ---- eval=FALSE---------------------------------------------------------
+## demo_data %>%
+##   mutate(
+##     age_int = case_when(
+##       age=="12 years old or younger" ~ 12,
+##       age=="18 years old or older" ~ 18,
+##       TRUE ~ as.numeric(str_remove(age, " years old"))
+##       # TRUE is like "else", everything else is categorized last
+##   ))
+## 
+## # your own function with list(~) and .
+## demo_data %>% mutate_if(is.double,list(~(.^2)))
+## demo_data %>% mutate_at(vars(bmi, stweight),list(~(.-100)))
 
 ## ---- eval=FALSE---------------------------------------------------------
 ## h(g(f(mydata)))
@@ -242,14 +306,26 @@ demo_data %>% arrange(desc(bmi), stweight) %>% head(n=3)
 ##   g() %>%
 ##   h()
 
-## ------------------------------------------------------------------------
-mydata_new <- mydata_tib %>% select(id, weight_kg, bmi) %>%
-  mutate(height_m = sqrt(weight_kg /bmi))
-mydata_new %>% head(n=3)
+## ---- eval = FALSE-------------------------------------------------------
+## demo_data2 <- demo_data %>%
+##   na.omit %>%
+##   mutate(
+##     height_m = sqrt(stweight/bmi),
+##     bmi_high = 1*(bmi>30)
+##   ) %>%
+##   select_if(is.numeric)
+## demo_data2
+
+## ---- eval = FALSE-------------------------------------------------------
+## demo_data3 <- na.omit(demo_data)
+## demo_data3$height_m <- sqrt(demo_data3$stweight/demo_data3$bmi)
+## demo_data3$bmi_high <- 1*(demo_data3$bmi>30)
+## demo_data3 <- demo_data3[,c("record","bmi","stweight","height_m","bmi_high")]
+## demo_data3
 
 ## ---- eval=FALSE, echo=FALSE---------------------------------------------
 ## # RUN THESE AFTER KNITTING
-## knitr::purl(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.Rmd"), out = here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.R"))
+## knitr::purl(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.Rmd"), out = here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.R"))
 ## # remotes::install_github('rstudio/pagedown')
-## pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides.html"))
+## pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html"))
 
