@@ -662,18 +662,6 @@ Save the results in each step as `newdata`.
 
 
 
-```{r, include=FALSE}
-newdata <- demo_data %>%
-  # rename_all(toupper) %>%
-  select_if(is.character) %>%
-  filter(race7 %in% c("Asian","Native Hawaiian/other PI"), grade == "9th") %>%
-  filter(age != "12 years old or younger") %>%
-  select(-race4)
-dim(newdata)
-```
-
-
-
 ---
 
 class: center, middle, inverse
@@ -874,21 +862,6 @@ Save the results in each step as `newdata`.
 1. Arrange by `grade_num` from highest to lowest
 
 1. Save all output to `newdata`.
-
-```{r, eval=FALSE, echo=FALSE}
-demo_data %>%
-  separate(grade, c("grade_num"), sep = "th") %>%
-  mutate(grade_num = as.numeric(grade_num)) %>%
-  filter(grade_num >= 11) %>%
-  filter(!is.na(bmi)) %>%
-  mutate(
-    bmi_normal = case_when(
-      (18.5 <= bmi) & (bmi <= 24.9) ~ 1,
-      TRUE ~ 0
-      )
-    ) %>%
-  arrange(desc(grade_num))
-```
 
 
 ---

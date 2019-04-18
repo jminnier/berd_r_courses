@@ -100,7 +100,7 @@ demo_data <- read_csv("data/yrbss_demo.csv")
 
 ---
 
-# Practice 1 Solutions
+# Practice 1 Solutions (1/2)
 
 ```{r}
 newdata <- demo_data %>%
@@ -114,7 +114,7 @@ newdata
 
 ---
 
-# Practice 1 Solutions Continued
+# Practice 1 Solutions (2/2)
 
 ```{r}
 dim(newdata) # both nrow and ncol
@@ -145,7 +145,7 @@ Save the results in each step as `newdata`.
 
 ---
 
-# Practice 2 Solutions
+# Practice 2 Solutions (1/2)
 
 ```{r}
 newdata <- demo_data %>%
@@ -164,7 +164,9 @@ newdata <- demo_data %>%
 newdata
 ```
 
-# Practice 2 Solutions (alternative)
+---
+
+# Practice 2 Solutions - Alternative (2/2)
 
 ```{r}
 newdata <- demo_data %>%
