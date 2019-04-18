@@ -1,0 +1,186 @@
+---
+title: Data Wrangling in R with the Tidyverse (Part 1) - Practice Solutions
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+date: "<span style = 'font-size: 80%;'>2019/04/18 (Part 1)<br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_tidy1](http://bit.ly/berd_tidy1) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_tidy1_pdf](http://bit.ly/berd_tidy1_pdf)</span>"
+output: 
+  xaringan::moon_reader:
+    css: [css/xaringan-themer.css, css/my-theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:9"
+    includes:
+      in_header: ../header.html   
+editor_options: 
+  chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+library(lubridate)
+library(janitor)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  #fig.width=10.5, 
+  #fig.height=4,
+  fig.align = "center",
+  rows.print=7,
+  echo=TRUE,
+  highlight = TRUE,
+  prompt = FALSE, # IF TRUE adds a > before each code input
+  comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  #comment=NA
+  )
+
+# set ggplot theme
+theme_set(theme_bw(base_size = 24))
+```
+
+
+
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#3A6185", ## OHSU Marquam
+  code_highlight_color = "#c0e8f5",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = NULL,
+  text_font_size = "24px",
+  code_font_size = "20px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
+  outfile = "css/xaringan-themer.css"
+)
+```
+
+# Load the data and packages
+
+```{r}
+# install.packages("tidyverse")
+library(tidyverse)  
+library(lubridate)
+demo_data <- read_csv("data/yrbss_demo.csv")
+```
+
+---
+
+# Practice 1
+
+1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
+
+1. Subset the data so that only character variables are included and save the result as `newdata`.
+
+1. Filter `newdata` to only keep Asian or Native Hawaiian/other PI subjects that are in the 9th grade, and save again as `newdata`.
+
+1. Filter `newdata` to remove subjects younger than 13, and save as `newdata`.
+
+1. Remove the column `race4`, and save as `newdata`.
+
+1. How many rows does the resulting `newdata` have? How many columns?
+
+---
+
+# Practice 1 Solutions
+
+```{r}
+newdata <- demo_data %>%
+  select_if(is.character) %>%
+  filter(race7 %in% c("Asian","Native Hawaiian/other PI"), 
+         grade == "9th",
+         age != "12 years old or younger") %>%
+  select(-race4)
+newdata
+```
+
+---
+
+# Practice 1 Solutions Continued
+
+```{r}
+dim(newdata) # both nrow and ncol
+nrow(newdata)
+ncol(newdata)
+```
+
+---
+
+# Practice 2
+
+Do the following data wrangling steps in order so that the output from the previous step is the input for the next step.
+Save the results in each step as `newdata`.
+
+1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
+
+1. Create a variable called `grade_num` that has the numeric grade number (use `as.numeirc`).
+
+1. Filter the data to keep only students in grade 11 or higher.
+
+1. Filter out rows when `bmi` is `NA`.
+
+1. Create a binary variable called `bmi_normal` that is equal to 1 when `bmi` is between 18.5 to 24.9 and 0 when it is outside that range.
+
+1. Arrange by `grade_num` from highest to lowest
+
+1. Save all output to `newdata`.
+
+---
+
+# Practice 2 Solutions
+
+```{r}
+newdata <- demo_data %>%
+  separate(grade, c("grade_num"), sep = "th") %>%
+  mutate(grade_num = as.numeric(grade_num)) %>%
+  filter(grade_num >= 11,
+         !is.na(bmi)) %>%
+  mutate(
+    bmi_normal = case_when(
+      (18.5 <= bmi) & (bmi <= 24.9) ~ 1,
+      bmi > 24.9 ~ 0,
+      bmi < 18.5 ~ 0,
+      )
+    ) %>%
+  arrange(desc(grade_num))
+newdata
+```
+
+# Practice 2 Solutions (alternative)
+
+```{r}
+newdata <- demo_data %>%
+  mutate(
+    grade_num = str_replace(grade,"th",""),
+    grade_num = as.numeric(grade_num),
+    ) %>%
+  filter(grade_num >= 11,
+         !is.na(bmi)) %>%
+  mutate(
+    bmi_normal = case_when(
+      (18.5 <= bmi) & (bmi <= 24.9) ~ 1,
+      TRUE ~ 0, # TRUE is like "else", also changes NAs if any
+      )
+    ) %>%
+  arrange(desc(grade_num))
+newdata
+```
+

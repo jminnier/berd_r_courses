@@ -15,7 +15,7 @@ class: left, middle, inverse, title-slide
 
 # Data Wrangling in R with the Tidyverse (Part 1)
 ### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
-### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_tidy1">bit.ly/berd_tidy</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_tidy1_pdf">bit.ly/berd_tidy_pdf</a></span>
+### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_tidy1">bit.ly/berd_tidy1</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_tidy1_pdf">bit.ly/berd_tidy1_pdf</a></span>
 
 ---
 
@@ -63,7 +63,7 @@ Part 1:
 - A few good practices in R/RStudio
 - What is tidy data?
 - What is tidyverse?
-- Manipulate data frames
+- Manipulate data 
 
 Part 2:
 - Reshaping (long/wide format) data
@@ -159,7 +159,7 @@ action | mac | windows/linux
 ---| ---| ---
 interrupt currently executing command | esc | esc
 in console, go to previously run code | up/down | up/down
-keyboard shortcut help | option+shift+k | alt+shift+k
+keyboard shortcut help | option + shift + k | alt + shift + k
 
 ---
 
@@ -515,7 +515,7 @@ class: center, middle, inverse
 # Tools for tidying data
 
 - `tidyverse` functions
-    + `tidyverse` is a suite of packages that implement `tidy` methods for data importing, cleaning, and wrangling
+    + `tidyverse` is a [suite of packages](https://www.tidyverse.org/packages/) that implement `tidy` methods for data importing, cleaning, and wrangling
     + load the `tidyverse` packages by running the code `library(tidyverse)` 
         * see pre-workshop homework for code to install `tidyverse`
 
@@ -617,7 +617,9 @@ filter data based on rows
 .pull-right-60[
 - `is.na()` to filter based on missing values
 - `%in%` to filter based on group membership
-- `!` in front negates the statement, as in `!is.na(age)` or `!(grade%in%c("9th","10th"))`
+- `!` in front negates the statement, as in 
+    + `!is.na(age)` 
+    + `!(grade %in% c("9th","10th"))`
 ]
 
 
@@ -1059,7 +1061,8 @@ demo_data2 %&gt;% select(bmi, bmi_group) %&gt;% head()
 
 ```r
 demo_data %&gt;% 
-  separate(age,c("a","y","o","w","w2")) %&gt;%
+  separate(age,c("a","y","o","w","w2"),
+           sep = " ") %&gt;%
   select(a:w2)
 ```
 
@@ -1120,16 +1123,16 @@ First guess and then try them out.
 
 
 ```r
-demo_data %&gt;% separate(age, c("agenum","yrs"))
-demo_data %&gt;% separate(age, c("agenum","yrs"), remove = FALSE)
+demo_data %&gt;% separate(age, c("agenum","yrs"), sep = " ")
+demo_data %&gt;% separate(age, c("agenum","yrs"), sep = " ", remove = FALSE)
 
 demo_data %&gt;% separate(grade, c("grade_n"), sep = "th")
 demo_data %&gt;% separate(grade, c("grade_n"), sep = "t")
-demo_data %&gt;% separate(race4, c("race4_1","race4_2"), sep="/")
+demo_data %&gt;% separate(race4, c("race4_1", "race4_2"), sep = "/")
 
-demo_data %&gt;% unite("sex_grade",sex, grade, sep="::::")
-demo_data %&gt;% unite("sex_grade",sex, grade) # what is the default `sep`?
-demo_data %&gt;% unite("race", race4, race7) # what happens to NA values?
+demo_data %&gt;% unite("sex_grade", sex, grade, sep = "::::")
+demo_data %&gt;% unite("sex_grade", sex, grade)       # what is the default `sep` for unite?
+demo_data %&gt;% unite("race", race4, race7)          # what happens to NA values?
 ```
 
 
@@ -1256,21 +1259,21 @@ demo_data %&gt;% arrange(desc(bmi), stweight) %&gt;% head(n=3)
 
 # Practice
 
-&lt;!-- TO-DO: Add practice problems --&gt;
-
 Do the following data wrangling steps in order so that the output from the previous step is the input for the next step.
 Save the results in each step as `newdata`.
 
-&lt;!-- removed following since uses `rename_all(toupper)` that we moved to end --&gt;
-&lt;!-- 1. Convert all column names to upper case, save the result as `newdata`. --&gt;
-&lt;!-- I updated the instructions so not using all caps, as well as the solution in the code chunk below --&gt;
-
 1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
-1. Create a variable called `grade_num` that has the numeric grade number.
+
+1. Create a variable called `grade_num` that has the numeric grade number (use `as.numeirc`).
+
 1. Filter the data to keep only students in grade 11 or higher.
+
 1. Filter out rows when `bmi` is `NA`.
+
 1. Create a binary variable called `bmi_normal` that is equal to 1 when `bmi` is between 18.5 to 24.9 and 0 when it is outside that range.
+
 1. Arrange by `grade_num` from highest to lowest
+
 1. Save all output to `newdata`.
 
 
@@ -1280,18 +1283,17 @@ Save the results in each step as `newdata`.
 
 class: center, middle, inverse
 
-# advanced column commands
+# Advanced column commands
 
 &lt;!-- TO-DO: rename --&gt;
 
 ---
 
-# `mutate_*` practice
+# Mutating multiple columns at once: `mutate_*` 
 
-&lt;!-- TO-DO: Add mutate_ --&gt;
-- `mutate_at()`, `mutate_if()`, `mutate_all()` etc.
 - variants of `mutate()` that are useful for mutating multiple columns at once
-- which columns depends on a predicate, can be:
+    + `mutate_at()`, `mutate_if()`, `mutate_all()`, etc.
+- which columns get mutated depends on a predicate, can be:
     + a function that returns TRUE/FALSE like `is.numeric()`, or
     + variable names through `vars()`
 
@@ -1299,24 +1301,27 @@ What do these commands do? Try them out:
 
 
 ```r
-demo_data %&gt;% mutate_if(is.numeric, as.character) # as.character() is a function
-demo_data %&gt;% mutate_if(is.character, toupper) # toupper() is a function
+# mutate_if
+demo_data %&gt;% mutate_if(is.numeric, as.character)   # as.character() is a function
+demo_data %&gt;% mutate_if(is.character, tolower)      # tolower() is a function
 demo_data %&gt;% mutate_if(is.double, round, digits=0) # arguments to function can go after
 
-demo_data %&gt;% mutate_at(vars(age:grade), toupper)
-demo_data %&gt;% mutate_at(vars(bmi,stweight), floor)
+# mutate_at
+demo_data %&gt;% mutate_at(vars(age:grade), toupper)  # toupper() is a function
+demo_data %&gt;% mutate_at(vars(bmi,stweight), log)
 demo_data %&gt;% mutate_at(vars(contains("race")), str_detect, pattern = "White")
 
+# mutate_all
 demo_data %&gt;% mutate_all(as.character)
 ```
 
 
 ---
 
-# `select_*()` and `rename_*()` practice
+# Selecting &amp; renaming multiple columns 
 
-- variants of `select()` and `rename()` 
-- use like `mutate_*()`
+- `select_*()` &amp; `rename_*()` are variants of `select()` and `rename()` 
+- use like `mutate_*()` options on previous slide
 
 
 What do these commands do? Try them out:
@@ -1331,26 +1336,6 @@ demo_data %&gt;% rename_if(is.character, toupper)
 demo_data %&gt;% rename_at(vars(contains("race")), toupper)
 ```
 
----
-
-# Advanced `mutate_*()` and `case_when()` examples
-
-
-```r
-demo_data %&gt;%
-  mutate(
-    age_int = case_when(
-      age=="12 years old or younger" ~ 12,
-      age=="18 years old or older" ~ 18,
-      TRUE ~ as.numeric(str_remove(age, " years old"))
-      # TRUE is like "else", everything else is categorized last
-  ))
-
-# your own function with list(~) and .
-demo_data %&gt;% mutate_if(is.double,list(~(.^2)))
-demo_data %&gt;% mutate_at(vars(bmi, stweight),list(~(.-100)))
-```
-
 
 ---
 
@@ -1361,8 +1346,8 @@ demo_data %&gt;% mutate_at(vars(bmi, stweight),list(~(.-100)))
 - the result is a transformed data set as a `tibble`
 - Suppose you want to perform a series of operations on a data.frame or tibble `mydata` using hypothetical functions `f()`, `g()`, `h()`:
     + Perform `f(mydata)`
-    + use the output as an argument to `g()`
-    + use the output as an argument to `h()`
+    + use the output as an argument to `g()`: `g(f(mydata))`
+    + use the output as an argument to `h()`: `h(g(f(mydata)))`
 
 .pull-left[
 One option:
@@ -1371,9 +1356,6 @@ One option:
 ```r
 h(g(f(mydata)))
 ```
-]
-.pull-right[
-
 A long tedious option:
 
 
@@ -1383,25 +1365,8 @@ gout &lt;- g(fout)
 h(gout)
 ```
 ]
-
-&lt;!-- ??? Include function composition image, such as https://www.google.com/imgres?imgurl=http%3A%2F%2F3.bp.blogspot.com%2F-VoYjsWxjZC4%2FVjjGdkmVLPI%2FAAAAAAAACGA%2FZP7vnSa8x4s%2Fs640%2Fcomp%252Bfunction%252Bbox.JPG&amp;imgrefurl=http%3A%2F%2Fbeautifulhighschoolmath.blogspot.com%2F2015%2F11%2Fprecalculus-composition-of-functions.html&amp;docid=NvxyNrA8MhPH5M&amp;tbnid=Ip8VFKhlDweR6M%3A&amp;vet=10ahUKEwiXnb_e2dfhAhUTFnwKHRvIAn4QMwiWASgtMC0..i&amp;w=615&amp;h=396&amp;bih=1088&amp;biw=1203&amp;q=function%20composition&amp;ved=0ahUKEwiXnb_e2dfhAhUTFnwKHRvIAn4QMwiWASgtMC0&amp;iact=mrc&amp;uact=8 --&gt;
-
-&lt;!-- ??? Concerned that we'll lose non-mathy people with the function composition --&gt;
-&lt;!-- Also, function composition is different than adding functions --&gt;
-
-
-&lt;!-- ??? Sequential operations? --&gt;
----
-
-# Use the pipe `%&gt;%`
-
-Instead, we can use the pipe operator (pronounced "then")
-
-- Take `mydata` then
-- perform `f()` then
-- perform `g()` then
-- perform `h()`
-
+.pull-right[
+Using pipes - easier to read:
 
 ```r
 mydata %&gt;% 
@@ -1409,6 +1374,8 @@ mydata %&gt;%
   g() %&gt;% 
   h()
 ```
+
+]
 
 ---
 
@@ -1460,7 +1427,6 @@ Some of this is drawn from materials in online books/lessons:
 - [R for Data Science](https://r4ds.had.co.nz/index.html) - by Garrett Grolemund &amp; Hadley Wickham
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
 - [A gRadual intRoduction to the tidyverse](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse) - Workshop for Cascadia R 2017 by Chester Ismay and Ted Laderas
-- [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
 - ["Tidy Data" by Hadley Wickham](https://vita.had.co.nz/papers/tidy-data.pdf)
 ---
 
@@ -1486,8 +1452,8 @@ Meike Niederhausen: _niederha@ohsu.edu_
 &lt;!-- TO-DO: Update??? Create file with jsut the R code--&gt;
 
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides.R)
-- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_practice_answers.pdf)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1_practice_solutions.html)
 
 
 &lt;!-- TO DO: move all images to project folder so print pdf below works? --&gt;
