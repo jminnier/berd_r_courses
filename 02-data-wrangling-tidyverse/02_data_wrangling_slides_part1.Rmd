@@ -58,7 +58,7 @@ theme_set(theme_bw(base_size = 24))
 library(xaringanthemer)
 mono_light(
   base_color =  "#3A6185", ## OHSU Marquam
-  code_highlight_color = "#c0e8f5",
+  code_highlight_color = "#cbdded",
   link_color = "#38BDDE",
   header_font_google = google_font("Josefin Sans"),
   text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
