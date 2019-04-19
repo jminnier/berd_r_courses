@@ -654,6 +654,7 @@ demo_data %&gt;% filter(bmi &gt; 20)
 - __Bracket method__: need to repeat tibble name
 - Need to use `$` 
 - Very nested and confusing to read
+- Keeps `NA`s
 
 
 ```r
@@ -681,6 +682,7 @@ demo_data[demo_data$grade=="9th",]
 .pull-right[
 - __Pipe method__: list tibble name once
 - No `$` needed since uses "non-standard evaluation": `filter()` knows `grade` is a column in `demo_data`
+- Removes `NA`s
 
 ```r
 demo_data %&gt;% filter(grade=="9th")
@@ -704,7 +706,6 @@ demo_data %&gt;% filter(grade=="9th")
 ```
 
 ]
-
 
 ---
 
@@ -918,6 +919,9 @@ demo_data %&gt;% rename(id = record)   # order: new_name = old_name
 ```r
 # Remember: to save output into the same tibble you would use &lt;-
 newdata &lt;- newdata %&gt;% select(-record)
+
+# Useful to see what categories are available
+demo_data %&gt;% janitor::tabyl(race7)
 ```
 
 Do the following data wrangling steps in order so that the output from the previous step is the input for the next step.
@@ -929,9 +933,7 @@ Save the results in each step as `newdata`.
 
 1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
 
-1. Subset the data so that only character variables are included and save the result as `newdata`.
-
-1. Filter `newdata` to only keep Asian or Native Hawaiian/other PI subjects that are in the 9th grade, and save again as `newdata`.
+1. Filter `newdata` to only keep "Asian" or "Native Hawaiian/other PI" subjects that are in the 9th grade, and save again as `newdata`.
 
 1. Filter `newdata` to remove subjects younger than 13, and save as `newdata`.
 
@@ -1259,7 +1261,7 @@ Save the results in each step as `newdata`.
 
 1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
 
-1. Create a variable called `grade_num` that has the numeric grade number (use `as.numeirc`).
+1. Create a variable called `grade_num` that has the numeric grade number (use `as.numeric()`).
 
 1. Filter the data to keep only students in grade 11 or higher.
 

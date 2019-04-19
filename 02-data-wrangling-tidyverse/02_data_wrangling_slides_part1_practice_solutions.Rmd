@@ -88,8 +88,6 @@ demo_data <- read_csv("data/yrbss_demo.csv")
 
 1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
 
-1. Subset the data so that only character variables are included and save the result as `newdata`.
-
 1. Filter `newdata` to only keep Asian or Native Hawaiian/other PI subjects that are in the 9th grade, and save again as `newdata`.
 
 1. Filter `newdata` to remove subjects younger than 13, and save as `newdata`.
@@ -104,7 +102,6 @@ demo_data <- read_csv("data/yrbss_demo.csv")
 
 ```{r}
 newdata <- demo_data %>%
-  select_if(is.character) %>%
   filter(race7 %in% c("Asian","Native Hawaiian/other PI"), 
          grade == "9th",
          age != "12 years old or younger") %>%
@@ -131,7 +128,7 @@ Save the results in each step as `newdata`.
 
 1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
 
-1. Create a variable called `grade_num` that has the numeric grade number (use `as.numeirc`).
+1. Create a variable called `grade_num` that has the numeric grade number (use `as.numeric`).
 
 1. Filter the data to keep only students in grade 11 or higher.
 

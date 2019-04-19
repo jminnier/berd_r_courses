@@ -45,8 +45,8 @@ mono_light(
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## y <- 5
-## y
+y <- 5
+y
 
 
 ## ------------------------------------------------------------------------
@@ -126,7 +126,7 @@ mydata_tib %>% head(n=3)      # prounounce %>% as "then"
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## mydata_tib %>% head(n=3) %>% summary()
+mydata_tib %>% head(n=3) %>% summary()
 
 
 ## ---- results=FALSE------------------------------------------------------
@@ -146,18 +146,18 @@ demo_data %>% filter(grade=="9th")
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## demo_data %>% filter(bmi < 5)
-## demo_data %>% filter(bmi/stweight < 0.5)    # can do math
-## demo_data %>% filter((bmi < 15) | (bmi > 50))
-## demo_data %>% filter(bmi < 20, stweight < 50, sex == "Male") # filter on multiple variables
-## 
-## demo_data %>% filter(record == 506901)      # note the use of == instead of just =
-## demo_data %>% filter(sex == "Female")
-## demo_data %>% filter(!(grade == "9th"))
-## demo_data %>% filter(grade %in% c("10th", "11th"))
-## 
-## demo_data %>% filter(is.na(bmi))
-## demo_data %>% filter(!is.na(bmi))
+demo_data %>% filter(bmi < 5)
+demo_data %>% filter(bmi/stweight < 0.5)    # can do math
+demo_data %>% filter((bmi < 15) | (bmi > 50))
+demo_data %>% filter(bmi < 20, stweight < 50, sex == "Male") # filter on multiple variables
+
+demo_data %>% filter(record == 506901)      # note the use of == instead of just =
+demo_data %>% filter(sex == "Female")
+demo_data %>% filter(!(grade == "9th"))
+demo_data %>% filter(grade %in% c("10th", "11th"))
+
+demo_data %>% filter(is.na(bmi))
+demo_data %>% filter(!is.na(bmi))
 
 
 ## ------------------------------------------------------------------------
@@ -174,17 +174,17 @@ demo_data %>% select(record:sex)
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## demo_data %>% select(record:sex)
-## demo_data %>% select(one_of(c("age","stweight")))
-## 
-## demo_data %>% select(-grade,-sex)
-## demo_data %>% select(-(record:sex))
-## 
-## demo_data %>% select(contains("race"))
-## demo_data %>% select(starts_with("r"))
-## demo_data %>% select(-contains("r"))
-## 
-## demo_data %>% select(record, race4, race7, everything())
+demo_data %>% select(record:sex)
+demo_data %>% select(one_of(c("age","stweight")))
+
+demo_data %>% select(-grade,-sex)
+demo_data %>% select(-(record:sex))
+
+demo_data %>% select(contains("race"))
+demo_data %>% select(starts_with("r"))
+demo_data %>% select(-contains("r"))
+
+demo_data %>% select(record, race4, race7, everything())
 
 
 ## ------------------------------------------------------------------------
@@ -192,18 +192,11 @@ demo_data %>% rename(id = record)   # order: new_name = old_name
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## # Remember: to save output into the same tibble you would use <-
-## newdata <- newdata %>% select(-record)
+# Remember: to save output into the same tibble you would use <-
+newdata <- newdata %>% select(-record)
 
-
-## ---- include=FALSE------------------------------------------------------
-newdata <- demo_data %>%
-  # rename_all(toupper) %>%
-  select_if(is.character) %>%
-  filter(race7 %in% c("Asian","Native Hawaiian/other PI"), grade == "9th") %>%
-  filter(age != "12 years old or younger") %>%
-  select(-race4)
-dim(newdata)
+# Useful to see what categories are available
+demo_data %>% janitor::tabyl(race7)
 
 
 ## ------------------------------------------------------------------------
@@ -214,12 +207,12 @@ newdata %>% select(record, bmi, stweight)
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## demo_data %>% mutate(bmi_high = (bmi > 30))
-## 
-## demo_data %>% mutate(male = (sex == "Male"))
-## demo_data %>% mutate(male = 1 * (sex == "Male"))
-## 
-## demo_data %>% mutate(grade_num = as.numeric(str_remove(grade, "th")))
+demo_data %>% mutate(bmi_high = (bmi > 30))
+
+demo_data %>% mutate(male = (sex == "Male"))
+demo_data %>% mutate(male = 1 * (sex == "Male"))
+
+demo_data %>% mutate(grade_num = as.numeric(str_remove(grade, "th")))
 
 
 ## ------------------------------------------------------------------------
@@ -248,17 +241,17 @@ demo_data %>%
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## demo_data %>% separate(age, c("agenum","yrs"), sep = " ")
-## demo_data %>% separate(age, c("agenum","yrs"), sep = " ", remove = FALSE)
-## 
-## demo_data %>% separate(grade, c("grade_n"), sep = "th")
-## demo_data %>% separate(grade, c("grade_n"), sep = "t")
-## demo_data %>% separate(race4, c("race4_1", "race4_2"), sep = "/")
-## 
-## demo_data %>% unite("sex_grade", sex, grade, sep = "::::")
-## demo_data %>% unite("sex_grade", sex, grade)       # what is the default `sep` for unite?
-## demo_data %>% unite("race", race4, race7)          # what happens to NA values?
-## 
+demo_data %>% separate(age, c("agenum","yrs"), sep = " ")
+demo_data %>% separate(age, c("agenum","yrs"), sep = " ", remove = FALSE)
+
+demo_data %>% separate(grade, c("grade_n"), sep = "th")
+demo_data %>% separate(grade, c("grade_n"), sep = "t")
+demo_data %>% separate(race4, c("race4_1", "race4_2"), sep = "/")
+
+demo_data %>% unite("sex_grade", sex, grade, sep = "::::")
+demo_data %>% unite("sex_grade", sex, grade)       # what is the default `sep` for unite?
+demo_data %>% unite("race", race4, race7)          # what happens to NA values?
+
 
 
 ## ------------------------------------------------------------------------
@@ -286,84 +279,69 @@ demo_data %>% arrange(bmi, stweight) %>% head(n=3)
 demo_data %>% arrange(desc(bmi), stweight) %>% head(n=3)
 
 
-## ---- eval=FALSE, echo=FALSE---------------------------------------------
-## demo_data %>%
-##   separate(grade, c("grade_num"), sep = "th") %>%
-##   mutate(grade_num = as.numeric(grade_num)) %>%
-##   filter(grade_num >= 11) %>%
-##   filter(!is.na(bmi)) %>%
-##   mutate(
-##     bmi_normal = case_when(
-##       (18.5 <= bmi) & (bmi <= 24.9) ~ 1,
-##       TRUE ~ 0
-##       )
-##     ) %>%
-##   arrange(desc(grade_num))
-
-
 ## ---- eval=FALSE---------------------------------------------------------
-## # mutate_if
-## demo_data %>% mutate_if(is.numeric, as.character)   # as.character() is a function
-## demo_data %>% mutate_if(is.character, tolower)      # tolower() is a function
-## demo_data %>% mutate_if(is.double, round, digits=0) # arguments to function can go after
-## 
-## # mutate_at
-## demo_data %>% mutate_at(vars(age:grade), toupper)  # toupper() is a function
-## demo_data %>% mutate_at(vars(bmi,stweight), log)
-## demo_data %>% mutate_at(vars(contains("race")), str_detect, pattern = "White")
-## 
-## # mutate_all
-## demo_data %>% mutate_all(as.character)
+# mutate_if
+demo_data %>% mutate_if(is.numeric, as.character)   # as.character() is a function
+demo_data %>% mutate_if(is.character, tolower)      # tolower() is a function
+demo_data %>% mutate_if(is.double, round, digits=0) # arguments to function can go after
+
+# mutate_at
+demo_data %>% mutate_at(vars(age:grade), toupper)  # toupper() is a function
+demo_data %>% mutate_at(vars(bmi,stweight), log)
+demo_data %>% mutate_at(vars(contains("race")), str_detect, pattern = "White")
+
+# mutate_all
+demo_data %>% mutate_all(as.character)
 
 
 ## ----eval=FALSE----------------------------------------------------------
-## demo_data %>% select_if(is.numeric)
-## 
-## demo_data %>% rename_all(toupper)
-## demo_data %>% rename_if(is.character, toupper)
-## 
-## demo_data %>% rename_at(vars(contains("race")), toupper)
+demo_data %>% select_if(is.numeric)
+
+demo_data %>% rename_all(toupper)
+demo_data %>% rename_if(is.character, toupper)
+
+demo_data %>% rename_at(vars(contains("race")), toupper)
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## h(g(f(mydata)))
+h(g(f(mydata)))
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## fout <- f(mydata)
-## gout <- g(fout)
-## h(gout)
+fout <- f(mydata)
+gout <- g(fout)
+h(gout)
 
 
 ## ---- eval=FALSE---------------------------------------------------------
-## mydata %>%
-##   f() %>%
-##   g() %>%
-##   h()
+mydata %>% 
+  f() %>% 
+  g() %>% 
+  h()
 
 
 ## ---- eval = FALSE-------------------------------------------------------
-## demo_data2 <- demo_data %>%
-##   na.omit %>%
-##   mutate(
-##     height_m = sqrt(stweight/bmi),
-##     bmi_high = 1*(bmi>30)
-##   ) %>%
-##   select_if(is.numeric)
-## demo_data2
+demo_data2 <- demo_data %>% 
+  na.omit %>%
+  mutate(
+    height_m = sqrt(stweight/bmi),
+    bmi_high = 1*(bmi>30)
+  ) %>%
+  select_if(is.numeric)
+demo_data2
 
 
 ## ---- eval = FALSE-------------------------------------------------------
-## demo_data3 <- na.omit(demo_data)
-## demo_data3$height_m <- sqrt(demo_data3$stweight/demo_data3$bmi)
-## demo_data3$bmi_high <- 1*(demo_data3$bmi>30)
-## demo_data3 <- demo_data3[,c("record","bmi","stweight","height_m","bmi_high")]
-## demo_data3
+demo_data3 <- na.omit(demo_data)
+demo_data3$height_m <- sqrt(demo_data3$stweight/demo_data3$bmi)
+demo_data3$bmi_high <- 1*(demo_data3$bmi>30)
+demo_data3 <- demo_data3[,c("record","bmi","stweight","height_m","bmi_high")]
+demo_data3
 
 
 ## ---- eval=FALSE, echo=FALSE---------------------------------------------
-## # RUN THESE AFTER KNITTING
-## knitr::purl(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.Rmd"), out = here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.R"))
-## # remotes::install_github('rstudio/pagedown')
-## pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html"))
+# RUN THESE AFTER KNITTING
+knitr::purl(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.Rmd"), out = here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.R"))
+# remotes::install_github('rstudio/pagedown')
+pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html"))
 

@@ -48,8 +48,6 @@ demo_data &lt;- read_csv("data/yrbss_demo.csv")
 
 1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
 
-1. Subset the data so that only character variables are included and save the result as `newdata`.
-
 1. Filter `newdata` to only keep Asian or Native Hawaiian/other PI subjects that are in the 9th grade, and save again as `newdata`.
 
 1. Filter `newdata` to remove subjects younger than 13, and save as `newdata`.
@@ -65,7 +63,6 @@ demo_data &lt;- read_csv("data/yrbss_demo.csv")
 
 ```r
 newdata &lt;- demo_data %&gt;%
-  select_if(is.character) %&gt;%
   filter(race7 %in% c("Asian","Native Hawaiian/other PI"), 
          grade == "9th",
          age != "12 years old or younger") %&gt;%
@@ -74,19 +71,19 @@ newdata
 ```
 
 ```
-# A tibble: 503 x 4
-   age          sex    grade race7                   
-   &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                   
- 1 15 years old Male   9th   Asian                   
- 2 14 years old Female 9th   Asian                   
- 3 14 years old Male   9th   Asian                   
- 4 14 years old Female 9th   Native Hawaiian/other PI
- 5 15 years old Male   9th   Asian                   
- 6 14 years old Female 9th   Asian                   
- 7 15 years old Female 9th   Native Hawaiian/other PI
- 8 15 years old Male   9th   Asian                   
- 9 14 years old Female 9th   Asian                   
-10 15 years old Male   9th   Asian                   
+# A tibble: 503 x 7
+    record age          sex    grade race7                     bmi stweight
+     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                   &lt;dbl&gt;    &lt;dbl&gt;
+ 1  924270 15 years old Male   9th   Asian                    30.7     81.6
+ 2 1310726 14 years old Female 9th   Asian                    30.7     81.6
+ 3  256154 14 years old Male   9th   Asian                    NA       NA  
+ 4  930610 14 years old Female 9th   Native Hawaiian/other …  20.9     59.0
+ 5  256461 15 years old Male   9th   Asian                    NA       NA  
+ 6  767725 14 years old Female 9th   Asian                    19.1     50.8
+ 7  769030 15 years old Female 9th   Native Hawaiian/other …  19.4     NA  
+ 8  923983 15 years old Male   9th   Asian                    21.0     70.3
+ 9  931000 14 years old Female 9th   Asian                    18.9     45.4
+10 1305660 15 years old Male   9th   Asian                    24.4     64.9
 # … with 493 more rows
 ```
 
@@ -100,7 +97,7 @@ dim(newdata) # both nrow and ncol
 ```
 
 ```
-[1] 503   4
+[1] 503   7
 ```
 
 ```r
@@ -116,7 +113,7 @@ ncol(newdata)
 ```
 
 ```
-[1] 4
+[1] 7
 ```
 
 ---
@@ -128,7 +125,7 @@ Save the results in each step as `newdata`.
 
 1. Import `demo_data.csv` in the `data` folder if you haven't already done so.
 
-1. Create a variable called `grade_num` that has the numeric grade number (use `as.numeirc`).
+1. Create a variable called `grade_num` that has the numeric grade number (use `as.numeric`).
 
 1. Filter the data to keep only students in grade 11 or higher.
 
