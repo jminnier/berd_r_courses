@@ -1,0 +1,452 @@
+---
+title: Data Wrangling in R with the Tidyverse (Part 2)
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+date: "<span style = 'font-size: 80%;'>2019/04/18 (Part 1) & 2019/04/25 (Part 2) <br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_tidy2](http://bit.ly/berd_tidy2) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_tidy2_pdf](http://bit.ly/berd_tidy2_pdf)</span>"
+output: 
+  xaringan::moon_reader:
+    css: [css/xaringan-themer.css, css/my-theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:9"
+    includes:
+      in_header: ../header.html   
+editor_options: 
+  chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+library(lubridate)
+library(janitor)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  #fig.width=10.5, 
+  #fig.height=4,
+  fig.align = "center",
+  rows.print=7,
+  echo=TRUE,
+  highlight = TRUE,
+  prompt = FALSE, # IF TRUE adds a > before each code input
+  comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  )
+
+# set ggplot theme
+theme_set(theme_bw(base_size = 24))
+```
+
+
+
+```{r xaringan-themer, include = FALSE}
+# Use xaringan theme from first set
+```
+
+
+
+# Load files for today's workshop
+
+.pull-left-40[
+- Open the slides of this workshop: [bit.ly/berd_tidy2](https://bit.ly/berd_tidy2)
+- If you haven't already,
+  + Open the [pre-workshop homework](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
+  + Follow steps 1-5
+  + Download zip folder
+  + Open `berd_tidyverse_project.Rproj`
+- Open a new R script and run the commands to the right
+]
+
+.pull-right-60[
+```{r}
+# install.packages("tidyverse","janitor")  
+library(tidyverse)
+library(lubridate)  
+library(janitor)
+demo_data <- read_csv("data/yrbss_demo.csv")
+qn_data <- read_csv("data/yrbss_qn.csv")
+```
+
+
+]
+
+<center><img src="img/horst_tidyverse.jpg" width="30%" height="30%"></center>[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# Learning objectives
+
+<!-- TO-DO: update after finishing rest of slides -->
+
+Previously, in Part 1:
+- What is data wrangling?
+- A few good practices in R/RStudio
+- What is tidy data?
+- What is tidyverse?
+- Manipulate data 
+
+Part 2:
+- Reshaping (long/wide format) data
+- Join/merge data sets
+- Data cleaning, including examples for dealing with:
+  + Missing data
+  + Strings/character vectors
+  + Factors/categorical variables
+  + Dates
+
+
+---
+
+class: center, middle, inverse
+
+# More Data Wrangling
+
+<center><img src="img/dplyr_wrangling.png" width="55%" height="55%"></center>
+
+[Alison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+
+---
+
+# Review Part 1: manipulating data
+
+## Columns ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#28))
+
+- `select()` to subset columns
+- `rename()` to rename columns
+- `mutate()` to add new columns
+  + `separate()` and `unite()` are shortcuts for specific `mutate` type operations
+
+## Rows ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#25))
+
+- `filter()` to subset rows
+  + `na.omit()` and `distinct()` are shortcuts for specific `filter` type operations
+- `arrange()` to order the data
+
+---
+
+# Changing *all* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
+
+`mutate_all()`, `rename_all()`: applies a function to all columns
+
+
+```{r}
+demo_data %>% mutate_all(as.character) %>% head(3)
+```
+
+```{r}
+demo_data %>% rename_all(toupper) %>% head(3)
+```
+
+
+---
+
+# Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
+
+- `mutate_at()`, `rename_at()`: uses `vars()` to select specific variables to apply a function to
+
+```{r}
+demo_data %>% mutate_at(vars(contains("race")), as.factor) %>% head(3)
+```
+
+```{r}
+demo_data %>% rename_at(vars(record:grade),toupper) %>% head(3)
+```
+
+---
+
+# Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
+
+- `mutate_if()`, `rename_if()`, `select_if()`: uses a function that returns TRUE/FALSE to select columns and applies function on the TRUE columns
+
+
+```{r}
+demo_data %>% mutate_if(is.numeric, round, digits = 0) %>% head(3)
+```
+
+```{r}
+demo_data %>% rename_if(is.character, str_sub, 1L, 2L) %>% head(3)
+```
+
+---
+
+# `add_row()` to add one or more rows
+
+```{r}
+demo_data %>% 
+  add_row(record=100, age=NA, sex="Female", grade="9th") %>% #<<
+  arrange(record) %>% head(3)
+```
+
+```{r}
+demo_data %>% 
+  add_row(record=100:102, bmi=c(25,30,18)) %>% #<<
+  arrange(record) %>% head(3)
+```
+
+---
+
+# `add_column()` to add one or more columns
+
+
+```{r}
+demo_data %>% 
+  add_column(study_date = "2019-04-10", .before="age") %>% #<<
+  head(3)
+```
+
+```{r}
+demo_data %>% 
+  add_column(id = 1:nrow(demo_data), .before="record") %>% #<<
+  head(3)
+```
+
+
+
+---
+class: center, inverse, middle
+
+# Quick tips on summarizing data
+
+---
+
+# Frequency tables (using the `janitor` package)
+
+.pull-left[
+```{r}
+demo_data %>% tabyl(grade)
+```
+
+```{r}
+# output can be treated as tibble
+demo_data %>% tabyl(grade) %>% select(-n)
+```
+]
+.pull-right[
+```{r}
+demo_data %>%
+  tabyl(grade) %>%
+  adorn_totals("row") %>%
+  adorn_pct_formatting(digits=2)
+```
+
+]
+
+---
+
+# 2x2 tables
+
+.pull-left-40[
+```{r}
+demo_data %>% tabyl(grade, sex)
+```
+]
+.pull-right-60[
+```{r}
+demo_data %>% tabyl(grade, sex) %>%
+  adorn_percentages(denominator = "col") %>%
+  adorn_totals("row") %>%
+  adorn_pct_formatting() %>%
+  adorn_ns()
+```
+]
+
+Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when using `factors`.
+
+---
+
+class: center, inverse, middle
+
+# Combining data
+
+---
+
+# `bind_rows()`
+
+
+
+```{r, echo=FALSE}
+hdata1 <- tibble(id = 1:2, name = c("Nina","Yi"), height=c(2, 1), age=c(4,2))
+hdata2 <- tibble(id = 7:9, name = c("Bo","Al","Juan"), height=c(2, 1.7, 1.8), years=c(3,1,2))
+```
+
+
+.pull-left[
+```{r}
+hdata1
+```
+
+```{r}
+hdata2
+```
+]
+.pull-right[
+```{r}
+bind_rows(hdata1, hdata2, .id = "group") #<< 
+```
+
+<center><img src="img/bind_rows_cheatsheet.png" width="80%" height="80%"><br>
+<a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">dplyr data transformation cheatsheet</a>
+</center>
+]
+
+---
+
+# `bind_cols()`?
+
+**Not a good idea.** Use `join` to preserve ordering!!
+
+```{r}
+demo_sub <- demo_data %>% slice(1:20) # first 20 rows of demo_data
+qn_sub <- qn_data %>% slice(1:20)     # first 20 rows of qn_data
+bind_cols(demo_sub, qn_sub)           # blindly bind columns #<<   
+```
+
+
+---
+
+# *Join*ing your data sets
+
+- Uses overlapping or selected columns to combine two or more data sets
+- The joining column observations must match!
+- Also called "merging", or "mutating join"
+- Based off of SQL operations for databases
+
+<center><img src="img/joins_colors.png" width="55%" height="55%"><a href="https://rpubs.com/williamsurles/293454"><br>William Surles</a>
+</center>
+
+
+
+---
+
+# All the joins
+
+.pull-left[
+<center>
+<!-- <img src="img/joins_x_y.png" width="20%" height="20%"><br> -->
+<img src="img/joins_cheatsheet_expl.png" width="80%" height="80%"><br>
+<a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">dplyr data transformation cheatsheet</a>
+</center>
+]
+.pull-right[
+<center><img src="img/dplyr_join_venn.png" width="70%" height="70%"><br>
+<a href="https://twitter.com/yutannihilation/status/551572539697143808">Hiroaki Yutani</a></center>
+]
+
+---
+
+# Which columns will be used to join?
+
+*All* overlapping (intersecting) column names, or:
+
+<center>
+<img src="img/joins_cheatsheet_arguments.png" width="60%" height="60%"><br>
+<a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">dplyr data transformation cheatsheet</a>
+</center>
+
+---
+
+# Most commonly used: `left_join()`
+
+- `left_join(x,y)` includes all observations in `x`, regardless of whether they match or not
+- adds all columns in `y` but only rows that match `x` observations
+
+.pull-left[
+```{r, results="hold"}
+df1 <- tibble(x = c(1, 2), y = 2:1)
+df2 <- tibble(x = c(1, 3), z = 10:11)
+df1
+df2
+```
+]
+.pull-right[
+```{r}
+left_join(df1, df2)
+```
+]
+
+---
+
+# Things to know about joins
+
+- mutating joins are used to add new variables, but they can also generate new observations
+- if a match is not unique, a join will add all possible combinations
+
+```{r}
+df1 <- tibble(x = c(1, 1, 2), y = 1:3)
+df2 <- tibble(x = c(1, 1, 2), z = c("a", "b", "a"))
+
+df1 %>% left_join(df2)
+```
+
+---
+
+# Learn more about joins
+
+- [Two-table verbs vignette for `dplyr` package](https://dplyr.tidyverse.org/articles/two-table.html)
+- [Jenny Bryan's STAT545 dplyr cheatsheet for join](https://stat545.com/bit001_dplyr-cheatsheet.html)
+- [R for Data Science's "Relational data" chapter (great diagrams)](https://r4ds.had.co.nz/relational-data.html)
+
+
+---
+# Resources - Tidyverse & Data Wrangling
+
+Links
+
+- [Learn the tidyverse](https://www.tidyverse.org/learn/)
+- [Data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+Some of this is drawn from materials in online books/lessons:
+
+- [R for Data Science](https://r4ds.had.co.nz/index.html) - by Garrett Grolemund & Hadley Wickham
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
+- [A gRadual intRoduction to the tidyverse](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse) - Workshop for Cascadia R 2017 by Chester Ismay and Ted Laderas
+- ["Tidy Data" by Hadley Wickham](https://vita.had.co.nz/papers/tidy-data.pdf)
+---
+
+# Possible Future Workshop Topics?
+
+- reproducible reports in R
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr
+- statistical modeling in R
+
+---
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+<!-- TO-DO: Update??? Create file with jsut the R code-->
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2_practice_solutions.html)
+
+
+<!-- TO DO: move all images to project folder so print pdf below works? -->
+```{r, eval=FALSE, echo=FALSE}
+# RUN THESE AFTER KNITTING
+# create R file
+knitr::purl(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.Rmd"), out = here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.R"))
+# remotes::install_github('rstudio/pagedown')
+pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html"))
+```

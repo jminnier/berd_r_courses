@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Wrangling in R with the Tidyverse (Part 2)</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# Data Wrangling in R with the Tidyverse (Part 2)
+### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
+### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> slides: <a href="http://bit.ly/berd_tidy2">bit.ly/berd_tidy2</a> <br> pdf: <a href="http://bit.ly/berd_tidy2_pdf">bit.ly/berd_tidy2_pdf</a></span>
+
+---
+
+
+layout: true
+  
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/berd_tidy&lt;/span&gt;&lt;/div&gt;  --&gt;
+
+---
+
+
+
+
+
+
+
+
+
+# Load files for today's workshop
+
+.pull-left-40[
+- Open the slides of this workshop: [bit.ly/berd_tidy2](https://bit.ly/berd_tidy2)
+- If you haven't already,
+  + Open the [pre-workshop homework](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_pre_course_homework.html)
+  + Follow steps 1-5
+  + Download zip folder
+  + Open `berd_tidyverse_project.Rproj`
+- Open a new R script and run the commands to the right
+]
+
+.pull-right-60[
+
+```r
+# install.packages("tidyverse","janitor")  
+library(tidyverse)
+library(lubridate)  
+library(janitor)
+demo_data &lt;- read_csv("data/yrbss_demo.csv")
+qn_data &lt;- read_csv("data/yrbss_qn.csv")
+```
+
+
+]
+
+&lt;center&gt;&lt;img src="img/horst_tidyverse.jpg" width="30%" height="30%"&gt;&lt;/center&gt;[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# Learning objectives
+
+&lt;!-- TO-DO: update after finishing rest of slides --&gt;
+
+Previously, in Part 1:
+- What is data wrangling?
+- A few good practices in R/RStudio
+- What is tidy data?
+- What is tidyverse?
+- Manipulate data 
+
+Part 2:
+- Reshaping (long/wide format) data
+- Join/merge data sets
+- Data cleaning, including examples for dealing with:
+  + Missing data
+  + Strings/character vectors
+  + Factors/categorical variables
+  + Dates
+
+
+---
+
+class: center, middle, inverse
+
+# More Data Wrangling
+
+&lt;center&gt;&lt;img src="img/dplyr_wrangling.png" width="55%" height="55%"&gt;&lt;/center&gt;
+
+[Alison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+
+---
+
+# Review Part 1: manipulating data
+
+## Columns ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#28))
+
+- `select()` to subset columns
+- `rename()` to rename columns
+- `mutate()` to add new columns
+  + `separate()` and `unite()` are shortcuts for specific `mutate` type operations
+
+## Rows ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#25))
+
+- `filter()` to subset rows
+  + `na.omit()` and `distinct()` are shortcuts for specific `filter` type operations
+- `arrange()` to order the data
+
+---
+
+# Changing *all* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
+
+`mutate_all()`, `rename_all()`: applies a function to all columns
+
+
+
+```r
+demo_data %&gt;% mutate_all(as.character) %&gt;% head(3)
+```
+
+```
+# A tibble: 3 x 8
+  record age             sex    grade race4      race7      bmi    stweight
+  &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;   
+1 931897 15 years old    Female 10th  White      White      17.179 54.43   
+2 333862 17 years old    Female 12th  White      White      20.24… 57.15   
+3 36253  18 years old o… Male   11th  Hispanic/… Hispanic/… &lt;NA&gt;   &lt;NA&gt;    
+```
+
+
+```r
+demo_data %&gt;% rename_all(toupper) %&gt;% head(3)
+```
+
+```
+# A tibble: 3 x 8
+  RECORD AGE             SEX    GRADE RACE4       RACE7        BMI STWEIGHT
+   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+1 931897 15 years old    Female 10th  White       White       17.2     54.4
+2 333862 17 years old    Female 12th  White       White       20.2     57.2
+3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…  NA       NA  
+```
+
+
+---
+
+# Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
+
+- `mutate_at()`, `rename_at()`: uses `vars()` to select specific variables to apply a function to
+
+
+```r
+demo_data %&gt;% mutate_at(vars(contains("race")), as.factor) %&gt;% head(3)
+```
+
+```
+# A tibble: 3 x 8
+  record age             sex    grade race4       race7        bmi stweight
+   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;fct&gt;       &lt;fct&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+1 931897 15 years old    Female 10th  White       White       17.2     54.4
+2 333862 17 years old    Female 12th  White       White       20.2     57.2
+3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…  NA       NA  
+```
+
+
+```r
+demo_data %&gt;% rename_at(vars(record:grade),toupper) %&gt;% head(3)
+```
+
+```
+# A tibble: 3 x 8
+  RECORD AGE             SEX    GRADE race4       race7        bmi stweight
+   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+1 931897 15 years old    Female 10th  White       White       17.2     54.4
+2 333862 17 years old    Female 12th  White       White       20.2     57.2
+3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…  NA       NA  
+```
+
+---
+
+# Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
+
+- `mutate_if()`, `rename_if()`, `select_if()`: uses a function that returns TRUE/FALSE to select columns and applies function on the TRUE columns
+
+
+
+```r
+demo_data %&gt;% mutate_if(is.numeric, round, digits = 0) %&gt;% head(3)
+```
+
+```
+# A tibble: 3 x 8
+  record age             sex    grade race4       race7        bmi stweight
+   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+1 931897 15 years old    Female 10th  White       White         17       54
+2 333862 17 years old    Female 12th  White       White         20       57
+3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…    NA       NA
+```
+
+
+```r
+demo_data %&gt;% rename_if(is.character, str_sub, 1L, 2L) %&gt;% head(3)
+```
+
+```
+# A tibble: 3 x 8
+  record ag              se     gr    ra          ra           bmi stweight
+   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+1 931897 15 years old    Female 10th  White       White       17.2     54.4
+2 333862 17 years old    Female 12th  White       White       20.2     57.2
+3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…  NA       NA  
+```
+
+---
+
+# `add_row()` to add one or more rows
+
+
+```r
+demo_data %&gt;% 
+* add_row(record=100, age=NA, sex="Female", grade="9th") %&gt;%
+  arrange(record) %&gt;% head(3)
+```
+
+```
+# A tibble: 3 x 8
+  record age   sex    grade race4           race7             bmi stweight
+   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+1    100 &lt;NA&gt;  Female 9th   &lt;NA&gt;            &lt;NA&gt;               NA       NA
+2  30592 &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;            &lt;NA&gt;               NA       NA
+3  30593 &lt;NA&gt;  &lt;NA&gt;   9th   Hispanic/Latino Hispanic/Latino    NA       NA
+```
+
+
+```r
+demo_data %&gt;% 
+* add_row(record=100:102, bmi=c(25,30,18)) %&gt;%
+  arrange(record) %&gt;% head(3)
+```
+
+```
+# A tibble: 3 x 8
+  record age   sex   grade race4 race7   bmi stweight
+   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1    100 &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;     25       NA
+2    101 &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;     30       NA
+3    102 &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;     18       NA
+```
+
+---
+
+# `add_column()` to add one or more columns
+
+
+
+```r
+demo_data %&gt;% 
+* add_column(study_date = "2019-04-10", .before="age") %&gt;%
+  head(3)
+```
+
+```
+# A tibble: 3 x 9
+  record study_date age        sex    grade race4    race7     bmi stweight
+   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+1 931897 2019-04-10 15 years … Female 10th  White    White    17.2     54.4
+2 333862 2019-04-10 17 years … Female 12th  White    White    20.2     57.2
+3  36253 2019-04-10 18 years … Male   11th  Hispani… Hispan…  NA       NA  
+```
+
+
+```r
+demo_data %&gt;% 
+* add_column(id = 1:nrow(demo_data), .before="record") %&gt;%
+  head(3)
+```
+
+```
+# A tibble: 3 x 9
+     id record age          sex    grade race4     race7       bmi stweight
+  &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1     1 931897 15 years old Female 10th  White     White      17.2     54.4
+2     2 333862 17 years old Female 12th  White     White      20.2     57.2
+3     3  36253 18 years ol… Male   11th  Hispanic… Hispanic…  NA       NA  
+```
+
+
+
+---
+class: center, inverse, middle
+
+# Quick tips on summarizing data
+
+---
+
+# Frequency tables (using the `janitor` package)
+
+.pull-left[
+
+```r
+demo_data %&gt;% tabyl(grade)
+```
+
+```
+ grade    n percent valid_percent
+  10th 4907 0.24535     0.2504338
+  11th 4891 0.24455     0.2496172
+  12th 4577 0.22885     0.2335919
+   9th 5219 0.26095     0.2663570
+  &lt;NA&gt;  406 0.02030            NA
+```
+
+
+```r
+# output can be treated as tibble
+demo_data %&gt;% tabyl(grade) %&gt;% select(-n)
+```
+
+```
+ grade percent valid_percent
+  10th 0.24535     0.2504338
+  11th 0.24455     0.2496172
+  12th 0.22885     0.2335919
+   9th 0.26095     0.2663570
+  &lt;NA&gt; 0.02030            NA
+```
+]
+.pull-right[
+
+```r
+demo_data %&gt;%
+  tabyl(grade) %&gt;%
+  adorn_totals("row") %&gt;%
+  adorn_pct_formatting(digits=2)
+```
+
+```
+ grade     n percent valid_percent
+  10th  4907  24.54%        25.04%
+  11th  4891  24.45%        24.96%
+  12th  4577  22.88%        23.36%
+   9th  5219  26.10%        26.64%
+  &lt;NA&gt;   406   2.03%             -
+ Total 20000 100.00%       100.00%
+```
+
+]
+
+---
+
+# 2x2 tables
+
+.pull-left-40[
+
+```r
+demo_data %&gt;% tabyl(grade, sex)
+```
+
+```
+ grade Female Male NA_
+  10th   2332 2539  36
+  11th   2365 2496  30
+  12th   2277 2263  37
+   9th   2492 2684  43
+  &lt;NA&gt;    126  195  85
+```
+]
+.pull-right-60[
+
+```r
+demo_data %&gt;% tabyl(grade, sex) %&gt;%
+  adorn_percentages(denominator = "col") %&gt;%
+  adorn_totals("row") %&gt;%
+  adorn_pct_formatting() %&gt;%
+  adorn_ns()
+```
+
+```
+ grade        Female           Male          NA_
+  10th  24.3% (2332)  24.9%  (2539)  15.6%  (36)
+  11th  24.7% (2365)  24.5%  (2496)  13.0%  (30)
+  12th  23.7% (2277)  22.2%  (2263)  16.0%  (37)
+   9th  26.0% (2492)  26.4%  (2684)  18.6%  (43)
+  &lt;NA&gt;   1.3%  (126)   1.9%   (195)  36.8%  (85)
+ Total 100.0% (9592) 100.0% (10177) 100.0% (231)
+```
+]
+
+Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when using `factors`.
+
+---
+
+class: center, inverse, middle
+
+# Combining data
+
+---
+
+# `bind_rows()`
+
+
+
+
+
+
+.pull-left[
+
+```r
+hdata1
+```
+
+```
+# A tibble: 2 x 4
+     id name  height   age
+  &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1     1 Nina       2     4
+2     2 Yi         1     2
+```
+
+
+```r
+hdata2
+```
+
+```
+# A tibble: 3 x 4
+     id name  height years
+  &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1     7 Bo       2       3
+2     8 Al       1.7     1
+3     9 Juan     1.8     2
+```
+]
+.pull-right[
+
+```r
+*bind_rows(hdata1, hdata2, .id = "group")
+```
+
+```
+# A tibble: 5 x 6
+  group    id name  height   age years
+  &lt;chr&gt; &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 1         1 Nina     2       4    NA
+2 1         2 Yi       1       2    NA
+3 2         7 Bo       2      NA     3
+4 2         8 Al       1.7    NA     1
+5 2         9 Juan     1.8    NA     2
+```
+
+&lt;center&gt;&lt;img src="img/bind_rows_cheatsheet.png" width="80%" height="80%"&gt;&lt;br&gt;
+&lt;a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"&gt;dplyr data transformation cheatsheet&lt;/a&gt;
+&lt;/center&gt;
+]
+
+---
+
+# `bind_cols()`?
+
+**Not a good idea.** Use `join` to preserve ordering!!
+
+
+```r
+demo_sub &lt;- demo_data %&gt;% slice(1:20) # first 20 rows of demo_data
+qn_sub &lt;- qn_data %&gt;% slice(1:20)     # first 20 rows of qn_data
+*bind_cols(demo_sub, qn_sub)           # blindly bind columns
+```
+
+```
+# A tibble: 20 x 13
+   record age   sex   grade race4 race7   bmi stweight record1 q8    q12  
+    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 9.32e5 15 y… Fema… 10th  White White  17.2     54.4  922375 Neve… &lt;NA&gt; 
+ 2 3.34e5 17 y… Fema… 12th  White White  20.2     57.2   36718 Neve… &lt;NA&gt; 
+ 3 3.63e4 18 y… Male  11th  Hisp… Hisp…  NA       NA    187667 Did … &lt;NA&gt; 
+ 4 1.10e6 15 y… Male  10th  Blac… Blac…  28.0     85.7  109951 Did … &lt;NA&gt; 
+ 5 1.30e6 14 y… Male  9th   All … Mult…  24.5     66.7 1109733 Neve… &lt;NA&gt; 
+ 6 2.62e5 17 y… Male  9th   All … &lt;NA&gt;   NA       NA    761127 Most… &lt;NA&gt; 
+ 7 9.27e5 16 y… Male  11th  All … Asian  20.5     70.3  930811 Neve… &lt;NA&gt; 
+ 8 1.31e6 17 y… Male  12th  White White  19.3     59.0  401921 Rare… &lt;NA&gt; 
+ 9 5.06e5 18 y… Male  12th  Hisp… Hisp…  33.1    123.    42244 Rare… &lt;NA&gt; 
+10 1.80e5 14 y… Male  10th  Blac… Blac…  NA       NA    271375 Alwa… &lt;NA&gt; 
+11 1.10e6 15 y… Male  9th   &lt;NA&gt;  &lt;NA&gt;   17.1     45.4  639521 Rare… &lt;NA&gt; 
+12 1.31e6 16 y… Male  10th  Hisp… Hisp…  21.8     66.7 1309762 Did … 6 to…
+13 3.12e4 15 y… Male  10th  All … &lt;NA&gt;   NA       NA   1313278 Did … All …
+14 1.09e5 16 y… Male  11th  White White  NA       NA    640176 Did … &lt;NA&gt; 
+15 1.81e5 15 y… Male  9th   White White  NA       NA    925706 Did … &lt;NA&gt; 
+16 1.31e6 15 y… Fema… 10th  White White  22.0     65.8 1306447 Neve… I di…
+17 7.70e5 16 y… Fema… 10th  White White  32.4     86.2   31079 Neve… &lt;NA&gt; 
+18 9.38e5 18 y… Fema… 12th  White White  21.7     64.9  185891 Some… &lt;NA&gt; 
+19 1.31e6 16 y… Male  11th  White White  28.3    102.   270777 Alwa… &lt;NA&gt; 
+20 2.72e5 18 y… Fema… 11th  White White  NA       NA   1313665 Neve… 0 da…
+# … with 2 more variables: q31 &lt;chr&gt;, qn24 &lt;lgl&gt;
+```
+
+
+---
+
+# *Join*ing your data sets
+
+- Uses overlapping or selected columns to combine two or more data sets
+- The joining column observations must match!
+- Also called "merging", or "mutating join"
+- Based off of SQL operations for databases
+
+&lt;center&gt;&lt;img src="img/joins_colors.png" width="55%" height="55%"&gt;&lt;a href="https://rpubs.com/williamsurles/293454"&gt;&lt;br&gt;William Surles&lt;/a&gt;
+&lt;/center&gt;
+
+
+
+---
+
+# All the joins
+
+.pull-left[
+&lt;center&gt;
+&lt;!-- &lt;img src="img/joins_x_y.png" width="20%" height="20%"&gt;&lt;br&gt; --&gt;
+&lt;img src="img/joins_cheatsheet_expl.png" width="80%" height="80%"&gt;&lt;br&gt;
+&lt;a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"&gt;dplyr data transformation cheatsheet&lt;/a&gt;
+&lt;/center&gt;
+]
+.pull-right[
+&lt;center&gt;&lt;img src="img/dplyr_join_venn.png" width="70%" height="70%"&gt;&lt;br&gt;
+&lt;a href="https://twitter.com/yutannihilation/status/551572539697143808"&gt;Hiroaki Yutani&lt;/a&gt;&lt;/center&gt;
+]
+
+---
+
+# Which columns will be used to join?
+
+*All* overlapping (intersecting) column names, or:
+
+&lt;center&gt;
+&lt;img src="img/joins_cheatsheet_arguments.png" width="60%" height="60%"&gt;&lt;br&gt;
+&lt;a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"&gt;dplyr data transformation cheatsheet&lt;/a&gt;
+&lt;/center&gt;
+
+---
+
+# Most commonly used: `left_join()`
+
+- `left_join(x,y)` includes all observations in `x`, regardless of whether they match or not
+- adds all columns in `y` but only rows that match `x` observations
+
+.pull-left[
+
+```r
+df1 &lt;- tibble(x = c(1, 2), y = 2:1)
+df2 &lt;- tibble(x = c(1, 3), z = 10:11)
+df1
+df2
+```
+
+```
+# A tibble: 2 x 2
+      x     y
+  &lt;dbl&gt; &lt;int&gt;
+1     1     2
+2     2     1
+# A tibble: 2 x 2
+      x     z
+  &lt;dbl&gt; &lt;int&gt;
+1     1    10
+2     3    11
+```
+]
+.pull-right[
+
+```r
+left_join(df1, df2)
+```
+
+```
+# A tibble: 2 x 3
+      x     y     z
+  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+1     1     2    10
+2     2     1    NA
+```
+]
+
+---
+
+# Things to know about joins
+
+- mutating joins are used to add new variables, but they can also generate new observations
+- if a match is not unique, a join will add all possible combinations
+
+
+```r
+df1 &lt;- tibble(x = c(1, 1, 2), y = 1:3)
+df2 &lt;- tibble(x = c(1, 1, 2), z = c("a", "b", "a"))
+
+df1 %&gt;% left_join(df2)
+```
+
+```
+# A tibble: 5 x 3
+      x     y z    
+  &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;
+1     1     1 a    
+2     1     1 b    
+3     1     2 a    
+4     1     2 b    
+5     2     3 a    
+```
+
+---
+
+# Learn more about joins
+
+- [Two-table verbs vignette for `dplyr` package](https://dplyr.tidyverse.org/articles/two-table.html)
+- [Jenny Bryan's STAT545 dplyr cheatsheet for join](https://stat545.com/bit001_dplyr-cheatsheet.html)
+- [R for Data Science's "Relational data" chapter (great diagrams)](https://r4ds.had.co.nz/relational-data.html)
+
+
+---
+# Resources - Tidyverse &amp; Data Wrangling
+
+Links
+
+- [Learn the tidyverse](https://www.tidyverse.org/learn/)
+- [Data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+Some of this is drawn from materials in online books/lessons:
+
+- [R for Data Science](https://r4ds.had.co.nz/index.html) - by Garrett Grolemund &amp; Hadley Wickham
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
+- [A gRadual intRoduction to the tidyverse](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse) - Workshop for Cascadia R 2017 by Chester Ismay and Ted Laderas
+- ["Tidy Data" by Hadley Wickham](https://vita.had.co.nz/papers/tidy-data.pdf)
+---
+
+# Possible Future Workshop Topics?
+
+- reproducible reports in R
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr
+- statistical modeling in R
+
+---
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+&lt;!-- TO-DO: Update??? Create file with jsut the R code--&gt;
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2_practice_solutions.html)
+
+
+&lt;!-- TO DO: move all images to project folder so print pdf below works? --&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
