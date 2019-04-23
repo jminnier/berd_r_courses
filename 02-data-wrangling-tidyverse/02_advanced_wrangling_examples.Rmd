@@ -1,0 +1,195 @@
+---
+title: "Advanced Wrangling Examples"
+author: "Jessica Minnier & Meike Niederhausen"
+date: '`r Sys.Date()`'
+output:   
+  html_document:
+    highlight: pygments
+    keep_md: no
+    number_sections: yes
+    smart: yes
+    theme: yeti
+    toc: yes
+    toc_float: yes
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(readxl)
+library(skimr)
+library(janitor)
+library(jmmisc)
+#### Global chunk options -----------------------------
+
+knitr::opts_chunk$set(
+  eval       = TRUE,    # whether to run code in code chunk
+  include    = TRUE,    # whether to include the chunk output
+  echo       = TRUE,   # Whether to show code chunk in final output
+  error      = TRUE,    # whether to display error messages
+  message    = FALSE,   # whether to preserve messages
+  warning    = FALSE,   # whether to preserve warnings
+  comment    = "#>",    # a character string to append at start
+                        # of each line of results in final document
+  tidy       = FALSE,   # whether to tidy code chunks for display
+  dpi        = 96, 
+  fig.width  = 6,       # consistent width for figures
+  fig.asp    = 0.618,   # the golden ratio, can be adjusted in individual chunks
+  out.width  = "100%",   # controls the output size
+  fig.align  = "center" # give plot room to breathe
+)
+```
+
+
+# Import data
+
+```{r}
+# install.packages("tidyverse","janitor")  
+library(tidyverse)
+library(lubridate)  
+library(janitor)
+demo_data <- read_csv("data/yrbss_demo.csv")
+qn_data <- read_csv("data/yrbss_qn.csv")
+```
+
+# Look at the data
+
+```{r}
+glimpse(demo_data)
+glimpse(qn_data)
+```
+
+
+
+# Join the data
+
+Make sure all records are unique. How many overlap?
+```{r}
+length(unique(demo_data$record))
+
+length(unique(qn_data$record))
+
+length(intersect(demo_data$record, qn_data$record))
+```
+
+Looks like all records in qn_data are also in demo_data. Is that right?
+
+```{r}
+table(qn_data$record%in%demo_data$record)
+```
+
+
+```{r}
+all_data <- left_join(demo_data, qn_data)
+glimpse(all_data)
+```
+
+```{r}
+all_data_clean <- all_data %>%
+  # numeric grade
+  mutate(grade_num = as.numeric(str_replace(grade,"th","")),
+         female = 1*(sex=="Female"))%>%
+  # numeric age (<= 12 to 12 and >= 18 to 18)
+  separate(age,c("age_num"),"year",remove = FALSE) %>%
+  mutate(age_num = as.numeric(age_num)) %>%
+  # add bmi categories
+  mutate(
+    bmi_cat = case_when(
+      bmi < 18.5 ~ "underweight",               # condition ~ new_value
+      bmi >= 18.5 & bmi <= 24.9 ~ "normal",
+      bmi > 24.9 & bmi <= 29.9 ~ "overweight",
+      bmi > 29.9 ~ "obese")
+    )
+
+glimpse(all_data_clean)
+```
+
+Check that everything worked the right way:
+
+```{r}
+all_data_clean %>% tabyl(race4, race7)
+all_data_clean %>% tabyl(sex, female)
+all_data_clean %>% tabyl(age, age_num)
+all_data_clean %>% group_by(bmi_cat) %>% summarize(min(bmi),max(bmi))
+```
+
+Let's tackle the question answers. First rename them to something meaninful and then look at the levels.
+
+```{r}
+all_data_clean <- all_data_clean %>%
+  # q8 = How often wear bicycle helmet
+  # q12 = Texted while driving
+  # q31 = Ever smoked
+  # qn24 = Bullied past 12 months
+  rename(q_bike_helmet = q8,
+         q_text_while_driving = q12,
+         q_smoked_ever = q31,
+         q_bullied_past_12mo = qn24
+         )
+
+all_data_clean %>% tabyl(q_bike_helmet)
+all_data_clean %>% tabyl(q_text_while_driving)
+all_data_clean %>% tabyl(q_smoked_ever)
+all_data_clean %>% tabyl(q_bullied_past_12mo)
+```
+
+Convert the true/false and yes/no to numeric.
+
+```{r}
+all_data_clean <- all_data_clean %>%
+  mutate(q_smoked_ever = 1*(q_smoked_ever=="Yes"),
+         q_bullied_past_12mo = 1*(q_bullied_past_12mo))
+```
+
+# Missingness
+
+How many rows do we have?
+
+```{r}
+all_data_clean %>% nrow
+```
+
+How many rows are left if we take out any row with missingness?
+
+```{r}
+all_data_clean %>% na.omit %>% nrow
+```
+
+Could replace missing `sex` with `Unknown`:
+
+```{r}
+newdata <- all_data_clean %>%
+  mutate(sex2 = replace_na(sex, "Unknown"))
+
+newdata %>% tabyl(sex, sex2)
+```
+
+Could replace all NAs in the question columns with another string, i.e. "No answer":
+
+```{r}
+all_data_clean %>% 
+  mutate_at(vars(contains("q")),list(~replace_na(.,"No answer"))) %>%
+  tabyl(q_text_while_driving)
+```
+
+
+Could remove all data with missingness in sex and age
+
+```{r}
+newdata <- all_data_clean %>% drop_na(sex, age)
+nrow(newdata)
+```
+
+
+# Summarize
+
+What proportion were bullied in the last 12 months, by sex? Include counts of each sex category.
+
+```{r}
+all_data_clean %>% 
+  group_by(sex) %>% 
+  summarize(
+    "n"=n(),
+    "proportion_bullied"=round(mean(q_bullied_past_12mo,na.rm=T),3))
+```
+

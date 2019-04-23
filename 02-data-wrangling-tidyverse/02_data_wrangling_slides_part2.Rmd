@@ -71,10 +71,11 @@ theme_set(theme_bw(base_size = 24))
 
 .pull-right-60[
 ```{r}
-# install.packages("tidyverse","janitor")  
+# install.packages("tidyverse","janitor","glue")  
 library(tidyverse)
 library(lubridate)  
 library(janitor)
+library(glue)
 demo_data <- read_csv("data/yrbss_demo.csv")
 qn_data <- read_csv("data/yrbss_qn.csv")
 ```
@@ -267,6 +268,33 @@ Notice `grade` is not sorted in a pleasing way. We will learn how to deal with t
 
 ---
 
+# `summarize()`
+
+- we can summarize data as a whole, or in groups with `group_by()`
+- very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+- also use `summarize_at()`, `summarize_if()`, `summarize_all()`
+
+.pull-left[
+```{r}
+demo_data %>% 
+  summarize(bmi_mean = mean(bmi,na.rm=TRUE),
+            bmi_sd = sd(bmi,na.rm=TRUE))
+```
+]
+
+.pull-right[
+```{r}
+# by group variable
+demo_data %>% 
+  group_by(grade) %>% #<<
+  summarize(n_per_group = n(), #<<
+            bmi_mean = mean(bmi,na.rm=TRUE),
+            bmi_sd = sd(bmi,na.rm=TRUE))
+```
+]
+
+---
+
 class: center, inverse, middle
 
 # Combining data
@@ -304,7 +332,7 @@ bind_rows(hdata1, hdata2, .id = "group") #<<
 
 ---
 
-# `bind_cols()`?
+# `bind_cols()`? Nope!
 
 **Not a good idea.** Use `join` to preserve ordering!!
 
@@ -358,6 +386,18 @@ bind_cols(demo_sub, qn_sub)           # blindly bind columns #<<
 
 ---
 
+# Check overlapping column names
+
+```{r}
+colnames(demo_data)
+colnames(qn_data)
+intersect(colnames(demo_data), colnames(qn_data))
+```
+
+<!-- TO DO: add more interesting example? -->
+
+---
+
 # Most commonly used: `left_join()`
 
 - `left_join(x,y)` includes all observations in `x`, regardless of whether they match or not
@@ -398,6 +438,171 @@ df1 %>% left_join(df2)
 - [Two-table verbs vignette for `dplyr` package](https://dplyr.tidyverse.org/articles/two-table.html)
 - [Jenny Bryan's STAT545 dplyr cheatsheet for join](https://stat545.com/bit001_dplyr-cheatsheet.html)
 - [R for Data Science's "Relational data" chapter (great diagrams)](https://r4ds.had.co.nz/relational-data.html)
+
+---
+
+# Practice
+
+1. Add a column of 1s to `qn_data` called `qn_yes` and save the resulting data as `qn_data2`.
+
+1. Join `demo_data` and `qn_data2` by column `record`. Keep all rows from `demo_data` and only rows from `qn_data2` that match records in `demo_data`. Call the resulting data `all_data`.
+
+1. Print a `tabyl()` of `qn_yes` for the data `all_data`.
+
+1. Print a 2x2 table of `qn_yes` vs `grade`.
+
+1. Convert all character columns (check with `is.character`) to numeric by first using `as.factor` to convert to a factor and then checking for all factor variables (with `is.factor`) and use `as.numeric` to convert to numeric. Save data as `newdata`. Glimpse or print the first few rows of `newdata`. Compare `all_data` and `newdata`. How did `q31` change?
+
+```{r, include=FALSE}
+qn_data2 <- qn_data %>% add_column(qn_yes = 1)
+all_data <- left_join(demo_data, qn_data2)
+all_data %>% tabyl(qn_yes)
+all_data %>% tabyl(qn_yes,grade)
+newdata <- all_data %>% mutate_if(is.character, as.factor) %>%
+  mutate_if(is.factor, as.numeric)
+newdata
+all_data
+```
+
+<!-- TO DO: Make this better, just added some random stuff. -->
+
+---
+
+class: center, middle, inverse
+
+# Reshaping data (long vs wide)
+
+---
+
+# Long vs wide
+
+<!-- TO DO: define, show pic -->
+
+---
+
+# `gather()`
+
+---
+
+# `spread()`
+
+---
+
+# Practice
+
+---
+
+class: center, middle, inverse
+
+# Data cleaning
+
+---
+
+<!-- TO DO: just adding random stuff from here, NEED TO EDIT/CLEAN UP/ADD MORE EXPLANATIONS -->
+
+# Handling missing data
+
+Remove all rows with any missing data
+
+```{r}
+all_data %>% 
+  na.omit() %>% #<<
+  nrow
+```
+
+Remove all rows with any missing data in selected rows
+
+```{r}
+all_data %>% 
+  drop_na(sex, age) %>% #<<
+  nrow
+```
+
+---
+
+# Replace `NA`s with a string or value
+
+
+```{r}
+all_data %>% 
+  mutate(sex = replace_na(sex, "Unknown")) %>% #<<
+  tabyl(sex)
+
+all_data %>% 
+  mutate_at(vars(starts_with("q")),list(~replace_na(.,"No answer"))) %>% #<<
+  tabyl(q8, q31)
+```
+
+---
+
+# Replace specific values (i.e. "No answer", 9999, etc) with `NA`:
+
+```{r}
+all_data %>% tabyl(race4)
+all_data %>%
+  mutate(race4 = na_if(race4, "All other races")) %>% #<<
+  tabyl(race4)
+```
+
+---
+
+# Working with strings/character columns
+
+- Use the `tidyverse` package `stringr` (may need to load with `library(stringr)`)
+- To paste strings or values together, use the package `glue`
+
+---
+
+# `str_detect()` find strings
+
+```{r}
+all_data %>% 
+  filter(str_detect(race7,"Latino")) %>% #<<
+  head(3)
+
+all_data %>% 
+  mutate(q8_mentions_helmet = str_detect(q8,"helmet")) %>% #<<
+  tabyl(q8, q8_mentions_helmet)
+```
+
+---
+
+# Replace strings
+
+```{r}
+all_data %>% 
+  mutate(race4 = str_replace(race4,"Latino","Latinx")) %>% #<<
+  tabyl(race4)
+```
+
+---
+
+# Paste strings
+
+Use `glue()` to paste data together with strings. Put any column names or function operations in `{}`:
+
+```{r}
+all_data %>%
+  mutate(info = glue("Student {record} is {age} with BMI = {round(bmi,1)}")) %>%
+  select(record, info) %>%
+  head()
+```
+
+---
+
+# Paste strings of summary data
+
+Calculate the S.E. of the mean and create a column with "mean (SE)" of bmi:
+
+```{r}
+demo_data %>% 
+  group_by(sex) %>%
+  summarize(n_sex = n(),
+            bmi_mean = mean(bmi,na.rm=TRUE),
+            bmi_sd = sd(bmi,na.rm=TRUE)) %>%
+  mutate(bmi_mean_se = glue("{round(bmi_mean,1)} ({signif(bmi_sd/sqrt(n_sex),2)})"))
+```
+
 
 
 ---
