@@ -1191,12 +1191,13 @@ Some of this is drawn from materials in online books/lessons:
 
 - reproducible reports in R (probably next)
   + R Markdown and knitr
+  + Create dynamic Word, html, pdf documents with code + output
 - tables
 - ggplot2 visualization
 - advanced tidyverse: functions, purrr
 - statistical modeling in R
 
-Fill out feedback forms to suggest more or help us prioritize!
+**Fill out feedback forms to suggest more or help us prioritize!**
 
 ---
 
