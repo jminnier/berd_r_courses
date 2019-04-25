@@ -43,7 +43,7 @@ layout: true
   + Follow steps 1-5
   + Download zip folder
   + Open `berd_tidyverse_project.Rproj`
-- Open a new R script and run the commands to the right
+- __Open a new R script and run the commands to the right__
 ]
 
 .pull-right-60[
@@ -93,7 +93,7 @@ Part 2:
 
 class: center, middle, inverse
 
-# More Data Wrangling
+# More data wrangling
 
 &lt;center&gt;&lt;img src="img/dplyr_wrangling.png" width="55%" height="55%"&gt;&lt;/center&gt;
 
@@ -159,7 +159,7 @@ demo_data %&gt;% rename_all(toupper) %&gt;% head(3)
 
 # Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-- `mutate_at()`, `rename_at()`: uses `vars()` to select specific variables to apply a function to
+`mutate_at()`, `rename_at()`: uses `vars()` to select specific variables to apply a function to
 
 
 ```r
@@ -196,7 +196,7 @@ demo_data %&gt;% rename_at(vars(record:grade),toupper) %&gt;% head(3)
 
 # Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-- `mutate_if()`, `rename_if()`, `select_if()`: uses a function that returns TRUE/FALSE to select columns and applies function on the TRUE columns
+`mutate_if()`, `rename_if()`, `select_if()`: uses a function that returns TRUE/FALSE to select columns and applies function on the TRUE columns
 
 
 
@@ -681,10 +681,18 @@ see next slide...
 - Often we want to specify which columns to use, 
     + and also how to rename duplicated columns that were not merged
 
+.pull-left[
 &lt;center&gt;
-&lt;img src="img/joins_cheatsheet_arguments.png" width="45%" height="45%"&gt;&lt;br&gt;
+&lt;img src="img/joins_x_y.png" width="90%" height="90%"&gt;
+&lt;/center&gt;
+]
+
+.pull-right[
+&lt;center&gt;
+&lt;img src="img/joins_cheatsheet_arguments.png" width="90%" height="90%"&gt;&lt;br&gt;
 &lt;a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"&gt;dplyr data transformation cheatsheet&lt;/a&gt;
 &lt;/center&gt;
+]
 
 ---
 
@@ -1176,8 +1184,8 @@ A small data example:
 ```r
 mydata &lt;- tibble(id = 7:9, 
                  name = c("Bo","Al","Juan"), 
-                 height=c(2, NA, 1.8), 
-                 years=c(3,1,NA))
+                 height = c(2, NA, 1.8), 
+                 years = c(51,35,NA))
 mydata
 ```
 
@@ -1185,8 +1193,8 @@ mydata
 # A tibble: 3 x 4
      id name  height years
   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1     7 Bo       2       3
-2     8 Al      NA       1
+1     7 Bo       2      51
+2     8 Al      NA      35
 3     9 Juan     1.8    NA
 ```
 ]
@@ -1204,7 +1212,7 @@ mydata %&gt;% drop_na()
 # A tibble: 1 x 4
      id name  height years
   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1     7 Bo         2     3
+1     7 Bo         2    51
 ```
 
 Remove rows with `NA` in **selected columns**
@@ -1218,7 +1226,7 @@ mydata %&gt;% drop_na(height)
 # A tibble: 2 x 4
      id name  height years
   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1     7 Bo       2       3
+1     7 Bo       2      51
 2     9 Juan     1.8    NA
 ```
 ]
@@ -1241,8 +1249,8 @@ mydata
 # A tibble: 3 x 4
      id name  height years
   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1     7 Bo       2       3
-2     8 Al      NA       1
+1     7 Bo       2      51
+2     8 Al      NA      35
 3     9 Juan     1.8    NA
 ```
 
@@ -1259,8 +1267,8 @@ mydata %&gt;%
 # A tibble: 3 x 4
      id name  height  years
   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;
-1     7 Bo    2           3
-2     8 Al    Unknown     1
+1     7 Bo    2          51
+2     8 Al    Unknown    35
 3     9 Juan  1.8         0
 ```
 ]
@@ -1492,7 +1500,7 @@ all_data %&gt;%
 
 ---
 
-# Glue summary data
+# Using `glue` to summarize data
 
 - Useful for tables (will cover this more in another session)
 - Example, calculate the S.E. of the mean and create a column with "mean (SE)" of bmi:
@@ -1528,7 +1536,7 @@ demo_data %&gt;%
     + convert to minutes/years/etc
     + change timezones
     + add 1 month to a date...
-- [lubridate cheat sheet](https://www.rstudio.com/resources/cheatsheets/#lubridate)
+- [`lubridate` cheat sheet](https://www.rstudio.com/resources/cheatsheets/#lubridate)
 - `read_csv` and `read_excel` etc automatically import dates correctly
 
 ]
@@ -1545,14 +1553,14 @@ demo_data %&gt;%
 
 .pull-left-40[
 &lt;center&gt;&lt;img src="img/lubridate_parse_date_times.png" width="100%" height="100%"&gt;&lt;/center&gt;
-[lubridate cheat sheet](https://www.rstudio.com/resources/cheatsheets/#lubridate)
+[`lubridate` cheat sheet](https://www.rstudio.com/resources/cheatsheets/#lubridate)
 ]
 .pull-right-60[
 
 ```r
 timedata &lt;- 
-  tibble(name = c("Yi","Bo","DJ"), 
-         dob = c("10/31/1952","1/12/1984","2/02/2002"))
+ tibble(name = c("Yi","Bo","DJ"), 
+        dob=c("10/31/1952","1/12/1984","2/02/2002"))
 timedata %&gt;% 
   mutate(dob_date = mdy(dob),
          dob_wrong = dmy(dob)) # wrong order
@@ -1579,7 +1587,8 @@ timedata %&gt;% mutate(
   dob_year = year(dob),                      # extract the year
   time_since_birth = dob %--% today(),       # create an "interval"
   age = time_since_birth %/% years(1),       # modulus on "years"
-  dobplus = dob + days(10))                  # add 10 days
+  dobplus = dob + days(10)                   # add 10 days
+  )                  
 ```
 
 ```
@@ -1597,9 +1606,9 @@ timedata %&gt;% mutate(
 
 .pull-left-40[
 - Clean and order factors with `forcats` package
-- Will go over this for ggplot2 (visualization), statistical modeling (i.e. for `lm()`), and probably a workshop for creating tables
-- See [forcats cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
-and [forcats vignette]()
+- Will go over this for `ggplot2` (visualization), statistical modeling (i.e. for `lm()`), and probably a workshop for creating tables
+- See [`forcats` cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+and [`forcats` vignette]()
 ]
 .pull-right-60[
 &lt;center&gt;&lt;img src="img/forcats_cheatsheet.png" width="90%" height="90%"&gt;&lt;/center&gt;
@@ -1681,10 +1690,10 @@ mydata &lt;- tibble(loc = c("SW","NW","NW","NE","SE","SE"))
 
 mydata %&gt;% mutate(
   loc_fac = factor(loc),
-  loc2 = fct_collapse(loc_fac,                         # collapse levels
-                      south = c("SW","SE"),
-                      north = c("NE","NW")),
-  loc3 = fct_lump(loc_fac, n=2, other_level = "other") # top 2 levels + other
+* loc2 = fct_collapse(loc_fac,                         # collapse levels
+*                     south = c("SW","SE"),
+*                     north = c("NE","NW")),
+  loc3 = fct_lump(loc_fac, n=2, other_level = "other") # most common 2 levels + other
   )
 ```
 
@@ -1814,7 +1823,7 @@ class: center, middle, inverse
 
 ---
 
-# Resources - Tidyverse &amp; Data Wrangling
+# Resources - `tidyverse` &amp; data wrangling
 
 Links
 
@@ -1829,7 +1838,7 @@ Some of this is drawn from materials in online books/lessons:
 - ["Tidy Data" by Hadley Wickham](https://vita.had.co.nz/papers/tidy-data.pdf)
 ---
 
-# Possible Future Workshop Topics?
+# Possible future workshop topics?
 
 - reproducible reports in R
 - tables
