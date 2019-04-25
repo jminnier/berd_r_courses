@@ -1187,13 +1187,16 @@ Some of this is drawn from materials in online books/lessons:
 - ["Tidy Data" by Hadley Wickham](https://vita.had.co.nz/papers/tidy-data.pdf)
 ---
 
-# Possible future workshop topics?
+# Possible future workshop topics:
 
-- reproducible reports in R
+- reproducible reports in R (probably next)
+  + R Markdown and knitr
 - tables
 - ggplot2 visualization
 - advanced tidyverse: functions, purrr
 - statistical modeling in R
+
+Fill out feedback forms to suggest more or help us prioritize!
 
 ---
 
