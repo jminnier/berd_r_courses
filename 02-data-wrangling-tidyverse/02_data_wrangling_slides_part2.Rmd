@@ -1099,9 +1099,11 @@ class: center, middle, inverse
 
 ```{r}
 mydata <- tibble("First Name"= c("Yi","DJ"), "last init" = c("C","R"),
-                 "% in" = c(0.1, 0.5), "ñ$$$"= 1:2, " "=3:2,"     hi"=c("a","b"))
+                 "% in" = c(0.1, 0.5), "ñ$$$"= 1:2, " "=3:2,"     hi"=c("a","b"), 
+                 "null"=c(NA,NA))
 mydata
-mydata %>% clean_names() # in the janitor package
+mydata %>% clean_names() %>%        # in the janitor package #<<
+  remove_empty(c("rows","cols"))    # also useful
 ```
 
 ---

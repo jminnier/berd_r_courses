@@ -1724,20 +1724,22 @@ class: center, middle, inverse
 
 ```r
 mydata &lt;- tibble("First Name"= c("Yi","DJ"), "last init" = c("C","R"),
-                 "% in" = c(0.1, 0.5), "ñ$$$"= 1:2, " "=3:2,"     hi"=c("a","b"))
+                 "% in" = c(0.1, 0.5), "ñ$$$"= 1:2, " "=3:2,"     hi"=c("a","b"), 
+                 "null"=c(NA,NA))
 mydata
 ```
 
 ```
-# A tibble: 2 x 6
-  `First Name` `last init` `% in` `ñ$$$`   ` ` `     hi`
-  &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;  &lt;int&gt; &lt;int&gt; &lt;chr&gt;    
-1 Yi           C              0.1      1     3 a        
-2 DJ           R              0.5      2     2 b        
+# A tibble: 2 x 7
+  `First Name` `last init` `% in` `ñ$$$`   ` ` `     hi` null 
+  &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;  &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;lgl&gt;
+1 Yi           C              0.1      1     3 a         NA   
+2 DJ           R              0.5      2     2 b         NA   
 ```
 
 ```r
-mydata %&gt;% clean_names() # in the janitor package
+*mydata %&gt;% clean_names() %&gt;%        # in the janitor package
+  remove_empty(c("rows","cols"))    # also useful
 ```
 
 ```
