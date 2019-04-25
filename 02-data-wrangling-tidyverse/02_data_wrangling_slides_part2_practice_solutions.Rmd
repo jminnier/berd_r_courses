@@ -1,7 +1,7 @@
 ---
 title: Data Wrangling in R with the Tidyverse (Part 2) - Practice Solutions
 author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
-date: "<span style = 'font-size: 80%;'>2019/04/25 (Part 2)<br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_tidy1](http://bit.ly/berd_tidy1) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_tidy1_pdf](http://bit.ly/berd_tidy1_pdf)</span>"
+date: "<span style = 'font-size: 80%;'>2019/04/25 (Part 2)<br><br><br> `r icon::fa('link')` solutions: [bit.ly/berd_tidy2_solns](http://bit.ly/berd_tidy2_solns) <br>`r icon::fa('link')` slides: [bit.ly/berd_tidy2](http://bit.ly/berd_tidy2) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_tidy2_pdf](http://bit.ly/berd_tidy2_pdf)</span>"
 output: 
   xaringan::moon_reader:
     css: [css/xaringan-themer-solns.css, css/my-theme.css]

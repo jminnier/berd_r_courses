@@ -282,8 +282,8 @@ BP_both_long
 ## ------------------------------------------------------------------------
 mydata <- tibble(id = 7:9, 
                  name = c("Bo","Al","Juan"), 
-                 height=c(2, NA, 1.8), 
-                 years=c(3,1,NA))
+                 height = c(2, NA, 1.8), 
+                 years = c(51,35,NA))
 mydata
 
 
@@ -383,8 +383,8 @@ demo_data %>%
 
 ## ------------------------------------------------------------------------
 timedata <- 
-  tibble(name = c("Yi","Bo","DJ"), 
-         dob = c("10/31/1952","1/12/1984","2/02/2002"))
+ tibble(name = c("Yi","Bo","DJ"), 
+        dob=c("10/31/1952","1/12/1984","2/02/2002"))
 timedata %>% 
   mutate(dob_date = mdy(dob),
          dob_wrong = dmy(dob)) # wrong order
@@ -396,7 +396,8 @@ timedata %>% mutate(
   dob_year = year(dob),                      # extract the year
   time_since_birth = dob %--% today(),       # create an "interval"
   age = time_since_birth %/% years(1),       # modulus on "years"
-  dobplus = dob + days(10))                  # add 10 days
+  dobplus = dob + days(10)                   # add 10 days
+  )                  
 
 
 ## ------------------------------------------------------------------------
@@ -423,18 +424,20 @@ mydata <- tibble(loc = c("SW","NW","NW","NE","SE","SE"))
 
 mydata %>% mutate(
   loc_fac = factor(loc),
-  loc2 = fct_collapse(loc_fac,                         # collapse levels
-                      south = c("SW","SE"),
-                      north = c("NE","NW")),
-  loc3 = fct_lump(loc_fac, n=2, other_level = "other") # top 2 levels + other
+  loc2 = fct_collapse(loc_fac,                         # collapse levels #<<
+                      south = c("SW","SE"), #<<
+                      north = c("NE","NW")), #<<
+  loc3 = fct_lump(loc_fac, n=2, other_level = "other") # most common 2 levels + other
   )
 
 
 ## ------------------------------------------------------------------------
 mydata <- tibble("First Name"= c("Yi","DJ"), "last init" = c("C","R"),
-                 "% in" = c(0.1, 0.5), "ñ$$$"= 1:2, " "=3:2,"     hi"=c("a","b"))
+                 "% in" = c(0.1, 0.5), "ñ$$$"= 1:2, " "=3:2,"     hi"=c("a","b"), 
+                 "null"=c(NA,NA))
 mydata
-mydata %>% clean_names() # in the janitor package
+mydata %>% clean_names() %>%        # in the janitor package #<<
+  remove_empty(c("rows","cols"))    # also useful
 
 
 ## ------------------------------------------------------------------------
