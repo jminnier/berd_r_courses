@@ -79,25 +79,26 @@ library(glue)
 demo_data <- read_csv("data/yrbss_demo.csv")
 qn_data <- read_csv("data/yrbss_qn.csv")
 ```
-
+<center><img src="img/horst_tidyverse.jpg" width="90%" height="90%"></center>[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
 ]
 
-<center><img src="img/horst_tidyverse.jpg" width="30%" height="30%"></center>[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
 
 ---
 
 # Learning objectives
 
 <!-- TO-DO: update after finishing rest of slides -->
-
+.pull-left[
 Previously, in Part 1:
 - What is data wrangling?
 - A few good practices in R/RStudio
 - What is tidy data?
 - What is tidyverse?
 - Manipulate data 
-
+]
+.pull-right[
 Part 2:
 - Summarizing data
 - Combine (join) data sets
@@ -106,7 +107,9 @@ Part 2:
   + Missing data
   + Strings/character vectors
   + Dates
-
+  + Factors
+  + Messy names
+]
 <!-- + Factors/categorical variables -->
 ---
 
@@ -518,7 +521,12 @@ merged_data
 
 1. Create a 2x2 table of `qn_yes` vs `grade`.
 
+Note about the data:
 
+- q8 = How often wear bicycle helmet
+- q12 = Texted while driving
+- q31 = Ever smoked
+- qn24 = Bullied past 12 months
 
 ```{r, include=FALSE}
 qn_data2 <- qn_data %>% add_column(qn_yes = 1)
@@ -875,7 +883,7 @@ all_data %>%
 
 
 ```{r}
-mydata <- tibble(name = c("Joy","Ella","Jay"), state = c("New Mexico","New York","Oregon"))
+mydata <- tibble(name = c("J.M.","Ella","Jay"), state = c("New Mexico","New York","Oregon"))
 ```
 
 .pull-left[
@@ -898,13 +906,14 @@ mydata %>% mutate(
 # `str_replace_all()`, `str_replace()`
 
 ```{r}
-mydata %>% mutate(state = str_replace_all(state, "New", "Old"))
+mydata %>% mutate(state_old = str_replace_all(state, "New", "Old"))
 ```
 
 ```{r}
-mydata %>% mutate(name2 = str_replace(name, "l","-"),        # replace first instance
-                  name3 = str_replace_all(name, "l","-"),    # replace all instances
-                  state2 = str_replace_all(state, " ",""))   # remove spaces
+mydata %>% mutate(
+  name2 = str_replace(name, "l", "-"),           # first instance
+  name3 = str_replace_all(name, "l", "-"),       # all instances
+  name4 = str_replace_all(name, fixed("."), "")) # special characters with fixed()
 ```
 
 ---
@@ -914,8 +923,8 @@ mydata %>% mutate(name2 = str_replace(name, "l","-"),        # replace first ins
 Based on position `1` (`start = 1`) to length of string (`end = -1`)
 ```{r}
 mydata %>% mutate(
-  short_name  = str_sub(name, start=1, end=2),       # specify start to end
-  short_name2 = str_sub(name, end=2),                # specify only end
+  short_name  = str_sub(name, start = 1, end = 2),   # specify start to end
+  short_name2 = str_sub(name, end = 2),              # specify only end
   short_state = str_sub(state, end = -3)             # negative endices, from end
   )
 ```
@@ -1007,6 +1016,73 @@ timedata %>% mutate(
   dobplus = dob + days(10))                  # add 10 days
 ```
 
+---
+
+# Factors - categorical data
+
+.pull-left-40[
+- Clean and order factors with `forcats` package
+- Will go over this for ggplot2 (visualization), statistical modeling (i.e. for `lm()`), and probably a workshop for creating tables
+- See [forcats cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+and [forcats vignette]()
+]
+.pull-right-60[
+<center><img src="img/forcats_cheatsheet.png" width="90%" height="90%"></center>
+]
+
+---
+
+# `forcats` examples - specify levels `fct_relevel()`
+
+.pull-left[
+```{r}
+mydata <- tibble(
+  id = 1:4, 
+  grade=c("9th","10th","11th","9th")) %>%
+  mutate(grade_fac = factor(grade)) #<<
+levels(mydata$grade_fac)
+mydata %>% arrange(grade_fac)
+```
+
+]
+
+.pull-right[
+
+```{r}
+mydata <- mydata %>% 
+  mutate(
+    grade_fac = #<<
+      fct_relevel(grade_fac, #<<
+                  c("9th","10th","11th"))) #<<
+levels(mydata$grade_fac)
+mydata %>% arrange(grade_fac)
+```
+
+]
+
+---
+
+# `forcats` examples - collapse levels
+
+```{r}
+mydata <- tibble(loc = c("SW","NW","NW","NE","SE","SE"))
+
+mydata %>% mutate(
+  loc_fac = factor(loc),
+  loc2 = fct_collapse(loc_fac,                         # collapse levels
+                      south = c("SW","SE"),
+                      north = c("NE","NW")),
+  loc3 = fct_lump(loc_fac, n=2, other_level = "other") # top 2 levels + other
+  )
+```
+
+---
+
+class: center, middle, inverse
+
+# Other "janitor" work
+
+<center><img src="img/janitor_logo_small.png" width="30%" height="30%"></center>
 
 ---
 
@@ -1035,8 +1111,56 @@ read_excel("data/messy_names.xlsx", .name_repair = janitor::make_clean_names)
 
 # Practice
 
+Copy and paste the code below into R to create the dataset `messy_data`
+
+```{r}
+messy_data <- tibble(NAME = c("J N","A C","D E"), 
+                     `months follow up` = c("", 10, 11), 
+                     `Date of visit` = c("July 31, 2003", "Nov 12, 2005", "Aug 3, 2007"))
+```
+
+
+1. Clean column names with `clean_names()`.
+
+1. Replace missing ("") data in `months_follow_up` with NA.
+
+1. Convert `months_follow_up` to a numeric variable.
+
+1. Convert `date_of_visit` to a date.
+
+1. Create a column called `date_last_visit` that is the date of visit *plus* months of follow up.
+
+1. Remove rows (cases) with missing data in `months_follow_up`.
+
+1. Remove the spaces in `name`.
+
+```{r, echo=FALSE}
+clean_data <- messy_data %>% 
+  clean_names() %>%
+  mutate(
+    months_follow_up = replace_na(months_follow_up,""),
+    months_follow_up = as.numeric(months_follow_up),
+    date_of_visit = mdy(date_of_visit),
+    date_last_visit = date_of_visit + months(months_follow_up)) %>%
+  drop_na(months_follow_up) %>%
+  mutate(name = str_replace_all(name," ",""))
+```
+
 
 ---
+
+
+class: center, middle, inverse
+
+# This was a *lot*, but learning R gets easier!
+
+<center><img src="img/horst_r_first_then.png" width="40%" height="90%"></center>[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+
+
+
+---
+
 # Resources - Tidyverse & Data Wrangling
 
 Links

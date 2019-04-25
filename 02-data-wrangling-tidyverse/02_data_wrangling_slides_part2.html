@@ -4,6 +4,7 @@
     <title>Data Wrangling in R with the Tidyverse (Part 2)</title>
     <meta charset="utf-8">
     <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
     <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
@@ -14,7 +15,7 @@ class: left, middle, inverse, title-slide
 
 # Data Wrangling in R with the Tidyverse (Part 2)
 ### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
-### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> slides: <a href="http://bit.ly/berd_tidy2">bit.ly/berd_tidy2</a> <br> pdf: <a href="http://bit.ly/berd_tidy2_pdf">bit.ly/berd_tidy2_pdf</a></span>
+### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_tidy2">bit.ly/berd_tidy2</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_tidy2_pdf">bit.ly/berd_tidy2_pdf</a></span>
 
 ---
 
@@ -56,25 +57,26 @@ library(glue)
 demo_data &lt;- read_csv("data/yrbss_demo.csv")
 qn_data &lt;- read_csv("data/yrbss_qn.csv")
 ```
-
+&lt;center&gt;&lt;img src="img/horst_tidyverse.jpg" width="90%" height="90%"&gt;&lt;/center&gt;[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
 ]
 
-&lt;center&gt;&lt;img src="img/horst_tidyverse.jpg" width="30%" height="30%"&gt;&lt;/center&gt;[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
 
 ---
 
 # Learning objectives
 
 &lt;!-- TO-DO: update after finishing rest of slides --&gt;
-
+.pull-left[
 Previously, in Part 1:
 - What is data wrangling?
 - A few good practices in R/RStudio
 - What is tidy data?
 - What is tidyverse?
 - Manipulate data 
-
+]
+.pull-right[
 Part 2:
 - Summarizing data
 - Combine (join) data sets
@@ -83,7 +85,9 @@ Part 2:
   + Missing data
   + Strings/character vectors
   + Dates
-
+  + Factors
+  + Messy names
+]
 &lt;!-- + Factors/categorical variables --&gt;
 ---
 
@@ -798,7 +802,12 @@ merged_data
 
 1. Create a 2x2 table of `qn_yes` vs `grade`.
 
+Note about the data:
 
+- q8 = How often wear bicycle helmet
+- q12 = Texted while driving
+- q31 = Ever smoked
+- qn24 = Bullied past 12 months
 
 
 
@@ -1358,7 +1367,7 @@ all_data %&gt;%
 
 
 ```r
-mydata &lt;- tibble(name = c("Joy","Ella","Jay"), state = c("New Mexico","New York","Oregon"))
+mydata &lt;- tibble(name = c("J.M.","Ella","Jay"), state = c("New Mexico","New York","Oregon"))
 ```
 
 .pull-left[
@@ -1373,7 +1382,7 @@ mydata %&gt;% filter(str_detect(name,"J"))
 # A tibble: 2 x 2
   name  state     
   &lt;chr&gt; &lt;chr&gt;     
-1 Joy   New Mexico
+1 J.M.  New Mexico
 2 Jay   Oregon    
 ```
 ]
@@ -1390,7 +1399,7 @@ mydata %&gt;% mutate(
 # A tibble: 3 x 3
   name  state      new_state
   &lt;chr&gt; &lt;chr&gt;      &lt;lgl&gt;    
-1 Joy   New Mexico TRUE     
+1 J.M.  New Mexico TRUE     
 2 Ella  New York   TRUE     
 3 Jay   Oregon     FALSE    
 ```
@@ -1401,32 +1410,33 @@ mydata %&gt;% mutate(
 
 
 ```r
-mydata %&gt;% mutate(state = str_replace_all(state, "New", "Old"))
+mydata %&gt;% mutate(state_old = str_replace_all(state, "New", "Old"))
 ```
 
 ```
-# A tibble: 3 x 2
-  name  state     
-  &lt;chr&gt; &lt;chr&gt;     
-1 Joy   Old Mexico
-2 Ella  Old York  
-3 Jay   Oregon    
+# A tibble: 3 x 3
+  name  state      state_old 
+  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;     
+1 J.M.  New Mexico Old Mexico
+2 Ella  New York   Old York  
+3 Jay   Oregon     Oregon    
 ```
 
 
 ```r
-mydata %&gt;% mutate(name2 = str_replace(name, "l","-"),        # replace first instance
-                  name3 = str_replace_all(name, "l","-"),    # replace all instances
-                  state2 = str_replace_all(state, " ",""))   # remove spaces
+mydata %&gt;% mutate(
+  name2 = str_replace(name, "l", "-"),           # first instance
+  name3 = str_replace_all(name, "l", "-"),       # all instances
+  name4 = str_replace_all(name, fixed("."), "")) # special characters with fixed()
 ```
 
 ```
 # A tibble: 3 x 5
-  name  state      name2 name3 state2   
-  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
-1 Joy   New Mexico Joy   Joy   NewMexico
-2 Ella  New York   E-la  E--a  NewYork  
-3 Jay   Oregon     Jay   Jay   Oregon   
+  name  state      name2 name3 name4
+  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1 J.M.  New Mexico J.M.  J.M.  JM   
+2 Ella  New York   E-la  E--a  Ella 
+3 Jay   Oregon     Jay   Jay   Jay  
 ```
 
 ---
@@ -1437,8 +1447,8 @@ Based on position `1` (`start = 1`) to length of string (`end = -1`)
 
 ```r
 mydata %&gt;% mutate(
-  short_name  = str_sub(name, start=1, end=2),       # specify start to end
-  short_name2 = str_sub(name, end=2),                # specify only end
+  short_name  = str_sub(name, start = 1, end = 2),   # specify start to end
+  short_name2 = str_sub(name, end = 2),              # specify only end
   short_state = str_sub(state, end = -3)             # negative endices, from end
   )
 ```
@@ -1447,7 +1457,7 @@ mydata %&gt;% mutate(
 # A tibble: 3 x 5
   name  state      short_name short_name2 short_state
   &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;      
-1 Joy   New Mexico Jo         Jo          New Mexi   
+1 J.M.  New Mexico J.         J.          New Mexi   
 2 Ella  New York   El         El          New Yo     
 3 Jay   Oregon     Ja         Ja          Oreg       
 ```
@@ -1569,7 +1579,7 @@ timedata %&gt;% mutate(
   dob_year = year(dob),                      # extract the year
   time_since_birth = dob %--% today(),       # create an "interval"
   age = time_since_birth %/% years(1),       # modulus on "years"
-  dobplus = dob + days(10))                  # add time
+  dobplus = dob + days(10))                  # add 10 days
 ```
 
 ```
@@ -1581,6 +1591,122 @@ timedata %&gt;% mutate(
 3 DJ    2002-02-02     2002 2002-02-02 UTC--2019-04-25 UTC    17 2002-02-12
 ```
 
+---
+
+# Factors - categorical data
+
+.pull-left-40[
+- Clean and order factors with `forcats` package
+- Will go over this for ggplot2 (visualization), statistical modeling (i.e. for `lm()`), and probably a workshop for creating tables
+- See [forcats cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+and [forcats vignette]()
+]
+.pull-right-60[
+&lt;center&gt;&lt;img src="img/forcats_cheatsheet.png" width="90%" height="90%"&gt;&lt;/center&gt;
+]
+
+---
+
+# `forcats` examples - specify levels `fct_relevel()`
+
+.pull-left[
+
+```r
+mydata &lt;- tibble(
+  id = 1:4, 
+  grade=c("9th","10th","11th","9th")) %&gt;%
+* mutate(grade_fac = factor(grade))
+levels(mydata$grade_fac)
+```
+
+```
+[1] "10th" "11th" "9th" 
+```
+
+```r
+mydata %&gt;% arrange(grade_fac)
+```
+
+```
+# A tibble: 4 x 3
+     id grade grade_fac
+  &lt;int&gt; &lt;chr&gt; &lt;fct&gt;    
+1     2 10th  10th     
+2     3 11th  11th     
+3     1 9th   9th      
+4     4 9th   9th      
+```
+
+]
+
+.pull-right[
+
+
+```r
+mydata &lt;- mydata %&gt;% 
+  mutate(
+*   grade_fac =
+*     fct_relevel(grade_fac,
+*                 c("9th","10th","11th")))
+levels(mydata$grade_fac)
+```
+
+```
+[1] "9th"  "10th" "11th"
+```
+
+```r
+mydata %&gt;% arrange(grade_fac)
+```
+
+```
+# A tibble: 4 x 3
+     id grade grade_fac
+  &lt;int&gt; &lt;chr&gt; &lt;fct&gt;    
+1     1 9th   9th      
+2     4 9th   9th      
+3     2 10th  10th     
+4     3 11th  11th     
+```
+
+]
+
+---
+
+# `forcats` examples - collapse levels
+
+
+```r
+mydata &lt;- tibble(loc = c("SW","NW","NW","NE","SE","SE"))
+
+mydata %&gt;% mutate(
+  loc_fac = factor(loc),
+  loc2 = fct_collapse(loc_fac,                         # collapse levels
+                      south = c("SW","SE"),
+                      north = c("NE","NW")),
+  loc3 = fct_lump(loc_fac, n=2, other_level = "other") # top 2 levels + other
+  )
+```
+
+```
+# A tibble: 6 x 4
+  loc   loc_fac loc2  loc3 
+  &lt;chr&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;
+1 SW    SW      south other
+2 NW    NW      north NW   
+3 NW    NW      north NW   
+4 NE    NE      north other
+5 SE    SE      south SE   
+6 SE    SE      south SE   
+```
+
+---
+
+class: center, middle, inverse
+
+# Other "janitor" work
+
+&lt;center&gt;&lt;img src="img/janitor_logo_small.png" width="30%" height="30%"&gt;&lt;/center&gt;
 
 ---
 
@@ -1647,8 +1773,47 @@ read_excel("data/messy_names.xlsx", .name_repair = janitor::make_clean_names)
 
 # Practice
 
+Copy and paste the code below into R to create the dataset `messy_data`
+
+
+```r
+messy_data &lt;- tibble(NAME = c("J N","A C","D E"), 
+                     `months follow up` = c("", 10, 11), 
+                     `Date of visit` = c("July 31, 2003", "Nov 12, 2005", "Aug 3, 2007"))
+```
+
+
+1. Clean column names with `clean_names()`.
+
+1. Replace missing ("") data in `months_follow_up` with NA.
+
+1. Convert `months_follow_up` to a numeric variable.
+
+1. Convert `date_of_visit` to a date.
+
+1. Create a column called `date_last_visit` that is the date of visit *plus* months of follow up.
+
+1. Remove rows (cases) with missing data in `months_follow_up`.
+
+1. Remove the spaces in `name`.
+
+
+
 
 ---
+
+
+class: center, middle, inverse
+
+# This was a *lot*, but learning R gets easier!
+
+&lt;center&gt;&lt;img src="img/horst_r_first_then.png" width="40%" height="90%"&gt;&lt;/center&gt;[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+
+
+
+---
+
 # Resources - Tidyverse &amp; Data Wrangling
 
 Links
