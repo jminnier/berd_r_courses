@@ -99,15 +99,15 @@ Previously, in Part 1:
 - Manipulate data 
 
 Part 2:
-- Reshaping (long/wide format) data
-- Join/merge data sets
-- Data cleaning, including examples for dealing with:
+- Summarizing data
+- Combine (join) data sets
+- Reshaping data: wide vs. long formats 
+- Data cleaning:
   + Missing data
   + Strings/character vectors
-  + Factors/categorical variables
   + Dates
 
-
+<!-- + Factors/categorical variables -->
 ---
 
 class: center, middle, inverse
@@ -127,7 +127,7 @@ class: center, middle, inverse
 
 - `select()` to subset columns
 - `rename()` to rename columns
-- `mutate()` to add new columns
+- `mutate()` to add new columns or change values within existing columns
   + `separate()` and `unite()` are shortcuts for specific `mutate` type operations
 
 ## Rows ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#25))
@@ -140,14 +140,16 @@ class: center, middle, inverse
 
 # Changing *all* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-`mutate_all()`, `rename_all()`: applies a function to all columns
+`mutate_all()`, `rename_all()`: applies a function to *all* columns
 
 
 ```{r}
+# mutate_all changes the data in all columns
 demo_data %>% mutate_all(as.character) %>% head(3)
 ```
 
 ```{r}
+# rename_all changes all column names
 demo_data %>% rename_all(toupper) %>% head(3)
 ```
 
@@ -159,12 +161,15 @@ demo_data %>% rename_all(toupper) %>% head(3)
 - `mutate_at()`, `rename_at()`: uses `vars()` to select specific variables to apply a function to
 
 ```{r}
-demo_data %>% mutate_at(vars(contains("race")), as.factor) %>% head(3)
+# mutate_at changes the data in specified columns
+demo_data %>% mutate_at(vars(contains("race"), sex), as.factor) %>% head(3)
 ```
 
 ```{r}
+# rename_at changes specified column names
 demo_data %>% rename_at(vars(record:grade),toupper) %>% head(3)
 ```
+
 
 ---
 
@@ -177,40 +182,41 @@ demo_data %>% rename_at(vars(record:grade),toupper) %>% head(3)
 demo_data %>% mutate_if(is.numeric, round, digits = 0) %>% head(3)
 ```
 
+<!-- replaced  -->
+<!-- demo_data %>% rename_if(is.character, str_sub, 1L, 2L) %>% head(3)  -->
+<!-- with code below -->
+
 ```{r}
-demo_data %>% rename_if(is.character, str_sub, 1L, 2L) %>% head(3)
+demo_data %>% rename_if(is.character, str_sub, start = 1, end = 2) %>% head(3)
 ```
+
+<!-- https://stringr.tidyverse.org/reference/str_sub.html -->
 
 ---
 
-# `add_row()` to add one or more rows
+# Add one or more rows: `add_row()`
 
 ```{r}
-demo_data %>% 
-  add_row(record=100, age=NA, sex="Female", grade="9th") %>% #<<
+demo_data %>% add_row(record=100, age=NA, sex="Female", grade="9th") %>% #<<
   arrange(record) %>% head(3)
 ```
 
 ```{r}
-demo_data %>% 
-  add_row(record=100:102, bmi=c(25,30,18)) %>% #<<
+demo_data %>% add_row(record=100:102, bmi=c(25,30,18)) %>% #<<
   arrange(record) %>% head(3)
 ```
 
 ---
 
-# `add_column()` to add one or more columns
-
+# Add one or more columns: `add_column()`
 
 ```{r}
-demo_data %>% 
-  add_column(study_date = "2019-04-10", .before="age") %>% #<<
+demo_data %>% add_column(study_date = "2019-04-10", .after="record") %>% #<<
   head(3)
 ```
 
 ```{r}
-demo_data %>% 
-  add_column(id = 1:nrow(demo_data), .before="record") %>% #<<
+demo_data %>% add_column(id = 1:nrow(demo_data), .before="record") %>% #<<
   head(3)
 ```
 
@@ -221,12 +227,28 @@ class: center, inverse, middle
 
 # Quick tips on summarizing data
 
+## categorical data
+## numerical data
+
+<center>
+<img src="img/janitor_logo_small.png" width="20%" height="20%">
+<img src="img/hex-dplyr.png" width="20%" height="20%">  
+</center>
+
+[janitor](https://cran.r-project.org/web/packages/janitor/readme/README.html),   [dplyr](https://dplyr.tidyverse.org/)
+
+
+
+
+
 ---
 
-# Frequency tables (using the `janitor` package)
+# Frequency tables: `janitor` package's `tabyl` function 
 
 .pull-left[
+
 ```{r}
+# default table
 demo_data %>% tabyl(grade)
 ```
 
@@ -236,59 +258,70 @@ demo_data %>% tabyl(grade) %>% select(-n)
 ```
 ]
 .pull-right[
+
+`adorn_` your table!
 ```{r}
 demo_data %>%
   tabyl(grade) %>%
-  adorn_totals("row") %>%
-  adorn_pct_formatting(digits=2)
+  adorn_totals("row") %>% #<<
+  adorn_pct_formatting(digits=2)  #<<
 ```
 
 ]
 
+
 ---
 
-# 2x2 tables
+# 2x2 `tabyl`s
 
 .pull-left-40[
 ```{r}
+# default 2x2 table
 demo_data %>% tabyl(grade, sex)
 ```
+
+What adornments does the tabyl to right have?
 ]
 .pull-right-60[
 ```{r}
 demo_data %>% tabyl(grade, sex) %>%
-  adorn_percentages(denominator = "col") %>%
-  adorn_totals("row") %>%
-  adorn_pct_formatting() %>%
-  adorn_ns()
+  adorn_percentages(denominator = "col") %>% #<<
+  adorn_totals("row") %>% #<<
+  adorn_pct_formatting(digits = 1) %>% #<<
+  adorn_ns() #<<
 ```
 ]
 
-Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when using `factors`.
+- Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when we discuss `factors` as a data type in R.
+- Base R has a `table` function, but it is clunkier and the output is not a data frame. 
+- See the [tabyl vignette](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html) for more information, adorn options, & 3-way `tabyl`s
 
 ---
 
-# `summarize()`
+# Numerical data summaries: `summarize()`
 
-- we can summarize data as a whole, or in groups with `group_by()`
-- very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
-- also use `summarize_at()`, `summarize_if()`, `summarize_all()`
+- We can summarize data as a whole, or in groups with `group_by()`
+- `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+- Can also use `summarize_at()`, `summarize_if()`, `summarize_all()`
 
 .pull-left[
 ```{r}
+# summary of all data as a whole
 demo_data %>% 
-  summarize(bmi_mean = mean(bmi,na.rm=TRUE),
-            bmi_sd = sd(bmi,na.rm=TRUE))
+  summarize(bmi_mean =mean(bmi,na.rm=TRUE), #<<
+            bmi_sd = sd(bmi,na.rm=TRUE)) #<<
 ```
+
+What does `na.rm=TRUE` do and what happens if we leave it out?
 ]
 
 .pull-right[
 ```{r}
-# by group variable
+# summary by group variable
 demo_data %>% 
   group_by(grade) %>% #<<
-  summarize(n_per_group = n(), #<<
-            bmi_mean = mean(bmi,na.rm=TRUE),
+  summarize(n_per_group = n(), 
+            bmi_mean =mean(bmi,na.rm=TRUE),
             bmi_sd = sd(bmi,na.rm=TRUE))
 ```
 ]
@@ -297,32 +330,41 @@ demo_data %>%
 
 class: center, inverse, middle
 
-# Combining data
+# Combining data sets
+
+
+<center>
+<img src="img/combine_cases.png" width="25%" height="25%"><br>
+<img src="img/combine_variables.png" width="40%" height="40%">   be careful!!!<br>
+<a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">dplyr data transformation cheatsheet</a>
+</center>
+
 
 ---
 
-# `bind_rows()`
+# Rows (cases): paste data below each other 
 
-
+`bind_rows()` combines rows from different data sets  
+& accounts for different column names
 
 ```{r, echo=FALSE}
-hdata1 <- tibble(id = 1:2, name = c("Nina","Yi"), height=c(2, 1), age=c(4,2))
-hdata2 <- tibble(id = 7:9, name = c("Bo","Al","Juan"), height=c(2, 1.7, 1.8), years=c(3,1,2))
+data1 <- tibble(id = 1:2, name = c("Nina","Yi"), height=c(2, 1), age=c(4,2))
+data2 <- tibble(id = 7:9, name = c("Bo","Al","Juan"), height=c(2, 1.7, 1.8), years=c(3,1,2))
 ```
 
 
 .pull-left[
 ```{r}
-hdata1
+data1
 ```
 
 ```{r}
-hdata2
+data2
 ```
 ]
 .pull-right[
 ```{r}
-bind_rows(hdata1, hdata2, .id = "group") #<< 
+bind_rows(data1,data2, .id = "group") #<< 
 ```
 
 <center><img src="img/bind_rows_cheatsheet.png" width="80%" height="80%"><br>
@@ -332,81 +374,60 @@ bind_rows(hdata1, hdata2, .id = "group") #<<
 
 ---
 
-# `bind_cols()`? Nope!
+# Columns (variables): *DO NOT USE `bind_cols()`!!*
 
-**Not a good idea.** Use `join` to preserve ordering!!
+<!-- Include description of qn_data -->
+
+- `bind_cols()` blindly pastes columns next to each other without preserving order of variables that they have in common  
+    + Use `join` to preserve ordering - see next slides
 
 ```{r}
+# datasets must have same number of rows to use bind_cols()
 demo_sub <- demo_data %>% slice(1:20) # first 20 rows of demo_data
 qn_sub <- qn_data %>% slice(1:20)     # first 20 rows of qn_data
-bind_cols(demo_sub, qn_sub)           # blindly bind columns #<<   
+bind_cols(demo_sub, qn_sub)           # blindly bind columns; 2nd record column got renamed #<<   
 ```
 
 
 ---
 
-# *Join*ing your data sets
-
-- Uses overlapping or selected columns to combine two or more data sets
-- The joining column observations must match!
-- Also called "merging", or "mutating join"
-- Based off of SQL operations for databases
-
-<center><img src="img/joins_colors.png" width="55%" height="55%"><a href="https://rpubs.com/williamsurles/293454"><br>William Surles</a>
-</center>
-
-
-
----
-
-# All the joins
+# *`join`*ing your data sets
 
 .pull-left[
+- `Join` uses overlapping or selected columns to combine two or more data sets.
+- Also called "merging" or "mutating join". 
+- Function names are based off of SQL operations for databases.
+
 <center>
-<!-- <img src="img/joins_x_y.png" width="20%" height="20%"><br> -->
-<img src="img/joins_cheatsheet_expl.png" width="80%" height="80%"><br>
-<a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">dplyr data transformation cheatsheet</a>
+<img src="img/joins_x_y.png" width="90%" height="90%">
 </center>
 ]
+
 .pull-right[
-<center><img src="img/dplyr_join_venn.png" width="70%" height="70%"><br>
-<a href="https://twitter.com/yutannihilation/status/551572539697143808">Hiroaki Yutani</a></center>
+<center>
+<img src="img/joins_cheatsheet_expl.png" width="90%" height="90%"><br>
+<a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">dplyr data transformation cheatsheet</a>
+</center>
 ]
 
 ---
 
-# Which columns will be used to join?
+# `join` options visually
 
-*All* overlapping (intersecting) column names, or:
-
-<center>
-<img src="img/joins_cheatsheet_arguments.png" width="60%" height="60%"><br>
-<a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">dplyr data transformation cheatsheet</a>
-</center>
-
----
-
-# Check overlapping column names
-
-```{r}
-colnames(demo_data)
-colnames(qn_data)
-intersect(colnames(demo_data), colnames(qn_data))
-```
-
-<!-- TO DO: add more interesting example? -->
+<center><img src="img/dplyr_join_venn.png" width="30%" height="30%"><br>
+<a href="https://twitter.com/yutannihilation/status/551572539697143808">Hiroaki Yutani</a></center>
 
 ---
 
 # Most commonly used: `left_join()`
 
-- `left_join(x,y)` includes all observations in `x`, regardless of whether they match or not
-- adds all columns in `y` but only rows that match `x` observations
+- `left_join(x,y)` includes all observations in `x`, regardless of whether they match ones in `y` or not.
+- It includes all columns in `y`, but only rows that match `x`'s observations.
 
 .pull-left[
 ```{r, results="hold"}
-df1 <- tibble(x = c(1, 2), y = 2:1)
-df2 <- tibble(x = c(1, 3), z = 10:11)
+df1 <- tibble(a = c(1, 2), b = 2:1)
+df2 <- tibble(a = c(1, 3), c = 10:11)
 df1
 df2
 ```
@@ -415,25 +436,71 @@ df2
 ```{r}
 left_join(df1, df2)
 ```
+
+- Which common column(s) were used to merge the datasets?  
+- What if we want to specify which columns to join by when merging?  
+see next slide...
 ]
+---
+
+# Which columns will be used to join?
+
+- If no columns are specified to join by, then *all* overlapping (intersecting) column names will be used
+- Often we want to specify which columns to use, 
+    + and also how to rename duplicated columns that were not merged
+
+<center>
+<img src="img/joins_cheatsheet_arguments.png" width="45%" height="45%"><br>
+<a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">dplyr data transformation cheatsheet</a>
+</center>
 
 ---
 
-# Things to know about joins
+# Check for overlapping column names
 
-- mutating joins are used to add new variables, but they can also generate new observations
-- if a match is not unique, a join will add all possible combinations
+Goal: merge the demographics (`demo_data`) and questionnaire (`qn_data`) together.
+
+What column names do these datasets have in common?
 
 ```{r}
-df1 <- tibble(x = c(1, 1, 2), y = 1:3)
-df2 <- tibble(x = c(1, 1, 2), z = c("a", "b", "a"))
-
-df1 %>% left_join(df2)
+colnames(demo_data)
+colnames(qn_data)
+intersect(colnames(demo_data), colnames(qn_data)) #<<
 ```
+
 
 ---
 
-# Learn more about joins
+# Merge `demo_data` and `qn_data` together
+
+
+.pull-left[
+Let's do a full join so that we keep all data from both datasets
+
+```{r}
+merged_data <- 
+  full_join(demo_data, qn_data, 
+            by = "record")
+
+# Check dimensions of original and new datasets
+```
+
+]
+.pull-right[
+```{r}
+dim(demo_data); dim(qn_data); dim(merged_data) 
+```
+]
+
+
+```{r}
+merged_data
+```
+
+
+---
+
+# Learn more about `join`ing data
 
 - [Two-table verbs vignette for `dplyr` package](https://dplyr.tidyverse.org/articles/two-table.html)
 - [Jenny Bryan's STAT545 dplyr cheatsheet for join](https://stat545.com/bit001_dplyr-cheatsheet.html)
@@ -443,25 +510,21 @@ df1 %>% left_join(df2)
 
 # Practice
 
-1. Add a column of 1s to `qn_data` called `qn_yes` and save the resulting data as `qn_data2`.
+1. Add a column of `1`'s to `qn_data` called `qn_yes` and save the resulting data as `qn_data2`.
 
 1. Join `demo_data` and `qn_data2` by column `record`. Keep all rows from `demo_data` and only rows from `qn_data2` that match records in `demo_data`. Call the resulting data `all_data`.
 
-1. Print a `tabyl()` of `qn_yes` for the data `all_data`.
+1. Create a `tabyl()` of `qn_yes` for the data `all_data`.
 
-1. Print a 2x2 table of `qn_yes` vs `grade`.
+1. Create a 2x2 table of `qn_yes` vs `grade`.
 
-1. Convert all character columns (check with `is.character`) to numeric by first using `as.factor` to convert to a factor and then checking for all factor variables (with `is.factor`) and use `as.numeric` to convert to numeric. Save data as `newdata`. Glimpse or print the first few rows of `newdata`. Compare `all_data` and `newdata`. How did `q31` change?
+
 
 ```{r, include=FALSE}
 qn_data2 <- qn_data %>% add_column(qn_yes = 1)
 all_data <- left_join(demo_data, qn_data2)
 all_data %>% tabyl(qn_yes)
 all_data %>% tabyl(qn_yes,grade)
-newdata <- all_data %>% mutate_if(is.character, as.factor) %>%
-  mutate_if(is.factor, as.numeric)
-newdata
-all_data
 ```
 
 <!-- TO DO: Make this better, just added some random stuff. -->
@@ -470,25 +533,199 @@ all_data
 
 class: center, middle, inverse
 
-# Reshaping data (long vs wide)
+# Reshaping data 
+
+wide vs. long
+
+<img src="img/hex-tidyr.png" width="20%" height="20%">  
+[tidyr](https://tidyr.tidyverse.org)
 
 ---
 
-# Long vs wide
+# Wide vs. long data
 
 <!-- TO DO: define, show pic -->
+- __Wide__ data has one row per subject, with multiple columns for their repeated measurements
+- __Long__ data has multiple rows per subject, with one column for the measurement variable and another indicating from when/where the repeated measures are from
+
+.pull-left[
+wide  
+<img src="img/SBP_wide2.png" width="73%" height="73%">
+]
+.pull-right[
+long  
+<img src="img/SBP_long2.png" width="30%" height="30%">
+]
 
 ---
 
-# `gather()`
+# Example wide dataset
+
+Copy and paste the code below into R to create this example dataset
+
+```{r}
+BP_wide <- tibble(id = letters[1:4],
+                     sex = c("F", "M", "M", "F"),
+                     SBP_v1 = c(130, 120, 130, 119),
+                     SBP_v2 = c(110, 116, 136, 106),
+                     SBP_v3 = c(112, 122, 138, 118))
+BP_wide
+```
+
+- What do you think the data in the table are measures of?
+- How can we tell the data are wide?
+
+
 
 ---
 
-# `spread()`
+# Wide to long: `gather()`
+
+
+.pull-left[
+```{r}
+BP_wide
+```
+
+`gather` columns into rows to make the data long. Need to __specify__:
+- __new column names__
+    + __key__: stores row names of wide data's gathered columns 
+    + __value__: stores data values
+- __which columns to gather__
+]
+.pull-right[
+```{r}
+BP_long <- BP_wide %>% 
+  gather(key = "visit", value = "SBP", 
+         SBP_v1:SBP_v3)
+BP_long
+```
+]
+
+
+<!-- <img src="img/gather.png" width="40%" height="40%">   -->
+<!-- [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) -->
+
+
+
+---
+
+# Long to wide: `spread()`
+
+<!-- <img src="img/spread.png" width="40%" height="40%">   -->
+<!-- [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) -->
+
+
+.pull-left[
+```{r}
+BP_long
+```
+
+]
+.pull-right[
+`spread` rows into columns to make the data wide. Need to __specify__ which columns in the long data to use:
+- __key__ column: has the variable names 
+- __value__ column: has the data values
+    
+```{r}
+BP_wide2 <- BP_long %>% 
+  spread(key = "visit", value = "SBP")
+BP_wide2
+```
+]
+
+
+
+---
+
+# Clean up long data's visit column (key column)
+
+.pull-left[
+```{r}
+BP_long
+```
+*Goal*: remove the string `SBP_v` from the `visit` variable's values.
+]
+.pull-right[
+
+```{r}
+BP_long2 <- BP_long %>% 
+  mutate(visit = 
+           str_replace(visit,"SBP_v","")) 
+BP_long2
+```
+]
+
+
+---
+
+# Make cleaned-up long data wide
+
+.pull-left[
+```{r}
+head(BP_long2, 2)
+BP_wide3 <- BP_long2 %>% 
+  spread(key = "visit", value = "SBP")
+BP_wide3
+```
+]
+
+.pull-right[
+
+*Problem*: have numbers as column names, since `spread`'s default is to use the levels of the `key` as the new row names.  
+
+*Solution*: have row names start with the `key` column's name `sep`arated by a character
+```{r}
+BP_wide4 <- BP_long2 %>% 
+  spread(key = "visit", value = "SBP",
+         sep="_") # specify separating character
+BP_wide4
+```
+]
 
 ---
 
 # Practice
+
+Copy and paste the code below into R to create the dataset `DBP_wide`
+
+```{r}
+DBP_wide <- tibble(id = letters[1:4],
+                  sex = c("F", "M", "M", "F"),
+                  v1.DBP = c(88, 84, 102, 70),
+                  v2.DBP = c(78, 78, 96, 76),
+                  v3.DBP = c(94, 82, 94, 74),
+                  age=c(23, 56, 41, 38)
+                  )
+```
+
+1. Make `DBP_wide` into a long dataframe based on the repeated DBP columns and save it as `DBP_long`.
+1. Clean up the visit column of `DBP_long` so that the values are 1, 2, 3, and save it as `DBP_long`.
+
+1. Make `DBP_long` wide with column names `visit.1, visit.2, visit.3` for the DBP values, and save it as `DBP_wide2`.
+
+1. Join `DBP_long` with `BP_long2` so that we have one data frame with columns id, sex, visit, SBP, DBP, and age. Save this as `BP_both_long`.
+
+
+```{r, include=FALSE}
+DBP_long <- DBP_wide %>%
+  gather(key = "visit", value = "DBP", 
+         v1.DBP, v2.DBP, v3.DBP) %>%
+  mutate(visit = 
+           str_replace(visit,c("v"), "")) %>%
+  mutate(visit = 
+           str_replace(visit,".DBP",""))  
+DBP_long
+
+DBP_wide2 <- DBP_long %>% 
+  spread(key = "visit", value = "DBP",
+         sep=".") # specify separating character
+DBP_wide2
+
+
+BP_both_long <- left_join(BP_long2, DBP_long, by = c("id", "sex", "visit"))
+BP_both_long
+```
 
 ---
 
@@ -502,11 +739,12 @@ class: center, middle, inverse
 
 # Handling missing data
 
+<!-- These examples might be clearer with a small dataset and showing what the outcomes are. -->
 Remove all rows with any missing data
 
 ```{r}
 all_data %>% 
-  na.omit() %>% #<<
+  drop_na() %>% #<<
   nrow
 ```
 
@@ -515,6 +753,13 @@ Remove all rows with any missing data in selected rows
 ```{r}
 all_data %>% 
   drop_na(sex, age) %>% #<<
+  nrow
+```
+
+<!-- clean up -->
+```{r}
+all_data %>% 
+  drop_na(-age) %>% #<<
   nrow
 ```
 
@@ -527,7 +772,9 @@ all_data %>%
 all_data %>% 
   mutate(sex = replace_na(sex, "Unknown")) %>% #<<
   tabyl(sex)
+# Can do above on multiple variables, or, if lots do more advanced option below:
 
+# Advanced example:
 all_data %>% 
   mutate_at(vars(starts_with("q")),list(~replace_na(.,"No answer"))) %>% #<<
   tabyl(q8, q31)
@@ -587,6 +834,11 @@ all_data %>%
   select(record, info) %>%
   head()
 ```
+
+
+---
+
+# Practice
 
 ---
 

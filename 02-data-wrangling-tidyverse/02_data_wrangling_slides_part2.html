@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Data Wrangling in R with the Tidyverse (Part 2)</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
     <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
@@ -77,15 +77,15 @@ Previously, in Part 1:
 - Manipulate data 
 
 Part 2:
-- Reshaping (long/wide format) data
-- Join/merge data sets
-- Data cleaning, including examples for dealing with:
+- Summarizing data
+- Combine (join) data sets
+- Reshaping data: wide vs. long formats 
+- Data cleaning:
   + Missing data
   + Strings/character vectors
-  + Factors/categorical variables
   + Dates
 
-
+&lt;!-- + Factors/categorical variables --&gt;
 ---
 
 class: center, middle, inverse
@@ -105,7 +105,7 @@ class: center, middle, inverse
 
 - `select()` to subset columns
 - `rename()` to rename columns
-- `mutate()` to add new columns
+- `mutate()` to add new columns or change values within existing columns
   + `separate()` and `unite()` are shortcuts for specific `mutate` type operations
 
 ## Rows ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#25))
@@ -118,11 +118,12 @@ class: center, middle, inverse
 
 # Changing *all* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-`mutate_all()`, `rename_all()`: applies a function to all columns
+`mutate_all()`, `rename_all()`: applies a function to *all* columns
 
 
 
 ```r
+# mutate_all changes the data in all columns
 demo_data %&gt;% mutate_all(as.character) %&gt;% head(3)
 ```
 
@@ -137,6 +138,7 @@ demo_data %&gt;% mutate_all(as.character) %&gt;% head(3)
 
 
 ```r
+# rename_all changes all column names
 demo_data %&gt;% rename_all(toupper) %&gt;% head(3)
 ```
 
@@ -158,13 +160,14 @@ demo_data %&gt;% rename_all(toupper) %&gt;% head(3)
 
 
 ```r
-demo_data %&gt;% mutate_at(vars(contains("race")), as.factor) %&gt;% head(3)
+# mutate_at changes the data in specified columns
+demo_data %&gt;% mutate_at(vars(contains("race"), sex), as.factor) %&gt;% head(3)
 ```
 
 ```
 # A tibble: 3 x 8
   record age             sex    grade race4       race7        bmi stweight
-   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;fct&gt;       &lt;fct&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+   &lt;dbl&gt; &lt;chr&gt;           &lt;fct&gt;  &lt;chr&gt; &lt;fct&gt;       &lt;fct&gt;      &lt;dbl&gt;    &lt;dbl&gt;
 1 931897 15 years old    Female 10th  White       White       17.2     54.4
 2 333862 17 years old    Female 12th  White       White       20.2     57.2
 3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…  NA       NA  
@@ -172,6 +175,7 @@ demo_data %&gt;% mutate_at(vars(contains("race")), as.factor) %&gt;% head(3)
 
 
 ```r
+# rename_at changes specified column names
 demo_data %&gt;% rename_at(vars(record:grade),toupper) %&gt;% head(3)
 ```
 
@@ -183,6 +187,7 @@ demo_data %&gt;% rename_at(vars(record:grade),toupper) %&gt;% head(3)
 2 333862 17 years old    Female 12th  White       White       20.2     57.2
 3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…  NA       NA  
 ```
+
 
 ---
 
@@ -205,9 +210,13 @@ demo_data %&gt;% mutate_if(is.numeric, round, digits = 0) %&gt;% head(3)
 3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…    NA       NA
 ```
 
+&lt;!-- replaced  --&gt;
+&lt;!-- demo_data %&gt;% rename_if(is.character, str_sub, 1L, 2L) %&gt;% head(3)  --&gt;
+&lt;!-- with code below --&gt;
+
 
 ```r
-demo_data %&gt;% rename_if(is.character, str_sub, 1L, 2L) %&gt;% head(3)
+demo_data %&gt;% rename_if(is.character, str_sub, start = 1, end = 2) %&gt;% head(3)
 ```
 
 ```
@@ -219,14 +228,15 @@ demo_data %&gt;% rename_if(is.character, str_sub, 1L, 2L) %&gt;% head(3)
 3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…  NA       NA  
 ```
 
+&lt;!-- https://stringr.tidyverse.org/reference/str_sub.html --&gt;
+
 ---
 
-# `add_row()` to add one or more rows
+# Add one or more rows: `add_row()`
 
 
 ```r
-demo_data %&gt;% 
-* add_row(record=100, age=NA, sex="Female", grade="9th") %&gt;%
+*demo_data %&gt;% add_row(record=100, age=NA, sex="Female", grade="9th") %&gt;%
   arrange(record) %&gt;% head(3)
 ```
 
@@ -241,8 +251,7 @@ demo_data %&gt;%
 
 
 ```r
-demo_data %&gt;% 
-* add_row(record=100:102, bmi=c(25,30,18)) %&gt;%
+*demo_data %&gt;% add_row(record=100:102, bmi=c(25,30,18)) %&gt;%
   arrange(record) %&gt;% head(3)
 ```
 
@@ -257,13 +266,11 @@ demo_data %&gt;%
 
 ---
 
-# `add_column()` to add one or more columns
-
+# Add one or more columns: `add_column()`
 
 
 ```r
-demo_data %&gt;% 
-* add_column(study_date = "2019-04-10", .before="age") %&gt;%
+*demo_data %&gt;% add_column(study_date = "2019-04-10", .after="record") %&gt;%
   head(3)
 ```
 
@@ -278,8 +285,7 @@ demo_data %&gt;%
 
 
 ```r
-demo_data %&gt;% 
-* add_column(id = 1:nrow(demo_data), .before="record") %&gt;%
+*demo_data %&gt;% add_column(id = 1:nrow(demo_data), .before="record") %&gt;%
   head(3)
 ```
 
@@ -299,13 +305,29 @@ class: center, inverse, middle
 
 # Quick tips on summarizing data
 
+## categorical data
+## numerical data
+
+&lt;center&gt;
+&lt;img src="img/janitor_logo_small.png" width="20%" height="20%"&gt;
+&lt;img src="img/hex-dplyr.png" width="20%" height="20%"&gt;  
+&lt;/center&gt;
+
+[janitor](https://cran.r-project.org/web/packages/janitor/readme/README.html),   [dplyr](https://dplyr.tidyverse.org/)
+
+
+
+
+
 ---
 
-# Frequency tables (using the `janitor` package)
+# Frequency tables: `janitor` package's `tabyl` function 
 
 .pull-left[
 
+
 ```r
+# default table
 demo_data %&gt;% tabyl(grade)
 ```
 
@@ -335,11 +357,13 @@ demo_data %&gt;% tabyl(grade) %&gt;% select(-n)
 ]
 .pull-right[
 
+`adorn_` your table!
+
 ```r
 demo_data %&gt;%
   tabyl(grade) %&gt;%
-  adorn_totals("row") %&gt;%
-  adorn_pct_formatting(digits=2)
+* adorn_totals("row") %&gt;%
+* adorn_pct_formatting(digits=2)
 ```
 
 ```
@@ -354,13 +378,15 @@ demo_data %&gt;%
 
 ]
 
+
 ---
 
-# 2x2 tables
+# 2x2 `tabyl`s
 
 .pull-left-40[
 
 ```r
+# default 2x2 table
 demo_data %&gt;% tabyl(grade, sex)
 ```
 
@@ -372,15 +398,17 @@ demo_data %&gt;% tabyl(grade, sex)
    9th   2492 2684  43
   &lt;NA&gt;    126  195  85
 ```
+
+What adornments does the tabyl to right have?
 ]
 .pull-right-60[
 
 ```r
 demo_data %&gt;% tabyl(grade, sex) %&gt;%
-  adorn_percentages(denominator = "col") %&gt;%
-  adorn_totals("row") %&gt;%
-  adorn_pct_formatting() %&gt;%
-  adorn_ns()
+* adorn_percentages(denominator = "col") %&gt;%
+* adorn_totals("row") %&gt;%
+* adorn_pct_formatting(digits = 1) %&gt;%
+* adorn_ns()
 ```
 
 ```
@@ -394,22 +422,25 @@ demo_data %&gt;% tabyl(grade, sex) %&gt;%
 ```
 ]
 
-Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when using `factors`.
+- Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when we discuss `factors` as a data type in R.
+- Base R has a `table` function, but it is clunkier and the output is not a data frame. 
+- See the [tabyl vignette](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html) for more information, adorn options, &amp; 3-way `tabyl`s
 
 ---
 
-# `summarize()`
+# Numerical data summaries: `summarize()`
 
-- we can summarize data as a whole, or in groups with `group_by()`
-- very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
-- also use `summarize_at()`, `summarize_if()`, `summarize_all()`
+- We can summarize data as a whole, or in groups with `group_by()`
+- `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+- Can also use `summarize_at()`, `summarize_if()`, `summarize_all()`
 
 .pull-left[
 
 ```r
+# summary of all data as a whole
 demo_data %&gt;% 
-  summarize(bmi_mean = mean(bmi,na.rm=TRUE),
-            bmi_sd = sd(bmi,na.rm=TRUE))
+* summarize(bmi_mean =mean(bmi,na.rm=TRUE),
+*           bmi_sd = sd(bmi,na.rm=TRUE))
 ```
 
 ```
@@ -418,16 +449,18 @@ demo_data %&gt;%
      &lt;dbl&gt;  &lt;dbl&gt;
 1     23.5   4.99
 ```
+
+What does `na.rm=TRUE` do and what happens if we leave it out?
 ]
 
 .pull-right[
 
 ```r
-# by group variable
+# summary by group variable
 demo_data %&gt;% 
 * group_by(grade) %&gt;%
-* summarize(n_per_group = n(),
-            bmi_mean = mean(bmi,na.rm=TRUE),
+  summarize(n_per_group = n(), 
+            bmi_mean =mean(bmi,na.rm=TRUE),
             bmi_sd = sd(bmi,na.rm=TRUE))
 ```
 
@@ -447,13 +480,22 @@ demo_data %&gt;%
 
 class: center, inverse, middle
 
-# Combining data
+# Combining data sets
+
+
+&lt;center&gt;
+&lt;img src="img/combine_cases.png" width="25%" height="25%"&gt;&lt;br&gt;
+&lt;img src="img/combine_variables.png" width="40%" height="40%"&gt;   be careful!!!&lt;br&gt;
+&lt;a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"&gt;dplyr data transformation cheatsheet&lt;/a&gt;
+&lt;/center&gt;
+
 
 ---
 
-# `bind_rows()`
+# Rows (cases): paste data below each other 
 
-
+`bind_rows()` combines rows from different data sets  
+&amp; accounts for different column names
 
 
 
@@ -461,7 +503,7 @@ class: center, inverse, middle
 .pull-left[
 
 ```r
-hdata1
+data1
 ```
 
 ```
@@ -474,7 +516,7 @@ hdata1
 
 
 ```r
-hdata2
+data2
 ```
 
 ```
@@ -489,7 +531,7 @@ hdata2
 .pull-right[
 
 ```r
-*bind_rows(hdata1, hdata2, .id = "group")
+*bind_rows(data1,data2, .id = "group")
 ```
 
 ```
@@ -510,15 +552,19 @@ hdata2
 
 ---
 
-# `bind_cols()`? Nope!
+# Columns (variables): *DO NOT USE `bind_cols()`!!*
 
-**Not a good idea.** Use `join` to preserve ordering!!
+&lt;!-- Include description of qn_data --&gt;
+
+- `bind_cols()` blindly pastes columns next to each other without preserving order of variables that they have in common  
+    + Use `join` to preserve ordering - see next slides
 
 
 ```r
+# datasets must have same number of rows to use bind_cols()
 demo_sub &lt;- demo_data %&gt;% slice(1:20) # first 20 rows of demo_data
 qn_sub &lt;- qn_data %&gt;% slice(1:20)     # first 20 rows of qn_data
-*bind_cols(demo_sub, qn_sub)           # blindly bind columns
+*bind_cols(demo_sub, qn_sub)           # blindly bind columns; 2nd record column got renamed
 ```
 
 ```
@@ -551,48 +597,99 @@ qn_sub &lt;- qn_data %&gt;% slice(1:20)     # first 20 rows of qn_data
 
 ---
 
-# *Join*ing your data sets
-
-- Uses overlapping or selected columns to combine two or more data sets
-- The joining column observations must match!
-- Also called "merging", or "mutating join"
-- Based off of SQL operations for databases
-
-&lt;center&gt;&lt;img src="img/joins_colors.png" width="55%" height="55%"&gt;&lt;a href="https://rpubs.com/williamsurles/293454"&gt;&lt;br&gt;William Surles&lt;/a&gt;
-&lt;/center&gt;
-
-
-
----
-
-# All the joins
+# *`join`*ing your data sets
 
 .pull-left[
+- `Join` uses overlapping or selected columns to combine two or more data sets.
+- Also called "merging" or "mutating join". 
+- Function names are based off of SQL operations for databases.
+
 &lt;center&gt;
-&lt;!-- &lt;img src="img/joins_x_y.png" width="20%" height="20%"&gt;&lt;br&gt; --&gt;
-&lt;img src="img/joins_cheatsheet_expl.png" width="80%" height="80%"&gt;&lt;br&gt;
+&lt;img src="img/joins_x_y.png" width="90%" height="90%"&gt;
+&lt;/center&gt;
+]
+
+.pull-right[
+&lt;center&gt;
+&lt;img src="img/joins_cheatsheet_expl.png" width="90%" height="90%"&gt;&lt;br&gt;
 &lt;a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"&gt;dplyr data transformation cheatsheet&lt;/a&gt;
 &lt;/center&gt;
 ]
-.pull-right[
-&lt;center&gt;&lt;img src="img/dplyr_join_venn.png" width="70%" height="70%"&gt;&lt;br&gt;
-&lt;a href="https://twitter.com/yutannihilation/status/551572539697143808"&gt;Hiroaki Yutani&lt;/a&gt;&lt;/center&gt;
-]
 
+---
+
+# `join` options visually
+
+&lt;center&gt;&lt;img src="img/dplyr_join_venn.png" width="30%" height="30%"&gt;&lt;br&gt;
+&lt;a href="https://twitter.com/yutannihilation/status/551572539697143808"&gt;Hiroaki Yutani&lt;/a&gt;&lt;/center&gt;
+
+---
+
+# Most commonly used: `left_join()`
+
+- `left_join(x,y)` includes all observations in `x`, regardless of whether they match ones in `y` or not.
+- It includes all columns in `y`, but only rows that match `x`'s observations.
+
+.pull-left[
+
+```r
+df1 &lt;- tibble(a = c(1, 2), b = 2:1)
+df2 &lt;- tibble(a = c(1, 3), c = 10:11)
+df1
+df2
+```
+
+```
+# A tibble: 2 x 2
+      a     b
+  &lt;dbl&gt; &lt;int&gt;
+1     1     2
+2     2     1
+# A tibble: 2 x 2
+      a     c
+  &lt;dbl&gt; &lt;int&gt;
+1     1    10
+2     3    11
+```
+]
+.pull-right[
+
+```r
+left_join(df1, df2)
+```
+
+```
+# A tibble: 2 x 3
+      a     b     c
+  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+1     1     2    10
+2     2     1    NA
+```
+
+- Which common column(s) were used to merge the datasets?  
+- What if we want to specify which columns to join by when merging?  
+see next slide...
+]
 ---
 
 # Which columns will be used to join?
 
-*All* overlapping (intersecting) column names, or:
+- If no columns are specified to join by, then *all* overlapping (intersecting) column names will be used
+- Often we want to specify which columns to use, 
+    + and also how to rename duplicated columns that were not merged
 
 &lt;center&gt;
-&lt;img src="img/joins_cheatsheet_arguments.png" width="60%" height="60%"&gt;&lt;br&gt;
+&lt;img src="img/joins_cheatsheet_arguments.png" width="45%" height="45%"&gt;&lt;br&gt;
 &lt;a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"&gt;dplyr data transformation cheatsheet&lt;/a&gt;
 &lt;/center&gt;
 
 ---
 
-# Check overlapping column names
+# Check for overlapping column names
+
+Goal: merge the demographics (`demo_data`) and questionnaire (`qn_data`) together.
+
+What column names do these datasets have in common?
 
 
 ```r
@@ -613,88 +710,78 @@ colnames(qn_data)
 ```
 
 ```r
-intersect(colnames(demo_data), colnames(qn_data))
+*intersect(colnames(demo_data), colnames(qn_data))
 ```
 
 ```
 [1] "record"
 ```
 
-&lt;!-- TO DO: add more interesting example? --&gt;
 
 ---
 
-# Most commonly used: `left_join()`
+# Merge `demo_data` and `qn_data` together
 
-- `left_join(x,y)` includes all observations in `x`, regardless of whether they match or not
-- adds all columns in `y` but only rows that match `x` observations
 
 .pull-left[
+Let's do a full join so that we keep all data from both datasets
+
 
 ```r
-df1 &lt;- tibble(x = c(1, 2), y = 2:1)
-df2 &lt;- tibble(x = c(1, 3), z = 10:11)
-df1
-df2
+merged_data &lt;- 
+  full_join(demo_data, qn_data, 
+            by = "record")
+
+# Check dimensions of original and new datasets
 ```
 
-```
-# A tibble: 2 x 2
-      x     y
-  &lt;dbl&gt; &lt;int&gt;
-1     1     2
-2     2     1
-# A tibble: 2 x 2
-      x     z
-  &lt;dbl&gt; &lt;int&gt;
-1     1    10
-2     3    11
-```
 ]
 .pull-right[
 
 ```r
-left_join(df1, df2)
+dim(demo_data); dim(qn_data); dim(merged_data) 
 ```
 
 ```
-# A tibble: 2 x 3
-      x     y     z
-  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
-1     1     2    10
-2     2     1    NA
+[1] 20000     8
+```
+
+```
+[1] 10000     5
+```
+
+```
+[1] 20000    12
 ```
 ]
 
----
-
-# Things to know about joins
-
-- mutating joins are used to add new variables, but they can also generate new observations
-- if a match is not unique, a join will add all possible combinations
 
 
 ```r
-df1 &lt;- tibble(x = c(1, 1, 2), y = 1:3)
-df2 &lt;- tibble(x = c(1, 1, 2), z = c("a", "b", "a"))
-
-df1 %&gt;% left_join(df2)
+merged_data
 ```
 
 ```
-# A tibble: 5 x 3
-      x     y z    
-  &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;
-1     1     1 a    
-2     1     1 b    
-3     1     2 a    
-4     1     2 b    
-5     2     3 a    
+# A tibble: 20,000 x 12
+   record age   sex   grade race4 race7   bmi stweight q8    q12   q31  
+    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 9.32e5 15 y… Fema… 10th  White White  17.2     54.4 Neve… &lt;NA&gt;  Yes  
+ 2 3.34e5 17 y… Fema… 12th  White White  20.2     57.2 &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+ 3 3.63e4 18 y… Male  11th  Hisp… Hisp…  NA       NA   Neve… &lt;NA&gt;  &lt;NA&gt; 
+ 4 1.10e6 15 y… Male  10th  Blac… Blac…  28.0     85.7 Neve… &lt;NA&gt;  Yes  
+ 5 1.30e6 14 y… Male  9th   All … Mult…  24.5     66.7 &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+ 6 2.62e5 17 y… Male  9th   All … &lt;NA&gt;   NA       NA   &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+ 7 9.27e5 16 y… Male  11th  All … Asian  20.5     70.3 &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+ 8 1.31e6 17 y… Male  12th  White White  19.3     59.0 Neve… 3 to… No   
+ 9 5.06e5 18 y… Male  12th  Hisp… Hisp…  33.1    123.  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+10 1.80e5 14 y… Male  10th  Blac… Blac…  NA       NA   Neve… &lt;NA&gt;  No   
+# … with 19,990 more rows, and 1 more variable: qn24 &lt;lgl&gt;
 ```
+
 
 ---
 
-# Learn more about joins
+# Learn more about `join`ing data
 
 - [Two-table verbs vignette for `dplyr` package](https://dplyr.tidyverse.org/articles/two-table.html)
 - [Jenny Bryan's STAT545 dplyr cheatsheet for join](https://stat545.com/bit001_dplyr-cheatsheet.html)
@@ -704,15 +791,15 @@ df1 %&gt;% left_join(df2)
 
 # Practice
 
-1. Add a column of 1s to `qn_data` called `qn_yes` and save the resulting data as `qn_data2`.
+1. Add a column of `1`'s to `qn_data` called `qn_yes` and save the resulting data as `qn_data2`.
 
 1. Join `demo_data` and `qn_data2` by column `record`. Keep all rows from `demo_data` and only rows from `qn_data2` that match records in `demo_data`. Call the resulting data `all_data`.
 
-1. Print a `tabyl()` of `qn_yes` for the data `all_data`.
+1. Create a `tabyl()` of `qn_yes` for the data `all_data`.
 
-1. Print a 2x2 table of `qn_yes` vs `grade`.
+1. Create a 2x2 table of `qn_yes` vs `grade`.
 
-1. Convert all character columns (check with `is.character`) to numeric by first using `as.factor` to convert to a factor and then checking for all factor variables (with `is.factor`) and use `as.numeric` to convert to numeric. Save data as `newdata`. Glimpse or print the first few rows of `newdata`. Compare `all_data` and `newdata`. How did `q31` change?
+
 
 
 
@@ -722,25 +809,324 @@ df1 %&gt;% left_join(df2)
 
 class: center, middle, inverse
 
-# Reshaping data (long vs wide)
+# Reshaping data 
+
+wide vs. long
+
+&lt;img src="img/hex-tidyr.png" width="20%" height="20%"&gt;  
+[tidyr](https://tidyr.tidyverse.org)
 
 ---
 
-# Long vs wide
+# Wide vs. long data
 
 &lt;!-- TO DO: define, show pic --&gt;
+- __Wide__ data has one row per subject, with multiple columns for their repeated measurements
+- __Long__ data has multiple rows per subject, with one column for the measurement variable and another indicating from when/where the repeated measures are from
+
+.pull-left[
+wide  
+&lt;img src="img/SBP_wide2.png" width="73%" height="73%"&gt;
+]
+.pull-right[
+long  
+&lt;img src="img/SBP_long2.png" width="30%" height="30%"&gt;
+]
 
 ---
 
-# `gather()`
+# Example wide dataset
+
+Copy and paste the code below into R to create this example dataset
+
+
+```r
+BP_wide &lt;- tibble(id = letters[1:4],
+                     sex = c("F", "M", "M", "F"),
+                     SBP_v1 = c(130, 120, 130, 119),
+                     SBP_v2 = c(110, 116, 136, 106),
+                     SBP_v3 = c(112, 122, 138, 118))
+BP_wide
+```
+
+```
+# A tibble: 4 x 5
+  id    sex   SBP_v1 SBP_v2 SBP_v3
+  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 a     F        130    110    112
+2 b     M        120    116    122
+3 c     M        130    136    138
+4 d     F        119    106    118
+```
+
+- What do you think the data in the table are measures of?
+- How can we tell the data are wide?
+
+
 
 ---
 
-# `spread()`
+# Wide to long: `gather()`
+
+
+.pull-left[
+
+```r
+BP_wide
+```
+
+```
+# A tibble: 4 x 5
+  id    sex   SBP_v1 SBP_v2 SBP_v3
+  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 a     F        130    110    112
+2 b     M        120    116    122
+3 c     M        130    136    138
+4 d     F        119    106    118
+```
+
+`gather` columns into rows to make the data long. Need to __specify__:
+- __new column names__
+    + __key__: stores row names of wide data's gathered columns 
+    + __value__: stores data values
+- __which columns to gather__
+]
+.pull-right[
+
+```r
+BP_long &lt;- BP_wide %&gt;% 
+  gather(key = "visit", value = "SBP", 
+         SBP_v1:SBP_v3)
+BP_long
+```
+
+```
+# A tibble: 12 x 4
+   id    sex   visit    SBP
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+ 1 a     F     SBP_v1   130
+ 2 b     M     SBP_v1   120
+ 3 c     M     SBP_v1   130
+ 4 d     F     SBP_v1   119
+ 5 a     F     SBP_v2   110
+ 6 b     M     SBP_v2   116
+ 7 c     M     SBP_v2   136
+ 8 d     F     SBP_v2   106
+ 9 a     F     SBP_v3   112
+10 b     M     SBP_v3   122
+11 c     M     SBP_v3   138
+12 d     F     SBP_v3   118
+```
+]
+
+
+&lt;!-- &lt;img src="img/gather.png" width="40%" height="40%"&gt;   --&gt;
+&lt;!-- [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) --&gt;
+
+
+
+---
+
+# Long to wide: `spread()`
+
+&lt;!-- &lt;img src="img/spread.png" width="40%" height="40%"&gt;   --&gt;
+&lt;!-- [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) --&gt;
+
+
+.pull-left[
+
+```r
+BP_long
+```
+
+```
+# A tibble: 12 x 4
+   id    sex   visit    SBP
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+ 1 a     F     SBP_v1   130
+ 2 b     M     SBP_v1   120
+ 3 c     M     SBP_v1   130
+ 4 d     F     SBP_v1   119
+ 5 a     F     SBP_v2   110
+ 6 b     M     SBP_v2   116
+ 7 c     M     SBP_v2   136
+ 8 d     F     SBP_v2   106
+ 9 a     F     SBP_v3   112
+10 b     M     SBP_v3   122
+11 c     M     SBP_v3   138
+12 d     F     SBP_v3   118
+```
+
+]
+.pull-right[
+`spread` rows into columns to make the data wide. Need to __specify__ which columns in the long data to use:
+- __key__ column: has the variable names 
+- __value__ column: has the data values
+    
+
+```r
+BP_wide2 &lt;- BP_long %&gt;% 
+  spread(key = "visit", value = "SBP")
+BP_wide2
+```
+
+```
+# A tibble: 4 x 5
+  id    sex   SBP_v1 SBP_v2 SBP_v3
+  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 a     F        130    110    112
+2 b     M        120    116    122
+3 c     M        130    136    138
+4 d     F        119    106    118
+```
+]
+
+
+
+---
+
+# Clean up long data's visit column (key column)
+
+.pull-left[
+
+```r
+BP_long
+```
+
+```
+# A tibble: 12 x 4
+   id    sex   visit    SBP
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+ 1 a     F     SBP_v1   130
+ 2 b     M     SBP_v1   120
+ 3 c     M     SBP_v1   130
+ 4 d     F     SBP_v1   119
+ 5 a     F     SBP_v2   110
+ 6 b     M     SBP_v2   116
+ 7 c     M     SBP_v2   136
+ 8 d     F     SBP_v2   106
+ 9 a     F     SBP_v3   112
+10 b     M     SBP_v3   122
+11 c     M     SBP_v3   138
+12 d     F     SBP_v3   118
+```
+*Goal*: remove the string `SBP_v` from the `visit` variable's values.
+]
+.pull-right[
+
+
+```r
+BP_long2 &lt;- BP_long %&gt;% 
+  mutate(visit = 
+           str_replace(visit,"SBP_v","")) 
+BP_long2
+```
+
+```
+# A tibble: 12 x 4
+   id    sex   visit   SBP
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+ 1 a     F     1       130
+ 2 b     M     1       120
+ 3 c     M     1       130
+ 4 d     F     1       119
+ 5 a     F     2       110
+ 6 b     M     2       116
+ 7 c     M     2       136
+ 8 d     F     2       106
+ 9 a     F     3       112
+10 b     M     3       122
+11 c     M     3       138
+12 d     F     3       118
+```
+]
+
+
+---
+
+# Make cleaned-up long data wide
+
+.pull-left[
+
+```r
+head(BP_long2, 2)
+```
+
+```
+# A tibble: 2 x 4
+  id    sex   visit   SBP
+  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+1 a     F     1       130
+2 b     M     1       120
+```
+
+```r
+BP_wide3 &lt;- BP_long2 %&gt;% 
+  spread(key = "visit", value = "SBP")
+BP_wide3
+```
+
+```
+# A tibble: 4 x 5
+  id    sex     `1`   `2`   `3`
+  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 a     F       130   110   112
+2 b     M       120   116   122
+3 c     M       130   136   138
+4 d     F       119   106   118
+```
+]
+
+.pull-right[
+
+*Problem*: have numbers as column names, since `spread`'s default is to use the levels of the `key` as the new row names.  
+
+*Solution*: have row names start with the `key` column's name `sep`arated by a character
+
+```r
+BP_wide4 &lt;- BP_long2 %&gt;% 
+  spread(key = "visit", value = "SBP",
+         sep="_") # specify separating character
+BP_wide4
+```
+
+```
+# A tibble: 4 x 5
+  id    sex   visit_1 visit_2 visit_3
+  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 a     F         130     110     112
+2 b     M         120     116     122
+3 c     M         130     136     138
+4 d     F         119     106     118
+```
+]
 
 ---
 
 # Practice
+
+Copy and paste the code below into R to create the dataset `DBP_wide`
+
+
+```r
+DBP_wide &lt;- tibble(id = letters[1:4],
+                  sex = c("F", "M", "M", "F"),
+                  v1.DBP = c(88, 84, 102, 70),
+                  v2.DBP = c(78, 78, 96, 76),
+                  v3.DBP = c(94, 82, 94, 74),
+                  age=c(23, 56, 41, 38)
+                  )
+```
+
+1. Make `DBP_wide` into a long dataframe based on the repeated DBP columns and save it as `DBP_long`.
+1. Clean up the visit column of `DBP_long` so that the values are 1, 2, 3, and save it as `DBP_long`.
+
+1. Make `DBP_long` wide with column names `visit.1, visit.2, visit.3` for the DBP values, and save it as `DBP_wide2`.
+
+1. Join `DBP_long` with `BP_long2` so that we have one data frame with columns id, sex, visit, SBP, DBP, and age. Save this as `BP_both_long`.
+
+
+
 
 ---
 
@@ -754,12 +1140,13 @@ class: center, middle, inverse
 
 # Handling missing data
 
+&lt;!-- These examples might be clearer with a small dataset and showing what the outcomes are. --&gt;
 Remove all rows with any missing data
 
 
 ```r
 all_data %&gt;% 
-* na.omit() %&gt;%
+* drop_na() %&gt;%
   nrow
 ```
 
@@ -778,6 +1165,18 @@ all_data %&gt;%
 
 ```
 [1] 19637
+```
+
+&lt;!-- clean up --&gt;
+
+```r
+all_data %&gt;% 
+* drop_na(-age) %&gt;%
+  nrow
+```
+
+```
+[1] 2261
 ```
 
 ---
@@ -800,6 +1199,9 @@ all_data %&gt;%
 ```
 
 ```r
+# Can do above on multiple variables, or, if lots do more advanced option below:
+
+# Advanced example:
 all_data %&gt;% 
 * mutate_at(vars(starts_with("q")),list(~replace_na(.,"No answer"))) %&gt;%
   tabyl(q8, q31)
@@ -938,6 +1340,11 @@ all_data %&gt;%
 5 1303997 Student 1303997 is 14 years old with BMI = 24.5     
 6  261619 Student 261619 is 17 years old with BMI = NA        
 ```
+
+
+---
+
+# Practice
 
 ---
 
