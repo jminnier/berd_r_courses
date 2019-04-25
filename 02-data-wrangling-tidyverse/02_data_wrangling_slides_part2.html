@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html>
   <head>
     <title>Data Wrangling in R with the Tidyverse (Part 2)</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
-    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
     <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
@@ -15,7 +14,7 @@ class: left, middle, inverse, title-slide
 
 # Data Wrangling in R with the Tidyverse (Part 2)
 ### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
-### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_tidy2">bit.ly/berd_tidy2</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_tidy2_pdf">bit.ly/berd_tidy2_pdf</a></span>
+### <span style="font-size: 80%;">2019/04/18 (Part 1) &amp; 2019/04/25 (Part 2) <br><br><br> slides: <a href="http://bit.ly/berd_tidy2">bit.ly/berd_tidy2</a> <br> pdf: <a href="http://bit.ly/berd_tidy2_pdf">bit.ly/berd_tidy2_pdf</a></span>
 
 ---
 
@@ -811,11 +810,19 @@ class: center, middle, inverse
 
 # Reshaping data 
 
+
+
 wide vs. long
 
-&lt;img src="img/hex-tidyr.png" width="20%" height="20%"&gt;  
-[tidyr](https://tidyr.tidyverse.org)
 
+.pull-left[
+&lt;img src="img/horst_tidyr_spread_gather.png" width="80%" height="80%"&gt;  
+[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+]
+.pull-right[
+&lt;img src="img/hex-tidyr.png" width="70%" height="70%"&gt;  
+[tidyr](https://tidyr.tidyverse.org)
+]
 ---
 
 # Wide vs. long data
@@ -1134,76 +1141,131 @@ class: center, middle, inverse
 
 # Data cleaning
 
+## (messy NAs, names, strings, dates, factors)
+
+
+&lt;img src="img/stringr_hex.png" width="24%" height="30%"&gt;
+&lt;img src="img/glue_hex.png" width="24%" height="30%"&gt;
+&lt;img src="img/forcats_hex.png" width="24%" height="30%"&gt;
+&lt;img src="img/lubridate_hex2.png" width="24%" height="30%"&gt;
+
+
+
 ---
 
-&lt;!-- TO DO: just adding random stuff from here, NEED TO EDIT/CLEAN UP/ADD MORE EXPLANATIONS --&gt;
-
-# Handling missing data
+# Removing missing data: `drop_na()`
 
 &lt;!-- These examples might be clearer with a small dataset and showing what the outcomes are. --&gt;
-Remove all rows with any missing data
+
+
+
+.pull-left[
+
+A small data example:
 
 
 ```r
-all_data %&gt;% 
-* drop_na() %&gt;%
-  nrow
+mydata &lt;- tibble(id = 7:9, 
+                 name = c("Bo","Al","Juan"), 
+                 height=c(2, NA, 1.8), 
+                 years=c(3,1,NA))
+mydata
 ```
 
 ```
-[1] 2261
+# A tibble: 3 x 4
+     id name  height years
+  &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1     7 Bo       2       3
+2     8 Al      NA       1
+3     9 Juan     1.8    NA
+```
+]
+
+.pull-right[
+
+Remove *all* rows with **any missing data**
+
+
+```r
+mydata %&gt;% drop_na()
 ```
 
-Remove all rows with any missing data in selected rows
+```
+# A tibble: 1 x 4
+     id name  height years
+  &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1     7 Bo         2     3
+```
+
+Remove rows with `NA` in **selected columns**
 
 
 ```r
-all_data %&gt;% 
-* drop_na(sex, age) %&gt;%
-  nrow
+mydata %&gt;% drop_na(height)
 ```
 
 ```
-[1] 19637
+# A tibble: 2 x 4
+     id name  height years
+  &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1     7 Bo       2       3
+2     9 Juan     1.8    NA
 ```
+]
 
-&lt;!-- clean up --&gt;
-
-```r
-all_data %&gt;% 
-* drop_na(-age) %&gt;%
-  nrow
-```
-
-```
-[1] 2261
-```
 
 ---
 
-# Replace `NA`s with a string or value
+# Replace `NA`s with another value: `replace_na()`
 
 
 
-```r
-all_data %&gt;% 
-* mutate(sex = replace_na(sex, "Unknown")) %&gt;%
-  tabyl(sex)
-```
-
-```
-     sex     n percent
-  Female  9592 0.47960
-    Male 10177 0.50885
- Unknown   231 0.01155
-```
+.pull-left-40[
+Use with `mutate()`
 
 ```r
-# Can do above on multiple variables, or, if lots do more advanced option below:
+mydata
+```
 
-# Advanced example:
-all_data %&gt;% 
-* mutate_at(vars(starts_with("q")),list(~replace_na(.,"No answer"))) %&gt;%
+```
+# A tibble: 3 x 4
+     id name  height years
+  &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1     7 Bo       2       3
+2     8 Al      NA       1
+3     9 Juan     1.8    NA
+```
+
+]
+.pull-right-60[
+
+```r
+mydata %&gt;% 
+* mutate(height = replace_na(height, "Unknown"),
+*        years = replace_na(years, 0) )
+```
+
+```
+# A tibble: 3 x 4
+     id name  height  years
+  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;
+1     7 Bo    2           3
+2     8 Al    Unknown     1
+3     9 Juan  1.8         0
+```
+]
+
+---
+
+# `replace_na()` advanced example
+
+Replaces `NAs` in all columns starting with "q" with the string "No answer"
+
+```r
+qn_data %&gt;% 
+* mutate_at(vars(starts_with("q")),
+*           .funs = list(~replace_na(.,"No answer"))) %&gt;%
   tabyl(q8, q31)
 ```
 
@@ -1213,14 +1275,14 @@ all_data %&gt;%
          Did not ride a bicycle 1318       343 1223
  Most of the time wore a helmet  320        31  173
             Never wore a helmet 1429       418 1672
-                      No answer  267     10212  300
+                      No answer  267       212  300
            Rarely wore a helmet  481        73  405
         Sometimes wore a helmet  351        53  246
 ```
 
 ---
 
-# Replace specific values (i.e. "No answer", 9999, etc) with `NA`:
+# Convert (i.e. "No answer", 9999, etc) to `NA`: `na_if()`
 
 
 ```r
@@ -1251,86 +1313,164 @@ all_data %&gt;%
 ```
 
 ---
+# `na_if()` for all your data
 
-# Working with strings/character columns
+**Avoid this** by reading in your data correctly:
 
-- Use the `tidyverse` package `stringr` (may need to load with `library(stringr)`)
-- To paste strings or values together, use the package `glue`
+
+```r
+smalldata &lt;- read_csv("data/small_data.csv",
+*                     na = c("","9999","NA")) # specify your own missing values
+```
+
+**Otherwise** `na_if()` everything:
+
+
+```r
+# replace all "" with NA
+all_data %&gt;%
+* mutate_if(is.character, .funs = na_if(.,"")) %&gt;%
+
+# replace all 9999's with NA 
+all_data %&gt;%
+* mutate_if(is.numeric, .funs = na_if(.,9999)) %&gt;%
+```
+
+
+
+
+---
+
+# Working with character strings
+
+- [Use the package `stringr`](https://stringr.tidyverse.org/) (loaded with `tidyverse`)
+- Paste strings or values together [with package `glue`](https://glue.tidyverse.org/) (installed, not loaded w/ `tidyverse`)
+- *advanced tip*: learn ["regular expressions"](https://stringr.tidyverse.org/articles/regular-expressions.html) ([regex](https://xkcd.com/208/)) for pattern matching (see [cheatsheet](https://www.rstudio.com/resources/cheatsheets/#stringr)) and matching multiple characters/strings at once
+
+&lt;center&gt;&lt;img src="img/stringr_cheatsheet_clip.png" width="100%" height="90%"&gt;&lt;/center&gt;
+[stringr cheatsheet](https://www.rstudio.com/resources/cheatsheets/#stringr)
+
 
 ---
 
 # `str_detect()` find strings
 
 
-```r
-all_data %&gt;% 
-* filter(str_detect(race7,"Latino")) %&gt;%
-  head(3)
-```
-
-```
-# A tibble: 3 x 13
-  record age   sex   grade race4 race7   bmi stweight q8    q12   q31  
-   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
-1 3.63e4 18 y… Male  11th  Hisp… Hisp…  NA       NA   Neve… &lt;NA&gt;  &lt;NA&gt; 
-2 5.06e5 18 y… Male  12th  Hisp… Hisp…  33.1    123.  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
-3 1.31e6 16 y… Male  10th  Hisp… Hisp…  21.8     66.7 Neve… 1 or… Yes  
-# … with 2 more variables: qn24 &lt;lgl&gt;, qn_yes &lt;dbl&gt;
-```
 
 ```r
-all_data %&gt;% 
-* mutate(q8_mentions_helmet = str_detect(q8,"helmet")) %&gt;%
-  tabyl(q8, q8_mentions_helmet)
+mydata &lt;- tibble(name = c("Joy","Ella","Jay"), state = c("New Mexico","New York","Oregon"))
+```
+
+.pull-left[
+
+Filter based on string detection
+
+```r
+mydata %&gt;% filter(str_detect(name,"J"))       
 ```
 
 ```
-                             q8 FALSE TRUE   NA_
-           Always wore a helmet     0  685     0
-         Did not ride a bicycle  2884    0     0
- Most of the time wore a helmet     0  524     0
-            Never wore a helmet     0 3519     0
-           Rarely wore a helmet     0  959     0
-        Sometimes wore a helmet     0  650     0
-                           &lt;NA&gt;     0    0 10779
+# A tibble: 2 x 2
+  name  state     
+  &lt;chr&gt; &lt;chr&gt;     
+1 Joy   New Mexico
+2 Jay   Oregon    
+```
+]
+.pull-right[
+
+Creates a column of TRUE/FALSE if detected
+
+```r
+mydata %&gt;% mutate(
+  new_state = str_detect(state,"New"))    
+```
+
+```
+# A tibble: 3 x 3
+  name  state      new_state
+  &lt;chr&gt; &lt;chr&gt;      &lt;lgl&gt;    
+1 Joy   New Mexico TRUE     
+2 Ella  New York   TRUE     
+3 Jay   Oregon     FALSE    
+```
+]
+---
+
+# `str_replace_all()`, `str_replace()`
+
+
+```r
+mydata %&gt;% mutate(state = str_replace_all(state, "New", "Old"))
+```
+
+```
+# A tibble: 3 x 2
+  name  state     
+  &lt;chr&gt; &lt;chr&gt;     
+1 Joy   Old Mexico
+2 Ella  Old York  
+3 Jay   Oregon    
+```
+
+
+```r
+mydata %&gt;% mutate(name2 = str_replace(name, "l","-"),        # replace first instance
+                  name3 = str_replace_all(name, "l","-"),    # replace all instances
+                  state2 = str_replace_all(state, " ",""))   # remove spaces
+```
+
+```
+# A tibble: 3 x 5
+  name  state      name2 name3 state2   
+  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
+1 Joy   New Mexico Joy   Joy   NewMexico
+2 Ella  New York   E-la  E--a  NewYork  
+3 Jay   Oregon     Jay   Jay   Oregon   
 ```
 
 ---
 
-# Replace strings
+# `str_sub()`: shorten strings
 
+Based on position `1` (`start = 1`) to length of string (`end = -1`)
 
 ```r
-all_data %&gt;% 
-* mutate(race4 = str_replace(race4,"Latino","Latinx")) %&gt;%
-  tabyl(race4)
+mydata %&gt;% mutate(
+  short_name  = str_sub(name, start=1, end=2),       # specify start to end
+  short_name2 = str_sub(name, end=2),                # specify only end
+  short_state = str_sub(state, end = -3)             # negative endices, from end
+  )
 ```
 
 ```
-                     race4    n percent valid_percent
-           All other races 4713 0.23565     0.2443235
- Black or African American 4093 0.20465     0.2121825
-           Hispanic/Latinx 4670 0.23350     0.2420943
-                     White 5814 0.29070     0.3013997
-                      &lt;NA&gt;  710 0.03550            NA
+# A tibble: 3 x 5
+  name  state      short_name short_name2 short_state
+  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;      
+1 Joy   New Mexico Jo         Jo          New Mexi   
+2 Ella  New York   El         El          New Yo     
+3 Jay   Oregon     Ja         Ja          Oreg       
 ```
+
 
 ---
 
-# Paste strings
+# Paste strings together with `glue()`
 
-Use `glue()` to paste data together with strings. Put any column names or function operations in `{}`:
+- `paste()` is the base R way of pasting strings (surprise, it's hard to use)
+- `glue()` is most useful when pasting data columns together
+- **column *names* or function *operations* go inside `{}`**
+- See the [glue vignette](https://glue.tidyverse.org/index.html)
 
 
 ```r
 all_data %&gt;%
-  mutate(info = glue("Student {record} is {age} with BMI = {round(bmi,1)}")) %&gt;%
-  select(record, info) %&gt;%
-  head()
+* mutate(info = glue("Student {record} is {age} with BMI = {round(bmi,1)}")) %&gt;%
+  select(record, info) %&gt;% head(5)
 ```
 
 ```
-# A tibble: 6 x 2
+# A tibble: 5 x 2
    record info                                                
     &lt;dbl&gt; &lt;S3: glue&gt;                                          
 1  931897 Student 931897 is 15 years old with BMI = 17.2      
@@ -1338,19 +1478,14 @@ all_data %&gt;%
 3   36253 Student 36253 is 18 years old or older with BMI = NA
 4 1095530 Student 1095530 is 15 years old with BMI = 28       
 5 1303997 Student 1303997 is 14 years old with BMI = 24.5     
-6  261619 Student 261619 is 17 years old with BMI = NA        
 ```
 
-
 ---
 
-# Practice
+# Glue summary data
 
----
-
-# Paste strings of summary data
-
-Calculate the S.E. of the mean and create a column with "mean (SE)" of bmi:
+- Useful for tables (will cover this more in another session)
+- Example, calculate the S.E. of the mean and create a column with "mean (SE)" of bmi:
 
 
 ```r
@@ -1359,7 +1494,7 @@ demo_data %&gt;%
   summarize(n_sex = n(),
             bmi_mean = mean(bmi,na.rm=TRUE),
             bmi_sd = sd(bmi,na.rm=TRUE)) %&gt;%
-  mutate(bmi_mean_se = glue("{round(bmi_mean,1)} ({signif(bmi_sd/sqrt(n_sex),2)})"))
+* mutate(bmi_mean_se = glue("{round(bmi_mean,1)} ({signif(bmi_sd/sqrt(n_sex),2)})"))
 ```
 
 ```
@@ -1371,6 +1506,146 @@ demo_data %&gt;%
 3 Male   10177     23.7   5.01 23.7 (0.05) 
 ```
 
+---
+
+# Wrangle dates with `lubridate`
+
+.pull-left[
+- Convert characters to special "Date" type
+- Convert *terrible excel date formats* into workable data
+- Easy date magic examples:
+    + add and subtract dates
+    + convert to minutes/years/etc
+    + change timezones
+    + add 1 month to a date...
+- [lubridate cheat sheet](https://www.rstudio.com/resources/cheatsheets/#lubridate)
+- `read_csv` and `read_excel` etc automatically import dates correctly
+
+]
+
+.pull-right[
+&lt;center&gt;&lt;img src="img/horst_lubridate.png" width="100%" height="100%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;
+&lt;/center&gt;
+]
+
+
+---
+
+# What kind of date do you have?
+
+.pull-left-40[
+&lt;center&gt;&lt;img src="img/lubridate_parse_date_times.png" width="100%" height="100%"&gt;&lt;/center&gt;
+[lubridate cheat sheet](https://www.rstudio.com/resources/cheatsheets/#lubridate)
+]
+.pull-right-60[
+
+```r
+timedata &lt;- 
+  tibble(name = c("Yi","Bo","DJ"), 
+         dob = c("10/31/1952","1/12/1984","2/02/2002"))
+timedata %&gt;% 
+  mutate(dob_date = mdy(dob),
+         dob_wrong = dmy(dob)) # wrong order
+```
+
+```
+# A tibble: 3 x 4
+  name  dob        dob_date   dob_wrong 
+  &lt;chr&gt; &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;    
+1 Yi    10/31/1952 1952-10-31 NA        
+2 Bo    1/12/1984  1984-01-12 1984-12-01
+3 DJ    2/02/2002  2002-02-02 2002-02-02
+```
+]
+
+---
+
+# Math with dates
+
+
+```r
+timedata %&gt;% mutate(
+  dob = mdy(dob),                            # convert to a date
+  dob_year = year(dob),                      # extract the year
+  time_since_birth = dob %--% today(),       # create an "interval"
+  age = time_since_birth %/% years(1),       # modulus on "years"
+  dobplus = dob + days(10))                  # add time
+```
+
+```
+# A tibble: 3 x 6
+  name  dob        dob_year time_since_birth                 age dobplus   
+  &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;S4: Interval&gt;                 &lt;dbl&gt; &lt;date&gt;    
+1 Yi    1952-10-31     1952 1952-10-31 UTC--2019-04-25 UTC    66 1952-11-10
+2 Bo    1984-01-12     1984 1984-01-12 UTC--2019-04-25 UTC    35 1984-01-22
+3 DJ    2002-02-02     2002 2002-02-02 UTC--2019-04-25 UTC    17 2002-02-12
+```
+
+
+---
+
+# Clean messy column names with `clean_names()`
+
+
+```r
+mydata &lt;- tibble("First Name"= c("Yi","DJ"), "last init" = c("C","R"),
+                 "% in" = c(0.1, 0.5), "ñ$$$"= 1:2, " "=3:2,"     hi"=c("a","b"))
+mydata
+```
+
+```
+# A tibble: 2 x 6
+  `First Name` `last init` `% in` `ñ$$$`   ` ` `     hi`
+  &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;  &lt;int&gt; &lt;int&gt; &lt;chr&gt;    
+1 Yi           C              0.1      1     3 a        
+2 DJ           R              0.5      2     2 b        
+```
+
+```r
+mydata %&gt;% clean_names() # in the janitor package
+```
+
+```
+# A tibble: 2 x 6
+  first_name last_init percent_in     n     x hi   
+  &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;
+1 Yi         C                0.1     1     3 a    
+2 DJ         R                0.5     2     2 b    
+```
+
+---
+
+# Clean names of your excel sheet
+
+&lt;center&gt;&lt;img src="img/messy_names_excel.png" width="90%" height="90%"&gt;&lt;/center&gt;
+
+
+```r
+library(readxl)
+read_excel("data/messy_names.xlsx", .name_repair = janitor::make_clean_names)
+```
+
+```
+# A tibble: 20,000 x 9
+    record age   grade_string race  race_2 bmi_kg_m_2 weight_kg x     x_2  
+     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+ 1  931897 15 y… 10th         White White        17.2      54.4 some… &lt;NA&gt; 
+ 2  333862 17 y… 12th         White White        20.2      57.2 notes &lt;NA&gt; 
+ 3   36253 18 y… 11th         Hisp… Hispa…       NA        NA   I th… &lt;NA&gt; 
+ 4 1095530 15 y… 10th         Blac… Black…       28.0      85.7 why   WHY? 
+ 5 1303997 14 y… 9th          All … Multi…       24.5      66.7 &lt;NA&gt;  &lt;NA&gt; 
+ 6  261619 17 y… 9th          All … &lt;NA&gt;         NA        NA   &lt;NA&gt;  &lt;NA&gt; 
+ 7  926649 16 y… 11th         All … Asian        20.5      70.3 &lt;NA&gt;  &lt;NA&gt; 
+ 8 1309082 17 y… 12th         White White        19.3      59.0 &lt;NA&gt;  &lt;NA&gt; 
+ 9  506337 18 y… 12th         Hisp… Hispa…       33.1     123.  &lt;NA&gt;  &lt;NA&gt; 
+10  180494 14 y… 10th         Blac… Black…       NA        NA   &lt;NA&gt;  &lt;NA&gt; 
+# … with 19,990 more rows
+```
+
+
+---
+
+# Practice
 
 
 ---

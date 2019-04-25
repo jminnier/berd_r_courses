@@ -535,11 +535,19 @@ class: center, middle, inverse
 
 # Reshaping data 
 
+
+
 wide vs. long
 
-<img src="img/hex-tidyr.png" width="20%" height="20%">  
-[tidyr](https://tidyr.tidyverse.org)
 
+.pull-left[
+<img src="img/horst_tidyr_spread_gather.png" width="80%" height="80%">  
+[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+]
+.pull-right[
+<img src="img/hex-tidyr.png" width="70%" height="70%">  
+[tidyr](https://tidyr.tidyverse.org)
+]
 ---
 
 # Wide vs. long data
@@ -733,56 +741,89 @@ class: center, middle, inverse
 
 # Data cleaning
 
+## (messy NAs, names, strings, dates, factors)
+
+
+<img src="img/stringr_hex.png" width="24%" height="30%">
+<img src="img/glue_hex.png" width="24%" height="30%">
+<img src="img/forcats_hex.png" width="24%" height="30%">
+<img src="img/lubridate_hex2.png" width="24%" height="30%">
+
+
+
 ---
 
-<!-- TO DO: just adding random stuff from here, NEED TO EDIT/CLEAN UP/ADD MORE EXPLANATIONS -->
-
-# Handling missing data
+# Removing missing data: `drop_na()`
 
 <!-- These examples might be clearer with a small dataset and showing what the outcomes are. -->
-Remove all rows with any missing data
+
+
+
+.pull-left[
+
+A small data example:
 
 ```{r}
-all_data %>% 
-  drop_na() %>% #<<
-  nrow
+mydata <- tibble(id = 7:9, 
+                 name = c("Bo","Al","Juan"), 
+                 height=c(2, NA, 1.8), 
+                 years=c(3,1,NA))
+mydata
 ```
+]
 
-Remove all rows with any missing data in selected rows
+.pull-right[
+
+Remove *all* rows with **any missing data**
 
 ```{r}
-all_data %>% 
-  drop_na(sex, age) %>% #<<
-  nrow
+mydata %>% drop_na()
 ```
 
-<!-- clean up -->
+Remove rows with `NA` in **selected columns**
+
 ```{r}
-all_data %>% 
-  drop_na(-age) %>% #<<
-  nrow
+mydata %>% drop_na(height)
 ```
+]
+
 
 ---
 
-# Replace `NA`s with a string or value
+# Replace `NA`s with another value: `replace_na()`
 
 
+
+.pull-left-40[
+Use with `mutate()`
 ```{r}
-all_data %>% 
-  mutate(sex = replace_na(sex, "Unknown")) %>% #<<
-  tabyl(sex)
-# Can do above on multiple variables, or, if lots do more advanced option below:
+mydata
+```
 
-# Advanced example:
-all_data %>% 
-  mutate_at(vars(starts_with("q")),list(~replace_na(.,"No answer"))) %>% #<<
+]
+.pull-right-60[
+```{r}
+mydata %>% 
+  mutate(height = replace_na(height, "Unknown"), #<<
+         years = replace_na(years, 0) ) #<<
+```
+]
+
+---
+
+# `replace_na()` advanced example
+
+Replaces `NAs` in all columns starting with "q" with the string "No answer"
+```{r}
+qn_data %>% 
+  mutate_at(vars(starts_with("q")), #<<
+            .funs = list(~replace_na(.,"No answer"))) %>% #<<
   tabyl(q8, q31)
 ```
 
 ---
 
-# Replace specific values (i.e. "No answer", 9999, etc) with `NA`:
+# Convert (i.e. "No answer", 9999, etc) to `NA`: `na_if()`
 
 ```{r}
 all_data %>% tabyl(race4)
@@ -792,59 +833,115 @@ all_data %>%
 ```
 
 ---
+# `na_if()` for all your data
 
-# Working with strings/character columns
+**Avoid this** by reading in your data correctly:
 
-- Use the `tidyverse` package `stringr` (may need to load with `library(stringr)`)
-- To paste strings or values together, use the package `glue`
+```{r, eval=FALSE}
+smalldata <- read_csv("data/small_data.csv",
+                      na = c("","9999","NA")) # specify your own missing values #<<
+```
+
+**Otherwise** `na_if()` everything:
+
+```{r, eval=FALSE}
+# replace all "" with NA
+all_data %>%
+  mutate_if(is.character, .funs = na_if(.,"")) %>% #<<
+
+# replace all 9999's with NA 
+all_data %>%
+  mutate_if(is.numeric, .funs = na_if(.,9999)) %>% #<<
+```
+
+
+
+
+---
+
+# Working with character strings
+
+- [Use the package `stringr`](https://stringr.tidyverse.org/) (loaded with `tidyverse`)
+- Paste strings or values together [with package `glue`](https://glue.tidyverse.org/) (installed, not loaded w/ `tidyverse`)
+- *advanced tip*: learn ["regular expressions"](https://stringr.tidyverse.org/articles/regular-expressions.html) ([regex](https://xkcd.com/208/)) for pattern matching (see [cheatsheet](https://www.rstudio.com/resources/cheatsheets/#stringr)) and matching multiple characters/strings at once
+
+<center><img src="img/stringr_cheatsheet_clip.png" width="100%" height="90%"></center>
+[stringr cheatsheet](https://www.rstudio.com/resources/cheatsheets/#stringr)
+
 
 ---
 
 # `str_detect()` find strings
 
-```{r}
-all_data %>% 
-  filter(str_detect(race7,"Latino")) %>% #<<
-  head(3)
 
-all_data %>% 
-  mutate(q8_mentions_helmet = str_detect(q8,"helmet")) %>% #<<
-  tabyl(q8, q8_mentions_helmet)
+```{r}
+mydata <- tibble(name = c("Joy","Ella","Jay"), state = c("New Mexico","New York","Oregon"))
+```
+
+.pull-left[
+
+Filter based on string detection
+```{r}
+mydata %>% filter(str_detect(name,"J"))       
+```
+]
+.pull-right[
+
+Creates a column of TRUE/FALSE if detected
+```{r}
+mydata %>% mutate(
+  new_state = str_detect(state,"New"))    
+```
+]
+---
+
+# `str_replace_all()`, `str_replace()`
+
+```{r}
+mydata %>% mutate(state = str_replace_all(state, "New", "Old"))
+```
+
+```{r}
+mydata %>% mutate(name2 = str_replace(name, "l","-"),        # replace first instance
+                  name3 = str_replace_all(name, "l","-"),    # replace all instances
+                  state2 = str_replace_all(state, " ",""))   # remove spaces
 ```
 
 ---
 
-# Replace strings
+# `str_sub()`: shorten strings
 
+Based on position `1` (`start = 1`) to length of string (`end = -1`)
 ```{r}
-all_data %>% 
-  mutate(race4 = str_replace(race4,"Latino","Latinx")) %>% #<<
-  tabyl(race4)
+mydata %>% mutate(
+  short_name  = str_sub(name, start=1, end=2),       # specify start to end
+  short_name2 = str_sub(name, end=2),                # specify only end
+  short_state = str_sub(state, end = -3)             # negative endices, from end
+  )
 ```
+
 
 ---
 
-# Paste strings
+# Paste strings together with `glue()`
 
-Use `glue()` to paste data together with strings. Put any column names or function operations in `{}`:
+- `paste()` is the base R way of pasting strings (surprise, it's hard to use)
+- `glue()` is most useful when pasting data columns together
+- **column *names* or function *operations* go inside `{}`**
+- See the [glue vignette](https://glue.tidyverse.org/index.html)
 
 ```{r}
 all_data %>%
-  mutate(info = glue("Student {record} is {age} with BMI = {round(bmi,1)}")) %>%
-  select(record, info) %>%
-  head()
+  mutate(info = glue("Student {record} is {age} with BMI = {round(bmi,1)}")) %>% #<<
+  select(record, info) %>% head(5)
 ```
 
-
 ---
 
-# Practice
+# Glue summary data
 
----
-
-# Paste strings of summary data
-
-Calculate the S.E. of the mean and create a column with "mean (SE)" of bmi:
+- Useful for tables (will cover this more in another session)
+- Example, calculate the S.E. of the mean and create a column with "mean (SE)" of bmi:
 
 ```{r}
 demo_data %>% 
@@ -852,9 +949,91 @@ demo_data %>%
   summarize(n_sex = n(),
             bmi_mean = mean(bmi,na.rm=TRUE),
             bmi_sd = sd(bmi,na.rm=TRUE)) %>%
-  mutate(bmi_mean_se = glue("{round(bmi_mean,1)} ({signif(bmi_sd/sqrt(n_sex),2)})"))
+  mutate(bmi_mean_se = glue("{round(bmi_mean,1)} ({signif(bmi_sd/sqrt(n_sex),2)})")) #<<
 ```
 
+---
+
+# Wrangle dates with `lubridate`
+
+.pull-left[
+- Convert characters to special "Date" type
+- Convert *terrible excel date formats* into workable data
+- Easy date magic examples:
+    + add and subtract dates
+    + convert to minutes/years/etc
+    + change timezones
+    + add 1 month to a date...
+- [lubridate cheat sheet](https://www.rstudio.com/resources/cheatsheets/#lubridate)
+- `read_csv` and `read_excel` etc automatically import dates correctly
+
+]
+
+.pull-right[
+<center><img src="img/horst_lubridate.png" width="100%" height="100%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a>
+</center>
+]
+
+
+---
+
+# What kind of date do you have?
+
+.pull-left-40[
+<center><img src="img/lubridate_parse_date_times.png" width="100%" height="100%"></center>
+[lubridate cheat sheet](https://www.rstudio.com/resources/cheatsheets/#lubridate)
+]
+.pull-right-60[
+```{r}
+timedata <- 
+  tibble(name = c("Yi","Bo","DJ"), 
+         dob = c("10/31/1952","1/12/1984","2/02/2002"))
+timedata %>% 
+  mutate(dob_date = mdy(dob),
+         dob_wrong = dmy(dob)) # wrong order
+```
+]
+
+---
+
+# Math with dates
+
+```{r}
+timedata %>% mutate(
+  dob = mdy(dob),                            # convert to a date
+  dob_year = year(dob),                      # extract the year
+  time_since_birth = dob %--% today(),       # create an "interval"
+  age = time_since_birth %/% years(1),       # modulus on "years"
+  dobplus = dob + days(10))                  # add 10 days
+```
+
+
+---
+
+# Clean messy column names with `clean_names()`
+
+```{r}
+mydata <- tibble("First Name"= c("Yi","DJ"), "last init" = c("C","R"),
+                 "% in" = c(0.1, 0.5), "ñ$$$"= 1:2, " "=3:2,"     hi"=c("a","b"))
+mydata
+mydata %>% clean_names() # in the janitor package
+```
+
+---
+
+# Clean names of your excel sheet
+
+<center><img src="img/messy_names_excel.png" width="90%" height="90%"></center>
+
+```{r}
+library(readxl)
+read_excel("data/messy_names.xlsx", .name_repair = janitor::make_clean_names)
+```
+
+
+---
+
+# Practice
 
 
 ---
