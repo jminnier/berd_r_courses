@@ -1,0 +1,235 @@
+---
+title: Data Wrangling in R with the Tidyverse (Part 2) - Practice Solutions
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+date: "<span style = 'font-size: 80%;'>2019/04/25 (Part 2)<br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_tidy1](http://bit.ly/berd_tidy1) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_tidy1_pdf](http://bit.ly/berd_tidy1_pdf)</span>"
+output: 
+  xaringan::moon_reader:
+    css: [css/xaringan-themer-solns.css, css/my-theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:9"
+    includes:
+      in_header: ../header.html   
+editor_options: 
+  chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+library(lubridate)
+library(janitor)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  #fig.width=10.5, 
+  #fig.height=4,
+  fig.align = "center",
+  rows.print=7,
+  echo=TRUE,
+  highlight = TRUE,
+  prompt = FALSE, # IF TRUE adds a > before each code input
+  comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  #comment=NA
+  )
+
+# set ggplot theme
+theme_set(theme_bw(base_size = 24))
+```
+
+
+
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#518c66", ## OHSU Marquam
+  code_highlight_color = "#c0e8f5",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = NULL,
+  text_font_size = "24px",
+  code_font_size = "20px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
+  outfile = "css/xaringan-themer-solns.css"
+)
+```
+
+# Load the data and packages
+
+```{r}
+# install.packages("tidyverse","janitor","glue")  
+library(tidyverse)
+library(lubridate)  
+library(janitor)
+library(glue)
+demo_data <- read_csv("data/yrbss_demo.csv")
+qn_data <- read_csv("data/yrbss_qn.csv")
+```
+
+---
+
+# Practice 1
+
+1. Add a column of `1`'s to `qn_data` called `qn_yes` and save the resulting data as `qn_data2`.
+
+1. Join `demo_data` and `qn_data2` by column `record`. Keep all rows from `demo_data` and only rows from `qn_data2` that match records in `demo_data`. Call the resulting data `all_data`.
+
+1. Create a `tabyl()` of `qn_yes` for the data `all_data`.
+
+1. Create a 2x2 table of `qn_yes` vs `grade`.
+
+Note about the data:
+
+- q8 = How often wear bicycle helmet
+- q12 = Texted while driving
+- q31 = Ever smoked
+- qn24 = Bullied past 12 months
+
+---
+
+```{r,}
+qn_data2 <- qn_data %>% add_column(qn_yes = 1)
+all_data <- left_join(demo_data, qn_data2)
+all_data %>% tabyl(qn_yes)
+all_data %>% tabyl(qn_yes,grade)
+```
+
+---
+
+# Practice 2
+
+
+1. Make `DBP_wide` into a long dataframe based on the repeated DBP columns and save it as `DBP_long`.
+1. Clean up the visit column of `DBP_long` so that the values are 1, 2, 3, and save it as `DBP_long`.
+
+1. Make `DBP_long` wide with column names `visit.1, visit.2, visit.3` for the DBP values, and save it as `DBP_wide2`.
+
+1. Join `DBP_long` with `BP_long2` so that we have one data frame with columns id, sex, visit, SBP, DBP, and age. Save this as `BP_both_long`.
+
+---
+
+# Practice 2 Initial Data
+
+Copy and paste the code below into R to create the datasets:
+
+```{r}
+DBP_wide <- tibble(id = letters[1:4],
+                  sex = c("F", "M", "M", "F"),
+                  v1.DBP = c(88, 84, 102, 70),
+                  v2.DBP = c(78, 78, 96, 76),
+                  v3.DBP = c(94, 82, 94, 74),
+                  age=c(23, 56, 41, 38)
+                  )
+BP_wide <- tibble(id = letters[1:4],
+                     sex = c("F", "M", "M", "F"),
+                     SBP_v1 = c(130, 120, 130, 119),
+                     SBP_v2 = c(110, 116, 136, 106),
+                     SBP_v3 = c(112, 122, 138, 118))
+BP_long <- BP_wide %>% 
+  gather(key = "visit", value = "SBP", SBP_v1:SBP_v3)
+BP_long2 <- BP_long %>% 
+  mutate(visit = str_replace(visit,"SBP_v","")) 
+```
+---
+
+# Practice 2 solutions (1/2)
+
+.pull-left[
+```{r}
+DBP_long <- DBP_wide %>%
+  gather(key = "visit", value = "DBP", 
+         v1.DBP, v2.DBP, v3.DBP) %>%
+  mutate(visit = str_replace(
+    visit, c("v"), "")) %>%
+  mutate(visit = str_replace(
+    visit, ".DBP", ""))  
+DBP_long
+```
+]
+.pull-right[
+```{r}
+DBP_wide2 <- DBP_long %>% 
+  spread(
+    key = "visit", value = "DBP",
+    sep=".") # specify separating character
+DBP_wide2
+```
+]
+---
+
+# Practice 2 solutions (2/2)
+
+```{r}
+BP_both_long <- left_join(BP_long2, DBP_long, by = c("id", "sex", "visit"))
+BP_both_long
+```
+
+---
+
+# Practice 3
+
+```{r}
+messy_data <- tibble(NAME = c("J N","A C","D E"), 
+                     `months follow up` = c("", 10, 11), 
+                     `Date of visit` = c("July 31, 2003", "Nov 12, 2005", "Aug 3, 2007"))
+```
+
+1. Clean column names with `clean_names()`.
+1. Replace missing ("") data in `months_follow_up` with NA.
+1. Convert `months_follow_up` to a numeric variable.
+1. Convert `date_of_visit` to a date.
+1. Create a column called `date_last_visit` that is the date of visit *plus* months of follow up.
+1. Remove rows (cases) with missing data in `months_follow_up`.
+1. Remove the spaces in `name`.
+
+```{r}
+messy_data
+```
+
+
+---
+
+# Practice solutions 3 (1/2)
+
+```{r}
+clean_data <- messy_data %>% 
+  clean_names() %>%
+  mutate(
+    months_follow_up = replace_na(months_follow_up,""),
+    months_follow_up = as.numeric(months_follow_up),
+    date_of_visit = mdy(date_of_visit),
+    date_last_visit = date_of_visit + months(months_follow_up))
+clean_data
+```
+
+---
+
+# Practice solutions 3 (2/2)
+
+```{r}
+
+clean_data <- clean_data %>%
+  drop_na(months_follow_up) %>%
+  mutate(name = str_replace_all(name," ",""))
+clean_data
+```
+

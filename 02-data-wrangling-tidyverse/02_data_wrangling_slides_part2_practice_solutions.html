@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Wrangling in R with the Tidyverse (Part 2) - Practice Solutions</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer-solns.css" type="text/css" />
+    <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# Data Wrangling in R with the Tidyverse (Part 2) - Practice Solutions
+### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
+### <span style="font-size: 80%;">2019/04/25 (Part 2)<br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_tidy1">bit.ly/berd_tidy1</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_tidy1_pdf">bit.ly/berd_tidy1_pdf</a></span>
+
+---
+
+
+layout: true
+  
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/berd_tidy&lt;/span&gt;&lt;/div&gt;  --&gt;
+
+---
+
+
+
+
+
+
+
+# Load the data and packages
+
+
+```r
+# install.packages("tidyverse","janitor","glue")  
+library(tidyverse)
+library(lubridate)  
+library(janitor)
+library(glue)
+demo_data &lt;- read_csv("data/yrbss_demo.csv")
+qn_data &lt;- read_csv("data/yrbss_qn.csv")
+```
+
+---
+
+# Practice 1
+
+1. Add a column of `1`'s to `qn_data` called `qn_yes` and save the resulting data as `qn_data2`.
+
+1. Join `demo_data` and `qn_data2` by column `record`. Keep all rows from `demo_data` and only rows from `qn_data2` that match records in `demo_data`. Call the resulting data `all_data`.
+
+1. Create a `tabyl()` of `qn_yes` for the data `all_data`.
+
+1. Create a 2x2 table of `qn_yes` vs `grade`.
+
+Note about the data:
+
+- q8 = How often wear bicycle helmet
+- q12 = Texted while driving
+- q31 = Ever smoked
+- qn24 = Bullied past 12 months
+
+---
+
+
+```r
+qn_data2 &lt;- qn_data %&gt;% add_column(qn_yes = 1)
+all_data &lt;- left_join(demo_data, qn_data2)
+all_data %&gt;% tabyl(qn_yes)
+```
+
+```
+ qn_yes     n percent valid_percent
+      1 10000     0.5             1
+     NA 10000     0.5            NA
+```
+
+```r
+all_data %&gt;% tabyl(qn_yes,grade)
+```
+
+```
+ qn_yes 10th 11th 12th  9th NA_
+      1 2443 2498 2287 2573 199
+     NA 2464 2393 2290 2646 207
+```
+
+---
+
+# Practice 2
+
+
+1. Make `DBP_wide` into a long dataframe based on the repeated DBP columns and save it as `DBP_long`.
+1. Clean up the visit column of `DBP_long` so that the values are 1, 2, 3, and save it as `DBP_long`.
+
+1. Make `DBP_long` wide with column names `visit.1, visit.2, visit.3` for the DBP values, and save it as `DBP_wide2`.
+
+1. Join `DBP_long` with `BP_long2` so that we have one data frame with columns id, sex, visit, SBP, DBP, and age. Save this as `BP_both_long`.
+
+---
+
+# Practice 2 Initial Data
+
+Copy and paste the code below into R to create the datasets:
+
+
+```r
+DBP_wide &lt;- tibble(id = letters[1:4],
+                  sex = c("F", "M", "M", "F"),
+                  v1.DBP = c(88, 84, 102, 70),
+                  v2.DBP = c(78, 78, 96, 76),
+                  v3.DBP = c(94, 82, 94, 74),
+                  age=c(23, 56, 41, 38)
+                  )
+BP_wide &lt;- tibble(id = letters[1:4],
+                     sex = c("F", "M", "M", "F"),
+                     SBP_v1 = c(130, 120, 130, 119),
+                     SBP_v2 = c(110, 116, 136, 106),
+                     SBP_v3 = c(112, 122, 138, 118))
+BP_long &lt;- BP_wide %&gt;% 
+  gather(key = "visit", value = "SBP", SBP_v1:SBP_v3)
+BP_long2 &lt;- BP_long %&gt;% 
+  mutate(visit = str_replace(visit,"SBP_v","")) 
+```
+---
+
+# Practice 2 solutions (1/2)
+
+.pull-left[
+
+```r
+DBP_long &lt;- DBP_wide %&gt;%
+  gather(key = "visit", value = "DBP", 
+         v1.DBP, v2.DBP, v3.DBP) %&gt;%
+  mutate(visit = str_replace(
+    visit, c("v"), "")) %&gt;%
+  mutate(visit = str_replace(
+    visit, ".DBP", ""))  
+DBP_long
+```
+
+```
+# A tibble: 12 x 5
+   id    sex     age visit   DBP
+   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+ 1 a     F        23 1        88
+ 2 b     M        56 1        84
+ 3 c     M        41 1       102
+ 4 d     F        38 1        70
+ 5 a     F        23 2        78
+ 6 b     M        56 2        78
+ 7 c     M        41 2        96
+ 8 d     F        38 2        76
+ 9 a     F        23 3        94
+10 b     M        56 3        82
+11 c     M        41 3        94
+12 d     F        38 3        74
+```
+]
+.pull-right[
+
+```r
+DBP_wide2 &lt;- DBP_long %&gt;% 
+  spread(
+    key = "visit", value = "DBP",
+    sep=".") # specify separating character
+DBP_wide2
+```
+
+```
+# A tibble: 4 x 6
+  id    sex     age visit.1 visit.2 visit.3
+  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 a     F        23      88      78      94
+2 b     M        56      84      78      82
+3 c     M        41     102      96      94
+4 d     F        38      70      76      74
+```
+]
+---
+
+# Practice 2 solutions (2/2)
+
+
+```r
+BP_both_long &lt;- left_join(BP_long2, DBP_long, by = c("id", "sex", "visit"))
+BP_both_long
+```
+
+```
+# A tibble: 12 x 6
+   id    sex   visit   SBP   age   DBP
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 a     F     1       130    23    88
+ 2 b     M     1       120    56    84
+ 3 c     M     1       130    41   102
+ 4 d     F     1       119    38    70
+ 5 a     F     2       110    23    78
+ 6 b     M     2       116    56    78
+ 7 c     M     2       136    41    96
+ 8 d     F     2       106    38    76
+ 9 a     F     3       112    23    94
+10 b     M     3       122    56    82
+11 c     M     3       138    41    94
+12 d     F     3       118    38    74
+```
+
+---
+
+# Practice 3
+
+
+```r
+messy_data &lt;- tibble(NAME = c("J N","A C","D E"), 
+                     `months follow up` = c("", 10, 11), 
+                     `Date of visit` = c("July 31, 2003", "Nov 12, 2005", "Aug 3, 2007"))
+```
+
+1. Clean column names with `clean_names()`.
+1. Replace missing ("") data in `months_follow_up` with NA.
+1. Convert `months_follow_up` to a numeric variable.
+1. Convert `date_of_visit` to a date.
+1. Create a column called `date_last_visit` that is the date of visit *plus* months of follow up.
+1. Remove rows (cases) with missing data in `months_follow_up`.
+1. Remove the spaces in `name`.
+
+
+```r
+messy_data
+```
+
+```
+# A tibble: 3 x 3
+  NAME  `months follow up` `Date of visit`
+  &lt;chr&gt; &lt;chr&gt;              &lt;chr&gt;          
+1 J N   ""                 July 31, 2003  
+2 A C   10                 Nov 12, 2005   
+3 D E   11                 Aug 3, 2007    
+```
+
+
+---
+
+# Practice solutions 3 (1/2)
+
+
+```r
+clean_data &lt;- messy_data %&gt;% 
+  clean_names() %&gt;%
+  mutate(
+    months_follow_up = replace_na(months_follow_up,""),
+    months_follow_up = as.numeric(months_follow_up),
+    date_of_visit = mdy(date_of_visit),
+    date_last_visit = date_of_visit + months(months_follow_up))
+clean_data
+```
+
+```
+# A tibble: 3 x 4
+  name  months_follow_up date_of_visit date_last_visit
+  &lt;chr&gt;            &lt;dbl&gt; &lt;date&gt;        &lt;date&gt;         
+1 J N                 NA 2003-07-31    NA             
+2 A C                 10 2005-11-12    2006-09-12     
+3 D E                 11 2007-08-03    2008-07-03     
+```
+
+---
+
+# Practice solutions 3 (2/2)
+
+
+```r
+clean_data &lt;- clean_data %&gt;%
+  drop_na(months_follow_up) %&gt;%
+  mutate(name = str_replace_all(name," ",""))
+clean_data
+```
+
+```
+# A tibble: 2 x 4
+  name  months_follow_up date_of_visit date_last_visit
+  &lt;chr&gt;            &lt;dbl&gt; &lt;date&gt;        &lt;date&gt;         
+1 AC                  10 2005-11-12    2006-09-12     
+2 DE                  11 2007-08-03    2008-07-03     
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
