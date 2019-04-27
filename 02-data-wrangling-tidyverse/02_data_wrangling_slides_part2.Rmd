@@ -863,11 +863,11 @@ smalldata <- read_csv("data/small_data.csv",
 ```{r, eval=FALSE}
 # replace all "" with NA
 all_data %>%
-  mutate_if(is.character, .funs = na_if(.,"")) %>% #<<
+  mutate_if(is.character, .funs = na_if(.,"")) #<<
 
 # replace all 9999's with NA 
 all_data %>%
-  mutate_if(is.numeric, .funs = na_if(.,9999)) %>% #<<
+  mutate_if(is.numeric, .funs = na_if(.,9999)) #<<
 ```
 
 

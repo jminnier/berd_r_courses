@@ -1346,11 +1346,11 @@ smalldata &lt;- read_csv("data/small_data.csv",
 ```r
 # replace all "" with NA
 all_data %&gt;%
-* mutate_if(is.character, .funs = na_if(.,"")) %&gt;%
+* mutate_if(is.character, .funs = na_if(.,""))
 
 # replace all 9999's with NA 
 all_data %&gt;%
-* mutate_if(is.numeric, .funs = na_if(.,9999)) %&gt;%
+* mutate_if(is.numeric, .funs = na_if(.,9999))
 ```
 
 
@@ -1595,9 +1595,9 @@ timedata %&gt;% mutate(
 # A tibble: 3 x 6
   name  dob        dob_year time_since_birth                 age dobplus   
   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;S4: Interval&gt;                 &lt;dbl&gt; &lt;date&gt;    
-1 Yi    1952-10-31     1952 1952-10-31 UTC--2019-04-25 UTC    66 1952-11-10
-2 Bo    1984-01-12     1984 1984-01-12 UTC--2019-04-25 UTC    35 1984-01-22
-3 DJ    2002-02-02     2002 2002-02-02 UTC--2019-04-25 UTC    17 2002-02-12
+1 Yi    1952-10-31     1952 1952-10-31 UTC--2019-04-26 UTC    66 1952-11-10
+2 Bo    1984-01-12     1984 1984-01-12 UTC--2019-04-26 UTC    35 1984-01-22
+3 DJ    2002-02-02     2002 2002-02-02 UTC--2019-04-26 UTC    17 2002-02-12
 ```
 
 ---
