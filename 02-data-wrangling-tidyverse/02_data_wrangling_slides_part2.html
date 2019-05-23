@@ -121,37 +121,35 @@ class: center, middle, inverse
 
 # Changing *all* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-`mutate_all()`, `rename_all()`: applies a function to *all* columns
-
+`mutate_all()`, `rename_all()`: applies a function to *all* columns: &lt;br&gt;`mutate_all(FUNCTION, FUNCTION_ARGUMENTS)`
 
 
 ```r
 # mutate_all changes the data in all columns
-demo_data %&gt;% mutate_all(as.character) %&gt;% head(3)
+demo_data %&gt;% mutate_all(as.character) %&gt;% head(2)
 ```
 
 ```
-# A tibble: 3 x 8
-  record age             sex    grade race4      race7      bmi    stweight
-  &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;   
-1 931897 15 years old    Female 10th  White      White      17.179 54.43   
-2 333862 17 years old    Female 12th  White      White      20.24… 57.15   
-3 36253  18 years old o… Male   11th  Hispanic/… Hispanic/… &lt;NA&gt;   &lt;NA&gt;    
+# A tibble: 2 x 8
+  record age          sex    grade race4 race7 bmi     stweight
+  &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   
+1 931897 15 years old Female 10th  White White 17.179  54.43   
+2 333862 17 years old Female 12th  White White 20.2487 57.15   
 ```
 
 
 ```r
 # rename_all changes all column names
-demo_data %&gt;% rename_all(toupper) %&gt;% head(3)
+demo_data %&gt;% rename_all(str_sub, end = 2) %&gt;% head(3)
 ```
 
 ```
 # A tibble: 3 x 8
-  RECORD AGE             SEX    GRADE RACE4       RACE7        BMI STWEIGHT
-   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
-1 931897 15 years old    Female 10th  White       White       17.2     54.4
-2 333862 17 years old    Female 12th  White       White       20.2     57.2
-3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…  NA       NA  
+      re ag               se     gr    ra           ra             bm    st
+   &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 931897 15 years old     Female 10th  White        White        17.2  54.4
+2 333862 17 years old     Female 12th  White        White        20.2  57.2
+3  36253 18 years old or… Male   11th  Hispanic/La… Hispanic/L…  NA    NA  
 ```
 
 
@@ -159,21 +157,20 @@ demo_data %&gt;% rename_all(toupper) %&gt;% head(3)
 
 # Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-`mutate_at()`, `rename_at()`: uses `vars()` to select specific variables to apply a function to
+`mutate_at()`, `rename_at()`: uses `vars()` to select specific variables to apply a function to i.e. `mutate_at(vars(SELECT), FUNCTION, FUNCTION_ARGUMENTS)`
 
 
 ```r
 # mutate_at changes the data in specified columns
-demo_data %&gt;% mutate_at(vars(contains("race"), sex), as.factor) %&gt;% head(3)
+demo_data %&gt;% mutate_at(vars(contains("race"), sex), as.factor) %&gt;% head(2)
 ```
 
 ```
-# A tibble: 3 x 8
-  record age             sex    grade race4       race7        bmi stweight
-   &lt;dbl&gt; &lt;chr&gt;           &lt;fct&gt;  &lt;chr&gt; &lt;fct&gt;       &lt;fct&gt;      &lt;dbl&gt;    &lt;dbl&gt;
-1 931897 15 years old    Female 10th  White       White       17.2     54.4
-2 333862 17 years old    Female 12th  White       White       20.2     57.2
-3  36253 18 years old o… Male   11th  Hispanic/L… Hispanic/…  NA       NA  
+# A tibble: 2 x 8
+  record age          sex    grade race4 race7   bmi stweight
+   &lt;dbl&gt; &lt;chr&gt;        &lt;fct&gt;  &lt;chr&gt; &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 931897 15 years old Female 10th  White White  17.2     54.4
+2 333862 17 years old Female 12th  White White  20.2     57.2
 ```
 
 
@@ -196,7 +193,7 @@ demo_data %&gt;% rename_at(vars(record:grade),toupper) %&gt;% head(3)
 
 # Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-`mutate_if()`, `rename_if()`, `select_if()`: uses a function that returns TRUE/FALSE to select columns and applies function on the TRUE columns
+`mutate_if()`, `rename_if()`, `select_if()`: uses a function that returns TRUE/FALSE to select columns and applies function on the TRUE columns:&lt;BR&gt;`mutate_if(BOOLEAN, FUNCTION, FUNCTION_ARGUMENTS)`
 
 
 
@@ -219,7 +216,7 @@ demo_data %&gt;% mutate_if(is.numeric, round, digits = 0) %&gt;% head(3)
 
 
 ```r
-demo_data %&gt;% rename_if(is.character, str_sub, start = 1, end = 2) %&gt;% head(3)
+demo_data %&gt;% rename_if(is.character, str_sub, end = 2) %&gt;% head(3)
 ```
 
 ```
@@ -1595,9 +1592,9 @@ timedata %&gt;% mutate(
 # A tibble: 3 x 6
   name  dob        dob_year time_since_birth                 age dobplus   
   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;S4: Interval&gt;                 &lt;dbl&gt; &lt;date&gt;    
-1 Yi    1952-10-31     1952 1952-10-31 UTC--2019-05-16 UTC    66 1952-11-10
-2 Bo    1984-01-12     1984 1984-01-12 UTC--2019-05-16 UTC    35 1984-01-22
-3 DJ    2002-02-02     2002 2002-02-02 UTC--2019-05-16 UTC    17 2002-02-12
+1 Yi    1952-10-31     1952 1952-10-31 UTC--2019-05-23 UTC    66 1952-11-10
+2 Bo    1984-01-12     1984 1984-01-12 UTC--2019-05-23 UTC    35 1984-01-22
+3 DJ    2002-02-02     2002 2002-02-02 UTC--2019-05-23 UTC    17 2002-02-12
 ```
 
 ---

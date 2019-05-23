@@ -143,17 +143,16 @@ class: center, middle, inverse
 
 # Changing *all* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-`mutate_all()`, `rename_all()`: applies a function to *all* columns
-
+`mutate_all()`, `rename_all()`: applies a function to *all* columns: <br>`mutate_all(FUNCTION, FUNCTION_ARGUMENTS)`
 
 ```{r}
 # mutate_all changes the data in all columns
-demo_data %>% mutate_all(as.character) %>% head(3)
+demo_data %>% mutate_all(as.character) %>% head(2)
 ```
 
 ```{r}
 # rename_all changes all column names
-demo_data %>% rename_all(toupper) %>% head(3)
+demo_data %>% rename_all(str_sub, end = 2) %>% head(3)
 ```
 
 
@@ -161,11 +160,11 @@ demo_data %>% rename_all(toupper) %>% head(3)
 
 # Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-`mutate_at()`, `rename_at()`: uses `vars()` to select specific variables to apply a function to
+`mutate_at()`, `rename_at()`: uses `vars()` to select specific variables to apply a function to i.e. `mutate_at(vars(SELECT), FUNCTION, FUNCTION_ARGUMENTS)`
 
 ```{r}
 # mutate_at changes the data in specified columns
-demo_data %>% mutate_at(vars(contains("race"), sex), as.factor) %>% head(3)
+demo_data %>% mutate_at(vars(contains("race"), sex), as.factor) %>% head(2)
 ```
 
 ```{r}
@@ -178,7 +177,7 @@ demo_data %>% rename_at(vars(record:grade),toupper) %>% head(3)
 
 # Changing *some* columns at once ([part 1 slides](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#48))
 
-`mutate_if()`, `rename_if()`, `select_if()`: uses a function that returns TRUE/FALSE to select columns and applies function on the TRUE columns
+`mutate_if()`, `rename_if()`, `select_if()`: uses a function that returns TRUE/FALSE to select columns and applies function on the TRUE columns:<BR>`mutate_if(BOOLEAN, FUNCTION, FUNCTION_ARGUMENTS)`
 
 
 ```{r}
@@ -190,7 +189,7 @@ demo_data %>% mutate_if(is.numeric, round, digits = 0) %>% head(3)
 <!-- with code below -->
 
 ```{r}
-demo_data %>% rename_if(is.character, str_sub, start = 1, end = 2) %>% head(3)
+demo_data %>% rename_if(is.character, str_sub, end = 2) %>% head(3)
 ```
 
 <!-- https://stringr.tidyverse.org/reference/str_sub.html -->
