@@ -38,17 +38,17 @@ qn_data <- read_csv("data/yrbss_qn.csv")
 
 ## ------------------------------------------------------------------------
 # mutate_all changes the data in all columns
-demo_data %>% mutate_all(as.character) %>% head(3)
+demo_data %>% mutate_all(as.character) %>% head(2)
 
 
 ## ------------------------------------------------------------------------
 # rename_all changes all column names
-demo_data %>% rename_all(toupper) %>% head(3)
+demo_data %>% rename_all(str_sub, end = 2) %>% head(3)
 
 
 ## ------------------------------------------------------------------------
 # mutate_at changes the data in specified columns
-demo_data %>% mutate_at(vars(contains("race"), sex), as.factor) %>% head(3)
+demo_data %>% mutate_at(vars(contains("race"), sex), as.factor) %>% head(2)
 
 
 ## ------------------------------------------------------------------------
@@ -61,7 +61,7 @@ demo_data %>% mutate_if(is.numeric, round, digits = 0) %>% head(3)
 
 
 ## ------------------------------------------------------------------------
-demo_data %>% rename_if(is.character, str_sub, start = 1, end = 2) %>% head(3)
+demo_data %>% rename_if(is.character, str_sub, end = 2) %>% head(3)
 
 
 ## ------------------------------------------------------------------------
@@ -327,11 +327,11 @@ all_data %>%
 ## ---- eval=FALSE---------------------------------------------------------
 ## # replace all "" with NA
 ## all_data %>%
-##   mutate_if(is.character, .funs = na_if(.,"")) %>% #<<
+##   mutate_if(is.character, .funs = na_if(.,"")) #<<
 ## 
 ## # replace all 9999's with NA
 ## all_data %>%
-##   mutate_if(is.numeric, .funs = na_if(.,9999)) %>% #<<
+##   mutate_if(is.numeric, .funs = na_if(.,9999)) #<<
 
 
 ## ------------------------------------------------------------------------
