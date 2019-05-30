@@ -1223,4 +1223,6 @@ Meike Niederhausen: _niederha@ohsu.edu_
 knitr::purl(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.Rmd"), out = here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.R"))
 # remotes::install_github('rstudio/pagedown')
 pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html"))
+
+pagedown::chrome_print(here::here("02-data-wrangling-tidyverse/02_data_wrangling_slides_part2_practice_solutions.html"))
 ```
