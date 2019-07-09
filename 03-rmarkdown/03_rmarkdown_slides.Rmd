@@ -1,0 +1,132 @@
+---
+title: Reproducible Reports with R Markdown
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+date: "<span style = 'font-size: 80%;'>2019/07/18  <br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_rmd](http://bit.ly/berd_rmd) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_rmd_pdf](http://bit.ly/berd_rmd_pdf)</span>"
+output: 
+  xaringan::moon_reader:
+    css: [css/xaringan-themer.css, css/my-theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:9"
+    includes:
+      in_header: ../header.html   
+editor_options: 
+  chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+library(lubridate)
+library(janitor)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  #fig.width=10.5, 
+  #fig.height=4,
+  fig.align = "center",
+  rows.print=7,
+  echo=TRUE,
+  highlight = TRUE,
+  prompt = FALSE, # IF TRUE adds a > before each code input
+  comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  #comment=NA
+  )
+
+# set ggplot theme
+theme_set(theme_bw(base_size = 24))
+```
+
+
+
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#3A6185", ## OHSU Marquam
+  code_highlight_color = "#cbdded",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = NULL,
+  text_font_size = "24px",
+  code_font_size = "20px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
+  outfile = "css/xaringan-themer.css"
+)
+```
+
+
+
+# Load files for today's workshop
+
+.pull-left[
+- 
+]
+
+.pull-right[
+`# install.packages("knitr")`  
+`library(knitr)`
+]
+
+<center><img src="img/horst_rmarkdown_wizards.png" width="50%" height="50%"></center>[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# Learning objectives
+
+<!-- TO-DO: update after finishing rest of slides -->
+
+
+
+---
+
+# Possible Future Workshop Topics?
+
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr (apply/map)
+- statistical modeling in R
+
+---
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+<!-- TO-DO: Update??? Create file with jsut the R code-->
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/02_rmarkdown.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown.html)
+
+
+<!-- TO DO: move all images to project folder so print pdf below works? -->
+```{r, eval=FALSE, echo=FALSE}
+# RUN THESE AFTER KNITTING
+knitr::purl(here::here("03-rmarkdown/03_rmarkdown_slides.Rmd"), out = here::here("03-rmarkdown/03_rmarkdown_slides.R"))
+# remotes::install_github('rstudio/pagedown')
+pagedown::chrome_print(here::here("03-rmarkdown/03_rmarkdown_slides.html"))
+```

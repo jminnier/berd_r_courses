@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Reproducible Reports with R Markdown</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# Reproducible Reports with R Markdown
+### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
+### <span style="font-size: 80%;">2019/07/18 <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_rmd">bit.ly/berd_rmd</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_rmd_pdf">bit.ly/berd_rmd_pdf</a></span>
+
+---
+
+
+layout: true
+  
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/berd_tidy&lt;/span&gt;&lt;/div&gt;  --&gt;
+
+---
+
+
+
+
+
+
+
+
+
+# Load files for today's workshop
+
+.pull-left[
+- 
+]
+
+.pull-right[
+`# install.packages("knitr")`  
+`library(knitr)`
+]
+
+&lt;center&gt;&lt;img src="img/horst_rmarkdown_wizards.png" width="50%" height="50%"&gt;&lt;/center&gt;[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# Learning objectives
+
+&lt;!-- TO-DO: update after finishing rest of slides --&gt;
+
+
+
+---
+
+# Possible Future Workshop Topics?
+
+- tables
+- ggplot2 visualization
+- advanced tidyverse: functions, purrr (apply/map)
+- statistical modeling in R
+
+---
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+&lt;!-- TO-DO: Update??? Create file with jsut the R code--&gt;
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/02_rmarkdown.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown.html)
+
+
+&lt;!-- TO DO: move all images to project folder so print pdf below works? --&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
