@@ -109,7 +109,7 @@ Code + text (in markdown syntax)
 ]
 
 .pull-right[
-&lt;img src="img/ex_md.png" width="70%" height="60%"&gt;
+&lt;img src="img/ex_md.png" width="100%" height="60%"&gt;
 ]
 
 ---
@@ -117,7 +117,7 @@ Code + text (in markdown syntax)
 # knitr converts `.Rmd` -&gt; `.md` -&gt; `.html`
 
 .pull-left[
-&lt;img src="img/ex_rmd.png" width="100%" height="60%"&gt;
+&lt;img src="img/ex_rmd_html.png" width="100%" height="60%"&gt;
 ]
 
 .pull-right[
@@ -128,12 +128,12 @@ Code + text (in markdown syntax)
 
 # knitr converts `.Rmd` -&gt; `.md` -&gt; `.pdf`
 
-.pull-left[
-&lt;img src="img/ex_rmd.png" width="100%" height="60%"&gt;
+.pull-left-40[
+&lt;img src="img/ex_rmd_pdf.png" width="100%" height="60%"&gt;
 ]
 
-.pull-right[
-&lt;img src="img/ex_pdf.png" width="50%" height="60%"&gt;
+.pull-right-60[
+&lt;img src="img/ex_pdf2.png" width="100%" height="60%"&gt;
 ]
 
 ---
@@ -141,11 +141,23 @@ Code + text (in markdown syntax)
 # knitr converts `.Rmd` -&gt; `.md` -&gt; `.doc`
 
 .pull-left[
-&lt;img src="img/ex_rmd.png" width="100%" height="60%"&gt;
+&lt;img src="img/ex_rmd_word.png" width="100%" height="60%"&gt;
 ]
 
 .pull-right[
 &lt;img src="img/ex_word.png" width="50%" height="60%"&gt;
+]
+
+---
+
+# knitr converts `.Rmd` -&gt; `.md` -&gt; slides
+
+.pull-left[
+&lt;img src="img/ex_ioslides.png" width="100%" height="60%"&gt;
+]
+
+.pull-right[
+&lt;img src="img/ex_slides.png" width="80%" height="60%"&gt;
 ]
 
 
@@ -165,12 +177,11 @@ Code + text (in markdown syntax)
 
 __Use projects__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
 - Create an RStudio project for each data analysis project
-- Sets working directory
+- Sets *working directory*
 - A project is associated with a directory folder
     + Keep data files there
     + Keep scripts there; edit them, run them in bits or as a whole
     + Save your outputs (plots and cleaned data) there
-
 - Only use relative paths, never absolute paths
     + relative (good): `read_csv("data/mydata.csv")`
     + absolute (bad): `read_csv("/home/yourname/Documents/stuff/mydata.csv")`
@@ -183,6 +194,169 @@ __Advantages of using projects__
 ---
 
 # INSERT MEIKE'S SLIDES HERE
+
+---
+
+
+class: center, middle, inverse
+
+# Reproducible Workflow
+
+---
+
+# Be Organized
+
+Your files must make sense to yourself 6 months from now, and/or other collaborators.
+&lt;center&gt;&lt;img src="img/jenny_filesalad.png" width="90%" height="50%"&gt;&lt;/center&gt;[Jenny Bryan's "What They Forgot to Teach you About R" Rstudio::conf2018 training](https://github.com/jennybc/what-they-forgot)
+
+---
+
+# No! Absolute! File! Paths! (don't `setwd()`)
+
+Absolute paths `\(\neq\)` reproducible
+
+Relative paths `\(=\)` reproducible (if done correctly)
+
+&lt;center&gt;&lt;img src="img/jenny_filepath.png" width="80%" height="50%"&gt;&lt;/center&gt;
+
+[Jenny Bryan](https://jennybryan.org/about/)'s oft quoted opinion, See post on [Project-oriented
+workflow](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
+
+---
+
+# Project directory structure
+
+- .Rproj sets your working directory (**USE [PROJECTS](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)**)
+
+
+```r
+# Use a relative path, "relative to" the project folder
+read_csv("mydata.csv") # looks in .Rproj folder
+```
+
+
+- .Rmd files when knit look for sourced files *in the folder they live in*
+
+````
+```{r data, eval=TRUE}
+read_csv("mydata.csv") # looks in .Rmd folder
+```
+````
+
+- It's good practice to organize all your code/data/output into separate folders
+
+These three facts together can cause a headache. Enter `here::here()`!
+
+---
+
+# Everything in one folder
+
+&lt;img src="img/report2_same_folder_input.png" width="80%" height="60%"&gt;
+
+After knitting, this gives you (file 🥗)
+
+&lt;img src="img/report2_same_folder_inputandoutput.png" width="80%" height="60%"&gt;
+
+---
+
+# Slightly more organized
+
+&lt;img src="img/report3_subfolder_input.png" width="70%" height="60%"&gt;
+
+
+After knitting, this gives you:
+&lt;img src="img/report3_subfolder_inputandoutput.png" width="70%" height="60%"&gt;
+
+
+
+---
+
+# A tip about "moving up" a directory/folder
+
+- In unix, to point to the folder one level up (it contains the folder you're in), use `../`
+- As in `cd ..` moves up one directory, or `cp ../myfile.txt newfile.txt` this copies a file one level up into the current folder (working directory)
+- When you want to source the data, you could use `../` to move up a folder into the main directory, and then back down into the `data/` folder:
+
+
+```r
+# From the .Rmd folder, move up one folder then down to the data folder
+mydata &lt;- read_csv("../data/report3_nhanes_data.csv")
+```
+
+&lt;img src="img/report3_subfolder_input.png" width="70%" height="60%"&gt;
+
+
+
+---
+
+# That was confusing, right? Use `here::here()`!
+
+
+&lt;center&gt;&lt;img src="img/horst_here.png" width="50%" height="50%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+
+
+
+---
+
+# `here::here()` `\(\rightarrow\)` relative paths to the project directory
+
+- The `here` package's `here()` function solves this issue of inconsistent working directories.
+- The point of Rstudio project workflow is to always have the same "home" working directory = where the `.Rproj` file is.
+- `here::here()` returns the project directory as a string
+- Fully reproducible if the whole folder is moved or shared or posted to github
+- Portable to ALL systems (Mac, PC, unix), don't worry about `/` or `\` or spaces etc
+
+
+```r
+here::here()
+```
+
+```
+[1] "/Users/minnier/Google Drive/BERD R Classes/berd_r_courses_github"
+```
+
+---
+
+# `here::here()` with folders and filenames
+
+- `here::here("folder","filename")` returns the entire file path as a string
+- These file paths work when running an `.Rmd` file interactively like a notebook, when knitting it, when copying it to the console, wherever, whenever!!
+
+
+```r
+here::here("data","mydatafile.csv")
+```
+
+```
+[1] "/Users/minnier/Google Drive/BERD R Classes/berd_r_courses_github/data/mydatafile.csv"
+```
+
+
+```r
+here::here("data","raw-data","mydatafile.csv")
+```
+
+```
+[1] "/Users/minnier/Google Drive/BERD R Classes/berd_r_courses_github/data/raw-data/mydatafile.csv"
+```
+
+We will explore how and when to use this in the exercises.
+
+---
+
+# Exercises:
+
+- Open `report2.Rmd`
+- Open `report3/report3.Rmd`
+- Open `report3-here/report3_here.Rmd`
+
+---
+
+class: center, middle, inverse
+
+# Extensions
+
+---
 
 ---
 
@@ -207,7 +381,7 @@ Meike Niederhausen: _niederha@ohsu.edu_
 &lt;!-- TO-DO: Update??? Create file with jsut the R code--&gt;
 
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/02_rmarkdown.R)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown.R)
 - answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown.html)
 
 

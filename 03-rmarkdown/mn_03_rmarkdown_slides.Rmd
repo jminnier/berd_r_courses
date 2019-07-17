@@ -339,34 +339,9 @@ mydata <- read_csv("../data/report3_nhanes_data.csv")
 
 ---
 
-# `here::here()` $\rightarrow$ relative paths to the project directory
-
-- The `here` package's `here()` function solves this issue of inconsistent working directories.
-- The point of Rstudio project workflow is to always have the same "home" working directory = where the `.Rproj` file is.
-- `here::here()` returns the project directory as a string
-- Fully reproducible if the whole folder is moved or shared or posted to github
-- Portable to ALL systems (Mac, PC, unix), don't worry about `/` or `\` or spaces etc
-
-```{r}
-here::here()
-```
-
----
-
-# `here::here()` with folders and filenames
-
-- `here::here("folder","filename")` returns the entire file path as a string
-- These file paths work when running an `.Rmd` file interactively like a notebook, when knitting it, when copying it to the console, wherever, whenever!!
-
-```{r}
-here::here("data","mydatafile.csv")
-```
-
-```{r}
-here::here("data","raw-data","mydatafile.csv")
-```
-
-We will explore how and when to use this in the exercises.
+- The `here` package and the `here()` function solves this issue of inconsistent working directories.
+- The point of projects is to always have the same "home" working directory = where the `.Rproj` file is.
+- `here::here()`
 
 ---
 
