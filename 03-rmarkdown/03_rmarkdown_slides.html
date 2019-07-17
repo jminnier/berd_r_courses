@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Reproducible Reports with R Markdown</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
     <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/5235085b15.js"></script>
@@ -53,7 +53,136 @@ layout: true
 
 &lt;!-- TO-DO: update after finishing rest of slides --&gt;
 
+---
 
+class: middle, inverse
+
+# Why Reproducibility?
+
+
+- Evidence your results are correct.
+- Allow others to use our methods and results.
+
+"An article about computational results is advertising, not scholarship. The actual scholarship is the full software environment, code and data, that produced the result."
+
+[(Claerbout and Karrenbach 1992)](http://sepwww.stanford.edu/doku.php?id=sep:research:reproducible:seg92)
+
+---
+
+# Types of Reproducibility
+
+- **Computational reproducibility:** detailed information is provided about *code, software, hardware and implementation details*.
+- **Empirical reproducibility:** detailed information is provided about non-computational empirical *scientific experiments and observations [data]*. 
+- **Statistical reproducibility:** detailed information is provided about the choice of *statistical tests, model parameters, threshold values, etc*.
+
+[R Opensci Reproducibility Guide](https://ropensci.github.io/reproducibility-guide/sections/introduction/)
+
+---
+
+# Software tool for reproducibility: *Literate Programming*
+
+&gt;These tools enable writing and publishing **self-contained documents that include narrative and code used to generate both text and graphical results**.
+
+&gt;In the R ecosystem, knitr [R markdown] and its ancestor Sweave used with RStudio are the main tools for literate computing. Markdown or LaTeX are used for writing the narrative, with chunks of R code sprinkled throughout the narrative. IPython is a popular related system for the Python language, providing an interactive notebook for browser-based literate computing."
+
+[R Opensci Reproducibility Guide](https://ropensci.github.io/reproducibility-guide/sections/introduction/)
+
+---
+
+# R Markdown = `.Rmd` file
+
+Code + text (in markdown syntax)
+
+`knitr` is a package that converts `.Rmd` files containing code + markdown syntax to a plain text `.md` markdown file, and then to other formats (html, pdf, Word, etc)
+
+
+&lt;img src="img/ex_rmd.png" width="45%" align="top"&gt; `\(\Rightarrow\)`
+&lt;img src="img/ex_html.png" width="45%" align="top"&gt;
+
+
+---
+
+# knitr converts `.Rmd` -&gt; `.md`
+
+.pull-left[
+&lt;img src="img/ex_rmd.png" width="100%" height="60%"&gt;
+]
+
+.pull-right[
+&lt;img src="img/ex_md.png" width="70%" height="60%"&gt;
+]
+
+---
+
+# knitr converts `.Rmd` -&gt; `.md` -&gt; `.html`
+
+.pull-left[
+&lt;img src="img/ex_rmd.png" width="100%" height="60%"&gt;
+]
+
+.pull-right[
+&lt;img src="img/ex_html.png" width="100%" height="60%"&gt;
+]
+
+---
+
+# knitr converts `.Rmd` -&gt; `.md` -&gt; `.pdf`
+
+.pull-left[
+&lt;img src="img/ex_rmd.png" width="100%" height="60%"&gt;
+]
+
+.pull-right[
+&lt;img src="img/ex_pdf.png" width="50%" height="60%"&gt;
+]
+
+---
+
+# knitr converts `.Rmd` -&gt; `.md` -&gt; `.doc`
+
+.pull-left[
+&lt;img src="img/ex_rmd.png" width="100%" height="60%"&gt;
+]
+
+.pull-right[
+&lt;img src="img/ex_word.png" width="50%" height="60%"&gt;
+]
+
+
+
+---
+
+# R Markdown vs. `knitr::knit()`
+
+
+&lt;center&gt;&lt;img src="img/knitr_workflow_sachsmc.png" width="80%" height="80%"&gt;&lt;/center&gt;[Michael Sachs](https://sachsmc.github.io/knit-git-markr-guide/knitr/knit.html)
+
+
+
+---
+
+# Good practices in RStudio
+
+__Use projects__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+- Create an RStudio project for each data analysis project
+- Sets working directory
+- A project is associated with a directory folder
+    + Keep data files there
+    + Keep scripts there; edit them, run them in bits or as a whole
+    + Save your outputs (plots and cleaned data) there
+
+- Only use relative paths, never absolute paths
+    + relative (good): `read_csv("data/mydata.csv")`
+    + absolute (bad): `read_csv("/home/yourname/Documents/stuff/mydata.csv")`
+    
+__Advantages of using projects__
+- standardize file paths
+- keep everything together
+- a whole folder can be shared and run on another computer
+
+---
+
+# INSERT MEIKE'S SLIDES HERE
 
 ---
 
