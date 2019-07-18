@@ -747,8 +747,6 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width,
 
 # Tables - with no formatting
 
-<!-- * kable, kableExtra -->
-
 .pull-left[
  Text in editor:
 
