@@ -1462,8 +1462,7 @@ Meike Niederhausen: _niederha@ohsu.edu_
 
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
 - all the [R code from the slides in an R script](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown.R)
-- The project folder of examples is on github [github.com/jminnier/berd_rmarkdown_project](https://github.com/jminnier/berd_rmarkdown_project)
-- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown_practice_solutions.html)
+- The project folder of examples with solutions is on github [github.com/jminnier/berd_rmarkdown_project](https://github.com/jminnier/berd_rmarkdown_project)
 
 
 <!-- TO DO: move all images to project folder so print pdf below works? -->
