@@ -46,6 +46,70 @@ mono_light(
 )
 
 
+## ------------------------------------------------------------------------
+summary(iris)
+
+
+## ------------------------------------------------------------------------
+mean(iris$Sepal.Length)
+
+
+## ----echo=FALSE----------------------------------------------------------
+mean(iris$Sepal.Length)
+
+
+## ----eval=FALSE----------------------------------------------------------
+## mean(iris$Sepal.Length)
+
+
+## ----include=FALSE-------------------------------------------------------
+mean(iris$Sepal.Length)
+
+
+## ----include=FALSE-------------------------------------------------------
+mean_SepalLength <- mean(iris$Sepal.Length)
+
+
+## ----Sepal_WidthVsHeight, echo=FALSE, fig.width=7, fig.height=7----------
+library(ggplot2) # loads ggplot2 package
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, 
+                 color = Species)) +
+  geom_point()
+
+
+## ------------------------------------------------------------------------
+table_sepal_length <- iris %>% 
+  group_by(Species) %>% 
+  summarize(mean = mean(Sepal.Length),
+            SD = sd(Sepal.Length))
+
+table_sepal_length
+
+
+## ------------------------------------------------------------------------
+library(knitr) 
+# only need to load package 
+# once in a document
+
+kable(table_sepal_length, 
+      format = "markdown",
+      digits = 2)
+
+
+## ----echo=FALSE----------------------------------------------------------
+library(kableExtra) 
+
+kable(table_sepal_length, digits = 2) %>% 
+  kable_styling(bootstrap_options = c("striped")) %>%
+  add_header_above(c(" ", "Sepal Length" = 2)) %>% 
+  add_indent(c(1, 2, 3)) %>% 
+  footnote(general = "Fisher's Iris dataset",
+           number = c("n = 150", "Data collected by Anderson"),
+           alphabet = c("Lengths measured in cm")
+           )
+
+
 ## ---- eval=FALSE---------------------------------------------------------
 ## # Use a relative path, "relative to" the project folder
 ## read_csv("mydata.csv") # looks in .Rproj folder
