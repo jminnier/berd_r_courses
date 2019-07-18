@@ -834,9 +834,9 @@ See [Hao Zhu's webpage](https://haozhu233.github.io/kableExtra/awesome_table_in_
 
 * You can set global chunk options that are use for all chunks in the file
   * Include this chunk at the beginning of the .Rmd file
-  * The template .Rmd file already includes a chunk labeled `global_options`
+  * The template .Rmd file already includes a chunk labeled `setup`
     * Add more options as desired to this chunk
-* Any chunk option can be set in the `global_options` chunk
+* Any chunk option can be set in the `setup` chunk
 
 <center><img src="img/screenshot_global_options.png" width="90%" height="90%"></center>
 
