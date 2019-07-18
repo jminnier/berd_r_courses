@@ -122,7 +122,9 @@ class: middle, inverse
 # Types of Reproducibility
 
 - **Computational reproducibility:** detailed information is provided about *code, software, hardware and implementation details*.
+
 - **Empirical reproducibility:** detailed information is provided about non-computational empirical *scientific experiments and observations [data]*. 
+
 - **Statistical reproducibility:** detailed information is provided about the choice of *statistical tests, model parameters, threshold values, etc*.
 
 [R Opensci Reproducibility Guide](https://ropensci.github.io/reproducibility-guide/sections/introduction/)
@@ -139,9 +141,7 @@ class: middle, inverse
 
 ---
 
-# R Markdown = `.Rmd` file
-
-Code + text (in markdown syntax)
+# R Markdown = `.Rmd` file = Code + text
 
 `knitr` is a package that converts `.Rmd` files containing code + markdown syntax to a plain text `.md` markdown file, and then to other formats (html, pdf, Word, etc)
 
