@@ -1428,6 +1428,7 @@ rmarkdown::render(
 - Include [HTML headers or Latex preambles](https://slides.yihui.name/2019-rstudio-conf-rmarkdown-workshop.html#75) and files for definitions in YAML
 - Add references and a [bibliography](https://slides.yihui.name/2019-rstudio-conf-rmarkdown-workshop.html#61) with BibTex `.bib` files
 - Similar to `.Rmd` are Rstudio ["notebooks"](https://bookdown.org/yihui/rmarkdown/notebook.html) -- like an `.Rmd` but all the output is saved as it is run in the notebook.
+- Publish rendered html on [Rpubs](https://rpubs.com/) with Publish button, or through [github + netlify](https://bookdown.org/yihui/rmarkdown/blogdown-deploy.html).
 - [Look at these slides by Alison Hill](https://arm.rbind.io/slides/xaringan.html#1) and [these by Yihui Xie](https://slides.yihui.name/2019-rstudio-conf-rmarkdown-workshop.html) for many, many more tips and examples
 
 ---
