@@ -1,10 +1,11 @@
 # OCTRI BERD R Courses
 
-Authors: [Jessica Minnier](https://github.com/jminnier) & [Meike Niederhausen](https://github.com/Niederhausen)
+Authors:
 
+[Jessica Minnier, PhD](https://github.com/jminnier) & [Meike Niederhausen, PhD](https://github.com/Niederhausen)  
 Oregon Health & Science University
 
-Slides and materials for the OHSU OCTRI BERD R courses
+## Slides and materials for the OHSU OCTRI BERD R courses
 
 Most sessions have been recorded and can be found at this public [link](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public).
 
