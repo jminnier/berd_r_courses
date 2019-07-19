@@ -48,3 +48,9 @@ Good places to start:
 - [Introduction to module and RStudio by Emma Rand](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html)
 - [Basic Basics opinionated tour of Rstudio](http://rladiessydney.org/post/2018/11/05/basicbasics-1/)
 
+# Instructor Info
+
+[Jessica Minnier, PhD](http://jessicaminnier.com/) & [Meike Niederhausen, PhD](https://ohsu-psu-sph.org/faculty-directory/name/meike-niederhausen/)
+Oregon Health & Science University
+
+Slides and code for BERD workshop materials: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
