@@ -1,5 +1,7 @@
 # OCTRI BERD R Courses
 
+Github repo: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+
 *Authors:* [Jessica Minnier, PhD](https://github.com/jminnier) & [Meike Niederhausen, PhD](https://github.com/Niederhausen)  
 Oregon Health & Science University
 
