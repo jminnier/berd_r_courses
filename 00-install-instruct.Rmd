@@ -1,0 +1,50 @@
+---
+title: "BERD Intro to R and Rstudio"
+author: "Installation Instructions"
+date: "Updated: `r Sys.Date()`"
+output: 
+  html_document: 
+    theme: flatly
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Pre-course installation
+
+R and Rstudio are two separate programs. You must install R first. Then Install Rstudio desktop. 
+
+For help, try [watching this video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&feature=youtu.be)
+
+## Install R (first)
+
+- Windows: Download from https://cran.rstudio.com/bin/windows/base/ from the link "Download R 3.6.1 for Windows"
+- Mac OS X: Download the latest .pkg file (top link, currently R-3.6.1.pkg) from https://cran.rstudio.com/bin/macosx/
+
+## Install RStudio Desktop Open Source License (second)
+
+- Select download file corresponding to your operating system  from https://www.rstudio.com/products/rstudio/download/#download
+
+## Open Rstudio
+
+After installation, open Rstudio by clicking on the Rstudio icon, a round blue ball with R in it, that should look something like this:
+
+<img src="https://www.macupdate.com/images/icons256/50318.png"width="20%" height="20%">
+
+Do not open the regular R software, it is just working in the background when you use Rstudio.
+
+# Prepare for the course
+
+We *highly recommend* getting acquainted with Rstudio and R prior to the workshop. You will get much more out of the workshop if you have explored the interface first.
+
+Good places to start:
+
+- [Slides from the original version of this workshop](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.html)
+- [Rstudio cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
+- [Modern Dive textbook chapter getting started](https://moderndive.com/2-getting-started.html)
+- [Introduction to module and RStudio by Emma Rand](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html)
+- [Basic Basics opinionated tour of Rstudio](http://rladiessydney.org/post/2018/11/05/basicbasics-1/)
+
