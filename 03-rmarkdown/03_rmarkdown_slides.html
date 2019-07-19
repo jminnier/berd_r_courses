@@ -37,17 +37,18 @@ layout: true
 
 # Load files for today's workshop
 
-.pull-left-40[
+.pull-left[
 - Open slides [bit.ly/berd_rmd](http://bit.ly/berd_rmd)
 - Get project folder
     + Download zip folder at [bit.ly/berd_rmd_zip](http://bit.ly/berd_rmd_zip)
         + UNZIP completely
-        + Open unzipped folder, open `berd_rmarkdown_project.Rproj` file
-        + Run `00-install.R`
+        + Open unzipped folder
+        + Open `berd_rmarkdown_project.Rproj`
+        + Inside Rstudio, click on file `00-install.R` and click "Run"
     + *Or* open Rstudio Cloud project (need to make an account) at [bit.ly/berd_rmd_rc](http://bit.ly/berd_rmd_rc)
         + click "Save a permanent copy"
 ]
-.pull-right-60[
+.pull-right[
 &lt;center&gt;&lt;img src="img/horst_rmarkdown_wizards.png" width="100%" height="100%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
 ]
 ---
@@ -117,7 +118,7 @@ class: middle, inverse
 
 ---
 
-# knitr converts `.Rmd` -&gt; `.md`
+# knitr converts `.Rmd` -&gt; `.md` (behind the scenes)
 
 .pull-left[
 &lt;img src="img/ex_rmd.png" width="100%" height="60%"&gt;
@@ -1040,9 +1041,33 @@ Producing pdf documents requires that LaTeX be installed on your computer
 &lt;center&gt;&lt;img src="img/screenshot_YAML_pdf_out.png" width="50%" height="100%"&gt;&lt;/center&gt;
 ]
 
+---
+
+# Extensions and Tips
+
+---
+
+# Real time knitting: `xaringan::inf_mr()`
+
+Instead of clicking "Knit" every time to see your updated document output, try this:
+
+After installing the `xaringan` package:
 
 
+```r
+install.packages("xaringan")
+```
 
+`.Rmd` files can be run and rendered "live" as you type when you either run
+
+
+```r
+xaringan::inf_mr()
+```
+
+in the console when your `.Rmd` file is open. Or, click on on Adddins (top of screen), scroll down to "Xaringan" and click on "Infinite Moon Reader"
+
+This is a new feature, so you need the most recent version of `xaringan` and Rstudio. It works well for html_document output.
 
 ---
 
@@ -1262,7 +1287,67 @@ kable(summarytable)
 
 class: center, middle, inverse
 
-# Extensions and Tips
+# More Extensions and Tips
+
+---
+
+# Make presentation slides
+
+- These slides were made using `.Rmd` file with the `xaringan` package!
+- Simple templates can be found in `File -&gt; new File -&gt; R Markdown -&gt; Presentation `
+
+.pull-left[
+- Each type of presentation uses different syntax to start a new slide
+    + ```# Slide Header``` 
+    + ```---```
+- [ioslides](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html) and [Slidy](https://bookdown.org/yihui/rmarkdown/slidy-presentation.html) are html slides, simple options
+- [Beamer](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html) is from Latex
+- [Xaringan](https://bookdown.org/yihui/rmarkdown/xaringan.html) (html based on javascript remark.js) has the most flexibility for customizing slides
+- [PowerPoint](https://bookdown.org/yihui/rmarkdown/powerpoint-presentation.html) is in the newest Rstudio release, can use custom templates
+]
+.pull-right[
+&lt;img src="img/new_rmd_pres.png" width="100%" align="top"&gt;
+]
+
+---
+
+# Presentations Exercise
+
+Open `report2_pres.Rmd` and follow instructions.
+
+Bonus: Try using `xaringan::inf_mr()` to update the output in real time.
+
+---
+
+# Tabsets
+
+A nice feature for showing multiple images or sections is with [tabbed sections](https://bookdown.org/yihui/rmarkdown/html-document.html):
+
+.pull-left[
+````
+## Results {.tabset}
+
+### By Species
+
+```{r}
+ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species))+
+  geom_point()
+```
+
+### Panel Species
+
+```{r}
+ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species))+
+geom_point()+
+  facet_wrap(~Species)
+```
+
+````
+]
+.pull-right[
+![](img/screenshot_tabset.png)
+
+]
 
 ---
 
@@ -1270,8 +1355,8 @@ class: center, middle, inverse
 
 - Rstudio can run [multiple programming languages](https://bookdown.org/yihui/rmarkdown/language-engines.html) in the same `.Rmd` (if they are installed), including SAS, STATA, and python.
 - For more on how to use STATA and SAS, for example, see the documentation for these packages:
-    + [`StataMarkdown`](https://www.ssc.wisc.edu/~hemken/Stataworkshops/Stata%20and%20R%20Markdown/StataMarkdown)
-    + [`SASMarkdown`](https://www.ssc.wisc.edu/~hemken/SASworkshops/Markdown/SASmarkdown.html)
+    + [StataMarkdown](https://www.ssc.wisc.edu/~hemken/Stataworkshops/Stata%20and%20R%20Markdown/StataMarkdown)
+    + [SASMarkdown](https://www.ssc.wisc.edu/~hemken/SASworkshops/Markdown/SASmarkdown.html)
 
 
 ```r
@@ -1300,8 +1385,8 @@ names(knitr::knit_engines$get())
     + Use one language to clean data &amp; save the cleaned data as a file
     + source the file and continue in another language.
 - Other packages can be loaded that help to link objects from various languages, i.e.
-    + [`reticulate`](https://rstudio.github.io/reticulate/articles/r_markdown.html) can store objects created by python code for use in R
-    + `StataMarkdown` and `SASMarkdown` use chunk option [`collectcode=TRUE`](https://www.ssc.wisc.edu/~hemken/Stataworkshops/Stata%20and%20R%20Markdown/StataProfile.html) to save code output.
+    + [reticulate](https://rstudio.github.io/reticulate/articles/r_markdown.html) can store objects created by python code for use in R
+    + StataMarkdown and SASMarkdown use chunk option [`collectcode=TRUE` to save code output](https://www.ssc.wisc.edu/~hemken/Stataworkshops/Stata%20and%20R%20Markdown/StataProfile.html).
 ]
 .pull-right[
 ````
@@ -1327,48 +1412,24 @@ library(SASmarkdown)
 
 ---
 
-# Make presentation slides
-
-- These slides were made using `.Rmd` file with the `xaringan` package!
-- Simple templates can be found in `File -&gt; new File -&gt; R Markdown -&gt; Presentation `
-
-.pull-left[
-- Each type of presentation uses different syntax to start a new slide
-    + ```# Slide Header``` 
-    + ```---```
-- [ioslides](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html) and [Slidy](https://bookdown.org/yihui/rmarkdown/slidy-presentation.html) are html slides, simple options
-- [Beamer](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html) is from Latex
-- [Xaringan](https://bookdown.org/yihui/rmarkdown/xaringan.html) (html based on javascript remark.js) has the most flexibility for customizing slides
-- [PowerPoint](https://bookdown.org/yihui/rmarkdown/powerpoint-presentation.html) is in the newest Rstudio release, can use custom templates
-]
-.pull-right[
-&lt;img src="img/new_rmd_pres.png" width="100%" align="top"&gt;
-]
-
----
-
-# Presentations Exercise
-
-Open `report2_pres.Rmd` and follow instructions.
-
----
-
 # Knit other types of output
 
 - Journal articles, custom [templates](https://bookdown.org/yihui/rmarkdown/document-templates.html)
     + File `\(\rightarrow\)` New File `\(\rightarrow\)` R Markdown `\(\rightarrow\)` From template
 - Dashboards: [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) report output
-- Interactive reports with [`shiny`](https://shiny.rstudio.com/)
-- Interactive tutorials with [`learnr`](https://rstudio.github.io/learnr/)
-- Websites: [`blogdown`](https://bookdown.org/yihui/blogdown/)
-- Books: [`bookdown`](https://bookdown.org/)
-- Posters: [`posterdown`](https://github.com/brentthorne/posterdown)
-- Grad school theses: [`thesisdown`](https://github.com/ismayc/thesisdown)
+- Interactive reports with [](https://shiny.rstudio.com/)
+- Interactive tutorials with [learnr](https://rstudio.github.io/learnr/)
+- Websites: [blogdown](https://bookdown.org/yihui/blogdown/)
+- Books: [bookdown](https://bookdown.org/)
+- Posters: [posterdown](https://github.com/brentthorne/posterdown)
+- Grad school theses: [thesisdown](https://github.com/ismayc/thesisdown)
 - It's really endless....
 
 ---
 
 # `rmarkdown::render()`
+
+It can sometimes be easier to set options and change output files/locations when using the `render()` function in the `rmarkdown` package. This is also useful for rendering multiple documents in a batch, or using [parameterized reports](#param).
 
 In an `.R` file or in the console, run commands to knit the documents:
 
@@ -1389,7 +1450,7 @@ render("report1.Rmd", output_format = c("html_document", "pdf_document"))
 # Render to a different file name or folder
 render("report1.Rmd", 
        output_format = "html_document",
-       output_file = "report1_2019_07_18.html")
+       output_file = "output/report1_2019_07_18.html")
 ```
 
 ---
@@ -1425,6 +1486,7 @@ knitr::knit_exit()
 ````
 
 ---
+name: param
 
 # Parameterized Reports
 
@@ -1475,8 +1537,7 @@ rmarkdown::render(
 
 # Many more bonus tips
 
-- Instead of Knit, run `xaringan::inf_mr()` in the console (or use the addin) to live-render to html as you change an `.Rmd`
-- Use [git and github](https://happygitwithr.com/) for version control, and use output format [`github_document`](https://rmarkdown.rstudio.com/github_document_format.html) - see an [example](https://github.com/jminnier/nhanes_cvd/blob/master/report_annotated.md)
+- Use [git and github](https://happygitwithr.com/) for version control, and use output format [github_document](https://rmarkdown.rstudio.com/github_document_format.html) - see an [example](https://github.com/jminnier/nhanes_cvd/blob/master/report_annotated.md)
 - Quickly convert `.R` files to `.html` with the [notebook/compile button](https://support.rstudio.com/hc/en-us/articles/200552276-Creating-Notebooks-from-R-Scripts) or `knitr::spin()`
 - Include [HTML headers or Latex preambles](https://slides.yihui.name/2019-rstudio-conf-rmarkdown-workshop.html#75) and files for definitions in YAML
 - Add references and a [bibliography](https://slides.yihui.name/2019-rstudio-conf-rmarkdown-workshop.html#61) with BibTex `.bib` files
@@ -1522,9 +1583,9 @@ Meike Niederhausen: _niederha@ohsu.edu_
 
 &lt;!-- TO-DO: Update??? Create file with just the R code--&gt;
 
-- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-- all the [R code from the slides in an R script](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown.R)
-- The project folder of examples with solutions is on github [github.com/jminnier/berd_rmarkdown_project](https://github.com/jminnier/berd_rmarkdown_project)
+- Code for these slides on github, with links to other course materials: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- All the [R code from the slides in an R script](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown.R)
+- The project folder of examples can be downloaded from github [github.com/jminnier/berd_rmarkdown_project](https://github.com/jminnier/berd_rmarkdown_project) and the solutions are in the `solns/` folder.
 
 
 &lt;!-- TO DO: move all images to project folder so print pdf below works? --&gt;
