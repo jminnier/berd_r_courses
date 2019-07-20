@@ -47,6 +47,7 @@ Good places to start:
 - [Modern Dive textbook chapter getting started](https://moderndive.com/2-getting-started.html)
 - [Introduction to module and RStudio by Emma Rand](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html)
 - [Basic Basics opinionated tour of Rstudio](http://rladiessydney.org/post/2018/11/05/basicbasics-1/)
+- [R bootcamp - interactive tutorial](https://r-bootcamp.netlify.com/) Ted Laderas & Jessica Minnier
 
 # Instructor Info
 

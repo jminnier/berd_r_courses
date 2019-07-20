@@ -1021,6 +1021,7 @@ Producing pdf documents requires that LaTeX be installed on your computer
 ]
 
 ---
+class: center, middle, inverse
 
 # Extensions and Tips
 
