@@ -72,7 +72,7 @@ mean_SepalLength <- mean(iris$Sepal.Length)
 
 ## ----Sepal_WidthVsHeight, echo=FALSE, fig.width=7, fig.height=7----------
 library(ggplot2) # loads ggplot2 package
-
+# Don't need to load ggplot2 if already loaded tidyverse package
 ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, 
                  color = Species)) +
   geom_point()
@@ -87,27 +87,43 @@ table_sepal_length <- iris %>%
 table_sepal_length
 
 
-## ------------------------------------------------------------------------
-library(knitr) 
-# only need to load package 
-# once in a document
+## ----echo=FALSE, eval=FALSE----------------------------------------------
+## library(knitr)
+## # Only need to load package once in a document.
+## # Recommend doing this in 1st chunk of the .Rmd
+## 
+## kable(table_sepal_length,
+##       format = "html", digits = 2,
+##       caption = "Iris Sepal Lengths")
+## 
+## kable(table_sepal_length,
+##       format = "markdown", digits = 2,
+##       caption = "Iris Sepal Lengths")
+## # Note that the caption isn't shown!!
 
-kable(table_sepal_length, 
-      format = "markdown",
-      digits = 2)
+
+## ----echo=FALSE, message=FALSE, eval=FALSE-------------------------------
+## library(kableExtra)
+## 
+## kable(table_sepal_length, digits = 2) %>%
+##   kable_styling(bootstrap_options = c("striped"),
+##                 full_width = F) %>%
+##   add_header_above(c(" ", "Sepal Length^1^" = 2)) %>%
+##     # first column no header, next 2 columns have header
+##   add_indent(c(1, 2, 3)) %>%
+##     # specifying rows 1-3 of table; column names aren't a row
+##   footnote(general = "Fisher's Iris dataset",
+##            number = c("n = 150", "Data collected by Anderson"),
+##            alphabet = c("Lengths measured in cm")
+##            )
 
 
-## ----echo=FALSE----------------------------------------------------------
-library(kableExtra) 
+## ---- eval=FALSE---------------------------------------------------------
+## install.packages("xaringan")
 
-kable(table_sepal_length, digits = 2) %>% 
-  kable_styling(bootstrap_options = c("striped")) %>%
-  add_header_above(c(" ", "Sepal Length" = 2)) %>% 
-  add_indent(c(1, 2, 3)) %>% 
-  footnote(general = "Fisher's Iris dataset",
-           number = c("n = 150", "Data collected by Anderson"),
-           alphabet = c("Lengths measured in cm")
-           )
+
+## ---- eval=FALSE---------------------------------------------------------
+## xaringan::inf_mr()
 
 
 ## ---- eval=FALSE---------------------------------------------------------
@@ -152,8 +168,7 @@ names(knitr::knit_engines$get())
 ## # Render to a different file name or folder
 ## render("report1.Rmd",
 ##        output_format = "html_document",
-##        output_file = "report1_2019_07_18.html")
-## 
+##        output_file = "output/report1_2019_07_18.html")
 
 
 ## ---- eval=FALSE---------------------------------------------------------
