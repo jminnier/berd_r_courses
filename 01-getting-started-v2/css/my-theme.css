@@ -1,0 +1,48 @@
+.title-slide a, a > code {
+    color: #aadff2;
+    text-decoration: none;
+}
+
+div.my-footer {
+    background-color: #E7EEF0;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 30px;
+    width: 100%;
+}
+div.my-footer span {
+    font-size: 14pt;
+    color: #125972;
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+}
+
+.inverse .my-footer {
+  display: none;
+}
+
+.pull-left-60 {
+  float: left;
+  width: 57%;
+}
+.pull-right-40 {
+  float: right;
+  width: 37%;
+}
+.pull-right-40 ~ * {
+  clear: both;
+}
+
+.pull-left-40 {
+  float: left;
+  width: 37%;
+}
+.pull-right-60 {
+  float: right;
+  width: 57%;
+}
+.pull-right-60 ~ * {
+  clear: both;
+}

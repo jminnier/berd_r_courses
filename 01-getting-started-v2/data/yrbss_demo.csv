@@ -1,0 +1,21 @@
+"id","age","sex","grade","race4","bmi","weight_kg","text_while_driving_30d","smoked_ever","bullied_past_12mo","height_m"
+335340,"17 years old","Female","10th","White",27.5671,66.23,NA,NA,NA,1.55000049439477
+638618,"16 years old","Female","9th",NA,29.3495,84.82,NA,"Yes",NA,1.69999944883309
+922382,"14 years old","Male","9th","White",18.1827,57.61,NA,"Yes",FALSE,1.77999896988112
+923122,"15 years old","Male","9th","White",21.3754,60.33,NA,"Yes",FALSE,1.68000098912071
+923963,"15 years old","Male","10th","Black or African American",19.5988,63.5,NA,"No",TRUE,1.79999841260053
+925603,"16 years old","Male","10th","All other races",22.191,70.31,NA,"No",TRUE,1.78000045063308
+933724,"16 years old","Female","10th","All other races",20.9913,45.36,NA,"Yes",TRUE,1.46999837687769
+935435,"17 years old","Female","12th","All other races",17.4814,43.09,NA,"No",FALSE,1.57000176966881
+1096564,"15 years old","Male","10th","All other races",22.4593,79.38,NA,NA,TRUE,1.87999822468379
+1108114,"17 years old","Female","9th","Black or African American",26.5781,68.04,NA,"No",FALSE,1.60000075249906
+1306150,"16 years old","Male","10th","Hispanic/Latino",21.1874,67.13,"0 days",NA,FALSE,1.7799979031409
+1307481,"17 years old","Male","12th","Hispanic/Latino",19.4637,56.25,"1 or 2 days","No",FALSE,1.69999859466841
+1307872,"17 years old","Male","11th","Hispanic/Latino",20.6121,61.69,"1 or 2 days","No",FALSE,1.73000064373759
+1311617,"15 years old","Female","10th","Hispanic/Latino",27.4648,70.31,"0 days","No",TRUE,1.60000127435794
+1313153,"16 years old","Female","11th","Hispanic/Latino",26.5781,68.04,"0 days","No",TRUE,1.60000075249906
+1313291,"16 years old","Female","11th","White",24.8047,63.5,"3 to 5 days","No",FALSE,1.59999959685055
+1313477,"16 years old","Female","10th","All other races",25.0318,76.66,"0 days","No",TRUE,1.75000128408046
+1315121,"17 years old","Female","11th",NA,22.2687,54.89,"I did not drive the past 30 days","Yes",FALSE,1.56999830343598
+1315850,"17 years old","Female","12th","Hispanic/Latino",19.4922,49.9,"0 days",NA,FALSE,1.59999948697419
+1316123,"18 years old or older","Female","12th","Black or African American",27.4894,74.84,"All 30 days","Yes",FALSE,1.65000119605288

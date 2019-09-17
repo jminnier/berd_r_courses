@@ -1,43 +1,76 @@
 ---
 title: Getting Started with R and RStudio
-author: Jessica Minnier, PhD & Meike Niederhausen, PhD
-date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2019/02/26 & 2019/03/07 <br> Slides available at http://bit.ly/berd_r_intro <br> pdf version: http://bit.ly/berd_r_intro_pdf'
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+date: "<span style = 'font-size: 80%;'>2019/09/24  <br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_intro_r](http://bit.ly/berd_intro_r) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_intro_r_pdf](http://bit.ly/berd_intro_r_pdf)</span>"
 output: 
   xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts, mycss.css]
+    css: [css/xaringan-themer.css, css/my-theme.css]
     lib_dir: libs
     nature:
-      highlightStyle: rainbow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
       highlightLines: true
       highlightLanguage: r
       countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:10"
     includes:
       in_header: ../header.html   
-    #css: ../jminnier.css
 editor_options: 
   chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
 ---
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 
 library(tidyverse)
+library(lubridate)
+library(janitor)
+library(emo)
+library(here)
 
 knitr::opts_chunk$set(
   warning=FALSE, 
   message=FALSE, 
-  fig.width=10.5, 
-  fig.height=4,
+  #fig.width=10.5, 
+  #fig.height=4,
   fig.align = "center",
-  rows.print=16,
+  rows.print=7,
   echo=TRUE,
   highlight = TRUE,
-  prompt = TRUE, # IF TRUE adds a > before each code input
-  comment=NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
-  #comment=NA
+  prompt = FALSE, # IF TRUE adds a > before each code input
+  #comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  comment = '##'
   )
 
+# set ggplot theme
 theme_set(theme_bw(base_size = 24))
+```
+
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#3A6185", ## OHSU Marquam
+  code_highlight_color = "#cbdded",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = NULL,
+  text_font_size = "24px",
+  code_font_size = "20px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
+  outfile = "css/xaringan-themer.css"
+)
 ```
 
 
@@ -46,7 +79,7 @@ theme_set(theme_bw(base_size = 24))
 ## Install R
 
 - Windows : Download from https://cran.rstudio.com/bin/windows/base/
-- Mac OS X: Download the latest .pkg file (currently R-3.5.2.pkg) from https://cran.rstudio.com/bin/macosx/
+- Mac OS X: Download the latest .pkg file (currently R-3.6.1.pkg) from https://cran.rstudio.com/bin/macosx/
 
 ## Install RStudio Desktop Open Source License
 
@@ -83,7 +116,7 @@ Rrrrrr?
 
 # What is R? 
 
-.pull-left[
+.pull-left-60[
 - A programming language
 - Focus on statistical modeling and data analysis
     + import data, manipulate data, run statistics, make plots
@@ -95,7 +128,7 @@ Rrrrrr?
 ]
 
 
-.pull-right[
+.pull-right-40[
 ![](img/R_logo.png)
 ]
 
@@ -112,31 +145,50 @@ For the history and details: [Wikipedia](https://bit.ly/1efFmaY)
 
 # What is RStudio?
 
-![](img/01_md_rstudio.png)
+.pull-left[
+R is a programming language]
+.pull-right[
+RStudio is an integrated development environment (IDE) = an interface to use R (with perks!)
+]
 
-- R is a programming language
-- RStudio is an integrated development environment (IDE) = an interface to use R (with perks!)
+<center><img src="img/01_md_rstudio.png" width="78%" height="78%"><a href="https://moderndive.com/2-getting-started.html"><br>Modern Dive</a></center>
 
-from [Modern Dive](https://moderndive.com/2-getting-started.html); see also [DataCamp's video discussion on the difference](https://campus.datacamp.com/courses/working-with-the-rstudio-ide-part-1/orientation?ex=1)
 ---
 
 # Start RStudio
 
-![](img/01_md_r.png)
+## Double click on the `berd_intro_project.Rproj` file.
 
-from [Modern Dive](https://moderndive.com/2-getting-started.html)
 
+<center><img src="img/01_md_r.png" width="78%" height="78%"><a href="https://moderndive.com/2-getting-started.html"><br>Modern Dive</a></center>
 ---
 
-# RStudio anatomy
-
-![](img/RStudio_Anatomy.svg)
-
-from [Emma Rand](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html#what_are_r_and_rstudio)
+<center><img src="img/RStudio_Anatomy.svg" width="100%" height="100%"><a href="http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html#what_are_r_and_rstudio"><br>Emma Rand</a></center>
 
 ---
 
 # Rstudio demo
+
+
+---
+
+# More about R Projects - Good Practices
+
+__Use projects__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+- Create an RStudio project for each data analysis project, for each homework folder
+- A project is associated with a directory folder
+    + Keep data files there
+    + Keep scripts there; edit them, run them in bits or as a whole
+    + Save your outputs (plots and cleaned data) there
+- Only use relative paths, never absolute paths
+    + relative (good): `read_csv("data/mydata.csv")`
+    + absolute (bad): `read_csv("/home/yourname/Documents/stuff/mydata.csv")`
+    
+__Advantages of using projects__
+- standardizes file paths
+- keep everything together
+- a whole folder can be easily shared and run on another computer
+- when you open the project everything is as you left it
 
 
 ---
@@ -153,22 +205,29 @@ class: inverse, middle, center
 __Typing and execting code in the console __
 * Type code in the console
 * Press __return__ to execute the code
-
-<br>
+* Output shown below
 
 _Coding in the console is not advisable for most situations!_
 * We only recommend this for short pieces of code that you don't need to save
+* We will be using scripts (`.R` files) to run and save code (in a few slides)
+
+```{r}
+7
+```
+
 ]
 
 
 .pull-right[
 ```{r}
-7
 3 + 5
 "hello"
 
 # this is a comment, nothing happens
 # 5 - 8
+
+# multiple lines of code with ;
+3 + 5; 4 + 8
 ```
 ]
 
@@ -225,8 +284,6 @@ exp(0)
 ```
 ]
 
-<br>
-
 --
 
 Check that `log()` is base $e$
@@ -237,14 +294,44 @@ log(exp(1))
 
 ---
 
+# Using functions
+
+* `log()` is an example of a function
+* functions have "arguments"
+* `?log` in console will show help for `log()`
+
+.pull-left[
+Arguments read in order:
+```{r}
+mean(1:4)
+```
+
+```{r}
+seq(1,12,3)
+```
+]
+.pull-right[
+Arguments read by name:
+```{r}
+mean(x = 1:4)
+```
+
+```{r}
+seq(from = 1, to = 12, by = 3)
+```
+]
+
+---
+
 # Variables
 
 Data, information, everything is stored as a variable
-
+.pull-left[
 * Can assign a variable using either `=` or `<-`
     - Using `<-` is preferable
+    - type name of variable to print
+    
 
-.pull-left[
 Assigning just one value:
 ```{r}
 x = 5
@@ -320,7 +407,28 @@ greetings <- c("Guten Tag", "Hola", hi)
 greetings
 ```
 
+---
 
+# Missing values
+
+Missing values are denoted as `NA` and are handled differently depending on the operation.
+
+.pull-left[
+```{r}
+x <- c(1, 2, NA, 5)
+x
+mean(x)
+mean(x, na.rm=T)
+```
+]
+.pull-right[
+```{r}
+x <- c("a", "a", NA, "b")
+table(x)
+table(x, useNA = "always")
+```
+
+]
 
 ---
 
@@ -362,7 +470,7 @@ ls()
 
 ---
 
-# Common console errors 
+# Common console errors (1/2)
  
 __Incomplete commands__ 
 
@@ -386,7 +494,10 @@ Example:
 # 3 + (2*6
 ```
 
---
+---
+
+# Common console errors (2/2)
+
 
 __Object is not found__
 
@@ -398,6 +509,11 @@ Example:
 hello
 ```
 
+* Can be due to missing quotes
+
+```{r error=TRUE}
+install.packages(dplyr) # need install.packages("dplyr")
+```
 ---
 
 class: inverse, center, middle
@@ -412,7 +528,7 @@ class: inverse, center, middle
 
 * __Create a new script__ by 
     + selecting `File -> New File -> R Script`, 
-    + or clicking on ![](img/01_Script_create.png) (the left most button at the top of the scripting window), and then selecting the first option `R Script` 
+    + *or* clicking on ![](img/01_Script_create.png) (the left most button at the top of the scripting window), and then selecting the first option `R Script` 
 
   
 * __Type code__ in the script
@@ -427,7 +543,7 @@ class: inverse, center, middle
 
 * __Select code__ you want to execute, by 
     - placing the cursor in the line of code you want to execute, 
-    - or highlighting the code you want to execute
+    - *or* highlighting the code you want to execute
 
 
 
@@ -452,7 +568,33 @@ class: inverse, center, middle
 
 ![](img/01_Scripting_practice3.png)
 
+---
 
+# Useful keyboard shortcuts
+
+.pull-left-60[
+
+action | mac | windows/linux
+---| ---| ---
+run code in script | cmd + enter | ctrl + enter 
+`<-`| option + - | alt + -
+]
+.pull-right-40[
+Try typing (with shortcut) in a script and running
+```{r, eval=FALSE}
+y <- 5
+y
+```
+Now, in the *console*, press the up arrow.
+]
+
+## Others: ([see full list](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
+
+action | mac | windows/linux
+---| ---| ---
+interrupt currently executing command | esc | esc
+in console, go to previously run code | up/down | up/down
+keyboard shortcut help | option + shift + k | alt + shift + k
 ---
 
 # Saving a script
@@ -474,25 +616,27 @@ class: center, inverse, middle
 
 ---
 
-# Practice questions
+# Practice 1
+
+1. Open a new R script and type code/answers for next tasks in it. Save as `Practice1.R`
 
 1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
-2. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
 
-3. What is the sum of `a1` and `a2`? 
+1. What is the sum of `a1` and `a2`? 
 
-4. What does the command `sum(a1)` do?
+1. What does the command `sum(a1)` do?
 
-5. What does the command `length(a1)` do?
+1. What does the command `length(a1)` do?
 
-6. Use the commands to calculate the average of the values in `a1`.
+1. Use the commands to calculate the average of the values in `a1`.
 
-7. The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
+1. The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
 
-8. Compute the sum of the squares of all integers from 1 to 100.
+1. Compute the sum of the squares of all integers from 1 to 100.
 
-9. Take a break!
+1. Take a break!
 
 
 ---
@@ -505,37 +649,44 @@ class: inverse, middle, center
 
 # Data frames
 
+.pull-left-60[
 __Vectors__ vs. __data frames__: a data frame is a collection (or array or table) of vectors
 
 ```{r}
-df <- data.frame(IDs=1:3, 
-                 gender=c("male", "female", "Male"), 
-                 age=c(28, 35.5, 31),
-                 trt = c("control", "1", "1"),
-                 Veteran = c(FALSE, TRUE, TRUE))
+df <- data.frame(
+  IDs=1:3, 
+  gender=c("male", "female", "Male"), 
+  age=c(28, 35.5, 31),
+  trt = c("control", "1", "1"),
+  Veteran = c(FALSE, TRUE, TRUE)
+  )
 df
 ```
 
+]
+.pull-right-40[
 
+* Allows different columns to be of different data types (i.e. numeric vs. text)
+* Both numeric and text can be stored within a column (stored together as *text*).
 
-* A data frame allows different columns to be of different data types (i.e. numeric vs. text), and even allows both numeric and text within a column (stored together as text).
-
-* Vectors and data frames are examples of _objects_ in R. 
+* Vectors and data frames are examples of _**objects**_ in R. 
   + There are other types of R objects to store data, such as matrices, lists, and tibbles.
   + These will be discussed in future R workshops.
-
+]
 
 ---
 
-# Variable types
+# Variable (column) types
 
-* integer: integer-valued numbers
-* numeric: numbers that are decimals
-* factor: how categorical variables are stored
-* character: text 
-* logical (TRUE, FALSE)
+type | description
+---|---
+integer | integer-valued numbers
+numeric | numbers that are decimals
+factor | categorical variables stored with levels (groups)
+character | text, "strings"
+logical | boolean (TRUE, FALSE)
 
-Each variable (column) in a data frame can be of a different type.
+<!-- Each variable (column) in a data frame can be of a different type. -->
 
 * View the __structure__ of our data frame to see what the variable types are:
 
@@ -568,7 +719,9 @@ df[2, 3]
 ]
 
 .pull-right[
-Entire column: `DatSetName[, column#]`
+Entire column: 
+
+`DatSetName[, column#]`
 ```{r}
 # Third column
 df[, 3]
@@ -592,14 +745,18 @@ class: inverse, center, middle
 
 # Load a data set
 
-* Open csv file directly from the internet:
+* Read in csv file from file path with code (filepath relative to Rproj directory)
 
-```{r}
-mydata <- read.csv(url("http://bit.ly/berd_data_csv"))
+```{r, eval=FALSE}
+mydata <- read.csv("data/yrbss_demo.csv")
 ```
 
-* Or, download file and open saved file using Import Dataset button in Environment window:  ![](img/01_Import_Dataset.png). 
-  + If you use this option, then copy and paste the code from the console importing the data to your script so that you have a record of from where and how you loaded the data set.
+```{r, echo=FALSE}
+mydata <- read.csv(here::here("01-getting-started-v2","data","yrbss_demo.csv"))
+```
+
+* Or, open saved file using Import Dataset button in Environment window:  ![](img/01_Import_Dataset.png). 
+  + If you use this option, then copy and paste the importing code to your script so that you have a record of from where and how you loaded the data set.
 
 
 ```{r, eval=FALSE}
@@ -619,14 +776,12 @@ View(mydata)
 
 Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
 
-- complex survey data
+- small subset (20 rows) of the full complex survey data
 - national school-based survey conducted by CDC and state, territorial, tribal, and local surveys conducted by state, territorial, and local education and health agencies and tribal governments
-- monitors six categories of health-related behaviors that contribute to the leading causes of death and disability among youth and adults (including alcohol & drug use, unhealthy & dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
-- this data is a small subset (20 rows) of data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
-- we will use the full R data set in a future workshop teaching data cleaning
+- monitors health-related behaviors (including alcohol & drug use, unhealthy & dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
+- original data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
 
 <img src="img/01_yrbss.png" width="110%" height="110%">
-
 
 ---
 
@@ -640,14 +795,19 @@ summary(mydata)
 
 # Data set info
 
+.pull-left-40[
 ```{r}
 dim(mydata)
 nrow(mydata)
 ncol(mydata)
+```
+]
 
+.pull-right-60[
+```{r}
 names(mydata)
 ```
-
+]
 
 
 ---
@@ -710,10 +870,7 @@ mydata$bmi
 
 ---
 
-# Basic plots of numeric data (1/3)
-
-
-## Histogram
+# Basic plots of numeric data: Histogram
 
 ```{r fig.height=2.5, fig.width=7}
 hist(mydata$bmi)
@@ -722,14 +879,12 @@ hist(mydata$bmi)
 With extra features: 
 
 ```{r fig.height=2.5, fig.width=7}
-hist(mydata$bmi, xlab = "BMI", main="BMI's of students")
+hist(mydata$bmi, xlab = "BMI", main="BMIs of students")
 ```
 
 ---
 
-# Basic plots of numeric data (2/3)
-
-## Boxplot
+# Basic plots of numeric data: Boxplot
 
 .pull-left[
 ```{r fig.height=5, fig.width=5}
@@ -745,15 +900,13 @@ boxplot(mydata$bmi)
 boxplot(mydata$bmi ~ mydata$sex, 
   horizontal = TRUE, 
   xlab = "BMI", ylab = "sex",
-  main = "BMI's of students by sex")
+  main = "BMIs of students by sex")
 ```
 ]
 
 ---
 
-# Basic plots of numeric data (3/3)
-
-## Scatterplot
+# Basic plots of numeric data: Scatterplot
 
 .pull-left[
 ```{r fig.height=5, fig.width=5}
@@ -889,11 +1042,13 @@ mydata[mydata$bmi < 19, c("age", "sex", "bmi")]
 
 ---
 
-# Practice
+# Practice 2
+
+1. Create a new script and save it as `Practice2.R`
 
 1. Create data frames for males and females separately.
 
-2. Do males and females have similar BMI's? Weights? Compares means, standard deviations, range, and boxplots.
+2. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
 
 3. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
 
@@ -907,14 +1062,14 @@ mydata[mydata$bmi < 19, c("age", "sex", "bmi")]
 # Save data frame
 
 * Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
-```{r}
-save(mydata, file = "mydata.RData")
+```{r, eval=FALSE}
+save(mydata, file = "data/mydata.RData")
 ```
 
 You can load .RData files using the load() command:
 
-```{r}
-load("mydata.RData")
+```{r, eval=FALSE}
+load("data/mydata.RData")
 ```
   
 
@@ -922,8 +1077,8 @@ load("mydata.RData")
 
 * Save __csv__ file: comma-separated values
 
-```{r}
-write.csv(mydata, file = "mydata.csv", col.names = TRUE, row.names = FALSE)
+```{r, eval=FALSE}
+write.csv(mydata, file = "data/mydata.csv", col.names = TRUE, row.names = FALSE)
 ```
 
 
@@ -937,30 +1092,43 @@ class: inverse, center, middle
 
 # Installing and using packages
 
-(Packages are to R/Rstudio like apps are to your phone/OS)
-
-## CRAN = package mothership
-
-[Comprehensive R Archive Network](https://cran.r-project.org/)
-
-Also can use the "Packages" tab in the Files/Plots/Packages/Help/Viewer window
-
+- Packages are to R like apps are to your phone/OS
+- Packages contain additional functions and data
+- Install packages with `install.packages()`
+  + Also can use the "Packages" tab in Files/Plots/Packages/Help/Viewer window
+  + *Only install once (unless you want to update)*
+  + Installs from [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) = package mothership
 
 ```{r, eval = FALSE}
-# Install a package from CRAN (main package repository)
-install.packages("tidyverse") # only do this ONCE
-# Load the package
-library(tidyverse)
+install.packages("dplyr")   # only do this ONCE, use quotes
 ```
 
-## Other places (i.e. github) = wild west
+- Load packages: At the top of your script include `library()` commands to load each required package *every* time you open Rstudio.
+```{r}
+library(dplyr)    # run this every time you open Rstudio
+```
+
+- Use a function without loading the package with `::`
+```{r}
+dplyr::arrange(mydata, bmi)
+```
+
+---
+
+# Installing packages from other places (i.e. github, URLs)
+
+- Need to have [remotes](https://github.com/r-lib/remotes#readme) package installed first:
+```{r, eval=FALSE}
+install.packages("remotes") 
+```
+
+- To install a package from github (often in development) use `install_github()` from the remotes package
 
 ```{r, eval=FALSE}
-install.packages("devtools") # only do this ONCE
-library(devtools)
-# Install a package from github (often in development, no testing)
 # https://github.com/hadley/yrbss
-install_github("hadley/yrbss")
+remotes::install_github("hadley/yrbss")
+
+# Load it the same way
 library(yrbss)
 ```
 
@@ -979,8 +1147,8 @@ Use `?` in front of function name in console. Try this:
 
 - Use `??` (i.e `??dplyr` or `??read_csv`) for searching all documentation in installed packages (including unloaded packages)
 - search [Stack Overflow #r tag](https://stackoverflow.com/questions/tagged/r)
-- google your question + rcran or + r (i.e. "make a boxplot rcran" "make a boxplot r")
-- google the error in quotes (i.e. "Evaluation error: invalid type (closure) for variable '***'")
+- googlequestion + rcran or + r (i.e. "make a boxplot rcran" "make a boxplot r")
+- google error in quotes (i.e. `"Evaluation error: invalid type (closure) for variable '***'"`)
 - search [github](https://github.com/search/advanced?q=language:R) for your function name (to see examples) or error
 - [Rstudio community](https://community.rstudio.com/)
 - [twitter #rstats](https://twitter.com/search?q=%23rstats&src=typd)
@@ -989,16 +1157,15 @@ Use `?` in front of function name in console. Try this:
 
 # Resources
 
+- Click on this [List of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
+- Watch [recordings of our other workshops](https://github.com/jminnier/berd_r_courses)
+- __Highly recommend *Data Wrangling in R with Tidyverse*__
+
+Getting started:
+
 - [RStudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
 - Install R/RStudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&feature=youtu.be)
 - [Basic Basics](http://rladiessydney.org/post/2018/11/05/basicbasics/)
-
-Interactive lessons
-
-- [DataCamp](www.datacamp.com)
-    + [Introduction to R (free course)](https://www.datacamp.com/courses/free-introduction-to-r)
-    + [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
-    + [Intermediate R](https://www.datacamp.com/courses/intermediate-r)
 
 Some of this is drawn from materials in online books/lessons:
 
@@ -1013,19 +1180,8 @@ Some of this is drawn from materials in online books/lessons:
 - OHSU's [BioData club](https://biodata-club.github.io/) + active slack channel
 - Portland's [R user meetup group](https://www.meetup.com/portland-r-user-group/) + active slack channel
 - [R-ladies PDX](https://www.meetup.com/R-Ladies-PDX/) meetup group
-- in June in Portland, the [WNAR Annual meeting](http://www.wnar.org/event-3013994) (biostats conference) will have R related workshops
-- in June in Redmond, the [Cascadia R conference](https://www.eventbank.com/event/cascadia-r-conference-2019-11944/) will have presentations
 
 ---
-
-# Possible Future Workshop Topics?
-
-- data wrangling with the tidyverse
-- reproducible reports in R
-- tables
-- ggplot2 visualization
-- advanced tidyverse: functions, purrr
-- statistical modeling in R
 
 ## Contact info:
 
@@ -1037,8 +1193,11 @@ Meike Niederhausen: _niederha@ohsu.edu_
 ## This workshop info:
 
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.R)
-- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_Practice_Answers.pdf)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.pdf)
+- The project folder of examples can be downloaded at [github.com/jminnier/berd_intro_project](https://github.com/jminnier/berd_intro_project) & the solutions are in the `solns/` folder.
+
+
 
 ```{r, include=FALSE}
 #knitr::purl("01-getting-started/01_getting_started_slides.Rmd", out = "01-getting-started/01_getting_started_slides.R")
