@@ -1048,13 +1048,14 @@ mydata[mydata$bmi < 19, c("age", "sex", "bmi")]
 
 1. Create data frames for males and females separately.
 
-2. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
 
-3. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
 
-4. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+<!-- TO DO: FIX THIS, NAs are including and changing means. See solution file -->
+1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
 
-5. Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
+1. Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
 
 
 ---

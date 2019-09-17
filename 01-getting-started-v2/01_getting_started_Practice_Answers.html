@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Practice Solutions to   Getting Started with R and RStudio</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer-solns.css" type="text/css" />
+    <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# Practice Solutions to <br> Getting Started with R and RStudio
+### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD
+### OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop <br><br> 2019/09/24
+
+---
+
+
+layout: true
+  
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/berd_tidy&lt;/span&gt;&lt;/div&gt;  --&gt;
+
+---
+
+
+
+
+
+
+
+
+
+
+# Practice questions 1
+
+1. Open a new R script and type code/answers for next tasks in it. Save as `Practice1.R`
+
+1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+1. What is the sum of `a1` and `a2`? 
+
+1. What does the command `sum(a1)` do?
+
+1. What does the command `length(a1)` do?
+
+1. Use the commands to calculate the average of the values in `a1`.
+
+1. The formula for the first `\(n\)` integers is `\(n(n+1)/2\)`. Compute the sum of all integers from 1 to 100 to verify that this formula holds for `\(n=100\)`. 
+
+1. Compute the sum of the squares of all integers from 1 to 100.
+
+1. Take a break!
+
+---
+
+# Answers to practice questions 1
+
+__#2__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+__#3__ Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+
+```r
+a1 &lt;- 4:10
+a2 &lt;- c(4, 6, 8, 10)
+# the following works as well:
+a2 &lt;- 2*(2:5)
+# or
+a2 &lt;- seq(4, 10, by=2)
+```
+
+---
+
+__#4__ What is the sum of `a1` and `a2`? 
+
+
+```r
+a1+a2
+```
+
+```
+Warning in a1 + a2: longer object length is not a multiple of shorter
+object length
+```
+
+```
+[1]  8 11 14 17 12 15 18
+```
+
+Note that instead of giving an error, the terms of `a1` are repeated as needed since `a2` is longer than `a1`
+
+
+---
+
+__#5__ What does the command `sum(a1)` do?
+
+
+```r
+sum(a1)
+```
+
+```
+[1] 49
+```
+
+`sum` adds up the values in the vector
+
+&lt;br&gt;
+
+__#6__ What does the command `length(a1)` do?
+
+
+```r
+length(a1)
+```
+
+```
+[1] 7
+```
+
+`length` is the number of values in the vector
+
+---
+
+__#7__ Use the commands to calculate the average of the values in `a1`.
+
+
+```r
+sum(a1) / length(a1)
+```
+
+```
+[1] 7
+```
+
+```r
+# this is equivalent
+mean(a1)
+```
+
+```
+[1] 7
+```
+
+---
+
+__#8__ The formula for the first `\(n\)` integers is `\(n(n+1)/2\)`. Compute the sum of all integers from 1 to 100 to verify that this formula holds for `\(n=100\)`. 
+
+
+```r
+sum(1:100)
+```
+
+```
+[1] 5050
+```
+
+```r
+# verify formula for n=100:
+n=100
+n * (n+1) / 2
+```
+
+```
+[1] 5050
+```
+
+
+---
+
+__#9__ Compute the sum of the squares of all integers from 1 to 100.
+
+
+```r
+# The following code creates a vector of the squares of all integers from 1 to 100
+(1:100)^2
+```
+
+```
+  [1]     1     4     9    16    25    36    49    64    81   100   121
+ [12]   144   169   196   225   256   289   324   361   400   441   484
+ [23]   529   576   625   676   729   784   841   900   961  1024  1089
+ [34]  1156  1225  1296  1369  1444  1521  1600  1681  1764  1849  1936
+ [45]  2025  2116  2209  2304  2401  2500  2601  2704  2809  2916  3025
+ [56]  3136  3249  3364  3481  3600  3721  3844  3969  4096  4225  4356
+ [67]  4489  4624  4761  4900  5041  5184  5329  5476  5625  5776  5929
+ [78]  6084  6241  6400  6561  6724  6889  7056  7225  7396  7569  7744
+ [89]  7921  8100  8281  8464  8649  8836  9025  9216  9409  9604  9801
+[100] 10000
+```
+
+```r
+# Now add the squares:
+sum((1:100)^2)
+```
+
+```
+[1] 338350
+```
+
+
+---
+
+
+
+
+# Practice 2
+
+1. Create a new script and save it as `Practice2.R`
+
+1. Create data frames for males and females separately.
+
+2. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+3. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+4. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+5. Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
+
+
+---
+
+# Practice Answers (1/7)
+
+__#2__ Create data frames for males and females separately.
+
+
+```r
+boys &lt;- mydata[mydata$sex == "Male", ]
+girls &lt;- mydata[mydata$sex == "Female", ]
+```
+
+---
+
+__#3__ Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+.pull-left-60[
+
+```r
+summary(boys$bmi); sd(boys$bmi)
+```
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  18.18   19.57   20.90   20.63   21.58   22.46 
+```
+
+```
+[1] 1.466896
+```
+
+```r
+summary(girls$bmi); sd(girls$bmi)
+```
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  17.48   21.95   25.80   24.59   27.47   29.35 
+```
+
+```
+[1] 3.70739
+```
+
+]
+.pull-right-40[
+
+
+```r
+boxplot(mydata$bmi ~ mydata$sex)
+```
+
+&lt;img src="01_getting_started_Practice_Answers_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+__#4__ Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+.pull-left[
+
+```r
+plot(boys$bmi, boys$weight)
+```
+
+&lt;img src="01_getting_started_Practice_Answers_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+
+```r
+plot(girls$bmi, girls$weight)
+```
+
+&lt;img src="01_getting_started_Practice_Answers_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
+__#5__ Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+.pull-left[
+
+```r
+bullied_boys &lt;- 
+  boys[boys$bullied_past_12mo == TRUE,]
+nrow(bullied_boys)
+```
+
+```
+[1] 3
+```
+
+```r
+bullied_boys_prct &lt;- 
+  nrow(bullied_boys) / nrow(boys) * 100
+bullied_boys_prct
+```
+
+```
+[1] 37.5
+```
+
+```r
+# alternative
+mean(boys$bullied_past_12mo, na.rm=TRUE)
+```
+
+```
+[1] 0.375
+```
+]
+.pull-right[
+
+```r
+# THIS DOESN'T WORK, need to use which(girls$bullied_past_12mo) but we didn't teach which()
+bullied_girls &lt;- 
+  girls[girls$bullied_past_12mo == TRUE,]
+nrow(bullied_girls)
+```
+
+```
+[1] 6
+```
+
+```r
+bullied_girls_prct &lt;- 
+  nrow(bullied_girls) / nrow(girls) * 100
+bullied_girls_prct
+```
+
+```
+[1] 50
+```
+
+```r
+# alternative
+mean(girls$bullied_past_12mo, na.rm=TRUE)
+```
+
+```
+[1] 0.4
+```
+]
+
+---
+
+
+__#6__ Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
+
+
+```r
+bullied_yes &lt;- mydata[mydata$bullied_past_12mo == TRUE,]
+bullied_no &lt;- mydata[mydata$bullied_past_12mo == FALSE,]
+
+# Not bullied students have higher proportion of smokers
+summary(bullied_yes$smoked_ever)
+```
+
+```
+  No  Yes NA's 
+   5    1    3 
+```
+
+```r
+summary(bullied_no$smoked_ever)
+```
+
+```
+  No  Yes NA's 
+   5    4    4 
+```
+ 
+---
+
+
+```r
+## 6 ctd, Does it vary by gender? Not really
+summary(bullied_yes[bullied_yes$sex == "Male", "smoked_ever"])
+```
+
+```
+  No  Yes NA's 
+   2    0    3 
+```
+
+```r
+summary(bullied_yes[bullied_yes$sex == "Female", "smoked_ever"])
+```
+
+```
+  No  Yes NA's 
+   3    1    2 
+```
+
+```r
+summary(bullied_no[bullied_no$sex == "Male", "smoked_ever"])
+```
+
+```
+  No  Yes NA's 
+   2    2    3 
+```
+
+```r
+summary(bullied_no[bullied_no$sex == "Female", "smoked_ever"])
+```
+
+```
+  No  Yes NA's 
+   3    2    3 
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,86 +1,123 @@
 ---
 title: Practice Solutions to <br> Getting Started with R and RStudio 
 author: Jessica Minnier, PhD & Meike Niederhausen, PhD
-date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2019/02/26 <br> Slides available at http://bit.ly/berd_r_intro <br> pdf version: http://bit.ly/berd_r_intro_pdf'
+date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2019/09/24'
 output: 
   xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts, mycss.css]
+    css: [css/xaringan-themer-solns.css, css/my-theme.css]
     lib_dir: libs
     nature:
-      highlightStyle: rainbow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
       highlightLines: true
       highlightLanguage: r
       countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:9"
     includes:
       in_header: ../header.html   
-    #css: ../jminnier.css
 editor_options: 
   chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
 ---
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 
 library(tidyverse)
+library(lubridate)
+library(janitor)
 
 knitr::opts_chunk$set(
   warning=FALSE, 
   message=FALSE, 
-  fig.width=10.5, 
-  fig.height=4,
+  #fig.width=10.5, 
+  #fig.height=4,
   fig.align = "center",
-  rows.print=16,
+  rows.print=7,
   echo=TRUE,
   highlight = TRUE,
-  prompt = TRUE, # IF TRUE adds a > before each code input
-  comment=NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  prompt = FALSE, # IF TRUE adds a > before each code input
+  comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
   #comment=NA
   )
 
+# set ggplot theme
 theme_set(theme_bw(base_size = 24))
 ```
 
 
 
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#518c66", ## OHSU Marquam
+  code_highlight_color = "#c0e8f5",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = NULL,
+  text_font_size = "24px",
+  code_font_size = "20px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
+  outfile = "css/xaringan-themer-solns.css"
+)
+```
 
-# Practice questions
+
+
+
+# Practice questions 1
+
+1. Open a new R script and type code/answers for next tasks in it. Save as `Practice1.R`
 
 1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
-2. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
 
-3. What is the sum of `a1` and `a2`? 
+1. What is the sum of `a1` and `a2`? 
 
-4. What does the command `sum(a1)` do?
+1. What does the command `sum(a1)` do?
 
-5. What does the command `length(a1)` do?
+1. What does the command `length(a1)` do?
 
-6. Use the commands to calculate the average of the values in `a1`.
+1. Use the commands to calculate the average of the values in `a1`.
 
-7. The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
+1. The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
 
-8. Compute the sum of the squares of all integers from 1 to 100.
+1. Compute the sum of the squares of all integers from 1 to 100.
 
-9. Take a break!
-
+1. Take a break!
 
 ---
 
-# Answers to practice questions (1/4)
+# Answers to practice questions 1
 
-__#1__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
+__#2__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
-__#2__ Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+__#3__ Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
 
 ```{r}
 a1 <- 4:10
 a2 <- c(4, 6, 8, 10)
 # the following works as well:
 a2 <- 2*(2:5)
+# or
+a2 <- seq(4, 10, by=2)
 ```
 
+---
 
-__#3__ What is the sum of `a1` and `a2`? 
+__#4__ What is the sum of `a1` and `a2`? 
 
 ````{r warning=TRUE}
 a1+a2
@@ -91,9 +128,7 @@ Note that instead of giving an error, the terms of `a1` are repeated as needed s
 
 ---
 
-# Answers to practice questions (2/4)
-
-__#4__ What does the command `sum(a1)` do?
+__#5__ What does the command `sum(a1)` do?
 
 ```{r}
 sum(a1)
@@ -103,7 +138,7 @@ sum(a1)
 
 <br>
 
-__#5__ What does the command `length(a1)` do?
+__#6__ What does the command `length(a1)` do?
 
 ```{r}
 length(a1)
@@ -113,16 +148,18 @@ length(a1)
 
 ---
 
-# Answers to practice questions (3/4)
-
-__#6__ Use the commands to calculate the average of the values in `a1`.
+__#7__ Use the commands to calculate the average of the values in `a1`.
 
 ```{r}
 sum(a1) / length(a1)
+
+# this is equivalent
+mean(a1)
 ```
 
+---
 
-__#7__ The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
+__#8__ The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
 
 ```{r}
 sum(1:100)
@@ -134,9 +171,7 @@ n * (n+1) / 2
 
 ---
 
-# Answers to practice questions (4/4)
-
-__#8__ Compute the sum of the squares of all integers from 1 to 100.
+__#9__ Compute the sum of the squares of all integers from 1 to 100.
 
 ```{r}
 # The following code creates a vector of the squares of all integers from 1 to 100
@@ -150,7 +185,8 @@ sum((1:100)^2)
 ---
 
 ```{r echo=FALSE}
-mydata <- read.csv(url("http://bit.ly/berd_data_csv"))
+mydata <- read.csv(here::here("01-getting-started-v2","data","yrbss_demo.csv"))
+# mydata <- read.csv("data/yrbss_demo.csv")
 
 # Add height column to data frame
 mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi)
@@ -158,11 +194,13 @@ mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi)
 ```
 
 
-# Practice
+# Practice 2
+
+1. Create a new script and save it as `Practice2.R`
 
 1. Create data frames for males and females separately.
 
-2. Do males and females have similar BMI's? Weights? Compares means, standard deviations, range, and boxplots.
+2. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
 
 3. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
 
@@ -175,41 +213,35 @@ mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi)
 
 # Practice Answers (1/7)
 
-__#1__ Create data frames for males and females separately.
+__#2__ Create data frames for males and females separately.
 
 ```{r}
 boys <- mydata[mydata$sex == "Male", ]
 girls <- mydata[mydata$sex == "Female", ]
 ```
 
-
 ---
 
-# Practice Answers (2/7)
+__#3__ Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
 
-__#2__ Do males and females have similar BMI's? Weights? Compares means, standard deviations, range, and boxplots.
-
+.pull-left-60[
 ```{r}
 summary(boys$bmi); sd(boys$bmi)
 summary(girls$bmi); sd(girls$bmi)
 ```
 
----
-
-# Practice Answers (3/7)
-
-__#2__ cont'd
+]
+.pull-right-40[
 
 ```{r fig.height=5}
 boxplot(mydata$bmi ~ mydata$sex)
 ```
-
+]
 
 ---
 
-# Practice Answers (4/7)
 
-__#3__ Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+__#4__ Plot BMI vs. weight for each gender separately. Do they have similar relationships?
 
 .pull-left[
 ```{r fig.height=5, fig.width=4}
@@ -230,26 +262,40 @@ plot(girls$bmi, girls$weight)
 
 ---
 
-# Practice Answers (5/7)
+__#5__ Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
 
-__#4__ Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
-
+.pull-left[
 ```{r}
-bullied_boys <- boys[boys$bullied_past_12mo == TRUE,]
+bullied_boys <- 
+  boys[boys$bullied_past_12mo == TRUE,]
 nrow(bullied_boys)
-bullied_boys_prct <- nrow(bullied_boys) / nrow(boys) * 100; bullied_boys_prct
+bullied_boys_prct <- 
+  nrow(bullied_boys) / nrow(boys) * 100
+bullied_boys_prct
 
-bullied_girls <- girls[girls$bullied_past_12mo == TRUE,]
-nrow(bullied_girls)
-bullied_girls_prct <- nrow(bullied_girls) / nrow(girls) * 100; bullied_girls_prct
+# alternative
+mean(boys$bullied_past_12mo, na.rm=TRUE)
 ```
+]
+.pull-right[
+```{r}
+# THIS DOESN'T WORK, need to use which(girls$bullied_past_12mo) but we didn't teach which()
+bullied_girls <- 
+  girls[girls$bullied_past_12mo == TRUE,]
+nrow(bullied_girls)
+bullied_girls_prct <- 
+  nrow(bullied_girls) / nrow(girls) * 100
+bullied_girls_prct
 
+# alternative
+mean(girls$bullied_past_12mo, na.rm=TRUE)
+```
+]
 
 ---
 
-# Practice Answers (6/7)
 
-__#5__ Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
+__#6__ Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
 
 ```{r}
 bullied_yes <- mydata[mydata$bullied_past_12mo == TRUE,]
@@ -262,12 +308,8 @@ summary(bullied_no$smoked_ever)
  
 ---
 
-# Practice Answers (7/7)
-
-__#5__ cont'd
-
 ```{r}
-# Vary by gender? Not really.
+## 6 ctd, Does it vary by gender? Not really
 summary(bullied_yes[bullied_yes$sex == "Male", "smoked_ever"])
 summary(bullied_yes[bullied_yes$sex == "Female", "smoked_ever"])
 
@@ -277,6 +319,6 @@ summary(bullied_no[bullied_no$sex == "Female", "smoked_ever"])
 
 
 ```{r, include=FALSE}
-#knitr::purl("01-getting-started/01_getting_started_Practice_Answers.Rmd")
+#knitr::purl("01-getting-started-v2/01_getting_started_Practice_Answers.Rmd")
 ```
 
