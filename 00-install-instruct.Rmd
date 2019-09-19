@@ -17,9 +17,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Pre-course installation
 
-- R and Rstudio are two separate programs. You must install R first. Then Install Rstudio desktop. 
+- R and Rstudio are two separate programs. You must install R first. Then install Rstudio desktop. 
 - For help, try [watching this video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&feature=youtu.be)
-- Even if you have R installed already, we highly recommend installing the latest version. Just follow the instructions as below to update everything.
+- Even if you have R installed already, we highly recommend installing the latest version if it has been a while since you installed it. Just follow the instructions as below to update everything.
 - **TRY TO DO THIS YOURSELF BEFORE THE WORKSHOP** If you have tried it at home and still have questions, come to the workshop 30 minutes early and the instructors will try to help.
 
 ## Install **R** (first)
@@ -43,23 +43,24 @@ Do not open the regular R software, it is just working in the background when yo
 
 ## *Highly recommended*
 
-- Get acquainted with Rstudio and R prior to the workshop. You will get much more out of the workshop if you have explored the interface first.
-- View previous workshops that have been recorded, including an earlier version of "Getting Started with R and Rstudio"
-    + Slides at [github.com/jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-    + [Recordings are on echo](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public).
-    + [Slides from the original version of this workshop](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.html)
-- Try out the [Programming basics](https://rstudio.cloud/learn/primers/1.2) interactive lesson from Rstudio.
+- Get acquainted with Rstudio (and R) prior to the workshop. You will get much more out of the workshop if you have opened the software and explored the interface first.
 
-## Want more preparation?:
+## *Recommended*
+- Try out the [Programming basics](https://rstudio.cloud/learn/primers/1.2) interactive lesson from Rstudio.
+- Look over [slides from the original version of this workshop](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.html)
+
+## Still want more preparation?:
 
 - **Very Useful**: [Rstudio interactive lessons](https://rstudio.cloud/learn/primers)
+- View previous OHSU OCTRI BERD workshops that have been recorded, including an earlier version of "Getting Started with R and Rstudio"
+    + Slides at [github.com/jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+    + [Recordings are on echo](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public).
 - Long list of other resources [here](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
 - [Rstudio IDE cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
 - [Modern Dive textbook chapter getting started](https://moderndive.com/1-getting-started.html)
 - [R bootcamp - interactive tutorial](https://r-bootcamp.netlify.com/) Ted Laderas & Jessica Minnier
 - [Introduction to module and RStudio by Emma Rand](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html)
 - [Basic Basics opinionated tour of Rstudio](http://rladiessydney.org/post/2018/11/05/basicbasics-1/)
-
 
 # Instructor Info
 
