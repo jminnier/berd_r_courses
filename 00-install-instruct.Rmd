@@ -3,11 +3,11 @@ title: "BERD Getting Started with R and Rstudio"
 author: "Pre-workshop Installation Instructions"
 date: "Updated: `r Sys.Date()`"
 output: 
+  pdf_document: default
   html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
-  pdf_document: default
 urlcolor: blue
 ---
 
