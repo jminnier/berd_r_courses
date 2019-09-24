@@ -1205,8 +1205,12 @@ Meike Niederhausen: _niederha@ohsu.edu_
 
 
 
-```{r, include=FALSE}
-#knitr::purl("01-getting-started/01_getting_started_slides.Rmd", out = "01-getting-started/01_getting_started_slides.R")
-#knitr::purl("01_getting_started_slides.Rmd")
+
+```{r, eval=FALSE, echo=FALSE}
+# RUN THESE AFTER KNITTING
+knitr::purl(here::here("01-getting-started-v2","01_getting_started_slides.Rmd"), 
+            out = here::here("01-getting-started-v2","01_getting_started_slides.R"))
+# remotes::install_github('rstudio/pagedown')
+pagedown::chrome_print(here::here("01-getting-started-v2","01_getting_started_slides.html"))
 ```
 
