@@ -43,8 +43,8 @@ knitr::opts_chunk$set(
   rows.print=7,
   echo=TRUE,
   highlight = TRUE,
-  prompt = FALSE, # IF TRUE adds a > before each code input
-  #comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  # prompt = TRUE, # IF TRUE adds a > before each code input
+  # comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
   comment = '##'
   )
 
@@ -78,8 +78,12 @@ mono_light(
 
 ## Install R
 
-- Windows : Download from https://cran.rstudio.com/bin/windows/base/
-- Mac OS X: Download the latest .pkg file (currently R-3.6.1.pkg) from https://cran.rstudio.com/bin/macosx/
+- Windows: 
+    - Download from https://cran.rstudio.com/bin/windows/base/
+- Mac OS X: 
+    - Download the latest .pkg file (currently R-3.6.1.pkg) from https://cran.rstudio.com/bin/macosx/
+
+<!-- UPDATE current R package in future talks -->
 
 ## Install RStudio Desktop Open Source License
 
@@ -175,7 +179,7 @@ RStudio is an integrated development environment (IDE) = an interface to use R (
 # More about R Projects - Good Practices
 
 __Use projects__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
-- Create an RStudio project for each data analysis project, for each homework folder
+- Create an RStudio project for each data analysis project, for each homework assignment, etc.
 - A project is associated with a directory folder
     + Keep data files there
     + Keep scripts there; edit them, run them in bits or as a whole
@@ -211,7 +215,7 @@ _Coding in the console is not advisable for most situations!_
 * We only recommend this for short pieces of code that you don't need to save
 * We will be using scripts (`.R` files) to run and save code (in a few slides)
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 7
 ```
 
@@ -219,14 +223,14 @@ _Coding in the console is not advisable for most situations!_
 
 
 .pull-right[
-```{r}
+```{r prompt = TRUE, comment = NA}
 3 + 5
 "hello"
 
 # this is a comment, nothing happens
 # 5 - 8
 
-# multiple lines of code with ;
+# separate multiple commands with ;
 3 + 5; 4 + 8
 ```
 ]
@@ -238,7 +242,7 @@ _Coding in the console is not advisable for most situations!_
 
 
 .pull-left[
-```{r}
+```{r prompt = TRUE, comment = NA}
 10^2
 3 ^ 7
 6/9
@@ -251,7 +255,7 @@ _Coding in the console is not advisable for most situations!_
 .pull-right[
 R follows the rules for order of operations and ignores spaces between numbers (or objects)
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 4^3-2* 7+9 /2
 ```
 
@@ -267,7 +271,7 @@ The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$
 .pull-left[
 
 Logarithms: `log()` is base $e$
-```{r}
+```{r prompt = TRUE, comment = NA}
 log(10)
 log10(10)
 ```
@@ -278,7 +282,7 @@ log10(10)
 
 .pull-right[
 Exponentials
-```{r}
+```{r prompt = TRUE, comment = NA}
 exp(1)
 exp(0)
 ```
@@ -288,7 +292,7 @@ exp(0)
 
 Check that `log()` is base $e$
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 log(exp(1))
 ```
 
@@ -302,21 +306,21 @@ log(exp(1))
 
 .pull-left[
 Arguments read in order:
-```{r}
+```{r prompt = TRUE, comment = NA}
 mean(1:4)
 ```
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 seq(1,12,3)
 ```
 ]
 .pull-right[
 Arguments read by name:
-```{r}
+```{r prompt = TRUE, comment = NA}
 mean(x = 1:4)
 ```
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 seq(from = 1, to = 12, by = 3)
 ```
 ]
@@ -333,7 +337,7 @@ Data, information, everything is stored as a variable
     
 
 Assigning just one value:
-```{r}
+```{r prompt = TRUE, comment = NA}
 x = 5
 x
 x <- 5
@@ -347,14 +351,14 @@ x
 Assigning a __vector__ of values
 * Consecutive integers
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 a <- 3:10
 a
 ```
 
 * __Concatenate__ a string of numbers
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 b <- c(5, 12, 2, 100, 8)
 b
 ```
@@ -367,7 +371,7 @@ b
 
 .pull-left[
 Math using variables with just one value
-```{r}
+```{r prompt = TRUE, comment = NA}
 x <- 5
 x
 
@@ -382,13 +386,11 @@ y
 
 .pull-right[
 Math on vectors of values: element-wise computation
-```{r}
+```{r prompt = TRUE, comment = NA}
 a <- 3:6
 a
 
-a+2
-
-a*3
+a+2; a*3
 
 a*a
 ```
@@ -399,7 +401,7 @@ a*a
 
 # Variable can include text (characters)
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 hi <- "hello"
 hi
 
@@ -414,15 +416,15 @@ greetings
 Missing values are denoted as `NA` and are handled differently depending on the operation.
 
 .pull-left[
-```{r}
+```{r prompt = TRUE, comment = NA}
 x <- c(1, 2, NA, 5)
 x
 mean(x)
-mean(x, na.rm=T)
+mean(x, na.rm=TRUE)
 ```
 ]
 .pull-right[
-```{r}
+```{r prompt = TRUE, comment = NA}
 x <- c("a", "a", NA, "b")
 table(x)
 table(x, useNA = "always")
@@ -437,9 +439,9 @@ table(x, useNA = "always")
  
 <!-- __List of defined variables (and other objects)__ -->
 
-* The R command to see what objects have been defined is `ls()`. 
+* `ls()` is the R command to see what objects have been defined. 
 * This list includes all defined objects (including dataframes, functions, etc.)
-```{r}
+```{r prompt = TRUE, comment = NA}
 ls()
 ```
 
@@ -454,14 +456,14 @@ ls()
 
 * The R command to delete an object is `rm()`. 
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 ls()
 rm("greetings", hi)  # Can run with or without quotes
 ls()
 ```
 
 * Remove EVERYTHING - _Be careful!!_
-```{r}
+```{r prompt = TRUE, comment = NA}
 rm(list=ls())
 ls()
 ```
@@ -483,7 +485,7 @@ __Incomplete commands__
 .pull-right[
 Example:
 
-```{r}
+```{r prompt = TRUE, comment = NA}
 3 + (2*6
 )
 ```
@@ -505,13 +507,13 @@ __Object is not found__
 
 Example:
 
-```{r error=TRUE}
+```{r error=TRUE, prompt = TRUE, comment = NA}
 hello
 ```
 
 * Can be due to missing quotes
 
-```{r error=TRUE}
+```{r error=TRUE, prompt = TRUE, comment = NA}
 install.packages(dplyr) # need install.packages("dplyr")
 ```
 ---
@@ -555,9 +557,9 @@ class: inverse, center, middle
           + __Mac__:  __command + return__
 
 
-![](img/01_Scripting_practice2.png)
+<!-- ![](img/01_Scripting_practice2.png) -->
 
-
+<center><img src="img/01_Scripting_practice2.png" width="80%" height="80%"></center>  
 
 ---
 
@@ -566,7 +568,10 @@ class: inverse, center, middle
 * The screenshot below shows code in the scripting window (top left window)
 * The executed highlighted code and its output appear in the console window (bottom left window)
 
-![](img/01_Scripting_practice3.png)
+<!-- ![](img/01_Scripting_practice3.png) -->
+
+<center><img src="img/01_Scripting_practice3.png" width="90%" height="90%"></center>  
+
 
 ---
 
