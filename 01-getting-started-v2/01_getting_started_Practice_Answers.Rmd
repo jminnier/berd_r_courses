@@ -200,25 +200,31 @@ mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi)
 
 1. Create data frames for males and females separately.
 
-2. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
 
-3. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
 
-4. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
-
-5. Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
+1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
 
 
 ---
 
-# Practice Answers (1/7)
+# Practice 2 Answers
 
 __#2__ Create data frames for males and females separately.
 
 ```{r}
 boys <- mydata[mydata$sex == "Male", ]
+dim(boys)
 girls <- mydata[mydata$sex == "Female", ]
+dim(girls)
 ```
+
+Check number of boys & girls:
+```{r}
+summary(mydata$sex)
+```
+
 
 ---
 
@@ -279,7 +285,7 @@ mean(boys$bullied_past_12mo, na.rm=TRUE)
 ]
 .pull-right[
 ```{r}
-# THIS DOESN'T WORK, need to use which(girls$bullied_past_12mo) but we didn't teach which()
+# Apply the same method for girls:
 bullied_girls <- 
   girls[girls$bullied_past_12mo == TRUE,]
 nrow(bullied_girls)
@@ -287,35 +293,75 @@ bullied_girls_prct <-
   nrow(bullied_girls) / nrow(girls) * 100
 bullied_girls_prct
 
-# alternative
+# alternative. Answers don't match. Why???
 mean(girls$bullied_past_12mo, na.rm=TRUE)
 ```
+
+
 ]
 
+
 ---
 
+__#5__ cont'd
 
-__#6__ Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
+On the previous slide we saw that our two methods for calculating the percentage of girls that were bullied in the past 12 months did not match. What went wrong?
+
 
 ```{r}
-bullied_yes <- mydata[mydata$bullied_past_12mo == TRUE,]
-bullied_no <- mydata[mydata$bullied_past_12mo == FALSE,]
-
-# Not bullied students have higher proportion of smokers
-summary(bullied_yes$smoked_ever)
-summary(bullied_no$smoked_ever)
+nrow(bullied_girls)
+girls$bullied_past_12mo
 ```
- 
+
+
+To get the number of girls that were bullied we need to make sure the missing values (NA) are not included.
+
 ---
 
-```{r}
-## 6 ctd, Does it vary by gender? Not really
-summary(bullied_yes[bullied_yes$sex == "Male", "smoked_ever"])
-summary(bullied_yes[bullied_yes$sex == "Female", "smoked_ever"])
+__#5__ cont'd - working with NA's
 
-summary(bullied_no[bullied_no$sex == "Male", "smoked_ever"])
-summary(bullied_no[bullied_no$sex == "Female", "smoked_ever"])
+```{r}
+# values of bullied_past_12mo
+girls$bullied_past_12mo
+
+# which are missing (logical)
+is.na(girls$bullied_past_12mo)
+
+# which are NOT missing (logical)
+!is.na(girls$bullied_past_12mo)
 ```
+
+---
+
+__#5__ cont'd - fix girls' code
+
+Exclude the missing values from the `bullied_girls`:
+
+```{r}
+girls2 <- girls[!is.na(girls$bullied_past_12mo),]
+nrow(girls2)
+
+bullied_girls2 <- girls2[girls2$bullied_past_12mo == TRUE,]
+nrow(bullied_girls2)
+
+# from girls dataset, total number bullied
+sum(girls$bullied_past_12mo, na.rm = TRUE)
+```
+
+---
+
+__#5__ cont'd - Calculate percentage girls bullied
+
+```{r}
+bullied_girls_prct2 <- nrow(bullied_girls2) / nrow(girls2) * 100
+bullied_girls_prct2
+
+# Compare to alternative
+mean(girls$bullied_past_12mo, na.rm=TRUE)
+```
+
+
+
 
 
 ```{r, include=FALSE}

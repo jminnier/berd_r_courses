@@ -553,17 +553,16 @@ Math on vectors of values: element-wise computation
 
 # Missing values
 
-Missing values are denoted as `NA` and are handled differently depending on the operation.
-
+Missing values are denoted as `NA` and are handled differently depending on the operation. There are special functions for `NA` (i.e. `is.na()`, `na.omit()`).
 .pull-left[
 
 ```r
 &gt; x &lt;- c(1, 2, NA, 5)
-&gt; x
+&gt; is.na(x)
 ```
 
 ```
-[1]  1  2 NA  5
+[1] FALSE FALSE  TRUE FALSE
 ```
 
 ```r
@@ -1182,19 +1181,6 @@ head(mydata)
 ## 6     70.31                   &lt;NA&gt;          No              TRUE 1.780000
 ```
 
-```r
-head(mydata, 2)
-```
-
-```
-##       id          age    sex grade race4     bmi weight_kg
-## 1 335340 17 years old Female  10th White 27.5671     66.23
-## 2 638618 16 years old Female   9th  &lt;NA&gt; 29.3495     84.82
-##   text_while_driving_30d smoked_ever bullied_past_12mo height_m
-## 1                   &lt;NA&gt;        &lt;NA&gt;                NA 1.550000
-## 2                   &lt;NA&gt;         Yes                NA 1.699999
-```
-
 ---
 
 # View the end of a data set
@@ -1226,6 +1212,39 @@ tail(mydata)
 ## 18             FALSE 1.569998
 ## 19             FALSE 1.599999
 ## 20             FALSE 1.650001
+```
+
+---
+
+# Specify how many rows to view at beginning or end of a data set
+
+
+```r
+head(mydata, 3)
+```
+
+```
+##       id          age    sex grade race4     bmi weight_kg
+## 1 335340 17 years old Female  10th White 27.5671     66.23
+## 2 638618 16 years old Female   9th  &lt;NA&gt; 29.3495     84.82
+## 3 922382 14 years old   Male   9th White 18.1827     57.61
+##   text_while_driving_30d smoked_ever bullied_past_12mo height_m
+## 1                   &lt;NA&gt;        &lt;NA&gt;                NA 1.550000
+## 2                   &lt;NA&gt;         Yes                NA 1.699999
+## 3                   &lt;NA&gt;         Yes             FALSE 1.779999
+```
+
+```r
+tail(mydata, 1)
+```
+
+```
+##         id                   age    sex grade                     race4
+## 20 1316123 18 years old or older Female  12th Black or African American
+##        bmi weight_kg text_while_driving_30d smoked_ever bullied_past_12mo
+## 20 27.4894     74.84            All 30 days         Yes             FALSE
+##    height_m
+## 20 1.650001
 ```
 
 ---
@@ -1280,7 +1299,7 @@ mydata$bmi
 hist(mydata$bmi)
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-46-1.png" style="display: block; margin: auto;" /&gt;
 
 With extra features: 
 
@@ -1289,7 +1308,7 @@ With extra features:
 hist(mydata$bmi, xlab = "BMI", main="BMIs of students")
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-46-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1301,7 +1320,7 @@ hist(mydata$bmi, xlab = "BMI", main="BMIs of students")
 boxplot(mydata$bmi)
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-48-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1316,7 +1335,7 @@ boxplot(mydata$bmi ~ mydata$sex,
   main = "BMIs of students by sex")
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-48-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1329,7 +1348,7 @@ boxplot(mydata$bmi ~ mydata$sex,
 plot(mydata$weight_kg, mydata$bmi)
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1340,14 +1359,14 @@ plot(mydata$weight_kg, mydata$bmi,
    main = "BMI vs. Weight")
 ```
 
-&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_getting_started_slides_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
 # Summary stats of numeric data (1/2)
 
-## Standard R `summary` command
+* Standard R `summary` command
 
 
 ```r
@@ -1359,7 +1378,7 @@ summary(mydata$bmi)
 ##   17.48   20.36   22.23   23.01   26.58   29.35
 ```
 
-## Mean and standard deviation
+* Mean and standard deviation
 
 
 ```r
@@ -1382,7 +1401,7 @@ sd(mydata$bmi)
 
 # Summary stats of numeric data (2/2)
 &lt;!-- QQ: Why is (2/2) being cut off? It's not cut off for (1/2).--&gt;
-## Min, max, &amp; median
+* Min, max, &amp; median
 
 .pull-left[
 
@@ -1414,7 +1433,7 @@ median(mydata$bmi)
 ```
 ]
 
-## Quantiles
+* Quantiles
 
 
 ```r
@@ -1425,8 +1444,8 @@ quantile(mydata$bmi, prob=c(0, .25, .5, .75, 1))
 ##       0%      25%      50%      75%     100% 
 ## 17.48140 20.35878 22.22985 26.57810 29.34950
 ```
-
 ---
+
 
 # Add height column to data frame
 
@@ -1436,7 +1455,7 @@ Since `\(\textrm{BMI} = \frac{kg}{m^2}\)`, we have
 &lt;!-- * UPDATE: need correct units! --&gt;
 
 ```r
-mydata$height_m &lt;- sqrt( mydata$weight_kg / mydata$bmi)
+mydata$height_m &lt;- sqrt( mydata$weight_kg / mydata$bmi )
 mydata$height_m
 ```
 
@@ -1446,12 +1465,21 @@ mydata$height_m
 ## [15] 1.600001 1.600000 1.750001 1.569998 1.599999 1.650001
 ```
 
+.pull-left-40[
+
 ```r
-dim(mydata); names(mydata)
+dim(mydata)
 ```
 
 ```
 ## [1] 20 11
+```
+]
+
+.pull-right-60[
+
+```r
+names(mydata)
 ```
 
 ```
@@ -1462,7 +1490,7 @@ dim(mydata); names(mydata)
 ##  [9] "smoked_ever"            "bullied_past_12mo"     
 ## [11] "height_m"
 ```
-
+]
 
 ---
 
@@ -1548,7 +1576,7 @@ mydata[, c("age", "bmi")]
 * Rows for 14 year olds only
 
 ```r
-mydata[mydata$age == "14 years old",]
+mydata[mydata$age == "14 years old",] # 1 row since there is only one 14 year old
 ```
 
 ```
@@ -1558,7 +1586,7 @@ mydata[mydata$age == "14 years old",]
 ## 3                   &lt;NA&gt;         Yes             FALSE 1.779999
 ```
 
-In this case the output is only one row since there is only one 14 year old.
+&lt;!-- In this case the output is only one row since there is only one 14 year old. --&gt;
 
 * Rows for teens with BMI less than 19
 
@@ -1620,10 +1648,8 @@ mydata[mydata$bmi &lt; 19, c("age", "sex", "bmi")]
 
 1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
 
-&lt;!-- TO DO: FIX THIS, NAs are including and changing means. See solution file --&gt;
 1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
 
-1. Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
 
 
 ---
@@ -1633,7 +1659,7 @@ mydata[mydata$bmi &lt; 19, c("age", "sex", "bmi")]
 * Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
 
 ```r
-save(mydata, file = "data/mydata.RData")
+save(mydata, file = "data/mydata.RData")  # saving mydata within the data folder
 ```
 
 You can load .RData files using the load() command:

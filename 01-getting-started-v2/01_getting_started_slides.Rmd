@@ -418,12 +418,11 @@ greetings
 
 # Missing values
 
-Missing values are denoted as `NA` and are handled differently depending on the operation.
-
+Missing values are denoted as `NA` and are handled differently depending on the operation. There are special functions for `NA` (i.e. `is.na()`, `na.omit()`).
 .pull-left[
 ```{r prompt = TRUE, comment = NA}
 x <- c(1, 2, NA, 5)
-x
+is.na(x)
 mean(x)
 mean(x, na.rm=TRUE)
 ```
@@ -838,7 +837,6 @@ str(mydata)   # structure of data
 
 ```{r}
 head(mydata)
-head(mydata, 2)
 ```
 
 ---
@@ -847,6 +845,15 @@ head(mydata, 2)
 
 ```{r}
 tail(mydata)
+```
+
+---
+
+# Specify how many rows to view at beginning or end of a data set
+
+```{r}
+head(mydata, 3)
+tail(mydata, 1)
 ```
 
 ---
@@ -936,13 +943,13 @@ plot(mydata$weight_kg, mydata$bmi,
 
 # Summary stats of numeric data (1/2)
 
-## Standard R `summary` command
+* Standard R `summary` command
 
 ```{r}
 summary(mydata$bmi)
 ```
 
-## Mean and standard deviation
+* Mean and standard deviation
 
 ```{r}
 mean(mydata$bmi)
@@ -953,7 +960,7 @@ sd(mydata$bmi)
 
 # Summary stats of numeric data (2/2)
 <!-- QQ: Why is (2/2) being cut off? It's not cut off for (1/2).-->
-## Min, max, & median
+* Min, max, & median
 
 .pull-left[
 ```{r}
@@ -969,13 +976,13 @@ median(mydata$bmi)
 ```
 ]
 
-## Quantiles
+* Quantiles
 
 ```{r}
 quantile(mydata$bmi, prob=c(0, .25, .5, .75, 1))  
 ```
-
 ---
+
 
 # Add height column to data frame
 
@@ -984,11 +991,21 @@ $\textrm{height}(m) = \sqrt{\frac{\textrm{weight}(kg)}{\textrm{BMI}}}$
 
 <!-- * UPDATE: need correct units! -->
 ```{r}
-mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi)
+mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi )
 mydata$height_m
-dim(mydata); names(mydata)
 ```
 
+.pull-left-40[
+```{r}
+dim(mydata)
+```
+]
+
+.pull-right-60[
+```{r}
+names(mydata)
+```
+]
 
 ---
 
@@ -1023,10 +1040,10 @@ mydata[, c("age", "bmi")]
 
 * Rows for 14 year olds only
 ```{r}
-mydata[mydata$age == "14 years old",]
+mydata[mydata$age == "14 years old",] # 1 row since there is only one 14 year old
 ```
 
-In this case the output is only one row since there is only one 14 year old.
+<!-- In this case the output is only one row since there is only one 14 year old. -->
 
 * Rows for teens with BMI less than 19
 ```{r}
@@ -1062,10 +1079,8 @@ mydata[mydata$bmi < 19, c("age", "sex", "bmi")]
 
 1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
 
-<!-- TO DO: FIX THIS, NAs are including and changing means. See solution file -->
 1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
 
-1. Are students that were bullied in the past year more likely to have smoked in the past? Does this vary by gender?
 
 
 ---
@@ -1074,7 +1089,7 @@ mydata[mydata$bmi < 19, c("age", "sex", "bmi")]
 
 * Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
 ```{r, eval=FALSE}
-save(mydata, file = "data/mydata.RData")
+save(mydata, file = "data/mydata.RData")  # saving mydata within the data folder
 ```
 
 You can load .RData files using the load() command:
