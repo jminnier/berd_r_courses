@@ -320,5 +320,7 @@ summary(bullied_no[bullied_no$sex == "Female", "smoked_ever"])
 
 ```{r, include=FALSE}
 #knitr::purl("01-getting-started-v2/01_getting_started_Practice_Answers.Rmd")
+pagedown::chrome_print(here::here("01-getting-started-v2","01_getting_started_Practice_Answers.html"))
+
 ```
 
