@@ -15,7 +15,7 @@ class: left, middle, inverse, title-slide
 
 # Reproducible Reports with R Markdown
 ### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
-### <span style="font-size: 80%;">2019/07/18 <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_rmd">bit.ly/berd_rmd</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_rmd_pdf">bit.ly/berd_rmd_pdf</a></span>
+### <span style="font-size: 80%;">2019/07/18 &amp; 2019/09/25 <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_rmd">bit.ly/berd_rmd</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_rmd_pdf">bit.ly/berd_rmd_pdf</a></span>
 
 ---
 
@@ -40,9 +40,9 @@ layout: true
 - Open slides [bit.ly/berd_rmd](http://bit.ly/berd_rmd)
 - Get project folder
     + Download zip folder at [bit.ly/berd_rmd_zip](http://bit.ly/berd_rmd_zip)
-        + UNZIP completely
+        + UNZIP completely (right click-&gt; "extract all")
         + Open unzipped folder
-        + Open `berd_rmarkdown_project.Rproj`
+        + Open (double click) `berd_rmarkdown_project.Rproj`
         + Inside RStudio, click on file `00-install.R` and click "Run"
     + *Or* open RStudio Cloud project (need to make an account) at [bit.ly/berd_rmd_rc](http://bit.ly/berd_rmd_rc)
         + click "Save a permanent copy"
@@ -1603,7 +1603,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {
