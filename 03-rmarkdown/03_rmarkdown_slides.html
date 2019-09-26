@@ -1161,7 +1161,7 @@ here::here()
 ```
 
 ```
-[1] "/Users/niederha/Google Drive/BERD R Classes/berd_r_courses_github"
+[1] "/Users/minnier/Google Drive/BERD R Classes/berd_r_courses_github"
 ```
 
 ---
@@ -1177,7 +1177,7 @@ here::here("data","mydatafile.csv")
 ```
 
 ```
-[1] "/Users/niederha/Google Drive/BERD R Classes/berd_r_courses_github/data/mydatafile.csv"
+[1] "/Users/minnier/Google Drive/BERD R Classes/berd_r_courses_github/data/mydatafile.csv"
 ```
 
 
@@ -1186,7 +1186,7 @@ here::here("data","raw-data","mydatafile.csv")
 ```
 
 ```
-[1] "/Users/niederha/Google Drive/BERD R Classes/berd_r_courses_github/data/raw-data/mydatafile.csv"
+[1] "/Users/minnier/Google Drive/BERD R Classes/berd_r_courses_github/data/raw-data/mydatafile.csv"
 ```
 
 We will explore how and when to use this in the exercises.
@@ -1600,7 +1600,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {
