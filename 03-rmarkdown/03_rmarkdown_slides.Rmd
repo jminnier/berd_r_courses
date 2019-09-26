@@ -421,7 +421,7 @@ Output:
 # RStudio tip
 
 
-You can easily navigating through your .Rmd file if you use headers to outline your text
+You can easily naviage through your .Rmd file if you use headers to outline your text
 
 <center><img src="img/screenshot_RStudio_headers.png" width="50%" height="100%"></center>
 
@@ -881,7 +881,7 @@ See [Hao Zhu's webpage](https://haozhu233.github.io/kableExtra/awesome_table_in_
 ---
 
 # Practice! (part 1)
-Create a .Rmd file with file name `example2.Rmd` that creates the html output `example2/example2.html` below.
+Edit the file `example2/example2.Rmd` to create html output that matches `example2/example2_output.html` shown below.
 
 .pull-left[
 <img src="img/screenshot_example2_part1.png" width="100%" height="100%">
@@ -897,7 +897,7 @@ Create a .Rmd file with file name `example2.Rmd` that creates the html output `e
 
 # Practice! (part 2)
 
-Create the table output shown below and at the end of `example2/example2.html` (code [link](https://haozhu233.github.io/kableExtra/awesome_table_in_html.html))
+Create the table output shown below and at the end of `example2/example2_output.html` (code [link](https://haozhu233.github.io/kableExtra/awesome_table_in_html.html))
 
 <img src="img/screenshot_example2_part3.png" width="100%" height="100%">
 
@@ -1056,6 +1056,15 @@ Producing pdf documents requires that [LaTeX](https://www.latex-project.org/get/
 ]
 
 ---
+
+# Practice!
+
+Change the YAML of `example2/example2.Rmd` to 
+
+1. Add your name as author
+1. Produce a Word document or a pdf document
+
+---
 class: center, middle, inverse
 
 # Extensions and Tips
@@ -1066,19 +1075,15 @@ class: center, middle, inverse
 
 Instead of clicking "Knit" every time to see your updated document output, try this:
 
-After installing the `xaringan` package:
+After installing the `xaringan` package,
 
-```{r, eval=FALSE}
-install.packages("xaringan")
-```
-
-`.Rmd` files can be run and rendered "live" as you type when you either run
+`.Rmd` files can be run and rendered "live" as you type/save when you either run
 
 ```{r, eval=FALSE}
 xaringan::inf_mr()
 ```
 
-in the console when your `.Rmd` file is open. Or, click on on Adddins (top of screen), scroll down to "Xaringan" and click on "Infinite Moon Reader"
+in the console when your `.Rmd` file is open. *Or,* click on on Adddins (top of screen), scroll down to "Xaringan" and click on "Infinite Moon Reader"
 
 This is a new feature, so you need the most recent version of `xaringan` and RStudio. It works well for `html_document` output.
 
@@ -1113,7 +1118,7 @@ workflow](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
 
 # Project directory structure
 
-- The .Rproj file sets your working directory (**USE [PROJECTS](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)**)
+- The .Rproj file sets your working/home directory (**USE [PROJECTS](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)**)
 
 ```{r, eval=FALSE}
 # Use a relative path, "relative to" the project folder
@@ -1175,15 +1180,6 @@ mydata <- read_csv("../data/report3_nhanes_data.csv")
 
 ---
 
-# Exercises:
-
-Within your project folder, open these files and follow the instructions:
-
-- `report2.Rmd`
-- `report3/report3.Rmd`
-
----
-
 # Find the `..` confusing? Use `here::here()`!
 
 <center><img src="img/horst_here.png" width="50%" height="50%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
@@ -1222,11 +1218,17 @@ We will explore how and when to use this in the exercises.
 
 ---
 
-# Exercises:
+# Practice!
 
 Within your project folder, open this file and follow the instructions:
 
-- `report3-here/report3_here.Rmd`
+- `example4/example4.Rmd`
+
+---
+
+class: center, middle, inverse
+
+# More Extensions and Tips
 
 ---
 
@@ -1282,12 +1284,6 @@ kable(summarytable)
 
 ---
 
-class: center, middle, inverse
-
-# More Extensions and Tips
-
----
-
 # Make presentation slides
 
 - These slides were made using a `.Rmd` file with the `xaringan` package!
@@ -1308,9 +1304,9 @@ class: center, middle, inverse
 
 ---
 
-# Presentations Exercise
+# Presentations Practice!
 
-Open `report2_pres.Rmd` and follow instructions.
+Open `example4/example4_pres.Rmd` and follow instructions.
 
 Bonus: Try using `xaringan::inf_mr()` to update the output in real time.
 
