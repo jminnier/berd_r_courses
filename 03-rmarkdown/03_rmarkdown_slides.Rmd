@@ -419,7 +419,7 @@ Output:
 # RStudio tip
 
 
-You can easily naviage through your .Rmd file if you use headers to outline your text
+You can easily navigate through your .Rmd file if you use headers to outline your text
 
 <center><img src="img/screenshot_RStudio_headers.png" width="50%" height="100%"></center>
 
@@ -578,7 +578,7 @@ Output:
 
 # Spell check
 
-Alas, there is no autmotic sepll chekc to catch you're tipos and grammar.
+Alas, there are no autmatik sepll chekc to katch you're tipos and grammR.
 
 * You can manually do a spell check by clicking on the <img src="img/icon_spellcheck.png"> icon above the editor window. 
 * There is no built-in grammar check in RStudio.
@@ -771,8 +771,8 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width,
 
 # Tables - with no formatting
 
-* Below a summary table with the mean and SD of sepal lengths is created as a tibble
-* Then the table is displayed with no special formatting
+* Below we create a summary table with the mean and SD of sepal lengths
+* The table is displayed with no special formatting
 
 ```{r}
 table_sepal_length <- iris %>% 
@@ -879,15 +879,16 @@ See [Hao Zhu's webpage](https://haozhu233.github.io/kableExtra/awesome_table_in_
 ---
 
 # Practice! (part 1)
-Edit the file `example2/example2.Rmd` to create html output that matches `example2/example2_output.html` shown below.
 
 .pull-left[
-<img src="img/screenshot_example2_part1.png" width="100%" height="100%">
+Edit the file `example2/example2.Rmd` to create html output that matches `example2/example2_output.html` shown below.
+
+<img src="img/screenshot_example2_part1.png" width="85%" height="100%">
 ]
 
 .pull-right[
 
-<img src="img/screenshot_example2_part2.png" width="70%" height="100%">
+<img src="img/screenshot_example2_part2.png" width="75%" height="100%">
 ]
 
 
@@ -944,13 +945,13 @@ Output:
 
 
 .pull-left-40[
-Text in editor:
+Text in editor: (`example3a.Rmd`)
 <img src="img/screenshot_YAML_TOC_code.png" width="100%" height="100%">
 Try out `collapsed: yes` and `smooth_scroll: no`
 ]
 
 .pull-right-60[
-Output:
+Output:  (`example3a.html`)
 <img src="img/screenshot_YAML_TOC_out.png" width="100%" height="100%">
 ]
 
@@ -965,12 +966,12 @@ Output:
 
 
 .pull-left-40[
-Text in editor:
+Text in editor: (`example3b.Rmd`)
 <img src="img/screenshot_YAML_theme_code.png" width="100%" height="100%">
 ]
 
 .pull-right-60[
-Output:
+Output: (`example3b.html`)
 <img src="img/screenshot_YAML_theme_out.png" width="100%" height="100%">
 ]
 
@@ -995,12 +996,12 @@ Output:
 * Not many YAML options
 * Cannot include html code or html-specific commands  
 
-Text in editor:
+Text in editor: (`Word_example3.Rmd`)
 <img src="img/screenshot_YAML_Word_code.png" width="100%" height="100%">
 ]
 
 .pull-right-60[
-Output: 
+Output: (`Word_example3.docx`)
 <img src="img/screenshot_YAML_Word_out.png" width="90%" height="100%">
 ]
 
@@ -1024,16 +1025,17 @@ Output:
 * Create a Word doc with preferred formatting
   * font types and sizes, margins, header colors, etc.
 
-YAML with code to include style file:
+YAML with code to include style file: 
 <img src="img/screenshot_YAML_Word_style_code.png" width="100%" height="100%">
 ]
 
 .pull-right-60[
-Sample style file:
+Sample style file: (`word-styles-reference.docx`)
 <center><img src="img/screenshot_word_template.png" width="100%" height="100%"></center>
 ]
 
-The Word doc created by RStudio will have the same formatting as the specified style file.
+The Word doc created by RStudio will have the same formatting as the specified style file.  
+
 
 ---
 
@@ -1041,16 +1043,18 @@ The Word doc created by RStudio will have the same formatting as the specified s
 
 Producing pdf documents requires that [LaTeX](https://www.latex-project.org/get/) be installed on your computer
 
-.pull-left-40[
+.pull-left[
 * Few YAML options
 * Lots of table options, including kableExtra
 * Can use LaTeX code for formatting
 
-<img src="img/screenshot_YAML_pdf_code.png" width="100%" height="100%">
+<img src="img/screenshot_YAML_pdf_code.png" width="75%" height="75%">
+
+See `pdf_example3.Rmd` for code and `pdf_example3.pdf` for output.
 ]
 
-.pull-right-60[
-<center><img src="img/screenshot_YAML_pdf_out.png" width="50%" height="100%"></center>
+.pull-right[
+<center><img src="img/screenshot_YAML_pdf_out.png" width="60%" height="100%"></center>
 ]
 
 ---

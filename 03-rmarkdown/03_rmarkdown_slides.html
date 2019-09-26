@@ -376,7 +376,7 @@ Output:
 # RStudio tip
 
 
-You can easily naviage through your .Rmd file if you use headers to outline your text
+You can easily navigate through your .Rmd file if you use headers to outline your text
 
 &lt;center&gt;&lt;img src="img/screenshot_RStudio_headers.png" width="50%" height="100%"&gt;&lt;/center&gt;
 
@@ -535,7 +535,7 @@ Output:
 
 # Spell check
 
-Alas, there is no autmotic sepll chekc to catch you're tipos and grammar.
+Alas, there are no autmatik sepll chekc to katch you're tipos and grammR.
 
 * You can manually do a spell check by clicking on the &lt;img src="img/icon_spellcheck.png"&gt; icon above the editor window. 
 * There is no built-in grammar check in RStudio.
@@ -743,8 +743,8 @@ Output:
 
 # Tables - with no formatting
 
-* Below a summary table with the mean and SD of sepal lengths is created as a tibble
-* Then the table is displayed with no special formatting
+* Below we create a summary table with the mean and SD of sepal lengths
+* The table is displayed with no special formatting
 
 
 ```r
@@ -834,15 +834,16 @@ See [Hao Zhu's webpage](https://haozhu233.github.io/kableExtra/awesome_table_in_
 ---
 
 # Practice! (part 1)
-Edit the file `example2/example2.Rmd` to create html output that matches `example2/example2_output.html` shown below.
 
 .pull-left[
-&lt;img src="img/screenshot_example2_part1.png" width="100%" height="100%"&gt;
+Edit the file `example2/example2.Rmd` to create html output that matches `example2/example2_output.html` shown below.
+
+&lt;img src="img/screenshot_example2_part1.png" width="85%" height="100%"&gt;
 ]
 
 .pull-right[
 
-&lt;img src="img/screenshot_example2_part2.png" width="70%" height="100%"&gt;
+&lt;img src="img/screenshot_example2_part2.png" width="75%" height="100%"&gt;
 ]
 
 
@@ -899,13 +900,13 @@ Output:
 
 
 .pull-left-40[
-Text in editor:
+Text in editor: (`example3a.Rmd`)
 &lt;img src="img/screenshot_YAML_TOC_code.png" width="100%" height="100%"&gt;
 Try out `collapsed: yes` and `smooth_scroll: no`
 ]
 
 .pull-right-60[
-Output:
+Output:  (`example3a.html`)
 &lt;img src="img/screenshot_YAML_TOC_out.png" width="100%" height="100%"&gt;
 ]
 
@@ -920,12 +921,12 @@ Output:
 
 
 .pull-left-40[
-Text in editor:
+Text in editor: (`example3b.Rmd`)
 &lt;img src="img/screenshot_YAML_theme_code.png" width="100%" height="100%"&gt;
 ]
 
 .pull-right-60[
-Output:
+Output: (`example3b.html`)
 &lt;img src="img/screenshot_YAML_theme_out.png" width="100%" height="100%"&gt;
 ]
 
@@ -950,12 +951,12 @@ Output:
 * Not many YAML options
 * Cannot include html code or html-specific commands  
 
-Text in editor:
+Text in editor: (`Word_example3.Rmd`)
 &lt;img src="img/screenshot_YAML_Word_code.png" width="100%" height="100%"&gt;
 ]
 
 .pull-right-60[
-Output: 
+Output: (`Word_example3.docx`)
 &lt;img src="img/screenshot_YAML_Word_out.png" width="90%" height="100%"&gt;
 ]
 
@@ -979,16 +980,17 @@ Output:
 * Create a Word doc with preferred formatting
   * font types and sizes, margins, header colors, etc.
 
-YAML with code to include style file:
+YAML with code to include style file: 
 &lt;img src="img/screenshot_YAML_Word_style_code.png" width="100%" height="100%"&gt;
 ]
 
 .pull-right-60[
-Sample style file:
+Sample style file: (`word-styles-reference.docx`)
 &lt;center&gt;&lt;img src="img/screenshot_word_template.png" width="100%" height="100%"&gt;&lt;/center&gt;
 ]
 
-The Word doc created by RStudio will have the same formatting as the specified style file.
+The Word doc created by RStudio will have the same formatting as the specified style file.  
+
 
 ---
 
@@ -996,16 +998,18 @@ The Word doc created by RStudio will have the same formatting as the specified s
 
 Producing pdf documents requires that [LaTeX](https://www.latex-project.org/get/) be installed on your computer
 
-.pull-left-40[
+.pull-left[
 * Few YAML options
 * Lots of table options, including kableExtra
 * Can use LaTeX code for formatting
 
-&lt;img src="img/screenshot_YAML_pdf_code.png" width="100%" height="100%"&gt;
+&lt;img src="img/screenshot_YAML_pdf_code.png" width="75%" height="75%"&gt;
+
+See `pdf_example3.Rmd` for code and `pdf_example3.pdf` for output.
 ]
 
-.pull-right-60[
-&lt;center&gt;&lt;img src="img/screenshot_YAML_pdf_out.png" width="50%" height="100%"&gt;&lt;/center&gt;
+.pull-right[
+&lt;center&gt;&lt;img src="img/screenshot_YAML_pdf_out.png" width="60%" height="100%"&gt;&lt;/center&gt;
 ]
 
 ---
@@ -1157,7 +1161,7 @@ here::here()
 ```
 
 ```
-[1] "/Users/minnier/Google Drive/BERD R Classes/berd_r_courses_github"
+[1] "/Users/niederha/Google Drive/BERD R Classes/berd_r_courses_github"
 ```
 
 ---
@@ -1173,7 +1177,7 @@ here::here("data","mydatafile.csv")
 ```
 
 ```
-[1] "/Users/minnier/Google Drive/BERD R Classes/berd_r_courses_github/data/mydatafile.csv"
+[1] "/Users/niederha/Google Drive/BERD R Classes/berd_r_courses_github/data/mydatafile.csv"
 ```
 
 
@@ -1182,7 +1186,7 @@ here::here("data","raw-data","mydatafile.csv")
 ```
 
 ```
-[1] "/Users/minnier/Google Drive/BERD R Classes/berd_r_courses_github/data/raw-data/mydatafile.csv"
+[1] "/Users/niederha/Google Drive/BERD R Classes/berd_r_courses_github/data/raw-data/mydatafile.csv"
 ```
 
 We will explore how and when to use this in the exercises.
@@ -1596,24 +1600,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+})();</script>
 
 <script>
 (function() {
