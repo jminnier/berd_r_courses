@@ -81,7 +81,7 @@ mono_light(
 - Windows: 
     - Download from https://cran.rstudio.com/bin/windows/base/
 - Mac OS X: 
-    - Download the latest .pkg file (currently R-3.6.1.pkg) from https://cran.rstudio.com/bin/macosx/
+    - Download the latest .pkg file (currently R-3.6.2.pkg) from https://cran.rstudio.com/bin/macosx/
 
 <!-- UPDATE current R package in future talks -->
 
@@ -146,7 +146,7 @@ For the history and details: [Wikipedia](https://bit.ly/1efFmaY)
 
 - an interpreted language (run it through a command line)
 - procedural programming with functions
-- Why "R"?? Scheme (?) inspired S (invented at Bell Labs in 1976) which inspired R (**free and open source!** in 1993)
+- Why "R"?? Scheme (?) inspired S (invented at Bell Labs in 1976) which inspired R (**free and open source!** in 1992)
 
 
 
@@ -160,7 +160,7 @@ R is a programming language]
 RStudio is an integrated development environment (IDE) = an interface to use R (with perks!)
 ]
 
-<center><img src="img/01_md_rstudio.png" width="78%" height="78%"><a href="https://moderndive.com/2-getting-started.html"><br>Modern Dive</a></center>
+<center><img src="img/01_md_rstudio.png" width="78%" height="78%"><a href="https://moderndive.com/1-getting-started.html#r-rstudio"><br>Modern Dive</a></center>
 
 ---
 
@@ -169,7 +169,7 @@ RStudio is an integrated development environment (IDE) = an interface to use R (
 ## Double click on the `berd_intro_project.Rproj` file.
 
 
-<center><img src="img/01_md_r.png" width="78%" height="78%"><a href="https://moderndive.com/2-getting-started.html"><br>Modern Dive</a></center>
+<center><img src="img/01_md_r.png" width="78%" height="78%"><a href="https://moderndive.com/1-getting-started.html#using-r-via-rstudio"><br>Modern Dive</a></center>
 ---
 
 <center><img src="img/RStudio_Anatomy.svg" width="100%" height="100%"><a href="http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html#what_are_r_and_rstudio"><br>Emma Rand</a></center>
@@ -390,7 +390,7 @@ y
 --
 
 .pull-right[
-Math on vectors of values: element-wise computation
+Math on vectors of values: __element-wise__ computation
 ```{r prompt = TRUE, comment = NA}
 a <- 3:6
 a
@@ -639,9 +639,9 @@ class: center, inverse, middle
 
 1. What does the command `length(a1)` do?
 
-1. Use the commands to calculate the average of the values in `a1`.
+1. Use the `sum` and `length` commands to calculate the average of the values in `a1`.
 
-1. The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
+1. Compute the sum of all integers from 1 to 100. Then compare your answer to the one you get using the formula for sum of the first $n$ integers: $n(n+1)/2$.  
 
 1. Compute the sum of the squares of all integers from 1 to 100.
 
