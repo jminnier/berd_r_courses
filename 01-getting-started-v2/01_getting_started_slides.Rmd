@@ -1,7 +1,7 @@
 ---
 title: Getting Started with R and RStudio
 author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
-date: "<span style = 'font-size: 80%;'>2019/09/24  <br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_intro_r](http://bit.ly/berd_intro_r) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_intro_r_pdf](http://bit.ly/berd_intro_r_pdf)</span>"
+date: "<span style = 'font-size: 80%;'>2019/09/24 & 2020/02/19  <br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_intro_r](http://bit.ly/berd_intro_r) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_intro_r_pdf](http://bit.ly/berd_intro_r_pdf)</span>"
 output: 
   xaringan::moon_reader:
     css: [css/xaringan-themer.css, css/my-theme.css]
@@ -181,17 +181,17 @@ RStudio is an integrated development environment (IDE) = an interface to use R (
 
 ---
 
-# More about R Projects - Good Practices
+# R Projects (why .Rproj file?) & Good Practices
 
-__Use projects__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+__Use projects to keep everything together__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
 - Create an RStudio project for each data analysis project, for each homework assignment, etc.
 - A project is associated with a directory folder
     + Keep data files there
     + Keep scripts there; edit them, run them in bits or as a whole
     + Save your outputs (plots and cleaned data) there
 - Only use relative paths, never absolute paths
-    + relative (good): `read_csv("data/mydata.csv")`
-    + absolute (bad): `read_csv("/home/yourname/Documents/stuff/mydata.csv")`
+    + relative (good): `read.csv("data/mydata.csv")`
+    + absolute (bad): `read.csv("/home/yourname/Documents/stuff/mydata.csv")`
     
 __Advantages of using projects__
 - standardizes file paths
@@ -549,7 +549,7 @@ class: inverse, center, middle
 
 * __Select code__ you want to execute, by 
     - placing the cursor in the line of code you want to execute, 
-    - *or* highlighting the code you want to execute
+    - __*or*__ highlighting the code you want to execute
 
 
 
@@ -1203,9 +1203,15 @@ Some of this is drawn from materials in online books/lessons:
 
 # Local resources
 
+.pull-left[
 - OHSU's [BioData club](https://biodata-club.github.io/) + active slack channel
 - Portland's [R user meetup group](https://www.meetup.com/portland-r-user-group/) + active slack channel
 - [R-ladies PDX](https://www.meetup.com/R-Ladies-PDX/) meetup group
+- [Cascadia R Conf - May 31, 2020 in Eugene with workshops](https://cascadiarconf.org/)
+]
+.pull-right[
+<center><img src="img/horst_welcome_to_rstats_twitter.png" width="100%" height="100%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
+]
 
 ---
 

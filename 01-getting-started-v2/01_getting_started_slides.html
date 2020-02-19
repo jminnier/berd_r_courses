@@ -15,7 +15,7 @@ class: left, middle, inverse, title-slide
 
 # Getting Started with R and RStudio
 ### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
-### <span style="font-size: 80%;">2019/09/24 <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_intro_r">bit.ly/berd_intro_r</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_intro_r_pdf">bit.ly/berd_intro_r_pdf</a></span>
+### <span style="font-size: 80%;">2019/09/24 &amp; 2020/02/19 <br><br><br> <i class="fas  fa-link "></i> slides: <a href="http://bit.ly/berd_intro_r">bit.ly/berd_intro_r</a> <br> <i class="fas  fa-file-pdf "></i> pdf: <a href="http://bit.ly/berd_intro_r_pdf">bit.ly/berd_intro_r_pdf</a></span>
 
 ---
 
@@ -138,17 +138,17 @@ RStudio is an integrated development environment (IDE) = an interface to use R (
 
 ---
 
-# More about R Projects - Good Practices
+# R Projects (why .Rproj file?) &amp; Good Practices
 
-__Use projects__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+__Use projects to keep everything together__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
 - Create an RStudio project for each data analysis project, for each homework assignment, etc.
 - A project is associated with a directory folder
     + Keep data files there
     + Keep scripts there; edit them, run them in bits or as a whole
     + Save your outputs (plots and cleaned data) there
 - Only use relative paths, never absolute paths
-    + relative (good): `read_csv("data/mydata.csv")`
-    + absolute (bad): `read_csv("/home/yourname/Documents/stuff/mydata.csv")`
+    + relative (good): `read.csv("data/mydata.csv")`
+    + absolute (bad): `read.csv("/home/yourname/Documents/stuff/mydata.csv")`
     
 __Advantages of using projects__
 - standardizes file paths
@@ -753,7 +753,7 @@ class: inverse, center, middle
 
 * __Select code__ you want to execute, by 
     - placing the cursor in the line of code you want to execute, 
-    - *or* highlighting the code you want to execute
+    - __*or*__ highlighting the code you want to execute
 
 
 
@@ -1069,14 +1069,7 @@ summary(mydata)
 ##  3 to 5 days                     : 1         NA's: 4     TRUE :7          
 ##  All 30 days                     : 1                     NA's :2          
 ##  I did not drive the past 30 days: 1                                      
-##  NA's                            :10                                      
-##     height_m    
-##  Min.   :1.470  
-##  1st Qu.:1.600  
-##  Median :1.665  
-##  Mean   :1.669  
-##  3rd Qu.:1.758  
-##  Max.   :1.880
+##  NA's                            :10
 ```
 
 ---
@@ -1090,7 +1083,7 @@ dim(mydata)
 ```
 
 ```
-## [1] 20 11
+## [1] 20 10
 ```
 
 ```r
@@ -1106,7 +1099,7 @@ ncol(mydata)
 ```
 
 ```
-## [1] 11
+## [1] 10
 ```
 ]
 
@@ -1117,12 +1110,10 @@ names(mydata)
 ```
 
 ```
-##  [1] "id"                     "age"                   
-##  [3] "sex"                    "grade"                 
-##  [5] "race4"                  "bmi"                   
-##  [7] "weight_kg"              "text_while_driving_30d"
-##  [9] "smoked_ever"            "bullied_past_12mo"     
-## [11] "height_m"
+##  [1] "id"                     "age"                    "sex"                   
+##  [4] "grade"                  "race4"                  "bmi"                   
+##  [7] "weight_kg"              "text_while_driving_30d" "smoked_ever"           
+## [10] "bullied_past_12mo"
 ```
 ]
 
@@ -1140,7 +1131,7 @@ str(mydata)   # structure of data
 ```
 
 ```
-## 'data.frame':	20 obs. of  11 variables:
+## 'data.frame':	20 obs. of  10 variables:
 ##  $ id                    : int  335340 638618 922382 923122 923963 925603 933724 935435 1096564 1108114 ...
 ##  $ age                   : Factor w/ 5 levels "14 years old",..: 4 3 1 2 2 3 3 4 2 4 ...
 ##  $ sex                   : Factor w/ 2 levels "Female","Male": 1 1 2 2 2 2 1 1 2 1 ...
@@ -1151,7 +1142,6 @@ str(mydata)   # structure of data
 ##  $ text_while_driving_30d: Factor w/ 5 levels "0 days","1 or 2 days",..: NA NA NA NA NA NA NA NA NA NA ...
 ##  $ smoked_ever           : Factor w/ 2 levels "No","Yes": NA 2 2 2 1 1 2 1 NA 1 ...
 ##  $ bullied_past_12mo     : logi  NA NA FALSE FALSE TRUE TRUE ...
-##  $ height_m              : num  1.55 1.7 1.78 1.68 1.8 ...
 ```
 
 
@@ -1165,20 +1155,20 @@ head(mydata)
 ```
 
 ```
-##       id          age    sex grade                     race4     bmi
-## 1 335340 17 years old Female  10th                     White 27.5671
-## 2 638618 16 years old Female   9th                      &lt;NA&gt; 29.3495
-## 3 922382 14 years old   Male   9th                     White 18.1827
-## 4 923122 15 years old   Male   9th                     White 21.3754
-## 5 923963 15 years old   Male  10th Black or African American 19.5988
-## 6 925603 16 years old   Male  10th           All other races 22.1910
-##   weight_kg text_while_driving_30d smoked_ever bullied_past_12mo height_m
-## 1     66.23                   &lt;NA&gt;        &lt;NA&gt;                NA 1.550000
-## 2     84.82                   &lt;NA&gt;         Yes                NA 1.699999
-## 3     57.61                   &lt;NA&gt;         Yes             FALSE 1.779999
-## 4     60.33                   &lt;NA&gt;         Yes             FALSE 1.680001
-## 5     63.50                   &lt;NA&gt;          No              TRUE 1.799998
-## 6     70.31                   &lt;NA&gt;          No              TRUE 1.780000
+##       id          age    sex grade                     race4     bmi weight_kg
+## 1 335340 17 years old Female  10th                     White 27.5671     66.23
+## 2 638618 16 years old Female   9th                      &lt;NA&gt; 29.3495     84.82
+## 3 922382 14 years old   Male   9th                     White 18.1827     57.61
+## 4 923122 15 years old   Male   9th                     White 21.3754     60.33
+## 5 923963 15 years old   Male  10th Black or African American 19.5988     63.50
+## 6 925603 16 years old   Male  10th           All other races 22.1910     70.31
+##   text_while_driving_30d smoked_ever bullied_past_12mo
+## 1                   &lt;NA&gt;        &lt;NA&gt;                NA
+## 2                   &lt;NA&gt;         Yes                NA
+## 3                   &lt;NA&gt;         Yes             FALSE
+## 4                   &lt;NA&gt;         Yes             FALSE
+## 5                   &lt;NA&gt;          No              TRUE
+## 6                   &lt;NA&gt;          No              TRUE
 ```
 
 ---
@@ -1191,27 +1181,20 @@ tail(mydata)
 ```
 
 ```
-##         id                   age    sex grade                     race4
-## 15 1313153          16 years old Female  11th           Hispanic/Latino
-## 16 1313291          16 years old Female  11th                     White
-## 17 1313477          16 years old Female  10th           All other races
-## 18 1315121          17 years old Female  11th                      &lt;NA&gt;
-## 19 1315850          17 years old Female  12th           Hispanic/Latino
-## 20 1316123 18 years old or older Female  12th Black or African American
-##        bmi weight_kg           text_while_driving_30d smoked_ever
-## 15 26.5781     68.04                           0 days          No
-## 16 24.8047     63.50                      3 to 5 days          No
-## 17 25.0318     76.66                           0 days          No
-## 18 22.2687     54.89 I did not drive the past 30 days         Yes
-## 19 19.4922     49.90                           0 days        &lt;NA&gt;
-## 20 27.4894     74.84                      All 30 days         Yes
-##    bullied_past_12mo height_m
-## 15              TRUE 1.600001
-## 16             FALSE 1.600000
-## 17              TRUE 1.750001
-## 18             FALSE 1.569998
-## 19             FALSE 1.599999
-## 20             FALSE 1.650001
+##         id                   age    sex grade                     race4     bmi
+## 15 1313153          16 years old Female  11th           Hispanic/Latino 26.5781
+## 16 1313291          16 years old Female  11th                     White 24.8047
+## 17 1313477          16 years old Female  10th           All other races 25.0318
+## 18 1315121          17 years old Female  11th                      &lt;NA&gt; 22.2687
+## 19 1315850          17 years old Female  12th           Hispanic/Latino 19.4922
+## 20 1316123 18 years old or older Female  12th Black or African American 27.4894
+##    weight_kg           text_while_driving_30d smoked_ever bullied_past_12mo
+## 15     68.04                           0 days          No              TRUE
+## 16     63.50                      3 to 5 days          No             FALSE
+## 17     76.66                           0 days          No              TRUE
+## 18     54.89 I did not drive the past 30 days         Yes             FALSE
+## 19     49.90                           0 days        &lt;NA&gt;             FALSE
+## 20     74.84                      All 30 days         Yes             FALSE
 ```
 
 ---
@@ -1228,10 +1211,10 @@ head(mydata, 3)
 ## 1 335340 17 years old Female  10th White 27.5671     66.23
 ## 2 638618 16 years old Female   9th  &lt;NA&gt; 29.3495     84.82
 ## 3 922382 14 years old   Male   9th White 18.1827     57.61
-##   text_while_driving_30d smoked_ever bullied_past_12mo height_m
-## 1                   &lt;NA&gt;        &lt;NA&gt;                NA 1.550000
-## 2                   &lt;NA&gt;         Yes                NA 1.699999
-## 3                   &lt;NA&gt;         Yes             FALSE 1.779999
+##   text_while_driving_30d smoked_ever bullied_past_12mo
+## 1                   &lt;NA&gt;        &lt;NA&gt;                NA
+## 2                   &lt;NA&gt;         Yes                NA
+## 3                   &lt;NA&gt;         Yes             FALSE
 ```
 
 ```r
@@ -1239,12 +1222,10 @@ tail(mydata, 1)
 ```
 
 ```
-##         id                   age    sex grade                     race4
-## 20 1316123 18 years old or older Female  12th Black or African American
-##        bmi weight_kg text_while_driving_30d smoked_ever bullied_past_12mo
-## 20 27.4894     74.84            All 30 days         Yes             FALSE
-##    height_m
-## 20 1.650001
+##         id                   age    sex grade                     race4     bmi
+## 20 1316123 18 years old or older Female  12th Black or African American 27.4894
+##    weight_kg text_while_driving_30d smoked_ever bullied_past_12mo
+## 20     74.84            All 30 days         Yes             FALSE
 ```
 
 ---
@@ -1268,9 +1249,9 @@ mydata[, 6]
 ```
 
 ```
-##  [1] 27.5671 29.3495 18.1827 21.3754 19.5988 22.1910 20.9913 17.4814
-##  [9] 22.4593 26.5781 21.1874 19.4637 20.6121 27.4648 26.5781 24.8047
-## [17] 25.0318 22.2687 19.4922 27.4894
+##  [1] 27.5671 29.3495 18.1827 21.3754 19.5988 22.1910 20.9913 17.4814 22.4593
+## [10] 26.5781 21.1874 19.4637 20.6121 27.4648 26.5781 24.8047 25.0318 22.2687
+## [19] 19.4922 27.4894
 ```
 
 The problem with this method, is that we need to know the column number which can change as we make changes to the data set. 
@@ -1285,9 +1266,9 @@ mydata$bmi
 ```
 
 ```
-##  [1] 27.5671 29.3495 18.1827 21.3754 19.5988 22.1910 20.9913 17.4814
-##  [9] 22.4593 26.5781 21.1874 19.4637 20.6121 27.4648 26.5781 24.8047
-## [17] 25.0318 22.2687 19.4922 27.4894
+##  [1] 27.5671 29.3495 18.1827 21.3754 19.5988 22.1910 20.9913 17.4814 22.4593
+## [10] 26.5781 21.1874 19.4637 20.6121 27.4648 26.5781 24.8047 25.0318 22.2687
+## [19] 19.4922 27.4894
 ```
 
 ---
@@ -1460,9 +1441,9 @@ mydata$height_m
 ```
 
 ```
-##  [1] 1.550000 1.699999 1.779999 1.680001 1.799998 1.780000 1.469998
-##  [8] 1.570002 1.879998 1.600001 1.779998 1.699999 1.730001 1.600001
-## [15] 1.600001 1.600000 1.750001 1.569998 1.599999 1.650001
+##  [1] 1.550000 1.699999 1.779999 1.680001 1.799998 1.780000 1.469998 1.570002
+##  [9] 1.879998 1.600001 1.779998 1.699999 1.730001 1.600001 1.600001 1.600000
+## [17] 1.750001 1.569998 1.599999 1.650001
 ```
 
 .pull-left-40[
@@ -1483,12 +1464,10 @@ names(mydata)
 ```
 
 ```
-##  [1] "id"                     "age"                   
-##  [3] "sex"                    "grade"                 
-##  [5] "race4"                  "bmi"                   
-##  [7] "weight_kg"              "text_while_driving_30d"
-##  [9] "smoked_ever"            "bullied_past_12mo"     
-## [11] "height_m"
+##  [1] "id"                     "age"                    "sex"                   
+##  [4] "grade"                  "race4"                  "bmi"                   
+##  [7] "weight_kg"              "text_while_driving_30d" "smoked_ever"           
+## [10] "bullied_past_12mo"      "height_m"
 ```
 ]
 
@@ -1580,10 +1559,10 @@ mydata[mydata$age == "14 years old",] # 1 row since there is only one 14 year ol
 ```
 
 ```
-##       id          age  sex grade race4     bmi weight_kg
-## 3 922382 14 years old Male   9th White 18.1827     57.61
-##   text_while_driving_30d smoked_ever bullied_past_12mo height_m
-## 3                   &lt;NA&gt;         Yes             FALSE 1.779999
+##       id          age  sex grade race4     bmi weight_kg text_while_driving_30d
+## 3 922382 14 years old Male   9th White 18.1827     57.61                   &lt;NA&gt;
+##   smoked_ever bullied_past_12mo height_m
+## 3         Yes             FALSE 1.779999
 ```
 
 &lt;!-- In this case the output is only one row since there is only one 14 year old. --&gt;
@@ -1715,69 +1694,69 @@ dplyr::arrange(mydata, bmi)
 ```
 
 ```
-##         id                   age    sex grade                     race4
-## 1   935435          17 years old Female  12th           All other races
-## 2   922382          14 years old   Male   9th                     White
-## 3  1307481          17 years old   Male  12th           Hispanic/Latino
-## 4  1315850          17 years old Female  12th           Hispanic/Latino
-## 5   923963          15 years old   Male  10th Black or African American
-## 6  1307872          17 years old   Male  11th           Hispanic/Latino
-## 7   933724          16 years old Female  10th           All other races
-## 8  1306150          16 years old   Male  10th           Hispanic/Latino
-## 9   923122          15 years old   Male   9th                     White
-## 10  925603          16 years old   Male  10th           All other races
-## 11 1315121          17 years old Female  11th                      &lt;NA&gt;
-## 12 1096564          15 years old   Male  10th           All other races
-## 13 1313291          16 years old Female  11th                     White
-## 14 1313477          16 years old Female  10th           All other races
-## 15 1108114          17 years old Female   9th Black or African American
-## 16 1313153          16 years old Female  11th           Hispanic/Latino
-## 17 1311617          15 years old Female  10th           Hispanic/Latino
-## 18 1316123 18 years old or older Female  12th Black or African American
-## 19  335340          17 years old Female  10th                     White
-## 20  638618          16 years old Female   9th                      &lt;NA&gt;
-##        bmi weight_kg           text_while_driving_30d smoked_ever
-## 1  17.4814     43.09                             &lt;NA&gt;          No
-## 2  18.1827     57.61                             &lt;NA&gt;         Yes
-## 3  19.4637     56.25                      1 or 2 days          No
-## 4  19.4922     49.90                           0 days        &lt;NA&gt;
-## 5  19.5988     63.50                             &lt;NA&gt;          No
-## 6  20.6121     61.69                      1 or 2 days          No
-## 7  20.9913     45.36                             &lt;NA&gt;         Yes
-## 8  21.1874     67.13                           0 days        &lt;NA&gt;
-## 9  21.3754     60.33                             &lt;NA&gt;         Yes
-## 10 22.1910     70.31                             &lt;NA&gt;          No
-## 11 22.2687     54.89 I did not drive the past 30 days         Yes
-## 12 22.4593     79.38                             &lt;NA&gt;        &lt;NA&gt;
-## 13 24.8047     63.50                      3 to 5 days          No
-## 14 25.0318     76.66                           0 days          No
-## 15 26.5781     68.04                             &lt;NA&gt;          No
-## 16 26.5781     68.04                           0 days          No
-## 17 27.4648     70.31                           0 days          No
-## 18 27.4894     74.84                      All 30 days         Yes
-## 19 27.5671     66.23                             &lt;NA&gt;        &lt;NA&gt;
-## 20 29.3495     84.82                             &lt;NA&gt;         Yes
-##    bullied_past_12mo height_m
-## 1              FALSE 1.570002
-## 2              FALSE 1.779999
-## 3              FALSE 1.699999
-## 4              FALSE 1.599999
-## 5               TRUE 1.799998
-## 6              FALSE 1.730001
-## 7               TRUE 1.469998
-## 8              FALSE 1.779998
-## 9              FALSE 1.680001
-## 10              TRUE 1.780000
-## 11             FALSE 1.569998
-## 12              TRUE 1.879998
-## 13             FALSE 1.600000
-## 14              TRUE 1.750001
-## 15             FALSE 1.600001
-## 16              TRUE 1.600001
-## 17              TRUE 1.600001
-## 18             FALSE 1.650001
-## 19                NA 1.550000
-## 20                NA 1.699999
+##         id                   age    sex grade                     race4     bmi
+## 1   935435          17 years old Female  12th           All other races 17.4814
+## 2   922382          14 years old   Male   9th                     White 18.1827
+## 3  1307481          17 years old   Male  12th           Hispanic/Latino 19.4637
+## 4  1315850          17 years old Female  12th           Hispanic/Latino 19.4922
+## 5   923963          15 years old   Male  10th Black or African American 19.5988
+## 6  1307872          17 years old   Male  11th           Hispanic/Latino 20.6121
+## 7   933724          16 years old Female  10th           All other races 20.9913
+## 8  1306150          16 years old   Male  10th           Hispanic/Latino 21.1874
+## 9   923122          15 years old   Male   9th                     White 21.3754
+## 10  925603          16 years old   Male  10th           All other races 22.1910
+## 11 1315121          17 years old Female  11th                      &lt;NA&gt; 22.2687
+## 12 1096564          15 years old   Male  10th           All other races 22.4593
+## 13 1313291          16 years old Female  11th                     White 24.8047
+## 14 1313477          16 years old Female  10th           All other races 25.0318
+## 15 1108114          17 years old Female   9th Black or African American 26.5781
+## 16 1313153          16 years old Female  11th           Hispanic/Latino 26.5781
+## 17 1311617          15 years old Female  10th           Hispanic/Latino 27.4648
+## 18 1316123 18 years old or older Female  12th Black or African American 27.4894
+## 19  335340          17 years old Female  10th                     White 27.5671
+## 20  638618          16 years old Female   9th                      &lt;NA&gt; 29.3495
+##    weight_kg           text_while_driving_30d smoked_ever bullied_past_12mo
+## 1      43.09                             &lt;NA&gt;          No             FALSE
+## 2      57.61                             &lt;NA&gt;         Yes             FALSE
+## 3      56.25                      1 or 2 days          No             FALSE
+## 4      49.90                           0 days        &lt;NA&gt;             FALSE
+## 5      63.50                             &lt;NA&gt;          No              TRUE
+## 6      61.69                      1 or 2 days          No             FALSE
+## 7      45.36                             &lt;NA&gt;         Yes              TRUE
+## 8      67.13                           0 days        &lt;NA&gt;             FALSE
+## 9      60.33                             &lt;NA&gt;         Yes             FALSE
+## 10     70.31                             &lt;NA&gt;          No              TRUE
+## 11     54.89 I did not drive the past 30 days         Yes             FALSE
+## 12     79.38                             &lt;NA&gt;        &lt;NA&gt;              TRUE
+## 13     63.50                      3 to 5 days          No             FALSE
+## 14     76.66                           0 days          No              TRUE
+## 15     68.04                             &lt;NA&gt;          No             FALSE
+## 16     68.04                           0 days          No              TRUE
+## 17     70.31                           0 days          No              TRUE
+## 18     74.84                      All 30 days         Yes             FALSE
+## 19     66.23                             &lt;NA&gt;        &lt;NA&gt;                NA
+## 20     84.82                             &lt;NA&gt;         Yes                NA
+##    height_m
+## 1  1.570002
+## 2  1.779999
+## 3  1.699999
+## 4  1.599999
+## 5  1.799998
+## 6  1.730001
+## 7  1.469998
+## 8  1.779998
+## 9  1.680001
+## 10 1.780000
+## 11 1.569998
+## 12 1.879998
+## 13 1.600000
+## 14 1.750001
+## 15 1.600001
+## 16 1.600001
+## 17 1.600001
+## 18 1.650001
+## 19 1.550000
+## 20 1.699999
 ```
 
 ---
@@ -1846,9 +1825,15 @@ Some of this is drawn from materials in online books/lessons:
 
 # Local resources
 
+.pull-left[
 - OHSU's [BioData club](https://biodata-club.github.io/) + active slack channel
 - Portland's [R user meetup group](https://www.meetup.com/portland-r-user-group/) + active slack channel
 - [R-ladies PDX](https://www.meetup.com/R-Ladies-PDX/) meetup group
+- [Cascadia R Conf - May 31, 2020 in Eugene with workshops](https://cascadiarconf.org/)
+]
+.pull-right[
+&lt;center&gt;&lt;img src="img/horst_welcome_to_rstats_twitter.png" width="100%" height="100%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+]
 
 ---
 
