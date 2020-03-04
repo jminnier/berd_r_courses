@@ -184,6 +184,70 @@ of geometric objects.
 
 <center><img src="img/khealy_ggplot1.png" width="100%" height="100%"><a href="https://github.com/rstudio-conf-2020/dataviz"><br>Kieran Healy</a></center>
 
+
+
+---
+
+class: center, middle, inverse
+
+# Tidy Data
+
+<img src="img/horst_tidyverse.jpg" width="70%" height="70%">
+
+[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+
+---
+
+## Ggplot needs tidy data
+
+What are __tidy__ data?
+
+1. Each variable forms a column
+2. Each observation forms a row 
+3. Each value has its own cell
+
+![](img/r4ds_tidy_data.png)
+[G. Grolemond & H. Wickham's R for Data Science](https://r4ds.had.co.nz/tidy-data.html)
+
+See BERD workshop [Data Wrangling Part 1](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#14) slides for more info.
+
+---
+ 
+## Gapminder data 
+
+.pull-left[
+
+[Gapminder](https://www.gapminder.org) is a foundation "fact tank" that collects reliable global statistics on many different measures, such as average life expectancy, population size, food supply, water source, etc. for individual countries
+
+<img src="img/gapminder_screenshot.png" width="90%" height="100%">
+
+[Gapminder](https://www.gapminder.org/tools/#$chart-type=bubbles)
+
+]
+
+.pull-right[
+* `Gapminder_vars_2011.csv` contains select measures restricted to the year 2011.
+
+* `Gapminder_vars_2011_long.csv` is the same data as in `Gapminder_vars_2011.csv`, but in a _long_ format
+    * Instead of individual columns for `CO2emissions`, `ElectricityUsePP`, ... `WaterSourcePrct`, 
+        * there is a column called `Measures` which contains these variables names and 
+        * a column called `Values` with the actual values for these measures.
+    * This means the dataset contains multiple rows per country to account for each of these measures. 
+]
+
+---
+
+## A look at the `Gapminder_vars_2011.csv` dataset
+
+```{r}
+gapminder2011 <- read_csv("data/Gapminder_vars_2011.csv")
+glimpse(gapminder2011)
+```
+
+
+
+
 ---
 name:visualtoc
 
@@ -233,10 +297,16 @@ ggplot(data = gapminder2011,
     text = element_text(family = "Palatino")) +
   scale_fill_viridis_d(name = "Subregions")
 ```
+
+See the last section of [ggplot1 Aesthetic specifications](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html) for an explanation of `hjust`.
+
+<center><img src="img/hjust_vjust.png" width="50%" height="100%"></center>
+
+
 ]
 
 .pull-right[
-```{r barplot_regions_out, ref.label="barplot_regions", echo=FALSE, fig.keep = "first"}
+```{r barplot_regions_out, ref.label="barplot_regions_nice", echo=FALSE, fig.keep = "first"}
 ```
 ]
 
@@ -649,7 +719,10 @@ name:lineplot
 # Lineplot
 
 .pull-left[
+For the Lineplot example we are using the `gapminder::gapminder` dataset since it has longitudinal data across many years for life expectancy.
+
 ```{r lineplot_YearLifeExp_nice, eval = FALSE}
+library(gapminder)
 ggplot(data = gapminder,
        aes(x = year,
            y = lifeExp,
@@ -673,6 +746,19 @@ ggplot(data = gapminder,
 ```{r lineplot_YearLifeExp_out, ref.label="lineplot_YearLifeExp_nice", echo=FALSE}
 ```
 ]
+
+
+---
+
+## R package `gapminder` has a dataset called `gapminder`
+
+For the Lineplot example we are using the `gapminder::gapminder` dataset since it has longitudinal data across many years for life expectancy.
+
+```{r}
+library(gapminder)
+head(gapminder,15)
+```
+
 
 ---
 
@@ -889,6 +975,9 @@ name:facethist
 # Faceted 2x Histogram
 
 .pull-left[
+Note that a __long__ dataset is being used in this example!  
+See next slide for an explanation.
+
 ```{r facet2x_density_all_nice, eval = FALSE, fig.width=10, fig.height=5}
 ggplot(data = gapminder2011_long) + 
   geom_histogram(aes(x = Values),
@@ -916,6 +1005,55 @@ ggplot(data = gapminder2011_long) +
 ```{r facet2x_density_all_out, ref.label="facet2x_density_all_nice", echo=FALSE}
 ```
 ]
+
+
+---
+
+# Wide vs. long data
+
+- __Wide__ data has one row per subject, with multiple columns for their repeated measurements
+- __Long__ data has multiple rows per subject, with one column for the measurement variable and another indicating from when/where the repeated measures are from
+
+.pull-left[
+wide  
+<img src="img/SBP_wide2.png" width="73%" height="73%">
+
+See BERD workshop [Data Wrangling Part 2](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html#26) for slides on how to make wide data long.
+]
+.pull-right[
+long  
+<img src="img/SBP_long2.png" width="30%" height="30%">
+]
+
+
+
+---
+
+# Dataset `Gapminder_vars_2011_long.csv` (1/2)
+
+* This is the same 2011 Gapminder data we've been using thus far, but in a __long format__ instead of wide.
+    * Instead of individual columns for `CO2emissions`, `ElectricityUsePP`, ... `WaterSourcePrct`, 
+        * there is a column called `Measures` which contains these variables names and 
+        * a column called `Values` with the actual values for these measures.
+    * This means the dataset contains multiple rows per country to account for each of these measures. 
+
+```{r}
+gapminder2011_long <- read_csv("data/Gapminder_vars_2011_long.csv")
+glimpse(gapminder2011_long)
+```
+
+
+---
+
+# Dataset `Gapminder_vars_2011_long.csv` (2/2)
+
+```{r}
+gapminder2011_long %>% 
+  select(country, population, four_regions, Measures, Values) %>% 
+  head(15)
+```
+
+
 
 ---
 
@@ -1231,6 +1369,27 @@ from ["Themes to improve your ggplot figures" by David Keyes](https://rfortheres
 .pull-right[
 <center><img src="img/wesanderson.png" width="60%" height="60%"><a href="https://www.datanovia.com/en/blog/ggplot-colors-best-tricks-you-will-love/"><br>wesanderson package</a></center>
 ]
+
+
+
+---
+
+# Changing the order of names (levels) within a categorical variable
+
+* The default order of names within a categorical variable is alphanumeric
+    * Such as `africa, americas, asia, europe` for the `four_regions` variable
+
+* Often we want a different order when making plots though.
+
+## `factor` level variables
+
+Do this by making the categorical variable a `factor` level variable in R.
+
+* We can change the order of names within a `factor` level variable, and even rename the levels.
+
+* The `forcats` package makes this easy to do. See https://forcats.tidyverse.org/.
+
+
 
 ---
 
