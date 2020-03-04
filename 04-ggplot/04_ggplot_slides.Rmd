@@ -160,7 +160,11 @@ of geometric objects.
 - aes: aesthetic attributes of the geometric object that we can perceive on a graphic. For example, x/y position, color, shape, and size. Each assigned aesthetic attribute can be mapped to a variable in our data-set.
 
 ---
-MEIKE ADD GGPLOT BASICS FIGURE FROM CLASS NOTES?
+# ggplot basics
+
+<center><img src="img/ggplot_basics_from_ppt.png" width="90%" height="100%"></center>
+
+
 ---
 # Grammar of ggplot2
 
@@ -212,7 +216,7 @@ Inspired by [EvaMaeRey (Gina Reynolds)](https://github.com/EvaMaeRey), author of
 name:barplot
 # Barplot
 
-.pull-left-40[
+.pull-left[
 ```{r barplot_regions_nice, eval=FALSE}
 ggplot(data = gapminder2011,
        aes(x = four_regions,
@@ -230,7 +234,7 @@ ggplot(data = gapminder2011,
 ```
 ]
 
-.pull-right-60[
+.pull-right[
 ```{r barplot_regions_out, ref.label="barplot_regions", echo=FALSE, fig.keep = "first"}
 ```
 ]
@@ -266,21 +270,20 @@ name:histogram
 ```{r hist_LifeExp_nice, eval = FALSE}
 ggplot(data = gapminder2011,
        aes(x = LifeExpectancyYrs,
-           fill = four_regions)) + 
+           fill = four_regions)
+       ) + 
   geom_histogram() + 
   scale_fill_discrete(
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
-  ) + 
+    ) + 
   labs(
     x = "Life Expectancy (years)",   
     title = "Histogram"
     ) + 
   ggthemes::theme_economist() +
-  theme(
-    legend.position="bottom"
-  ) 
+  theme(legend.position="bottom") 
 ```
 ]
 .pull-right[
@@ -299,15 +302,13 @@ ggplot(data = gapminder2011) +
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
-  ) + 
+    ) + 
   labs(
     x = "Life Expectancy (years)",   
     title = "Histogram"
     ) + 
   ggthemes::theme_economist() +
-  theme(
-    legend.position="bottom"
-  ) 
+  theme(legend.position="bottom") 
 ```
 
 `r chunk_reveal("hist_LifeExp", break_type = "auto", split=40)`
@@ -319,12 +320,13 @@ ggplot(data = gapminder2011) +
 * "Generic" positions
       * `legend.position = "left"`
       * Other options: "top", "right", "bottom", "none"
+      
 * Specificied by location
     * `legend.position = c(x,y)`
     * Specify x and y coordinates of position
         * Values should be between 0 and 1
-        * c(0,0) corresponds to the bottom left
-        * c(1,1) corresponds to the top right
+        * __c(0,0)__ corresponds to the __bottom left__
+        * __c(1,1)__ corresponds to the __top right__
 
 ---
 name:density
@@ -334,21 +336,20 @@ name:density
 ```{r density_LifeExp_nice, eval = FALSE}
 ggplot(data = gapminder2011,
        aes(x = LifeExpectancyYrs,
-           fill = four_regions)) + 
+           fill = four_regions)
+       ) + 
   geom_density(alpha = 0.4) +
   scale_fill_discrete(
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
-  ) +
+    ) +
   labs(
     x = "Life Expectancy (years)",   
     title = "Density Plot"
-  )+
+    ) +
   hrbrthemes::theme_ipsum() +
-  theme(
-    legend.position=c(.2,.8)
-  )
+  theme(legend.position=c(.2,.8))
 ```
 ]
 .pull-right[
@@ -368,14 +369,10 @@ ggplot(data = gapminder2011) +
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
-  ) +
-  scale_alpha(
-    guide = "none"
-  ) +
+    ) +
+  scale_alpha(guide = "none") +
   hrbrthemes::theme_ipsum() +
-  theme(
-    legend.position=c(.2,.8)
-    ) + 
+  theme(legend.position=c(.2,.8)) + 
   labs(
     x = "Life Expectancy (years)",   
     title = "Density Plot"
@@ -392,11 +389,13 @@ name:ridgeline
 
 .pull-left[
 ```{r ridges_LifeExp_nice, eval = FALSE}
-# library(ggridges)
+library(ggridges)
+
 ggplot(data = gapminder2011,
        aes(x = LifeExpectancyYrs,
            y = four_regions,
-           fill = four_regions)) + 
+           fill = four_regions)
+       ) + 
   geom_density_ridges(alpha = 0.4) +
   ggthemes::theme_clean() + 
   theme(legend.position="none") + 
@@ -415,7 +414,8 @@ ggplot(data = gapminder2011,
 ---
 
 ```{r ridges_LifeExp, include = FALSE}
-# library(ggridges)
+library(ggridges)
+
 ggplot(data = gapminder2011) + 
   aes(x = LifeExpectancyYrs) + 
   aes(y = four_regions) + 
@@ -444,24 +444,20 @@ name:boxplot
 ggplot(data = gapminder2011,
        aes(y = LifeExpectancyYrs,
            x = four_regions,
-           fill = four_regions)) + 
+           fill = four_regions)
+       ) + 
   geom_boxplot(alpha = 0.3) + 
   coord_flip() +   
   theme_fivethirtyeight() +
   scale_fill_fivethirtyeight() + 
   theme(legend.position = "none") + 
-  geom_jitter(
-    width = .1, 
-    alpha = 0.3  
-    ) +
-  geom_violin(
-    colour = "grey",
-    alpha = .2
-  ) + 
+  geom_jitter(width = .1, alpha = 0.3) +
+  geom_violin(colour = "grey", alpha = .2) + 
   labs(
     x = "World Region",    
     y = "Life Expectancy (years)",   
-    title = "Boxplot")
+    title = "Boxplot"
+    )
 ```
 ]
 .pull-right[
@@ -493,7 +489,8 @@ ggplot(data = gapminder2011) +
   labs(
     x = "World Region",    
     y = "Life Expectancy (years)",   
-    title = "Boxplot")
+    title = "Boxplot"
+    )
 ```
 
 `r chunk_reveal("boxplot_LifeExp", break_type = "auto", split=40)`
@@ -509,12 +506,13 @@ name:scatterplot
 
 # Scatterplot
 
-.pull-left-40[
+.pull-left[
 ```{r scatter_FoodvsLifeExp_nice, eval = FALSE}
 ggplot(data = gapminder2011,
        aes(x = FoodSupplykcPPD,
            y = LifeExpectancyYrs,
-           color = four_regions)) + 
+           color = four_regions)
+       ) + 
   geom_point(alpha = 0.4) +
   geom_smooth(se = FALSE)+
   geom_smooth(method = lm) +
@@ -523,7 +521,7 @@ ggplot(data = gapminder2011,
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
-  ) +
+    ) +
   labs(
     x = "Daily Food Supply Per Person (kc)",   
     y = "Life Expectancy (years)",   
@@ -531,7 +529,7 @@ ggplot(data = gapminder2011,
     )
 ```
 ]
-.pull-right-60[
+.pull-right[
 ```{r scatter_FoodvsLifeExp_out, ref.label="scatter_FoodvsLifeExp_nice", echo=FALSE}
 ```
 ]
@@ -551,16 +549,10 @@ ggplot(data = gapminder2011) +
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
-  ) +
-  scale_alpha(
-    guide = "none"
-  ) +
-  geom_smooth(
-    se = FALSE
-  ) +
-  geom_smooth(
-    method = lm
-  ) +
+    ) +
+  scale_alpha(guide = "none") +
+  geom_smooth(se = FALSE) +
+  geom_smooth(method = lm) +
   theme_minimal() +
   labs(
     x = "Daily Food Supply Per Person (kc)",   
@@ -583,7 +575,8 @@ ggplot(data = gapminder2011,
        aes(x = FoodSupplykcPPD,
            y = LifeExpectancyYrs,
            color = four_regions,
-           size = population)) + 
+           size = population)
+       ) + 
   geom_point(alpha = 0.4) +
   scale_color_colorblind(
     name = "Regions",
@@ -629,9 +622,7 @@ ggplot(data = gapminder2011) +
     breaks = c(1e08,5e08,1e09),
     labels = c(100,500,1000)
   ) +
-  scale_alpha(
-    guide = "none"
-  ) +
+  scale_alpha(guide = "none") +
   hrbrthemes::theme_ipsum() +
   labs(
     x = "Daily Food Supply PP (kc)",  
@@ -660,17 +651,18 @@ ggplot(data = gapminder,
        aes(x = year,
            y = lifeExp,
            color = continent,
-           group = country)) + 
+           group = country)
+       ) + 
   geom_point(alpha = 0.4) +
   geom_line(alpha = 0.7) +
-  scale_color_colorblind(
-    name = "Continents"
-  ) +
+  scale_color_colorblind(name = "Continents") +
   ggthemes::theme_clean() + 
   labs(
     x = "Year",   
     y = "Life Expectancy (years)",   
-    title = "Lineplot"
+    title = "Lineplot",
+    subtitle = "Time series",
+    caption = "Source: gapminder package"
     )
 ```
 ]
@@ -688,21 +680,19 @@ ggplot(data = gapminder) +
   geom_point() +
   aes(color = continent) +
   aes(alpha=.4) +
-  geom_line(
-    alpha = .7
-  ) +
+  geom_line(alpha = .7) +
   aes(group = country) +
   scale_color_colorblind(
     name = "Continents"
-  ) +
-  scale_alpha(
-    guide = "none"
-  ) +
+    ) +
+  scale_alpha(guide = "none") +
   ggthemes::theme_clean() + 
   labs(
     x = "Year",   
     y = "Life Expectancy (years)",   
-    title = "Lineplot"
+    title = "Lineplot",
+    subtitle = "Time series",
+    caption = "Source: gapminder package"
     )
 ```
 
@@ -711,7 +701,7 @@ ggplot(data = gapminder) +
 
 ---
 name::ggmarginal
-# `ggMarginal`
+# `ggmarginal`
 
 https://cran.r-project.org/web/packages/ggExtra/vignettes/ggExtra.html
 
@@ -724,16 +714,18 @@ p <- ggplot(data = gapminder2011,
         aes(x = FoodSupplykcPPD, 
             y = LifeExpectancyYrs,
             color = four_regions,
-            alpha=.4)) +
+            alpha=.4)
+        ) +
   geom_point() +
   scale_color_discrete(
     name = "Regions",
     labels = c("Africa", "Americas", 
-               "Asia", "Europe")) +
+               "Asia", "Europe")
+    ) +
   scale_alpha(guide = "none") +
   theme(legend.position="bottom") +
   labs(
-    x = "Daily Food Supply Per Person (kc)",   
+    x = "Daily Food Supply PP (kc)",   
     y = "Life Expectancy (years)",   
     title = "Scatterplot"
     )
@@ -806,7 +798,7 @@ https://ggobi.github.io/ggally/index.html
 ```{r fig.width=10, fig.height=5}
 # library(GGally)
 gapminder2011 %>% 
-  select(FoodSupplykcPPD:WaterSourcePrct) %>% 
+  select(FoodSupplykcPPD:WaterSourcePrct) %>% # specifying which columns to use
   ggcorr()
 ```
 
@@ -819,7 +811,7 @@ https://ggobi.github.io/ggally/index.html
 ```{r fig.width=10, fig.height=5}
 # library(GGally)
 gapminder2011 %>% 
-  select(FoodSupplykcPPD:WaterSourcePrct) %>% 
+  select(FoodSupplykcPPD:WaterSourcePrct) %>% # specifying which columns to use
   ggpairs()
 ```
 
@@ -838,24 +830,23 @@ name:facetdensity
 ```{r facet_density_all_nice, eval = FALSE}
 ggplot(data = gapminder2011_long,
        aes(x = Values,
-           color = four_regions)) + 
-  facet_wrap(
-    ~ Measures, 
-    scales = "free",
-    ncol = 2) + 
+           color = four_regions)
+       ) + 
+  facet_wrap(~ Measures, 
+             scales = "free",
+             ncol = 2
+             ) + 
   geom_density() +
   ggthemes::theme_few() + 
-  theme(
-    legend.position="top"
-    )  +
-  scale_color_discrete(
-    name = "Regions",
-    labels = c("Africa", "Americas", 
-               "Asia", "Europe")
-  ) + 
+  theme(legend.position="top")  +
   labs(
     x = "",   
-    title = "Faceted Density Plots"
+    title = "Faceted Density Plots",
+    # Add a figure number!
+    tag = "Fig 1",
+    # note that color is being 
+    # specified inside labs!
+    color = "Regions"  
     )
 ```
 ]
@@ -870,23 +861,18 @@ ggplot(data = gapminder2011_long,
 ggplot(data = gapminder2011_long) + 
   aes(x = Values) + 
   geom_density() + 
-  facet_wrap( 
-    ~ Measures, 
-    scales = "free", 
-    ncol = 2) + 
+  facet_wrap(~ Measures, 
+             scales = "free", 
+             ncol = 2
+             ) + 
   aes(color = four_regions) + 
   ggthemes::theme_few() + 
-  theme( 
-    legend.position="top" 
-    )  + 
-  scale_color_discrete( 
-    name = "Regions", 
-    labels = c("Africa", "Americas",  
-               "Asia", "Europe") 
-  ) + 
-  labs( 
-    x = "",    
-    title = "Faceted Density Plots" 
+  theme( legend.position="top")  + 
+  labs(
+    x = "",   
+    title = "Faceted Density Plots",
+    tag = "Fig 1",
+    color = "Regions"  
     )
 ```
 
@@ -915,7 +901,7 @@ ggplot(data = gapminder2011_long) +
     strip.text.x = element_text(size=6),
     axis.text.x = element_text(angle=45, 
                                hjust=1)
-  ) +
+    ) +
   labs(
     x = "",   
     title = "Faceted Density Plots"
@@ -939,9 +925,10 @@ ggplot(data = gapminder2011_long) +
   geom_histogram() +
   ggthemes::theme_igray() + 
   theme(
-    strip.text.y = element_text(size=10, 
-                                angle=45, 
-                                face = "bold"),
+    strip.text.y = 
+      element_text(size=10, 
+                   angle=45, 
+                   face = "bold"),
     strip.text.x = element_text(size=6),
     axis.text.x = element_text(angle=45, 
                                hjust=1)
@@ -996,7 +983,8 @@ ggplot(data = pasilla_data,
   labs(
     x = bquote(~Log[2]~ "fold change"),
     y = bquote(~Log[10]~adjusted~italic(P)),
-    title = "Volcano Plot - Gene Expression of Pasilla Data"
+    title = "Volcano Plot",
+    subtitle = "Gene Expression of Pasilla Data"
   )
 ```
 ]
@@ -1026,7 +1014,8 @@ ggplot(data = pasilla_data,
   labs(
     x = bquote(~Log[2]~ "fold change"),
     y = bquote(~Log[10]~adjusted~italic(P)),
-    title = "Volcano Plot - Gene Expression of Pasilla Data"
+    title = "Volcano Plot",
+  subtitle="Gene Expression of Pasilla Data"
   )
 ```
 
@@ -1122,7 +1111,7 @@ ggpubr::ggarrange(p1, p2, labels = "AUTO",
   common.legend = TRUE, legend = "bottom")
 ```
 
-Other options: `cowplot`, `patchwork`.
+Other options: [cowplot](https://wilkelab.org/cowplot/articles/index.html) and [patchwork](https://github.com/thomasp85/patchwork).
 ]
 
 ---
@@ -1201,6 +1190,14 @@ class:center, middle, inverse
 
 ---
 
+<!-- ![](img/poster_big.png) -->
+
+<center><img src="img/poster_big.png" width="85%" height="80%"</center>
+[https://www.data-to-viz.com/poster.html](https://www.data-to-viz.com/poster.html)
+
+
+---
+
 # Many, many ggplot extensions!
 
 Some examples at the [ggplot2 extensions gallery](https://www.ggplot2-exts.org/gallery/)
@@ -1225,10 +1222,13 @@ from ["Themes to improve your ggplot figures" by David Keyes](https://rfortheres
 ---
 
 # References
+<!-- to-do: check this slide -->
 
 - [ggplot cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 - [ggplot2 package reference](https://ggplot2.tidyverse.org/reference/)
+- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/) by Hadley Wickham
 - [*Data Visualizaton* online textbook by Kieran Healy](https://socviz.co/makeplot.html)
+- [R Graphics Cookbook](http://www.cookbook-r.com/Graphs/) by Winston Chang
 - [*R for Data Science* online textbook by Hadley Wickham](https://r4ds.had.co.nz/data-visualisation.html)
 - [*Introduction to Data Science* online textbook by Rafael A. Irizarry](https://rafalab.github.io/dsbook/ggplot2.html)
 
@@ -1237,11 +1237,22 @@ Example plots and extensions:
 - [R Graph Gallery](https://www.r-graph-gallery.com/)
 - [ggplot2 extension gallery](https://www.ggplot2-exts.org/gallery/)
 - [All Your Figure Are Belong To Us](https://yutannihilation.github.io/allYourFigureAreBelongToUs/)
+- [from Data to Viz](https://www.data-to-viz.com/) - beautiful flowcharts to help you decide on a plot based on the variable type(s); check out their [poster](https://www.data-to-viz.com/poster.html)
+- [Top 50 ggplot2 Visualizations - The Master List (With Full R Code)](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+
+OHSU class: 
+
+- [CS 631 Data Visualization](https://www.ohsu.edu/school-of-medicine/csee/data-science)
+
+---
 
 ## Inspiration for this talk
 
 - [github/flipbookr](https://github.com/EvaMaeRey/flipbookr)
 - [Kieran Healy's rstudio::conf2020 data viz materials](https://github.com/rstudio-conf-2020/dataviz)
+
+
+
 
 ---
 
