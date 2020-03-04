@@ -1037,8 +1037,13 @@ name:heatmap
 
 # Heatmap with `pheatmap::pheatmap()`
 
-.pull-left[
+It's possible to make heatmaps in ggplot2 with `geom_tile()`, but there are many other better functions using base R that cluster and annotate the data. This is using `pheatmap` package.
+
+.pull-left-60[
+We need to create the data:
+
 ```{r pasilla_heat, cache=FALSE}
+# select expression data
 pasilla_heat <- pasilla_data %>%
   select(treated1:untreated4)
 # subtract off gene-specific means
@@ -1046,13 +1051,35 @@ pasilla_heat <- pasilla_heat - rowMeans(pasilla_heat)
 # calculate standard deviation of each centered gened
 sd_gene <- apply(pasilla_heat,1,sd)
 # select top 500 most variable
-pasilla_heat <- pasilla_heat[order(sd_gene, decreasing = TRUE)[1:500],]
-head(pasilla_heat)
+pasilla_heat <- 
+  pasilla_heat[order(sd_gene, decreasing = TRUE)[1:500],]
+
+# create annotation data
+pasilla_col <- data.frame(
+  trt = factor(c(rep("trt",3), rep("untrt",4))),
+  id = 1:7,
+  row.names=colnames(pasilla_heat))
+```
+]
+.pull-right-40[
+```{r}
+head(pasilla_heat, n = 3)
+
+pasilla_col
 ```
 
+]
+
+---
+# Heatmap with `pheatmap::pheatmap()`
+
+.pull-left[
 ```{r heatmap, eval=FALSE}
-pheatmap::pheatmap(mat = pasilla_heat,
-                   show_rownames = FALSE)
+pheatmap::pheatmap(
+  mat = pasilla_heat,
+  show_rownames = FALSE,
+  annotation_col = pasilla_col
+)
 ```
 ]
 .pull-right[

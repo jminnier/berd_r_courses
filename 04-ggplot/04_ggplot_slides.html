@@ -2977,9 +2977,14 @@ name:heatmap
 
 # Heatmap with `pheatmap::pheatmap()`
 
-.pull-left[
+It's possible to make heatmaps in ggplot2 with `geom_tile()`, but there are many other better functions using base R that cluster and annotate the data. This is using `pheatmap` package.
+
+.pull-left-60[
+We need to create the data:
+
 
 ```r
+# select expression data
 pasilla_heat &lt;- pasilla_data %&gt;%
   select(treated1:untreated4)
 # subtract off gene-specific means
@@ -2987,31 +2992,57 @@ pasilla_heat &lt;- pasilla_heat - rowMeans(pasilla_heat)
 # calculate standard deviation of each centered gened
 sd_gene &lt;- apply(pasilla_heat,1,sd)
 # select top 500 most variable
-pasilla_heat &lt;- pasilla_heat[order(sd_gene, decreasing = TRUE)[1:500],]
-head(pasilla_heat)
-```
+pasilla_heat &lt;- 
+  pasilla_heat[order(sd_gene, decreasing = TRUE)[1:500],]
 
+# create annotation data
+pasilla_col &lt;- data.frame(
+  trt = factor(c(rep("trt",3), rep("untrt",4))),
+  id = 1:7,
+  row.names=colnames(pasilla_heat))
 ```
-       treated1   treated2  treated3 untreated1 untreated2 untreated3
-2390 -1.5997691  0.8713581  1.568570 -1.5006560 -2.1033425   1.338488
-521  -1.3218267  0.9954861  1.278523 -1.5210730 -1.4256886   1.040472
-7886 -0.5901012  0.8225366  1.339219 -1.7627544 -1.7018289   1.155933
-7668 -1.3935481  0.6383422  1.366950 -1.3935481 -1.3935481   1.207422
-1861 -1.8223610 -1.1310619 -1.067572  0.6643273  0.6548635   1.250505
-6643 -1.3260796 -1.3839344 -1.110418  0.9075517  0.7899272   1.087418
-     untreated4
-2390  1.4253512
-521   0.9541077
-7886  0.7369965
-7668  0.9679303
-1861  1.4512988
-6643  1.0355348
-```
-
+]
+.pull-right-40[
 
 ```r
-pheatmap::pheatmap(mat = pasilla_heat,
-                   show_rownames = FALSE)
+head(pasilla_heat, n = 3)
+```
+
+```
+       treated1  treated2 treated3 untreated1 untreated2 untreated3 untreated4
+2390 -1.5997691 0.8713581 1.568570  -1.500656  -2.103343   1.338488  1.4253512
+521  -1.3218267 0.9954861 1.278523  -1.521073  -1.425689   1.040472  0.9541077
+7886 -0.5901012 0.8225366 1.339219  -1.762754  -1.701829   1.155933  0.7369965
+```
+
+```r
+pasilla_col
+```
+
+```
+             trt id
+treated1     trt  1
+treated2     trt  2
+treated3     trt  3
+untreated1 untrt  4
+untreated2 untrt  5
+untreated3 untrt  6
+untreated4 untrt  7
+```
+
+]
+
+---
+# Heatmap with `pheatmap::pheatmap()`
+
+.pull-left[
+
+```r
+pheatmap::pheatmap(
+  mat = pasilla_heat,
+  show_rownames = FALSE,
+  annotation_col = pasilla_col
+)
 ```
 ]
 .pull-right[
