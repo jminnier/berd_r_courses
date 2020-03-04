@@ -22,7 +22,7 @@ editor_options:
 layout: true
   
 <!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
-<div class="my-footer"><a href="#visualtoc"> Visual TOC</span></div>
+<!-- <div class="my-footer"><a href="#visualtoc"> Visual TOC</span></div> -->
 
 ---
 
