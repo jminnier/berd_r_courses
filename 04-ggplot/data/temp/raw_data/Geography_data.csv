@@ -1,0 +1,198 @@
+﻿geo,name,four_regions,eight_regions,six_regions,members_oecd_g77,Latitude,Longitude,World bank region,"World bank, 4 income groups 2017"
+afg,Afghanistan,asia,asia_west,south_asia,g77,33,66,South Asia,Low income
+alb,Albania,europe,europe_east,europe_central_asia,others,41,20,Europe & Central Asia,Upper middle income
+dza,Algeria,africa,africa_north,middle_east_north_africa,g77,28,3,Middle East & North Africa,Upper middle income
+and,Andorra,europe,europe_west,europe_central_asia,others,42.50779,1.52109,Europe & Central Asia,High income
+ago,Angola,africa,africa_sub_saharan,sub_saharan_africa,g77,-12.5,18.5,Sub-Saharan Africa,Lower middle income
+atg,Antigua and Barbuda,americas,america_north,america,g77,17.05,-61.8,Latin America & Caribbean,High income
+arg,Argentina,americas,america_south,america,g77,-34,-64,Latin America & Caribbean,Upper middle income
+arm,Armenia,europe,europe_east,europe_central_asia,others,40.25,45,Europe & Central Asia,Lower middle income
+aus,Australia,asia,east_asia_pacific,east_asia_pacific,oecd,-25,135,East Asia & Pacific,High income
+aut,Austria,europe,europe_west,europe_central_asia,oecd,47.33333,13.33333,Europe & Central Asia,High income
+aze,Azerbaijan,europe,europe_east,europe_central_asia,others,40.5,47.5,Europe & Central Asia,Upper middle income
+bhs,Bahamas,americas,america_north,america,g77,25.04082,-77.37122,Latin America & Caribbean,High income
+bhr,Bahrain,asia,asia_west,middle_east_north_africa,g77,26.03333,50.55,Middle East & North Africa,High income
+bgd,Bangladesh,asia,asia_west,south_asia,g77,24,90,South Asia,Lower middle income
+brb,Barbados,americas,america_north,america,g77,13.16667,-59.53333,Latin America & Caribbean,High income
+blr,Belarus,europe,europe_east,europe_central_asia,others,53,28,Europe & Central Asia,Upper middle income
+bel,Belgium,europe,europe_west,europe_central_asia,oecd,50.75,4.5,Europe & Central Asia,High income
+blz,Belize,americas,america_north,america,g77,17.49952,-88.19756,Latin America & Caribbean,Upper middle income
+ben,Benin,africa,africa_sub_saharan,sub_saharan_africa,g77,9.5,2.25,Sub-Saharan Africa,Low income
+btn,Bhutan,asia,asia_west,south_asia,g77,27.5,90.5,South Asia,Lower middle income
+bol,Bolivia,americas,america_south,america,g77,-17,-65,Latin America & Caribbean,Lower middle income
+bih,Bosnia and Herzegovina,europe,europe_east,europe_central_asia,g77,44.25,17.83333,Europe & Central Asia,Upper middle income
+bwa,Botswana,africa,africa_sub_saharan,sub_saharan_africa,g77,-22,24,Sub-Saharan Africa,Upper middle income
+bra,Brazil,americas,america_south,america,g77,-10,-55,Latin America & Caribbean,Upper middle income
+brn,Brunei,asia,east_asia_pacific,east_asia_pacific,g77,4.5,114.66667,East Asia & Pacific,High income
+bgr,Bulgaria,europe,europe_east,europe_central_asia,others,42.66667,25.25,Europe & Central Asia,Upper middle income
+bfa,Burkina Faso,africa,africa_sub_saharan,sub_saharan_africa,g77,12.5,-1.66667,Sub-Saharan Africa,Low income
+bdi,Burundi,africa,africa_sub_saharan,sub_saharan_africa,g77,-3.5,30,Sub-Saharan Africa,Low income
+khm,Cambodia,asia,east_asia_pacific,east_asia_pacific,g77,13,105,East Asia & Pacific,Lower middle income
+cmr,Cameroon,africa,africa_sub_saharan,sub_saharan_africa,g77,6,12.5,Sub-Saharan Africa,Lower middle income
+can,Canada,americas,america_north,america,oecd,60.10867,-113.64258,North America,High income
+cpv,Cape Verde,africa,africa_sub_saharan,sub_saharan_africa,g77,16,-24,Sub-Saharan Africa,Lower middle income
+caf,Central African Republic,africa,africa_sub_saharan,sub_saharan_africa,g77,7,21,Sub-Saharan Africa,Low income
+tcd,Chad,africa,africa_sub_saharan,sub_saharan_africa,g77,15,19,Sub-Saharan Africa,Low income
+chl,Chile,americas,america_south,america,g77,-33.45694,-70.64827,Latin America & Caribbean,High income
+chn,China,asia,east_asia_pacific,east_asia_pacific,g77,35,105,East Asia & Pacific,Upper middle income
+col,Colombia,americas,america_south,america,g77,4,-73.25,Latin America & Caribbean,Upper middle income
+com,Comoros,africa,africa_sub_saharan,sub_saharan_africa,g77,-12.23333,44.44553,Sub-Saharan Africa,Low income
+cod,"Congo, Dem. Rep.",africa,africa_sub_saharan,sub_saharan_africa,g77,-2.5,23.5,Sub-Saharan Africa,Low income
+cog,"Congo, Rep.",africa,africa_sub_saharan,sub_saharan_africa,g77,-1,15.5,Sub-Saharan Africa,Lower middle income
+cri,Costa Rica,americas,america_north,america,g77,10,-84,Latin America & Caribbean,Upper middle income
+civ,Cote d'Ivoire,africa,africa_sub_saharan,sub_saharan_africa,g77,8,-5.5,Sub-Saharan Africa,Lower middle income
+hrv,Croatia,europe,europe_east,europe_central_asia,others,45.16667,15.5,Europe & Central Asia,Upper middle income
+cub,Cuba,americas,america_north,america,g77,22,-79.5,Latin America & Caribbean,Upper middle income
+cyp,Cyprus,europe,europe_west,europe_central_asia,others,35,33,Europe & Central Asia,High income
+cze,Czech Republic,europe,europe_east,europe_central_asia,oecd,49.75,15,Europe & Central Asia,High income
+dnk,Denmark,europe,europe_west,europe_central_asia,oecd,56,10,Europe & Central Asia,High income
+dji,Djibouti,africa,africa_north,middle_east_north_africa,g77,11.58901,43.14503,Middle East & North Africa,Lower middle income
+dma,Dominica,americas,america_north,america,g77,15.5,-61.33333,Latin America & Caribbean,Upper middle income
+dom,Dominican Republic,americas,america_north,america,g77,19,-70.66667,Latin America & Caribbean,Upper middle income
+ecu,Ecuador,americas,america_south,america,g77,-1.25,-78.25,Latin America & Caribbean,Upper middle income
+egy,Egypt,africa,africa_north,middle_east_north_africa,g77,27,30,Middle East & North Africa,Lower middle income
+slv,El Salvador,americas,america_north,america,g77,13.83333,-88.91667,Latin America & Caribbean,Lower middle income
+gnq,Equatorial Guinea,africa,africa_sub_saharan,sub_saharan_africa,g77,1.7,10.5,Sub-Saharan Africa,Upper middle income
+eri,Eritrea,africa,africa_sub_saharan,sub_saharan_africa,g77,15,39,Sub-Saharan Africa,Low income
+est,Estonia,europe,europe_east,europe_central_asia,others,59,26,Europe & Central Asia,High income
+eth,Ethiopia,africa,africa_sub_saharan,sub_saharan_africa,g77,9,39.5,Sub-Saharan Africa,Low income
+fji,Fiji,asia,east_asia_pacific,east_asia_pacific,g77,-18,178,East Asia & Pacific,Upper middle income
+fin,Finland,europe,europe_east,europe_central_asia,oecd,64,26,Europe & Central Asia,High income
+fra,France,europe,europe_west,europe_central_asia,oecd,46,2,Europe & Central Asia,High income
+gab,Gabon,africa,africa_sub_saharan,sub_saharan_africa,g77,-1,11.75,Sub-Saharan Africa,Upper middle income
+gmb,Gambia,africa,africa_sub_saharan,sub_saharan_africa,g77,13.5,-15.5,Sub-Saharan Africa,Low income
+geo,Georgia,europe,europe_east,europe_central_asia,others,41.99998,43.4999,Europe & Central Asia,Lower middle income
+deu,Germany,europe,europe_west,europe_central_asia,oecd,51.5,10.5,Europe & Central Asia,High income
+gha,Ghana,africa,africa_sub_saharan,sub_saharan_africa,g77,8.1,-1.2,Sub-Saharan Africa,Lower middle income
+grc,Greece,europe,europe_west,europe_central_asia,oecd,39,22,Europe & Central Asia,High income
+grd,Grenada,americas,america_north,america,g77,12.11667,-61.66667,Latin America & Caribbean,Upper middle income
+gtm,Guatemala,americas,america_north,america,g77,14.64072,-90.51327,Latin America & Caribbean,Lower middle income
+gin,Guinea,africa,africa_sub_saharan,sub_saharan_africa,g77,10.83333,-10.66667,Sub-Saharan Africa,Low income
+gnb,Guinea-Bissau,africa,africa_sub_saharan,sub_saharan_africa,g77,12,-15,Sub-Saharan Africa,Low income
+guy,Guyana,americas,america_south,america,g77,5,-59,Latin America & Caribbean,Upper middle income
+hti,Haiti,americas,america_north,america,g77,19,-72.41667,Latin America & Caribbean,Low income
+hos,Holy See,europe,europe_west,europe_central_asia,others,41.90236,12.45332,,
+hnd,Honduras,americas,america_north,america,g77,15,-86.5,Latin America & Caribbean,Lower middle income
+hkg,"Hong Kong, China",asia,east_asia_pacific,east_asia_pacific,others,22.28552,114.15769,East Asia & Pacific,High income
+hun,Hungary,europe,europe_east,europe_central_asia,oecd,47,20,Europe & Central Asia,High income
+isl,Iceland,europe,europe_west,europe_central_asia,oecd,65,-18,Europe & Central Asia,High income
+ind,India,asia,asia_west,south_asia,g77,22,79,South Asia,Lower middle income
+idn,Indonesia,asia,east_asia_pacific,east_asia_pacific,g77,-5,120,East Asia & Pacific,Lower middle income
+irn,Iran,asia,asia_west,middle_east_north_africa,g77,32,53,Middle East & North Africa,Upper middle income
+irq,Iraq,asia,asia_west,middle_east_north_africa,g77,33,44,Middle East & North Africa,Upper middle income
+irl,Ireland,europe,europe_west,europe_central_asia,oecd,53,-8,Europe & Central Asia,High income
+isr,Israel,asia,asia_west,middle_east_north_africa,others,31.5,34.75,Middle East & North Africa,High income
+ita,Italy,europe,europe_west,europe_central_asia,oecd,42.83333,12.83333,Europe & Central Asia,High income
+jam,Jamaica,americas,america_north,america,g77,18.16667,-77.25,Latin America & Caribbean,Upper middle income
+jpn,Japan,asia,east_asia_pacific,east_asia_pacific,oecd,35.68536,139.75309,East Asia & Pacific,High income
+jor,Jordan,asia,asia_west,middle_east_north_africa,g77,31,36,Middle East & North Africa,Lower middle income
+kaz,Kazakhstan,asia,asia_west,europe_central_asia,others,48,68,Europe & Central Asia,Upper middle income
+ken,Kenya,africa,africa_sub_saharan,sub_saharan_africa,g77,1,38,Sub-Saharan Africa,Lower middle income
+kir,Kiribati,asia,east_asia_pacific,east_asia_pacific,others,1.421,172.984,East Asia & Pacific,Lower middle income
+prk,North Korea,asia,east_asia_pacific,east_asia_pacific,g77,40,127,East Asia & Pacific,Low income
+kor,South Korea,asia,east_asia_pacific,east_asia_pacific,oecd,36.5,127.75,East Asia & Pacific,High income
+kwt,Kuwait,asia,asia_west,middle_east_north_africa,g77,29.36972,47.97833,Middle East & North Africa,High income
+kgz,Kyrgyz Republic,asia,asia_west,europe_central_asia,others,41.5,75,Europe & Central Asia,Lower middle income
+lao,Lao,asia,east_asia_pacific,east_asia_pacific,g77,18,105,East Asia & Pacific,Lower middle income
+lva,Latvia,europe,europe_east,europe_central_asia,others,57,25,Europe & Central Asia,High income
+lbn,Lebanon,asia,asia_west,middle_east_north_africa,g77,33.83333,35.83333,Middle East & North Africa,Upper middle income
+lso,Lesotho,africa,africa_sub_saharan,sub_saharan_africa,g77,-29.5,28.25,Sub-Saharan Africa,Lower middle income
+lbr,Liberia,africa,africa_sub_saharan,sub_saharan_africa,g77,6.5,-9.5,Sub-Saharan Africa,Low income
+lby,Libya,africa,africa_north,middle_east_north_africa,g77,28,17,Middle East & North Africa,Upper middle income
+lie,Liechtenstein,europe,europe_west,europe_central_asia,others,47.16667,9.53333,Europe & Central Asia,High income
+ltu,Lithuania,europe,europe_east,europe_central_asia,others,55.41667,24,Europe & Central Asia,High income
+lux,Luxembourg,europe,europe_west,europe_central_asia,oecd,49.61167,6.13,Europe & Central Asia,High income
+mkd,"Macedonia, FYR",europe,europe_east,europe_central_asia,others,41.66667,21.75,Europe & Central Asia,Upper middle income
+mdg,Madagascar,africa,africa_sub_saharan,sub_saharan_africa,g77,-20,47,Sub-Saharan Africa,Low income
+mwi,Malawi,africa,africa_sub_saharan,sub_saharan_africa,g77,-13.5,34,Sub-Saharan Africa,Low income
+mys,Malaysia,asia,east_asia_pacific,east_asia_pacific,g77,2.5,112.5,East Asia & Pacific,Upper middle income
+mdv,Maldives,asia,asia_west,south_asia,g77,3.2,73,South Asia,Upper middle income
+mli,Mali,africa,africa_sub_saharan,sub_saharan_africa,g77,18,-2,Sub-Saharan Africa,Low income
+mlt,Malta,europe,europe_west,europe_central_asia,others,35.91667,14.43333,Middle East & North Africa,High income
+mhl,Marshall Islands,asia,east_asia_pacific,east_asia_pacific,g77,7.113,171.236,East Asia & Pacific,Upper middle income
+mrt,Mauritania,africa,africa_sub_saharan,sub_saharan_africa,g77,20.25,-10.5,Sub-Saharan Africa,Lower middle income
+mus,Mauritius,africa,africa_sub_saharan,sub_saharan_africa,g77,-20.3,57.58333,Sub-Saharan Africa,Upper middle income
+mex,Mexico,americas,america_north,america,oecd,19.42847,-99.12766,Latin America & Caribbean,Upper middle income
+fsm,"Micronesia, Fed. Sts.",asia,east_asia_pacific,east_asia_pacific,g77,6.924,158.162,East Asia & Pacific,Lower middle income
+mda,Moldova,europe,europe_east,europe_central_asia,others,47.25,28.58333,Europe & Central Asia,Lower middle income
+mco,Monaco,europe,europe_west,europe_central_asia,others,43.73333,7.41667,Europe & Central Asia,High income
+mng,Mongolia,asia,east_asia_pacific,east_asia_pacific,g77,46,105,East Asia & Pacific,Lower middle income
+mne,Montenegro,europe,europe_east,europe_central_asia,others,42.75,19.25,Europe & Central Asia,Upper middle income
+mar,Morocco,africa,africa_north,middle_east_north_africa,g77,32,-6,Middle East & North Africa,Lower middle income
+moz,Mozambique,africa,africa_sub_saharan,sub_saharan_africa,g77,-18.25,35,Sub-Saharan Africa,Low income
+mmr,Myanmar,asia,east_asia_pacific,east_asia_pacific,g77,21,96,East Asia & Pacific,Lower middle income
+nam,Namibia,africa,africa_sub_saharan,sub_saharan_africa,g77,-22,17,Sub-Saharan Africa,Upper middle income
+nru,Nauru,asia,east_asia_pacific,east_asia_pacific,others,-0.517,166.933,East Asia & Pacific,Upper middle income
+npl,Nepal,asia,asia_west,south_asia,g77,28,84,South Asia,Low income
+nld,Netherlands,europe,europe_west,europe_central_asia,oecd,52.25,5.75,Europe & Central Asia,High income
+nzl,New Zealand,asia,east_asia_pacific,east_asia_pacific,oecd,-42,174,East Asia & Pacific,High income
+nic,Nicaragua,americas,america_north,america,g77,13,-85,Latin America & Caribbean,Lower middle income
+ner,Niger,africa,africa_sub_saharan,sub_saharan_africa,g77,18,9,Sub-Saharan Africa,Low income
+nga,Nigeria,africa,africa_sub_saharan,sub_saharan_africa,g77,10,8,Sub-Saharan Africa,Lower middle income
+nor,Norway,europe,europe_west,europe_central_asia,oecd,62,10,Europe & Central Asia,High income
+omn,Oman,asia,asia_west,middle_east_north_africa,g77,21,57,Middle East & North Africa,High income
+pak,Pakistan,asia,asia_west,south_asia,g77,30,70,South Asia,Lower middle income
+plw,Palau,asia,east_asia_pacific,east_asia_pacific,others,7.503,134.621,East Asia & Pacific,High income
+pan,Panama,americas,america_north,america,g77,8.9936,-79.51973,Latin America & Caribbean,Upper middle income
+png,Papua New Guinea,asia,east_asia_pacific,east_asia_pacific,g77,-6,147,East Asia & Pacific,Lower middle income
+pry,Paraguay,americas,america_south,america,g77,-23.33333,-58,Latin America & Caribbean,Upper middle income
+per,Peru,americas,america_south,america,g77,-10,-75.25,Latin America & Caribbean,Upper middle income
+phl,Philippines,asia,east_asia_pacific,east_asia_pacific,g77,13,122,East Asia & Pacific,Lower middle income
+pol,Poland,europe,europe_west,europe_central_asia,oecd,52,20,Europe & Central Asia,High income
+prt,Portugal,europe,europe_west,europe_central_asia,oecd,39.6945,-8.13057,Europe & Central Asia,High income
+qat,Qatar,asia,asia_west,middle_east_north_africa,g77,25.27932,51.52245,Middle East & North Africa,High income
+rou,Romania,europe,europe_east,europe_central_asia,others,46,25,Europe & Central Asia,Upper middle income
+rus,Russia,europe,europe_east,europe_central_asia,others,60,100,Europe & Central Asia,Upper middle income
+rwa,Rwanda,africa,africa_sub_saharan,sub_saharan_africa,g77,-2,30,Sub-Saharan Africa,Low income
+kna,St. Kitts and Nevis,americas,america_north,america,g77,17.33333,-62.75,Latin America & Caribbean,High income
+lca,St. Lucia,americas,america_north,america,g77,13.88333,-60.96667,Latin America & Caribbean,Upper middle income
+vct,St. Vincent and the Grenadines,americas,america_north,america,g77,13.08333,-61.2,Latin America & Caribbean,Upper middle income
+wsm,Samoa,asia,east_asia_pacific,east_asia_pacific,g77,-13.8,-172.13333,East Asia & Pacific,Upper middle income
+smr,San Marino,europe,europe_west,europe_central_asia,others,43.93667,12.44639,Europe & Central Asia,High income
+stp,Sao Tome and Principe,africa,africa_sub_saharan,sub_saharan_africa,g77,1,7,Sub-Saharan Africa,Lower middle income
+sau,Saudi Arabia,asia,asia_west,middle_east_north_africa,g77,25,45,Middle East & North Africa,High income
+sen,Senegal,africa,africa_sub_saharan,sub_saharan_africa,g77,14.5,-14.25,Sub-Saharan Africa,Low income
+srb,Serbia,europe,europe_east,europe_central_asia,others,44.81892,20.45998,Europe & Central Asia,Upper middle income
+syc,Seychelles,africa,africa_sub_saharan,sub_saharan_africa,g77,-4.58333,55.66667,Sub-Saharan Africa,High income
+sle,Sierra Leone,africa,africa_sub_saharan,sub_saharan_africa,g77,8.5,-11.5,Sub-Saharan Africa,Low income
+sgp,Singapore,asia,east_asia_pacific,east_asia_pacific,g77,1.28967,103.85007,East Asia & Pacific,High income
+svk,Slovak Republic,europe,europe_east,europe_central_asia,oecd,48.66667,19.5,Europe & Central Asia,High income
+svn,Slovenia,europe,europe_east,europe_central_asia,others,46.08333,15,Europe & Central Asia,High income
+slb,Solomon Islands,asia,east_asia_pacific,east_asia_pacific,g77,-8,159,East Asia & Pacific,Lower middle income
+som,Somalia,africa,africa_sub_saharan,sub_saharan_africa,g77,6,48,Sub-Saharan Africa,Low income
+zaf,South Africa,africa,africa_sub_saharan,sub_saharan_africa,g77,-29,24,Sub-Saharan Africa,Upper middle income
+esp,Spain,europe,europe_west,europe_central_asia,oecd,40,-4,Europe & Central Asia,High income
+lka,Sri Lanka,asia,asia_west,south_asia,g77,7.75,80.75,South Asia,Lower middle income
+sdn,Sudan,africa,africa_sub_saharan,sub_saharan_africa,g77,16,30,Sub-Saharan Africa,Lower middle income
+sur,Suriname,americas,america_south,america,g77,4,-56,Latin America & Caribbean,Upper middle income
+swz,Swaziland,africa,africa_sub_saharan,sub_saharan_africa,g77,-26.5,31.5,Sub-Saharan Africa,Lower middle income
+swe,Sweden,europe,europe_west,europe_central_asia,oecd,62,15,Europe & Central Asia,High income
+che,Switzerland,europe,europe_west,europe_central_asia,oecd,47.00016,8.01427,Europe & Central Asia,High income
+syr,Syria,asia,asia_west,middle_east_north_africa,g77,35,38,Middle East & North Africa,Lower middle income
+twn,Taiwan,asia,east_asia_pacific,east_asia_pacific,others,24,121,East Asia & Pacific,High income
+tjk,Tajikistan,asia,asia_west,europe_central_asia,others,39,71,Europe & Central Asia,Lower middle income
+tza,Tanzania,africa,africa_sub_saharan,sub_saharan_africa,g77,-6,35,Sub-Saharan Africa,Low income
+tha,Thailand,asia,east_asia_pacific,east_asia_pacific,g77,15.5,101,East Asia & Pacific,Upper middle income
+tls,Timor-Leste,asia,east_asia_pacific,east_asia_pacific,g77,-8.83333,125.75,East Asia & Pacific,Lower middle income
+tgo,Togo,africa,africa_sub_saharan,sub_saharan_africa,g77,8.66667,1.08333,Sub-Saharan Africa,Low income
+ton,Tonga,asia,east_asia_pacific,east_asia_pacific,g77,-20,-175,East Asia & Pacific,Upper middle income
+tto,Trinidad and Tobago,americas,america_north,america,g77,11,-61,Latin America & Caribbean,High income
+tun,Tunisia,africa,africa_north,middle_east_north_africa,g77,34,9,Middle East & North Africa,Lower middle income
+tur,Turkey,europe,europe_east,europe_central_asia,oecd,39,35,Europe & Central Asia,Upper middle income
+tkm,Turkmenistan,asia,asia_west,europe_central_asia,g77,39.75,59.66667,Europe & Central Asia,Upper middle income
+tuv,Tuvalu,asia,east_asia_pacific,east_asia_pacific,others,-8.51719,179.14478,East Asia & Pacific,Upper middle income
+uga,Uganda,africa,africa_sub_saharan,sub_saharan_africa,g77,1.25,32.5,Sub-Saharan Africa,Low income
+ukr,Ukraine,europe,europe_east,europe_central_asia,others,49,32,Europe & Central Asia,Lower middle income
+are,United Arab Emirates,asia,asia_west,middle_east_north_africa,g77,23.75,54.5,Middle East & North Africa,High income
+gbr,United Kingdom,europe,europe_west,europe_central_asia,oecd,54.75844,-2.69531,Europe & Central Asia,High income
+usa,United States,americas,america_north,america,oecd,39.76,-98.5,North America,High income
+ury,Uruguay,americas,america_south,america,g77,-33,-56,Latin America & Caribbean,High income
+uzb,Uzbekistan,asia,asia_west,europe_central_asia,others,41.66667,63.83333,Europe & Central Asia,Lower middle income
+vut,Vanuatu,asia,east_asia_pacific,east_asia_pacific,g77,-16,167,East Asia & Pacific,Lower middle income
+ven,Venezuela,americas,america_south,america,g77,8,-66,Latin America & Caribbean,Upper middle income
+pse,Palestine,asia,asia_west,middle_east_north_africa,g77,31.92157,35.20329,Middle East & North Africa,Lower middle income
+vnm,Vietnam,asia,east_asia_pacific,east_asia_pacific,g77,16.16667,107.83333,East Asia & Pacific,Lower middle income
+yem,Yemen,asia,asia_west,middle_east_north_africa,g77,15.5,47.5,Middle East & North Africa,Lower middle income
+zmb,Zambia,africa,africa_sub_saharan,sub_saharan_africa,g77,-14.33333,28.5,Sub-Saharan Africa,Lower middle income
+zwe,Zimbabwe,africa,africa_sub_saharan,sub_saharan_africa,g77,-19,29.75,Sub-Saharan Africa,Low income
+ssd,South Sudan,africa,africa_sub_saharan,sub_saharan_africa,,7.5,30,Sub-Saharan Africa,Low income

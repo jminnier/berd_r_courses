@@ -1,0 +1,196 @@
+country,CO2emissions,ElectricityUsePP,FoodSupplykcPPD,IncomePP,LifeExpectancyYrs,FemaleLiteracyRate,population,WaterSourcePrct,WaterSourcePrct_2011_quart,geo,four_regions,eight_regions,six_regions,members_oecd_g77,latitude,longitude,world_bank_region,world_bank_4_income_groups_2017
+Afghanistan,0.412,NA,2110,1660,56.7,13,29700000,52.6,Q1,afg,asia,asia_west,south_asia,g77,33,66,South Asia,Low income
+Albania,1.79,2210,3130,10200,76.7,95.7,2930000,88.1,Q2,alb,europe,europe_east,europe_central_asia,others,41,20,Europe & Central Asia,Upper middle income
+Algeria,3.29,1120,3220,13000,76.7,NA,36800000,92.6,Q2,dza,africa,africa_north,middle_east_north_africa,g77,28,3,Middle East & North Africa,Upper middle income
+Andorra,5.87,NA,NA,42000,82.6,NA,83800,100,Q4,and,europe,europe_west,europe_central_asia,others,42.50779,1.52109,Europe & Central Asia,High income
+Angola,1.25,207,2410,5910,60.9,58.6,24200000,40.3,Q1,ago,africa,africa_sub_saharan,sub_saharan_africa,g77,-12.5,18.5,Sub-Saharan Africa,Lower middle income
+Antigua and Barbuda,5.36,NA,2370,18600,76.9,99.4,95700,97,Q3,atg,americas,america_north,america,g77,17.05,-61.8,Latin America & Caribbean,High income
+Argentina,4.6,2900,3160,19600,76,97.9,41700000,99.5,Q4,arg,americas,america_south,america,g77,-34,-64,Latin America & Caribbean,Upper middle income
+Armenia,1.71,1810,2790,7020,73.8,99.5,2880000,97.8,Q3,arm,europe,europe_east,europe_central_asia,others,40.25,45,Europe & Central Asia,Lower middle income
+Australia,17.4,10600,3240,41800,82.2,NA,22500000,99.9,Q4,aus,asia,east_asia_pacific,east_asia_pacific,oecd,-25,135,East Asia & Pacific,High income
+Austria,7.69,8430,3740,44200,80.7,NA,8460000,100,Q4,aut,europe,europe_west,europe_central_asia,oecd,47.33333,13.33333,Europe & Central Asia,High income
+Azerbaijan,3.66,1710,3040,15800,69.9,NA,9150000,82.3,Q2,aze,europe,europe_east,europe_central_asia,others,40.5,47.5,Europe & Central Asia,Upper middle income
+Bahamas,5.09,NA,2570,22700,73.8,NA,367000,97.8,Q3,bhs,americas,america_north,america,g77,25.04082,-77.37122,Latin America & Caribbean,High income
+Bahrain,22.4,17900,NA,40700,76.2,NA,1280000,100,Q4,bhr,asia,asia_west,middle_east_north_africa,g77,26.03333,50.55,Middle East & North Africa,High income
+Bangladesh,0.412,258,2430,2570,71,53.4,154000000,96.7,Q3,bgd,asia,asia_west,south_asia,g77,24,90,South Asia,Lower middle income
+Barbados,5.45,NA,2890,15400,76.7,NA,281000,98.2,Q3,brb,americas,america_north,america,g77,13.16667,-59.53333,Latin America & Caribbean,High income
+Belarus,6.77,3630,3400,17200,70.7,NA,9470000,98,Q3,blr,europe,europe_east,europe_central_asia,others,53,28,Europe & Central Asia,Upper middle income
+Belgium,9.08,8020,3720,41200,80.2,NA,11000000,100,Q4,bel,europe,europe_west,europe_central_asia,oecd,50.75,4.5,Europe & Central Asia,High income
+Belize,1.83,NA,2760,7860,71.5,NA,329000,94.6,Q3,blz,americas,america_north,america,g77,17.49952,-88.19756,Latin America & Caribbean,Upper middle income
+Benin,0.56,91.5,2600,1820,62.2,NA,9460000,65.2,Q1,ben,africa,africa_sub_saharan,sub_saharan_africa,g77,9.5,2.25,Sub-Saharan Africa,Low income
+Bhutan,0.99,NA,NA,6810,72.5,NA,741000,94.7,Q3,btn,asia,asia_west,south_asia,g77,27.5,90.5,South Asia,Lower middle income
+Bolivia,1.6,637,2220,5600,71.9,NA,10100000,89.4,Q2,bol,americas,america_south,america,g77,-17,-65,Latin America & Caribbean,Lower middle income
+Bosnia and Herzegovina,6.48,3320,3130,9890,76.9,96.7,3690000,97.4,Q3,bih,europe,europe_east,europe_central_asia,g77,44.25,17.83333,Europe & Central Asia,Upper middle income
+Botswana,2.04,1480,2270,13900,58.9,85.6,2050000,78.7,Q2,bwa,africa,africa_sub_saharan,sub_saharan_africa,g77,-22,24,Sub-Saharan Africa,Upper middle income
+Brazil,2.21,2420,3290,15000,74.4,NA,199000000,96.5,Q3,bra,americas,america_south,america,g77,-10,-55,Latin America & Caribbean,Upper middle income
+Brunei,24.6,8780,2940,82400,77,93.9,394000,99.5,Q4,brn,asia,east_asia_pacific,east_asia_pacific,g77,4.5,114.66667,East Asia & Pacific,High income
+Bulgaria,6.71,4860,2770,15700,74.3,98,7360000,99.4,Q4,bgr,europe,europe_east,europe_central_asia,others,42.66667,25.25,Europe & Central Asia,Upper middle income
+Burkina Faso,0.138,NA,2660,1470,58.4,NA,16100000,51.8,Q1,bfa,africa,africa_sub_saharan,sub_saharan_africa,g77,12.5,-1.66667,Sub-Saharan Africa,Low income
+Burundi,0.0268,NA,NA,772,58.2,NA,9040000,55,Q1,bdi,africa,africa_sub_saharan,sub_saharan_africa,g77,-3.5,30,Sub-Saharan Africa,Low income
+Cambodia,0.358,165,2430,2660,66.6,NA,14500000,68.9,Q1,khm,asia,east_asia_pacific,east_asia_pacific,g77,13,105,East Asia & Pacific,Lower middle income
+Cameroon,0.281,261,2570,2690,57.7,NA,20500000,62.7,Q1,cmr,africa,africa_sub_saharan,sub_saharan_africa,g77,6,12.5,Sub-Saharan Africa,Lower middle income
+Canada,15.6,15600,3470,41600,81.5,NA,34500000,99.3,Q4,can,americas,america_north,america,oecd,60.10867,-113.64258,North America,High income
+Cape Verde,1.21,NA,2570,5990,72.7,80.3,508000,84.3,Q2,cpv,africa,africa_sub_saharan,sub_saharan_africa,g77,16,-24,Sub-Saharan Africa,Lower middle income
+Central African Republic,0.0623,NA,2150,912,48,44.2,4480000,53.7,Q1,caf,africa,africa_sub_saharan,sub_saharan_africa,g77,7,21,Sub-Saharan Africa,Low income
+Chad,0.0439,NA,2060,1860,57,25.4,12300000,41.5,Q1,tcd,africa,africa_sub_saharan,sub_saharan_africa,g77,15,19,Sub-Saharan Africa,Low income
+Chile,4.62,3600,2960,20400,79.5,NA,17200000,99.3,Q4,chl,americas,america_south,america,g77,-33.45694,-70.64827,Latin America & Caribbean,High income
+China,7.12,3300,3080,10400,75.1,NA,1370000000,92,Q2,chn,asia,east_asia_pacific,east_asia_pacific,g77,35,105,East Asia & Pacific,Upper middle income
+Colombia,1.65,1120,2700,11500,77,93.7,46400000,95,Q3,col,americas,america_south,america,g77,4,-73.25,Latin America & Caribbean,Upper middle income
+Comoros,0.192,NA,NA,1420,65.6,70.6,707000,84.2,Q2,com,africa,africa_sub_saharan,sub_saharan_africa,g77,-12.23333,44.44553,Sub-Saharan Africa,Low income
+"Congo, Dem. Rep.",0.0374,108,NA,630,58,NA,66700000,39.8,Q1,cod,africa,africa_sub_saharan,sub_saharan_africa,g77,-2.5,23.5,Sub-Saharan Africa,Low income
+"Congo, Rep.",0.501,144,2190,5210,61.1,NA,4510000,65.1,Q1,cog,africa,africa_sub_saharan,sub_saharan_africa,g77,-1,15.5,Sub-Saharan Africa,Lower middle income
+Costa Rica,1.68,1900,2880,13400,80.5,96.5,4600000,98.7,Q3,cri,americas,america_north,america,g77,10,-84,Latin America & Caribbean,Upper middle income
+Cote d'Ivoire,0.347,198,2780,2510,56.9,47.6,20900000,72.7,Q1,civ,africa,africa_sub_saharan,sub_saharan_africa,g77,8,-5.5,Sub-Saharan Africa,Lower middle income
+Croatia,4.59,3900,3000,20700,76.6,98.3,4310000,99.4,Q4,hrv,europe,europe_east,europe_central_asia,others,45.16667,15.5,Europe & Central Asia,Upper middle income
+Cuba,3.17,1320,3290,18800,78.5,99.8,11400000,94.6,Q3,cub,americas,america_north,america,g77,22,-79.5,Latin America & Caribbean,Upper middle income
+Cyprus,6.6,4240,2680,33200,80.2,98.1,1120000,100,Q4,cyp,europe,europe_west,europe_central_asia,others,35,33,Europe & Central Asia,High income
+Czech Republic,10.1,6300,3250,28800,77.8,NA,10600000,99.9,Q4,cze,europe,europe_east,europe_central_asia,oecd,49.75,15,Europe & Central Asia,High income
+Denmark,7.28,6170,3350,44400,79.8,NA,5580000,100,Q4,dnk,europe,europe_west,europe_central_asia,oecd,56,10,Europe & Central Asia,High income
+Djibouti,0.546,NA,2500,2710,64.2,NA,866000,76.4,Q2,dji,africa,africa_north,middle_east_north_africa,g77,11.58901,43.14503,Middle East & North Africa,Lower middle income
+Dominica,1.79,NA,2960,10100,73,NA,71700,96.5,Q3,dma,americas,america_north,america,g77,15.5,-61.33333,Latin America & Caribbean,Upper middle income
+Dominican Republic,2.12,1400,2560,11300,74.7,90.2,10000000,93.7,Q3,dom,americas,america_north,america,g77,19,-70.66667,Latin America & Caribbean,Upper middle income
+Ecuador,2.54,1220,2380,9930,77,90.2,15200000,90.1,Q2,ecu,americas,america_south,america,g77,-1.25,-78.25,Latin America & Caribbean,Upper middle income
+Egypt,2.53,1660,3550,9820,70.9,64.6,85900000,98.3,Q3,egy,africa,africa_north,middle_east_north_africa,g77,27,30,Middle East & North Africa,Lower middle income
+El Salvador,1.07,883,2540,7430,74.3,NA,6190000,90,Q2,slv,americas,america_north,america,g77,13.83333,-88.91667,Latin America & Caribbean,Lower middle income
+Equatorial Guinea,6.16,NA,NA,34400,61.4,91.1,994000,49.3,Q1,gnq,africa,africa_sub_saharan,sub_saharan_africa,g77,1.7,10.5,Sub-Saharan Africa,Upper middle income
+Eritrea,0.133,64.1,NA,1510,62,59,4470000,18.3,Q1,eri,africa,africa_sub_saharan,sub_saharan_africa,g77,15,39,Sub-Saharan Africa,Low income
+Estonia,14,6310,3290,24500,76.3,99.8,1330000,99.5,Q4,est,europe,europe_east,europe_central_asia,others,59,26,Europe & Central Asia,High income
+Ethiopia,0.0858,52.6,2100,1160,62.2,NA,90000000,33.1,Q1,eth,africa,africa_sub_saharan,sub_saharan_africa,g77,9,39.5,Sub-Saharan Africa,Low income
+Fiji,1.26,NA,2920,7490,65.5,NA,867000,94,Q3,fji,asia,east_asia_pacific,east_asia_pacific,g77,-18,178,East Asia & Pacific,Upper middle income
+Finland,10.5,15700,3310,40700,80.3,NA,5390000,100,Q4,fin,europe,europe_east,europe_central_asia,oecd,64,26,Europe & Central Asia,High income
+France,5.24,7230,3510,37500,81.7,NA,63300000,100,Q4,fra,europe,europe_west,europe_central_asia,oecd,46,2,Europe & Central Asia,High income
+Gabon,2.93,960,2770,15900,63.3,85.6,1700000,85.8,Q2,gab,africa,africa_sub_saharan,sub_saharan_africa,g77,-1,11.75,Sub-Saharan Africa,Upper middle income
+Gambia,0.256,NA,2690,1540,66,41.9,1750000,78.5,Q2,gmb,africa,africa_sub_saharan,sub_saharan_africa,g77,13.5,-15.5,Sub-Saharan Africa,Low income
+Georgia,1.91,2220,2810,7320,73,99.7,4170000,92,Q2,geo,europe,europe_east,europe_central_asia,others,41.99998,43.4999,Europe & Central Asia,Lower middle income
+Germany,9.05,7280,3540,42700,80.3,NA,80900000,100,Q4,deu,europe,europe_west,europe_central_asia,oecd,51.5,10.5,Europe & Central Asia,High income
+Ghana,0.391,318,3000,3400,62.9,NA,25100000,74.4,Q1,gha,africa,africa_sub_saharan,sub_saharan_africa,g77,8.1,-1.2,Sub-Saharan Africa,Lower middle income
+Greece,6.99,5390,3430,26100,80.5,96.3,11400000,100,Q4,grc,europe,europe_west,europe_central_asia,oecd,39,22,Europe & Central Asia,High income
+Grenada,2.41,NA,2420,11200,71.3,NA,105000,95.9,Q3,grd,americas,america_north,america,g77,12.11667,-61.66667,Latin America & Caribbean,Upper middle income
+Guatemala,0.792,535,2490,6840,71.5,71.1,14900000,91.5,Q2,gtm,americas,america_north,america,g77,14.64072,-90.51327,Latin America & Caribbean,Lower middle income
+Guinea,0.252,NA,2550,1210,58.5,NA,11000000,63.9,Q1,gin,africa,africa_sub_saharan,sub_saharan_africa,g77,10.83333,-10.66667,Sub-Saharan Africa,Low income
+Guinea-Bissau,0.154,NA,2340,1490,56.2,42.1,1600000,64.9,Q1,gnb,africa,africa_sub_saharan,sub_saharan_africa,g77,12,-15,Sub-Saharan Africa,Low income
+Guyana,2.38,NA,2640,6130,65.7,NA,749000,93,Q2,guy,americas,america_south,america,g77,5,-59,Latin America & Caribbean,Upper middle income
+Haiti,0.219,31.1,2100,1560,60.5,NA,10100000,62.5,Q1,hti,americas,america_north,america,g77,19,-72.41667,Latin America & Caribbean,Low income
+Honduras,1.07,674,2620,4050,71.8,84.9,8350000,89.7,Q2,hnd,americas,america_north,america,g77,15,-86.5,Latin America & Caribbean,Lower middle income
+Hungary,4.83,3900,3060,22700,74.9,98.9,9900000,100,Q4,hun,europe,europe_east,europe_central_asia,oecd,47,20,Europe & Central Asia,High income
+Iceland,5.82,52400,3350,39500,82.1,NA,323000,100,Q4,isl,europe,europe_west,europe_central_asia,oecd,65,-18,Europe & Central Asia,High income
+India,1.48,699,2460,4640,66.6,NA,1250000000,85.7,Q2,ind,asia,asia_west,south_asia,g77,22,79,South Asia,Lower middle income
+Indonesia,2.46,679,2710,8840,70.2,90.1,246000000,85.8,Q2,idn,asia,east_asia_pacific,east_asia_pacific,g77,-5,120,East Asia & Pacific,Lower middle income
+Iran,7.8,2650,3050,17900,74.8,NA,75500000,95,Q3,irn,asia,asia_west,middle_east_north_africa,g77,32,53,Middle East & North Africa,Upper middle income
+Iraq,4.24,1270,2490,13300,67.6,71.2,31700000,83.2,Q2,irq,asia,asia_west,middle_east_north_africa,g77,33,44,Middle East & North Africa,Upper middle income
+Ireland,7.64,5660,3600,45500,80.5,NA,4660000,98.3,Q3,irl,europe,europe_west,europe_central_asia,oecd,53,-8,Europe & Central Asia,High income
+Israel,9.13,6930,3550,30500,81.6,NA,7570000,100,Q4,isr,asia,asia_west,middle_east_north_africa,others,31.5,34.75,Middle East & North Africa,High income
+Italy,6.66,5510,3580,36300,81.8,98.7,59800000,100,Q4,ita,europe,europe_west,europe_central_asia,oecd,42.83333,12.83333,Europe & Central Asia,High income
+Jamaica,2.78,1200,2770,8100,74.8,91.8,2830000,92.5,Q2,jam,americas,america_north,america,g77,18.16667,-77.25,Latin America & Caribbean,Upper middle income
+Japan,9.27,8100,2710,35800,82.6,NA,129000000,98.8,Q3,jpn,asia,east_asia_pacific,east_asia_pacific,oecd,35.68536,139.75309,East Asia & Pacific,High income
+Jordan,2.86,1870,3140,9210,76.1,93.9,7570000,98.8,Q3,jor,asia,asia_west,middle_east_north_africa,g77,31,36,Middle East & North Africa,Lower middle income
+Kazakhstan,15.6,4890,3210,21300,69,NA,16600000,90,Q2,kaz,asia,asia_west,europe_central_asia,others,48,68,Europe & Central Asia,Upper middle income
+Kenya,0.317,151,2170,2560,63.8,NA,42500000,55.4,Q1,ken,africa,africa_sub_saharan,sub_saharan_africa,g77,1,38,Sub-Saharan Africa,Lower middle income
+Kiribati,0.596,NA,3030,1710,60.8,NA,105000,63.9,Q1,kir,asia,east_asia_pacific,east_asia_pacific,others,1.421,172.984,East Asia & Pacific,Lower middle income
+Kuwait,28.5,15800,3470,77500,78.9,NA,3190000,100,Q4,kwt,asia,asia_west,middle_east_north_africa,g77,29.36972,47.97833,Middle East & North Africa,High income
+Kyrgyz Republic,1.39,1650,2770,2920,69.1,NA,5510000,85.3,Q2,kgz,asia,asia_west,europe_central_asia,others,41.5,75,Europe & Central Asia,Lower middle income
+Lao,0.256,NA,2400,4240,64.6,NA,6330000,71.8,Q1,lao,asia,east_asia_pacific,east_asia_pacific,g77,18,105,East Asia & Pacific,Lower middle income
+Latvia,3.49,3260,3150,19800,73.6,99.8,2090000,98.3,Q3,lva,europe,europe_east,europe_central_asia,others,57,25,Europe & Central Asia,High income
+Lebanon,4.46,3340,3130,15700,79,NA,4590000,90.4,Q2,lbn,asia,asia_west,middle_east_north_africa,g77,33.83333,35.83333,Middle East & North Africa,Upper middle income
+Lesotho,1.13,NA,2550,2500,47.5,NA,2060000,70.2,Q1,lso,africa,africa_sub_saharan,sub_saharan_africa,g77,-29.5,28.25,Sub-Saharan Africa,Lower middle income
+Liberia,0.219,NA,2250,734,61.4,NA,4070000,67.8,Q1,lbr,africa,africa_sub_saharan,sub_saharan_africa,g77,6.5,-9.5,Sub-Saharan Africa,Low income
+Libya,6.41,2860,NA,11200,61,83.3,6190000,96.8,Q3,lby,africa,africa_north,middle_east_north_africa,g77,28,17,Middle East & North Africa,Upper middle income
+Liechtenstein,1.31,NA,NA,NA,NA,NA,36300,100,Q4,lie,europe,europe_west,europe_central_asia,others,47.16667,9.53333,Europe & Central Asia,High income
+Lithuania,4.48,3530,3410,22900,73.5,99.7,3080000,95.8,Q3,ltu,europe,europe_east,europe_central_asia,others,55.41667,24,Europe & Central Asia,High income
+Luxembourg,21,15600,3530,92000,81.5,NA,520000,99.9,Q4,lux,europe,europe_west,europe_central_asia,oecd,49.61167,6.13,Europe & Central Asia,High income
+"Macedonia, FYR",4.54,3880,2910,11600,74.2,96,2070000,96.7,Q3,mkd,europe,europe_east,europe_central_asia,others,41.66667,21.75,Europe & Central Asia,Upper middle income
+Madagascar,0.108,NA,2090,1370,61.1,NA,21700000,46.6,Q1,mdg,africa,africa_sub_saharan,sub_saharan_africa,g77,-20,47,Sub-Saharan Africa,Low income
+Malawi,0.0756,NA,2350,1050,54.5,NA,15600000,63,Q1,mwi,africa,africa_sub_saharan,sub_saharan_africa,g77,-13.5,34,Sub-Saharan Africa,Low income
+Malaysia,7.7,4100,2890,21800,74.6,NA,28600000,96.8,Q3,mys,asia,east_asia_pacific,east_asia_pacific,g77,2.5,112.5,East Asia & Pacific,Upper middle income
+Maldives,2.63,NA,2750,11100,78.3,NA,375000,98.1,Q3,mdv,asia,asia_west,south_asia,g77,3.2,73,South Asia,Upper middle income
+Mali,0.0673,NA,2830,1880,60,24.6,15500000,67.7,Q1,mli,africa,africa_sub_saharan,sub_saharan_africa,g77,18,-2,Sub-Saharan Africa,Low income
+Malta,6.07,4870,3370,28600,80.4,NA,418000,100,Q4,mlt,europe,europe_west,europe_central_asia,others,35.91667,14.43333,Middle East & North Africa,High income
+Marshall Islands,1.95,NA,NA,3500,63.9,NA,52500,78.5,Q2,mhl,asia,east_asia_pacific,east_asia_pacific,g77,7.113,171.236,East Asia & Pacific,Upper middle income
+Mauritania,0.644,NA,2810,3370,68.6,52,3720000,65.8,Q1,mrt,africa,africa_sub_saharan,sub_saharan_africa,g77,20.25,-10.5,Sub-Saharan Africa,Lower middle income
+Mauritius,3.13,2030,3060,16600,73.8,86.7,1250000,99.8,Q4,mus,africa,africa_sub_saharan,sub_saharan_africa,g77,-20.3,57.58333,Sub-Saharan Africa,Upper middle income
+Mexico,4.07,2150,3030,15900,75.8,92.3,119000000,96,Q3,mex,americas,america_north,america,oecd,19.42847,-99.12766,Latin America & Caribbean,Upper middle income
+"Micronesia, Fed. Sts.",1.17,NA,NA,3410,65.4,NA,103000,88.7,Q2,fsm,asia,east_asia_pacific,east_asia_pacific,g77,6.924,158.162,East Asia & Pacific,Lower middle income
+Moldova,1.24,1470,2700,4180,71.5,98.5,4080000,86.1,Q2,mda,europe,europe_east,europe_central_asia,others,47.25,28.58333,Europe & Central Asia,Lower middle income
+Mongolia,7.79,1500,2450,8880,66.6,97.9,2760000,79.2,Q2,mng,asia,east_asia_pacific,east_asia_pacific,g77,46,105,East Asia & Pacific,Lower middle income
+Montenegro,4.11,5740,3480,14500,76.4,97.6,625000,96.2,Q3,mne,europe,europe_east,europe_central_asia,others,42.75,19.25,Europe & Central Asia,Upper middle income
+Morocco,1.76,824,3350,6690,73.8,57.6,32900000,78.3,Q2,mar,africa,africa_north,middle_east_north_africa,g77,32,-6,Middle East & North Africa,Lower middle income
+Mozambique,0.129,441,2260,955,55,NA,24900000,40.4,Q1,moz,africa,africa_sub_saharan,sub_saharan_africa,g77,-18.25,35,Sub-Saharan Africa,Low income
+Myanmar,0.283,156,2530,3900,67.4,90.4,50600000,64.2,Q1,mmr,asia,east_asia_pacific,east_asia_pacific,g77,21,96,East Asia & Pacific,Lower middle income
+Namibia,1.28,1570,2090,8720,60.1,NA,2220000,78.2,Q2,nam,africa,africa_sub_saharan,sub_saharan_africa,g77,-22,17,Sub-Saharan Africa,Upper middle income
+Nauru,3.95,NA,NA,7340,NA,NA,10200,99.4,Q4,nru,asia,east_asia_pacific,east_asia_pacific,others,-0.517,166.933,East Asia & Pacific,Upper middle income
+Nepal,0.202,115,2610,2030,68.7,46.7,27300000,85.7,Q2,npl,asia,asia_west,south_asia,g77,28,84,South Asia,Low income
+Netherlands,10.4,7060,3210,46100,80.9,NA,16700000,100,Q4,nld,europe,europe_west,europe_central_asia,oecd,52.25,5.75,Europe & Central Asia,High income
+New Zealand,7.13,9460,3140,32700,81,NA,4420000,100,Q4,nzl,asia,east_asia_pacific,east_asia_pacific,oecd,-42,174,East Asia & Pacific,High income
+Nicaragua,0.84,537,2540,4230,77.5,NA,5810000,81.7,Q2,nic,americas,america_north,america,g77,13,-85,Latin America & Caribbean,Lower middle income
+Niger,0.0778,47.5,2530,802,59.3,NA,17100000,43.6,Q1,ner,africa,africa_sub_saharan,sub_saharan_africa,g77,18,9,Sub-Saharan Africa,Low income
+Nigeria,0.588,150,2710,5260,61.3,NA,163000000,62.1,Q1,nga,africa,africa_sub_saharan,sub_saharan_africa,g77,10,8,Sub-Saharan Africa,Lower middle income
+North Korea,1.94,655,2100,1400,70.2,NA,24700000,99.6,Q4,prk,asia,east_asia_pacific,east_asia_pacific,g77,40,127,East Asia & Pacific,Low income
+Norway,9.13,23500,3490,62100,81.2,NA,4950000,100,Q4,nor,europe,europe_west,europe_central_asia,oecd,62,10,Europe & Central Asia,High income
+Oman,16.7,5880,3080,42100,76.4,NA,3240000,85.7,Q2,omn,asia,asia_west,middle_east_north_africa,g77,21,57,Middle East & North Africa,High income
+Pakistan,0.93,455,2430,4310,65.8,NA,174000000,88.7,Q2,pak,asia,asia_west,south_asia,g77,30,70,South Asia,Lower middle income
+Palau,12.3,NA,NA,13000,NA,NA,20600,98.1,Q3,plw,asia,east_asia_pacific,east_asia_pacific,others,7.503,134.621,East Asia & Pacific,High income
+Palestine,0.538,NA,NA,2670,72.1,92.6,4180000,87.9,Q2,pse,asia,asia_west,middle_east_north_africa,g77,31.92157,35.20329,Middle East & North Africa,Lower middle income
+Panama,2.72,1820,2650,16900,77.9,NA,3710000,93.3,Q2,pan,americas,america_north,america,g77,8.9936,-79.51973,Latin America & Caribbean,Upper middle income
+Papua New Guinea,0.733,NA,NA,2260,59,59.4,7270000,36.6,Q1,png,asia,east_asia_pacific,east_asia_pacific,g77,-6,147,East Asia & Pacific,Lower middle income
+Paraguay,0.845,1280,2610,7510,74.1,NA,6290000,92.9,Q2,pry,americas,america_south,america,g77,-23.33333,-58,Latin America & Caribbean,Upper middle income
+Peru,1.67,1240,2630,10400,78.1,NA,29800000,87.6,Q2,per,americas,america_south,america,g77,-10,-75.25,Latin America & Caribbean,Upper middle income
+Philippines,0.897,645,2570,5710,69.2,NA,95300000,89.3,Q2,phl,asia,east_asia_pacific,east_asia_pacific,g77,13,122,East Asia & Pacific,Lower middle income
+Poland,8.27,3880,3440,22900,76.5,99.6,38300000,97.9,Q3,pol,europe,europe_west,europe_central_asia,oecd,52,20,Europe & Central Asia,High income
+Portugal,4.48,4850,3480,26800,80.1,94,10600000,99.7,Q4,prt,europe,europe_west,europe_central_asia,oecd,39.6945,-8.13057,Europe & Central Asia,High income
+Qatar,41.2,14800,NA,129000,80,NA,1950000,100,Q4,qat,asia,asia_west,middle_east_north_africa,g77,25.27932,51.52245,Middle East & North Africa,High income
+Romania,4.18,2640,3340,18100,74.5,97.2,20300000,100,Q4,rou,europe,europe_east,europe_central_asia,others,46,25,Europe & Central Asia,Upper middle income
+Russia,12.3,6490,3330,24100,69.8,NA,143000000,96.1,Q3,rus,europe,europe_east,europe_central_asia,others,60,100,Europe & Central Asia,Upper middle income
+Rwanda,0.0631,NA,2210,1420,65.3,NA,10500000,54.1,Q1,rwa,africa,africa_sub_saharan,sub_saharan_africa,g77,-2,30,Sub-Saharan Africa,Low income
+Samoa,1.07,NA,2880,5670,71.5,98.6,188000,95,Q3,wsm,asia,east_asia_pacific,east_asia_pacific,g77,-13.8,-172.13333,East Asia & Pacific,Upper middle income
+Sao Tome and Principe,0.574,NA,2330,2700,69.3,NA,179000,76.4,Q2,stp,africa,africa_sub_saharan,sub_saharan_africa,g77,1,7,Sub-Saharan Africa,Lower middle income
+Saudi Arabia,17.7,8020,3100,48500,75.3,82.2,28200000,99.7,Q4,sau,asia,asia_west,middle_east_north_africa,g77,25,45,Middle East & North Africa,High income
+Senegal,0.629,200,2430,2160,64.4,NA,13300000,71.6,Q1,sen,africa,africa_sub_saharan,sub_saharan_africa,g77,14.5,-14.25,Sub-Saharan Africa,Low income
+Serbia,5.47,4490,2730,13000,74.8,96.9,8990000,90,Q2,srb,europe,europe_east,europe_central_asia,others,44.81892,20.45998,Europe & Central Asia,Upper middle income
+Seychelles,3.71,NA,NA,22600,73.5,92.3,91800,95.9,Q3,syc,africa,africa_sub_saharan,sub_saharan_africa,g77,-4.58333,55.66667,Sub-Saharan Africa,High income
+Sierra Leone,0.136,NA,2340,1250,55.7,32.6,6610000,52.7,Q1,sle,africa,africa_sub_saharan,sub_saharan_africa,g77,8.5,-11.5,Sub-Saharan Africa,Low income
+Singapore,8.74,8650,NA,75000,82.9,NA,5180000,100,Q4,sgp,asia,east_asia_pacific,east_asia_pacific,g77,1.28967,103.85007,East Asia & Pacific,High income
+Slovak Republic,6.38,5350,2940,25800,75.9,NA,5410000,97.9,Q3,svk,europe,europe_east,europe_central_asia,oecd,48.66667,19.5,Europe & Central Asia,High income
+Slovenia,7.35,6750,3170,28800,79.8,99.7,2050000,99.5,Q4,svn,europe,europe_east,europe_central_asia,others,46.08333,15,Europe & Central Asia,High income
+Solomon Islands,0.367,NA,2490,1970,62,NA,540000,69.7,Q1,slb,asia,east_asia_pacific,east_asia_pacific,g77,-8,159,East Asia & Pacific,Lower middle income
+Somalia,0.0488,NA,NA,614,53.4,NA,12400000,34.7,Q1,som,africa,africa_sub_saharan,sub_saharan_africa,g77,6,48,Sub-Saharan Africa,Low income
+South Africa,9,4540,3000,12200,55.8,92.2,52300000,82.8,Q2,zaf,africa,africa_sub_saharan,sub_saharan_africa,g77,-29,24,Sub-Saharan Africa,Upper middle income
+South Korea,11.8,10100,3350,31200,80.4,NA,49700000,99.1,Q3,kor,asia,east_asia_pacific,east_asia_pacific,oecd,36.5,127.75,East Asia & Pacific,High income
+South Sudan,NA,NA,NA,3480,58.1,NA,10400000,42.7,Q1,ssd,africa,africa_sub_saharan,sub_saharan_africa,NA,7.5,30,Sub-Saharan Africa,Low income
+Spain,5.77,5600,3190,32100,82.2,NA,46900000,100,Q4,esp,europe,europe_west,europe_central_asia,oecd,40,-4,Europe & Central Asia,High income
+Sri Lanka,0.745,504,2490,9210,76,NA,20300000,88.3,Q2,lka,asia,asia_west,south_asia,g77,7.75,80.75,South Asia,Lower middle income
+St. Kitts and Nevis,4.44,NA,2470,21700,NA,NA,52000,99,Q3,kna,americas,america_north,america,g77,17.33333,-62.75,Latin America & Caribbean,High income
+St. Lucia,2.34,NA,2580,10800,76,NA,174000,95.8,Q3,lca,americas,america_north,america,g77,13.88333,-60.96667,Latin America & Caribbean,Upper middle income
+St. Vincent and the Grenadines,1.81,NA,2940,9870,71.7,NA,109000,94.7,Q3,vct,americas,america_north,america,g77,13.08333,-61.2,Latin America & Caribbean,Upper middle income
+Sudan,0.445,142,2350,3630,66.5,63.2,35200000,53.3,Q1,sdn,africa,africa_sub_saharan,sub_saharan_africa,g77,16,30,Sub-Saharan Africa,Lower middle income
+Suriname,3.7,3340,2710,14900,70.5,NA,532000,94.2,Q3,sur,americas,america_south,america,g77,4,-56,Latin America & Caribbean,Upper middle income
+Swaziland,0.856,NA,2280,7320,48.9,87.3,1230000,63.4,Q1,swz,africa,africa_sub_saharan,sub_saharan_africa,g77,-26.5,31.5,Sub-Saharan Africa,Lower middle income
+Sweden,5.47,14000,3160,43800,81.7,NA,9470000,100,Q4,swe,europe,europe_west,europe_central_asia,oecd,62,15,Europe & Central Asia,High income
+Switzerland,4.66,7930,3490,55900,82.5,NA,7930000,100,Q4,che,europe,europe_west,europe_central_asia,oecd,47.00016,8.01427,Europe & Central Asia,High income
+Syria,2.73,1690,NA,6360,75,77.8,20900000,96.6,Q3,syr,asia,asia_west,middle_east_north_africa,g77,35,38,Middle East & North Africa,Lower middle income
+Tajikistan,0.301,1780,2050,2210,69.9,99.6,7820000,70.5,Q1,tjk,asia,asia_west,europe_central_asia,others,39,71,Europe & Central Asia,Lower middle income
+Tanzania,0.17,83.9,2200,2190,59.9,NA,47600000,45.2,Q1,tza,africa,africa_sub_saharan,sub_saharan_africa,g77,-6,35,Sub-Saharan Africa,Low income
+Thailand,4.12,2280,2760,13500,76.9,NA,67500000,97.4,Q3,tha,asia,east_asia_pacific,east_asia_pacific,g77,15.5,101,East Asia & Pacific,Upper middle income
+Timor-Leste,0.217,NA,2110,1960,71.6,NA,1130000,64.5,Q1,tls,asia,east_asia_pacific,east_asia_pacific,g77,-8.83333,125.75,East Asia & Pacific,Lower middle income
+Togo,0.369,133,2380,1230,59.6,48,6680000,58.2,Q1,tgo,africa,africa_sub_saharan,sub_saharan_africa,g77,8.66667,1.08333,Sub-Saharan Africa,Low income
+Tonga,0.982,NA,NA,5100,70,NA,105000,99.5,Q4,ton,asia,east_asia_pacific,east_asia_pacific,g77,-20,-175,East Asia & Pacific,Upper middle income
+Trinidad and Tobago,35.2,6390,2910,31000,72.7,98.5,1330000,96.9,Q3,tto,americas,america_north,america,g77,11,-61,Latin America & Caribbean,High income
+Tunisia,2.42,1320,3360,10100,77,NA,10800000,92.7,Q2,tun,africa,africa_north,middle_east_north_africa,g77,34,9,Middle East & North Africa,Lower middle income
+Turkey,4.37,2700,3670,19700,78.2,90.3,73400000,98.1,Q3,tur,europe,europe_east,europe_central_asia,oecd,39,35,Europe & Central Asia,Upper middle income
+Turkmenistan,12.1,2410,2850,11200,68.4,99.5,5170000,91.8,Q2,tkm,asia,asia_west,europe_central_asia,g77,39.75,59.66667,Europe & Central Asia,Upper middle income
+Tuvalu,0.69,NA,NA,3230,NA,NA,10600,98.8,Q3,tuv,asia,east_asia_pacific,east_asia_pacific,others,-8.51719,179.14478,East Asia & Pacific,Upper middle income
+Uganda,0.122,NA,2180,1630,57.7,NA,35100000,36.5,Q1,uga,africa,africa_sub_saharan,sub_saharan_africa,g77,1.25,32.5,Sub-Saharan Africa,Low income
+Ukraine,6.28,3660,3180,8280,71.1,99.7,45600000,97.1,Q3,ukr,europe,europe_east,europe_central_asia,others,49,32,Europe & Central Asia,Lower middle income
+United Arab Emirates,19.1,10600,3210,58400,76.5,NA,8670000,99.6,Q4,are,asia,asia_west,middle_east_north_africa,g77,23.75,54.5,Middle East & North Africa,High income
+United Kingdom,7.02,5470,3420,36500,80.5,NA,63800000,100,Q4,gbr,europe,europe_west,europe_central_asia,oecd,54.75844,-2.69531,Europe & Central Asia,High income
+United States,17,13200,3650,49800,78.8,NA,311000000,99.2,Q4,usa,americas,america_north,america,oecd,39.76,-98.5,North America,High income
+Uruguay,2.29,2810,3010,17900,76.4,NA,3390000,98.6,Q3,ury,americas,america_south,america,g77,-33,-56,Latin America & Caribbean,High income
+Uzbekistan,3.91,1630,2690,4470,69,99.2,29100000,91.5,Q2,uzb,asia,asia_west,europe_central_asia,others,41.66667,63.83333,Europe & Central Asia,Lower middle income
+Vanuatu,0.546,NA,2840,2920,63.2,81.5,242000,87.4,Q2,vut,asia,east_asia_pacific,east_asia_pacific,g77,-16,167,East Asia & Pacific,Lower middle income
+Venezuela,6,3190,2800,17000,75.4,NA,29500000,97.2,Q3,ven,americas,america_south,america,g77,8,-66,Latin America & Caribbean,Upper middle income
+Vietnam,1.7,1100,2720,4720,73.3,91.4,89400000,87.4,Q2,vnm,asia,east_asia_pacific,east_asia_pacific,g77,16.16667,107.83333,East Asia & Pacific,Lower middle income
+Yemen,0.811,190,2210,3810,67.7,48.5,24300000,62.4,Q1,yem,asia,asia_west,middle_east_north_africa,g77,15.5,47.5,Middle East & North Africa,Lower middle income
+Zambia,0.206,621,1910,3360,53.2,NA,14300000,57.9,Q1,zmb,africa,africa_sub_saharan,sub_saharan_africa,g77,-14.33333,28.5,Sub-Saharan Africa,Lower middle income
+Zimbabwe,0.665,570,2200,1660,51.9,80.1,14400000,67.8,Q1,zwe,africa,africa_sub_saharan,sub_saharan_africa,g77,-19,29.75,Sub-Saharan Africa,Low income
+Monaco,NA,NA,NA,58100,NA,NA,37500,100,Q4,mco,europe,europe_west,europe_central_asia,others,43.73333,7.41667,Europe & Central Asia,High income
+San Marino,NA,NA,NA,43100,NA,NA,31500,100,Q4,smr,europe,europe_west,europe_central_asia,others,43.93667,12.44639,Europe & Central Asia,High income
+Holy See,NA,NA,NA,NA,NA,NA,796,NA,NA,hos,europe,europe_west,europe_central_asia,others,41.90236,12.45332,NA,NA

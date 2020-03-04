@@ -1,0 +1,1366 @@
+country,population,four_regions,eight_regions,six_regions,WorldRegions,Measures,Values
+Afghanistan,29700000,asia,asia_west,south_asia,Asia,CO2emissions,0.412
+Afghanistan,29700000,asia,asia_west,south_asia,Asia,ElectricityUsePP,NA
+Afghanistan,29700000,asia,asia_west,south_asia,Asia,FoodSupplykcPPD,2110
+Afghanistan,29700000,asia,asia_west,south_asia,Asia,IncomePP,1660
+Afghanistan,29700000,asia,asia_west,south_asia,Asia,LifeExpectancyYrs,56.7
+Afghanistan,29700000,asia,asia_west,south_asia,Asia,FemaleLiteracyRate,13
+Afghanistan,29700000,asia,asia_west,south_asia,Asia,WaterSourcePrct,52.6
+Albania,2930000,europe,europe_east,europe_central_asia,Europe,CO2emissions,1.79
+Albania,2930000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,2210
+Albania,2930000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3130
+Albania,2930000,europe,europe_east,europe_central_asia,Europe,IncomePP,10200
+Albania,2930000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,76.7
+Albania,2930000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,95.7
+Albania,2930000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,88.1
+Algeria,36800000,africa,africa_north,middle_east_north_africa,Africa,CO2emissions,3.29
+Algeria,36800000,africa,africa_north,middle_east_north_africa,Africa,ElectricityUsePP,1120
+Algeria,36800000,africa,africa_north,middle_east_north_africa,Africa,FoodSupplykcPPD,3220
+Algeria,36800000,africa,africa_north,middle_east_north_africa,Africa,IncomePP,13000
+Algeria,36800000,africa,africa_north,middle_east_north_africa,Africa,LifeExpectancyYrs,76.7
+Algeria,36800000,africa,africa_north,middle_east_north_africa,Africa,FemaleLiteracyRate,NA
+Algeria,36800000,africa,africa_north,middle_east_north_africa,Africa,WaterSourcePrct,92.6
+Andorra,83800,europe,europe_west,europe_central_asia,Europe,CO2emissions,5.87
+Andorra,83800,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,NA
+Andorra,83800,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,NA
+Andorra,83800,europe,europe_west,europe_central_asia,Europe,IncomePP,42000
+Andorra,83800,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,82.6
+Andorra,83800,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Andorra,83800,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Angola,24200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,1.25
+Angola,24200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,207
+Angola,24200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2410
+Angola,24200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,5910
+Angola,24200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,60.9
+Angola,24200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,58.6
+Angola,24200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,40.3
+Antigua and Barbuda,95700,americas,america_north,america,Americas,CO2emissions,5.36
+Antigua and Barbuda,95700,americas,america_north,america,Americas,ElectricityUsePP,NA
+Antigua and Barbuda,95700,americas,america_north,america,Americas,FoodSupplykcPPD,2370
+Antigua and Barbuda,95700,americas,america_north,america,Americas,IncomePP,18600
+Antigua and Barbuda,95700,americas,america_north,america,Americas,LifeExpectancyYrs,76.9
+Antigua and Barbuda,95700,americas,america_north,america,Americas,FemaleLiteracyRate,99.4
+Antigua and Barbuda,95700,americas,america_north,america,Americas,WaterSourcePrct,97
+Argentina,41700000,americas,america_south,america,Americas,CO2emissions,4.6
+Argentina,41700000,americas,america_south,america,Americas,ElectricityUsePP,2900
+Argentina,41700000,americas,america_south,america,Americas,FoodSupplykcPPD,3160
+Argentina,41700000,americas,america_south,america,Americas,IncomePP,19600
+Argentina,41700000,americas,america_south,america,Americas,LifeExpectancyYrs,76
+Argentina,41700000,americas,america_south,america,Americas,FemaleLiteracyRate,97.9
+Argentina,41700000,americas,america_south,america,Americas,WaterSourcePrct,99.5
+Armenia,2880000,europe,europe_east,europe_central_asia,Europe,CO2emissions,1.71
+Armenia,2880000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,1810
+Armenia,2880000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,2790
+Armenia,2880000,europe,europe_east,europe_central_asia,Europe,IncomePP,7020
+Armenia,2880000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,73.8
+Armenia,2880000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,99.5
+Armenia,2880000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,97.8
+Australia,22500000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,17.4
+Australia,22500000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,10600
+Australia,22500000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,3240
+Australia,22500000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,41800
+Australia,22500000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,82.2
+Australia,22500000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Australia,22500000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,99.9
+Austria,8460000,europe,europe_west,europe_central_asia,Europe,CO2emissions,7.69
+Austria,8460000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,8430
+Austria,8460000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3740
+Austria,8460000,europe,europe_west,europe_central_asia,Europe,IncomePP,44200
+Austria,8460000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.7
+Austria,8460000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Austria,8460000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Azerbaijan,9150000,europe,europe_east,europe_central_asia,Europe,CO2emissions,3.66
+Azerbaijan,9150000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,1710
+Azerbaijan,9150000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3040
+Azerbaijan,9150000,europe,europe_east,europe_central_asia,Europe,IncomePP,15800
+Azerbaijan,9150000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,69.9
+Azerbaijan,9150000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Azerbaijan,9150000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,82.3
+Bahamas,367000,americas,america_north,america,Americas,CO2emissions,5.09
+Bahamas,367000,americas,america_north,america,Americas,ElectricityUsePP,NA
+Bahamas,367000,americas,america_north,america,Americas,FoodSupplykcPPD,2570
+Bahamas,367000,americas,america_north,america,Americas,IncomePP,22700
+Bahamas,367000,americas,america_north,america,Americas,LifeExpectancyYrs,73.8
+Bahamas,367000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+Bahamas,367000,americas,america_north,america,Americas,WaterSourcePrct,97.8
+Bahrain,1280000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,22.4
+Bahrain,1280000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,17900
+Bahrain,1280000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,NA
+Bahrain,1280000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,40700
+Bahrain,1280000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,76.2
+Bahrain,1280000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,NA
+Bahrain,1280000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,100
+Bangladesh,154000000,asia,asia_west,south_asia,Asia,CO2emissions,0.412
+Bangladesh,154000000,asia,asia_west,south_asia,Asia,ElectricityUsePP,258
+Bangladesh,154000000,asia,asia_west,south_asia,Asia,FoodSupplykcPPD,2430
+Bangladesh,154000000,asia,asia_west,south_asia,Asia,IncomePP,2570
+Bangladesh,154000000,asia,asia_west,south_asia,Asia,LifeExpectancyYrs,71
+Bangladesh,154000000,asia,asia_west,south_asia,Asia,FemaleLiteracyRate,53.4
+Bangladesh,154000000,asia,asia_west,south_asia,Asia,WaterSourcePrct,96.7
+Barbados,281000,americas,america_north,america,Americas,CO2emissions,5.45
+Barbados,281000,americas,america_north,america,Americas,ElectricityUsePP,NA
+Barbados,281000,americas,america_north,america,Americas,FoodSupplykcPPD,2890
+Barbados,281000,americas,america_north,america,Americas,IncomePP,15400
+Barbados,281000,americas,america_north,america,Americas,LifeExpectancyYrs,76.7
+Barbados,281000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+Barbados,281000,americas,america_north,america,Americas,WaterSourcePrct,98.2
+Belarus,9470000,europe,europe_east,europe_central_asia,Europe,CO2emissions,6.77
+Belarus,9470000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,3630
+Belarus,9470000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3400
+Belarus,9470000,europe,europe_east,europe_central_asia,Europe,IncomePP,17200
+Belarus,9470000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,70.7
+Belarus,9470000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Belarus,9470000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,98
+Belgium,11000000,europe,europe_west,europe_central_asia,Europe,CO2emissions,9.08
+Belgium,11000000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,8020
+Belgium,11000000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3720
+Belgium,11000000,europe,europe_west,europe_central_asia,Europe,IncomePP,41200
+Belgium,11000000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.2
+Belgium,11000000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Belgium,11000000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Belize,329000,americas,america_north,america,Americas,CO2emissions,1.83
+Belize,329000,americas,america_north,america,Americas,ElectricityUsePP,NA
+Belize,329000,americas,america_north,america,Americas,FoodSupplykcPPD,2760
+Belize,329000,americas,america_north,america,Americas,IncomePP,7860
+Belize,329000,americas,america_north,america,Americas,LifeExpectancyYrs,71.5
+Belize,329000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+Belize,329000,americas,america_north,america,Americas,WaterSourcePrct,94.6
+Benin,9460000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.56
+Benin,9460000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,91.5
+Benin,9460000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2600
+Benin,9460000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1820
+Benin,9460000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,62.2
+Benin,9460000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Benin,9460000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,65.2
+Bhutan,741000,asia,asia_west,south_asia,Asia,CO2emissions,0.99
+Bhutan,741000,asia,asia_west,south_asia,Asia,ElectricityUsePP,NA
+Bhutan,741000,asia,asia_west,south_asia,Asia,FoodSupplykcPPD,NA
+Bhutan,741000,asia,asia_west,south_asia,Asia,IncomePP,6810
+Bhutan,741000,asia,asia_west,south_asia,Asia,LifeExpectancyYrs,72.5
+Bhutan,741000,asia,asia_west,south_asia,Asia,FemaleLiteracyRate,NA
+Bhutan,741000,asia,asia_west,south_asia,Asia,WaterSourcePrct,94.7
+Bolivia,10100000,americas,america_south,america,Americas,CO2emissions,1.6
+Bolivia,10100000,americas,america_south,america,Americas,ElectricityUsePP,637
+Bolivia,10100000,americas,america_south,america,Americas,FoodSupplykcPPD,2220
+Bolivia,10100000,americas,america_south,america,Americas,IncomePP,5600
+Bolivia,10100000,americas,america_south,america,Americas,LifeExpectancyYrs,71.9
+Bolivia,10100000,americas,america_south,america,Americas,FemaleLiteracyRate,NA
+Bolivia,10100000,americas,america_south,america,Americas,WaterSourcePrct,89.4
+Bosnia and Herzegovina,3690000,europe,europe_east,europe_central_asia,Europe,CO2emissions,6.48
+Bosnia and Herzegovina,3690000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,3320
+Bosnia and Herzegovina,3690000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3130
+Bosnia and Herzegovina,3690000,europe,europe_east,europe_central_asia,Europe,IncomePP,9890
+Bosnia and Herzegovina,3690000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,76.9
+Bosnia and Herzegovina,3690000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,96.7
+Bosnia and Herzegovina,3690000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,97.4
+Botswana,2050000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,2.04
+Botswana,2050000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,1480
+Botswana,2050000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2270
+Botswana,2050000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,13900
+Botswana,2050000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,58.9
+Botswana,2050000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,85.6
+Botswana,2050000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,78.7
+Brazil,199000000,americas,america_south,america,Americas,CO2emissions,2.21
+Brazil,199000000,americas,america_south,america,Americas,ElectricityUsePP,2420
+Brazil,199000000,americas,america_south,america,Americas,FoodSupplykcPPD,3290
+Brazil,199000000,americas,america_south,america,Americas,IncomePP,15000
+Brazil,199000000,americas,america_south,america,Americas,LifeExpectancyYrs,74.4
+Brazil,199000000,americas,america_south,america,Americas,FemaleLiteracyRate,NA
+Brazil,199000000,americas,america_south,america,Americas,WaterSourcePrct,96.5
+Brunei,394000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,24.6
+Brunei,394000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,8780
+Brunei,394000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2940
+Brunei,394000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,82400
+Brunei,394000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,77
+Brunei,394000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,93.9
+Brunei,394000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,99.5
+Bulgaria,7360000,europe,europe_east,europe_central_asia,Europe,CO2emissions,6.71
+Bulgaria,7360000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,4860
+Bulgaria,7360000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,2770
+Bulgaria,7360000,europe,europe_east,europe_central_asia,Europe,IncomePP,15700
+Bulgaria,7360000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,74.3
+Bulgaria,7360000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,98
+Bulgaria,7360000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,99.4
+Burkina Faso,16100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.138
+Burkina Faso,16100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Burkina Faso,16100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2660
+Burkina Faso,16100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1470
+Burkina Faso,16100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,58.4
+Burkina Faso,16100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Burkina Faso,16100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,51.8
+Burundi,9040000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0268
+Burundi,9040000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Burundi,9040000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,NA
+Burundi,9040000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,772
+Burundi,9040000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,58.2
+Burundi,9040000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Burundi,9040000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,55
+Cambodia,14500000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.358
+Cambodia,14500000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,165
+Cambodia,14500000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2430
+Cambodia,14500000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,2660
+Cambodia,14500000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,66.6
+Cambodia,14500000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Cambodia,14500000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,68.9
+Cameroon,20500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.281
+Cameroon,20500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,261
+Cameroon,20500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2570
+Cameroon,20500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,2690
+Cameroon,20500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,57.7
+Cameroon,20500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Cameroon,20500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,62.7
+Canada,34500000,americas,america_north,america,Americas,CO2emissions,15.6
+Canada,34500000,americas,america_north,america,Americas,ElectricityUsePP,15600
+Canada,34500000,americas,america_north,america,Americas,FoodSupplykcPPD,3470
+Canada,34500000,americas,america_north,america,Americas,IncomePP,41600
+Canada,34500000,americas,america_north,america,Americas,LifeExpectancyYrs,81.5
+Canada,34500000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+Canada,34500000,americas,america_north,america,Americas,WaterSourcePrct,99.3
+Cape Verde,508000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,1.21
+Cape Verde,508000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Cape Verde,508000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2570
+Cape Verde,508000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,5990
+Cape Verde,508000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,72.7
+Cape Verde,508000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,80.3
+Cape Verde,508000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,84.3
+Central African Republic,4480000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0623
+Central African Republic,4480000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Central African Republic,4480000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2150
+Central African Republic,4480000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,912
+Central African Republic,4480000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,48
+Central African Republic,4480000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,44.2
+Central African Republic,4480000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,53.7
+Chad,12300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0439
+Chad,12300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Chad,12300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2060
+Chad,12300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1860
+Chad,12300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,57
+Chad,12300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,25.4
+Chad,12300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,41.5
+Chile,17200000,americas,america_south,america,Americas,CO2emissions,4.62
+Chile,17200000,americas,america_south,america,Americas,ElectricityUsePP,3600
+Chile,17200000,americas,america_south,america,Americas,FoodSupplykcPPD,2960
+Chile,17200000,americas,america_south,america,Americas,IncomePP,20400
+Chile,17200000,americas,america_south,america,Americas,LifeExpectancyYrs,79.5
+Chile,17200000,americas,america_south,america,Americas,FemaleLiteracyRate,NA
+Chile,17200000,americas,america_south,america,Americas,WaterSourcePrct,99.3
+China,1370000000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,7.12
+China,1370000000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,3300
+China,1370000000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,3080
+China,1370000000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,10400
+China,1370000000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,75.1
+China,1370000000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+China,1370000000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,92
+Colombia,46400000,americas,america_south,america,Americas,CO2emissions,1.65
+Colombia,46400000,americas,america_south,america,Americas,ElectricityUsePP,1120
+Colombia,46400000,americas,america_south,america,Americas,FoodSupplykcPPD,2700
+Colombia,46400000,americas,america_south,america,Americas,IncomePP,11500
+Colombia,46400000,americas,america_south,america,Americas,LifeExpectancyYrs,77
+Colombia,46400000,americas,america_south,america,Americas,FemaleLiteracyRate,93.7
+Colombia,46400000,americas,america_south,america,Americas,WaterSourcePrct,95
+Comoros,707000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.192
+Comoros,707000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Comoros,707000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,NA
+Comoros,707000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1420
+Comoros,707000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,65.6
+Comoros,707000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,70.6
+Comoros,707000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,84.2
+"Congo, Dem. Rep.",66700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0374
+"Congo, Dem. Rep.",66700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,108
+"Congo, Dem. Rep.",66700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,NA
+"Congo, Dem. Rep.",66700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,630
+"Congo, Dem. Rep.",66700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,58
+"Congo, Dem. Rep.",66700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+"Congo, Dem. Rep.",66700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,39.8
+"Congo, Rep.",4510000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.501
+"Congo, Rep.",4510000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,144
+"Congo, Rep.",4510000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2190
+"Congo, Rep.",4510000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,5210
+"Congo, Rep.",4510000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,61.1
+"Congo, Rep.",4510000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+"Congo, Rep.",4510000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,65.1
+Costa Rica,4600000,americas,america_north,america,Americas,CO2emissions,1.68
+Costa Rica,4600000,americas,america_north,america,Americas,ElectricityUsePP,1900
+Costa Rica,4600000,americas,america_north,america,Americas,FoodSupplykcPPD,2880
+Costa Rica,4600000,americas,america_north,america,Americas,IncomePP,13400
+Costa Rica,4600000,americas,america_north,america,Americas,LifeExpectancyYrs,80.5
+Costa Rica,4600000,americas,america_north,america,Americas,FemaleLiteracyRate,96.5
+Costa Rica,4600000,americas,america_north,america,Americas,WaterSourcePrct,98.7
+Cote d'Ivoire,20900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.347
+Cote d'Ivoire,20900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,198
+Cote d'Ivoire,20900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2780
+Cote d'Ivoire,20900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,2510
+Cote d'Ivoire,20900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,56.9
+Cote d'Ivoire,20900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,47.6
+Cote d'Ivoire,20900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,72.7
+Croatia,4310000,europe,europe_east,europe_central_asia,Europe,CO2emissions,4.59
+Croatia,4310000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,3900
+Croatia,4310000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3000
+Croatia,4310000,europe,europe_east,europe_central_asia,Europe,IncomePP,20700
+Croatia,4310000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,76.6
+Croatia,4310000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,98.3
+Croatia,4310000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,99.4
+Cuba,11400000,americas,america_north,america,Americas,CO2emissions,3.17
+Cuba,11400000,americas,america_north,america,Americas,ElectricityUsePP,1320
+Cuba,11400000,americas,america_north,america,Americas,FoodSupplykcPPD,3290
+Cuba,11400000,americas,america_north,america,Americas,IncomePP,18800
+Cuba,11400000,americas,america_north,america,Americas,LifeExpectancyYrs,78.5
+Cuba,11400000,americas,america_north,america,Americas,FemaleLiteracyRate,99.8
+Cuba,11400000,americas,america_north,america,Americas,WaterSourcePrct,94.6
+Cyprus,1120000,europe,europe_west,europe_central_asia,Europe,CO2emissions,6.6
+Cyprus,1120000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,4240
+Cyprus,1120000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,2680
+Cyprus,1120000,europe,europe_west,europe_central_asia,Europe,IncomePP,33200
+Cyprus,1120000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.2
+Cyprus,1120000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,98.1
+Cyprus,1120000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Czech Republic,10600000,europe,europe_east,europe_central_asia,Europe,CO2emissions,10.1
+Czech Republic,10600000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,6300
+Czech Republic,10600000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3250
+Czech Republic,10600000,europe,europe_east,europe_central_asia,Europe,IncomePP,28800
+Czech Republic,10600000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,77.8
+Czech Republic,10600000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Czech Republic,10600000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,99.9
+Denmark,5580000,europe,europe_west,europe_central_asia,Europe,CO2emissions,7.28
+Denmark,5580000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,6170
+Denmark,5580000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3350
+Denmark,5580000,europe,europe_west,europe_central_asia,Europe,IncomePP,44400
+Denmark,5580000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,79.8
+Denmark,5580000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Denmark,5580000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Djibouti,866000,africa,africa_north,middle_east_north_africa,Africa,CO2emissions,0.546
+Djibouti,866000,africa,africa_north,middle_east_north_africa,Africa,ElectricityUsePP,NA
+Djibouti,866000,africa,africa_north,middle_east_north_africa,Africa,FoodSupplykcPPD,2500
+Djibouti,866000,africa,africa_north,middle_east_north_africa,Africa,IncomePP,2710
+Djibouti,866000,africa,africa_north,middle_east_north_africa,Africa,LifeExpectancyYrs,64.2
+Djibouti,866000,africa,africa_north,middle_east_north_africa,Africa,FemaleLiteracyRate,NA
+Djibouti,866000,africa,africa_north,middle_east_north_africa,Africa,WaterSourcePrct,76.4
+Dominica,71700,americas,america_north,america,Americas,CO2emissions,1.79
+Dominica,71700,americas,america_north,america,Americas,ElectricityUsePP,NA
+Dominica,71700,americas,america_north,america,Americas,FoodSupplykcPPD,2960
+Dominica,71700,americas,america_north,america,Americas,IncomePP,10100
+Dominica,71700,americas,america_north,america,Americas,LifeExpectancyYrs,73
+Dominica,71700,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+Dominica,71700,americas,america_north,america,Americas,WaterSourcePrct,96.5
+Dominican Republic,10000000,americas,america_north,america,Americas,CO2emissions,2.12
+Dominican Republic,10000000,americas,america_north,america,Americas,ElectricityUsePP,1400
+Dominican Republic,10000000,americas,america_north,america,Americas,FoodSupplykcPPD,2560
+Dominican Republic,10000000,americas,america_north,america,Americas,IncomePP,11300
+Dominican Republic,10000000,americas,america_north,america,Americas,LifeExpectancyYrs,74.7
+Dominican Republic,10000000,americas,america_north,america,Americas,FemaleLiteracyRate,90.2
+Dominican Republic,10000000,americas,america_north,america,Americas,WaterSourcePrct,93.7
+Ecuador,15200000,americas,america_south,america,Americas,CO2emissions,2.54
+Ecuador,15200000,americas,america_south,america,Americas,ElectricityUsePP,1220
+Ecuador,15200000,americas,america_south,america,Americas,FoodSupplykcPPD,2380
+Ecuador,15200000,americas,america_south,america,Americas,IncomePP,9930
+Ecuador,15200000,americas,america_south,america,Americas,LifeExpectancyYrs,77
+Ecuador,15200000,americas,america_south,america,Americas,FemaleLiteracyRate,90.2
+Ecuador,15200000,americas,america_south,america,Americas,WaterSourcePrct,90.1
+Egypt,85900000,africa,africa_north,middle_east_north_africa,Africa,CO2emissions,2.53
+Egypt,85900000,africa,africa_north,middle_east_north_africa,Africa,ElectricityUsePP,1660
+Egypt,85900000,africa,africa_north,middle_east_north_africa,Africa,FoodSupplykcPPD,3550
+Egypt,85900000,africa,africa_north,middle_east_north_africa,Africa,IncomePP,9820
+Egypt,85900000,africa,africa_north,middle_east_north_africa,Africa,LifeExpectancyYrs,70.9
+Egypt,85900000,africa,africa_north,middle_east_north_africa,Africa,FemaleLiteracyRate,64.6
+Egypt,85900000,africa,africa_north,middle_east_north_africa,Africa,WaterSourcePrct,98.3
+El Salvador,6190000,americas,america_north,america,Americas,CO2emissions,1.07
+El Salvador,6190000,americas,america_north,america,Americas,ElectricityUsePP,883
+El Salvador,6190000,americas,america_north,america,Americas,FoodSupplykcPPD,2540
+El Salvador,6190000,americas,america_north,america,Americas,IncomePP,7430
+El Salvador,6190000,americas,america_north,america,Americas,LifeExpectancyYrs,74.3
+El Salvador,6190000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+El Salvador,6190000,americas,america_north,america,Americas,WaterSourcePrct,90
+Equatorial Guinea,994000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,6.16
+Equatorial Guinea,994000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Equatorial Guinea,994000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,NA
+Equatorial Guinea,994000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,34400
+Equatorial Guinea,994000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,61.4
+Equatorial Guinea,994000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,91.1
+Equatorial Guinea,994000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,49.3
+Eritrea,4470000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.133
+Eritrea,4470000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,64.1
+Eritrea,4470000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,NA
+Eritrea,4470000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1510
+Eritrea,4470000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,62
+Eritrea,4470000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,59
+Eritrea,4470000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,18.3
+Estonia,1330000,europe,europe_east,europe_central_asia,Europe,CO2emissions,14
+Estonia,1330000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,6310
+Estonia,1330000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3290
+Estonia,1330000,europe,europe_east,europe_central_asia,Europe,IncomePP,24500
+Estonia,1330000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,76.3
+Estonia,1330000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,99.8
+Estonia,1330000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,99.5
+Ethiopia,90000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0858
+Ethiopia,90000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,52.6
+Ethiopia,90000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2100
+Ethiopia,90000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1160
+Ethiopia,90000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,62.2
+Ethiopia,90000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Ethiopia,90000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,33.1
+Fiji,867000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,1.26
+Fiji,867000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Fiji,867000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2920
+Fiji,867000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,7490
+Fiji,867000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,65.5
+Fiji,867000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Fiji,867000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,94
+Finland,5390000,europe,europe_east,europe_central_asia,Europe,CO2emissions,10.5
+Finland,5390000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,15700
+Finland,5390000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3310
+Finland,5390000,europe,europe_east,europe_central_asia,Europe,IncomePP,40700
+Finland,5390000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,80.3
+Finland,5390000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Finland,5390000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,100
+France,63300000,europe,europe_west,europe_central_asia,Europe,CO2emissions,5.24
+France,63300000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,7230
+France,63300000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3510
+France,63300000,europe,europe_west,europe_central_asia,Europe,IncomePP,37500
+France,63300000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,81.7
+France,63300000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+France,63300000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Gabon,1700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,2.93
+Gabon,1700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,960
+Gabon,1700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2770
+Gabon,1700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,15900
+Gabon,1700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,63.3
+Gabon,1700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,85.6
+Gabon,1700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,85.8
+Gambia,1750000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.256
+Gambia,1750000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Gambia,1750000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2690
+Gambia,1750000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1540
+Gambia,1750000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,66
+Gambia,1750000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,41.9
+Gambia,1750000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,78.5
+Georgia,4170000,europe,europe_east,europe_central_asia,Europe,CO2emissions,1.91
+Georgia,4170000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,2220
+Georgia,4170000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,2810
+Georgia,4170000,europe,europe_east,europe_central_asia,Europe,IncomePP,7320
+Georgia,4170000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,73
+Georgia,4170000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,99.7
+Georgia,4170000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,92
+Germany,80900000,europe,europe_west,europe_central_asia,Europe,CO2emissions,9.05
+Germany,80900000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,7280
+Germany,80900000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3540
+Germany,80900000,europe,europe_west,europe_central_asia,Europe,IncomePP,42700
+Germany,80900000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.3
+Germany,80900000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Germany,80900000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Ghana,25100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.391
+Ghana,25100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,318
+Ghana,25100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,3000
+Ghana,25100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,3400
+Ghana,25100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,62.9
+Ghana,25100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Ghana,25100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,74.4
+Greece,11400000,europe,europe_west,europe_central_asia,Europe,CO2emissions,6.99
+Greece,11400000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,5390
+Greece,11400000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3430
+Greece,11400000,europe,europe_west,europe_central_asia,Europe,IncomePP,26100
+Greece,11400000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.5
+Greece,11400000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,96.3
+Greece,11400000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Grenada,105000,americas,america_north,america,Americas,CO2emissions,2.41
+Grenada,105000,americas,america_north,america,Americas,ElectricityUsePP,NA
+Grenada,105000,americas,america_north,america,Americas,FoodSupplykcPPD,2420
+Grenada,105000,americas,america_north,america,Americas,IncomePP,11200
+Grenada,105000,americas,america_north,america,Americas,LifeExpectancyYrs,71.3
+Grenada,105000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+Grenada,105000,americas,america_north,america,Americas,WaterSourcePrct,95.9
+Guatemala,14900000,americas,america_north,america,Americas,CO2emissions,0.792
+Guatemala,14900000,americas,america_north,america,Americas,ElectricityUsePP,535
+Guatemala,14900000,americas,america_north,america,Americas,FoodSupplykcPPD,2490
+Guatemala,14900000,americas,america_north,america,Americas,IncomePP,6840
+Guatemala,14900000,americas,america_north,america,Americas,LifeExpectancyYrs,71.5
+Guatemala,14900000,americas,america_north,america,Americas,FemaleLiteracyRate,71.1
+Guatemala,14900000,americas,america_north,america,Americas,WaterSourcePrct,91.5
+Guinea,11000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.252
+Guinea,11000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Guinea,11000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2550
+Guinea,11000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1210
+Guinea,11000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,58.5
+Guinea,11000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Guinea,11000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,63.9
+Guinea-Bissau,1600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.154
+Guinea-Bissau,1600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Guinea-Bissau,1600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2340
+Guinea-Bissau,1600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1490
+Guinea-Bissau,1600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,56.2
+Guinea-Bissau,1600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,42.1
+Guinea-Bissau,1600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,64.9
+Guyana,749000,americas,america_south,america,Americas,CO2emissions,2.38
+Guyana,749000,americas,america_south,america,Americas,ElectricityUsePP,NA
+Guyana,749000,americas,america_south,america,Americas,FoodSupplykcPPD,2640
+Guyana,749000,americas,america_south,america,Americas,IncomePP,6130
+Guyana,749000,americas,america_south,america,Americas,LifeExpectancyYrs,65.7
+Guyana,749000,americas,america_south,america,Americas,FemaleLiteracyRate,NA
+Guyana,749000,americas,america_south,america,Americas,WaterSourcePrct,93
+Haiti,10100000,americas,america_north,america,Americas,CO2emissions,0.219
+Haiti,10100000,americas,america_north,america,Americas,ElectricityUsePP,31.1
+Haiti,10100000,americas,america_north,america,Americas,FoodSupplykcPPD,2100
+Haiti,10100000,americas,america_north,america,Americas,IncomePP,1560
+Haiti,10100000,americas,america_north,america,Americas,LifeExpectancyYrs,60.5
+Haiti,10100000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+Haiti,10100000,americas,america_north,america,Americas,WaterSourcePrct,62.5
+Honduras,8350000,americas,america_north,america,Americas,CO2emissions,1.07
+Honduras,8350000,americas,america_north,america,Americas,ElectricityUsePP,674
+Honduras,8350000,americas,america_north,america,Americas,FoodSupplykcPPD,2620
+Honduras,8350000,americas,america_north,america,Americas,IncomePP,4050
+Honduras,8350000,americas,america_north,america,Americas,LifeExpectancyYrs,71.8
+Honduras,8350000,americas,america_north,america,Americas,FemaleLiteracyRate,84.9
+Honduras,8350000,americas,america_north,america,Americas,WaterSourcePrct,89.7
+Hungary,9900000,europe,europe_east,europe_central_asia,Europe,CO2emissions,4.83
+Hungary,9900000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,3900
+Hungary,9900000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3060
+Hungary,9900000,europe,europe_east,europe_central_asia,Europe,IncomePP,22700
+Hungary,9900000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,74.9
+Hungary,9900000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,98.9
+Hungary,9900000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,100
+Iceland,323000,europe,europe_west,europe_central_asia,Europe,CO2emissions,5.82
+Iceland,323000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,52400
+Iceland,323000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3350
+Iceland,323000,europe,europe_west,europe_central_asia,Europe,IncomePP,39500
+Iceland,323000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,82.1
+Iceland,323000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Iceland,323000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+India,1250000000,asia,asia_west,south_asia,Asia,CO2emissions,1.48
+India,1250000000,asia,asia_west,south_asia,Asia,ElectricityUsePP,699
+India,1250000000,asia,asia_west,south_asia,Asia,FoodSupplykcPPD,2460
+India,1250000000,asia,asia_west,south_asia,Asia,IncomePP,4640
+India,1250000000,asia,asia_west,south_asia,Asia,LifeExpectancyYrs,66.6
+India,1250000000,asia,asia_west,south_asia,Asia,FemaleLiteracyRate,NA
+India,1250000000,asia,asia_west,south_asia,Asia,WaterSourcePrct,85.7
+Indonesia,246000000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,2.46
+Indonesia,246000000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,679
+Indonesia,246000000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2710
+Indonesia,246000000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,8840
+Indonesia,246000000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,70.2
+Indonesia,246000000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,90.1
+Indonesia,246000000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,85.8
+Iran,75500000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,7.8
+Iran,75500000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,2650
+Iran,75500000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,3050
+Iran,75500000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,17900
+Iran,75500000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,74.8
+Iran,75500000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,NA
+Iran,75500000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,95
+Iraq,31700000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,4.24
+Iraq,31700000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,1270
+Iraq,31700000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,2490
+Iraq,31700000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,13300
+Iraq,31700000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,67.6
+Iraq,31700000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,71.2
+Iraq,31700000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,83.2
+Ireland,4660000,europe,europe_west,europe_central_asia,Europe,CO2emissions,7.64
+Ireland,4660000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,5660
+Ireland,4660000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3600
+Ireland,4660000,europe,europe_west,europe_central_asia,Europe,IncomePP,45500
+Ireland,4660000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.5
+Ireland,4660000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Ireland,4660000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,98.3
+Israel,7570000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,9.13
+Israel,7570000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,6930
+Israel,7570000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,3550
+Israel,7570000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,30500
+Israel,7570000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,81.6
+Israel,7570000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,NA
+Israel,7570000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,100
+Italy,59800000,europe,europe_west,europe_central_asia,Europe,CO2emissions,6.66
+Italy,59800000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,5510
+Italy,59800000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3580
+Italy,59800000,europe,europe_west,europe_central_asia,Europe,IncomePP,36300
+Italy,59800000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,81.8
+Italy,59800000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,98.7
+Italy,59800000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Jamaica,2830000,americas,america_north,america,Americas,CO2emissions,2.78
+Jamaica,2830000,americas,america_north,america,Americas,ElectricityUsePP,1200
+Jamaica,2830000,americas,america_north,america,Americas,FoodSupplykcPPD,2770
+Jamaica,2830000,americas,america_north,america,Americas,IncomePP,8100
+Jamaica,2830000,americas,america_north,america,Americas,LifeExpectancyYrs,74.8
+Jamaica,2830000,americas,america_north,america,Americas,FemaleLiteracyRate,91.8
+Jamaica,2830000,americas,america_north,america,Americas,WaterSourcePrct,92.5
+Japan,129000000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,9.27
+Japan,129000000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,8100
+Japan,129000000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2710
+Japan,129000000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,35800
+Japan,129000000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,82.6
+Japan,129000000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Japan,129000000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,98.8
+Jordan,7570000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,2.86
+Jordan,7570000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,1870
+Jordan,7570000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,3140
+Jordan,7570000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,9210
+Jordan,7570000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,76.1
+Jordan,7570000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,93.9
+Jordan,7570000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,98.8
+Kazakhstan,16600000,asia,asia_west,europe_central_asia,Asia,CO2emissions,15.6
+Kazakhstan,16600000,asia,asia_west,europe_central_asia,Asia,ElectricityUsePP,4890
+Kazakhstan,16600000,asia,asia_west,europe_central_asia,Asia,FoodSupplykcPPD,3210
+Kazakhstan,16600000,asia,asia_west,europe_central_asia,Asia,IncomePP,21300
+Kazakhstan,16600000,asia,asia_west,europe_central_asia,Asia,LifeExpectancyYrs,69
+Kazakhstan,16600000,asia,asia_west,europe_central_asia,Asia,FemaleLiteracyRate,NA
+Kazakhstan,16600000,asia,asia_west,europe_central_asia,Asia,WaterSourcePrct,90
+Kenya,42500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.317
+Kenya,42500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,151
+Kenya,42500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2170
+Kenya,42500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,2560
+Kenya,42500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,63.8
+Kenya,42500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Kenya,42500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,55.4
+Kiribati,105000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.596
+Kiribati,105000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Kiribati,105000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,3030
+Kiribati,105000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,1710
+Kiribati,105000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,60.8
+Kiribati,105000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Kiribati,105000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,63.9
+Kuwait,3190000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,28.5
+Kuwait,3190000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,15800
+Kuwait,3190000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,3470
+Kuwait,3190000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,77500
+Kuwait,3190000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,78.9
+Kuwait,3190000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,NA
+Kuwait,3190000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,100
+Kyrgyz Republic,5510000,asia,asia_west,europe_central_asia,Asia,CO2emissions,1.39
+Kyrgyz Republic,5510000,asia,asia_west,europe_central_asia,Asia,ElectricityUsePP,1650
+Kyrgyz Republic,5510000,asia,asia_west,europe_central_asia,Asia,FoodSupplykcPPD,2770
+Kyrgyz Republic,5510000,asia,asia_west,europe_central_asia,Asia,IncomePP,2920
+Kyrgyz Republic,5510000,asia,asia_west,europe_central_asia,Asia,LifeExpectancyYrs,69.1
+Kyrgyz Republic,5510000,asia,asia_west,europe_central_asia,Asia,FemaleLiteracyRate,NA
+Kyrgyz Republic,5510000,asia,asia_west,europe_central_asia,Asia,WaterSourcePrct,85.3
+Lao,6330000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.256
+Lao,6330000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Lao,6330000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2400
+Lao,6330000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,4240
+Lao,6330000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,64.6
+Lao,6330000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Lao,6330000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,71.8
+Latvia,2090000,europe,europe_east,europe_central_asia,Europe,CO2emissions,3.49
+Latvia,2090000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,3260
+Latvia,2090000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3150
+Latvia,2090000,europe,europe_east,europe_central_asia,Europe,IncomePP,19800
+Latvia,2090000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,73.6
+Latvia,2090000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,99.8
+Latvia,2090000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,98.3
+Lebanon,4590000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,4.46
+Lebanon,4590000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,3340
+Lebanon,4590000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,3130
+Lebanon,4590000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,15700
+Lebanon,4590000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,79
+Lebanon,4590000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,NA
+Lebanon,4590000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,90.4
+Lesotho,2060000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,1.13
+Lesotho,2060000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Lesotho,2060000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2550
+Lesotho,2060000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,2500
+Lesotho,2060000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,47.5
+Lesotho,2060000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Lesotho,2060000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,70.2
+Liberia,4070000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.219
+Liberia,4070000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Liberia,4070000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2250
+Liberia,4070000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,734
+Liberia,4070000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,61.4
+Liberia,4070000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Liberia,4070000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,67.8
+Libya,6190000,africa,africa_north,middle_east_north_africa,Africa,CO2emissions,6.41
+Libya,6190000,africa,africa_north,middle_east_north_africa,Africa,ElectricityUsePP,2860
+Libya,6190000,africa,africa_north,middle_east_north_africa,Africa,FoodSupplykcPPD,NA
+Libya,6190000,africa,africa_north,middle_east_north_africa,Africa,IncomePP,11200
+Libya,6190000,africa,africa_north,middle_east_north_africa,Africa,LifeExpectancyYrs,61
+Libya,6190000,africa,africa_north,middle_east_north_africa,Africa,FemaleLiteracyRate,83.3
+Libya,6190000,africa,africa_north,middle_east_north_africa,Africa,WaterSourcePrct,96.8
+Liechtenstein,36300,europe,europe_west,europe_central_asia,Europe,CO2emissions,1.31
+Liechtenstein,36300,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,NA
+Liechtenstein,36300,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,NA
+Liechtenstein,36300,europe,europe_west,europe_central_asia,Europe,IncomePP,NA
+Liechtenstein,36300,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,NA
+Liechtenstein,36300,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Liechtenstein,36300,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Lithuania,3080000,europe,europe_east,europe_central_asia,Europe,CO2emissions,4.48
+Lithuania,3080000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,3530
+Lithuania,3080000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3410
+Lithuania,3080000,europe,europe_east,europe_central_asia,Europe,IncomePP,22900
+Lithuania,3080000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,73.5
+Lithuania,3080000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,99.7
+Lithuania,3080000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,95.8
+Luxembourg,520000,europe,europe_west,europe_central_asia,Europe,CO2emissions,21
+Luxembourg,520000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,15600
+Luxembourg,520000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3530
+Luxembourg,520000,europe,europe_west,europe_central_asia,Europe,IncomePP,92000
+Luxembourg,520000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,81.5
+Luxembourg,520000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Luxembourg,520000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,99.9
+"Macedonia, FYR",2070000,europe,europe_east,europe_central_asia,Europe,CO2emissions,4.54
+"Macedonia, FYR",2070000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,3880
+"Macedonia, FYR",2070000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,2910
+"Macedonia, FYR",2070000,europe,europe_east,europe_central_asia,Europe,IncomePP,11600
+"Macedonia, FYR",2070000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,74.2
+"Macedonia, FYR",2070000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,96
+"Macedonia, FYR",2070000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,96.7
+Madagascar,21700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.108
+Madagascar,21700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Madagascar,21700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2090
+Madagascar,21700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1370
+Madagascar,21700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,61.1
+Madagascar,21700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Madagascar,21700000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,46.6
+Malawi,15600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0756
+Malawi,15600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Malawi,15600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2350
+Malawi,15600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1050
+Malawi,15600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,54.5
+Malawi,15600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Malawi,15600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,63
+Malaysia,28600000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,7.7
+Malaysia,28600000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,4100
+Malaysia,28600000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2890
+Malaysia,28600000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,21800
+Malaysia,28600000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,74.6
+Malaysia,28600000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Malaysia,28600000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,96.8
+Maldives,375000,asia,asia_west,south_asia,Asia,CO2emissions,2.63
+Maldives,375000,asia,asia_west,south_asia,Asia,ElectricityUsePP,NA
+Maldives,375000,asia,asia_west,south_asia,Asia,FoodSupplykcPPD,2750
+Maldives,375000,asia,asia_west,south_asia,Asia,IncomePP,11100
+Maldives,375000,asia,asia_west,south_asia,Asia,LifeExpectancyYrs,78.3
+Maldives,375000,asia,asia_west,south_asia,Asia,FemaleLiteracyRate,NA
+Maldives,375000,asia,asia_west,south_asia,Asia,WaterSourcePrct,98.1
+Mali,15500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0673
+Mali,15500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Mali,15500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2830
+Mali,15500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1880
+Mali,15500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,60
+Mali,15500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,24.6
+Mali,15500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,67.7
+Malta,418000,europe,europe_west,europe_central_asia,Europe,CO2emissions,6.07
+Malta,418000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,4870
+Malta,418000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3370
+Malta,418000,europe,europe_west,europe_central_asia,Europe,IncomePP,28600
+Malta,418000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.4
+Malta,418000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Malta,418000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Marshall Islands,52500,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,1.95
+Marshall Islands,52500,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Marshall Islands,52500,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,NA
+Marshall Islands,52500,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,3500
+Marshall Islands,52500,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,63.9
+Marshall Islands,52500,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Marshall Islands,52500,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,78.5
+Mauritania,3720000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.644
+Mauritania,3720000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Mauritania,3720000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2810
+Mauritania,3720000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,3370
+Mauritania,3720000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,68.6
+Mauritania,3720000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,52
+Mauritania,3720000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,65.8
+Mauritius,1250000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,3.13
+Mauritius,1250000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,2030
+Mauritius,1250000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,3060
+Mauritius,1250000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,16600
+Mauritius,1250000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,73.8
+Mauritius,1250000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,86.7
+Mauritius,1250000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,99.8
+Mexico,119000000,americas,america_north,america,Americas,CO2emissions,4.07
+Mexico,119000000,americas,america_north,america,Americas,ElectricityUsePP,2150
+Mexico,119000000,americas,america_north,america,Americas,FoodSupplykcPPD,3030
+Mexico,119000000,americas,america_north,america,Americas,IncomePP,15900
+Mexico,119000000,americas,america_north,america,Americas,LifeExpectancyYrs,75.8
+Mexico,119000000,americas,america_north,america,Americas,FemaleLiteracyRate,92.3
+Mexico,119000000,americas,america_north,america,Americas,WaterSourcePrct,96
+"Micronesia, Fed. Sts.",103000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,1.17
+"Micronesia, Fed. Sts.",103000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+"Micronesia, Fed. Sts.",103000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,NA
+"Micronesia, Fed. Sts.",103000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,3410
+"Micronesia, Fed. Sts.",103000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,65.4
+"Micronesia, Fed. Sts.",103000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+"Micronesia, Fed. Sts.",103000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,88.7
+Moldova,4080000,europe,europe_east,europe_central_asia,Europe,CO2emissions,1.24
+Moldova,4080000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,1470
+Moldova,4080000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,2700
+Moldova,4080000,europe,europe_east,europe_central_asia,Europe,IncomePP,4180
+Moldova,4080000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,71.5
+Moldova,4080000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,98.5
+Moldova,4080000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,86.1
+Mongolia,2760000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,7.79
+Mongolia,2760000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,1500
+Mongolia,2760000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2450
+Mongolia,2760000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,8880
+Mongolia,2760000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,66.6
+Mongolia,2760000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,97.9
+Mongolia,2760000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,79.2
+Montenegro,625000,europe,europe_east,europe_central_asia,Europe,CO2emissions,4.11
+Montenegro,625000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,5740
+Montenegro,625000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3480
+Montenegro,625000,europe,europe_east,europe_central_asia,Europe,IncomePP,14500
+Montenegro,625000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,76.4
+Montenegro,625000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,97.6
+Montenegro,625000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,96.2
+Morocco,32900000,africa,africa_north,middle_east_north_africa,Africa,CO2emissions,1.76
+Morocco,32900000,africa,africa_north,middle_east_north_africa,Africa,ElectricityUsePP,824
+Morocco,32900000,africa,africa_north,middle_east_north_africa,Africa,FoodSupplykcPPD,3350
+Morocco,32900000,africa,africa_north,middle_east_north_africa,Africa,IncomePP,6690
+Morocco,32900000,africa,africa_north,middle_east_north_africa,Africa,LifeExpectancyYrs,73.8
+Morocco,32900000,africa,africa_north,middle_east_north_africa,Africa,FemaleLiteracyRate,57.6
+Morocco,32900000,africa,africa_north,middle_east_north_africa,Africa,WaterSourcePrct,78.3
+Mozambique,24900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.129
+Mozambique,24900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,441
+Mozambique,24900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2260
+Mozambique,24900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,955
+Mozambique,24900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,55
+Mozambique,24900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Mozambique,24900000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,40.4
+Myanmar,50600000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.283
+Myanmar,50600000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,156
+Myanmar,50600000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2530
+Myanmar,50600000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,3900
+Myanmar,50600000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,67.4
+Myanmar,50600000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,90.4
+Myanmar,50600000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,64.2
+Namibia,2220000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,1.28
+Namibia,2220000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,1570
+Namibia,2220000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2090
+Namibia,2220000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,8720
+Namibia,2220000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,60.1
+Namibia,2220000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Namibia,2220000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,78.2
+Nauru,10200,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,3.95
+Nauru,10200,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Nauru,10200,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,NA
+Nauru,10200,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,7340
+Nauru,10200,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,NA
+Nauru,10200,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Nauru,10200,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,99.4
+Nepal,27300000,asia,asia_west,south_asia,Asia,CO2emissions,0.202
+Nepal,27300000,asia,asia_west,south_asia,Asia,ElectricityUsePP,115
+Nepal,27300000,asia,asia_west,south_asia,Asia,FoodSupplykcPPD,2610
+Nepal,27300000,asia,asia_west,south_asia,Asia,IncomePP,2030
+Nepal,27300000,asia,asia_west,south_asia,Asia,LifeExpectancyYrs,68.7
+Nepal,27300000,asia,asia_west,south_asia,Asia,FemaleLiteracyRate,46.7
+Nepal,27300000,asia,asia_west,south_asia,Asia,WaterSourcePrct,85.7
+Netherlands,16700000,europe,europe_west,europe_central_asia,Europe,CO2emissions,10.4
+Netherlands,16700000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,7060
+Netherlands,16700000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3210
+Netherlands,16700000,europe,europe_west,europe_central_asia,Europe,IncomePP,46100
+Netherlands,16700000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.9
+Netherlands,16700000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Netherlands,16700000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+New Zealand,4420000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,7.13
+New Zealand,4420000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,9460
+New Zealand,4420000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,3140
+New Zealand,4420000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,32700
+New Zealand,4420000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,81
+New Zealand,4420000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+New Zealand,4420000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,100
+Nicaragua,5810000,americas,america_north,america,Americas,CO2emissions,0.84
+Nicaragua,5810000,americas,america_north,america,Americas,ElectricityUsePP,537
+Nicaragua,5810000,americas,america_north,america,Americas,FoodSupplykcPPD,2540
+Nicaragua,5810000,americas,america_north,america,Americas,IncomePP,4230
+Nicaragua,5810000,americas,america_north,america,Americas,LifeExpectancyYrs,77.5
+Nicaragua,5810000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+Nicaragua,5810000,americas,america_north,america,Americas,WaterSourcePrct,81.7
+Niger,17100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0778
+Niger,17100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,47.5
+Niger,17100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2530
+Niger,17100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,802
+Niger,17100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,59.3
+Niger,17100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Niger,17100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,43.6
+Nigeria,163000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.588
+Nigeria,163000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,150
+Nigeria,163000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2710
+Nigeria,163000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,5260
+Nigeria,163000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,61.3
+Nigeria,163000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Nigeria,163000000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,62.1
+North Korea,24700000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,1.94
+North Korea,24700000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,655
+North Korea,24700000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2100
+North Korea,24700000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,1400
+North Korea,24700000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,70.2
+North Korea,24700000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+North Korea,24700000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,99.6
+Norway,4950000,europe,europe_west,europe_central_asia,Europe,CO2emissions,9.13
+Norway,4950000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,23500
+Norway,4950000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3490
+Norway,4950000,europe,europe_west,europe_central_asia,Europe,IncomePP,62100
+Norway,4950000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,81.2
+Norway,4950000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Norway,4950000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Oman,3240000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,16.7
+Oman,3240000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,5880
+Oman,3240000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,3080
+Oman,3240000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,42100
+Oman,3240000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,76.4
+Oman,3240000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,NA
+Oman,3240000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,85.7
+Pakistan,174000000,asia,asia_west,south_asia,Asia,CO2emissions,0.93
+Pakistan,174000000,asia,asia_west,south_asia,Asia,ElectricityUsePP,455
+Pakistan,174000000,asia,asia_west,south_asia,Asia,FoodSupplykcPPD,2430
+Pakistan,174000000,asia,asia_west,south_asia,Asia,IncomePP,4310
+Pakistan,174000000,asia,asia_west,south_asia,Asia,LifeExpectancyYrs,65.8
+Pakistan,174000000,asia,asia_west,south_asia,Asia,FemaleLiteracyRate,NA
+Pakistan,174000000,asia,asia_west,south_asia,Asia,WaterSourcePrct,88.7
+Palau,20600,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,12.3
+Palau,20600,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Palau,20600,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,NA
+Palau,20600,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,13000
+Palau,20600,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,NA
+Palau,20600,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Palau,20600,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,98.1
+Palestine,4180000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,0.538
+Palestine,4180000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,NA
+Palestine,4180000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,NA
+Palestine,4180000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,2670
+Palestine,4180000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,72.1
+Palestine,4180000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,92.6
+Palestine,4180000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,87.9
+Panama,3710000,americas,america_north,america,Americas,CO2emissions,2.72
+Panama,3710000,americas,america_north,america,Americas,ElectricityUsePP,1820
+Panama,3710000,americas,america_north,america,Americas,FoodSupplykcPPD,2650
+Panama,3710000,americas,america_north,america,Americas,IncomePP,16900
+Panama,3710000,americas,america_north,america,Americas,LifeExpectancyYrs,77.9
+Panama,3710000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+Panama,3710000,americas,america_north,america,Americas,WaterSourcePrct,93.3
+Papua New Guinea,7270000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.733
+Papua New Guinea,7270000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Papua New Guinea,7270000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,NA
+Papua New Guinea,7270000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,2260
+Papua New Guinea,7270000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,59
+Papua New Guinea,7270000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,59.4
+Papua New Guinea,7270000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,36.6
+Paraguay,6290000,americas,america_south,america,Americas,CO2emissions,0.845
+Paraguay,6290000,americas,america_south,america,Americas,ElectricityUsePP,1280
+Paraguay,6290000,americas,america_south,america,Americas,FoodSupplykcPPD,2610
+Paraguay,6290000,americas,america_south,america,Americas,IncomePP,7510
+Paraguay,6290000,americas,america_south,america,Americas,LifeExpectancyYrs,74.1
+Paraguay,6290000,americas,america_south,america,Americas,FemaleLiteracyRate,NA
+Paraguay,6290000,americas,america_south,america,Americas,WaterSourcePrct,92.9
+Peru,29800000,americas,america_south,america,Americas,CO2emissions,1.67
+Peru,29800000,americas,america_south,america,Americas,ElectricityUsePP,1240
+Peru,29800000,americas,america_south,america,Americas,FoodSupplykcPPD,2630
+Peru,29800000,americas,america_south,america,Americas,IncomePP,10400
+Peru,29800000,americas,america_south,america,Americas,LifeExpectancyYrs,78.1
+Peru,29800000,americas,america_south,america,Americas,FemaleLiteracyRate,NA
+Peru,29800000,americas,america_south,america,Americas,WaterSourcePrct,87.6
+Philippines,95300000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.897
+Philippines,95300000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,645
+Philippines,95300000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2570
+Philippines,95300000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,5710
+Philippines,95300000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,69.2
+Philippines,95300000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Philippines,95300000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,89.3
+Poland,38300000,europe,europe_west,europe_central_asia,Europe,CO2emissions,8.27
+Poland,38300000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,3880
+Poland,38300000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3440
+Poland,38300000,europe,europe_west,europe_central_asia,Europe,IncomePP,22900
+Poland,38300000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,76.5
+Poland,38300000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,99.6
+Poland,38300000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,97.9
+Portugal,10600000,europe,europe_west,europe_central_asia,Europe,CO2emissions,4.48
+Portugal,10600000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,4850
+Portugal,10600000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3480
+Portugal,10600000,europe,europe_west,europe_central_asia,Europe,IncomePP,26800
+Portugal,10600000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.1
+Portugal,10600000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,94
+Portugal,10600000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,99.7
+Qatar,1950000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,41.2
+Qatar,1950000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,14800
+Qatar,1950000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,NA
+Qatar,1950000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,129000
+Qatar,1950000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,80
+Qatar,1950000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,NA
+Qatar,1950000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,100
+Romania,20300000,europe,europe_east,europe_central_asia,Europe,CO2emissions,4.18
+Romania,20300000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,2640
+Romania,20300000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3340
+Romania,20300000,europe,europe_east,europe_central_asia,Europe,IncomePP,18100
+Romania,20300000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,74.5
+Romania,20300000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,97.2
+Romania,20300000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,100
+Russia,143000000,europe,europe_east,europe_central_asia,Europe,CO2emissions,12.3
+Russia,143000000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,6490
+Russia,143000000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3330
+Russia,143000000,europe,europe_east,europe_central_asia,Europe,IncomePP,24100
+Russia,143000000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,69.8
+Russia,143000000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Russia,143000000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,96.1
+Rwanda,10500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0631
+Rwanda,10500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Rwanda,10500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2210
+Rwanda,10500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1420
+Rwanda,10500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,65.3
+Rwanda,10500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Rwanda,10500000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,54.1
+Samoa,188000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,1.07
+Samoa,188000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Samoa,188000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2880
+Samoa,188000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,5670
+Samoa,188000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,71.5
+Samoa,188000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,98.6
+Samoa,188000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,95
+Sao Tome and Principe,179000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.574
+Sao Tome and Principe,179000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Sao Tome and Principe,179000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2330
+Sao Tome and Principe,179000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,2700
+Sao Tome and Principe,179000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,69.3
+Sao Tome and Principe,179000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Sao Tome and Principe,179000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,76.4
+Saudi Arabia,28200000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,17.7
+Saudi Arabia,28200000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,8020
+Saudi Arabia,28200000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,3100
+Saudi Arabia,28200000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,48500
+Saudi Arabia,28200000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,75.3
+Saudi Arabia,28200000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,82.2
+Saudi Arabia,28200000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,99.7
+Senegal,13300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.629
+Senegal,13300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,200
+Senegal,13300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2430
+Senegal,13300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,2160
+Senegal,13300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,64.4
+Senegal,13300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Senegal,13300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,71.6
+Serbia,8990000,europe,europe_east,europe_central_asia,Europe,CO2emissions,5.47
+Serbia,8990000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,4490
+Serbia,8990000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,2730
+Serbia,8990000,europe,europe_east,europe_central_asia,Europe,IncomePP,13000
+Serbia,8990000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,74.8
+Serbia,8990000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,96.9
+Serbia,8990000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,90
+Seychelles,91800,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,3.71
+Seychelles,91800,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Seychelles,91800,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,NA
+Seychelles,91800,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,22600
+Seychelles,91800,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,73.5
+Seychelles,91800,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,92.3
+Seychelles,91800,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,95.9
+Sierra Leone,6610000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.136
+Sierra Leone,6610000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Sierra Leone,6610000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2340
+Sierra Leone,6610000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1250
+Sierra Leone,6610000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,55.7
+Sierra Leone,6610000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,32.6
+Sierra Leone,6610000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,52.7
+Singapore,5180000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,8.74
+Singapore,5180000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,8650
+Singapore,5180000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,NA
+Singapore,5180000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,75000
+Singapore,5180000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,82.9
+Singapore,5180000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Singapore,5180000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,100
+Slovak Republic,5410000,europe,europe_east,europe_central_asia,Europe,CO2emissions,6.38
+Slovak Republic,5410000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,5350
+Slovak Republic,5410000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,2940
+Slovak Republic,5410000,europe,europe_east,europe_central_asia,Europe,IncomePP,25800
+Slovak Republic,5410000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,75.9
+Slovak Republic,5410000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Slovak Republic,5410000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,97.9
+Slovenia,2050000,europe,europe_east,europe_central_asia,Europe,CO2emissions,7.35
+Slovenia,2050000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,6750
+Slovenia,2050000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3170
+Slovenia,2050000,europe,europe_east,europe_central_asia,Europe,IncomePP,28800
+Slovenia,2050000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,79.8
+Slovenia,2050000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,99.7
+Slovenia,2050000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,99.5
+Solomon Islands,540000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.367
+Solomon Islands,540000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Solomon Islands,540000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2490
+Solomon Islands,540000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,1970
+Solomon Islands,540000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,62
+Solomon Islands,540000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Solomon Islands,540000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,69.7
+Somalia,12400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.0488
+Somalia,12400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Somalia,12400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,NA
+Somalia,12400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,614
+Somalia,12400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,53.4
+Somalia,12400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Somalia,12400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,34.7
+South Africa,52300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,9
+South Africa,52300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,4540
+South Africa,52300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,3000
+South Africa,52300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,12200
+South Africa,52300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,55.8
+South Africa,52300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,92.2
+South Africa,52300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,82.8
+South Korea,49700000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,11.8
+South Korea,49700000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,10100
+South Korea,49700000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,3350
+South Korea,49700000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,31200
+South Korea,49700000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,80.4
+South Korea,49700000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+South Korea,49700000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,99.1
+South Sudan,10400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,NA
+South Sudan,10400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+South Sudan,10400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,NA
+South Sudan,10400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,3480
+South Sudan,10400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,58.1
+South Sudan,10400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+South Sudan,10400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,42.7
+Spain,46900000,europe,europe_west,europe_central_asia,Europe,CO2emissions,5.77
+Spain,46900000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,5600
+Spain,46900000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3190
+Spain,46900000,europe,europe_west,europe_central_asia,Europe,IncomePP,32100
+Spain,46900000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,82.2
+Spain,46900000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Spain,46900000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Sri Lanka,20300000,asia,asia_west,south_asia,Asia,CO2emissions,0.745
+Sri Lanka,20300000,asia,asia_west,south_asia,Asia,ElectricityUsePP,504
+Sri Lanka,20300000,asia,asia_west,south_asia,Asia,FoodSupplykcPPD,2490
+Sri Lanka,20300000,asia,asia_west,south_asia,Asia,IncomePP,9210
+Sri Lanka,20300000,asia,asia_west,south_asia,Asia,LifeExpectancyYrs,76
+Sri Lanka,20300000,asia,asia_west,south_asia,Asia,FemaleLiteracyRate,NA
+Sri Lanka,20300000,asia,asia_west,south_asia,Asia,WaterSourcePrct,88.3
+St. Kitts and Nevis,52000,americas,america_north,america,Americas,CO2emissions,4.44
+St. Kitts and Nevis,52000,americas,america_north,america,Americas,ElectricityUsePP,NA
+St. Kitts and Nevis,52000,americas,america_north,america,Americas,FoodSupplykcPPD,2470
+St. Kitts and Nevis,52000,americas,america_north,america,Americas,IncomePP,21700
+St. Kitts and Nevis,52000,americas,america_north,america,Americas,LifeExpectancyYrs,NA
+St. Kitts and Nevis,52000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+St. Kitts and Nevis,52000,americas,america_north,america,Americas,WaterSourcePrct,99
+St. Lucia,174000,americas,america_north,america,Americas,CO2emissions,2.34
+St. Lucia,174000,americas,america_north,america,Americas,ElectricityUsePP,NA
+St. Lucia,174000,americas,america_north,america,Americas,FoodSupplykcPPD,2580
+St. Lucia,174000,americas,america_north,america,Americas,IncomePP,10800
+St. Lucia,174000,americas,america_north,america,Americas,LifeExpectancyYrs,76
+St. Lucia,174000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+St. Lucia,174000,americas,america_north,america,Americas,WaterSourcePrct,95.8
+St. Vincent and the Grenadines,109000,americas,america_north,america,Americas,CO2emissions,1.81
+St. Vincent and the Grenadines,109000,americas,america_north,america,Americas,ElectricityUsePP,NA
+St. Vincent and the Grenadines,109000,americas,america_north,america,Americas,FoodSupplykcPPD,2940
+St. Vincent and the Grenadines,109000,americas,america_north,america,Americas,IncomePP,9870
+St. Vincent and the Grenadines,109000,americas,america_north,america,Americas,LifeExpectancyYrs,71.7
+St. Vincent and the Grenadines,109000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+St. Vincent and the Grenadines,109000,americas,america_north,america,Americas,WaterSourcePrct,94.7
+Sudan,35200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.445
+Sudan,35200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,142
+Sudan,35200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2350
+Sudan,35200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,3630
+Sudan,35200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,66.5
+Sudan,35200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,63.2
+Sudan,35200000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,53.3
+Suriname,532000,americas,america_south,america,Americas,CO2emissions,3.7
+Suriname,532000,americas,america_south,america,Americas,ElectricityUsePP,3340
+Suriname,532000,americas,america_south,america,Americas,FoodSupplykcPPD,2710
+Suriname,532000,americas,america_south,america,Americas,IncomePP,14900
+Suriname,532000,americas,america_south,america,Americas,LifeExpectancyYrs,70.5
+Suriname,532000,americas,america_south,america,Americas,FemaleLiteracyRate,NA
+Suriname,532000,americas,america_south,america,Americas,WaterSourcePrct,94.2
+Swaziland,1230000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.856
+Swaziland,1230000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Swaziland,1230000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2280
+Swaziland,1230000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,7320
+Swaziland,1230000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,48.9
+Swaziland,1230000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,87.3
+Swaziland,1230000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,63.4
+Sweden,9470000,europe,europe_west,europe_central_asia,Europe,CO2emissions,5.47
+Sweden,9470000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,14000
+Sweden,9470000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3160
+Sweden,9470000,europe,europe_west,europe_central_asia,Europe,IncomePP,43800
+Sweden,9470000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,81.7
+Sweden,9470000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Sweden,9470000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Switzerland,7930000,europe,europe_west,europe_central_asia,Europe,CO2emissions,4.66
+Switzerland,7930000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,7930
+Switzerland,7930000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3490
+Switzerland,7930000,europe,europe_west,europe_central_asia,Europe,IncomePP,55900
+Switzerland,7930000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,82.5
+Switzerland,7930000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Switzerland,7930000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Syria,20900000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,2.73
+Syria,20900000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,1690
+Syria,20900000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,NA
+Syria,20900000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,6360
+Syria,20900000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,75
+Syria,20900000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,77.8
+Syria,20900000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,96.6
+Tajikistan,7820000,asia,asia_west,europe_central_asia,Asia,CO2emissions,0.301
+Tajikistan,7820000,asia,asia_west,europe_central_asia,Asia,ElectricityUsePP,1780
+Tajikistan,7820000,asia,asia_west,europe_central_asia,Asia,FoodSupplykcPPD,2050
+Tajikistan,7820000,asia,asia_west,europe_central_asia,Asia,IncomePP,2210
+Tajikistan,7820000,asia,asia_west,europe_central_asia,Asia,LifeExpectancyYrs,69.9
+Tajikistan,7820000,asia,asia_west,europe_central_asia,Asia,FemaleLiteracyRate,99.6
+Tajikistan,7820000,asia,asia_west,europe_central_asia,Asia,WaterSourcePrct,70.5
+Tanzania,47600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.17
+Tanzania,47600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,83.9
+Tanzania,47600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2200
+Tanzania,47600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,2190
+Tanzania,47600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,59.9
+Tanzania,47600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Tanzania,47600000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,45.2
+Thailand,67500000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,4.12
+Thailand,67500000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,2280
+Thailand,67500000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2760
+Thailand,67500000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,13500
+Thailand,67500000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,76.9
+Thailand,67500000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Thailand,67500000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,97.4
+Timor-Leste,1130000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.217
+Timor-Leste,1130000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Timor-Leste,1130000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2110
+Timor-Leste,1130000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,1960
+Timor-Leste,1130000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,71.6
+Timor-Leste,1130000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Timor-Leste,1130000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,64.5
+Togo,6680000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.369
+Togo,6680000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,133
+Togo,6680000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2380
+Togo,6680000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1230
+Togo,6680000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,59.6
+Togo,6680000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,48
+Togo,6680000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,58.2
+Tonga,105000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.982
+Tonga,105000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Tonga,105000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,NA
+Tonga,105000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,5100
+Tonga,105000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,70
+Tonga,105000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Tonga,105000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,99.5
+Trinidad and Tobago,1330000,americas,america_north,america,Americas,CO2emissions,35.2
+Trinidad and Tobago,1330000,americas,america_north,america,Americas,ElectricityUsePP,6390
+Trinidad and Tobago,1330000,americas,america_north,america,Americas,FoodSupplykcPPD,2910
+Trinidad and Tobago,1330000,americas,america_north,america,Americas,IncomePP,31000
+Trinidad and Tobago,1330000,americas,america_north,america,Americas,LifeExpectancyYrs,72.7
+Trinidad and Tobago,1330000,americas,america_north,america,Americas,FemaleLiteracyRate,98.5
+Trinidad and Tobago,1330000,americas,america_north,america,Americas,WaterSourcePrct,96.9
+Tunisia,10800000,africa,africa_north,middle_east_north_africa,Africa,CO2emissions,2.42
+Tunisia,10800000,africa,africa_north,middle_east_north_africa,Africa,ElectricityUsePP,1320
+Tunisia,10800000,africa,africa_north,middle_east_north_africa,Africa,FoodSupplykcPPD,3360
+Tunisia,10800000,africa,africa_north,middle_east_north_africa,Africa,IncomePP,10100
+Tunisia,10800000,africa,africa_north,middle_east_north_africa,Africa,LifeExpectancyYrs,77
+Tunisia,10800000,africa,africa_north,middle_east_north_africa,Africa,FemaleLiteracyRate,NA
+Tunisia,10800000,africa,africa_north,middle_east_north_africa,Africa,WaterSourcePrct,92.7
+Turkey,73400000,europe,europe_east,europe_central_asia,Europe,CO2emissions,4.37
+Turkey,73400000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,2700
+Turkey,73400000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3670
+Turkey,73400000,europe,europe_east,europe_central_asia,Europe,IncomePP,19700
+Turkey,73400000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,78.2
+Turkey,73400000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,90.3
+Turkey,73400000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,98.1
+Turkmenistan,5170000,asia,asia_west,europe_central_asia,Asia,CO2emissions,12.1
+Turkmenistan,5170000,asia,asia_west,europe_central_asia,Asia,ElectricityUsePP,2410
+Turkmenistan,5170000,asia,asia_west,europe_central_asia,Asia,FoodSupplykcPPD,2850
+Turkmenistan,5170000,asia,asia_west,europe_central_asia,Asia,IncomePP,11200
+Turkmenistan,5170000,asia,asia_west,europe_central_asia,Asia,LifeExpectancyYrs,68.4
+Turkmenistan,5170000,asia,asia_west,europe_central_asia,Asia,FemaleLiteracyRate,99.5
+Turkmenistan,5170000,asia,asia_west,europe_central_asia,Asia,WaterSourcePrct,91.8
+Tuvalu,10600,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.69
+Tuvalu,10600,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Tuvalu,10600,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,NA
+Tuvalu,10600,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,3230
+Tuvalu,10600,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,NA
+Tuvalu,10600,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,NA
+Tuvalu,10600,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,98.8
+Uganda,35100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.122
+Uganda,35100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,NA
+Uganda,35100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2180
+Uganda,35100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1630
+Uganda,35100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,57.7
+Uganda,35100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Uganda,35100000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,36.5
+Ukraine,45600000,europe,europe_east,europe_central_asia,Europe,CO2emissions,6.28
+Ukraine,45600000,europe,europe_east,europe_central_asia,Europe,ElectricityUsePP,3660
+Ukraine,45600000,europe,europe_east,europe_central_asia,Europe,FoodSupplykcPPD,3180
+Ukraine,45600000,europe,europe_east,europe_central_asia,Europe,IncomePP,8280
+Ukraine,45600000,europe,europe_east,europe_central_asia,Europe,LifeExpectancyYrs,71.1
+Ukraine,45600000,europe,europe_east,europe_central_asia,Europe,FemaleLiteracyRate,99.7
+Ukraine,45600000,europe,europe_east,europe_central_asia,Europe,WaterSourcePrct,97.1
+United Arab Emirates,8670000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,19.1
+United Arab Emirates,8670000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,10600
+United Arab Emirates,8670000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,3210
+United Arab Emirates,8670000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,58400
+United Arab Emirates,8670000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,76.5
+United Arab Emirates,8670000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,NA
+United Arab Emirates,8670000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,99.6
+United Kingdom,63800000,europe,europe_west,europe_central_asia,Europe,CO2emissions,7.02
+United Kingdom,63800000,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,5470
+United Kingdom,63800000,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,3420
+United Kingdom,63800000,europe,europe_west,europe_central_asia,Europe,IncomePP,36500
+United Kingdom,63800000,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,80.5
+United Kingdom,63800000,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+United Kingdom,63800000,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+United States,311000000,americas,america_north,america,Americas,CO2emissions,17
+United States,311000000,americas,america_north,america,Americas,ElectricityUsePP,13200
+United States,311000000,americas,america_north,america,Americas,FoodSupplykcPPD,3650
+United States,311000000,americas,america_north,america,Americas,IncomePP,49800
+United States,311000000,americas,america_north,america,Americas,LifeExpectancyYrs,78.8
+United States,311000000,americas,america_north,america,Americas,FemaleLiteracyRate,NA
+United States,311000000,americas,america_north,america,Americas,WaterSourcePrct,99.2
+Uruguay,3390000,americas,america_south,america,Americas,CO2emissions,2.29
+Uruguay,3390000,americas,america_south,america,Americas,ElectricityUsePP,2810
+Uruguay,3390000,americas,america_south,america,Americas,FoodSupplykcPPD,3010
+Uruguay,3390000,americas,america_south,america,Americas,IncomePP,17900
+Uruguay,3390000,americas,america_south,america,Americas,LifeExpectancyYrs,76.4
+Uruguay,3390000,americas,america_south,america,Americas,FemaleLiteracyRate,NA
+Uruguay,3390000,americas,america_south,america,Americas,WaterSourcePrct,98.6
+Uzbekistan,29100000,asia,asia_west,europe_central_asia,Asia,CO2emissions,3.91
+Uzbekistan,29100000,asia,asia_west,europe_central_asia,Asia,ElectricityUsePP,1630
+Uzbekistan,29100000,asia,asia_west,europe_central_asia,Asia,FoodSupplykcPPD,2690
+Uzbekistan,29100000,asia,asia_west,europe_central_asia,Asia,IncomePP,4470
+Uzbekistan,29100000,asia,asia_west,europe_central_asia,Asia,LifeExpectancyYrs,69
+Uzbekistan,29100000,asia,asia_west,europe_central_asia,Asia,FemaleLiteracyRate,99.2
+Uzbekistan,29100000,asia,asia_west,europe_central_asia,Asia,WaterSourcePrct,91.5
+Vanuatu,242000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,0.546
+Vanuatu,242000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,NA
+Vanuatu,242000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2840
+Vanuatu,242000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,2920
+Vanuatu,242000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,63.2
+Vanuatu,242000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,81.5
+Vanuatu,242000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,87.4
+Venezuela,29500000,americas,america_south,america,Americas,CO2emissions,6
+Venezuela,29500000,americas,america_south,america,Americas,ElectricityUsePP,3190
+Venezuela,29500000,americas,america_south,america,Americas,FoodSupplykcPPD,2800
+Venezuela,29500000,americas,america_south,america,Americas,IncomePP,17000
+Venezuela,29500000,americas,america_south,america,Americas,LifeExpectancyYrs,75.4
+Venezuela,29500000,americas,america_south,america,Americas,FemaleLiteracyRate,NA
+Venezuela,29500000,americas,america_south,america,Americas,WaterSourcePrct,97.2
+Vietnam,89400000,asia,east_asia_pacific,east_asia_pacific,Asia,CO2emissions,1.7
+Vietnam,89400000,asia,east_asia_pacific,east_asia_pacific,Asia,ElectricityUsePP,1100
+Vietnam,89400000,asia,east_asia_pacific,east_asia_pacific,Asia,FoodSupplykcPPD,2720
+Vietnam,89400000,asia,east_asia_pacific,east_asia_pacific,Asia,IncomePP,4720
+Vietnam,89400000,asia,east_asia_pacific,east_asia_pacific,Asia,LifeExpectancyYrs,73.3
+Vietnam,89400000,asia,east_asia_pacific,east_asia_pacific,Asia,FemaleLiteracyRate,91.4
+Vietnam,89400000,asia,east_asia_pacific,east_asia_pacific,Asia,WaterSourcePrct,87.4
+Yemen,24300000,asia,asia_west,middle_east_north_africa,Asia,CO2emissions,0.811
+Yemen,24300000,asia,asia_west,middle_east_north_africa,Asia,ElectricityUsePP,190
+Yemen,24300000,asia,asia_west,middle_east_north_africa,Asia,FoodSupplykcPPD,2210
+Yemen,24300000,asia,asia_west,middle_east_north_africa,Asia,IncomePP,3810
+Yemen,24300000,asia,asia_west,middle_east_north_africa,Asia,LifeExpectancyYrs,67.7
+Yemen,24300000,asia,asia_west,middle_east_north_africa,Asia,FemaleLiteracyRate,48.5
+Yemen,24300000,asia,asia_west,middle_east_north_africa,Asia,WaterSourcePrct,62.4
+Zambia,14300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.206
+Zambia,14300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,621
+Zambia,14300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,1910
+Zambia,14300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,3360
+Zambia,14300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,53.2
+Zambia,14300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,NA
+Zambia,14300000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,57.9
+Zimbabwe,14400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,CO2emissions,0.665
+Zimbabwe,14400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,ElectricityUsePP,570
+Zimbabwe,14400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FoodSupplykcPPD,2200
+Zimbabwe,14400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,IncomePP,1660
+Zimbabwe,14400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,LifeExpectancyYrs,51.9
+Zimbabwe,14400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,FemaleLiteracyRate,80.1
+Zimbabwe,14400000,africa,africa_sub_saharan,sub_saharan_africa,Africa,WaterSourcePrct,67.8
+Monaco,37500,europe,europe_west,europe_central_asia,Europe,CO2emissions,NA
+Monaco,37500,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,NA
+Monaco,37500,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,NA
+Monaco,37500,europe,europe_west,europe_central_asia,Europe,IncomePP,58100
+Monaco,37500,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,NA
+Monaco,37500,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Monaco,37500,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+San Marino,31500,europe,europe_west,europe_central_asia,Europe,CO2emissions,NA
+San Marino,31500,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,NA
+San Marino,31500,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,NA
+San Marino,31500,europe,europe_west,europe_central_asia,Europe,IncomePP,43100
+San Marino,31500,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,NA
+San Marino,31500,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+San Marino,31500,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,100
+Holy See,796,europe,europe_west,europe_central_asia,Europe,CO2emissions,NA
+Holy See,796,europe,europe_west,europe_central_asia,Europe,ElectricityUsePP,NA
+Holy See,796,europe,europe_west,europe_central_asia,Europe,FoodSupplykcPPD,NA
+Holy See,796,europe,europe_west,europe_central_asia,Europe,IncomePP,NA
+Holy See,796,europe,europe_west,europe_central_asia,Europe,LifeExpectancyYrs,NA
+Holy See,796,europe,europe_west,europe_central_asia,Europe,FemaleLiteracyRate,NA
+Holy See,796,europe,europe_west,europe_central_asia,Europe,WaterSourcePrct,NA

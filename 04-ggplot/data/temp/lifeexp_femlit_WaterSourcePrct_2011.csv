@@ -1,0 +1,195 @@
+country,life_expectancy,FemaleLiteracyRate,WaterSourcePrct,WaterSourcePrct_2011_quart
+Afghanistan,56.7,13,52.6,Q1
+Albania,76.7,95.7,88.1,Q2
+Algeria,76.7,NA,92.6,Q2
+Andorra,82.6,NA,100,Q4
+Angola,60.9,58.6,40.3,Q1
+Antigua and Barbuda,76.9,99.4,97,Q3
+Argentina,76,97.9,99.5,Q4
+Armenia,73.8,99.5,97.8,Q3
+Australia,82.2,NA,99.9,Q4
+Austria,80.7,NA,100,Q4
+Azerbaijan,69.9,NA,82.3,Q2
+Bahamas,73.8,NA,97.8,Q3
+Bahrain,76.2,NA,100,Q4
+Bangladesh,71,53.4,96.7,Q3
+Barbados,76.7,NA,98.2,Q3
+Belarus,70.7,NA,98,Q3
+Belgium,80.2,NA,100,Q4
+Belize,71.5,NA,94.6,Q3
+Benin,62.2,NA,65.2,Q1
+Bhutan,72.5,NA,94.7,Q3
+Bolivia,71.9,NA,89.4,Q2
+Bosnia and Herzegovina,76.9,96.7,97.4,Q3
+Botswana,58.9,85.6,78.7,Q2
+Brazil,74.4,NA,96.5,Q3
+Brunei,77,93.9,99.5,Q4
+Bulgaria,74.3,98,99.4,Q4
+Burkina Faso,58.4,NA,51.8,Q1
+Burundi,58.2,NA,55,Q1
+Cambodia,66.6,NA,68.9,Q1
+Cameroon,57.7,NA,62.7,Q1
+Canada,81.5,NA,99.3,Q4
+Cape Verde,72.7,80.3,84.3,Q2
+Central African Republic,48,44.2,53.7,Q1
+Chad,57,25.4,41.5,Q1
+Chile,79.5,NA,99.3,Q4
+China,75.1,NA,92,Q2
+Colombia,77,93.7,95,Q3
+Comoros,65.6,70.6,84.2,Q2
+"Congo, Dem. Rep.",58,NA,39.8,Q1
+"Congo, Rep.",61.1,NA,65.1,Q1
+Costa Rica,80.5,96.5,98.7,Q3
+Cote d'Ivoire,56.9,47.6,72.7,Q1
+Croatia,76.6,98.3,99.4,Q4
+Cuba,78.5,99.8,94.6,Q3
+Cyprus,80.2,98.1,100,Q4
+Czech Republic,77.8,NA,99.9,Q4
+Denmark,79.8,NA,100,Q4
+Djibouti,64.2,NA,76.4,Q2
+Dominica,73,NA,96.5,Q3
+Dominican Republic,74.7,90.2,93.7,Q3
+Ecuador,77,90.2,90.1,Q2
+Egypt,70.9,64.6,98.3,Q3
+El Salvador,74.3,NA,90,Q2
+Equatorial Guinea,61.4,91.1,49.3,Q1
+Eritrea,62,59,18.3,Q1
+Estonia,76.3,99.8,99.5,Q4
+Ethiopia,62.2,NA,33.1,Q1
+Fiji,65.5,NA,94,Q3
+Finland,80.3,NA,100,Q4
+France,81.7,NA,100,Q4
+Gabon,63.3,85.6,85.8,Q2
+Gambia,66,41.9,78.5,Q2
+Georgia,73,99.7,92,Q2
+Germany,80.3,NA,100,Q4
+Ghana,62.9,NA,74.4,Q1
+Greece,80.5,96.3,100,Q4
+Grenada,71.3,NA,95.9,Q3
+Guatemala,71.5,71.1,91.5,Q2
+Guinea,58.5,NA,63.9,Q1
+Guinea-Bissau,56.2,42.1,64.9,Q1
+Guyana,65.7,NA,93,Q2
+Haiti,60.5,NA,62.5,Q1
+Honduras,71.8,84.9,89.7,Q2
+Hungary,74.9,98.9,100,Q4
+Iceland,82.1,NA,100,Q4
+India,66.6,NA,85.7,Q2
+Indonesia,70.2,90.1,85.8,Q2
+Iran,74.8,NA,95,Q3
+Iraq,67.6,71.2,83.2,Q2
+Ireland,80.5,NA,98.3,Q3
+Israel,81.6,NA,100,Q4
+Italy,81.8,98.7,100,Q4
+Jamaica,74.8,91.8,92.5,Q2
+Japan,82.6,NA,98.8,Q3
+Jordan,76.1,93.9,98.8,Q3
+Kazakhstan,69,NA,90,Q2
+Kenya,63.8,NA,55.4,Q1
+Kiribati,60.8,NA,63.9,Q1
+Kuwait,78.9,NA,100,Q4
+Kyrgyz Republic,69.1,NA,85.3,Q2
+Lao,64.6,NA,71.8,Q1
+Latvia,73.6,99.8,98.3,Q3
+Lebanon,79,NA,90.4,Q2
+Lesotho,47.5,NA,70.2,Q1
+Liberia,61.4,NA,67.8,Q1
+Libya,61,83.3,96.8,Q3
+Lithuania,73.5,99.7,95.8,Q3
+Luxembourg,81.5,NA,99.9,Q4
+"Macedonia, FYR",74.2,96,96.7,Q3
+Madagascar,61.1,NA,46.6,Q1
+Malawi,54.5,NA,63,Q1
+Malaysia,74.6,NA,96.8,Q3
+Maldives,78.3,NA,98.1,Q3
+Mali,60,24.6,67.7,Q1
+Malta,80.4,NA,100,Q4
+Marshall Islands,63.9,NA,78.5,Q2
+Mauritania,68.6,52,65.8,Q1
+Mauritius,73.8,86.7,99.8,Q4
+Mexico,75.8,92.3,96,Q3
+"Micronesia, Fed. Sts.",65.4,NA,88.7,Q2
+Moldova,71.5,98.5,86.1,Q2
+Mongolia,66.6,97.9,79.2,Q2
+Montenegro,76.4,97.6,96.2,Q3
+Morocco,73.8,57.6,78.3,Q2
+Mozambique,55,NA,40.4,Q1
+Myanmar,67.4,90.4,64.2,Q1
+Namibia,60.1,NA,78.2,Q2
+Nepal,68.7,46.7,85.7,Q2
+Netherlands,80.9,NA,100,Q4
+New Zealand,81,NA,100,Q4
+Nicaragua,77.5,NA,81.7,Q2
+Niger,59.3,NA,43.6,Q1
+Nigeria,61.3,NA,62.1,Q1
+North Korea,70.2,NA,99.6,Q4
+Norway,81.2,NA,100,Q4
+Oman,76.4,NA,85.7,Q2
+Pakistan,65.8,NA,88.7,Q2
+Palestine,72.1,92.6,87.9,Q2
+Panama,77.9,NA,93.3,Q2
+Papua New Guinea,59,59.4,36.6,Q1
+Paraguay,74.1,NA,92.9,Q2
+Peru,78.1,NA,87.6,Q2
+Philippines,69.2,NA,89.3,Q2
+Poland,76.5,99.6,97.9,Q3
+Portugal,80.1,94,99.7,Q4
+Qatar,80,NA,100,Q4
+Romania,74.5,97.2,100,Q4
+Russia,69.8,NA,96.1,Q3
+Rwanda,65.3,NA,54.1,Q1
+Samoa,71.5,98.6,95,Q3
+Sao Tome and Principe,69.3,NA,76.4,Q2
+Saudi Arabia,75.3,82.2,99.7,Q4
+Senegal,64.4,NA,71.6,Q1
+Serbia,74.8,96.9,90,Q2
+Seychelles,73.5,92.3,95.9,Q3
+Sierra Leone,55.7,32.6,52.7,Q1
+Singapore,82.9,NA,100,Q4
+Slovak Republic,75.9,NA,97.9,Q3
+Slovenia,79.8,99.7,99.5,Q4
+Solomon Islands,62,NA,69.7,Q1
+Somalia,53.4,NA,34.7,Q1
+South Africa,55.8,92.2,82.8,Q2
+South Korea,80.4,NA,99.1,Q3
+South Sudan,58.1,NA,42.7,Q1
+Spain,82.2,NA,100,Q4
+Sri Lanka,76,NA,88.3,Q2
+St. Lucia,76,NA,95.8,Q3
+St. Vincent and the Grenadines,71.7,NA,94.7,Q3
+Sudan,66.5,63.2,53.3,Q1
+Suriname,70.5,NA,94.2,Q3
+Swaziland,48.9,87.3,63.4,Q1
+Sweden,81.7,NA,100,Q4
+Switzerland,82.5,NA,100,Q4
+Syria,75,77.8,96.6,Q3
+Tajikistan,69.9,99.6,70.5,Q1
+Tanzania,59.9,NA,45.2,Q1
+Thailand,76.9,NA,97.4,Q3
+Timor-Leste,71.6,NA,64.5,Q1
+Togo,59.6,48,58.2,Q1
+Tonga,70,NA,99.5,Q4
+Trinidad and Tobago,72.7,98.5,96.9,Q3
+Tunisia,77,NA,92.7,Q2
+Turkey,78.2,90.3,98.1,Q3
+Turkmenistan,68.4,99.5,91.8,Q2
+Uganda,57.7,NA,36.5,Q1
+Ukraine,71.1,99.7,97.1,Q3
+United Arab Emirates,76.5,NA,99.6,Q4
+United Kingdom,80.5,NA,100,Q4
+United States,78.8,NA,99.2,Q4
+Uruguay,76.4,NA,98.6,Q3
+Uzbekistan,69,99.2,91.5,Q2
+Vanuatu,63.2,81.5,87.4,Q2
+Venezuela,75.4,NA,97.2,Q3
+Vietnam,73.3,91.4,87.4,Q2
+Yemen,67.7,48.5,62.4,Q1
+Zambia,53.2,NA,57.9,Q1
+Zimbabwe,51.9,80.1,67.8,Q1
+Palau,NA,NA,98.1,Q3
+Liechtenstein,NA,NA,100,Q4
+Monaco,NA,NA,100,Q4
+Nauru,NA,NA,99.4,Q4
+San Marino,NA,NA,100,Q4
+St. Kitts and Nevis,NA,NA,99,Q3
+Tuvalu,NA,NA,98.8,Q3

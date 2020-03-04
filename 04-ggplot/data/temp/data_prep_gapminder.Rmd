@@ -1,0 +1,607 @@
+---
+title: "Gapminder data prep"
+author: "meike"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+    theme: cerulean
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.height=3, fig.width=4, message = F)
+```
+
+```{r}
+library(readr)
+library(tidyverse)
+library(janitor)
+library(skimr)
+library(knitr)
+
+```
+
+# Datasets
+
+R name  | file name |  year subsetted
+------------|--------|--------
+LifeExpectancyYrs | life_expectancy_years.csv | 2011
+FemaleLiteracyRate | literacy_rate_adult_female_percent_of_females_ages_15_above.csv | 2011
+WaterSourcePrct | at_least_basic_water_source_overall_access_percent.csv | 2011
+CO2emissions | raw_data/co2_emissions_tonnes_per_person.csv
+ElectricityUsePP | raw_data/electricity_use_per_person.csv
+FoodSupplykcPPD | raw_data/food_supply_kilocalories_per_person_and_day.csv
+IncomePP | raw_data/income_per_person_gdppercapita_ppp_inflation_adjusted.csv | up to 2040
+population | raw_data/population_total.csv  | up to 2100
+
+
+
+# Life expectancy
+
+* Complete data for 1970-2016
+
+```{r}
+LifeExpectancyYrs_temp <- read_csv("raw_data/life_expectancy_years.csv")
+LifeExpectancyYrs <- clean_names(LifeExpectancyYrs_temp)
+# glimpse(LifeExpectancyYrs)
+dim(LifeExpectancyYrs)
+# names(LifeExpectancyYrs)
+```
+
+
+## skim
+
+```{r}
+LifeExpectancyYrs_skim <- skim(LifeExpectancyYrs)
+LifeExpectancyYrs_skim
+```
+
+## years with fewest missing data
+
+```{r}
+LifeExpectancyYrs_minNA <- LifeExpectancyYrs_skim %>% 
+  select(year = skim_variable, n_miss_LifeExpectancyYrs = n_missing) %>% 
+  filter(year != "country") %>% 
+  arrange(n_miss_LifeExpectancyYrs, desc(year)) 
+head(LifeExpectancyYrs_minNA, 15)
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+str(LifeExpectancyYrs_skim)
+names(LifeExpectancyYrs_skim)
+```
+
+
+
+
+## Restrict to 2011
+
+* 2011 is year with most data for Adult female FemaleLiteracyRate rate
+
+```{r}
+LifeExpectancyYrs_11 <- LifeExpectancyYrs %>% select(country, "x2011") %>% 
+  rename(LifeExpectancyYrs = x2011)
+LifeExpectancyYrs_11
+```
+
+
+
+# Literacy: Adult female FemaleLiteracyRate rate
+
+```{r}
+FemaleLiteracyRate_temp <- read_csv("raw_data/literacy_rate_adult_female_percent_of_females_ages_15_above.csv")
+FemaleLiteracyRate <- clean_names(FemaleLiteracyRate_temp)
+# glimpse(FemaleLiteracyRate)
+dim(FemaleLiteracyRate)
+# names(FemaleLiteracyRate)
+```
+
+
+## skim
+
+```{r}
+FemaleLiteracyRate_skim <- skim(FemaleLiteracyRate)
+FemaleLiteracyRate_skim
+```
+
+## years with fewest missing data
+
+```{r}
+FemaleLiteracyRate_minNA <- FemaleLiteracyRate_skim %>% 
+  select(year = skim_variable, n_miss_FemaleLiteracyRate = n_missing) %>% 
+  filter(year != "country") %>% 
+  arrange(n_miss_FemaleLiteracyRate, desc(year)) 
+head(FemaleLiteracyRate_minNA, 15)
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+str(FemaleLiteracyRate_skim)
+names(FemaleLiteracyRate_skim)
+```
+
+
+## Restrict to 2011
+
+* 2011 is year with most data for FemaleLiteracyRate rate
+
+```{r}
+FemaleLiteracyRate_11 <- FemaleLiteracyRate %>% select(country, "x2011") %>% 
+  rename(FemaleLiteracyRate = x2011)
+FemaleLiteracyRate_11
+```
+
+
+
+# Water access
+
+* n =194
+* Complete data for 2011-2012
+* distribution skewed right
+
+```{r}
+WaterSourcePrct_temp <- read_csv("raw_data/at_least_basic_water_source_overall_access_percent.csv")
+WaterSourcePrct <- clean_names(WaterSourcePrct_temp)
+# glimpse(WaterSourcePrct)
+dim(WaterSourcePrct)
+# names(WaterSourcePrct)
+```
+
+
+## skim
+
+```{r}
+WaterSourcePrct_skim <- skim(WaterSourcePrct)
+WaterSourcePrct_skim
+```
+
+## years with fewest missing data
+
+```{r}
+WaterSourcePrct_minNA <- WaterSourcePrct_skim %>% 
+  select(year = skim_variable, n_miss_WaterSourcePrct = n_missing) %>% 
+  filter(year != "country") %>% 
+  arrange(n_miss_WaterSourcePrct, desc(year)) 
+head(WaterSourcePrct_minNA, 15)
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+str(WaterSourcePrct_skim)
+names(WaterSourcePrct_skim)
+```
+
+
+
+## Restrict to 2011
+
+* 2011 is year with most data for Adult female FemaleLiteracyRate rate
+
+```{r}
+WaterSourcePrct_11 <- WaterSourcePrct %>% select(country, "x2011") %>% 
+  rename(WaterSourcePrct = x2011)
+WaterSourcePrct_11
+
+skim(WaterSourcePrct_11)
+
+# WaterSourcePrct_11 %>% tabyl(WaterSourcePrct)
+```
+
+
+Split data into quartiles:
+
+* group 1: [0, 74.9%]
+* group 2: (74.9%, 93.5%]
+* group 2: (93.5%, 99.1%]
+* group 2: (99.1%, 100%]
+
+### viz
+
+```{r}
+ggplot(WaterSourcePrct_11, aes(x=WaterSourcePrct)) +
+  geom_histogram()
+
+ggplot(WaterSourcePrct_11, aes(x=WaterSourcePrct)) +
+  geom_bar()
+
+ggplot(WaterSourcePrct_11, aes(y=WaterSourcePrct)) +
+  geom_boxplot()
+```
+
+### Categorical variable for quartiles
+
+
+```{r}
+WaterSourcePrct_11 <- WaterSourcePrct_11 %>% 
+  mutate(
+    WaterSourcePrct_2011_quart = case_when(
+      WaterSourcePrct <= 74.9 ~ "Q1",
+      WaterSourcePrct > 74.9 & WaterSourcePrct <= 93.5 ~ "Q2",
+      WaterSourcePrct > 93.5 & WaterSourcePrct <= 99.1 ~ "Q3",
+      WaterSourcePrct > 99.1 ~ "Q4"
+    ))
+
+WaterSourcePrct_11 %>% tabyl(WaterSourcePrct_2011_quart)
+```
+
+# CO2 emissions
+
+
+```{r}
+CO2emissions_temp <- read_csv("raw_data/co2_emissions_tonnes_per_person.csv")
+CO2emissions <- clean_names(CO2emissions_temp)
+# glimpse(CO2emissions)
+dim(CO2emissions)
+# names(CO2emissions)
+```
+
+
+## skim
+
+```{r}
+CO2emissions_skim <- skim(CO2emissions)
+CO2emissions_skim
+```
+
+## years with fewest missing data
+
+```{r}
+CO2emissions_minNA <- CO2emissions_skim %>% 
+  select(year = skim_variable, n_miss_CO2emissions = n_missing) %>% 
+  filter(year != "country") %>% 
+  arrange(n_miss_CO2emissions, desc(year)) 
+head(CO2emissions_minNA, 15)
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+str(CO2emissions_skim)
+names(CO2emissions_skim)
+```
+
+## Restrict to 2011
+
+```{r}
+CO2emissions_11 <- CO2emissions %>% select(country, "x2011") %>% 
+  rename(CO2emissions = x2011)
+CO2emissions_11
+
+skim(CO2emissions_11)
+```
+
+
+
+# Electricity use
+
+
+```{r}
+ElectricityUsePP_temp <- read_csv("raw_data/electricity_use_per_person.csv")
+ElectricityUsePP <- clean_names(ElectricityUsePP_temp)
+# glimpse(ElectricityUsePP)
+dim(ElectricityUsePP)
+# names(ElectricityUsePP)
+```
+
+
+## skim
+
+```{r}
+ElectricityUsePP_skim <- skim(ElectricityUsePP)
+ElectricityUsePP_skim
+```
+
+## years with fewest missing data
+
+```{r}
+ElectricityUsePP_minNA <- ElectricityUsePP_skim %>% 
+  select(year = skim_variable, n_miss_ElectricityUsePP = n_missing) %>% 
+  filter(year != "country") %>% 
+  arrange(n_miss_ElectricityUsePP, desc(year)) 
+head(ElectricityUsePP_minNA, 15)
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+str(ElectricityUsePP_skim)
+names(ElectricityUsePP_skim)
+```
+
+## Restrict to 2011
+
+```{r}
+ElectricityUsePP_11 <- ElectricityUsePP %>% select(country, "x2011") %>% 
+  rename(ElectricityUsePP = x2011)
+ElectricityUsePP_11
+
+skim(ElectricityUsePP_11)
+```
+# Food supply
+
+food_supply_kilocalories_per_person_and_day
+
+
+```{r}
+FoodSupplykcPPD_temp <- read_csv("raw_data/food_supply_kilocalories_per_person_and_day.csv")
+FoodSupplykcPPD <- clean_names(FoodSupplykcPPD_temp)
+# glimpse(FoodSupplykcPPD)
+dim(FoodSupplykcPPD)
+# names(FoodSupplykcPPD)
+```
+
+
+## skim
+
+```{r}
+FoodSupplykcPPD_skim <- skim(FoodSupplykcPPD)
+FoodSupplykcPPD_skim
+```
+
+## years with fewest missing data
+
+```{r}
+FoodSupplykcPPD_minNA <- FoodSupplykcPPD_skim %>% 
+  select(year = skim_variable, n_miss_FoodSupplykcPPD = n_missing) %>% 
+  filter(year != "country") %>% 
+  arrange(n_miss_FoodSupplykcPPD, desc(year)) 
+head(FoodSupplykcPPD_minNA, 15)
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+str(FoodSupplykcPPD_skim)
+names(FoodSupplykcPPD_skim)
+```
+
+## Restrict to 2011
+
+```{r}
+FoodSupplykcPPD_11 <- FoodSupplykcPPD %>% select(country, "x2011") %>% 
+  rename(FoodSupplykcPPD = x2011)
+FoodSupplykcPPD_11
+
+skim(FoodSupplykcPPD_11)
+```
+
+
+# Income
+
+income_per_person_gdppercapita_ppp_inflation_adjusted
+
+
+```{r}
+IncomePP_temp <- read_csv("raw_data/income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
+IncomePP_temp2 <- clean_names(IncomePP_temp)
+# glimpse(IncomePP)
+dim(IncomePP_temp2)
+# names(IncomePP_temp2)
+tail(names(IncomePP_temp2))
+
+IncomePP <- IncomePP_temp2 %>% 
+  select(country:x2019)
+dim(IncomePP)
+```
+
+
+## skim
+
+```{r}
+IncomePP_skim <- skim(IncomePP)
+IncomePP_skim
+```
+
+## years with fewest missing data
+
+```{r}
+IncomePP_minNA <- IncomePP_skim %>% 
+  select(year = skim_variable, n_miss_IncomePP = n_missing) %>% 
+  filter(year != "country") %>% 
+  arrange(n_miss_IncomePP, desc(year)) 
+head(IncomePP_minNA, 15)
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+str(IncomePP_skim)
+names(IncomePP_skim)
+```
+
+## Restrict to 2011
+
+```{r}
+IncomePP_11 <- IncomePP %>% select(country, "x2011") %>% 
+  rename(IncomePP = x2011)
+IncomePP_11
+
+skim(IncomePP_11)
+```
+
+# Population
+
+population_total.csv
+
+
+```{r}
+population_temp <- read_csv("raw_data/population_total.csv")
+population_temp2 <- clean_names(population_temp)
+# glimpse(population)
+dim(population_temp2)
+# names(population_temp2)
+tail(names(population_temp2))
+
+population <- population_temp2 %>% 
+  select(country:x2019)
+dim(population)
+```
+
+
+## skim
+
+```{r}
+population_skim <- skim(population)
+population_skim
+```
+
+## years with fewest missing data
+
+```{r}
+population_minNA <- population_skim %>% 
+  select(year = skim_variable, n_miss_population = n_missing) %>% 
+  filter(year != "country") %>% 
+  arrange(n_miss_population, desc(year)) 
+head(population_minNA, 15)
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+str(population_skim)
+names(population_skim)
+```
+
+
+## Restrict to 2011
+
+```{r}
+population_11 <- population %>% select(country, "x2011") %>% 
+  rename(population = x2011)
+population_11
+
+skim(population_11)
+```
+
+# Compare years with fewest missing values
+
+Looks like 2011 is the most recent year with the fewest missing values
+
+
+```{r}
+as.data.frame(ls()) %>% filter(str_detect(`ls()`, "_minNA"))
+```
+
+
+```{r}
+minNA_join <- Reduce(full_join,list(
+  CO2emissions_minNA, ElectricityUsePP_minNA, FoodSupplykcPPD_minNA, IncomePP_minNA, LifeExpectancyYrs_minNA, FemaleLiteracyRate_minNA, population_minNA, WaterSourcePrct_minNA
+  ))
+
+dim(minNA_join) # lots of missing values
+minNA_join # lots of missing values
+
+minNA_join_noNArow <- minNA_join %>% drop_na()
+minNA_join_noNArow %>% kable()
+```
+
+
+
+# Joins
+
+## Life expectancy & Adult female FemaleLiteracyRate rate
+
+```{r}
+LifeExpectancyYrs_FemaleLiteracyRate_2011 <- full_join(LifeExpectancyYrs_11, FemaleLiteracyRate_11,
+                                 by = c("country")
+                                 )
+LifeExpectancyYrs_FemaleLiteracyRate_2011
+
+
+skim(LifeExpectancyYrs_FemaleLiteracyRate_2011)
+```
+
+
+### save joined dataset
+
+```{r}
+save(LifeExpectancyYrs_FemaleLiteracyRate_2011, file = "LifeExpectancyYrs_FemaleLiteracyRate_2011.RData")
+write_csv(LifeExpectancyYrs_FemaleLiteracyRate_2011, path = "LifeExpectancyYrs_FemaleLiteracyRate_2011.csv")
+```
+
+## Add WaterSourcePrct access 2011 to `LifeExpectancyYrs_FemaleLiteracyRate_2011`
+
+```{r}
+dim(LifeExpectancyYrs_FemaleLiteracyRate_2011)
+dim(WaterSourcePrct_11)
+
+LifeExpectancyYrs_FemaleLiteracyRate_WaterSourcePrct_2011 <- full_join(LifeExpectancyYrs_FemaleLiteracyRate_2011, WaterSourcePrct_11,
+                                 by = c("country")
+                                 )
+dim(LifeExpectancyYrs_FemaleLiteracyRate_WaterSourcePrct_2011)
+LifeExpectancyYrs_FemaleLiteracyRate_WaterSourcePrct_2011
+skim(LifeExpectancyYrs_FemaleLiteracyRate_WaterSourcePrct_2011)
+```
+
+
+### save joined dataset
+
+```{r}
+save(LifeExpectancyYrs_FemaleLiteracyRate_WaterSourcePrct_2011, file = "LifeExpectancyYrs_FemaleLiteracyRate_WaterSourcePrct_2011.RData")
+write_csv(LifeExpectancyYrs_FemaleLiteracyRate_WaterSourcePrct_2011, path = "LifeExpectancyYrs_FemaleLiteracyRate_WaterSourcePrct_2011.csv")
+```
+
+
+## All 2011 datasets
+
+
+```{r}
+vars_2011 <- as.data.frame(ls()) %>% filter(str_detect(`ls()`, "_11"))
+vars_2011
+```
+
+
+```{r}
+join_2011 <- Reduce(full_join,list(
+  CO2emissions_11, ElectricityUsePP_11, FoodSupplykcPPD_11, IncomePP_11, LifeExpectancyYrs_11, FemaleLiteracyRate_11, population_11, WaterSourcePrct_11
+  ))
+
+dim(join_2011) # lots of missing values
+join_2011 # lots of missing values
+
+join_2011 %>% kable()
+```
+
+
+
+# Regions
+
+```{r}
+geog_temp <- read_csv("raw_data/Geography_data.csv")
+geog <- clean_names(geog_temp)
+dim(geog)
+names(geog)
+glimpse(geog)
+
+geog
+skim(geog)
+
+geog <- geog %>% rename(country = name)
+names(geog)
+```
+
+
+## Add regions data to 2011 variables
+
+```{r}
+dim(join_2011)
+dim(geog)
+
+join_2011_regions <- left_join(join_2011, geog,
+                               by = "country")
+
+dim(join_2011_regions)
+```
+
+  
+### save joined dataset
+
+```{r}
+save(join_2011_regions, file = "Gapminder_vars_2011.RData")
+write_csv(join_2011_regions, path = "Gapminder_vars_2011.csv")
+```
+
+
+

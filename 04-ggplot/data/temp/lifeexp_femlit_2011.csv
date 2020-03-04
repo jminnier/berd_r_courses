@@ -1,0 +1,189 @@
+country,life_expectancy,FemaleLiteracyRate
+Afghanistan,56.7,13
+Albania,76.7,95.7
+Algeria,76.7,NA
+Andorra,82.6,NA
+Angola,60.9,58.6
+Antigua and Barbuda,76.9,99.4
+Argentina,76,97.9
+Armenia,73.8,99.5
+Australia,82.2,NA
+Austria,80.7,NA
+Azerbaijan,69.9,NA
+Bahamas,73.8,NA
+Bahrain,76.2,NA
+Bangladesh,71,53.4
+Barbados,76.7,NA
+Belarus,70.7,NA
+Belgium,80.2,NA
+Belize,71.5,NA
+Benin,62.2,NA
+Bhutan,72.5,NA
+Bolivia,71.9,NA
+Bosnia and Herzegovina,76.9,96.7
+Botswana,58.9,85.6
+Brazil,74.4,NA
+Brunei,77,93.9
+Bulgaria,74.3,98
+Burkina Faso,58.4,NA
+Burundi,58.2,NA
+Cambodia,66.6,NA
+Cameroon,57.7,NA
+Canada,81.5,NA
+Cape Verde,72.7,80.3
+Central African Republic,48,44.2
+Chad,57,25.4
+Chile,79.5,NA
+China,75.1,NA
+Colombia,77,93.7
+Comoros,65.6,70.6
+"Congo, Dem. Rep.",58,NA
+"Congo, Rep.",61.1,NA
+Costa Rica,80.5,96.5
+Cote d'Ivoire,56.9,47.6
+Croatia,76.6,98.3
+Cuba,78.5,99.8
+Cyprus,80.2,98.1
+Czech Republic,77.8,NA
+Denmark,79.8,NA
+Djibouti,64.2,NA
+Dominica,73,NA
+Dominican Republic,74.7,90.2
+Ecuador,77,90.2
+Egypt,70.9,64.6
+El Salvador,74.3,NA
+Equatorial Guinea,61.4,91.1
+Eritrea,62,59
+Estonia,76.3,99.8
+Ethiopia,62.2,NA
+Fiji,65.5,NA
+Finland,80.3,NA
+France,81.7,NA
+Gabon,63.3,85.6
+Gambia,66,41.9
+Georgia,73,99.7
+Germany,80.3,NA
+Ghana,62.9,NA
+Greece,80.5,96.3
+Grenada,71.3,NA
+Guatemala,71.5,71.1
+Guinea,58.5,NA
+Guinea-Bissau,56.2,42.1
+Guyana,65.7,NA
+Haiti,60.5,NA
+Honduras,71.8,84.9
+Hungary,74.9,98.9
+Iceland,82.1,NA
+India,66.6,NA
+Indonesia,70.2,90.1
+Iran,74.8,NA
+Iraq,67.6,71.2
+Ireland,80.5,NA
+Israel,81.6,NA
+Italy,81.8,98.7
+Jamaica,74.8,91.8
+Japan,82.6,NA
+Jordan,76.1,93.9
+Kazakhstan,69,NA
+Kenya,63.8,NA
+Kiribati,60.8,NA
+Kuwait,78.9,NA
+Kyrgyz Republic,69.1,NA
+Lao,64.6,NA
+Latvia,73.6,99.8
+Lebanon,79,NA
+Lesotho,47.5,NA
+Liberia,61.4,NA
+Libya,61,83.3
+Lithuania,73.5,99.7
+Luxembourg,81.5,NA
+"Macedonia, FYR",74.2,96
+Madagascar,61.1,NA
+Malawi,54.5,NA
+Malaysia,74.6,NA
+Maldives,78.3,NA
+Mali,60,24.6
+Malta,80.4,NA
+Marshall Islands,63.9,NA
+Mauritania,68.6,52
+Mauritius,73.8,86.7
+Mexico,75.8,92.3
+"Micronesia, Fed. Sts.",65.4,NA
+Moldova,71.5,98.5
+Mongolia,66.6,97.9
+Montenegro,76.4,97.6
+Morocco,73.8,57.6
+Mozambique,55,NA
+Myanmar,67.4,90.4
+Namibia,60.1,NA
+Nepal,68.7,46.7
+Netherlands,80.9,NA
+New Zealand,81,NA
+Nicaragua,77.5,NA
+Niger,59.3,NA
+Nigeria,61.3,NA
+North Korea,70.2,NA
+Norway,81.2,NA
+Oman,76.4,NA
+Pakistan,65.8,NA
+Palestine,72.1,92.6
+Panama,77.9,NA
+Papua New Guinea,59,59.4
+Paraguay,74.1,NA
+Peru,78.1,NA
+Philippines,69.2,NA
+Poland,76.5,99.6
+Portugal,80.1,94
+Qatar,80,NA
+Romania,74.5,97.2
+Russia,69.8,NA
+Rwanda,65.3,NA
+Samoa,71.5,98.6
+Sao Tome and Principe,69.3,NA
+Saudi Arabia,75.3,82.2
+Senegal,64.4,NA
+Serbia,74.8,96.9
+Seychelles,73.5,92.3
+Sierra Leone,55.7,32.6
+Singapore,82.9,NA
+Slovak Republic,75.9,NA
+Slovenia,79.8,99.7
+Solomon Islands,62,NA
+Somalia,53.4,NA
+South Africa,55.8,92.2
+South Korea,80.4,NA
+South Sudan,58.1,NA
+Spain,82.2,NA
+Sri Lanka,76,NA
+St. Lucia,76,NA
+St. Vincent and the Grenadines,71.7,NA
+Sudan,66.5,63.2
+Suriname,70.5,NA
+Swaziland,48.9,87.3
+Sweden,81.7,NA
+Switzerland,82.5,NA
+Syria,75,77.8
+Tajikistan,69.9,99.6
+Tanzania,59.9,NA
+Thailand,76.9,NA
+Timor-Leste,71.6,NA
+Togo,59.6,48
+Tonga,70,NA
+Trinidad and Tobago,72.7,98.5
+Tunisia,77,NA
+Turkey,78.2,90.3
+Turkmenistan,68.4,99.5
+Uganda,57.7,NA
+Ukraine,71.1,99.7
+United Arab Emirates,76.5,NA
+United Kingdom,80.5,NA
+United States,78.8,NA
+Uruguay,76.4,NA
+Uzbekistan,69,99.2
+Vanuatu,63.2,81.5
+Venezuela,75.4,NA
+Vietnam,73.3,91.4
+Yemen,67.7,48.5
+Zambia,53.2,NA
+Zimbabwe,51.9,80.1
+Palau,NA,NA
