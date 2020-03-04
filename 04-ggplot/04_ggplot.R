@@ -81,7 +81,7 @@ pasilla_data <- read_csv(here("04-ggplot","data","gene_expr_pasilla_results.csv"
 
 
 ## ----echo=FALSE, eval=FALSE-----------------------------------------------------
-## names(gapminder2011)
+names(gapminder2011)
 
 
 ## ---- results='asis', echo=FALSE, cache=FALSE-----------------------------------
@@ -105,19 +105,19 @@ make_html_picture_link("figs/ggpubr_out-1.png","#sidebyside")
 
 
 ## ----barplot_regions_nice, eval=FALSE-------------------------------------------
-## ggplot(data = gapminder2011,
-##        aes(x = four_regions,
-##            fill = eight_regions)) +
-##   geom_bar() +
-##   labs(x = "World Regions",
-##        y = "Number of countries",
-##        title = "Barplot") +
-##   theme_bw() +
-##   theme(
-##     axis.text.x =
-##       element_text(angle = -30, hjust = 0),
-##     text = element_text(family = "Palatino")) +
-##   scale_fill_viridis_d(name = "Subregions")
+ggplot(data = gapminder2011,
+       aes(x = four_regions,
+           fill = eight_regions)) +
+  geom_bar() +
+  labs(x = "World Regions",
+       y = "Number of countries",
+       title = "Barplot") + 
+  theme_bw() + 
+  theme(
+    axis.text.x =
+      element_text(angle = -30, hjust = 0),
+    text = element_text(family = "Palatino")) +
+  scale_fill_viridis_d(name = "Subregions")
 
 
 ## ----barplot_regions_out, ref.label="barplot_regions", echo=FALSE, fig.keep = "first"----
@@ -143,22 +143,22 @@ ggplot(data = gapminder2011) +
 
 
 ## ----hist_LifeExp_nice, eval = FALSE--------------------------------------------
-## ggplot(data = gapminder2011,
-##        aes(x = LifeExpectancyYrs,
-##            fill = four_regions)
-##        ) +
-##   geom_histogram() +
-##   scale_fill_discrete(
-##     name = "Regions",
-##     labels = c("Africa", "Americas",
-##                "Asia", "Europe")
-##     ) +
-##   labs(
-##     x = "Life Expectancy (years)",
-##     title = "Histogram"
-##     ) +
-##   ggthemes::theme_economist() +
-##   theme(legend.position="bottom")
+ggplot(data = gapminder2011,
+       aes(x = LifeExpectancyYrs,
+           fill = four_regions)
+       ) + 
+  geom_histogram() + 
+  scale_fill_discrete(
+    name = "Regions",
+    labels = c("Africa", "Americas", 
+               "Asia", "Europe")
+    ) + 
+  labs(
+    x = "Life Expectancy (years)",   
+    title = "Histogram"
+    ) + 
+  ggthemes::theme_economist() +
+  theme(legend.position="bottom") 
 
 
 ## ----hist_LifeExp_out, ref.label="hist_LifeExp_nice", echo=FALSE----------------
@@ -183,22 +183,22 @@ ggplot(data = gapminder2011) +
 
 
 ## ----density_LifeExp_nice, eval = FALSE-----------------------------------------
-## ggplot(data = gapminder2011,
-##        aes(x = LifeExpectancyYrs,
-##            fill = four_regions)
-##        ) +
-##   geom_density(alpha = 0.4) +
-##   scale_fill_discrete(
-##     name = "Regions",
-##     labels = c("Africa", "Americas",
-##                "Asia", "Europe")
-##     ) +
-##   labs(
-##     x = "Life Expectancy (years)",
-##     title = "Density Plot"
-##     ) +
-##   hrbrthemes::theme_ipsum() +
-##   theme(legend.position=c(.2,.8))
+ggplot(data = gapminder2011,
+       aes(x = LifeExpectancyYrs,
+           fill = four_regions)
+       ) + 
+  geom_density(alpha = 0.4) +
+  scale_fill_discrete(
+    name = "Regions",
+    labels = c("Africa", "Americas", 
+               "Asia", "Europe")
+    ) +
+  labs(
+    x = "Life Expectancy (years)",   
+    title = "Density Plot"
+    ) +
+  hrbrthemes::theme_ipsum() +
+  theme(legend.position=c(.2,.8))
 
 
 ## ----density_LifeExp_out, ref.label="density_LifeExp_nice", echo=FALSE----------
@@ -225,21 +225,21 @@ ggplot(data = gapminder2011) +
 
 
 ## ----ridges_LifeExp_nice, eval = FALSE------------------------------------------
-## library(ggridges)
-## 
-## ggplot(data = gapminder2011,
-##        aes(x = LifeExpectancyYrs,
-##            y = four_regions,
-##            fill = four_regions)
-##        ) +
-##   geom_density_ridges(alpha = 0.4) +
-##   ggthemes::theme_clean() +
-##   theme(legend.position="none") +
-##   labs(
-##     x = "Life Expectancy (years)",
-##     y = "Regions",
-##     title = "Ridgeline Density Plot"
-##     )
+library(ggridges)
+
+ggplot(data = gapminder2011,
+       aes(x = LifeExpectancyYrs,
+           y = four_regions,
+           fill = four_regions)
+       ) + 
+  geom_density_ridges(alpha = 0.4) +
+  ggthemes::theme_clean() + 
+  theme(legend.position="none") + 
+  labs(
+    x = "Life Expectancy (years)",   
+    y = "Regions",
+    title = "Ridgeline Density Plot"
+    )
 
 
 ## ----ridges_LifeExp_out, ref.label="ridges_LifeExp_nice", echo=FALSE------------
@@ -264,23 +264,24 @@ ggplot(data = gapminder2011) +
 
 
 ## ----boxplot_LifeExp_nice, eval = FALSE-----------------------------------------
-## ggplot(data = gapminder2011,
-##        aes(y = LifeExpectancyYrs,
-##            x = four_regions,
-##            fill = four_regions)
-##        ) +
-##   geom_boxplot(alpha = 0.3) +
-##   coord_flip() +
-##   theme_fivethirtyeight() +
-##   scale_fill_fivethirtyeight() +
-##   theme(legend.position = "none") +
-##   geom_jitter(width = .1, alpha = 0.3) +
-##   geom_violin(colour = "grey", alpha = .2) +
-##   labs(
-##     x = "World Region",
-##     y = "Life Expectancy (years)",
-##     title = "Boxplot"
-##     )
+ggplot(data = gapminder2011,
+       aes(y = LifeExpectancyYrs,
+           x = four_regions,
+           fill = four_regions)
+       ) + 
+  geom_boxplot(alpha = 0.3) + 
+  coord_flip() +   
+  theme_fivethirtyeight() +
+  theme(axis.title = element_text()) + 
+  scale_fill_fivethirtyeight() + 
+  theme(legend.position = "none") + 
+  geom_jitter(width = .1, alpha = 0.3) +
+  geom_violin(colour = "grey", alpha = .2) + 
+  labs(
+    x = "World Region",    
+    y = "Life Expectancy (years)",   
+    title = "Boxplot"
+    )
 
 
 ## ----boxplot_LifeExp_out, ref.label="boxplot_LifeExp_nice", echo=FALSE----------
@@ -296,6 +297,7 @@ ggplot(data = gapminder2011) +
   coord_flip() +   
   theme_fivethirtyeight() +
   scale_fill_fivethirtyeight() + 
+  theme(axis.title = element_text()) + 
   theme(legend.position = "none") + 
   geom_jitter(
     width = .1, 
@@ -313,25 +315,25 @@ ggplot(data = gapminder2011) +
 
 
 ## ----scatter_FoodvsLifeExp_nice, eval = FALSE-----------------------------------
-## ggplot(data = gapminder2011,
-##        aes(x = FoodSupplykcPPD,
-##            y = LifeExpectancyYrs,
-##            color = four_regions)
-##        ) +
-##   geom_point(alpha = 0.4) +
-##   geom_smooth(se = FALSE)+
-##   geom_smooth(method = lm) +
-##   theme_minimal() +
-##   scale_color_colorblind(
-##     name = "Regions",
-##     labels = c("Africa", "Americas",
-##                "Asia", "Europe")
-##     ) +
-##   labs(
-##     x = "Daily Food Supply Per Person (kc)",
-##     y = "Life Expectancy (years)",
-##     title = "Scatterplot"
-##     )
+ggplot(data = gapminder2011,
+       aes(x = FoodSupplykcPPD,
+           y = LifeExpectancyYrs,
+           color = four_regions)
+       ) + 
+  geom_point(alpha = 0.4) +
+  geom_smooth(se = FALSE)+
+  geom_smooth(method = lm) +
+  theme_minimal() +
+  scale_color_colorblind(
+    name = "Regions",
+    labels = c("Africa", "Americas", 
+               "Asia", "Europe")
+    ) +
+  labs(
+    x = "Daily Food Supply Per Person (kc)",   
+    y = "Life Expectancy (years)",   
+    title = "Scatterplot"
+    )
 
 
 ## ----scatter_FoodvsLifeExp_out, ref.label="scatter_FoodvsLifeExp_nice", echo=FALSE----
@@ -361,29 +363,29 @@ ggplot(data = gapminder2011) +
 
 
 ## ----bubble_FemLitvsLifeExp_nice, eval = FALSE----------------------------------
-## ggplot(data = gapminder2011,
-##        aes(x = FoodSupplykcPPD,
-##            y = LifeExpectancyYrs,
-##            color = four_regions,
-##            size = population)
-##        ) +
-##   geom_point(alpha = 0.4) +
-##   scale_color_colorblind(
-##     name = "Regions",
-##     labels = c("Africa", "Americas",
-##                "Asia", "Europe")
-##   ) +
-##   scale_size(
-##     name = "Population Size (millions)",
-##     breaks = c(1e08,5e08,1e09),
-##     labels = c(100,500,1000)
-##   ) +
-##   hrbrthemes::theme_ipsum() +
-##   labs(
-##     x = "Daily Food Supply PP (kc)",
-##     y = "Life Expectancy (years)",
-##     title = "Bubbleplot"
-##     )
+ggplot(data = gapminder2011,
+       aes(x = FoodSupplykcPPD,
+           y = LifeExpectancyYrs,
+           color = four_regions,
+           size = population)
+       ) + 
+  geom_point(alpha = 0.4) +
+  scale_color_colorblind(
+    name = "Regions",
+    labels = c("Africa", "Americas", 
+               "Asia", "Europe")
+  ) +
+  scale_size(
+    name = "Population Size (millions)",
+    breaks = c(1e08,5e08,1e09),
+    labels = c(100,500,1000)
+  ) +
+  hrbrthemes::theme_ipsum() +
+  labs(
+    x = "Daily Food Supply PP (kc)",  
+    y = "Life Expectancy (years)",   
+    title = "Bubbleplot"
+    )
 
 
 ## ----bubble_FemLitvsLifeExp_out, ref.label="bubble_FemLitvsLifeExp_nice", echo=FALSE----
@@ -417,23 +419,23 @@ ggplot(data = gapminder2011) +
 
 
 ## ----lineplot_YearLifeExp_nice, eval = FALSE------------------------------------
-## ggplot(data = gapminder,
-##        aes(x = year,
-##            y = lifeExp,
-##            color = continent,
-##            group = country)
-##        ) +
-##   geom_point(alpha = 0.4) +
-##   geom_line(alpha = 0.7) +
-##   scale_color_colorblind(name = "Continents") +
-##   ggthemes::theme_clean() +
-##   labs(
-##     x = "Year",
-##     y = "Life Expectancy (years)",
-##     title = "Lineplot",
-##     subtitle = "Time series",
-##     caption = "Source: gapminder package"
-##     )
+ggplot(data = gapminder,
+       aes(x = year,
+           y = lifeExp,
+           color = continent,
+           group = country)
+       ) + 
+  geom_point(alpha = 0.4) +
+  geom_line(alpha = 0.7) +
+  scale_color_colorblind(name = "Continents") +
+  ggthemes::theme_clean() + 
+  labs(
+    x = "Year",   
+    y = "Life Expectancy (years)",   
+    title = "Lineplot",
+    subtitle = "Time series",
+    caption = "Source: gapminder package"
+    )
 
 
 ## ----lineplot_YearLifeExp_out, ref.label="lineplot_YearLifeExp_nice", echo=FALSE----
@@ -535,26 +537,26 @@ gapminder2011 %>%
 
 
 ## ----facet_density_all_nice, eval = FALSE---------------------------------------
-## ggplot(data = gapminder2011_long,
-##        aes(x = Values,
-##            color = four_regions)
-##        ) +
-##   facet_wrap(~ Measures,
-##              scales = "free",
-##              ncol = 2
-##              ) +
-##   geom_density() +
-##   ggthemes::theme_few() +
-##   theme(legend.position="top")  +
-##   labs(
-##     x = "",
-##     title = "Faceted Density Plots",
-##     # Add a figure number!
-##     tag = "Fig 1",
-##     # note that color is being
-##     # specified inside labs!
-##     color = "Regions"
-##     )
+ggplot(data = gapminder2011_long,
+       aes(x = Values,
+           color = four_regions)
+       ) + 
+  facet_wrap(~ Measures, 
+             scales = "free",
+             ncol = 2
+             ) + 
+  geom_density() +
+  ggthemes::theme_few() + 
+  theme(legend.position="top")  +
+  labs(
+    x = "",   
+    title = "Faceted Density Plots",
+    # Add a figure number!
+    tag = "Fig 1",
+    # note that color is being 
+    # specified inside labs!
+    color = "Regions"  
+    )
 
 
 ## ----facet_density_all_out, ref.label="facet_density_all_nice", echo=FALSE------
@@ -580,25 +582,26 @@ ggplot(data = gapminder2011_long) +
 
 
 ## ----facet2x_density_all_nice, eval = FALSE, fig.width=10, fig.height=5---------
-## ggplot(data = gapminder2011_long) +
-##   geom_histogram(aes(x = Values)) +
-##   facet_grid(
-##     four_regions ~ Measures,
-##     scales = "free_x"
-##     ) +
-##   ggthemes::theme_igray() +
-##   theme(
-##     strip.text.y = element_text(size=10,
-##                                 angle=45,
-##                                 face = "bold"),
-##     strip.text.x = element_text(size=6),
-##     axis.text.x = element_text(angle=45,
-##                                hjust=1)
-##     ) +
-##   labs(
-##     x = "",
-##     title = "Faceted Density Plots"
-##     )
+ggplot(data = gapminder2011_long) + 
+  geom_histogram(aes(x = Values),
+                 fill = "darkorange") +
+  facet_grid(
+    four_regions ~ Measures, 
+    scales = "free_x"
+    ) + 
+  ggthemes::theme_igray() + 
+  theme(
+    strip.text.y = element_text(size=10, 
+                                angle=45, 
+                                face = "bold"),
+    strip.text.x = element_text(size=6),
+    axis.text.x = element_text(angle=45, 
+                               hjust=1)
+    ) +
+  labs(
+    x = "",   
+    title = "Faceted Density Plots"
+    )
 
 
 ## ----facet2x_density_all_out, ref.label="facet2x_density_all_nice", echo=FALSE----
@@ -611,7 +614,7 @@ ggplot(data = gapminder2011_long) +
     four_regions ~ Measures, 
     scales = "free_x"
     ) + 
-  geom_histogram() +
+  geom_histogram(fill = "darkorange") +
   ggthemes::theme_igray() + 
   theme(
     strip.text.y = 
@@ -713,11 +716,11 @@ pasilla_col
 
 
 ## ----heatmap, eval=FALSE--------------------------------------------------------
-## pheatmap::pheatmap(
-##   mat = pasilla_heat,
-##   show_rownames = FALSE,
-##   annotation_col = pasilla_col
-## )
+pheatmap::pheatmap(
+  mat = pasilla_heat,
+  show_rownames = FALSE,
+  annotation_col = pasilla_col
+)
 
 
 ## ----heatmap_out, ref.label="heatmap", echo=FALSE-------------------------------
@@ -771,7 +774,7 @@ p1 <- ggplot(
 
 
 ## ---- eval = FALSE--------------------------------------------------------------
-## plotly::ggplotly(p1) #<<
+plotly::ggplotly(p1) #<<
 
 
 ## ----ggplotly_interactive, echo = FALSE-----------------------------------------
@@ -797,9 +800,10 @@ ggsave(plot = p1,
 
 
 ## ---- eval=FALSE, echo=FALSE----------------------------------------------------
-## # RUN THESE AFTER KNITTING
-## knitr::purl(here::here("04-ggplot","04_ggplot_slides.Rmd"),
-##             out = here::here("04-ggplot","04_ggplot.R"))
-## # remotes::install_github('rstudio/pagedown')
-## pagedown::chrome_print(here::here("04-ggplot/04_ggplot_slides.html"))
+# RUN THESE AFTER KNITTING
+knitr::purl(here::here("04-ggplot","04_ggplot_slides.Rmd"), 
+            out = here::here("04-ggplot","04_ggplot.R"))
+# remotes::install_github('rstudio/pagedown')
+pagedown::chrome_print(here::here("04-ggplot/04_ggplot_slides.html"),
+                       timeout = 90)
 

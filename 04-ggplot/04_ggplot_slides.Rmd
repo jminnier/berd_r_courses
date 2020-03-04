@@ -22,6 +22,7 @@ editor_options:
 layout: true
   
 <!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+<div class="my-footer"><a href="#visualtoc"> Visual TOC</span></div>
 
 ---
 
@@ -449,6 +450,7 @@ ggplot(data = gapminder2011,
   geom_boxplot(alpha = 0.3) + 
   coord_flip() +   
   theme_fivethirtyeight() +
+  theme(axis.title = element_text()) + 
   scale_fill_fivethirtyeight() + 
   theme(legend.position = "none") + 
   geom_jitter(width = .1, alpha = 0.3) +
@@ -477,6 +479,7 @@ ggplot(data = gapminder2011) +
   coord_flip() +   
   theme_fivethirtyeight() +
   scale_fill_fivethirtyeight() + 
+  theme(axis.title = element_text()) + 
   theme(legend.position = "none") + 
   geom_jitter(
     width = .1, 
@@ -888,7 +891,8 @@ name:facethist
 .pull-left[
 ```{r facet2x_density_all_nice, eval = FALSE, fig.width=10, fig.height=5}
 ggplot(data = gapminder2011_long) + 
-  geom_histogram(aes(x = Values)) +
+  geom_histogram(aes(x = Values),
+                 fill = "darkorange") +
   facet_grid(
     four_regions ~ Measures, 
     scales = "free_x"
@@ -922,7 +926,7 @@ ggplot(data = gapminder2011_long) +
     four_regions ~ Measures, 
     scales = "free_x"
     ) + 
-  geom_histogram() +
+  geom_histogram(fill = "darkorange") +
   ggthemes::theme_igray() + 
   theme(
     strip.text.y = 
@@ -1192,9 +1196,7 @@ class:center, middle, inverse
 
 <!-- ![](img/poster_big.png) -->
 
-<center><img src="img/poster_big.png" width="85%" height="80%"</center>
-[https://www.data-to-viz.com/poster.html](https://www.data-to-viz.com/poster.html)
-
+<center><img src="img/poster_big.png" width="85%" height="80%"><a href="https://www.data-to-viz.com/poster.html"><br>https://www.data-to-viz.com/poster.html</a></center>
 
 ---
 
@@ -1218,6 +1220,17 @@ We used themes from [`ggthemes`](https://yutannihilation.github.io/allYourFigure
 ]
 
 from ["Themes to improve your ggplot figures" by David Keyes](https://rfortherestofus.com/2019/08/themes-to-improve-your-ggplot-figures/)
+
+---
+
+# R colors and palettes
+
+.pull-left[
+<center><img src="img/ggplot2-colour-names.png" width="50%" height="50%"><a href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour"><br>Built in R Colors</a></center>
+]
+.pull-right[
+<center><img src="img/wesanderson.png" width="60%" height="60%"><a href="https://www.datanovia.com/en/blog/ggplot-colors-best-tricks-you-will-love/"><br>wesanderson package</a></center>
+]
 
 ---
 
@@ -1246,15 +1259,15 @@ OHSU class:
 
 ---
 
-## Inspiration for this talk
+# Inspiration for this talk
 
 - [github/flipbookr](https://github.com/EvaMaeRey/flipbookr)
 - [Kieran Healy's rstudio::conf2020 data viz materials](https://github.com/rstudio-conf-2020/dataviz)
 
 
 
-
 ---
+class: left
 
 # Thank you!
 
@@ -1270,11 +1283,12 @@ OHSU class:
 - The project folder of examples can be downloaded at [github.com/jminnier/berd_ggplot_project](https://github.com/jminnier/berd_ggplot_project) & the solutions are in the `solns/` folder.
 
 
-<!-- TO DO: move all images to project folder so print pdf below works? -->
+
 ```{r, eval=FALSE, echo=FALSE}
 # RUN THESE AFTER KNITTING
 knitr::purl(here::here("04-ggplot","04_ggplot_slides.Rmd"), 
             out = here::here("04-ggplot","04_ggplot.R"))
 # remotes::install_github('rstudio/pagedown')
-pagedown::chrome_print(here::here("04-ggplot/04_ggplot_slides.html"))
+pagedown::chrome_print(here::here("04-ggplot/04_ggplot_slides.html"),
+                       timeout = 90)
 ```
