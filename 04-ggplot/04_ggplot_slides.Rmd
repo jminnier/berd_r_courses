@@ -1062,7 +1062,7 @@ pheatmap::pheatmap(mat = pasilla_heat,
 
 ---
 name:sidebyside
-## Side by side plot with [`ggpubr`](https://rpkgs.datanovia.com/ggpubr/)
+# Side by side plot with [`ggpubr`](https://rpkgs.datanovia.com/ggpubr/)
 .pull-left[
 ```{r ggpubr}
 p1 <- ggplot(data = pasilla_data,
@@ -1229,7 +1229,7 @@ Example plots and extensions:
 
 - Code for these slides are on github, with links to other course materials: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
 - The `.Rmd` file that generated the slides is on [github](https://github.com/jminnier/berd_r_courses/blob/master/04-ggplot/04_ggplot_slides.Rmd) and can be downloaded [here](https://jminnier-berd-r-courses.netlify.com/04-ggplot/04_ggplot_slides.Rmd), though you need to download the whole [R project](https://github.com/jminnier/berd_r_courses/archive/master.zip) to knit the file.
-- The project folder of examples can be downloaded at [github.com/jminnier/berd_rmarkdown_project](https://github.com/jminnier/berd_rmarkdown_project) & the solutions are in the `solns/` folder.
+- The project folder of examples can be downloaded at [github.com/jminnier/berd_ggplot_project](https://github.com/jminnier/berd_ggplot_project) & the solutions are in the `solns/` folder.
 
 
 <!-- TO DO: move all images to project folder so print pdf below works? -->
