@@ -1,7 +1,7 @@
 ---
 title: Data Visualization with R and ggplot2
 author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
-date: "<span style = 'font-size: 80%;'>2020/03/04 & 2020/03/11 <br><br><br> `r icon::fa('link')` slides: [bit.ly/berd_ggplot](http://bit.ly/berd_ggplot) <br> `r icon::fa('file-pdf')` pdf:  [bit.ly/berd_ggplot_pdf](http://bit.ly/berd_ggplot_pdf)</span>"
+date: "<span style = 'font-size: 80%;'>2020/03/04 & 2020/05/20 <br><br><br> slides: [bit.ly/berd_ggplot](http://bit.ly/berd_ggplot) <br> pdf: [bit.ly/berd_ggplot_pdf](http://bit.ly/berd_ggplot_pdf)</span>"
 output: 
   xaringan::moon_reader:
     css: [css/xaringan-themer.css, css/ninjutsu.css, css/my-theme.css]
@@ -117,12 +117,13 @@ names(gapminder2011)
 
 .pull-left[
 1. Open slides [bit.ly/berd_ggplot](http://bit.ly/berd_ggplot)
-1. Get project folder
+1. Get project folder (detailed instructions: [bit.ly/berd_ggplot_instructions](https://bit.ly/berd_ggplot_instructions))
     + Download zip folder at [bit.ly/berd_ggplot_zip](http://bit.ly/berd_ggplot_zip)
     + UNZIP completely (right click-> "extract all")
     + Open unzipped folder
     + Open (double click) `berd_ggplot_project.Rproj`
     + Inside RStudio 'Files' tab: click on file `00-install.R` and click "Run" to run all lines of code.
+1. Open google doc for asking questions: [https://bit.ly/berd_doc](bit.ly/berd_doc)
 ]
 .pull-right[
 <center><img src="img/horst_ggplot2_masterpiece.png" width="100%" height="100%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
@@ -131,10 +132,18 @@ names(gapminder2011)
 
 # Learning objectives
 
+.pull-left[
 - Understand the basic idea behind grammar of graphics
 - Be able to data to visual elements
 - Be able to customize plots in various ways
 - Use ggplot extensions to make even more plots!
+]
+.pull-right[
+
+<center><img src="img/ggplot-grammar-of-graphics-stack.png" width="100%" height="100%"><a href="https://www.sites.univ-rennes2.fr/mastersigat/Cours/Atelier%20Visualisation%20de%20donn%C3%A9es%20CERGY.pdf"></a></center>
+
+]
+
 
 ---
 class: center, middle, inverse
@@ -161,29 +170,16 @@ of geometric objects.
 - aes: aesthetic attributes of the geometric object that we can perceive on a graphic. For example, x/y position, color, shape, and size. Each assigned aesthetic attribute can be mapped to a variable in our data-set.
 
 ---
-# ggplot basics
-
-<center><img src="img/ggplot_basics_from_ppt.png" width="90%" height="100%"></center>
-
-
----
-# Grammar of ggplot2
-
-.pull-left[
-<center><img src="img/cheatsheet_basics.png" width="100%" height="100%"><a href="https://rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf"><br>ggplot cheatsheet</a></center>
-]
-.pull-right[
-
-<center><img src="img/ggplot-grammar-of-graphics-stack.png" width="100%" height="100%"><a href="https://www.sites.univ-rennes2.fr/mastersigat/Cours/Atelier%20Visualisation%20de%20donn%C3%A9es%20CERGY.pdf"></a></center>
-
-]
-
----
 
 # Grammar of ggplot2
 
 <center><img src="img/khealy_ggplot1.png" width="100%" height="100%"><a href="https://github.com/rstudio-conf-2020/dataviz"><br>Kieran Healy</a></center>
 
+
+---
+# ggplot basics
+
+<center><img src="img/ggplot_basics_from_ppt.png" width="90%" height="100%"></center>
 
 
 ---
@@ -433,15 +429,13 @@ ggplot(data = gapminder2011,
 ```{r density_LifeExp, include = FALSE}
 ggplot(data = gapminder2011) + 
   aes(x = LifeExpectancyYrs) + 
-  geom_density() +
+  geom_density(alpha=.4) +
   aes(fill = four_regions) +
-  aes(alpha=.4) +   
   scale_fill_discrete(
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
     ) +
-  scale_alpha(guide = "none") +
   hrbrthemes::theme_ipsum() +
   theme(legend.position=c(.2,.8)) + 
   labs(
@@ -542,10 +536,9 @@ ggplot(data = gapminder2011,
 ```{r boxplot_LifeExp, include = FALSE}
 ggplot(data = gapminder2011) + 
   aes(y = LifeExpectancyYrs) + 
-  geom_boxplot() + 
+  geom_boxplot(alpha=.3) + 
   aes(x = four_regions) +   
   aes(fill = four_regions) +
-  aes(alpha=.3) +   
   coord_flip() +   
   theme_fivethirtyeight() +
   scale_fill_fivethirtyeight() + 
@@ -615,9 +608,8 @@ ggplot(data = gapminder2011,
 ggplot(data = gapminder2011) + 
   aes(x = FoodSupplykcPPD) + 
   aes(y = LifeExpectancyYrs) + 
-  geom_point() +
+  geom_point(alpha=.4) +
   aes(color = four_regions) +
-  aes(alpha=.4) +   
   scale_color_colorblind(
     name = "Regions",
     labels = c("Africa", "Americas", 
@@ -681,9 +673,8 @@ ggplot(data = gapminder2011,
 ggplot(data = gapminder2011) + 
   aes(x = FoodSupplykcPPD) + 
   aes(y = LifeExpectancyYrs) + 
-  geom_point() +
+  geom_point(alpha=.4) +
   aes(color = four_regions) +
-  aes(alpha=.4) +   
   aes(size = population) +
   scale_color_colorblind(
     name = "Regions",
@@ -695,7 +686,6 @@ ggplot(data = gapminder2011) +
     breaks = c(1e08,5e08,1e09),
     labels = c(100,500,1000)
   ) +
-  scale_alpha(guide = "none") +
   hrbrthemes::theme_ipsum() +
   labs(
     x = "Daily Food Supply PP (kc)",  
@@ -766,15 +756,13 @@ head(gapminder,15)
 ggplot(data = gapminder) + 
   aes(x = year) + 
   aes(y = lifeExp) + 
-  geom_point() +
+  geom_point(alpha = .4) +
   aes(color = continent) +
-  aes(alpha=.4) +
   geom_line(alpha = .7) +
   aes(group = country) +
   scale_color_colorblind(
     name = "Continents"
     ) +
-  scale_alpha(guide = "none") +
   ggthemes::theme_clean() + 
   labs(
     x = "Year",   
@@ -802,16 +790,14 @@ https://cran.r-project.org/web/packages/ggExtra/vignettes/ggExtra.html
 p <- ggplot(data = gapminder2011,
         aes(x = FoodSupplykcPPD, 
             y = LifeExpectancyYrs,
-            color = four_regions,
-            alpha=.4)
+            color = four_regions)
         ) +
-  geom_point() +
+  geom_point(alpha = .4) +
   scale_color_discrete(
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
     ) +
-  scale_alpha(guide = "none") +
   theme(legend.position="bottom") +
   labs(
     x = "Daily Food Supply PP (kc)",   
