@@ -14,7 +14,7 @@ Recommended viewing order (since some are recorded multiple times):
 1. Getting Started with R and Rstudio (September 24, 2019, 3 hour version)
 2. Data Wrangling in R, Part 1A and 1B (April 18, 2019, 2 hours)
 3. Data Wrangling in R, Part 2 (April 25, 2019, 2 hours)
-4. Data Visualization with R and ggplot2 (March 11, 2020, 2 hours)
+4. Data Visualization with R and ggplot2 (March 4, 2020, 2 hours)
 
 ### Materials
 
