@@ -429,8 +429,9 @@ ggplot(data = gapminder2011,
 ```{r density_LifeExp, include = FALSE}
 ggplot(data = gapminder2011) + 
   aes(x = LifeExpectancyYrs) + 
-  geom_density(alpha=.4) +
+  geom_density() +
   aes(fill = four_regions) +
+  aes(alpha=.4) +
   scale_fill_discrete(
     name = "Regions",
     labels = c("Africa", "Americas", 
@@ -507,12 +508,12 @@ name:boxplot
 .pull-left[
 ```{r boxplot_LifeExp_nice, eval = FALSE}
 ggplot(data = gapminder2011,
-       aes(y = LifeExpectancyYrs,
-           x = four_regions,
+       aes(x = LifeExpectancyYrs, # New!
+           y = four_regions,
            fill = four_regions)
        ) + 
   geom_boxplot(alpha = 0.3) + 
-  coord_flip() +   
+  # coord_flip() +   
   theme_fivethirtyeight() +
   theme(axis.title = element_text()) + 
   scale_fill_fivethirtyeight() + 
@@ -535,11 +536,10 @@ ggplot(data = gapminder2011,
 
 ```{r boxplot_LifeExp, include = FALSE}
 ggplot(data = gapminder2011) + 
-  aes(y = LifeExpectancyYrs) + 
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) + 
-  aes(x = four_regions) +   
-  aes(fill = four_regions) +
-  coord_flip() +   
+  aes(y = four_regions) +   
+  aes(fill = four_regions) + 
   theme_fivethirtyeight() +
   scale_fill_fivethirtyeight() + 
   theme(axis.title = element_text()) + 
@@ -605,9 +605,10 @@ ggplot(data = gapminder2011,
 
 
 ```{r scatter_FoodvsLifeExp, include = FALSE}
-ggplot(data = gapminder2011) + 
-  aes(x = FoodSupplykcPPD) + 
-  aes(y = LifeExpectancyYrs) + 
+ggplot(data = gapminder2011,
+       aes(x = FoodSupplykcPPD,
+           y = LifeExpectancyYrs)
+       ) +
   geom_point(alpha=.4) +
   aes(color = four_regions) +
   scale_color_colorblind(
@@ -615,7 +616,6 @@ ggplot(data = gapminder2011) +
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
     ) +
-  scale_alpha(guide = "none") +
   geom_smooth(se = FALSE) +
   geom_smooth(method = lm) +
   theme_minimal() +
@@ -670,11 +670,12 @@ ggplot(data = gapminder2011,
 ---
 
 ```{r bubble_FemLitvsLifeExp, include = FALSE}
-ggplot(data = gapminder2011) + 
-  aes(x = FoodSupplykcPPD) + 
-  aes(y = LifeExpectancyYrs) + 
+ggplot(data = gapminder2011,
+       aes(x = FoodSupplykcPPD,
+           y = LifeExpectancyYrs,
+           color = four_regions)
+       ) + 
   geom_point(alpha=.4) +
-  aes(color = four_regions) +
   aes(size = population) +
   scale_color_colorblind(
     name = "Regions",
@@ -753,11 +754,12 @@ head(gapminder,15)
 ---
 
 ```{r lineplot_YearLifeExp, include = FALSE}
-ggplot(data = gapminder) + 
-  aes(x = year) + 
-  aes(y = lifeExp) + 
+ggplot(data = gapminder,
+       aes(x = year,
+           y = lifeExp,
+           color = continent)
+       ) +
   geom_point(alpha = .4) +
-  aes(color = continent) +
   geom_line(alpha = .7) +
   aes(group = country) +
   scale_color_colorblind(
@@ -930,11 +932,61 @@ ggplot(data = gapminder2011_long,
 ```
 ]
 
+
+
+---
+
+# Wide vs. long data
+
+- __Wide__ data has one row per subject, with multiple columns for their repeated measurements
+- __Long__ data has multiple rows per subject, with one column for the measurement variable and another indicating from when/where the repeated measures are from
+
+.pull-left[
+wide  
+<img src="img/SBP_wide2.png" width="73%" height="73%">
+
+See BERD workshop [Data Wrangling Part 2](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html#26) for slides on how to make wide data long.
+]
+.pull-right[
+long  
+<img src="img/SBP_long2.png" width="30%" height="30%">
+]
+
+
+
+---
+
+# Dataset `Gapminder_vars_2011_long.csv` (1/2)
+
+* This is the same 2011 Gapminder data we've been using thus far, but in a __long format__ instead of wide.
+    * Instead of individual columns for `CO2emissions`, `ElectricityUsePP`, ... `WaterSourcePrct`, 
+        * there is a column called `Measures` which contains these variables names and 
+        * a column called `Values` with the actual values for these measures.
+    * This means the dataset contains multiple rows per country to account for each of these measures. 
+
+```{r}
+gapminder2011_long <- read_csv("data/Gapminder_vars_2011_long.csv")
+glimpse(gapminder2011_long)
+```
+
+
+---
+
+# Dataset `Gapminder_vars_2011_long.csv` (2/2)
+
+```{r}
+gapminder2011_long %>% 
+  select(country, population, four_regions, Measures, Values) %>% 
+  head(15)
+```
+
+
 ---
 
 ```{r facet_density_all, include = FALSE}
-ggplot(data = gapminder2011_long) + 
-  aes(x = Values) + 
+ggplot(data = gapminder2011_long,
+       aes(x = Values)
+       ) + 
   geom_density() + 
   facet_wrap(~ Measures, 
              scales = "free", 
@@ -993,59 +1045,13 @@ ggplot(data = gapminder2011_long) +
 ]
 
 
----
-
-# Wide vs. long data
-
-- __Wide__ data has one row per subject, with multiple columns for their repeated measurements
-- __Long__ data has multiple rows per subject, with one column for the measurement variable and another indicating from when/where the repeated measures are from
-
-.pull-left[
-wide  
-<img src="img/SBP_wide2.png" width="73%" height="73%">
-
-See BERD workshop [Data Wrangling Part 2](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html#26) for slides on how to make wide data long.
-]
-.pull-right[
-long  
-<img src="img/SBP_long2.png" width="30%" height="30%">
-]
-
-
-
----
-
-# Dataset `Gapminder_vars_2011_long.csv` (1/2)
-
-* This is the same 2011 Gapminder data we've been using thus far, but in a __long format__ instead of wide.
-    * Instead of individual columns for `CO2emissions`, `ElectricityUsePP`, ... `WaterSourcePrct`, 
-        * there is a column called `Measures` which contains these variables names and 
-        * a column called `Values` with the actual values for these measures.
-    * This means the dataset contains multiple rows per country to account for each of these measures. 
-
-```{r}
-gapminder2011_long <- read_csv("data/Gapminder_vars_2011_long.csv")
-glimpse(gapminder2011_long)
-```
-
-
----
-
-# Dataset `Gapminder_vars_2011_long.csv` (2/2)
-
-```{r}
-gapminder2011_long %>% 
-  select(country, population, four_regions, Measures, Values) %>% 
-  head(15)
-```
-
-
 
 ---
 
 ```{r facet2x_density_all, include = FALSE, fig.width=10, fig.height=5}
-ggplot(data = gapminder2011_long) + 
-  aes(x = Values) +
+ggplot(data = gapminder2011_long,
+       aes(x = Values)
+       ) + 
   facet_grid(
     four_regions ~ Measures, 
     scales = "free_x"

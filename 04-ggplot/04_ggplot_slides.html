@@ -764,7 +764,7 @@ count: false
 ```r
 ggplot(data = gapminder2011) +  
   aes(x = LifeExpectancyYrs) +  
-* geom_density(alpha=.4)
+* geom_density()
 ```
 ]]
 .column[.content[
@@ -781,7 +781,7 @@ count: false
 ```r
 ggplot(data = gapminder2011) +  
   aes(x = LifeExpectancyYrs) +  
-  geom_density(alpha=.4) +  
+  geom_density() +  
 * aes(fill = four_regions)
 ```
 ]]
@@ -799,13 +799,9 @@ count: false
 ```r
 ggplot(data = gapminder2011) +  
   aes(x = LifeExpectancyYrs) +  
-  geom_density(alpha=.4) +  
+  geom_density() +  
   aes(fill = four_regions) +  
-* scale_fill_discrete(
-*   name = "Regions",
-*   labels = c("Africa", "Americas",
-*              "Asia", "Europe")
-*   )
+* aes(alpha=.4)
 ```
 ]]
 .column[.content[
@@ -822,14 +818,14 @@ count: false
 ```r
 ggplot(data = gapminder2011) +  
   aes(x = LifeExpectancyYrs) +  
-  geom_density(alpha=.4) +  
+  geom_density() +  
   aes(fill = four_regions) +  
-  scale_fill_discrete(  
-    name = "Regions",  
-    labels = c("Africa", "Americas",  
-               "Asia", "Europe")  
-    ) +  
-* hrbrthemes::theme_ipsum()
+  aes(alpha=.4) +  
+* scale_fill_discrete(
+*   name = "Regions",
+*   labels = c("Africa", "Americas",
+*              "Asia", "Europe")
+*   )
 ```
 ]]
 .column[.content[
@@ -846,15 +842,15 @@ count: false
 ```r
 ggplot(data = gapminder2011) +  
   aes(x = LifeExpectancyYrs) +  
-  geom_density(alpha=.4) +  
+  geom_density() +  
   aes(fill = four_regions) +  
+  aes(alpha=.4) +  
   scale_fill_discrete(  
     name = "Regions",  
     labels = c("Africa", "Americas",  
                "Asia", "Europe")  
     ) +  
-  hrbrthemes::theme_ipsum() +  
-* theme(legend.position=c(.2,.8))
+* hrbrthemes::theme_ipsum()
 ```
 ]]
 .column[.content[
@@ -871,8 +867,35 @@ count: false
 ```r
 ggplot(data = gapminder2011) +  
   aes(x = LifeExpectancyYrs) +  
-  geom_density(alpha=.4) +  
+  geom_density() +  
   aes(fill = four_regions) +  
+  aes(alpha=.4) +  
+  scale_fill_discrete(  
+    name = "Regions",  
+    labels = c("Africa", "Americas",  
+               "Asia", "Europe")  
+    ) +  
+  hrbrthemes::theme_ipsum() +  
+* theme(legend.position=c(.2,.8))
+```
+]]
+.column[.content[
+&lt;img src="04_ggplot_slides_files/figure-html/density_LifeExp_auto_8_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+ 
+
+ 
+.column[.content[
+
+```r
+ggplot(data = gapminder2011) +  
+  aes(x = LifeExpectancyYrs) +  
+  geom_density() +  
+  aes(fill = four_regions) +  
+  aes(alpha=.4) +  
   scale_fill_discrete(  
     name = "Regions",  
     labels = c("Africa", "Americas",  
@@ -887,7 +910,7 @@ ggplot(data = gapminder2011) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/density_LifeExp_auto_8_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/density_LifeExp_auto_9_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 
 
@@ -1142,12 +1165,12 @@ name:boxplot
 
 ```r
 ggplot(data = gapminder2011,
-       aes(y = LifeExpectancyYrs,
-           x = four_regions,
+       aes(x = LifeExpectancyYrs, # New!
+           y = four_regions,
            fill = four_regions)
        ) + 
   geom_boxplot(alpha = 0.3) + 
-  coord_flip() +   
+  # coord_flip() +   
   theme_fivethirtyeight() +
   theme(axis.title = element_text()) + 
   scale_fill_fivethirtyeight() + 
@@ -1193,7 +1216,7 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-* aes(y = LifeExpectancyYrs)
+* aes(x = LifeExpectancyYrs)   # New!
 ```
 ]]
 .column[.content[
@@ -1209,7 +1232,7 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
 * geom_boxplot(alpha=.3)
 ```
 ]]
@@ -1226,9 +1249,9 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) +  
-* aes(x = four_regions)
+* aes(y = four_regions)
 ```
 ]]
 .column[.content[
@@ -1244,9 +1267,9 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) +  
-  aes(x = four_regions) +  
+  aes(y = four_regions) +  
 * aes(fill = four_regions)
 ```
 ]]
@@ -1263,11 +1286,11 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) +  
-  aes(x = four_regions) +  
+  aes(y = four_regions) +  
   aes(fill = four_regions) +  
-* coord_flip()
+* theme_fivethirtyeight()
 ```
 ]]
 .column[.content[
@@ -1283,12 +1306,12 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) +  
-  aes(x = four_regions) +  
+  aes(y = four_regions) +  
   aes(fill = four_regions) +  
-  coord_flip() +  
-* theme_fivethirtyeight()
+  theme_fivethirtyeight() +  
+* scale_fill_fivethirtyeight()
 ```
 ]]
 .column[.content[
@@ -1304,13 +1327,13 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) +  
-  aes(x = four_regions) +  
+  aes(y = four_regions) +  
   aes(fill = four_regions) +  
-  coord_flip() +  
   theme_fivethirtyeight() +  
-* scale_fill_fivethirtyeight()
+  scale_fill_fivethirtyeight() +  
+* theme(axis.title = element_text())
 ```
 ]]
 .column[.content[
@@ -1326,14 +1349,14 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) +  
-  aes(x = four_regions) +  
+  aes(y = four_regions) +  
   aes(fill = four_regions) +  
-  coord_flip() +  
   theme_fivethirtyeight() +  
   scale_fill_fivethirtyeight() +  
-* theme(axis.title = element_text())
+  theme(axis.title = element_text()) +  
+* theme(legend.position = "none")
 ```
 ]]
 .column[.content[
@@ -1349,15 +1372,18 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) +  
-  aes(x = four_regions) +  
+  aes(y = four_regions) +  
   aes(fill = four_regions) +  
-  coord_flip() +  
   theme_fivethirtyeight() +  
   scale_fill_fivethirtyeight() +  
   theme(axis.title = element_text()) +  
-* theme(legend.position = "none")
+  theme(legend.position = "none") +  
+* geom_jitter(
+*   width = .1,
+*   alpha = 0.3
+*   )
 ```
 ]]
 .column[.content[
@@ -1373,39 +1399,10 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) +  
-  aes(x = four_regions) +  
+  aes(y = four_regions) +  
   aes(fill = four_regions) +  
-  coord_flip() +  
-  theme_fivethirtyeight() +  
-  scale_fill_fivethirtyeight() +  
-  theme(axis.title = element_text()) +  
-  theme(legend.position = "none") +  
-* geom_jitter(
-*   width = .1,
-*   alpha = 0.3
-*   )
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/boxplot_LifeExp_auto_11_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
-  geom_boxplot(alpha=.3) +  
-  aes(x = four_regions) +  
-  aes(fill = four_regions) +  
-  coord_flip() +  
   theme_fivethirtyeight() +  
   scale_fill_fivethirtyeight() +  
   theme(axis.title = element_text()) +  
@@ -1421,7 +1418,7 @@ ggplot(data = gapminder2011) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/boxplot_LifeExp_auto_12_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/boxplot_LifeExp_auto_11_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 ---
 class: split-40
@@ -1433,11 +1430,10 @@ count: false
 
 ```r
 ggplot(data = gapminder2011) +  
-  aes(y = LifeExpectancyYrs) +  
+  aes(x = LifeExpectancyYrs) +  # New!
   geom_boxplot(alpha=.3) +  
-  aes(x = four_regions) +  
+  aes(y = four_regions) +  
   aes(fill = four_regions) +  
-  coord_flip() +  
   theme_fivethirtyeight() +  
   scale_fill_fivethirtyeight() +  
   theme(axis.title = element_text()) +  
@@ -1458,7 +1454,7 @@ ggplot(data = gapminder2011) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/boxplot_LifeExp_auto_13_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/boxplot_LifeExp_auto_12_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 
 ---
@@ -1514,7 +1510,10 @@ count: false
 .column[.content[
 
 ```r
-*ggplot(data = gapminder2011)
+*ggplot(data = gapminder2011,
+*      aes(x = FoodSupplykcPPD,
+*          y = LifeExpectancyYrs)
+*      )
 ```
 ]]
 .column[.content[
@@ -1529,8 +1528,11 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-* aes(x = FoodSupplykcPPD)
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs)  
+       ) +  
+* geom_point(alpha=.4)
 ```
 ]]
 .column[.content[
@@ -1545,9 +1547,12 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-* aes(y = LifeExpectancyYrs)
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs)  
+       ) +  
+  geom_point(alpha=.4) +  
+* aes(color = four_regions)
 ```
 ]]
 .column[.content[
@@ -1562,10 +1567,17 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
-* geom_point(alpha=.4)
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs)  
+       ) +  
+  geom_point(alpha=.4) +  
+  aes(color = four_regions) +  
+* scale_color_colorblind(
+*   name = "Regions",
+*   labels = c("Africa", "Americas",
+*              "Asia", "Europe")
+*   )
 ```
 ]]
 .column[.content[
@@ -1580,11 +1592,18 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs)  
+       ) +  
   geom_point(alpha=.4) +  
-* aes(color = four_regions)
+  aes(color = four_regions) +  
+  scale_color_colorblind(  
+    name = "Regions",  
+    labels = c("Africa", "Americas",  
+               "Asia", "Europe")  
+    ) +  
+* geom_smooth(se = FALSE)
 ```
 ]]
 .column[.content[
@@ -1599,16 +1618,19 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs)  
+       ) +  
   geom_point(alpha=.4) +  
   aes(color = four_regions) +  
-* scale_color_colorblind(
-*   name = "Regions",
-*   labels = c("Africa", "Americas",
-*              "Asia", "Europe")
-*   )
+  scale_color_colorblind(  
+    name = "Regions",  
+    labels = c("Africa", "Americas",  
+               "Asia", "Europe")  
+    ) +  
+  geom_smooth(se = FALSE) +  
+* geom_smooth(method = lm)
 ```
 ]]
 .column[.content[
@@ -1623,9 +1645,10 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs)  
+       ) +  
   geom_point(alpha=.4) +  
   aes(color = four_regions) +  
   scale_color_colorblind(  
@@ -1633,7 +1656,9 @@ ggplot(data = gapminder2011) +
     labels = c("Africa", "Americas",  
                "Asia", "Europe")  
     ) +  
-* scale_alpha(guide = "none")
+  geom_smooth(se = FALSE) +  
+  geom_smooth(method = lm) +  
+* theme_minimal()
 ```
 ]]
 .column[.content[
@@ -1648,9 +1673,10 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs)  
+       ) +  
   geom_point(alpha=.4) +  
   aes(color = four_regions) +  
   scale_color_colorblind(  
@@ -1658,88 +1684,6 @@ ggplot(data = gapminder2011) +
     labels = c("Africa", "Americas",  
                "Asia", "Europe")  
     ) +  
-  scale_alpha(guide = "none") +  
-* geom_smooth(se = FALSE)
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/scatter_FoodvsLifeExp_auto_8_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
-  geom_point(alpha=.4) +  
-  aes(color = four_regions) +  
-  scale_color_colorblind(  
-    name = "Regions",  
-    labels = c("Africa", "Americas",  
-               "Asia", "Europe")  
-    ) +  
-  scale_alpha(guide = "none") +  
-  geom_smooth(se = FALSE) +  
-* geom_smooth(method = lm)
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/scatter_FoodvsLifeExp_auto_9_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
-  geom_point(alpha=.4) +  
-  aes(color = four_regions) +  
-  scale_color_colorblind(  
-    name = "Regions",  
-    labels = c("Africa", "Americas",  
-               "Asia", "Europe")  
-    ) +  
-  scale_alpha(guide = "none") +  
-  geom_smooth(se = FALSE) +  
-  geom_smooth(method = lm) +  
-* theme_minimal()
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/scatter_FoodvsLifeExp_auto_10_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
-  geom_point(alpha=.4) +  
-  aes(color = four_regions) +  
-  scale_color_colorblind(  
-    name = "Regions",  
-    labels = c("Africa", "Americas",  
-               "Asia", "Europe")  
-    ) +  
-  scale_alpha(guide = "none") +  
   geom_smooth(se = FALSE) +  
   geom_smooth(method = lm) +  
   theme_minimal() +  
@@ -1751,7 +1695,7 @@ ggplot(data = gapminder2011) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/scatter_FoodvsLifeExp_auto_11_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/scatter_FoodvsLifeExp_auto_8_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 
 
@@ -1805,7 +1749,11 @@ count: false
 .column[.content[
 
 ```r
-*ggplot(data = gapminder2011)
+*ggplot(data = gapminder2011,
+*      aes(x = FoodSupplykcPPD,
+*          y = LifeExpectancyYrs,
+*          color = four_regions)
+*      )
 ```
 ]]
 .column[.content[
@@ -1820,8 +1768,12 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-* aes(x = FoodSupplykcPPD)
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs,  
+           color = four_regions)  
+       ) +  
+* geom_point(alpha=.4)
 ```
 ]]
 .column[.content[
@@ -1836,9 +1788,13 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-* aes(y = LifeExpectancyYrs)
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs,  
+           color = four_regions)  
+       ) +  
+  geom_point(alpha=.4) +  
+* aes(size = population)
 ```
 ]]
 .column[.content[
@@ -1853,10 +1809,18 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
-* geom_point(alpha=.4)
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs,  
+           color = four_regions)  
+       ) +  
+  geom_point(alpha=.4) +  
+  aes(size = population) +  
+* scale_color_colorblind(
+*   name = "Regions",
+*   labels = c("Africa", "Americas",
+*              "Asia", "Europe")
+* )
 ```
 ]]
 .column[.content[
@@ -1871,75 +1835,12 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs,  
+           color = four_regions)  
+       ) +  
   geom_point(alpha=.4) +  
-* aes(color = four_regions)
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/bubble_FemLitvsLifeExp_auto_5_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
-  geom_point(alpha=.4) +  
-  aes(color = four_regions) +  
-* aes(size = population)
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/bubble_FemLitvsLifeExp_auto_6_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
-  geom_point(alpha=.4) +  
-  aes(color = four_regions) +  
-  aes(size = population) +  
-* scale_color_colorblind(
-*   name = "Regions",
-*   labels = c("Africa", "Americas",
-*              "Asia", "Europe")
-* )
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/bubble_FemLitvsLifeExp_auto_7_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
-  geom_point(alpha=.4) +  
-  aes(color = four_regions) +  
   aes(size = population) +  
   scale_color_colorblind(  
     name = "Regions",  
@@ -1954,7 +1855,7 @@ ggplot(data = gapminder2011) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/bubble_FemLitvsLifeExp_auto_8_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/bubble_FemLitvsLifeExp_auto_5_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 ---
 class: split-40
@@ -1965,11 +1866,12 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs,  
+           color = four_regions)  
+       ) +  
   geom_point(alpha=.4) +  
-  aes(color = four_regions) +  
   aes(size = population) +  
   scale_color_colorblind(  
     name = "Regions",  
@@ -1985,7 +1887,7 @@ ggplot(data = gapminder2011) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/bubble_FemLitvsLifeExp_auto_9_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/bubble_FemLitvsLifeExp_auto_6_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 ---
 class: split-40
@@ -1996,11 +1898,12 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011) +  
-  aes(x = FoodSupplykcPPD) +  
-  aes(y = LifeExpectancyYrs) +  
+ggplot(data = gapminder2011,  
+       aes(x = FoodSupplykcPPD,  
+           y = LifeExpectancyYrs,  
+           color = four_regions)  
+       ) +  
   geom_point(alpha=.4) +  
-  aes(color = four_regions) +  
   aes(size = population) +  
   scale_color_colorblind(  
     name = "Regions",  
@@ -2021,7 +1924,7 @@ ggplot(data = gapminder2011) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/bubble_FemLitvsLifeExp_auto_10_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/bubble_FemLitvsLifeExp_auto_7_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 
 ---
@@ -2112,7 +2015,11 @@ count: false
 .column[.content[
 
 ```r
-*ggplot(data = gapminder)
+*ggplot(data = gapminder,
+*      aes(x = year,
+*          y = lifeExp,
+*          color = continent)
+*      )
 ```
 ]]
 .column[.content[
@@ -2127,8 +2034,12 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder) +  
-* aes(x = year)
+ggplot(data = gapminder,  
+       aes(x = year,  
+           y = lifeExp,  
+           color = continent)  
+       ) +  
+* geom_point(alpha = .4)
 ```
 ]]
 .column[.content[
@@ -2143,9 +2054,13 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder) +  
-  aes(x = year) +  
-* aes(y = lifeExp)
+ggplot(data = gapminder,  
+       aes(x = year,  
+           y = lifeExp,  
+           color = continent)  
+       ) +  
+  geom_point(alpha = .4) +  
+* geom_line(alpha = .7)
 ```
 ]]
 .column[.content[
@@ -2160,10 +2075,14 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder) +  
-  aes(x = year) +  
-  aes(y = lifeExp) +  
-* geom_point(alpha = .4)
+ggplot(data = gapminder,  
+       aes(x = year,  
+           y = lifeExp,  
+           color = continent)  
+       ) +  
+  geom_point(alpha = .4) +  
+  geom_line(alpha = .7) +  
+* aes(group = country)
 ```
 ]]
 .column[.content[
@@ -2178,11 +2097,17 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder) +  
-  aes(x = year) +  
-  aes(y = lifeExp) +  
+ggplot(data = gapminder,  
+       aes(x = year,  
+           y = lifeExp,  
+           color = continent)  
+       ) +  
   geom_point(alpha = .4) +  
-* aes(color = continent)
+  geom_line(alpha = .7) +  
+  aes(group = country) +  
+* scale_color_colorblind(
+*   name = "Continents"
+*   )
 ```
 ]]
 .column[.content[
@@ -2197,12 +2122,18 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder) +  
-  aes(x = year) +  
-  aes(y = lifeExp) +  
+ggplot(data = gapminder,  
+       aes(x = year,  
+           y = lifeExp,  
+           color = continent)  
+       ) +  
   geom_point(alpha = .4) +  
-  aes(color = continent) +  
-* geom_line(alpha = .7)
+  geom_line(alpha = .7) +  
+  aes(group = country) +  
+  scale_color_colorblind(  
+    name = "Continents"  
+    ) +  
+* ggthemes::theme_clean()
 ```
 ]]
 .column[.content[
@@ -2217,81 +2148,12 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder) +  
-  aes(x = year) +  
-  aes(y = lifeExp) +  
+ggplot(data = gapminder,  
+       aes(x = year,  
+           y = lifeExp,  
+           color = continent)  
+       ) +  
   geom_point(alpha = .4) +  
-  aes(color = continent) +  
-  geom_line(alpha = .7) +  
-* aes(group = country)
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/lineplot_YearLifeExp_auto_7_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder) +  
-  aes(x = year) +  
-  aes(y = lifeExp) +  
-  geom_point(alpha = .4) +  
-  aes(color = continent) +  
-  geom_line(alpha = .7) +  
-  aes(group = country) +  
-* scale_color_colorblind(
-*   name = "Continents"
-*   )
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/lineplot_YearLifeExp_auto_8_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder) +  
-  aes(x = year) +  
-  aes(y = lifeExp) +  
-  geom_point(alpha = .4) +  
-  aes(color = continent) +  
-  geom_line(alpha = .7) +  
-  aes(group = country) +  
-  scale_color_colorblind(  
-    name = "Continents"  
-    ) +  
-* ggthemes::theme_clean()
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/lineplot_YearLifeExp_auto_9_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder) +  
-  aes(x = year) +  
-  aes(y = lifeExp) +  
-  geom_point(alpha = .4) +  
-  aes(color = continent) +  
   geom_line(alpha = .7) +  
   aes(group = country) +  
   scale_color_colorblind(  
@@ -2308,7 +2170,7 @@ ggplot(data = gapminder) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/lineplot_YearLifeExp_auto_10_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/lineplot_YearLifeExp_auto_7_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 
 
@@ -2501,216 +2363,6 @@ ggplot(data = gapminder2011_long,
 &lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_out-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
----
-
-
-
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-*ggplot(data = gapminder2011_long)
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_1_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011_long) +  
-* aes(x = Values)
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_2_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
-* geom_density()
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_3_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
-  geom_density() +  
-* facet_wrap(~ Measures,
-*            scales = "free",
-*            ncol = 2
-*            )
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_4_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
-  geom_density() +  
-  facet_wrap(~ Measures,  
-             scales = "free",  
-             ncol = 2  
-             ) +  
-* aes(color = four_regions)
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_5_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
-  geom_density() +  
-  facet_wrap(~ Measures,  
-             scales = "free",  
-             ncol = 2  
-             ) +  
-  aes(color = four_regions) +  
-* ggthemes::theme_few()
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_6_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
-  geom_density() +  
-  facet_wrap(~ Measures,  
-             scales = "free",  
-             ncol = 2  
-             ) +  
-  aes(color = four_regions) +  
-  ggthemes::theme_few() +  
-* theme( legend.position="top")
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_7_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
-  geom_density() +  
-  facet_wrap(~ Measures,  
-             scales = "free",  
-             ncol = 2  
-             ) +  
-  aes(color = four_regions) +  
-  ggthemes::theme_few() +  
-  theme( legend.position="top")  +  
-* labs(
-*   x = "",
-*   title = "Faceted Density Plots",
-*   tag = "Fig 1",
-*   color = "Regions"
-*   )
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_8_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
-
-
-
----
-name:facethist
-
-# Faceted 2x Histogram
-
-.pull-left[
-Note that a __long__ dataset is being used in this example!  
-See next slide for an explanation.
-
-
-```r
-ggplot(data = gapminder2011_long) + 
-  geom_histogram(aes(x = Values),
-                 fill = "darkorange") +
-  facet_grid(
-    four_regions ~ Measures, 
-    scales = "free_x"
-    ) + 
-  ggthemes::theme_igray() + 
-  theme(
-    strip.text.y = element_text(size=10, 
-                                angle=45, 
-                                face = "bold"),
-    strip.text.x = element_text(size=6),
-    axis.text.x = element_text(angle=45, 
-                               hjust=1)
-    ) +
-  labs(
-    x = "",   
-    title = "Faceted Density Plots"
-    )
-```
-]
-.pull-right[
-&lt;img src="04_ggplot_slides_files/figure-html/facet2x_density_all_out-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]
 
 
 ---
@@ -2796,6 +2448,210 @@ gapminder2011_long %&gt;%
 ```
 
 
+---
+
+
+
+class: split-40
+count: false
+ 
+
+ 
+.column[.content[
+
+```r
+*ggplot(data = gapminder2011_long,
+*      aes(x = Values)
+*      )
+```
+]]
+.column[.content[
+&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_1_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+ 
+
+ 
+.column[.content[
+
+```r
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
+* geom_density()
+```
+]]
+.column[.content[
+&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_2_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+ 
+
+ 
+.column[.content[
+
+```r
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
+  geom_density() +  
+* facet_wrap(~ Measures,
+*            scales = "free",
+*            ncol = 2
+*            )
+```
+]]
+.column[.content[
+&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_3_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+ 
+
+ 
+.column[.content[
+
+```r
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
+  geom_density() +  
+  facet_wrap(~ Measures,  
+             scales = "free",  
+             ncol = 2  
+             ) +  
+* aes(color = four_regions)
+```
+]]
+.column[.content[
+&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_4_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+ 
+
+ 
+.column[.content[
+
+```r
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
+  geom_density() +  
+  facet_wrap(~ Measures,  
+             scales = "free",  
+             ncol = 2  
+             ) +  
+  aes(color = four_regions) +  
+* ggthemes::theme_few()
+```
+]]
+.column[.content[
+&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_5_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+ 
+
+ 
+.column[.content[
+
+```r
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
+  geom_density() +  
+  facet_wrap(~ Measures,  
+             scales = "free",  
+             ncol = 2  
+             ) +  
+  aes(color = four_regions) +  
+  ggthemes::theme_few() +  
+* theme( legend.position="top")
+```
+]]
+.column[.content[
+&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_6_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+ 
+
+ 
+.column[.content[
+
+```r
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
+  geom_density() +  
+  facet_wrap(~ Measures,  
+             scales = "free",  
+             ncol = 2  
+             ) +  
+  aes(color = four_regions) +  
+  ggthemes::theme_few() +  
+  theme( legend.position="top")  +  
+* labs(
+*   x = "",
+*   title = "Faceted Density Plots",
+*   tag = "Fig 1",
+*   color = "Regions"
+*   )
+```
+]]
+.column[.content[
+&lt;img src="04_ggplot_slides_files/figure-html/facet_density_all_auto_7_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+
+
+
+---
+name:facethist
+
+# Faceted 2x Histogram
+
+.pull-left[
+Note that a __long__ dataset is being used in this example!  
+See next slide for an explanation.
+
+
+```r
+ggplot(data = gapminder2011_long) + 
+  geom_histogram(aes(x = Values),
+                 fill = "darkorange") +
+  facet_grid(
+    four_regions ~ Measures, 
+    scales = "free_x"
+    ) + 
+  ggthemes::theme_igray() + 
+  theme(
+    strip.text.y = element_text(size=10, 
+                                angle=45, 
+                                face = "bold"),
+    strip.text.x = element_text(size=6),
+    axis.text.x = element_text(angle=45, 
+                               hjust=1)
+    ) +
+  labs(
+    x = "",   
+    title = "Faceted Density Plots"
+    )
+```
+]
+.pull-right[
+&lt;img src="04_ggplot_slides_files/figure-html/facet2x_density_all_out-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+
 
 ---
 
@@ -2809,7 +2665,9 @@ count: false
 .column[.content[
 
 ```r
-*ggplot(data = gapminder2011_long)
+*ggplot(data = gapminder2011_long,
+*      aes(x = Values)
+*      )
 ```
 ]]
 .column[.content[
@@ -2824,8 +2682,13 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011_long) +  
-* aes(x = Values)
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
+* facet_grid(
+*   four_regions ~ Measures,
+*   scales = "free_x"
+*   )
 ```
 ]]
 .column[.content[
@@ -2840,12 +2703,14 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
-* facet_grid(
-*   four_regions ~ Measures,
-*   scales = "free_x"
-*   )
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
+  facet_grid(  
+    four_regions ~ Measures,  
+    scales = "free_x"  
+    ) +  
+* geom_histogram(fill = "darkorange")
 ```
 ]]
 .column[.content[
@@ -2860,13 +2725,15 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
   facet_grid(  
     four_regions ~ Measures,  
     scales = "free_x"  
     ) +  
-* geom_histogram(fill = "darkorange")
+  geom_histogram(fill = "darkorange") +  
+* ggthemes::theme_igray()
 ```
 ]]
 .column[.content[
@@ -2881,30 +2748,9 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
-  facet_grid(  
-    four_regions ~ Measures,  
-    scales = "free_x"  
-    ) +  
-  geom_histogram(fill = "darkorange") +  
-* ggthemes::theme_igray()
-```
-]]
-.column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet2x_density_all_auto_5_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
-]]
----
-class: split-40
-count: false
- 
-
- 
-.column[.content[
-
-```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
   facet_grid(  
     four_regions ~ Measures,  
     scales = "free_x"  
@@ -2923,7 +2769,7 @@ ggplot(data = gapminder2011_long) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet2x_density_all_auto_6_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/facet2x_density_all_auto_5_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 ---
 class: split-40
@@ -2934,8 +2780,9 @@ count: false
 .column[.content[
 
 ```r
-ggplot(data = gapminder2011_long) +  
-  aes(x = Values) +  
+ggplot(data = gapminder2011_long,  
+       aes(x = Values)  
+       ) +  
   facet_grid(  
     four_regions ~ Measures,  
     scales = "free_x"  
@@ -2958,7 +2805,7 @@ ggplot(data = gapminder2011_long) +
 ```
 ]]
 .column[.content[
-&lt;img src="04_ggplot_slides_files/figure-html/facet2x_density_all_auto_7_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="04_ggplot_slides_files/figure-html/facet2x_density_all_auto_6_output-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 
 ---
