@@ -565,7 +565,7 @@ ggplot(data = gapminder2011) +
 
 # Exercise
 
-Complete the first section of the `practice_ggplot.Rmd` file: "Bar plot".
+Complete the third section of the `practice_ggplot.Rmd` file: "Bar plot".
 
 ---
 name:scatterplot
@@ -701,7 +701,7 @@ ggplot(data = gapminder2011,
 
 # Exercise
 
-Complete the second section of the `practice_ggplot.Rmd` file: "Histogram."
+Complete the fourth section of the `practice_ggplot.Rmd` file: "Bubbleplot"
 
 
 ---
@@ -1315,7 +1315,7 @@ ggsave(plot = p1,
 
 # Exercise
 
-Complete the third section of the `practice_ggplot.Rmd` file: "Bubble plot".
+Complete the fifth section of the `practice_ggplot.Rmd` file: "Histogram".
 
 ---
 class:center, middle, inverse
