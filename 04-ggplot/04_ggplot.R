@@ -1,4 +1,4 @@
-## ----setup, include=FALSE--------------------------------------------
+## ----setup, include=FALSE------------------------------------------------
 options(htmltools.dir.version = FALSE)
 
 library(tidyverse)
@@ -53,7 +53,7 @@ make_html_picture_link <- function(path, link){
 # theme_set(theme_bw(base_size = 24))
 
 
-## ----xaringan-themer, include = FALSE--------------------------------
+## ----xaringan-themer, include = FALSE------------------------------------
 # creates xaringan theme
 # devtools::install_github("gadenbuie/xaringanthemer")
 library(xaringanthemer)
@@ -74,22 +74,22 @@ mono_light(
 )
 
 
-## ----data, echo=FALSE------------------------------------------------
+## ----data, echo=FALSE----------------------------------------------------
 gapminder2011 <- read_csv(here("04-ggplot", "data", "Gapminder_vars_2011.csv"))
 gapminder2011_long <- read_csv(here("04-ggplot", "data", "Gapminder_vars_2011_long.csv"))
 pasilla_data <- read_csv(here("04-ggplot","data","gene_expr_pasilla_results.csv"))
 
 
-## ----echo=FALSE, eval=FALSE------------------------------------------
+## ----echo=FALSE, eval=FALSE----------------------------------------------
 ## names(gapminder2011)
 
 
-## --------------------------------------------------------------------
+## ------------------------------------------------------------------------
 gapminder2011 <- read_csv("data/Gapminder_vars_2011.csv")
 glimpse(gapminder2011)
 
 
-## ---- results='asis', echo=FALSE, cache=FALSE------------------------
+## ---- results='asis', echo=FALSE, cache=FALSE----------------------------
 make_html_picture_link("figs/barplot_regions_out-1.png", "#barplot")
 make_html_picture_link("figs/hist_LifeExp_out-1.png","#histogram")
 make_html_picture_link("figs/density_LifeExp_out-1.png","#density")
@@ -109,7 +109,7 @@ make_html_picture_link("figs/heatmap_out-1.png","#heatmap")
 make_html_picture_link("figs/ggpubr_out-1.png","#sidebyside")
 
 
-## ----barplot_regions_nice, eval=FALSE--------------------------------
+## ----barplot_regions_nice, eval=FALSE------------------------------------
 ## ggplot(data = gapminder2011,
 ##        aes(x = four_regions,
 ##            fill = eight_regions)) +
@@ -128,7 +128,7 @@ make_html_picture_link("figs/ggpubr_out-1.png","#sidebyside")
 ## ----barplot_regions_out, ref.label="barplot_regions_nice", echo=FALSE, fig.keep = "first"----
 
 
-## ----barplot_regions, include=FALSE----------------------------------
+## ----barplot_regions, include=FALSE--------------------------------------
 ggplot(data = gapminder2011) +
   aes(x = four_regions) +
   geom_bar() +
@@ -147,7 +147,7 @@ ggplot(data = gapminder2011) +
     text = element_text(family = "Palatino"))
 
 
-## ----hist_LifeExp_nice, eval = FALSE---------------------------------
+## ----hist_LifeExp_nice, eval = FALSE-------------------------------------
 ## ggplot(data = gapminder2011,
 ##        aes(x = LifeExpectancyYrs,
 ##            fill = four_regions)
@@ -166,10 +166,10 @@ ggplot(data = gapminder2011) +
 ##   theme(legend.position="bottom")
 
 
-## ----hist_LifeExp_out, ref.label="hist_LifeExp_nice", echo=FALSE-----
+## ----hist_LifeExp_out, ref.label="hist_LifeExp_nice", echo=FALSE---------
 
 
-## ----hist_LifeExp, include = FALSE-----------------------------------
+## ----hist_LifeExp, include = FALSE---------------------------------------
 ggplot(data = gapminder2011) + 
   aes(x = LifeExpectancyYrs) + 
   geom_histogram() + 
@@ -187,7 +187,7 @@ ggplot(data = gapminder2011) +
   theme(legend.position="bottom") 
 
 
-## ----density_LifeExp_nice, eval = FALSE------------------------------
+## ----density_LifeExp_nice, eval = FALSE----------------------------------
 ## ggplot(data = gapminder2011,
 ##        aes(x = LifeExpectancyYrs,
 ##            fill = four_regions)
@@ -209,18 +209,17 @@ ggplot(data = gapminder2011) +
 ## ----density_LifeExp_out, ref.label="density_LifeExp_nice", echo=FALSE----
 
 
-## ----density_LifeExp, include = FALSE--------------------------------
+## ----density_LifeExp, include = FALSE------------------------------------
 ggplot(data = gapminder2011) + 
   aes(x = LifeExpectancyYrs) + 
   geom_density() +
   aes(fill = four_regions) +
-  aes(alpha=.4) +   
+  aes(alpha=.4) +
   scale_fill_discrete(
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
     ) +
-  scale_alpha(guide = "none") +
   hrbrthemes::theme_ipsum() +
   theme(legend.position=c(.2,.8)) + 
   labs(
@@ -229,7 +228,7 @@ ggplot(data = gapminder2011) +
     )
 
 
-## ----ridges_LifeExp_nice, eval = FALSE-------------------------------
+## ----ridges_LifeExp_nice, eval = FALSE-----------------------------------
 ## library(ggridges)
 ## 
 ## ggplot(data = gapminder2011,
@@ -247,10 +246,10 @@ ggplot(data = gapminder2011) +
 ##     )
 
 
-## ----ridges_LifeExp_out, ref.label="ridges_LifeExp_nice", echo=FALSE----
+## ----ridges_LifeExp_out, ref.label="ridges_LifeExp_nice", echo=FALSE-----
 
 
-## ----ridges_LifeExp, include = FALSE---------------------------------
+## ----ridges_LifeExp, include = FALSE-------------------------------------
 library(ggridges)
 
 ggplot(data = gapminder2011) + 
@@ -268,14 +267,14 @@ ggplot(data = gapminder2011) +
     )
 
 
-## ----boxplot_LifeExp_nice, eval = FALSE------------------------------
+## ----boxplot_LifeExp_nice, eval = FALSE----------------------------------
 ## ggplot(data = gapminder2011,
-##        aes(y = LifeExpectancyYrs,
-##            x = four_regions,
+##        aes(x = LifeExpectancyYrs, # New!
+##            y = four_regions,
 ##            fill = four_regions)
 ##        ) +
-##   geom_boxplot(alpha = 0.3) +
-##   coord_flip() +
+##   geom_boxplot(alpha = 0.3) + # add outlier.shape = NA
+##   # coord_flip() +
 ##   theme_fivethirtyeight() +
 ##   theme(axis.title = element_text()) +
 ##   scale_fill_fivethirtyeight() +
@@ -292,14 +291,12 @@ ggplot(data = gapminder2011) +
 ## ----boxplot_LifeExp_out, ref.label="boxplot_LifeExp_nice", echo=FALSE----
 
 
-## ----boxplot_LifeExp, include = FALSE--------------------------------
+## ----boxplot_LifeExp, include = FALSE------------------------------------
 ggplot(data = gapminder2011) + 
-  aes(y = LifeExpectancyYrs) + 
-  geom_boxplot() + 
-  aes(x = four_regions) +   
-  aes(fill = four_regions) +
-  aes(alpha=.3) +   
-  coord_flip() +   
+  aes(x = LifeExpectancyYrs) +  # New!
+  geom_boxplot(alpha=.3) + 
+  aes(y = four_regions) +   
+  aes(fill = four_regions) + 
   theme_fivethirtyeight() +
   scale_fill_fivethirtyeight() + 
   theme(axis.title = element_text()) + 
@@ -319,7 +316,7 @@ ggplot(data = gapminder2011) +
     )
 
 
-## ----scatter_FoodvsLifeExp_nice, eval = FALSE------------------------
+## ----scatter_FoodvsLifeExp_nice, eval = FALSE----------------------------
 ## ggplot(data = gapminder2011,
 ##        aes(x = FoodSupplykcPPD,
 ##            y = LifeExpectancyYrs,
@@ -344,19 +341,18 @@ ggplot(data = gapminder2011) +
 ## ----scatter_FoodvsLifeExp_out, ref.label="scatter_FoodvsLifeExp_nice", echo=FALSE----
 
 
-## ----scatter_FoodvsLifeExp, include = FALSE--------------------------
-ggplot(data = gapminder2011) + 
-  aes(x = FoodSupplykcPPD) + 
-  aes(y = LifeExpectancyYrs) + 
-  geom_point() +
+## ----scatter_FoodvsLifeExp, include = FALSE------------------------------
+ggplot(data = gapminder2011,
+       aes(x = FoodSupplykcPPD,
+           y = LifeExpectancyYrs)
+       ) +
+  geom_point(alpha=.4) +
   aes(color = four_regions) +
-  aes(alpha=.4) +   
   scale_color_colorblind(
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
     ) +
-  scale_alpha(guide = "none") +
   geom_smooth(se = FALSE) +
   geom_smooth(method = lm) +
   theme_minimal() +
@@ -367,7 +363,7 @@ ggplot(data = gapminder2011) +
     )
 
 
-## ----bubble_FemLitvsLifeExp_nice, eval = FALSE-----------------------
+## ----bubble_FemLitvsLifeExp_nice, eval = FALSE---------------------------
 ## ggplot(data = gapminder2011,
 ##        aes(x = FoodSupplykcPPD,
 ##            y = LifeExpectancyYrs,
@@ -396,13 +392,13 @@ ggplot(data = gapminder2011) +
 ## ----bubble_FemLitvsLifeExp_out, ref.label="bubble_FemLitvsLifeExp_nice", echo=FALSE----
 
 
-## ----bubble_FemLitvsLifeExp, include = FALSE-------------------------
-ggplot(data = gapminder2011) + 
-  aes(x = FoodSupplykcPPD) + 
-  aes(y = LifeExpectancyYrs) + 
-  geom_point() +
-  aes(color = four_regions) +
-  aes(alpha=.4) +   
+## ----bubble_FemLitvsLifeExp, include = FALSE-----------------------------
+ggplot(data = gapminder2011,
+       aes(x = FoodSupplykcPPD,
+           y = LifeExpectancyYrs,
+           color = four_regions)
+       ) + 
+  geom_point(alpha=.4) +
   aes(size = population) +
   scale_color_colorblind(
     name = "Regions",
@@ -414,7 +410,6 @@ ggplot(data = gapminder2011) +
     breaks = c(1e08,5e08,1e09),
     labels = c(100,500,1000)
   ) +
-  scale_alpha(guide = "none") +
   hrbrthemes::theme_ipsum() +
   labs(
     x = "Daily Food Supply PP (kc)",  
@@ -423,7 +418,7 @@ ggplot(data = gapminder2011) +
     )
 
 
-## ----lineplot_YearLifeExp_nice, eval = FALSE-------------------------
+## ----lineplot_YearLifeExp_nice, eval = FALSE-----------------------------
 ## library(gapminder)
 ## ggplot(data = gapminder,
 ##        aes(x = year,
@@ -447,24 +442,23 @@ ggplot(data = gapminder2011) +
 ## ----lineplot_YearLifeExp_out, ref.label="lineplot_YearLifeExp_nice", echo=FALSE----
 
 
-## --------------------------------------------------------------------
+## ------------------------------------------------------------------------
 library(gapminder)
 head(gapminder,15)
 
 
-## ----lineplot_YearLifeExp, include = FALSE---------------------------
-ggplot(data = gapminder) + 
-  aes(x = year) + 
-  aes(y = lifeExp) + 
-  geom_point() +
-  aes(color = continent) +
-  aes(alpha=.4) +
+## ----lineplot_YearLifeExp, include = FALSE-------------------------------
+ggplot(data = gapminder,
+       aes(x = year,
+           y = lifeExp,
+           color = continent)
+       ) +
+  geom_point(alpha = .4) +
   geom_line(alpha = .7) +
   aes(group = country) +
   scale_color_colorblind(
     name = "Continents"
     ) +
-  scale_alpha(guide = "none") +
   ggthemes::theme_clean() + 
   labs(
     x = "Year",   
@@ -475,22 +469,20 @@ ggplot(data = gapminder) +
     )
 
 
-## ----margins_FoodvsLifeExp, fig.width=10, fig.height=5---------------
+## ----margins_FoodvsLifeExp, fig.width=10, fig.height=5-------------------
 # library(ggExtra)
 
 p <- ggplot(data = gapminder2011,
         aes(x = FoodSupplykcPPD, 
             y = LifeExpectancyYrs,
-            color = four_regions,
-            alpha=.4)
+            color = four_regions)
         ) +
-  geom_point() +
+  geom_point(alpha = .4) +
   scale_color_discrete(
     name = "Regions",
     labels = c("Africa", "Americas", 
                "Asia", "Europe")
     ) +
-  scale_alpha(guide = "none") +
   theme(legend.position="bottom") +
   labs(
     x = "Daily Food Supply PP (kc)",   
@@ -499,7 +491,7 @@ p <- ggplot(data = gapminder2011,
     )
 
 
-## ----margins_FoodvsLifeExp_out, fig.width=10, fig.height=5-----------
+## ----margins_FoodvsLifeExp_out, fig.width=10, fig.height=5---------------
 ggMarginal(p,
   type = "density",
   margins = "both",
@@ -508,7 +500,7 @@ ggMarginal(p,
 )
 
 
-## --------------------------------------------------------------------
+## ------------------------------------------------------------------------
 M <- cor(gapminder2011 %>% 
            select(FoodSupplykcPPD:WaterSourcePrct),
          use = "complete.obs" # specified since there are missing values
@@ -516,38 +508,38 @@ M <- cor(gapminder2011 %>%
 M
 
 
-## ----fig.height=4----------------------------------------------------
+## ----fig.height=4--------------------------------------------------------
 library(corrplot)
 corrplot(M, method = "number")
 
 
-## ----fig.width=10, fig.height=3--------------------------------------
+## ----fig.width=10, fig.height=3------------------------------------------
 corrplot(M, method = "ellipse")
 
 
-## ---- fig.height=2---------------------------------------------------
+## ---- fig.height=2-------------------------------------------------------
 corrplot.mixed(M)
 
 
-## ----corrplotmix, include=FALSE, fig.width=8, fig.height=8-----------
+## ----corrplotmix, include=FALSE, fig.width=8, fig.height=8---------------
 corrplot.mixed(M)
 
 
-## ----fig.width=10, fig.height=5--------------------------------------
+## ----fig.width=10, fig.height=5------------------------------------------
 # library(GGally)
 gapminder2011 %>% 
   select(FoodSupplykcPPD:WaterSourcePrct) %>% # specifying which columns to use
   ggcorr()
 
 
-## ----fig.width=10, fig.height=5--------------------------------------
+## ----fig.width=10, fig.height=5------------------------------------------
 # library(GGally)
 gapminder2011 %>% 
   select(FoodSupplykcPPD:WaterSourcePrct) %>% # specifying which columns to use
   ggpairs()
 
 
-## ----facet_density_all_nice, eval = FALSE----------------------------
+## ----facet_density_all_nice, eval = FALSE--------------------------------
 ## ggplot(data = gapminder2011_long,
 ##        aes(x = Values,
 ##            color = four_regions)
@@ -573,9 +565,21 @@ gapminder2011 %>%
 ## ----facet_density_all_out, ref.label="facet_density_all_nice", echo=FALSE----
 
 
-## ----facet_density_all, include = FALSE------------------------------
-ggplot(data = gapminder2011_long) + 
-  aes(x = Values) + 
+## ------------------------------------------------------------------------
+gapminder2011_long <- read_csv("data/Gapminder_vars_2011_long.csv")
+glimpse(gapminder2011_long)
+
+
+## ------------------------------------------------------------------------
+gapminder2011_long %>% 
+  select(country, population, four_regions, Measures, Values) %>% 
+  head(15)
+
+
+## ----facet_density_all, include = FALSE----------------------------------
+ggplot(data = gapminder2011_long,
+       aes(x = Values)
+       ) + 
   geom_density() + 
   facet_wrap(~ Measures, 
              scales = "free", 
@@ -618,20 +622,10 @@ ggplot(data = gapminder2011_long) +
 ## ----facet2x_density_all_out, ref.label="facet2x_density_all_nice", echo=FALSE----
 
 
-## --------------------------------------------------------------------
-gapminder2011_long <- read_csv("data/Gapminder_vars_2011_long.csv")
-glimpse(gapminder2011_long)
-
-
-## --------------------------------------------------------------------
-gapminder2011_long %>% 
-  select(country, population, four_regions, Measures, Values) %>% 
-  head(15)
-
-
 ## ----facet2x_density_all, include = FALSE, fig.width=10, fig.height=5----
-ggplot(data = gapminder2011_long) + 
-  aes(x = Values) +
+ggplot(data = gapminder2011_long,
+       aes(x = Values)
+       ) + 
   facet_grid(
     four_regions ~ Measures, 
     scales = "free_x"
@@ -653,11 +647,11 @@ ggplot(data = gapminder2011_long) +
     )
 
 
-## --------------------------------------------------------------------
+## ------------------------------------------------------------------------
 glimpse(pasilla_data)
 
 
-## ----volcanoplot_nice, include = TRUE--------------------------------
+## ----volcanoplot_nice, include = TRUE------------------------------------
 # Create subset for labeling
 pasilla_data_top = pasilla_data %>%
   filter(-log10(padj) > 10, 
@@ -685,10 +679,10 @@ ggplot(data = pasilla_data,
   )
 
 
-## ----volcanoplot_out, ref.label="volcanoplot", echo=FALSE------------
+## ----volcanoplot_out, ref.label="volcanoplot", echo=FALSE----------------
 
 
-## ----volcanoplot, include=FALSE--------------------------------------
+## ----volcanoplot, include=FALSE------------------------------------------
 ggplot(data = pasilla_data,
        aes(x = log2FoldChange,
            y = log10(padj))) +
@@ -712,7 +706,7 @@ ggplot(data = pasilla_data,
   )
 
 
-## ----pasilla_heat, cache=FALSE---------------------------------------
+## ----pasilla_heat, cache=FALSE-------------------------------------------
 # select expression data
 pasilla_heat <- pasilla_data %>%
   select(treated1:untreated4)
@@ -731,13 +725,13 @@ pasilla_col <- data.frame(
   row.names=colnames(pasilla_heat))
 
 
-## --------------------------------------------------------------------
+## ------------------------------------------------------------------------
 head(pasilla_heat, n = 3)
 
 pasilla_col
 
 
-## ----heatmap, eval=FALSE---------------------------------------------
+## ----heatmap, eval=FALSE-------------------------------------------------
 ## pheatmap::pheatmap(
 ##   mat = pasilla_heat,
 ##   show_rownames = FALSE,
@@ -745,10 +739,10 @@ pasilla_col
 ## )
 
 
-## ----heatmap_out, ref.label="heatmap", echo=FALSE--------------------
+## ----heatmap_out, ref.label="heatmap", echo=FALSE------------------------
 
 
-## ----ggpubr----------------------------------------------------------
+## ----ggpubr--------------------------------------------------------------
 p1 <- ggplot(data = pasilla_data,
        aes(x = log2FoldChange,
            y = -log10(padj),
@@ -778,7 +772,7 @@ ggpubr::ggarrange(p1, p2, labels = "AUTO",
   common.legend = TRUE, legend = "bottom")
 
 
-## ----ggplotly--------------------------------------------------------
+## ----ggplotly------------------------------------------------------------
 # Save ggplot
 p1 <- ggplot(
   data = pasilla_data,
@@ -795,15 +789,15 @@ p1 <- ggplot(
   scale_color_viridis_c()
 
 
-## ---- eval = FALSE---------------------------------------------------
+## ---- eval = FALSE-------------------------------------------------------
 ## plotly::ggplotly(p1) #<<
 
 
-## ----ggplotly_interactive, echo = FALSE------------------------------
+## ----ggplotly_interactive, echo = FALSE----------------------------------
 plotly::ggplotly(p1)
 
 
-## --------------------------------------------------------------------
+## ------------------------------------------------------------------------
 ggsave(plot = p1,
        filename = "figs/volcanoplot_small.png", 
        height = 4, 
@@ -812,7 +806,7 @@ ggsave(plot = p1,
        dpi = 100)
 
 
-## --------------------------------------------------------------------
+## ------------------------------------------------------------------------
 ggsave(plot = p1,
        filename = "figs/volcanoplot_large.png", 
        height = 10, 
@@ -821,7 +815,7 @@ ggsave(plot = p1,
        dpi = 300)
 
 
-## ---- eval=FALSE, echo=FALSE-----------------------------------------
+## ---- eval=FALSE, echo=FALSE---------------------------------------------
 ## # RUN THESE AFTER KNITTING
 ## knitr::purl(here::here("04-ggplot","04_ggplot_slides.Rmd"),
 ##             out = here::here("04-ggplot","04_ggplot.R"))
