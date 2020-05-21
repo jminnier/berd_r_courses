@@ -512,7 +512,7 @@ ggplot(data = gapminder2011,
            y = four_regions,
            fill = four_regions)
        ) + 
-  geom_boxplot(alpha = 0.3) + 
+  geom_boxplot(alpha = 0.3) + # add outlier.shape = NA
   # coord_flip() +   
   theme_fivethirtyeight() +
   theme(axis.title = element_text()) + 
@@ -1332,9 +1332,9 @@ class:center, middle, inverse
 
 # Many, many ggplot extensions!
 
-Some examples at the [ggplot2 extensions gallery](https://www.ggplot2-exts.org/gallery/)
+Some examples at the [ggplot2 extensions gallery](https://exts.ggplot2.tidyverse.org/gallery/)
 
-<center><img src="img/ggextensiongallery.png" width="100%" height="100%"><a href="https://www.ggplot2-exts.org/gallery/"><br>Allison Horst</a></center>
+<center><img src="img/ggextensiongallery.png" width="100%" height="100%"><a href="https://exts.ggplot2.tidyverse.org/gallery/"><br>Allison Horst</a></center>
 
 ---
 
@@ -1399,7 +1399,7 @@ Do this by making the categorical variable a `factor` level variable in R.
 Example plots and extensions:
 
 - [R Graph Gallery](https://www.r-graph-gallery.com/)
-- [ggplot2 extension gallery](https://www.ggplot2-exts.org/gallery/)
+- [ggplot2 extension gallery](https://exts.ggplot2.tidyverse.org/gallery/)
 - [All Your Figure Are Belong To Us](https://yutannihilation.github.io/allYourFigureAreBelongToUs/)
 - [from Data to Viz](https://www.data-to-viz.com/) - beautiful flowcharts to help you decide on a plot based on the variable type(s); check out their [poster](https://www.data-to-viz.com/poster.html)
 - [Top 50 ggplot2 Visualizations - The Master List (With Full R Code)](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
