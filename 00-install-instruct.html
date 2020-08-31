@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -1429,6 +1428,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -1457,6 +1457,12 @@ summary {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -1529,7 +1535,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">BERD Getting Started with R and Rstudio</h1>
 <h4 class="author">Pre-workshop Installation Instructions</h4>
-<h4 class="date">Updated: 2019-09-19</h4>
+<h4 class="date">Updated: 2020-08-31</h4>
 
 </div>
 
@@ -1545,8 +1551,8 @@ div.tocify {
 <div id="install-r-first" class="section level2">
 <h2>Install <strong>R</strong> (first)</h2>
 <ul>
-<li>Windows: Download from <a href="https://cran.rstudio.com/bin/windows/base/" class="uri">https://cran.rstudio.com/bin/windows/base/</a> from the link “Download R 3.6.1 for Windows”</li>
-<li>Mac OS X: Download the latest .pkg file (top link, currently R-3.6.1.pkg) from <a href="https://cran.rstudio.com/bin/macosx/" class="uri">https://cran.rstudio.com/bin/macosx/</a></li>
+<li>Windows: Download from <a href="https://cran.rstudio.com/bin/windows/base/" class="uri">https://cran.rstudio.com/bin/windows/base/</a> from the link “Download R 4.0.2 for Windows”</li>
+<li>Mac OS X: Download the latest .pkg file (top link, currently R-4.0.2.pkg) from <a href="https://cran.rstudio.com/bin/macosx/" class="uri">https://cran.rstudio.com/bin/macosx/</a></li>
 </ul>
 </div>
 <div id="install-rstudio-desktop-open-source-license-second" class="section level2">
@@ -1574,17 +1580,17 @@ div.tocify {
 <h2><em>Recommended</em></h2>
 <ul>
 <li>Try out the <a href="https://rstudio.cloud/learn/primers/1.2">Programming basics</a> interactive lesson from Rstudio.</li>
-<li>Look over <a href="https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.html">slides from the original version of this workshop</a></li>
+<li>Look over <a href="https://jminnier-berd-r-courses.netlify.app/01-getting-started-v2/01_getting_started_slides.html">slides from a previous version of this workshop</a></li>
 </ul>
 </div>
 <div id="still-want-more-preparation" class="section level2">
-<h2>Still want more preparation?:</h2>
+<h2>Still want more preparation?</h2>
 <ul>
 <li><strong>Very Useful</strong>: <a href="https://rstudio.cloud/learn/primers">Rstudio interactive lessons</a></li>
 <li>View previous OHSU OCTRI BERD workshops that have been recorded, including an earlier version of “Getting Started with R and Rstudio”
 <ul>
 <li>Slides at <a href="https://github.com/jminnier/berd_r_courses">github.com/jminnier/berd_r_courses</a></li>
-<li><a href="https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public">Recordings are on echo</a>.</li>
+<li><a href="https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public">Recordings are on echo</a>. Search for BERD.</li>
 </ul></li>
 <li>Long list of other resources <a href="https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md">here</a></li>
 <li><a href="https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet">Rstudio IDE cheatsheet</a></li>
@@ -1597,7 +1603,7 @@ div.tocify {
 </div>
 <div id="instructor-info" class="section level1">
 <h1>Instructor Info</h1>
-<p><a href="http://jessicaminnier.com/">Jessica Minnier, PhD</a> &amp; <a href="https://ohsu-psu-sph.org/faculty-directory/name/meike-niederhausen/">Meike Niederhausen, PhD</a> Oregon Health &amp; Science University</p>
+<p><a href="http://jessicaminnier.com/">Jessica Minnier, PhD</a> &amp; <a href="https://ohsu-psu-sph.org/faculty-2/faculty-directory/?cn-s=niederhausen&amp;cn-cat=">Meike Niederhausen, PhD</a>, Oregon Health &amp; Science University</p>
 <p>Slides and code for BERD workshop materials: <a href="https://github.com/jminnier/berd_r_courses">jminnier/berd_r_courses</a></p>
 </div>
 
@@ -1651,7 +1657,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
