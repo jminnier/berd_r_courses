@@ -24,8 +24,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Install **R** (first)
 
-- Windows: Download from https://cran.rstudio.com/bin/windows/base/ from the link "Download R 3.6.1 for Windows"
-- Mac OS X: Download the latest .pkg file (top link, currently R-3.6.1.pkg) from https://cran.rstudio.com/bin/macosx/
+- Windows: Download from https://cran.rstudio.com/bin/windows/base/ from the link "Download R 4.0.2 for Windows"
+- Mac OS X: Download the latest .pkg file (top link, currently R-4.0.2.pkg) from https://cran.rstudio.com/bin/macosx/
 
 ## Install **RStudio Desktop** Open Source License (second)
 
@@ -47,14 +47,14 @@ Do not open the regular R software, it is just working in the background when yo
 
 ## *Recommended*
 - Try out the [Programming basics](https://rstudio.cloud/learn/primers/1.2) interactive lesson from Rstudio.
-- Look over [slides from the original version of this workshop](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.html)
+- Look over [slides from a previous version of this workshop](https://jminnier-berd-r-courses.netlify.app/01-getting-started-v2/01_getting_started_slides.html)
 
-## Still want more preparation?:
+## Still want more preparation?
 
 - **Very Useful**: [Rstudio interactive lessons](https://rstudio.cloud/learn/primers)
 - View previous OHSU OCTRI BERD workshops that have been recorded, including an earlier version of "Getting Started with R and Rstudio"
     + Slides at [github.com/jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-    + [Recordings are on echo](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public).
+    + [Recordings are on echo](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public). Search for BERD.
 - Long list of other resources [here](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
 - [Rstudio IDE cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
 - [Modern Dive textbook chapter getting started](https://moderndive.com/1-getting-started.html)
@@ -64,7 +64,7 @@ Do not open the regular R software, it is just working in the background when yo
 
 # Instructor Info
 
-[Jessica Minnier, PhD](http://jessicaminnier.com/) & [Meike Niederhausen, PhD](https://ohsu-psu-sph.org/faculty-directory/name/meike-niederhausen/)
+[Jessica Minnier, PhD](http://jessicaminnier.com/) & [Meike Niederhausen, PhD](https://ohsu-psu-sph.org/faculty-2/faculty-directory/?cn-s=niederhausen&cn-cat=), 
 Oregon Health & Science University
 
 Slides and code for BERD workshop materials: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
