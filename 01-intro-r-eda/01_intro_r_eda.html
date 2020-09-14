@@ -1,0 +1,2937 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>An Introduction to R and RStudio for Exploratory Data Analysis</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# An Introduction to R and RStudio for Exploratory Data Analysis
+### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
+### <span style="font-size: 80%;">Part 1: 2020/09/16 &amp; Part 2: 2020/09/17 <br><br><br> slides: <a href="http://bit.ly/berd_eda">bit.ly/berd_eda</a> <br> pdf: <a href="http://bit.ly/berd_eda_pdf">bit.ly/berd_eda_pdf</a></span>
+
+---
+
+
+layout: true
+  
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/berd_tidy&lt;/span&gt;&lt;/div&gt;  --&gt;
+
+---
+
+
+
+
+
+
+# 1. Open slides: [bit.ly/berd_eda](http://bit.ly/berd_eda)
+
+## 2. Install R &amp; Rstudio: instructions [bit.ly/berd_install](http://bit.ly/berd_install)
+
+## 4. Download folder of data (unzip completely)
+
+CHANGE TO DOWNLOAD CSV OF DATA?
+
+- Go to [bit.ly/intro_rproj](http://bit.ly/intro_rproj) and **unzip** folder
+- Open (double click on) `berd_intro_project.Rproj` file.
+
+---
+
+# Learning Objectives
+
+.pull-left[
+- Basic operations in R/RStudio
+- Understand data structures
+- Be able to load in data
+- Basic operations on data
+]
+.pull-right[
+- Some data wrangling
+- Use Rstudio projects
+- Be able to make a plot
+- Basics of tidyverse and ggplot
+- Know how to get help
+]
+
+&lt;center&gt;&lt;img src="img/horst_monster_support.jpg" width="70%" height="75%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+---
+class: center, inverse, middle
+
+# Introduction
+
+Rrrrrr?
+
+---
+
+# What is R? 
+
+.pull-left-60[
+- A programming language
+- Focus on statistical modeling and data analysis
+    + import data, manipulate data, run statistics, make plots
+- Useful for "Data Science"
+- Great visualizations
+- Also useful for most anything else you'd want to tell a computer to do
+- Interfaces with other languages i.e. python, C++, bash
+
+]
+
+
+.pull-right-40[
+![](img/R_logo.png)
+]
+
+
+For the history and details: [Wikipedia](https://bit.ly/1efFmaY)
+
+- an interpreted language (run it through a command line)
+- procedural programming with functions
+- Why "R"?? Scheme (?) inspired S (invented at Bell Labs in 1976) which inspired R (**free and open source!** in 1992)
+
+---
+
+# Why R?
+.pull-left[
+- Free + Cross-platform (Mac/Windows)
+- Flexible, fun, many more modern statistics methods, large community for learning and help
+- One of the most popular data science tools for statistics in academia and industry
+- SAS and STATA (and SPSS) are still used but becoming less popular (expensive, not as versatile/comprehensive)
+- Constantly evolving and improving
+- If you want a job doing stats and not be limited to specific research groups or some pharma companies, you absolutely *need to know R*
+]
+
+.pull-right[
+
+&lt;center&gt;&lt;img src="img/r4stats_popularity_articles_trend.png" width="100%%" height="100%"&gt;&lt;a href="http://r4stats.com/articles/popularity/"&gt;&lt;br&gt;r4stats Robert A. Muenchen&lt;/a&gt;&lt;/center&gt;
+]
+
+---
+
+# What is RStudio?
+
+.pull-left[
+R is a programming language]
+.pull-right[
+RStudio is an integrated development environment (IDE) = an interface to use R (with perks!)
+]
+
+&lt;center&gt;&lt;img src="img/01_md_rstudio.png" width="78%" height="78%"&gt;&lt;a href="https://moderndive.com/1-getting-started.html#r-rstudio"&gt;&lt;br&gt;Modern Dive&lt;/a&gt;&lt;/center&gt;
+
+---
+
+# Start RStudio
+
+
+&lt;center&gt;&lt;img src="img/01_md_r.png" width="78%" height="78%"&gt;&lt;a href="https://moderndive.com/1-getting-started.html#using-r-via-rstudio"&gt;&lt;br&gt;Modern Dive&lt;/a&gt;&lt;/center&gt;
+---
+
+&lt;center&gt;&lt;img src="img/RStudio_Anatomy.svg" width="100%" height="100%"&gt;&lt;a href="http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html#what_are_r_and_rstudio"&gt;&lt;br&gt;Emma Rand&lt;/a&gt;&lt;/center&gt;
+
+---
+
+# Rstudio demo
+
+- Start Rstudio and explore
+
+
+**Bonus lessons**
+
+- [gifs showing how to adjust panels, personalize how Rstudio looks, etc](https://www.pipinghotdata.com/posts/2020-09-07-introducing-the-rstudio-ide-and-r-markdown/#background)
+
+---
+
+# R Projects (.Rproj file) &amp; Good Practices
+
+__Use projects to keep everything together__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+- A project keeps track of your coding environment and file structure.
+- Create an RStudio project for each data analysis project, for each homework assignment, etc.
+- A project is associated with a directory folder
+    + Keep data files there
+    + Keep code scripts there; edit them, run them in bits or as a whole
+    + Save your outputs (plots and cleaned data) there
+- Only use relative paths, never absolute paths
+    + relative (good): `read.csv("data/mydata.csv")`
+    + absolute (bad): `read.csv("/home/yourname/Documents/stuff/mydata.csv")`
+    
+__Advantages of using projects__
+- standardizes file paths
+- keep everything together
+- a whole folder can be easily shared and run on another computer
+- when you open the project everything is as you left it
+
+
+---
+
+# Open a new R project
+
+Let's go through it together. ([Read this for more](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects))
+
+File -&gt; New Project -&gt; New Directory
+
+**Bonus lessons**
+
+- [Video on projects in R, most useful info in minutes 2:00-13:00](https://rstudio.com/resources/webinars/managing-part-1-projects-in-rstudio/)
+
+---
+
+class: inverse, middle, center
+
+# Let's code!
+
+---
+
+# Coding in the console 
+ 
+.pull-left[
+__Typing and execting code in the console __
+* Type code in the console
+* Press __return__ to execute the code
+* Output shown below
+
+_Coding in the console is not advisable for most situations!_
+* We only recommend this for short pieces of code that you don't need to save
+* We will be using R markdown (`.Rmd` files) to run and save code and output  (in a few slides)
+
+
+```r
+&gt; 7
+```
+
+```
+[1] 7
+```
+
+]
+
+
+.pull-right[
+
+```r
+&gt; 3 + 5
+```
+
+```
+[1] 8
+```
+
+```r
+&gt; "hello"
+```
+
+```
+[1] "hello"
+```
+
+```r
+&gt; # this is a comment, nothing happens
+&gt; # 5 - 8
+&gt; 
+&gt; # separate multiple commands with ;
+&gt; 3 + 5; 4 + 8
+```
+
+```
+[1] 8
+```
+
+```
+[1] 12
+```
+]
+
+
+---
+
+# We can do math
+
+
+.pull-left[
+
+```r
+&gt; 10^2
+```
+
+```
+[1] 100
+```
+
+```r
+&gt; 3 ^ 7
+```
+
+```
+[1] 2187
+```
+
+```r
+&gt; 6/9
+```
+
+```
+[1] 0.6666667
+```
+
+```r
+&gt; 9-43
+```
+
+```
+[1] -34
+```
+]
+
+--
+
+.pull-right[
+R follows the rules for order of operations and ignores spaces between numbers (or objects)
+
+
+```r
+&gt; 4^3-2* 7+9 /2
+```
+
+```
+[1] 54.5
+```
+
+
+The equation above is computed as `$$4^3 − (2 \cdot 7) + \frac{9}{2}$$` 
+]
+
+
+---
+
+# Logarithms and exponentials
+
+.pull-left[
+
+Logarithms: `log()` is base `\(e\)`
+
+```r
+&gt; log(10)
+```
+
+```
+[1] 2.302585
+```
+
+```r
+&gt; log10(10)
+```
+
+```
+[1] 1
+```
+
+]
+
+--
+
+.pull-right[
+Exponentials
+
+```r
+&gt; exp(1)
+```
+
+```
+[1] 2.718282
+```
+
+```r
+&gt; exp(0)
+```
+
+```
+[1] 1
+```
+]
+
+--
+
+Check that `log()` is base `\(e\)`
+
+
+```r
+&gt; log(exp(1))
+```
+
+```
+[1] 1
+```
+
+---
+
+# Using functions
+
+* `log()` is an example of a function
+* functions have "arguments"
+* `?log` in console will show help for `log()`
+
+.pull-left[
+Arguments read in order:
+
+```r
+&gt; mean(1:4)
+```
+
+```
+[1] 2.5
+```
+
+
+```r
+&gt; seq(1,12,3)
+```
+
+```
+[1]  1  4  7 10
+```
+]
+.pull-right[
+Arguments read by name:
+
+```r
+&gt; mean(x = 1:4)
+```
+
+```
+[1] 2.5
+```
+
+
+```r
+&gt; seq(from = 1, to = 12, by = 3)
+```
+
+```
+[1]  1  4  7 10
+```
+]
+
+---
+
+# Variables
+
+Data, information, everything is stored as a variable
+.pull-left[
+* Can assign a variable using either `=` or `&lt;-`
+    - Using `&lt;-` is preferable
+    - type name of variable to print
+    
+
+Assigning just one value:
+
+```r
+&gt; x = 5
+&gt; x
+```
+
+```
+[1] 5
+```
+
+```r
+&gt; x &lt;- 5
+&gt; x
+```
+
+```
+[1] 5
+```
+]
+
+--
+
+.pull-right[
+Assigning a __vector__ of values
+* Consecutive integers
+
+
+```r
+&gt; a &lt;- 3:10
+&gt; a
+```
+
+```
+[1]  3  4  5  6  7  8  9 10
+```
+
+* __Concatenate__ a string of numbers
+
+
+```r
+&gt; b &lt;- c(5, 12, 2, 100, 8)
+&gt; b
+```
+
+```
+[1]   5  12   2 100   8
+```
+]
+
+
+---
+
+# We can do math with variables
+
+.pull-left[
+Math using variables with just one value
+
+```r
+&gt; x &lt;- 5
+&gt; x
+```
+
+```
+[1] 5
+```
+
+```r
+&gt; x + 3
+```
+
+```
+[1] 8
+```
+
+```r
+&gt; y &lt;- x^2
+&gt; y
+```
+
+```
+[1] 25
+```
+]
+
+--
+
+.pull-right[
+Math on vectors of values: __element-wise__ computation
+
+```r
+&gt; a &lt;- 3:6
+&gt; a
+```
+
+```
+[1] 3 4 5 6
+```
+
+```r
+&gt; a+2; a*3
+```
+
+```
+[1] 5 6 7 8
+```
+
+```
+[1]  9 12 15 18
+```
+
+```r
+&gt; a*a
+```
+
+```
+[1]  9 16 25 36
+```
+]
+
+
+---
+
+# Variable can include text (characters)
+
+
+```r
+&gt; hi &lt;- "hello"
+&gt; hi
+```
+
+```
+[1] "hello"
+```
+
+```r
+&gt; greetings &lt;- c("Guten Tag", "Hola", hi)
+&gt; greetings
+```
+
+```
+[1] "Guten Tag" "Hola"      "hello"    
+```
+
+---
+
+# Missing values
+
+Missing values are denoted as `NA` and are handled differently depending on the operation. There are special functions for `NA` (i.e. `is.na()`, `na.omit()`).
+.pull-left[
+
+```r
+&gt; x &lt;- c(1, 2, NA, 5)
+&gt; is.na(x)
+```
+
+```
+[1] FALSE FALSE  TRUE FALSE
+```
+
+```r
+&gt; mean(x)
+```
+
+```
+[1] NA
+```
+
+```r
+&gt; mean(x, na.rm=TRUE)
+```
+
+```
+[1] 2.666667
+```
+]
+.pull-right[
+
+```r
+&gt; x &lt;- c("a", "a", NA, "b")
+&gt; table(x)
+```
+
+```
+x
+a b 
+2 1 
+```
+
+```r
+&gt; table(x, useNA = "always")
+```
+
+```
+x
+   a    b &lt;NA&gt; 
+   2    1    1 
+```
+
+]
+
+---
+
+# Viewing list of defined variables
+
+ 
+&lt;!-- __List of defined variables (and other objects)__ --&gt;
+
+* `ls()` is the R command to see what objects have been defined. 
+* This list includes all defined objects (including dataframes, functions, etc.)
+
+```r
+&gt; ls()
+```
+
+```
+ [1] "a"          "b"          "data_dups"  "df"         "greetings"  "hi"        
+ [7] "mydata"     "mydata_new" "newdata"    "pct_data"   "x"          "y"         
+```
+
+* You can also look at the list in the Environment window:
+
+![](img/01_ls_screenshot.png)
+
+---
+
+# Removing defined variables
+
+
+* The R command to delete an object is `rm()`. 
+
+
+```r
+&gt; ls()
+```
+
+```
+ [1] "a"          "b"          "data_dups"  "df"         "greetings"  "hi"        
+ [7] "mydata"     "mydata_new" "newdata"    "pct_data"   "x"          "y"         
+```
+
+```r
+&gt; rm("greetings", hi)  # Can run with or without quotes
+&gt; ls()
+```
+
+```
+ [1] "a"          "b"          "data_dups"  "df"         "mydata"     "mydata_new"
+ [7] "newdata"    "pct_data"   "x"          "y"         
+```
+
+* Remove EVERYTHING - _Be careful!!_
+
+```r
+&gt; rm(list=ls())
+&gt; ls()
+```
+
+```
+character(0)
+```
+ 
+ * Can also remove everything using the _Clear Workspace_ option in the _Session_ menu.
+
+---
+
+# Common console errors (1/2)
+ 
+__Incomplete commands__ 
+
+.pull-left[
+* When the console is waiting for a new command, the prompt line begins with `&gt;`
+  + If the console prompt is `+`, then a previous command is incomplete
+  + You can finish typing the command in the console window
+]
+   
+.pull-right[
+Example:
+
+
+```r
+&gt; 3 + (2*6
++ )
+```
+
+```
+[1] 15
+```
+]
+
+
+
+---
+
+# Common console errors (2/2)
+
+
+__Object is not found__
+
+* This happens when text is entered for a non-existent variable (object)
+
+Example:
+
+
+```r
+&gt; hello
+```
+
+```
+Error in eval(expr, envir, enclos): object 'hello' not found
+```
+
+* Can be due to missing quotes
+
+
+```r
+&gt; install.packages(dplyr) # need install.packages("dplyr")
+```
+
+```
+Error in install.packages : object 'dplyr' not found
+```
+---
+
+class: inverse, center, middle
+
+# R scripts (save your work!)
+
+---
+
+# Coding in Rmd (1/4)
+
+&lt;!-- * Note that both of these options show the keyboard shortcut for your operating system   --&gt;
+    
+Two options:
+1. click on File `\(\rightarrow\)` New File `\(\rightarrow\)` R Markdown `\(\rightarrow\)` OK , or
+1. in upper left corner of RStudio click on &lt;img src="img/green_plus_create_file.png"&gt;  `\(\rightarrow\)` &lt;img src="img/select_RMarkdown_option.png"&gt;
+
+You should see the following text in your editor window:
+  
+
+![](img/01_rmd_screenshot.png)
+---
+
+# Saving an Rmd
+
+* __Save the Rmd__ by 
+    + selecting `File -&gt; Save`, 
+    + or clicking on ![](img/01_Script_Save.png) (towards the left above the scripting window)
+
+* You will need to specify
+    + a __filename__ to save the file as
+        - ALWAYS use __.Rmd__ as the filename extension for R markdown files
+    + the __folder__ to save the file in
+
+---
+
+# Coding in an Rmd (2/4)
+
+* __Type code__ inside code chunks [Code -&gt; Insert Chunk]
+    - Type each R command on its own line
+    
+---
+
+# Code chunks
+
+Chunks of R code start with ` ```{r} ` and end with ` ``` `.  
+For example, the chunk &lt;img src="img/screenshot_summary_iris.png" width="15%" height="50%"&gt; produces the output
+
+
+```r
+summary(iris)
+```
+
+```
+##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100   setosa    :50  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300   versicolor:50  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300   virginica :50  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199                  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800                  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500
+```
+
+---
+
+# Create a code chunk
+
+Code chunks can be created by either
+
+1. Clicking on ![](img/icon_insert.png) `\(\rightarrow\)` ![](img/icon_insert_Rchunk.png) at top right of editor window, or
+
+1. __Keyboard shortcut__
+  * Mac:   _Command + Option + I_
+  * PC:   _Ctrl + Alt + I_
+
+---
+
+# Coding in an Rmd (3/4)
+
+* __Select code__ you want to execute, by 
+    - placing the cursor in the line of code you want to execute, 
+    - __*or*__ highlighting the code you want to execute
+* __Execute code__ in the chunk by
+    - by clicking the play button in the top right corner of the chunk
+    - or typing one of the following key combinations to execute the code
+          + __Windows__:  __ctrl + return__
+          + __Mac__:  __command + return__
+&lt;center&gt;&lt;img src="img/01_rmd_coding.png" width="80%" height="80%"&gt;&lt;/center&gt;  
+
+---
+
+# Coding in an Rmd (4/4)
+
+* The executed highlighted code and its output appear below the code chunk
+
+&lt;center&gt;&lt;img src="img/01_rmd_coding2.png" width="80%" height="80%"&gt;&lt;/center&gt;
+
+---
+
+# Knit the .Rmd file = run all code, save report
+
+*Before knitting the .Rmd file, you must first **save it**. *
+
+To **knit** the .Rmd file, either
+1. click on the knit icon &lt;img src="img/knit_icon.png"&gt; at the top of the editor window 
+1. or use keyboard shortcuts
+    * Mac: *Command+Shift+K* 
+    * PC:  *Ctrl+Shift+K*
+1. or use the `render()` command in Console - *See Extensions section for details*
+
+A new window will open with the html output.
+
+Remark:
+* The template .Rmd file that RStudio creates will knit to an html file by default
+* Watch the [Intro to R Markdown workshop](https://github.com/jminnier/berd_r_courses) for more customization and output formats.
+
+
+---
+
+# Compare the .Rmd file with its html output 
+
+
+.pull-left[
+.Rmd file
+&lt;img src="img/default_rmd_html.png" width="84%" height="10%"&gt;
+]
+
+.pull-right[
+html output  
+&lt;img src="img/default_html.png" width="64%" height="40%"&gt;
+]
+
+---
+
+# Compare the .Rmd file with its html output 
+
+&lt;center&gt;&lt;img src="img/screenshot_default_rmd2html_markedup.png" width="87%" height="70%"&gt;&lt;/center&gt;
+
+
+---
+
+# Useful keyboard shortcuts
+
+.pull-left-60[
+
+action | mac | windows/linux
+---| ---| ---
+run code in Rmd or script | cmd + enter | ctrl + enter 
+`&lt;-`| option + - | alt + -
+]
+.pull-right-40[
+Try typing in Rmd (with shortcut) and running
+
+```r
+y &lt;- 5
+y
+```
+]
+
+## Others: ([see full list](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
+
+action | mac | windows/linux
+---| ---| ---
+interrupt currently executing command | esc | esc
+in console, go to previously run code | up/down | up/down
+keyboard shortcut help | option + shift + k | alt + shift + k
+
+---
+
+class: center, inverse, middle
+
+# Practice time!
+
+---
+
+# Practice 1
+
+1. Open a new Rmd and type code/answers for next tasks in it. Save as `Practice1.Rmd`
+
+1. Remove any template text you don't need. Create a new code chunk.
+
+1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+1. What is the sum of `a1` and `a2`? 
+
+1. What does the command `sum(a1)` do?
+
+1. What does the command `length(a1)` do?
+
+1. Use the `sum` and `length` commands to calculate the average of the values in `a1`.
+
+1. Take a break!
+
+
+---
+
+class: inverse, middle, center
+
+# Intro to Data
+
+---
+
+# How is data stored, how do we use it?
+
+- Often, data is in an excel sheet, or a plain text file (.csv, .txt)
+- .csv files open in Excel automatically, but actually are plain text
+- Usually, columns are variables/measures and rows are observations (i.e. a person's measurements)
+
+**Open the data file `yrbss.csv` and look at it**
+
+**Move the data file `yrbss.csv` into the Rstudio project folder** 
+&lt;center&gt;&lt;img src="img/01_filestruc.png" width="87%" height="70%"&gt;&lt;/center&gt;
+
+---
+
+# Data in R/Rstudio
+
+**Open `yrbss.csv` in Rstudio and look at it**
+
+- Click on `yrbss.csv` in the Files pane, click *View File*
+&lt;center&gt;&lt;img src="img/01_filestruc2.png" width="87%" height="70%"&gt;&lt;/center&gt;
+
+**We will show you how to store and use this data in R as a data frame**
+ 
+---
+
+# First, load the packages we need
+
+We will be using functions within the `tidyverse` package in R.
+
+- In the console, run the installation code
+  + if you get a message about restarting R, click Yes
+  + if you get an error message IN RED (warnings in orange or black text are ok), ask a TA
+
+
+```r
+install.packages("tidyverse")
+install.packages("janitor")
+```
+
+- Then add this code to the setup chunk in the Rmd and run that chunk:
+
+.pull-left[
+
+```r
+library(tidyverse)
+library(janitor)
+```
+]
+.pull-right[
+&lt;center&gt;&lt;img src="img/rmd_library.png" width="87%" height="70%"&gt;&lt;/center&gt;
+]
+
+- Now we can use functions in these packages, such as `read_csv()` and `%&gt;%` and `mutate()` and `tabyl()`
+
+---
+
+class: inverse, middle, center
+
+# Object types
+
+---
+
+# Data frames (aka "tibbles" in tidyverse)
+
+.pull-left-60[
+__Vectors__ vs. __data frames__: a data frame is a collection (or array or table) of vectors
+
+
+```r
+df &lt;- tibble(
+  IDs=1:3, 
+  gender=c("male", "female", "Male"), 
+  age=c(28, 35.5, 31),
+  trt = c("control", "1", "1"),
+  Veteran = c(FALSE, TRUE, TRUE)
+  )
+df
+```
+
+```
+## # A tibble: 3 x 5
+##     IDs gender   age trt     Veteran
+##   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;lgl&gt;  
+## 1     1 male    28   control FALSE  
+## 2     2 female  35.5 1       TRUE   
+## 3     3 Male    31   1       TRUE
+```
+
+]
+.pull-right-40[
+
+* Allows different columns to be of different data types (i.e. numeric vs. text)
+* Both numeric and text can be stored within a column (stored together as *text*).
+
+* Vectors and data frames are examples of _**objects**_ in R. 
+  + There are other types of R objects to store data, such as matrices, lists.
+  + These will be discussed in future R workshops.
+]
+
+
+---
+
+# Variable (column) types
+
+type | description
+---|---
+integer | integer-valued numbers
+numeric | numbers that are decimals
+factor | categorical variables stored with levels (groups)
+character | text, "strings"
+logical | boolean (TRUE, FALSE)
+
+&lt;!-- Each variable (column) in a data frame can be of a different type. --&gt;
+
+* View the __structure__ of our data frame to see what the variable types are:
+
+
+```r
+str(df)
+```
+
+```
+## tibble [3 × 5] (S3: tbl_df/tbl/data.frame)
+##  $ IDs    : int [1:3] 1 2 3
+##  $ gender : chr [1:3] "male" "female" "Male"
+##  $ age    : num [1:3] 28 35.5 31
+##  $ trt    : chr [1:3] "control" "1" "1"
+##  $ Veteran: logi [1:3] FALSE TRUE TRUE
+```
+
+&lt;!-- * Note that the ID column is _integer_ type since the values are all whole numbers, although we likely would think of it as being a categorical variable and thus prefer it to be a factor. --&gt;
+
+---
+
+# Data frame cells, rows, or columns
+
+
+&lt;!-- * Our data frame `df` --&gt;
+.pull-left[
+Show whole data frame
+
+```r
+df
+```
+
+```
+## # A tibble: 3 x 5
+##     IDs gender   age trt     Veteran
+##   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;lgl&gt;  
+## 1     1 male    28   control FALSE  
+## 2     2 female  35.5 1       TRUE   
+## 3     3 Male    31   1       TRUE
+```
+
+Specific cell: `DatSetName[row#, column#]`
+
+
+```r
+# Second row, Third column
+df[2, 3]
+```
+
+```
+## # A tibble: 1 x 1
+##     age
+##   &lt;dbl&gt;
+## 1  35.5
+```
+]
+
+.pull-right[
+Entire col: `DatSetName[, column#]`
+
+```r
+# Third column
+df[, 3]
+```
+
+```
+## # A tibble: 3 x 1
+##     age
+##   &lt;dbl&gt;
+## 1  28  
+## 2  35.5
+## 3  31
+```
+
+Entire row: `DatSetName[row#, ]`
+
+```r
+# Second row
+df[2,]
+```
+
+```
+## # A tibble: 1 x 5
+##     IDs gender   age trt   Veteran
+##   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;lgl&gt;  
+## 1     2 female  35.5 1     TRUE
+```
+]
+
+
+---
+
+class: inverse, center, middle
+
+# Getting the data into Rstudio
+
+---
+
+# Load a data set
+
+* Read in csv file from file path with code (filepath relative to Rproj directory)
+
+
+```r
+mydata &lt;- read_csv("yrbss.csv")
+```
+
+
+
+* Or, open saved file using Import Dataset button in Environment window:  ![](img/01_Import_Dataset.png) + From Text(readr). 
+  + If you use this option, **then copy and paste the importing code to your Rmd** so you have a record of from where and how you loaded the data set.
+
+
+
+```r
+# Run in console:
+View(mydata) 
+# Can also view the data by clicking on its name in the Environment tab
+```
+
+
+&lt;!-- ![](img/01_View_data_screenshot.png) --&gt;
+
+&lt;img src="img/01_View_data_screenshot2.png" width="110%" height="110%"&gt;
+
+
+---
+
+# Load a data set: bonus lessons
+
+- [Importing Data, Rstudio support topic](https://support.rstudio.com/hc/en-us/articles/218611977-Importing-Data-with-RStudio)
+
+![](https://support.rstudio.com/hc/article_attachments/360017333414/data-import-rstudio-overview.gif)
+---
+
+# About the data
+
+Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+
+- small subset (20 rows) of the full complex survey data
+- national school-based survey conducted by CDC and state, territorial, tribal, and local surveys conducted by state, territorial, and local education and health agencies and tribal governments
+- monitors health-related behaviors (including alcohol &amp; drug use, unhealthy &amp; dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
+- original data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
+
+&lt;img src="img/01_yrbss.png" width="110%" height="110%"&gt;
+
+---
+
+# Data set summary
+
+
+```r
+summary(mydata)
+```
+
+```
+##        id              age                sex               grade          
+##  Min.   : 335340   Length:20          Length:20          Length:20         
+##  1st Qu.: 925193   Class :character   Class :character   Class :character  
+##  Median :1207132   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :1093150                                                           
+##  3rd Qu.:1313188                                                           
+##  Max.   :1316123                                                           
+##     race4                bmi          weight_kg     text_while_driving_30d
+##  Length:20          Min.   :17.48   Min.   :43.09   Length:20             
+##  Class :character   1st Qu.:20.36   1st Qu.:57.27   Class :character      
+##  Mode  :character   Median :22.23   Median :64.86   Mode  :character      
+##                     Mean   :23.01   Mean   :64.09                         
+##                     3rd Qu.:26.58   3rd Qu.:70.31                         
+##                     Max.   :29.35   Max.   :84.82                         
+##  smoked_ever        bullied_past_12mo
+##  Length:20          Mode :logical    
+##  Class :character   FALSE:11         
+##  Mode  :character   TRUE :7          
+##                     NA's :2          
+##                                      
+## 
+```
+
+---
+
+# Data set info
+
+.pull-left-40[
+
+```r
+dim(mydata)
+```
+
+```
+## [1] 20 10
+```
+
+```r
+nrow(mydata)
+```
+
+```
+## [1] 20
+```
+
+```r
+ncol(mydata)
+```
+
+```
+## [1] 10
+```
+]
+
+.pull-right-60[
+
+```r
+names(mydata)
+```
+
+```
+##  [1] "id"                     "age"                    "sex"                   
+##  [4] "grade"                  "race4"                  "bmi"                   
+##  [7] "weight_kg"              "text_while_driving_30d" "smoked_ever"           
+## [10] "bullied_past_12mo"
+```
+]
+
+
+---
+
+# Data structure
+
+* What are the different __variable types__ in this data set?
+
+
+
+```r
+str(mydata)   # structure of data
+```
+
+```
+## tibble [20 × 10] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ id                    : num [1:20] 335340 638618 922382 923122 923963 ...
+##  $ age                   : chr [1:20] "17 years old" "16 years old" "14 years old" "15 years old" ...
+##  $ sex                   : chr [1:20] "Female" "Female" "Male" "Male" ...
+##  $ grade                 : chr [1:20] "10th" "9th" "9th" "9th" ...
+##  $ race4                 : chr [1:20] "White" NA "White" "White" ...
+##  $ bmi                   : num [1:20] 27.6 29.3 18.2 21.4 19.6 ...
+##  $ weight_kg             : num [1:20] 66.2 84.8 57.6 60.3 63.5 ...
+##  $ text_while_driving_30d: chr [1:20] NA NA NA NA ...
+##  $ smoked_ever           : chr [1:20] NA "Yes" "Yes" "Yes" ...
+##  $ bullied_past_12mo     : logi [1:20] NA NA FALSE FALSE TRUE TRUE ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   id = col_double(),
+##   ..   age = col_character(),
+##   ..   sex = col_character(),
+##   ..   grade = col_character(),
+##   ..   race4 = col_character(),
+##   ..   bmi = col_double(),
+##   ..   weight_kg = col_double(),
+##   ..   text_while_driving_30d = col_character(),
+##   ..   smoked_ever = col_character(),
+##   ..   bullied_past_12mo = col_logical()
+##   .. )
+```
+
+
+---
+
+# View the beginning of a data set
+
+
+```r
+head(mydata)
+```
+
+```
+## # A tibble: 6 x 10
+##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 335340 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+## 2 638618 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+## 3 922382 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+## 4 923122 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
+## 5 923963 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
+## 6 925603 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+---
+
+# View the end of a data set
+
+
+```r
+tail(mydata)
+```
+
+```
+## # A tibble: 6 x 10
+##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 2 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 3 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 4 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
+## 5 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
+## 6 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+---
+
+# Specify how many rows to view at beginning or end of a data set
+
+
+```r
+head(mydata, 3)
+```
+
+```
+## # A tibble: 3 x 10
+##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 335340 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+## 2 638618 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+## 3 922382 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+```r
+tail(mydata, 1)
+```
+
+```
+## # A tibble: 1 x 10
+##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+---
+
+class: inverse, center, middle
+
+# Working with the data
+
+---
+
+# The $
+
+Suppose we want to single out the column of BMI values.
+
+.pull-left[
+* How did we previously learn to do this?
+
+```r
+mydata[, 6]
+```
+
+```
+## # A tibble: 20 x 1
+##      bmi
+##    &lt;dbl&gt;
+##  1  27.6
+##  2  29.3
+##  3  18.2
+##  4  21.4
+##  5  19.6
+##  6  22.2
+##  7  21.0
+##  8  17.5
+##  9  22.5
+## 10  26.6
+## 11  21.2
+## 12  19.5
+## 13  20.6
+## 14  27.5
+## 15  26.6
+## 16  24.8
+## 17  25.0
+## 18  22.3
+## 19  19.5
+## 20  27.5
+```
+]
+.pull-right[
+The problem with this method, is that we need to know the column number which can change as we make changes to the data set. 
+
+* Use the `$` instead: `DatSetName$VariableName`
+
+
+```r
+mydata$bmi
+```
+
+```
+##  [1] 27.5671 29.3495 18.1827 21.3754 19.5988 22.1910 20.9913 17.4814 22.4593 26.5781
+## [11] 21.1874 19.4637 20.6121 27.4648 26.5781 24.8047 25.0318 22.2687 19.4922 27.4894
+```
+]
+---
+
+# Basic plots of numeric data: Histogram
+
+
+```r
+hist(mydata$bmi)
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
+
+With extra features: 
+
+
+```r
+hist(mydata$bmi, xlab = "BMI", main="BMIs of students")
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Basic plots of numeric data: Boxplot
+
+.pull-left[
+
+```r
+boxplot(mydata$bmi)
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+.pull-right[
+
+```r
+boxplot(mydata$bmi ~ mydata$sex, 
+  horizontal = TRUE, 
+  xlab = "BMI", ylab = "sex",
+  main = "BMIs of students by sex")
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Basic plots of numeric data: Scatterplot
+
+.pull-left[
+
+```r
+plot(mydata$weight_kg, mydata$bmi)
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+plot(mydata$weight_kg, mydata$bmi, 
+   xlab = "weight (kg)", ylab = "BMI", 
+   main = "BMI vs. Weight")
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Summary stats of numeric data (1/2)
+
+* Standard R `summary` command
+
+
+```r
+summary(mydata$bmi)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   17.48   20.36   22.23   23.01   26.58   29.35
+```
+
+* Mean and standard deviation
+
+
+```r
+mean(mydata$bmi)
+```
+
+```
+## [1] 23.00838
+```
+
+```r
+sd(mydata$bmi)
+```
+
+```
+## [1] 3.56471
+```
+
+---
+
+# Summary stats of numeric data (2/2)
+&lt;!-- QQ: Why is (2/2) being cut off? It's not cut off for (1/2).--&gt;
+* Min, max, &amp; median
+
+.pull-left[
+
+```r
+min(mydata$bmi)
+```
+
+```
+## [1] 17.4814
+```
+
+```r
+max(mydata$bmi)
+```
+
+```
+## [1] 29.3495
+```
+]
+
+.pull-right[
+
+```r
+median(mydata$bmi)
+```
+
+```
+## [1] 22.22985
+```
+]
+
+* Quantiles
+
+
+```r
+quantile(mydata$bmi, prob=c(0, .25, .5, .75, 1))  
+```
+
+```
+##       0%      25%      50%      75%     100% 
+## 17.48140 20.35878 22.22985 26.57810 29.34950
+```
+
+
+&lt;!-- # Add height column to data frame --&gt;
+
+&lt;!-- Since `\(\textrm{BMI} = \frac{kg}{m^2}\)`, we have --&gt;
+&lt;!-- `\(\textrm{height}(m) = \sqrt{\frac{\textrm{weight}(kg)}{\textrm{BMI}}}\)` --&gt;
+
+
+&lt;!-- mydata$height_m &lt;- sqrt( mydata$weight_kg / mydata$bmi ) --&gt;
+&lt;!-- mydata$height_m --&gt;
+
+
+---
+
+# Working with data, we will use the pipe `%&gt;%`
+
+The pipe operator `%&gt;%` is part of the tidyverse, and strings together commands to be performed sequentially
+
+
+```r
+mydata %&gt;% head(n=3)      # prounounce %&gt;% as "then"
+```
+
+```
+## # A tibble: 3 x 10
+##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 335340 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+## 2 638618 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+## 3 922382 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+- Always _first list the tibble_ that the commands are being applied to
+- Can use __multiple pipes__ to run multiple commands in sequence
+    + What does the following code do?
+
+
+```r
+mydata %&gt;% head(n=2) %&gt;% summary()
+```
+
+---
+
+class: center, middle, inverse
+
+# Subsetting data
+
+&lt;img src="img/datawrangle_cheatsheet_subset_rows.png" width="75%" height="75%"&gt;
+
+&lt;img src="img/datawrangle_cheatsheet_subset_cols.png" width="75%" height="75%"&gt;
+
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+---
+
+# `filter()` `\(\sim\)` rows
+
+filter data based on rows
+.pull-left-40[
+- math: `&gt;`,  `&lt;`,  `&gt;=`,  `&lt;=`
+-  double = for "is equal to":  `==`
+-  `&amp;` (and) 
+-  `|` (or)
+- != (not equal)
+]
+.pull-right-60[
+- `is.na()` to filter based on missing values
+- `%in%` to filter based on group membership
+- `!` in front negates the statement, as in 
+    + `!is.na(age)` 
+    + `!(grade %in% c("9th","10th"))`
+]
+
+
+
+```r
+mydata %&gt;% filter(bmi &gt; 20)
+```
+
+```
+## # A tibble: 15 x 10
+##        id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+##  1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+##  2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+##  3 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
+##  4 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
+##  5 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
+##  6 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
+##  7 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
+##  8 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
+##  9 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+## 10 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 11 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 12 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 13 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 14 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
+## 15 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+
+---
+
+# `filter()` practice
+
+What do these commands do? Try them out:
+
+
+```r
+mydata %&gt;% filter(age == "14 years old")
+mydata %&gt;% filter(bmi/weight_kg &lt; 0.5)    # can do math
+mydata %&gt;% filter((bmi &lt; 15) | (bmi &gt; 25))
+mydata %&gt;% filter(bmi &lt; 20, weight_kg &lt; 60, sex == "Female") # filter on multiple variables
+
+mydata %&gt;% filter(id == 923122)      # note the use of == instead of just =
+mydata %&gt;% filter(sex == "Female")
+mydata %&gt;% filter(!(grade == "9th"))
+mydata %&gt;% filter(grade %in% c("10th", "11th"))
+
+mydata %&gt;% filter(is.na(bmi))
+mydata %&gt;% filter(!is.na(bmi))
+```
+
+---
+
+# `select()` `\(\sim\)` columns
+
+- select columns (variables)
+- no quotes needed around variable names
+- can be used to rearrange columns
+- uses special syntax that is flexible and has many options
+
+
+```r
+mydata %&gt;% select(id, grade)
+```
+
+```
+## # A tibble: 20 x 2
+##         id grade
+##      &lt;dbl&gt; &lt;chr&gt;
+##  1  335340 10th 
+##  2  638618 9th  
+##  3  922382 9th  
+##  4  923122 9th  
+##  5  923963 10th 
+##  6  925603 10th 
+##  7  933724 10th 
+##  8  935435 12th 
+##  9 1096564 10th 
+## 10 1108114 9th  
+## 11 1306150 10th 
+## 12 1307481 12th 
+## 13 1307872 11th 
+## 14 1311617 10th 
+## 15 1313153 11th 
+## 16 1313291 11th 
+## 17 1313477 10th 
+## 18 1315121 11th 
+## 19 1315850 12th 
+## 20 1316123 12th
+```
+
+---
+
+# Column selection syntax options
+
+There are many ways to select a set of variable names (columns):
+
+- `var1:var20`: all columns from `var1` to `var20`
+- `one_of(c("a", "b", "c"))`: all columns with names in the specified character vector of names
+- __Removing columns__
+    + `-var1`: remove the column`var1`
+    + `-(var1:var20)`: remove all columns from `var1` to `var20`
+- __Select using text within column names__
+    + `contains("date")`, `contains("_")`: all variable names that contain the specified string
+    + `starts_with("a")` or `ends_with("last")`: all variable names that start or end with the specificed string
+- __Rearranging columns__
+    + use `everything()` to select all columns not already named
+    + example: `select(var1, var20, everything())` moves the column `var20` to the second position
+
+See other examples in the [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
+
+
+---
+
+# `select()` practice
+
+Which columns are selected &amp; in what order using these commands?  
+First guess and then try them out.
+
+
+```r
+mydata %&gt;% select(id:sex)
+mydata %&gt;% select(one_of(c("age","weight_kg")))
+
+mydata %&gt;% select(-grade,-sex)
+mydata %&gt;% select(-(id:sex))
+
+mydata %&gt;% select(contains("race"))
+mydata %&gt;% select(starts_with("r"))
+mydata %&gt;% select(-contains("r"))
+
+mydata %&gt;% select(id, race4, everything())
+```
+
+---
+
+class: center, middle, inverse
+
+# Changing the data
+
+&lt;center&gt;&lt;img src="img/horst_mutate.jpg" width="50%" height="50%"&gt;&lt;/center&gt;
+
+[Alison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# Save a new data frame, or overwrite existing one
+
+Use a new variable name on left side of `&lt;-` assignment to save updated data frames:
+
+
+```r
+mydata_new &lt;- mydata %&gt;% select(id:sex)
+mydata_new
+```
+
+```
+## # A tibble: 20 x 3
+##         id age                   sex   
+##      &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+##  1  335340 17 years old          Female
+##  2  638618 16 years old          Female
+##  3  922382 14 years old          Male  
+##  4  923122 15 years old          Male  
+##  5  923963 15 years old          Male  
+##  6  925603 16 years old          Male  
+##  7  933724 16 years old          Female
+##  8  935435 17 years old          Female
+##  9 1096564 15 years old          Male  
+## 10 1108114 17 years old          Female
+## 11 1306150 16 years old          Male  
+## 12 1307481 17 years old          Male  
+## 13 1307872 17 years old          Male  
+## 14 1311617 15 years old          Female
+## 15 1313153 16 years old          Female
+## 16 1313291 16 years old          Female
+## 17 1313477 16 years old          Female
+## 18 1315121 17 years old          Female
+## 19 1315850 17 years old          Female
+## 20 1316123 18 years old or older Female
+```
+
+---
+
+# `rename()` `\(\sim\)` columns
+
+- renames column variables
+- `%&gt;% rename(new_name = old_name)`
+
+.pull-left[
+Renames the column, just prints the output
+
+```r
+# This does not save the new name
+mydata %&gt;% rename(record = id)
+```
+
+```
+## # A tibble: 20 x 10
+##    record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+##  1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+##  2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+##  3 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+##  4 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
+##  5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
+##  6 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
+##  7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
+##  8 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
+##  9 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
+## 10 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
+## 11 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
+## 12 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+## 13 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+## 14 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 15 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 16 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 17 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 18 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
+## 19 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
+## 20 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+]
+.pull-right[
+
+Renames the column *and* overwrites `mydata` with renamed column:
+
+
+```r
+mydata &lt;- mydata %&gt;% rename(record = id)
+mydata
+```
+
+```
+## # A tibble: 20 x 10
+##    record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+##  1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+##  2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+##  3 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+##  4 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
+##  5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
+##  6 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
+##  7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
+##  8 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
+##  9 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
+## 10 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
+## 11 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
+## 12 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+## 13 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+## 14 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 15 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 16 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 17 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 18 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
+## 19 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
+## 20 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+]
+
+---
+
+# Make new variables
+
+&lt;img src="img/datawrangle_cheatsheet_makenewvars.png" width="100%" height="100%"&gt;
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+---
+
+# `mutate()`
+
+Use `mutate()` to add new columns to a tibble
+* many options in how to define new column of data
+
+
+
+```r
+newdata &lt;- mydata %&gt;% 
+   mutate(height_m = sqrt(weight_kg / bmi))   # use = (not &lt;- or ==) to define new variable
+
+newdata %&gt;% select(bmi, weight_kg, height_m)
+```
+
+```
+## # A tibble: 20 x 3
+##      bmi weight_kg height_m
+##    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1  27.6      66.2     1.55
+##  2  29.3      84.8     1.70
+##  3  18.2      57.6     1.78
+##  4  21.4      60.3     1.68
+##  5  19.6      63.5     1.80
+##  6  22.2      70.3     1.78
+##  7  21.0      45.4     1.47
+##  8  17.5      43.1     1.57
+##  9  22.5      79.4     1.88
+## 10  26.6      68.0     1.60
+## 11  21.2      67.1     1.78
+## 12  19.5      56.2     1.70
+## 13  20.6      61.7     1.73
+## 14  27.5      70.3     1.60
+## 15  26.6      68.0     1.60
+## 16  24.8      63.5     1.60
+## 17  25.0      76.7     1.75
+## 18  22.3      54.9     1.57
+## 19  19.5      49.9     1.60
+## 20  27.5      74.8     1.65
+```
+
+
+---
+
+# `mutate()` practice
+
+What do the following commands do?  
+First guess and then try them out.
+
+
+```r
+mydata %&gt;% mutate(bmi_high = (bmi &gt; 30))
+
+mydata %&gt;% mutate(male = (sex == "Male"))
+mydata %&gt;% mutate(male = 1 * (sex == "Male"))
+
+mydata %&gt;% mutate(grade_num = as.numeric(str_remove(grade, "th")))
+```
+
+
+---
+
+# Practice 2
+
+1. Create a new Rmd or continue in your current Rmd.
+
+1. Create data frames for males and females separately.
+
+1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+
+
+---
+
+# Save data frame
+
+* Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
+
+```r
+save(mydata, file = "data/mydata.RData")  # saving mydata within the data folder
+```
+
+You can load .RData files using the load() command:
+
+
+```r
+load("data/mydata.RData")
+```
+  
+
+&lt;br&gt;
+
+* Save __csv__ file: comma-separated values
+
+
+```r
+write.csv(mydata, file = "data/mydata.csv", col.names = TRUE, row.names = FALSE)
+```
+
+---
+
+class: center, middle, inverse
+
+# More commands to filter rows
+
+&lt;!-- TO-DO: rename? --&gt;
+
+---
+
+# Remove rows with missing data
+
+`drop_na()` (or `na.omit()`) removes *all* rows with *any* missing (`NA`) values in *any* column
+
+
+```r
+mydata %&gt;% drop_na()
+```
+
+```
+## # A tibble: 7 x 10
+##   record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+## 2 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+## 3 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 4 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 5 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 6 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 7 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+For more on dealing with missing data, see [Tidyverse part 2 workshop](https://jminnier-berd-r-courses.netlify.app/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html#35)
+
+---
+
+# Remove rows with duplicated data
+
+`distinct()` removes rows that are duplicates of other rows
+
+
+```r
+data_dups &lt;- tibble(
+  name = c("Ana","Bob","Cara", "Ana"),
+  race = c("Hispanic","Other", "White", "Hispanic")
+)
+```
+
+.pull-left[
+
+```r
+data_dups
+```
+
+```
+## # A tibble: 4 x 2
+##   name  race    
+##   &lt;chr&gt; &lt;chr&gt;   
+## 1 Ana   Hispanic
+## 2 Bob   Other   
+## 3 Cara  White   
+## 4 Ana   Hispanic
+```
+]
+.pull-right[
+
+```r
+data_dups %&gt;% distinct()
+```
+
+```
+## # A tibble: 3 x 2
+##   name  race    
+##   &lt;chr&gt; &lt;chr&gt;   
+## 1 Ana   Hispanic
+## 2 Bob   Other   
+## 3 Cara  White
+```
+]
+
+---
+
+# Order rows: `arrange()`
+
+Use `arrange()` to order the rows by the values in specified columns
+
+
+```r
+mydata %&gt;% arrange(bmi, weight_kg) %&gt;% head(n=3)
+```
+
+```
+## # A tibble: 3 x 10
+##   record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
+## 2 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+## 3 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+```r
+mydata %&gt;% arrange(desc(bmi), weight_kg) %&gt;% head(n=3)
+```
+
+```
+## # A tibble: 3 x 10
+##   record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+## 2 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+## 3 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+
+---
+class: center, inverse, middle
+
+# Quick tips on summarizing data
+
+## categorical data
+## numerical data
+
+&lt;center&gt;
+&lt;img src="img/janitor_logo_small.png" width="20%" height="20%"&gt;
+&lt;img src="img/hex-dplyr.png" width="20%" height="20%"&gt;  
+&lt;/center&gt;
+
+[janitor](https://cran.r-project.org/web/packages/janitor/readme/README.html),   [dplyr](https://dplyr.tidyverse.org/)
+
+
+---
+
+# Numerical data summaries: Using `$` vs `summarize()`
+
+We saw how to summarize a vector pulled with `$`, but there are easier ways to summarize multiple columns at once.
+
+.pull-left-40[
+
+```r
+mean(mydata$bmi)
+```
+
+```
+## [1] 23.00838
+```
+
+```r
+mean(mydata$weight_kg)
+```
+
+```
+## [1] 64.094
+```
+]
+.pull-right-60[
+
+```r
+mydata %&gt;%
+* summarize(mean(bmi), mean(weight_kg))
+```
+
+```
+## # A tibble: 1 x 2
+##   `mean(bmi)` `mean(weight_kg)`
+##         &lt;dbl&gt;             &lt;dbl&gt;
+## 1        23.0              64.1
+```
+]
+---
+
+# Numerical data summaries: `summarize()`
+
+- We can summarize data as a whole, or in groups with `group_by()`
+- `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+.pull-left[
+
+```r
+# summary of all data as a whole
+mydata %&gt;% 
+* summarize(bmi_mean =mean(bmi),
+*           bmi_sd = sd(bmi),
+*           bmi_cv = sd(bmi)/mean(bmi))
+```
+
+```
+## # A tibble: 1 x 3
+##   bmi_mean bmi_sd bmi_cv
+##      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1     23.0   3.56  0.155
+```
+]
+
+.pull-right[
+
+```r
+# summary by group variable
+mydata %&gt;% 
+* group_by(grade) %&gt;%
+  summarize(n_per_group = n(), 
+            bmi_mean =mean(bmi),
+            bmi_sd = sd(bmi),
+            bmi_cv = sd(bmi)/mean(bmi))
+```
+
+```
+## # A tibble: 4 x 5
+##   grade n_per_group bmi_mean bmi_sd bmi_cv
+##   &lt;chr&gt;       &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 10th            8     23.3   3.02  0.130
+## 2 11th            4     23.6   2.65  0.112
+## 3 12th            4     21.0   4.44  0.212
+## 4 9th             4     23.9   5.03  0.211
+```
+]
+---
+
+# Combine `summarize()` with other tidy functions
+
+
+```r
+mydata %&gt;% 
+  group_by(grade) %&gt;% 
+  summarize(n_per_group = n(), 
+            bmi_mean =mean(bmi),
+            bmi_sd = sd(bmi)) %&gt;%
+* mutate(bmi_cv = bmi_sd/bmi_mean) %&gt;%
+* filter(bmi_cv &gt; .2)
+```
+
+```
+## # A tibble: 2 x 5
+##   grade n_per_group bmi_mean bmi_sd bmi_cv
+##   &lt;chr&gt;       &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 12th            4     21.0   4.44  0.212
+## 2 9th             4     23.9   5.03  0.211
+```
+
+---
+# Advanced `summarize(across())`
+
+- Can also use `across()` to summarize multiple variables ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
+
+.pull-left[
+
+```r
+mydata %&gt;% 
+  summarize(across(c(bmi, weight_kg), mean))
+```
+
+```
+## # A tibble: 1 x 2
+##     bmi weight_kg
+##   &lt;dbl&gt;     &lt;dbl&gt;
+## 1  23.0      64.1
+```
+]
+.pull-right[
+
+```r
+mydata %&gt;%
+  summarize(across(where(is.numeric), mean))
+```
+
+```
+## # A tibble: 1 x 3
+##    record   bmi weight_kg
+##     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+## 1 1093150  23.0      64.1
+```
+]
+
+```r
+mydata %&gt;%
+  summarize(across(where(is.character), n_distinct))
+```
+
+```
+## # A tibble: 1 x 6
+##     age   sex grade race4 text_while_driving_30d smoked_ever
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;                  &lt;int&gt;       &lt;int&gt;
+## 1     5     2     4     5                      6           3
+```
+
+
+---
+
+# Frequency tables: simple `count()`
+
+.pull-left[
+
+```r
+mydata %&gt;% count(grade)
+```
+
+```
+## # A tibble: 4 x 2
+##   grade     n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 10th      8
+## 2 11th      4
+## 3 12th      4
+## 4 9th       4
+```
+]
+.pull-right[
+
+```r
+mydata %&gt;% count(grade, sex)
+```
+
+```
+## # A tibble: 8 x 3
+##   grade sex        n
+##   &lt;chr&gt; &lt;chr&gt;  &lt;int&gt;
+## 1 10th  Female     4
+## 2 10th  Male       4
+## 3 11th  Female     3
+## 4 11th  Male       1
+## 5 12th  Female     3
+## 6 12th  Male       1
+## 7 9th   Female     2
+## 8 9th   Male       2
+```
+]
+
+---
+
+# Fancier frequency tables: `janitor` package's `tabyl` function 
+
+.pull-left[
+
+
+```r
+# default table
+mydata %&gt;% tabyl(grade)
+```
+
+```
+##  grade n percent
+##   10th 8     0.4
+##   11th 4     0.2
+##   12th 4     0.2
+##    9th 4     0.2
+```
+
+
+```r
+# output can be treated as tibble
+mydata %&gt;% tabyl(grade) %&gt;% select(-n)
+```
+
+```
+##  grade percent
+##   10th     0.4
+##   11th     0.2
+##   12th     0.2
+##    9th     0.2
+```
+]
+.pull-right[
+
+`adorn_` your table!
+
+```r
+mydata %&gt;%
+  tabyl(grade) %&gt;%
+* adorn_totals("row") %&gt;%
+* adorn_pct_formatting(digits=2)
+```
+
+```
+##  grade  n percent
+##   10th  8  40.00%
+##   11th  4  20.00%
+##   12th  4  20.00%
+##    9th  4  20.00%
+##  Total 20 100.00%
+```
+
+]
+
+
+---
+
+# 2x2 `tabyl`s
+
+.pull-left-40[
+
+```r
+# default 2x2 table
+mydata %&gt;% tabyl(grade, sex)
+```
+
+```
+##  grade Female Male
+##   10th      4    4
+##   11th      3    1
+##   12th      3    1
+##    9th      2    2
+```
+
+What adornments does the tabyl to right have?
+]
+.pull-right-60[
+
+```r
+mydata %&gt;% tabyl(grade, sex) %&gt;%
+* adorn_percentages(denominator = "col") %&gt;%
+* adorn_totals("row") %&gt;%
+* adorn_pct_formatting(digits = 1) %&gt;%
+* adorn_ns()
+```
+
+```
+##  grade      Female       Male
+##   10th  33.3%  (4)  50.0% (4)
+##   11th  25.0%  (3)  12.5% (1)
+##   12th  25.0%  (3)  12.5% (1)
+##    9th  16.7%  (2)  25.0% (2)
+##  Total 100.0% (12) 100.0% (8)
+```
+]
+
+- Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when we discuss `factors` as a data type in R.
+- Base R has a `table` function, but it is clunkier and the output is not a data frame. 
+- See the [tabyl vignette](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html) for more information, adorn options, &amp; 3-way `tabyl`s
+
+
+---
+# 3 way tabyls are possible
+
+
+```r
+mydata %&gt;% tabyl(grade, race4, sex)
+```
+
+```
+## $Female
+##  grade All other races Black or African American Hispanic/Latino White NA_
+##   10th               2                         0               1     1   0
+##   11th               0                         0               1     1   1
+##   12th               1                         1               1     0   0
+##    9th               0                         1               0     0   1
+## 
+## $Male
+##  grade All other races Black or African American Hispanic/Latino White
+##   10th               2                         1               1     0
+##   11th               0                         0               1     0
+##   12th               0                         0               1     0
+##    9th               0                         0               0     2
+```
+
+---
+class: center, middle, inverse
+
+# Making prettier plots
+
+&lt;center&gt;&lt;img src="img/ggplotlogo.png" width="40%" height="40%"&gt;&lt;a href="https://ggplot2.tidyverse.org/index.html"&gt;&lt;/a&gt;&lt;/center&gt;
+
+---
+
+# Basics of ggplot
+
+- For a full treatment, watch our [BERD workshop "Data Visualization with R and ggplot2"](https://github.com/jminnier/berd_r_courses)
+
+&lt;center&gt;&lt;img src="img/ggplot_basics_from_ppt.png" width="90%" height="100%"&gt;&lt;/center&gt;
+
+---
+
+# Simple
+
+.pull-left[
+
+```r
+ggplot(data = mydata, 
+       aes(x = weight_kg, y = bmi)) +
+  geom_point()
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-95-1.png" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+ggplot(data = mydata, 
+       aes(x = weight_kg)) +
+  geom_histogram()
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-96-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Improved scatterplot (watch [BERD ggplot video](https://github.com/jminnier/berd_r_courses) for many customizations)
+
+.pull-left[
+
+```r
+ggplot(data = mydata, 
+       aes(x = weight_kg, 
+           y = bmi, 
+           color = sex)) +
+  geom_point()+
+  ggtitle("Weight vs BMI by Sex") +
+  xlab("Weight (kg)") +
+  ylab("BMI (kg/m^2)") +
+  theme_bw()
+```
+]
+.pull-right[
+&lt;img src="01_intro_r_eda_files/figure-html/scatter_nice_out-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Bar plots - counts
+
+.pull-left[
+
+```r
+ggplot(data = mydata,
+       aes(x = grade, 
+           fill = sex)) +
+  geom_bar()
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-97-1.png" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+
+```r
+ggplot(data = mydata,
+       aes(x = grade, 
+           fill = sex)) +
+  geom_bar(position = "dodge")
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-98-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Bar plots - percentages
+
+.pull-left[
+
+```r
+pct_data &lt;- mydata %&gt;% 
+  count(grade, sex) %&gt;% 
+  group_by(grade) %&gt;% 
+  mutate(pct = 100*n/sum(n))
+pct_data
+```
+
+```
+## # A tibble: 8 x 4
+## # Groups:   grade [4]
+##   grade sex        n   pct
+##   &lt;chr&gt; &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt;
+## 1 10th  Female     4    50
+## 2 10th  Male       4    50
+## 3 11th  Female     3    75
+## 4 11th  Male       1    25
+## 5 12th  Female     3    75
+## 6 12th  Male       1    25
+## 7 9th   Female     2    50
+## 8 9th   Male       2    50
+```
+]
+.pull-right[
+
+```r
+ggplot(data = pct_data, 
+       aes(x = grade, y = pct, 
+           fill = sex)) +
+  geom_col(position = "dodge")+
+  ylab("Percent")
+```
+
+&lt;img src="01_intro_r_eda_files/figure-html/unnamed-chunk-99-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+
+# Factor data types
+
+---
+
+class: inverse, center, middle
+
+# The more you know
+
+---
+
+# Installing and using packages
+
+- Packages are to R like apps are to your phone/OS
+- Packages contain additional functions and data
+- Install packages with `install.packages()`
+  + Also can use the "Packages" tab in Files/Plots/Packages/Help/Viewer window
+  + *Only install once (unless you want to update)*
+  + Installs from [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) = package mothership
+
+
+```r
+install.packages("dplyr")   # only do this ONCE, use quotes
+```
+
+- Load packages: At the top of your script include `library()` commands to load each required package *every* time you open Rstudio.
+
+```r
+library(dplyr)    # run this every time you open Rstudio
+```
+
+- Use a function without loading the package with `::`
+
+```r
+dplyr::arrange(mydata, bmi)
+```
+
+```
+## # A tibble: 20 x 10
+##    record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+##  1 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
+##  2 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+##  3 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+##  4 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
+##  5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
+##  6 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+##  7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
+##  8 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
+##  9 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
+## 10 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
+## 11 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
+## 12 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
+## 13 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 14 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 15 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
+## 16 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 17 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 18 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## 19 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+## 20 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+---
+
+# Installing packages from other places (i.e. github, URLs)
+
+- Need to have [remotes](https://github.com/r-lib/remotes#readme) package installed first:
+
+```r
+install.packages("remotes") 
+```
+
+- To install a package from github (often in development) use `install_github()` from the remotes package
+
+
+```r
+# https://github.com/hadley/yrbss
+remotes::install_github("hadley/yrbss")
+
+# Load it the same way
+library(yrbss)
+```
+
+
+
+---
+
+# How to get help (1/2)
+
+Use `?` in front of function name in console. Try this:
+
+![](img/01_help_screenshot.png)
+---
+
+# How to get help (2/2)
+
+- Use `??` (i.e `??dplyr` or `??read_csv`) for searching all documentation in installed packages (including unloaded packages)
+- search [Stack Overflow #r tag](https://stackoverflow.com/questions/tagged/r)
+- googlequestion + rcran or + r (i.e. "make a boxplot rcran" "make a boxplot r")
+- google error in quotes (i.e. `"Evaluation error: invalid type (closure) for variable '***'"`)
+- search [github](https://github.com/search/advanced?q=language:R) for your function name (to see examples) or error
+- [Rstudio community](https://community.rstudio.com/)
+- [twitter #rstats](https://twitter.com/search?q=%23rstats&amp;src=typd)
+
+---
+
+# Resources
+
+- Click on this [List of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
+- Watch [recordings of our other workshops](https://github.com/jminnier/berd_r_courses)
+- __Highly recommend *Data Wrangling in R with Tidyverse*__
+
+Getting started:
+
+- [RStudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
+- Install R/RStudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&amp;feature=youtu.be)
+- [Basic Basics](http://rladiessydney.org/post/2018/11/05/basicbasics/)
+
+Some of this is drawn from materials in online books/lessons:
+
+- [Intro to R/RStudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
+- [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+
+---
+
+# Local resources
+
+.pull-left[
+- OHSU's [BioData club](https://biodata-club.github.io/) + active slack channel
+- Portland's [R user meetup group](https://www.meetup.com/portland-r-user-group/) + active slack channel
+- [R-ladies PDX](https://www.meetup.com/R-Ladies-PDX/) meetup group
+- [Cascadia R Conf - May 31, 2020 in Eugene with workshops](https://cascadiarconf.org/)
+]
+.pull-right[
+&lt;center&gt;&lt;img src="img/horst_welcome_to_rstats_twitter.png" width="100%" height="100%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+]
+
+---
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.pdf)
+- The project folder of examples can be downloaded at [github.com/jminnier/berd_intro_project](https://github.com/jminnier/berd_intro_project) &amp; the solutions are in the `solns/` folder.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:10"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
