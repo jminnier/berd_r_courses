@@ -179,9 +179,9 @@ RStudio is an integrated development environment (IDE) = an interface to use R (
 
 ---
 
-# Rstudio demo
+# RStudio demo
 
-- Start Rstudio and explore
+- Start RStudio and explore
 
 
 **Bonus lessons**
@@ -190,78 +190,33 @@ RStudio is an integrated development environment (IDE) = an interface to use R (
 
 ---
 
-# R Projects (.Rproj file) & Good Practices
-
-__Use projects to keep everything together__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
-- A project keeps track of your coding environment and file structure.
-- Create an RStudio project for each data analysis project, for each homework assignment, etc.
-- A project is associated with a directory folder
-    + Keep data files there
-    + Keep code scripts there; edit them, run them in bits or as a whole
-    + Save your outputs (plots and cleaned data) there
-- Only use relative paths, never absolute paths
-    + relative (good): `read.csv("data/mydata.csv")`
-    + absolute (bad): `read.csv("/home/yourname/Documents/stuff/mydata.csv")`
-    
-__Advantages of using projects__
-- standardizes file paths
-- keep everything together
-- a whole folder can be easily shared and run on another computer
-- when you open the project everything is as you left it
-
-
----
-
-# Open a new R project
-
-Let's go through it together. ([Read this for more](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects))
-
-File -> New Project -> New Directory
-
-**Bonus lessons**
-
-- [Video on projects in R, most useful info in minutes 2:00-13:00](https://rstudio.com/resources/webinars/managing-part-1-projects-in-rstudio/)
-
----
-
 class: inverse, middle, center
 
 # Let's code!
+
+## R Basics
 
 ---
 
 # Coding in the console 
  
 .pull-left[
-__Typing and execting code in the console __
-* Type code in the console
-* Press __return__ to execute the code
-* Output shown below
+When you first open R, the console should be empty.
 
-_Coding in the console is not advisable for most situations!_
-* We only recommend this for short pieces of code that you don't need to save
-* We will be using R markdown (`.Rmd` files) to run and save code and output  (in a few slides)
-
-```{r prompt = TRUE, comment = NA}
-7
-```
+<img src="img/01_console_empty.png" width="90%" height="100%">
 
 ]
 
 
 .pull-right[
-```{r prompt = TRUE, comment = NA}
-3 + 5
-"hello"
+__Typing and executing code in the console __
+* Type code in the console (blue text)
+* Press __return__ to execute the code
+* Output shown below in black
 
-# this is a comment, nothing happens
-# 5 - 8
+<img src="img/01_console_commands2.png" width="90%" height="10%">
 
-# separate multiple commands with ;
-3 + 5; 4 + 8
-```
 ]
-
 
 ---
 
@@ -280,7 +235,8 @@ _Coding in the console is not advisable for most situations!_
 --
 
 .pull-right[
-R follows the rules for order of operations and ignores spaces between numbers (or objects)
+* Rules for order of operations are followed
+* Spaces between numbers and characters are ignored
 
 ```{r prompt = TRUE, comment = NA}
 4^3-2* 7+9 /2
@@ -293,77 +249,16 @@ The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$
 
 ---
 
-# Logarithms and exponentials
-
-.pull-left[
-
-Logarithms: `log()` is base $e$
-```{r prompt = TRUE, comment = NA}
-log(10)
-log10(10)
-```
-
-]
-
---
-
-.pull-right[
-Exponentials
-```{r prompt = TRUE, comment = NA}
-exp(1)
-exp(0)
-```
-]
-
---
-
-Check that `log()` is base $e$
-
-```{r prompt = TRUE, comment = NA}
-log(exp(1))
-```
-
----
-
-# Using functions
-
-* `log()` is an example of a function
-* functions have "arguments"
-* `?log` in console will show help for `log()`
-
-.pull-left[
-Arguments read in order:
-```{r prompt = TRUE, comment = NA}
-mean(1:4)
-```
-
-```{r prompt = TRUE, comment = NA}
-seq(1,12,3)
-```
-]
-.pull-right[
-Arguments read by name:
-```{r prompt = TRUE, comment = NA}
-mean(x = 1:4)
-```
-
-```{r prompt = TRUE, comment = NA}
-seq(from = 1, to = 12, by = 3)
-```
-]
-
----
-
 # Variables
 
-Data, information, everything is stored as a variable
+Variables are used to store data, figures, model output, etc.
 .pull-left[
 * Can assign a variable using either `=` or `<-`
     - Using `<-` is preferable
     - type name of variable to print
     
 
-Assigning just one value:
+Assign just one value:
 ```{r prompt = TRUE, comment = NA}
 x = 5
 x
@@ -375,8 +270,8 @@ x
 --
 
 .pull-right[
-Assigning a __vector__ of values
-* Consecutive integers
+Assign a __vector__ of values:
+* Consecutive integers using `:`
 
 ```{r prompt = TRUE, comment = NA}
 a <- 3:10
@@ -426,7 +321,7 @@ a*a
 
 ---
 
-# Variable can include text (characters)
+# Variables can include text (characters)
 
 ```{r prompt = TRUE, comment = NA}
 hi <- "hello"
@@ -435,6 +330,39 @@ hi
 greetings <- c("Guten Tag", "Hola", hi)
 greetings
 ```
+
+
+---
+
+# Using functions
+
+* `mean()` is an example of a function
+* functions have "arguments" that are specified within the `()`
+* `?mean` in console will show help for `mean()`
+
+.pull-left[
+Arguments specified by name:
+```{r prompt = TRUE, comment = NA}
+mean(x = 1:4)
+```
+
+```{r prompt = TRUE, comment = NA}
+seq(from = 1, to = 12, by = 3)
+seq(by = 3, to = 12, from = 1)
+```
+]
+.pull-right[
+Arguments not specified, but listed in order:
+```{r prompt = TRUE, comment = NA}
+mean(1:4)
+```
+
+```{r prompt = TRUE, comment = NA}
+seq(1,12,3)
+```
+
+]
+
 
 ---
 
@@ -542,15 +470,57 @@ hello
 ```{r error=TRUE, prompt = TRUE, comment = NA}
 install.packages(dplyr) # need install.packages("dplyr")
 ```
+
+
+---
+
+# R Projects (.Rproj file) & Good Practices
+
+__Use projects to keep everything together__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+- A project keeps track of your coding environment and file structure.
+- Create an RStudio project for each data analysis project, for each homework assignment, etc.
+- A project is associated with a directory folder
+    + Keep data files there
+    + Keep code scripts there; edit them, run them in bits or as a whole
+    + Save your outputs (plots and cleaned data) there
+- Only use relative paths, never absolute paths
+    + relative (good): `read.csv("data/mydata.csv")`
+    + absolute (bad): `read.csv("/home/yourname/Documents/stuff/mydata.csv")`
+    
+__Advantages of using projects__
+- standardizes file paths
+- keep everything together
+- a whole folder can be easily shared and run on another computer
+- when you open the project everything is as you left it
+
+
+---
+
+# Create a new R project
+
+Let's go through it together. ([Read this for more](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects))
+
+File -> New Project -> New Directory
+
+**Bonus lessons**
+
+- [Video on projects in R, most useful info in minutes 2:00-13:00](https://rstudio.com/resources/webinars/managing-part-1-projects-in-rstudio/)
+
+
+
 ---
 
 class: inverse, center, middle
 
-# R scripts (save your work!)
+# Coding with R Markdown (Rmd)
+
+## or, creating reproducible reports
+
+<center><img src="img/horst_rmarkdown_wizards.png" width="60%" height="100%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
 
 ---
 
-# Coding in Rmd (1/4)
+#  Create an R Markdown file (`.Rmd`) 
 
 <!-- * Note that both of these options show the keyboard shortcut for your operating system   -->
     
@@ -558,99 +528,48 @@ Two options:
 1. click on File $\rightarrow$ New File $\rightarrow$ R Markdown $\rightarrow$ OK , or
 1. in upper left corner of RStudio click on <img src="img/green_plus_create_file.png">  $\rightarrow$ <img src="img/select_RMarkdown_option.png">
 
-You should see the following text in your editor window:
-  
+.pull-left[
+Pop-up window:
+* Enter a title and your name
+* Keep default HTML output format
+* Then click OK.
+
+<!-- ![](img/01_rmd_screenshot_popup.png)   -->
+<center><img src="img/01_rmd_screenshot_popup.png" width="60%" height="100%"></center>
+
+]
+   
+.pull-right[
+* You should then see the following text in your editor window:
 
 ![](img/01_rmd_screenshot.png)
+<!-- img src="img/01_rmd_screenshot.png" width="60%" height="100%"> -->
+]
+
+
+
+
 ---
 
-# Saving an Rmd
+# Save the Markdown file (`.Rmd`)
 
-* __Save the Rmd__ by 
+* __Save the file__ by 
     + selecting `File -> Save`, 
-    + or clicking on ![](img/01_Script_Save.png) (towards the left above the scripting window)
+    + or clicking on ![](img/01_Script_Save.png) (towards the left above the scripting window),
+    + or keyboard shortcut
+        * PC:   _Ctrl + s_
+        * Mac:   _Command + s_
+        
 
 * You will need to specify
     + a __filename__ to save the file as
         - ALWAYS use __.Rmd__ as the filename extension for R markdown files
     + the __folder__ to save the file in
 
----
-
-# Coding in an Rmd (2/4)
-
-* __Type code__ inside code chunks [Code -> Insert Chunk]
-    - Type each R command on its own line
-    
----
-
-# Code chunks
-
-Chunks of R code start with ` ```{r} ` and end with ` ``` `.  
-For example, the chunk <img src="img/screenshot_summary_iris.png" width="15%" height="50%"> produces the output
-
-```{r}
-summary(iris)
-```
-
----
-
-# Create a code chunk
-
-Code chunks can be created by either
-
-1. Clicking on ![](img/icon_insert.png) $\rightarrow$ ![](img/icon_insert_Rchunk.png) at top right of editor window, or
-
-1. __Keyboard shortcut__
-  * Mac:   _Command + Option + I_
-  * PC:   _Ctrl + Alt + I_
-
----
-
-# Coding in an Rmd (3/4)
-
-* __Select code__ you want to execute, by 
-    - placing the cursor in the line of code you want to execute, 
-    - __*or*__ highlighting the code you want to execute
-* __Execute code__ in the chunk by
-    - by clicking the play button in the top right corner of the chunk
-    - or typing one of the following key combinations to execute the code
-          + __Windows__:  __ctrl + return__
-          + __Mac__:  __command + return__
-<center><img src="img/01_rmd_coding.png" width="80%" height="80%"></center>  
-
----
-
-# Coding in an Rmd (4/4)
-
-* The executed highlighted code and its output appear below the code chunk
-
-<center><img src="img/01_rmd_coding2.png" width="80%" height="80%"></center>
-
----
-
-# Knit the .Rmd file = run all code, save report
-
-*Before knitting the .Rmd file, you must first **save it**. *
-
-To **knit** the .Rmd file, either
-1. click on the knit icon <img src="img/knit_icon.png"> at the top of the editor window 
-1. or use keyboard shortcuts
-    * Mac: *Command+Shift+K* 
-    * PC:  *Ctrl+Shift+K*
-1. or use the `render()` command in Console - *See Extensions section for details*
-
-A new window will open with the html output.
-
-Remark:
-* The template .Rmd file that RStudio creates will knit to an html file by default
-* Watch the [Intro to R Markdown workshop](https://github.com/jminnier/berd_r_courses) for more customization and output formats.
-
 
 ---
 
 # Compare the .Rmd file with its html output 
-
 
 .pull-left[
 .Rmd file
@@ -669,6 +588,108 @@ html output
 <center><img src="img/screenshot_default_rmd2html_markedup.png" width="87%" height="70%"></center>
 
 
+
+
+---
+
+# How to create the html file? _Knit_ the .Rmd file! 
+
+<!-- *Before knitting the .Rmd file, you must first **save it**. * -->
+
+To **knit** the .Rmd file, either
+1. click on the knit icon <img src="img/knit_icon.png"> at the top of the editor window 
+1. or use keyboard shortcuts
+    * Mac: *Command+Shift+K* 
+    * PC:  *Ctrl+Shift+K*
+
+* A new window will open with the html output.
+* You will now see both .Rmd and .html files in the folder where you saved the .Rmd file.
+
+__Remarks:__
+* The template .Rmd file that RStudio creates will knit to an html file by default
+* Watch the [Reproducible Reports with R Markdown](https://github.com/jminnier/berd_r_courses) workshop for more customization and output formats (Word, pdf, slides).
+    + Slides at https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown_slides.html.
+
+
+
+---
+
+class: middle, inverse
+
+# 3 types of R Markdown content
+
+1. <span style="color:darkorange"> *Code chunks*</span>: type R code and execute it to see code output
+2. Text: write about your analyses
+3. YAML metadata: customize the report
+
+We will first focus on using code chunks.
+
+---
+
+# Create a code chunk
+
+Code chunks can be created by either
+
+1. Clicking on ![](img/icon_insert.png) $\rightarrow$ ![](img/icon_insert_Rchunk.png) at top right of the editor window, or
+
+1. __Keyboard shortcut__
+  * Mac:   _Command + Option + I_
+  * PC:   _Ctrl + Alt + I_
+
+* An empty code chunk looks like this:
+
+<center><img src="img/01_rmd_chunk_empty.png" width="40%" height="40%"></center>  
+
+<!-- ![](img/01_rmd_chunk_empty.png) -->
+
+* Note that a code chunks start with ` ```{r} ` and ends with ` ``` `.  
+
+
+
+
+---
+
+# Enter and run code (1/n)
+
+
+.pull-left[
+* __Type R code__ inside code chunks 
+* __Select code__ you want to run, by 
+    - placing the cursor in the line of code you want to run, 
+    - __*or*__ highlighting the code you want to run
+* __Run selected code__ by
+    - clicking on the ![](img/01_Script_Run.png) button in the top right corner of the scripting window and choosing "Run Selected Line(s)", 
+    - or typing one of the following key combinations:
+          + __Windows__:  __ctrl + return__
+          + __Mac__:  __command + return__
+]
+
+.pull-right[
+<center><img src="img/01_rmd_coding1b.png" width="100%" height="100%"></center>  
+<center><img src="img/01_rmd_coding1c.png" width="40%" height="40%"></center>  
+]
+
+
+
+---
+
+# Enter and run code (2/n)
+
+.pull-left-40[
+* __Run all code__ in a chunk by
+    - by clicking the play button in the top right corner of the chunk
+
+* The code output appears below the code chunk
+
+]
+
+.pull-right-60[
+<center><img src="img/01_rmd_coding2.png" width="100%" height="100%"></center>
+]
+
+
+
+
 ---
 
 # Useful keyboard shortcuts
@@ -677,7 +698,7 @@ html output
 
 action | mac | windows/linux
 ---| ---| ---
-run code in Rmd or script | cmd + enter | ctrl + enter 
+Run code in Rmd or script | cmd + enter | ctrl + enter 
 `<-`| option + - | alt + -
 ]
 .pull-right-40[
@@ -706,21 +727,23 @@ class: center, inverse, middle
 
 # Practice 1
 
-1. Open a new Rmd and type code/answers for next tasks in it. Save as `Practice1.Rmd`
+1. Create a new Rmd file and type the code and answers for tasks below in it. Save as `Practice1.Rmd`
 
-1. Remove any template text you don't need. Create a new code chunk.
+1. Remove any template text you don't need (starting with line 12), and create a new code chunk.
 
 1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
 1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
 
-1. What is the sum of `a1` and `a2`? 
+1. What do you get when you add `a1` to `a2`? 
 
 1. What does the command `sum(a1)` do?
 
 1. What does the command `length(a1)` do?
 
 1. Use the `sum` and `length` commands to calculate the average of the values in `a1`.
+
+1. Knit the Rmd file.
 
 1. Take a break!
 
@@ -1535,7 +1558,7 @@ mydata %>%
 mydata %>% 
   summarize(across(c(bmi, weight_kg), mean))
 ```
-]
+]   
 .pull-right[
 ```{r}
 mydata %>%
