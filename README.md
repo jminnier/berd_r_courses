@@ -16,6 +16,10 @@ Recommended viewing order (since some are recorded multiple times):
 3. Data Wrangling in R, Part 2 (April 25, 2019, 2 hours)
 4. Data Visualization with R and ggplot2 (May 20, 2020, 2.5 hours)
 
+Parts of workshops 1-4 have been reworked into a new workshop (Sept 2020) for beginners in R, introducing to basics of R/Rstudio along with some tidyverse, data wrangling, and ggplot principles.
+
+5. Introduction to R and Rstudio for Exploratory Data Analysis (Sept 16 & 17, 2020, 6 hours total)
+
 ### Materials
 
 Date | Session # | Title | Slides | Slide Code
@@ -25,7 +29,8 @@ Date | Session # | Title | Slides | Slide Code
 2019/04/25 | 2 - Part 2 | Data Wrangling in R with the Tidyverse | [html](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html), [pdf](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.pdf), [practice answers](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2_practice_solutions.html) | [Rmd](02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.Rmd) 
 2019/07/18 & 2019/09/26 | 3 | Reproducible Reports with R Markdown | [html](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown_slides.html), [pdf](https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown_slides.pdf), [practice .Rproj](https://github.com/jminnier/berd_rmarkdown_project) | [Rmd](03-rmarkdown/03_rmarkdown_slides.Rmd)
 2019/09/24 & 2020/02/18 | 1 version 2 | Getting Started with R and Rstudio | [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.pdf), [practice answers](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.html) | [Rmd](01-getting-started-v2/01_getting_started_slides.Rmd) 
-2020/03/04 & 2020/05/20 [virtual] | 4 | Data Visualization with R and ggplot2 | [html](https://jminnier-berd-r-courses.netlify.com/04-ggplot/04_ggplot_slides.html), [pdf](https://jminnier-berd-r-courses.netlify.com/04-ggplot/04_ggplot_slides.pdf) | [Rmd](04-ggplot/04_ggplot_slides.Rmd)
+2020/03/04 & 2020/05/20 [virtual] | 4 | Data Visualization with R and ggplot2 | [html](https://jminnier-berd-r-courses.netlify.com/04-ggplot/04_ggplot_slides.html), [pdf](https://jminnier-berd-r-courses.netlify.com/04-ggplot/04_ggplot_slides.pdf), [practice .Rproj](https://github.com/jminnier/berd_ggplot_project) | [Rmd](04-ggplot/04_ggplot_slides.Rmd)
+2020/09/16 & 2020/09/17 [virtual in two parts] | 5 | Introduction to R and Rstudio for Exploratory Data Analysis | [html](https://jminnier-berd-r-courses.netlify.com/01-intro-r-eda/01_intro_r_eda.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-intro-r-eda/01_intro_r_eda.pdg) | [Rmd]([html](https://jminnier-berd-r-courses.netlify.com/01-intro-r-eda/01_intro_r_eda.Rmd))
 
 ### Resources
 
