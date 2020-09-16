@@ -1,0 +1,14 @@
+---
+
+# Practice 4
+
+1. Create a new Rmd or continue in your current Rmd.
+
+1. Create data frames for males and females separately.
+
+1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+

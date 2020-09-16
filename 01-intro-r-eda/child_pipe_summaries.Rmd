@@ -6,7 +6,7 @@
 The pipe operator `%>%` is part of the tidyverse, and strings together commands to be performed sequentially
 
 ```{r}
-mydata %>% head(n=3)      # prounounce %>% as "then"
+penguins %>% head(n=3)      # prounounce %>% as "then"
 ```
 
 - Always _first list the tibble_ that the commands are being applied to
@@ -14,7 +14,7 @@ mydata %>% head(n=3)      # prounounce %>% as "then"
     + What does the following code do?
 
 ```{r, eval=FALSE}
-mydata %>% head(n=2) %>% summary()
+penguins %>% head(n=2) %>% summary()
 ```
 ---
 class: center, inverse, middle
@@ -34,74 +34,98 @@ class: center, inverse, middle
 
 ---
 
-# Numerical data summaries: Using `$` vs `summarize()`
+# Numerical data summaries: `$` vs `summarize()`
 
 We saw how to summarize a vector pulled with `$`, but there are easier ways to summarize multiple columns at once.
 
 .pull-left-40[
 ```{r}
-mean(mydata$bmi)
-mean(mydata$weight_kg)
+mean(penguins$body_mass_g)
+median(penguins$body_mass_g)
 ```
 ]
 .pull-right-60[
 ```{r}
-mydata %>%
-  summarize(mean(bmi), mean(weight_kg)) #<<
+penguins %>%
+  summarize(mean(body_mass_g), #<<
+            median(body_mass_g)) #<<
 ```
 ]
+
 ---
 
-# Numerical data summaries: `summarize()`
+# `summarize()` with `NA`
+
+- Don't forget `na.rm = TRUE` if you need it.
+- You can also name these columns.
+
+```{r}
+penguins %>%
+  summarize(mean_mass = mean(body_mass_g), 
+            mean_len = mean(bill_length_mm, na.rm = TRUE)) #<<
+```
+
+
+---
+
+# By group `summarize()` (1/2)
 
 - We can summarize data as a whole, or in groups with `group_by()`
 - `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
-
-.pull-left[
 ```{r}
 # summary of all data as a whole
-mydata %>% 
-  summarize(bmi_mean =mean(bmi), #<<
-            bmi_sd = sd(bmi),  #<<
-            bmi_cv = sd(bmi)/mean(bmi)) #<<
+penguins %>% 
+  summarize(mass_mean =mean(body_mass_g), #<<
+            mass_sd = sd(body_mass_g),  #<<
+            mass_cv = sd(body_mass_g)/mean(body_mass_g)) #<<
 ```
-]
-
-.pull-right[
-```{r}
-# summary by group variable
-mydata %>% 
-  group_by(grade) %>% #<<
-  summarize(n_per_group = n(), 
-            bmi_mean =mean(bmi),
-            bmi_sd = sd(bmi),
-            bmi_cv = sd(bmi)/mean(bmi))
-```
-]
 
 ---
-# Advanced `summarize(across())`
+
+
+# By group `summarize()` (2/2)
+
+- We can summarize data as a whole, or in groups with `group_by()`
+- `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+```{r}
+# summary by group variable
+penguins %>% 
+  group_by(species) %>% #<<
+  summarize(n_per_group = n(), 
+            mass_mean =mean(body_mass_g),
+            mass_sd = sd(body_mass_g),
+            mass_cv = sd(body_mass_g)/mean(body_mass_g))
+```
+
+---
+# Advanced `summarize(across())` (1/2)
 
 - Can also use `across()` to summarize multiple variables ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
 
-.pull-left[
+
 ```{r}
-mydata %>% 
-  summarize(across(c(bmi, weight_kg), mean))
+penguins %>% 
+  summarize(across(c(body_mass_g, bill_depth_mm), mean))
 ```
-]   
-.pull-right[
+ 
+
 ```{r}
-mydata %>%
+penguins %>%
   summarize(across(where(is.numeric), mean, na.rm=TRUE))
 ```
-]
+
+---
+
+# Advanced `summarize(across())` (2/2)
+
+- Can also use `across()` to summarize multiple variables ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
+
 ```{r}
-mydata %>%
+penguins %>%
   summarize(across(where(is.character), n_distinct))
 ```
-
 
 ---
 
@@ -109,12 +133,12 @@ mydata %>%
 
 .pull-left[
 ```{r}
-mydata %>% count(grade)
+penguins %>% count(island)
 ```
 ]
 .pull-right[
 ```{r}
-mydata %>% count(grade, sex)
+penguins %>% count(species, island)
 ```
 ]
 
@@ -126,20 +150,20 @@ mydata %>% count(grade, sex)
 
 ```{r}
 # default table
-mydata %>% tabyl(grade)
+penguins %>% tabyl(species)
 ```
 
 ```{r}
 # output can be treated as tibble
-mydata %>% tabyl(grade) %>% select(-n)
+penguins %>% tabyl(species) %>% select(-n)
 ```
 ]
 .pull-right[
 
 `adorn_` your table!
 ```{r}
-mydata %>%
-  tabyl(grade) %>%
+penguins %>% 
+  tabyl(species) %>%
   adorn_totals("row") %>% #<<
   adorn_pct_formatting(digits=2)  #<<
 ```
@@ -154,14 +178,15 @@ mydata %>%
 .pull-left-40[
 ```{r}
 # default 2x2 table
-mydata %>% tabyl(grade, sex)
+penguins %>% 
+  tabyl(species, sex) #<<
 ```
 
 What adornments does the tabyl to right have?
 ]
 .pull-right-60[
 ```{r}
-mydata %>% tabyl(grade, sex) %>%
+penguins %>% tabyl(species, sex) %>% 
   adorn_percentages(denominator = "col") %>% #<<
   adorn_totals("row") %>% #<<
   adorn_pct_formatting(digits = 1) %>% #<<
@@ -169,7 +194,6 @@ mydata %>% tabyl(grade, sex) %>%
 ```
 ]
 
-- Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when we discuss `factors` as a data type in R.
 - Base R has a `table` function, but it is clunkier and the output is not a data frame. 
 - See the [tabyl vignette](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html) for more information, adorn options, & 3-way `tabyl`s
 
@@ -178,5 +202,5 @@ mydata %>% tabyl(grade, sex) %>%
 # 3 way tabyls are possible
 
 ```{r}
-mydata %>% tabyl(grade, race4, sex)
+penguins %>% tabyl(species, island, sex)
 ```

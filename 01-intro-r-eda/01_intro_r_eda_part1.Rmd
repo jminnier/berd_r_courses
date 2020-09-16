@@ -73,7 +73,6 @@ mono_light(
 )
 ```
 
----
 
 ```{r child=here::here("01-intro-r-eda","child_intro.Rmd")}
 # Jessica
@@ -99,10 +98,14 @@ mono_light(
 # Meike; possibly end day 1 at end of this?
 ```
 
+```{r child=here::here("01-intro-r-eda","child_practice2.Rmd")}
+# Meike
+```
+
 ```{r child=here::here("01-intro-r-eda","child_pipe_summaries.Rmd")}
 # Jessica
 ```
 
-```{r child=here::here("01-intro-r-eda","child_practice2.Rmd")}
+```{r child=here::here("01-intro-r-eda","child_practice3.Rmd")}
 # Jessica - with pipe/summaries; stop day 1
 ```

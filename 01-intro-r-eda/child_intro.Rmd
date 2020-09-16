@@ -1,14 +1,15 @@
 
-# 1. Open slides: [bit.ly/berd_eda](http://bit.ly/berd_eda)
+### Do this now:
 
-## 2. Install R & Rstudio: instructions [bit.ly/berd_install](http://bit.ly/berd_install)
+1. **Open html slides**: [bit.ly/berd_intro_part1](http://bit.ly/berd_intro_part1)
+1. Make sure you have **installed R & Rstudio**: instructions here [bit.ly/berd_install](http://bit.ly/berd_install)
+1. **Open google doc** for asking questions: [bit.ly/berd_doc](https://bit.ly/berd_doc)
 
-## 4. Download folder of data (unzip completely)
+### Zoom rules:
 
-CHANGE TO DOWNLOAD CSV OF DATA?
-
-- Go to [bit.ly/intro_rproj](http://bit.ly/intro_rproj) and **unzip** folder
-- Open (double click on) `berd_intro_project.Rproj` file.
+1. **Change your name in Zoom** to a made up name/animal/word if you *do not want your name in recording* (show participants list, next to your name at the top there are options to rename yourself). **Turn off your video.** 
+1. **No private messages to instructors**, we won’t see them. **Chat message “Helpers” for help or to go to a breakout room**. The # of your breakout room corresponds to “your” helper. During breaks and exercises, helpers will be in breakout rooms.
+1. **Breakout rooms** are for getting help with R issues or with exercises. You won’t be able to see what is going on in the main room while you are in your breakout room. You can stay in main room during exercises if you wish, and can ask questions to the presenters in the main room during that time (unmute and speak, or in chat).
 
 ---
 
@@ -112,3 +113,24 @@ RStudio is an integrated development environment (IDE) = an interface to use R (
 **Bonus lessons**
 
 - [gifs showing how to adjust panels, personalize how Rstudio looks, etc](https://www.pipinghotdata.com/posts/2020-09-07-introducing-the-rstudio-ide-and-r-markdown/#background)
+
+---
+
+# Installing and using packages
+
+- Packages are to R like apps are to your phone/OS
+- Packages contain additional functions and data
+- Install packages with `install.packages()`
+  + Also can use the "Packages" tab in Files/Plots/Packages/Help/Viewer window
+  + *Only install once (unless you want to update)*
+  + Installs from [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) = package mothership
+
+```{r, eval = FALSE}
+install.packages("dplyr")   # only do this ONCE, use quotes
+```
+
+- Load packages: At the top of your script include `library()` commands to load each required package *every* time you open Rstudio.
+
+```{r}
+library(dplyr)    # run this every time you open Rstudio
+```

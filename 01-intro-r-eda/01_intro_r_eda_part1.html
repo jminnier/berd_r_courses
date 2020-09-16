@@ -29,20 +29,20 @@ layout: true
 
 
 
----
 
 
 
-# 1. Open slides: [bit.ly/berd_eda](http://bit.ly/berd_eda)
+### Do this now:
 
-## 2. Install R &amp; Rstudio: instructions [bit.ly/berd_install](http://bit.ly/berd_install)
+1. **Open html slides**: [bit.ly/berd_intro_part1](http://bit.ly/berd_intro_part1)
+1. Make sure you have **installed R &amp; Rstudio**: instructions here [bit.ly/berd_install](http://bit.ly/berd_install)
+1. **Open google doc** for asking questions: [bit.ly/berd_doc](https://bit.ly/berd_doc)
 
-## 4. Download folder of data (unzip completely)
+### Zoom rules:
 
-CHANGE TO DOWNLOAD CSV OF DATA?
-
-- Go to [bit.ly/intro_rproj](http://bit.ly/intro_rproj) and **unzip** folder
-- Open (double click on) `berd_intro_project.Rproj` file.
+1. **Change your name in Zoom** to a made up name/animal/word if you *do not want your name in recording* (show participants list, next to your name at the top there are options to rename yourself). **Turn off your video.** 
+1. **No private messages to instructors**, we won’t see them. **Chat message “Helpers” for help or to go to a breakout room**. The # of your breakout room corresponds to “your” helper. During breaks and exercises, helpers will be in breakout rooms.
+1. **Breakout rooms** are for getting help with R issues or with exercises. You won’t be able to see what is going on in the main room while you are in your breakout room. You can stay in main room during exercises if you wish, and can ask questions to the presenters in the main room during that time (unmute and speak, or in chat).
 
 ---
 
@@ -147,7 +147,42 @@ RStudio is an integrated development environment (IDE) = an interface to use R (
 
 - [gifs showing how to adjust panels, personalize how Rstudio looks, etc](https://www.pipinghotdata.com/posts/2020-09-07-introducing-the-rstudio-ide-and-r-markdown/#background)
 
+---
 
+# Installing and using packages
+
+- Packages are to R like apps are to your phone/OS
+- Packages contain additional functions and data
+- Install packages with `install.packages()`
+  + Also can use the "Packages" tab in Files/Plots/Packages/Help/Viewer window
+  + *Only install once (unless you want to update)*
+  + Installs from [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) = package mothership
+
+
+```r
+install.packages("dplyr")   # only do this ONCE, use quotes
+```
+
+- Load packages: At the top of your script include `library()` commands to load each required package *every* time you open Rstudio.
+
+
+```r
+library(dplyr)    # run this every time you open Rstudio
+```
+
+
+
+
+
+---
+
+class: inverse, middle, center
+
+# Let's code!
+
+## R Basics
+
+---
 
 # Coding in the console 
  
@@ -784,6 +819,20 @@ keyboard shortcut help | option + shift + k | alt + shift + k
 
 1. Knit the Rmd file.
 
+We will be using functions within the `tidyverse` package in R.
+
+- Copy the following installation code
+  + run in Rmd - only run this once, then comment it out with `#` in front
+  + if you get a message about restarting R, click Yes
+  + if you get an error message IN RED (warnings in orange or black text are ok), ask a TA
+
+
+```r
+install.packages("tidyverse")
+install.packages("janitor")
+```
+
+
 1. Take a break!
 
 
@@ -803,211 +852,47 @@ class: inverse, middle, center
 - .csv files open in Excel automatically, but actually are plain text
 - Usually, columns are variables/measures and rows are observations (i.e. a person's measurements)
 
-**Open the data file `yrbss.csv` and look at it**
+## Our example data: 
 
-**Move the data file `yrbss.csv` into the Rstudio project folder** 
-&lt;center&gt;&lt;img src="img/01_filestruc.png" width="87%" height="70%"&gt;&lt;/center&gt;
+[**Download data csv file** link](http://bit.ly/penguin_data) and pay attention to *where* it downloads on your computer
 
----
+- Make sure it is a .csv file and not a "web archive" or something else.
 
-# Data in R/Rstudio
+**Open the data file `penguins.csv` and look at it**
 
-**Open `yrbss.csv` in Rstudio and look at it**
-
-- Click on `yrbss.csv` in the Files pane, click *View File*
-&lt;center&gt;&lt;img src="img/01_filestruc2.png" width="87%" height="70%"&gt;&lt;/center&gt;
-
-**We will show you how to store and use this data in R as a data frame**
- 
----
-
-# First, load the packages we need
-
-We will be using functions within the `tidyverse` package in R.
-
-- In the console, run the installation code
-  + if you get a message about restarting R, click Yes
-  + if you get an error message IN RED (warnings in orange or black text are ok), ask a TA
-
-
-```r
-install.packages("tidyverse")
-install.packages("janitor")
-```
-
-- Then add this code to the setup chunk in the Rmd and run that chunk:
-
-.pull-left[
-
-```r
-library(tidyverse)
-library(janitor)
-```
-]
-.pull-right[
-&lt;center&gt;&lt;img src="img/rmd_library.png" width="87%" height="70%"&gt;&lt;/center&gt;
-]
-
-- Now we can use functions in these packages, such as `read_csv()` and `%&gt;%` and `mutate()` and `tabyl()`
-
----
-
-class: inverse, middle, center
-
-# Object types
-
----
-
-# Data frames (aka "tibbles" in tidyverse)
-
-.pull-left-60[
-__Vectors__ vs. __data frames__: a data frame is a collection (or array or table) of vectors
-
-
-```r
-df &lt;- tibble(
-  IDs=1:3, 
-  gender=c("male", "female", "Male"), 
-  age=c(28, 35.5, 31),
-  trt = c("control", "1", "1"),
-  Veteran = c(FALSE, TRUE, TRUE)
-  )
-df
-```
-
-```
-## # A tibble: 3 x 5
-##     IDs gender   age trt     Veteran
-##   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;lgl&gt;  
-## 1     1 male    28   control FALSE  
-## 2     2 female  35.5 1       TRUE   
-## 3     3 Male    31   1       TRUE
-```
-
-]
-.pull-right-40[
-
-* Allows different columns to be of different data types (i.e. numeric vs. text)
-* Both numeric and text can be stored within a column (stored together as *text*).
-
-* Vectors and data frames are examples of _**objects**_ in R. 
-  + There are other types of R objects to store data, such as matrices, lists.
-  + These will be discussed in future R workshops.
-]
+- What are the columns? What are the rows?
 
 
 ---
 
-# Variable (column) types
+# About the penguins data
 
-type | description
----|---
-integer | integer-valued numbers
-numeric | numbers that are decimals
-factor | categorical variables stored with levels (groups)
-character | text, "strings"
-logical | boolean (TRUE, FALSE)
+- A data set about penguins at Palmer Station, Antarctica! More info at [github.com/allisonhorst/palmerpenguins](https://github.com/allisonhorst/palmerpenguins)
+- Data were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network.
+- Each row is a penguin measurement
+- Some false missingness was induced for this practice.
 
-&lt;!-- Each variable (column) in a data frame can be of a different type. --&gt;
-
-* View the __structure__ of our data frame to see what the variable types are:
-
-
-```r
-str(df)
-```
-
-```
-## tibble [3 × 5] (S3: tbl_df/tbl/data.frame)
-##  $ IDs    : int [1:3] 1 2 3
-##  $ gender : chr [1:3] "male" "female" "Male"
-##  $ age    : num [1:3] 28 35.5 31
-##  $ trt    : chr [1:3] "control" "1" "1"
-##  $ Veteran: logi [1:3] FALSE TRUE TRUE
-```
-
-&lt;!-- * Note that the ID column is _integer_ type since the values are all whole numbers, although we likely would think of it as being a categorical variable and thus prefer it to be a factor. --&gt;
-
----
-
-# Data frame cells, rows, or columns
-
-
-&lt;!-- * Our data frame `df` --&gt;
-.pull-left[
-Show whole data frame
-
-```r
-df
-```
-
-```
-## # A tibble: 3 x 5
-##     IDs gender   age trt     Veteran
-##   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;lgl&gt;  
-## 1     1 male    28   control FALSE  
-## 2     2 female  35.5 1       TRUE   
-## 3     3 Male    31   1       TRUE
-```
-
-Specific cell: `DatSetName[row#, column#]`
-
-
-```r
-# Second row, Third column
-df[2, 3]
-```
-
-```
-## # A tibble: 1 x 1
-##     age
-##   &lt;dbl&gt;
-## 1  35.5
-```
-]
-
-.pull-right[
-Entire col: `DatSetName[, column#]`
-
-```r
-# Third column
-df[, 3]
-```
-
-```
-## # A tibble: 3 x 1
-##     age
-##   &lt;dbl&gt;
-## 1  28  
-## 2  35.5
-## 3  31
-```
-
-Entire row: `DatSetName[row#, ]`
-
-```r
-# Second row
-df[2,]
-```
-
-```
-## # A tibble: 1 x 5
-##     IDs gender   age trt   Veteran
-##   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;lgl&gt;  
-## 1     2 female  35.5 1     TRUE
-```
-]
+&lt;center&gt;&lt;img src="img/penguins_pic.png" width="50%" height="50%"&gt;&lt;img src="img/penguins_bill.png" width="50%" height="50%"&gt;&lt;/center&gt;
 
 
 ---
 
-class: inverse, center, middle
+# Workflow - Keep it together!
 
-# Getting the data into Rstudio
+**Steps for a new data analysis project or homework:**
+
+1. Create a folder to contain all your files.
+2. Move data file (`penguins.csv`) into this folder.
+3. Create an Rstudio project inside this folder. (next slides)
+4. Create a new Rmd for your analyses/homework.
+
+## Do steps 1 &amp; 2 now!
+
+&lt;center&gt;&lt;img src="img/workflow_folder.png" width="60%" height="50%"&gt;&lt;/center&gt;
+
 
 ---
 
----
 
 # R Projects (.Rproj file) &amp; Good Practices
 
@@ -1035,23 +920,91 @@ __Advantages of using projects__
 
 Let's go through it together. ([Read this for more](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects))
 
-File -&gt; New Project -&gt; New Directory
+.pull-left-60[
+- Click ![](img/rproj_new.png) in top left *or* File -&gt; New Project 
+- Click *Existing Directory*
+- Browse to your folder with the data
+- *Optional* Click "Open in new session checkbox"
+- Click "Create project"
+]
+.pull-right-40[
+&lt;center&gt;&lt;img src="img/rproj_existing.png" width="80%" height="50%"&gt;&lt;/center&gt;
+
+&lt;center&gt;&lt;img src="img/rproj_browse.png" width="80%" height="50%"&gt;&lt;/center&gt;
+]
+
 
 **Bonus lessons**
 
 - [Video on projects in R, most useful info in minutes 2:00-13:00](https://rstudio.com/resources/webinars/managing-part-1-projects-in-rstudio/)
 
 
+
 ---
 
+# The data file will be in your Files pane:
 
-# Load a data set
+and your workspace folder location will be showing at the top (i.e. `Home/Desktop/workshop_practice`)
 
+&lt;center&gt;&lt;img src="img/rproj_files.png" width="87%" height="70%"&gt;&lt;/center&gt;
+
+---
+
+# Data in R/Rstudio
+
+**Open `penguins.csv` in Rstudio and look at it**
+
+- Click on `penguins.csv` in the Files pane, click *View File*
+&lt;center&gt;&lt;img src="img/01_filestruc.png" width="87%" height="70%"&gt;&lt;/center&gt;
+
+**We will show you how to store and use this data in R as a data frame**
+
+Currently it is still just a file in your folder.
+ 
+---
+
+# To run and save your code: Create a new Rmd!
+
+- Then save it with a meaningful filename.
+- You will be prompted to save it in your current working folder.
+
+&lt;center&gt;&lt;img src="img/rproj_newrmd.png" width="87%" height="70%"&gt;&lt;/center&gt;
+
+---
+
+# Load the packages we need in the Rmd
+
+Add this code to the setup chunk in the Rmd and run that chunk:
+
+.pull-left[
+
+```r
+library(tidyverse)
+library(janitor)
+```
+]
+.pull-right[
+&lt;center&gt;&lt;img src="img/rmd_library.png" width="87%" height="70%"&gt;&lt;/center&gt;
+]
+
+Now we can use functions in these packages, such as `read_csv()` and `%&gt;%` and `mutate()` and `tabyl()`
+
+
+## Remove everything in the Rmd below this code
+
+- Loading library code should always be at the top of your Rmd so you can use these packages in code "lower down"
+
+---
+
+# Load the data set into R
+
+* Create a new code chunk (Code -&gt; insert chunk)
 * Read in csv file from file path with code (filepath relative to Rproj directory)
+* Copy this code to that code chunk and run it.
 
 
 ```r
-mydata &lt;- read_csv("yrbss.csv")
+penguins &lt;- read_csv("penguins.csv")
 ```
 
 
@@ -1063,14 +1016,22 @@ mydata &lt;- read_csv("yrbss.csv")
 
 ```r
 # Run in console:
-View(mydata) 
+View(penguins) 
 # Can also view the data by clicking on its name in the Environment tab
 ```
 
 
 &lt;!-- ![](img/01_View_data_screenshot.png) --&gt;
 
-&lt;img src="img/01_View_data_screenshot2.png" width="110%" height="110%"&gt;
+&lt;img src="img/view_penguins.png" width="110%" height="110%"&gt;
+
+---
+
+# Your Rmd should look something like this:
+
+Try knitting it!
+
+&lt;img src="img/rmd_penguins.png" width="60%" height="80%"&gt;
 
 
 ---
@@ -1080,18 +1041,99 @@ View(mydata)
 - [Importing Data, Rstudio support topic](https://support.rstudio.com/hc/en-us/articles/218611977-Importing-Data-with-RStudio)
 
 ![](https://support.rstudio.com/hc/article_attachments/360017333414/data-import-rstudio-overview.gif)
+
 ---
 
-# About the data
+class: inverse, middle, center
 
-Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+# Object types
 
-- small subset (20 rows) of the full complex survey data
-- national school-based survey conducted by CDC and state, territorial, tribal, and local surveys conducted by state, territorial, and local education and health agencies and tribal governments
-- monitors health-related behaviors (including alcohol &amp; drug use, unhealthy &amp; dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
-- original data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
+---
 
-&lt;img src="img/01_yrbss.png" width="110%" height="110%"&gt;
+# Data frames (aka "tibbles" in tidyverse)
+
+.pull-left-60[
+__Vectors__ vs. __data frames__: a data frame is a collection (or array or table) of vectors
+
+
+```r
+penguins
+```
+
+```
+## # A tibble: 342 x 9
+##       id species island bill_length_mm bill_depth_mm flipper_length_…
+##    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+##  1  1689 Adelie  Torge…           39.1          18.7              181
+##  2  4274 Adelie  Torge…           NA            17.4              186
+##  3  4539 Adelie  Torge…           40.3          18                195
+##  4  2435 Adelie  Torge…           36.7          19.3              193
+##  5  2326 Adelie  Torge…           39.3          20.6              190
+##  6  2637 Adelie  Torge…           38.9          17.8              181
+##  7  4443 Adelie  Torge…           NA            19.6              195
+##  8  2102 Adelie  Torge…           34.1          18.1              193
+##  9  2975 Adelie  Torge…           42            20.2              190
+## 10  3966 Adelie  Torge…           37.8          17.1              186
+## # … with 332 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;
+```
+
+]
+.pull-right-40[
+
+* Allows different columns to be of different data types (i.e. numeric vs. text)
+* Both numeric and text can be stored within a column (stored together as *text*).
+
+* Vectors and data frames are examples of _**objects**_ in R. 
+  + There are other types of R objects to store data, such as matrices, lists.
+  + These will be discussed in future R workshops.
+]
+
+
+---
+
+# Variable (column) types
+
+type | description
+---|---
+**double/numeric** | **numbers that are decimals**
+**character** | **text, "strings"**
+integer | integer-valued numbers
+factor | categorical variables stored with levels (groups)
+logical | boolean (TRUE, FALSE)
+
+- We will focus on double &amp; character, as most data will be of this type when using `read_csv()` to read in your data sets
+- If you see `int` = integer as a column type, you can treat it as a double for most intents and purposes.
+
+&lt;!-- Each variable (column) in a data frame can be of a different type. --&gt;
+
+&lt;!-- * Note that the ID column is _integer_ type since the values are all whole numbers, although we likely would think of it as being a categorical variable and thus prefer it to be a factor. --&gt;
+
+---
+
+# Data structure
+
+* What are the different __variable types__ in this data set?
+* What is `NA`?
+
+
+```r
+glimpse(penguins)   # structure of data
+```
+
+```
+## Rows: 342
+## Columns: 9
+## $ id                &lt;dbl&gt; 1689, 4274, 4539, 2435, 2326, 2637, 4443, 2102, 297…
+## $ species           &lt;chr&gt; "Adelie", "Adelie", "Adelie", "Adelie", "Adelie", "…
+## $ island            &lt;chr&gt; "Torgersen", "Torgersen", "Torgersen", "Torgersen",…
+## $ bill_length_mm    &lt;dbl&gt; 39.1, NA, 40.3, 36.7, 39.3, 38.9, NA, 34.1, 42.0, 3…
+## $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 18.1, 20.…
+## $ flipper_length_mm &lt;dbl&gt; 181, 186, 195, 193, 190, 181, 195, 193, 190, 186, 1…
+## $ body_mass_g       &lt;dbl&gt; 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3475, 425…
+## $ sex               &lt;chr&gt; "male", "female", "female", "female", "male", "fema…
+## $ year              &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 200…
+```
 
 ---
 
@@ -1099,31 +1141,74 @@ Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://w
 
 
 ```r
-summary(mydata)
+summary(penguins)
 ```
 
 ```
-##        id              age                sex               grade          
-##  Min.   : 335340   Length:20          Length:20          Length:20         
-##  1st Qu.: 925193   Class :character   Class :character   Class :character  
-##  Median :1207132   Mode  :character   Mode  :character   Mode  :character  
-##  Mean   :1093150                                                           
-##  3rd Qu.:1313188                                                           
-##  Max.   :1316123                                                           
-##     race4                bmi          weight_kg     text_while_driving_30d
-##  Length:20          Min.   :17.48   Min.   :43.09   Length:20             
-##  Class :character   1st Qu.:20.36   1st Qu.:57.27   Class :character      
-##  Mode  :character   Median :22.23   Median :64.86   Mode  :character      
-##                     Mean   :23.01   Mean   :64.09                         
-##                     3rd Qu.:26.58   3rd Qu.:70.31                         
-##                     Max.   :29.35   Max.   :84.82                         
-##  smoked_ever        bullied_past_12mo
-##  Length:20          Mode :logical    
-##  Class :character   FALSE:11         
-##  Mode  :character   TRUE :7          
-##                     NA's :2          
-##                                      
+##        id         species             island          bill_length_mm 
+##  Min.   :1001   Length:342         Length:342         Min.   :32.10  
+##  1st Qu.:2031   Class :character   Class :character   1st Qu.:39.45  
+##  Median :2984   Mode  :character   Mode  :character   Median :44.70  
+##  Mean   :3031                                         Mean   :44.00  
+##  3rd Qu.:4073                                         3rd Qu.:48.52  
+##  Max.   :4969                                         Max.   :59.60  
+##                                                       NA's   :6      
+##  bill_depth_mm   flipper_length_mm  body_mass_g       sex           
+##  Min.   :13.10   Min.   :172.0     Min.   :2700   Length:342        
+##  1st Qu.:15.60   1st Qu.:190.0     1st Qu.:3550   Class :character  
+##  Median :17.30   Median :197.0     Median :4050   Mode  :character  
+##  Mean   :17.15   Mean   :200.9     Mean   :4202                     
+##  3rd Qu.:18.70   3rd Qu.:213.0     3rd Qu.:4750                     
+##  Max.   :21.50   Max.   :231.0     Max.   :6300                     
+##                                                                     
+##       year     
+##  Min.   :2007  
+##  1st Qu.:2007  
+##  Median :2008  
+##  Mean   :2008  
+##  3rd Qu.:2009  
+##  Max.   :2009  
 ## 
+```
+
+---
+
+# Show (print) whole data frame
+
+Tibble truncates the output to ten rows, so you can't actually see it all.
+
+
+```r
+penguins
+```
+
+```
+## # A tibble: 342 x 9
+##       id species island bill_length_mm bill_depth_mm flipper_length_…
+##    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+##  1  1689 Adelie  Torge…           39.1          18.7              181
+##  2  4274 Adelie  Torge…           NA            17.4              186
+##  3  4539 Adelie  Torge…           40.3          18                195
+##  4  2435 Adelie  Torge…           36.7          19.3              193
+##  5  2326 Adelie  Torge…           39.3          20.6              190
+##  6  2637 Adelie  Torge…           38.9          17.8              181
+##  7  4443 Adelie  Torge…           NA            19.6              195
+##  8  2102 Adelie  Torge…           34.1          18.1              193
+##  9  2975 Adelie  Torge…           42            20.2              190
+## 10  3966 Adelie  Torge…           37.8          17.1              186
+## # … with 332 more rows, and 3 more variables: body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;
+```
+
+---
+
+# View whole data frame
+
+We showed this already, very handy to see *all* data. Run in console since it's more interactive.
+
+
+```r
+View(penguins)
 ```
 
 ---
@@ -1133,83 +1218,43 @@ summary(mydata)
 .pull-left-40[
 
 ```r
-dim(mydata)
+dim(penguins)
 ```
 
 ```
-## [1] 20 10
-```
-
-```r
-nrow(mydata)
-```
-
-```
-## [1] 20
+## [1] 342   9
 ```
 
 ```r
-ncol(mydata)
+nrow(penguins)
 ```
 
 ```
-## [1] 10
+## [1] 342
+```
+
+```r
+ncol(penguins)
+```
+
+```
+## [1] 9
 ```
 ]
 
 .pull-right-60[
 
 ```r
-names(mydata)
+names(penguins)
 ```
 
 ```
-##  [1] "id"                     "age"                    "sex"                   
-##  [4] "grade"                  "race4"                  "bmi"                   
-##  [7] "weight_kg"              "text_while_driving_30d" "smoked_ever"           
-## [10] "bullied_past_12mo"
+## [1] "id"                "species"           "island"           
+## [4] "bill_length_mm"    "bill_depth_mm"     "flipper_length_mm"
+## [7] "body_mass_g"       "sex"               "year"
 ```
 ]
 
-
----
-
-# Data structure
-
-* What are the different __variable types__ in this data set?
-
-
-
-```r
-str(mydata)   # structure of data
-```
-
-```
-## tibble [20 × 10] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ id                    : num [1:20] 335340 638618 922382 923122 923963 ...
-##  $ age                   : chr [1:20] "17 years old" "16 years old" "14 years old" "15 years old" ...
-##  $ sex                   : chr [1:20] "Female" "Female" "Male" "Male" ...
-##  $ grade                 : chr [1:20] "10th" "9th" "9th" "9th" ...
-##  $ race4                 : chr [1:20] "White" NA "White" "White" ...
-##  $ bmi                   : num [1:20] 27.6 29.3 18.2 21.4 19.6 ...
-##  $ weight_kg             : num [1:20] 66.2 84.8 57.6 60.3 63.5 ...
-##  $ text_while_driving_30d: chr [1:20] NA NA NA NA ...
-##  $ smoked_ever           : chr [1:20] NA "Yes" "Yes" "Yes" ...
-##  $ bullied_past_12mo     : logi [1:20] NA NA FALSE FALSE TRUE TRUE ...
-##  - attr(*, "spec")=
-##   .. cols(
-##   ..   id = col_double(),
-##   ..   age = col_character(),
-##   ..   sex = col_character(),
-##   ..   grade = col_character(),
-##   ..   race4 = col_character(),
-##   ..   bmi = col_double(),
-##   ..   weight_kg = col_double(),
-##   ..   text_while_driving_30d = col_character(),
-##   ..   smoked_ever = col_character(),
-##   ..   bullied_past_12mo = col_logical()
-##   .. )
-```
 
 
 ---
@@ -1218,20 +1263,20 @@ str(mydata)   # structure of data
 
 
 ```r
-head(mydata)
+head(penguins)
 ```
 
 ```
-## # A tibble: 6 x 10
-##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-## 1 335340 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
-## 2 638618 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
-## 3 922382 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
-## 4 923122 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
-## 5 923963 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
-## 6 925603 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+## # A tibble: 6 x 9
+##      id species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+## 1  1689 Adelie  Torge…           39.1          18.7              181        3750
+## 2  4274 Adelie  Torge…           NA            17.4              186        3800
+## 3  4539 Adelie  Torge…           40.3          18                195        3250
+## 4  2435 Adelie  Torge…           36.7          19.3              193        3450
+## 5  2326 Adelie  Torge…           39.3          20.6              190        3650
+## 6  2637 Adelie  Torge…           38.9          17.8              181        3625
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
 ```
 
 ---
@@ -1240,20 +1285,20 @@ head(mydata)
 
 
 ```r
-tail(mydata)
+tail(penguins)
 ```
 
 ```
-## # A tibble: 6 x 10
-##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-## 1 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
-## 2 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
-## 3 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
-## 4 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
-## 5 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
-## 6 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+## # A tibble: 6 x 9
+##      id species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+## 1  1947 Chinst… Dream            45.7          17                195        3650
+## 2  4452 Chinst… Dream            55.8          19.8              207        4000
+## 3  2420 Chinst… Dream            43.5          18.1              202        3400
+## 4  4861 Chinst… Dream            49.6          18.2              193        3775
+## 5  4865 Chinst… Dream            50.8          19                210        4100
+## 6  4162 Chinst… Dream            50.2          18.7              198        3775
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
 ```
 
 ---
@@ -1262,32 +1307,107 @@ tail(mydata)
 
 
 ```r
-head(mydata, 3)
+head(penguins, 3)
 ```
 
 ```
-## # A tibble: 3 x 10
-##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-## 1 335340 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
-## 2 638618 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
-## 3 922382 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+## # A tibble: 3 x 9
+##      id species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+## 1  1689 Adelie  Torge…           39.1          18.7              181        3750
+## 2  4274 Adelie  Torge…           NA            17.4              186        3800
+## 3  4539 Adelie  Torge…           40.3          18                195        3250
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
 ```
 
 ```r
-tail(mydata, 1)
+tail(penguins, 1)
 ```
 
 ```
-## # A tibble: 1 x 10
-##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-## 1 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+## # A tibble: 1 x 9
+##      id species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+## 1  4162 Chinst… Dream            50.2          18.7              198        3775
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
 ```
 
+---
 
+## Data frame cells, rows, or columns (rarely used)
+
+.pull-left-60[
+
+Specific cell: `DatSetName[row#, column#]`
+
+
+```r
+# Second row, Third column
+penguins[2, 3]
+```
+
+```
+## # A tibble: 1 x 1
+##   island   
+##   &lt;chr&gt;    
+## 1 Torgersen
+```
+
+Entire row: `DatSetName[row#, ]`
+
+```r
+# Second row
+penguins[2,]
+```
+
+```
+## # A tibble: 1 x 9
+##      id species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+## 1  4274 Adelie  Torge…             NA          17.4              186        3800
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
+```
+]
+
+.pull-right-40[
+Entire col: `DatSetName[, column#]`
+
+```r
+# Third column
+penguins[, 3]
+```
+
+```
+## # A tibble: 342 x 1
+##    island   
+##    &lt;chr&gt;    
+##  1 Torgersen
+##  2 Torgersen
+##  3 Torgersen
+##  4 Torgersen
+##  5 Torgersen
+##  6 Torgersen
+##  7 Torgersen
+##  8 Torgersen
+##  9 Torgersen
+## 10 Torgersen
+## # … with 332 more rows
+```
+
+]
+
+
+
+
+
+
+---
+
+class: inverse, center, middle
+
+# Working with the data
+
+---
 
 # The $
 
@@ -1297,33 +1417,24 @@ Suppose we want to single out the column of BMI values.
 * How did we previously learn to do this?
 
 ```r
-mydata[, 6]
+penguins[, 4]
 ```
 
 ```
-## # A tibble: 20 x 1
-##      bmi
-##    &lt;dbl&gt;
-##  1  27.6
-##  2  29.3
-##  3  18.2
-##  4  21.4
-##  5  19.6
-##  6  22.2
-##  7  21.0
-##  8  17.5
-##  9  22.5
-## 10  26.6
-## 11  21.2
-## 12  19.5
-## 13  20.6
-## 14  27.5
-## 15  26.6
-## 16  24.8
-## 17  25.0
-## 18  22.3
-## 19  19.5
-## 20  27.5
+## # A tibble: 342 x 1
+##    bill_length_mm
+##             &lt;dbl&gt;
+##  1           39.1
+##  2           NA  
+##  3           40.3
+##  4           36.7
+##  5           39.3
+##  6           38.9
+##  7           NA  
+##  8           34.1
+##  9           42  
+## 10           37.8
+## # … with 332 more rows
 ```
 ]
 .pull-right[
@@ -1333,13 +1444,33 @@ The problem with this method, is that we need to know the column number which ca
 
 
 ```r
-mydata$bmi
+penguins$bill_length_mm
 ```
 
 ```
-##  [1] 27.5671 29.3495 18.1827 21.3754 19.5988 22.1910 20.9913 17.4814 22.4593
-## [10] 26.5781 21.1874 19.4637 20.6121 27.4648 26.5781 24.8047 25.0318 22.2687
-## [19] 19.4922 27.4894
+##   [1] 39.1   NA 40.3 36.7 39.3 38.9   NA 34.1 42.0 37.8 37.8 41.1 38.6 34.6 36.6
+##  [16] 38.7 42.5 34.4 46.0 37.8 37.7 35.9 38.2 38.8 35.3 40.6 40.5 37.9 40.5 39.5
+##  [31] 37.2 39.5 40.9 36.4 39.2 38.8   NA 37.6 39.8 36.5 40.8 36.0 44.1 37.0 39.6
+##  [46] 41.1 37.5 36.0 42.3 39.6 40.1 35.0 42.0 34.5 41.4 39.0 40.6 36.5 37.6 35.7
+##  [61] 41.3 37.6 41.1 36.4 41.6 35.5 41.1 35.9 41.8 33.5 39.7 39.6 45.8 35.5 42.8
+##  [76] 40.9 37.2 36.2 42.1 34.6 42.9 36.7 35.1 37.3 41.3   NA 36.9 38.3 38.9 35.7
+##  [91] 41.1 34.0 39.6 36.2 40.8 38.1 40.3 33.1 43.2 35.0 41.0 37.7 37.8 37.9 39.7
+## [106] 38.6 38.2 38.1 43.2 38.1 45.6 39.7 42.2 39.6 42.7 38.6 37.3 35.7 41.1 36.2
+## [121] 37.7 40.2 41.4 35.2 40.6 38.8 41.5 39.0 44.1 38.5 43.1 36.8 37.5 38.1 41.1
+## [136] 35.6 40.2 37.0 39.7 40.2 40.6 32.1 40.7 37.3 39.0 39.2 36.6   NA 37.8 36.0
+## [151] 41.5 46.1 50.0 48.7 50.0 47.6 46.5 45.4 46.7 43.3 46.8 40.9 49.0 45.5 48.4
+## [166] 45.8 49.3 42.0 49.2 46.2 48.7 50.2 45.1 46.5 46.3 42.9 46.1 44.5 47.8 48.2
+## [181] 50.0 47.3   NA 45.1 59.6 49.1 48.4 42.6 44.4 44.0 48.7 42.7 49.6 45.3 49.6
+## [196] 50.5 43.6 45.5 50.5 44.9 45.2 46.6 48.5 45.1 50.1 46.5 45.0 43.8 45.5 43.2
+## [211] 50.4 45.3 46.2 45.7 54.3 45.8 49.8 46.2 49.5 43.5 50.7 47.7 46.4 48.2 46.5
+## [226] 46.4 48.6 47.5 51.1 45.2 45.2 49.1 52.5 47.4 50.0 44.9 50.8 43.4 51.3 47.5
+## [241] 52.1 47.5 52.2 45.5 49.5 44.5 50.8 49.4 46.9 48.4 51.1 48.5 55.9 47.2 49.1
+## [256] 47.3 46.8 41.7 53.4 43.3 48.1 50.5 49.8 43.5 51.5 46.2 55.1 44.5 48.8 47.2
+## [271] 46.8 50.4 45.2 49.9 46.5 50.0 51.3 45.4 52.7 45.2 46.1 51.3 46.0 51.3 46.6
+## [286] 51.7 47.0 52.0 45.9 50.5 50.3 58.0 46.4 49.2 42.4 48.5 43.2 50.6 46.7 52.0
+## [301] 50.5 49.5 46.4 52.8 40.9 54.2 42.5 51.0 49.7 47.5 47.6 52.0 46.9 53.5 49.0
+## [316] 46.2 50.9 45.5 50.9 50.8 50.1 49.0 51.5 49.8 48.1 51.4 45.7 50.7 42.5 52.2
+## [331] 45.2 49.3 50.2 45.6 51.9 46.8 45.7 55.8 43.5 49.6 50.8 50.2
 ```
 ]
 ---
@@ -1351,7 +1482,7 @@ mydata$bmi
 hist(mydata$bmi)
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-48-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
 
 With extra features: 
 
@@ -1360,7 +1491,7 @@ With extra features:
 hist(mydata$bmi, xlab = "BMI", main="BMIs of students")
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1372,7 +1503,7 @@ hist(mydata$bmi, xlab = "BMI", main="BMIs of students")
 boxplot(mydata$bmi)
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1387,7 +1518,7 @@ boxplot(mydata$bmi ~ mydata$sex,
   main = "BMIs of students by sex")
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1400,7 +1531,7 @@ boxplot(mydata$bmi ~ mydata$sex,
 plot(mydata$weight_kg, mydata$bmi)
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1411,7 +1542,7 @@ plot(mydata$weight_kg, mydata$bmi,
    main = "BMI vs. Weight")
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-56-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1509,6 +1640,16 @@ quantile(mydata$bmi, prob=c(0, .25, .5, .75, 1))
 
 
 
+---
+
+# Practice 2
+
+1. Create a new Rmd or continue in your current Rmd.
+
+
+
+
+
 
 ---
 
@@ -1518,17 +1659,17 @@ The pipe operator `%&gt;%` is part of the tidyverse, and strings together comman
 
 
 ```r
-mydata %&gt;% head(n=3)      # prounounce %&gt;% as "then"
+penguins %&gt;% head(n=3)      # prounounce %&gt;% as "then"
 ```
 
 ```
-## # A tibble: 3 x 10
-##       id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-## 1 335340 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
-## 2 638618 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
-## 3 922382 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+## # A tibble: 3 x 9
+##      id species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+## 1  1689 Adelie  Torge…           39.1          18.7              181        3750
+## 2  4274 Adelie  Torge…           NA            17.4              186        3800
+## 3  4539 Adelie  Torge…           40.3          18                195        3250
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
 ```
 
 - Always _first list the tibble_ that the commands are being applied to
@@ -1537,7 +1678,7 @@ mydata %&gt;% head(n=3)      # prounounce %&gt;% as "then"
 
 
 ```r
-mydata %&gt;% head(n=2) %&gt;% summary()
+penguins %&gt;% head(n=2) %&gt;% summary()
 ```
 ---
 class: center, inverse, middle
@@ -1557,137 +1698,168 @@ class: center, inverse, middle
 
 ---
 
-# Numerical data summaries: Using `$` vs `summarize()`
+# Numerical data summaries: `$` vs `summarize()`
 
 We saw how to summarize a vector pulled with `$`, but there are easier ways to summarize multiple columns at once.
 
 .pull-left-40[
 
 ```r
-mean(mydata$bmi)
+mean(penguins$body_mass_g)
 ```
 
 ```
-## [1] 23.00838
+## [1] 4201.754
 ```
 
 ```r
-mean(mydata$weight_kg)
+median(penguins$body_mass_g)
 ```
 
 ```
-## [1] 64.094
+## [1] 4050
 ```
 ]
 .pull-right-60[
 
 ```r
-mydata %&gt;%
-* summarize(mean(bmi), mean(weight_kg))
+penguins %&gt;%
+* summarize(mean(body_mass_g),
+*           median(body_mass_g))
 ```
 
 ```
 ## # A tibble: 1 x 2
-##   `mean(bmi)` `mean(weight_kg)`
-##         &lt;dbl&gt;             &lt;dbl&gt;
-## 1        23.0              64.1
+##   `mean(body_mass_g)` `median(body_mass_g)`
+##                 &lt;dbl&gt;                 &lt;dbl&gt;
+## 1               4202.                  4050
 ```
 ]
+
 ---
 
-# Numerical data summaries: `summarize()`
+# `summarize()` with `NA`
+
+- Don't forget `na.rm = TRUE` if you need it.
+- You can also name these columns.
+
+
+```r
+penguins %&gt;%
+  summarize(mean_mass = mean(body_mass_g), 
+*           mean_len = mean(bill_length_mm, na.rm = TRUE))
+```
+
+```
+## # A tibble: 1 x 2
+##   mean_mass mean_len
+##       &lt;dbl&gt;    &lt;dbl&gt;
+## 1     4202.     44.0
+```
+
+
+---
+
+# By group `summarize()` (1/2)
 
 - We can summarize data as a whole, or in groups with `group_by()`
 - `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
 
-.pull-left[
-
 ```r
 # summary of all data as a whole
-mydata %&gt;% 
-* summarize(bmi_mean =mean(bmi),
-*           bmi_sd = sd(bmi),
-*           bmi_cv = sd(bmi)/mean(bmi))
+penguins %&gt;% 
+* summarize(mass_mean =mean(body_mass_g),
+*           mass_sd = sd(body_mass_g),
+*           mass_cv = sd(body_mass_g)/mean(body_mass_g))
 ```
 
 ```
 ## # A tibble: 1 x 3
-##   bmi_mean bmi_sd bmi_cv
-##      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1     23.0   3.56  0.155
+##   mass_mean mass_sd mass_cv
+##       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1     4202.    802.   0.191
 ```
-]
 
-.pull-right[
+---
+
+
+# By group `summarize()` (2/2)
+
+- We can summarize data as a whole, or in groups with `group_by()`
+- `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
 
 ```r
 # summary by group variable
-mydata %&gt;% 
-* group_by(grade) %&gt;%
+penguins %&gt;% 
+* group_by(species) %&gt;%
   summarize(n_per_group = n(), 
-            bmi_mean =mean(bmi),
-            bmi_sd = sd(bmi),
-            bmi_cv = sd(bmi)/mean(bmi))
+            mass_mean =mean(body_mass_g),
+            mass_sd = sd(body_mass_g),
+            mass_cv = sd(body_mass_g)/mean(body_mass_g))
 ```
 
 ```
-## # A tibble: 4 x 5
-##   grade n_per_group bmi_mean bmi_sd bmi_cv
-##   &lt;chr&gt;       &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 10th            8     23.3   3.02  0.130
-## 2 11th            4     23.6   2.65  0.112
-## 3 12th            4     21.0   4.44  0.212
-## 4 9th             4     23.9   5.03  0.211
+## # A tibble: 3 x 5
+##   species   n_per_group mass_mean mass_sd mass_cv
+##   &lt;chr&gt;           &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Adelie            151     3701.    459.  0.124 
+## 2 Chinstrap          68     3733.    384.  0.103 
+## 3 Gentoo            123     5076.    504.  0.0993
 ```
-]
 
 ---
-# Advanced `summarize(across())`
+# Advanced `summarize(across())` (1/2)
 
 - Can also use `across()` to summarize multiple variables ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
 
-.pull-left[
+
 
 ```r
-mydata %&gt;% 
-  summarize(across(c(bmi, weight_kg), mean))
+penguins %&gt;% 
+  summarize(across(c(body_mass_g, bill_depth_mm), mean))
 ```
 
 ```
 ## # A tibble: 1 x 2
-##     bmi weight_kg
-##   &lt;dbl&gt;     &lt;dbl&gt;
-## 1  23.0      64.1
+##   body_mass_g bill_depth_mm
+##         &lt;dbl&gt;         &lt;dbl&gt;
+## 1       4202.          17.2
 ```
-]   
-.pull-right[
+ 
+
 
 ```r
-mydata %&gt;%
+penguins %&gt;%
   summarize(across(where(is.numeric), mean, na.rm=TRUE))
 ```
 
 ```
-## # A tibble: 1 x 3
-##        id   bmi weight_kg
-##     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-## 1 1093150  23.0      64.1
+## # A tibble: 1 x 6
+##      id bill_length_mm bill_depth_mm flipper_length_mm body_mass_g  year
+##   &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 3031.           44.0          17.2              201.       4202. 2008.
 ```
-]
+
+---
+
+# Advanced `summarize(across())` (2/2)
+
+- Can also use `across()` to summarize multiple variables ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
+
 
 ```r
-mydata %&gt;%
+penguins %&gt;%
   summarize(across(where(is.character), n_distinct))
 ```
 
 ```
-## # A tibble: 1 x 6
-##     age   sex grade race4 text_while_driving_30d smoked_ever
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;                  &lt;int&gt;       &lt;int&gt;
-## 1     5     2     4     5                      6           3
+## # A tibble: 1 x 3
+##   species island   sex
+##     &lt;int&gt;  &lt;int&gt; &lt;int&gt;
+## 1       3      3     3
 ```
-
 
 ---
 
@@ -1696,37 +1868,33 @@ mydata %&gt;%
 .pull-left[
 
 ```r
-mydata %&gt;% count(grade)
+penguins %&gt;% count(island)
 ```
 
 ```
-## # A tibble: 4 x 2
-##   grade     n
-##   &lt;chr&gt; &lt;int&gt;
-## 1 10th      8
-## 2 11th      4
-## 3 12th      4
-## 4 9th       4
+## # A tibble: 3 x 2
+##   island        n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 Biscoe      167
+## 2 Dream       124
+## 3 Torgersen    51
 ```
 ]
 .pull-right[
 
 ```r
-mydata %&gt;% count(grade, sex)
+penguins %&gt;% count(species, island)
 ```
 
 ```
-## # A tibble: 8 x 3
-##   grade sex        n
-##   &lt;chr&gt; &lt;chr&gt;  &lt;int&gt;
-## 1 10th  Female     4
-## 2 10th  Male       4
-## 3 11th  Female     3
-## 4 11th  Male       1
-## 5 12th  Female     3
-## 6 12th  Male       1
-## 7 9th   Female     2
-## 8 9th   Male       2
+## # A tibble: 5 x 3
+##   species   island        n
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;int&gt;
+## 1 Adelie    Biscoe       44
+## 2 Adelie    Dream        56
+## 3 Adelie    Torgersen    51
+## 4 Chinstrap Dream        68
+## 5 Gentoo    Biscoe      123
 ```
 ]
 
@@ -1739,29 +1907,27 @@ mydata %&gt;% count(grade, sex)
 
 ```r
 # default table
-mydata %&gt;% tabyl(grade)
+penguins %&gt;% tabyl(species)
 ```
 
 ```
-##  grade n percent
-##   10th 8     0.4
-##   11th 4     0.2
-##   12th 4     0.2
-##    9th 4     0.2
+##    species   n   percent
+##     Adelie 151 0.4415205
+##  Chinstrap  68 0.1988304
+##     Gentoo 123 0.3596491
 ```
 
 
 ```r
 # output can be treated as tibble
-mydata %&gt;% tabyl(grade) %&gt;% select(-n)
+penguins %&gt;% tabyl(species) %&gt;% select(-n)
 ```
 
 ```
-##  grade percent
-##   10th     0.4
-##   11th     0.2
-##   12th     0.2
-##    9th     0.2
+##    species   percent
+##     Adelie 0.4415205
+##  Chinstrap 0.1988304
+##     Gentoo 0.3596491
 ```
 ]
 .pull-right[
@@ -1769,19 +1935,18 @@ mydata %&gt;% tabyl(grade) %&gt;% select(-n)
 `adorn_` your table!
 
 ```r
-mydata %&gt;%
-  tabyl(grade) %&gt;%
+penguins %&gt;% 
+  tabyl(species) %&gt;%
 * adorn_totals("row") %&gt;%
 * adorn_pct_formatting(digits=2)
 ```
 
 ```
-##  grade  n percent
-##   10th  8  40.00%
-##   11th  4  20.00%
-##   12th  4  20.00%
-##    9th  4  20.00%
-##  Total 20 100.00%
+##    species   n percent
+##     Adelie 151  44.15%
+##  Chinstrap  68  19.88%
+##     Gentoo 123  35.96%
+##      Total 342 100.00%
 ```
 
 ]
@@ -1795,15 +1960,15 @@ mydata %&gt;%
 
 ```r
 # default 2x2 table
-mydata %&gt;% tabyl(grade, sex)
+penguins %&gt;% 
+* tabyl(species, sex)
 ```
 
 ```
-##  grade Female Male
-##   10th      4    4
-##   11th      3    1
-##   12th      3    1
-##    9th      2    2
+##    species female male NA_
+##     Adelie     73   73   5
+##  Chinstrap     34   34   0
+##     Gentoo     58   61   4
 ```
 
 What adornments does the tabyl to right have?
@@ -1811,7 +1976,7 @@ What adornments does the tabyl to right have?
 .pull-right-60[
 
 ```r
-mydata %&gt;% tabyl(grade, sex) %&gt;%
+penguins %&gt;% tabyl(species, sex) %&gt;% 
 * adorn_percentages(denominator = "col") %&gt;%
 * adorn_totals("row") %&gt;%
 * adorn_pct_formatting(digits = 1) %&gt;%
@@ -1819,16 +1984,14 @@ mydata %&gt;% tabyl(grade, sex) %&gt;%
 ```
 
 ```
-##  grade      Female       Male
-##   10th  33.3%  (4)  50.0% (4)
-##   11th  25.0%  (3)  12.5% (1)
-##   12th  25.0%  (3)  12.5% (1)
-##    9th  16.7%  (2)  25.0% (2)
-##  Total 100.0% (12) 100.0% (8)
+##    species       female         male        NA_
+##     Adelie  44.2%  (73)  43.5%  (73)  55.6% (5)
+##  Chinstrap  20.6%  (34)  20.2%  (34)   0.0% (0)
+##     Gentoo  35.2%  (58)  36.3%  (61)  44.4% (4)
+##      Total 100.0% (165) 100.0% (168) 100.0% (9)
 ```
 ]
 
-- Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when we discuss `factors` as a data type in R.
 - Base R has a `table` function, but it is clunkier and the output is not a data frame. 
 - See the [tabyl vignette](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html) for more information, adorn options, &amp; 3-way `tabyl`s
 
@@ -1838,31 +2001,47 @@ mydata %&gt;% tabyl(grade, sex) %&gt;%
 
 
 ```r
-mydata %&gt;% tabyl(grade, race4, sex)
+penguins %&gt;% tabyl(species, island, sex)
 ```
 
 ```
-## $Female
-##  grade All other races Black or African American Hispanic/Latino White NA_
-##   10th               2                         0               1     1   0
-##   11th               0                         0               1     1   1
-##   12th               1                         1               1     0   0
-##    9th               0                         1               0     0   1
+## $female
+##    species Biscoe Dream Torgersen
+##     Adelie     22    27        24
+##  Chinstrap      0    34         0
+##     Gentoo     58     0         0
 ## 
-## $Male
-##  grade All other races Black or African American Hispanic/Latino White
-##   10th               2                         1               1     0
-##   11th               0                         0               1     0
-##   12th               0                         0               1     0
-##    9th               0                         0               0     2
+## $male
+##    species Biscoe Dream Torgersen
+##     Adelie     22    28        23
+##  Chinstrap      0    34         0
+##     Gentoo     61     0         0
+## 
+## $NA_
+##    species Biscoe Dream Torgersen
+##     Adelie      0     1         4
+##  Chinstrap      0     0         0
+##     Gentoo      4     0         0
 ```
+
+
+
+
 
 
 ---
 
-# Practice 2
+# Practice 3
 
-1. Create a new Rmd or continue in your current Rmd.
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data.)
+
+1. Count the number of different years in the data.
+
+1. Count the number of penguins measured each year.
+
+1. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+
+1. Create a 2x2 table of number of penguins measured in each year by each island.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

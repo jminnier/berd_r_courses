@@ -26,4 +26,17 @@ class: center, inverse, middle
 
 1. Knit the Rmd file.
 
+We will be using functions within the `tidyverse` package in R.
+
+- Copy the following installation code
+  + run in Rmd - only run this once, then comment it out with `#` in front
+  + if you get a message about restarting R, click Yes
+  + if you get an error message IN RED (warnings in orange or black text are ok), ask a TA
+
+```{r eval=FALSE}
+install.packages("tidyverse")
+install.packages("janitor")
+```
+
+
 1. Take a break!

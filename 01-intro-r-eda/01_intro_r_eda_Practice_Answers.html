@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Practice Solutions to   Intro to R and Rstudio for EDA</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer-solns.css" type="text/css" />
+    <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# Practice Solutions to <br> Intro to R and Rstudio for EDA
+### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD
+### OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop <br><br> 2020/09/16
+
+---
+
+
+layout: true
+  
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/berd_tidy&lt;/span&gt;&lt;/div&gt;  --&gt;
+
+---
+
+
+
+
+
+
+
+
+
+
+
+# Practice questions 1
+
+1. Open a new R script and type code/answers for next tasks in it. Save as `Practice1.R`
+
+1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+1. What is the sum of `a1` and `a2`? 
+
+1. What does the command `sum(a1)` do?
+
+1. What does the command `length(a1)` do?
+
+1. Use the commands to calculate the average of the values in `a1`.
+
+1. The formula for the first `\(n\)` integers is `\(n(n+1)/2\)`. Compute the sum of all integers from 1 to 100 to verify that this formula holds for `\(n=100\)`. 
+
+1. Compute the sum of the squares of all integers from 1 to 100.
+
+1. Take a break!
+
+---
+
+# Answers to practice questions 1
+
+__#2__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+__#3__ Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+
+```r
+a1 &lt;- 4:10
+a2 &lt;- c(4, 6, 8, 10)
+# the following works as well:
+a2 &lt;- 2*(2:5)
+# or
+a2 &lt;- seq(4, 10, by=2)
+```
+
+---
+
+__#4__ What is the sum of `a1` and `a2`? 
+
+
+```r
+a1+a2
+```
+
+```
+Warning in a1 + a2: longer object length is not a multiple of shorter object
+length
+```
+
+```
+[1]  8 11 14 17 12 15 18
+```
+
+Note that instead of giving an error, the terms of `a1` are repeated as needed since `a2` is longer than `a1`
+
+
+---
+
+__#5__ What does the command `sum(a1)` do?
+
+
+```r
+sum(a1)
+```
+
+```
+[1] 49
+```
+
+`sum` adds up the values in the vector
+
+&lt;br&gt;
+
+__#6__ What does the command `length(a1)` do?
+
+
+```r
+length(a1)
+```
+
+```
+[1] 7
+```
+
+`length` is the number of values in the vector
+
+---
+
+__#7__ Use the commands to calculate the average of the values in `a1`.
+
+
+```r
+sum(a1) / length(a1)
+```
+
+```
+[1] 7
+```
+
+```r
+# this is equivalent
+mean(a1)
+```
+
+```
+[1] 7
+```
+
+---
+
+__#8__ The formula for the first `\(n\)` integers is `\(n(n+1)/2\)`. Compute the sum of all integers from 1 to 100 to verify that this formula holds for `\(n=100\)`. 
+
+
+```r
+sum(1:100)
+```
+
+```
+[1] 5050
+```
+
+```r
+# verify formula for n=100:
+n=100
+n * (n+1) / 2
+```
+
+```
+[1] 5050
+```
+
+
+---
+
+__#9__ Compute the sum of the squares of all integers from 1 to 100.
+
+
+```r
+# The following code creates a vector of the squares of all integers from 1 to 100
+(1:100)^2
+```
+
+```
+  [1]     1     4     9    16    25    36    49    64    81   100   121   144
+ [13]   169   196   225   256   289   324   361   400   441   484   529   576
+ [25]   625   676   729   784   841   900   961  1024  1089  1156  1225  1296
+ [37]  1369  1444  1521  1600  1681  1764  1849  1936  2025  2116  2209  2304
+ [49]  2401  2500  2601  2704  2809  2916  3025  3136  3249  3364  3481  3600
+ [61]  3721  3844  3969  4096  4225  4356  4489  4624  4761  4900  5041  5184
+ [73]  5329  5476  5625  5776  5929  6084  6241  6400  6561  6724  6889  7056
+ [85]  7225  7396  7569  7744  7921  8100  8281  8464  8649  8836  9025  9216
+ [97]  9409  9604  9801 10000
+```
+
+```r
+# Now add the squares:
+sum((1:100)^2)
+```
+
+```
+[1] 338350
+```
+
+
+---
+
+
+
+# Practice 2
+
+# Practice 2 Answers
+
+---
+
+# Practice 3
+
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+
+1. How many different years are in the data? (Hint: use `tabyl()` or `n_distinct()`)
+
+1. Count the number of penguins measured each year.
+
+1. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+
+1. Create a 2x2 table of number of penguins measured in each year by each island.
+
+---
+
+# Practice 3 Answers
+
+### 2. How many different years are in the data? (Hint: use `tabyl()` or `n_distinct()`)
+
+.pull-left[
+Option 1:
+
+```r
+penguins %&gt;% 
+  summarize(n_distinct(year))
+```
+
+```
+# A tibble: 1 x 1
+  `n_distinct(year)`
+               &lt;int&gt;
+1                  3
+```
+]
+.pull-right[
+Option 2:
+
+```r
+penguins %&gt;% tabyl(year)
+```
+
+```
+ year   n   percent
+ 2007 109 0.3187135
+ 2008 114 0.3333333
+ 2009 119 0.3479532
+```
+
+```r
+penguins %&gt;% tabyl(year) %&gt;% nrow
+```
+
+```
+[1] 3
+```
+]
+
+---
+
+### 3. Count the number of penguins measured each year.
+
+.pull-left[
+Option 1:
+
+```r
+penguins %&gt;% count(year)
+```
+
+```
+# A tibble: 3 x 2
+   year     n
+  &lt;dbl&gt; &lt;int&gt;
+1  2007   109
+2  2008   114
+3  2009   119
+```
+]
+.pull-right[
+Option 2:
+
+```r
+penguins %&gt;% tabyl(year)
+```
+
+```
+ year   n   percent
+ 2007 109 0.3187135
+ 2008 114 0.3333333
+ 2009 119 0.3479532
+```
+]
+
+---
+
+### 4. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+
+
+```r
+penguins %&gt;% 
+  group_by(species, sex) %&gt;%
+  summarize(median(body_mass_g))
+```
+
+```
+# A tibble: 8 x 3
+# Groups:   species [3]
+  species   sex    `median(body_mass_g)`
+  &lt;chr&gt;     &lt;chr&gt;                  &lt;dbl&gt;
+1 Adelie    female                 3400 
+2 Adelie    male                   4000 
+3 Adelie    &lt;NA&gt;                   3475 
+4 Chinstrap female                 3550 
+5 Chinstrap male                   3950 
+6 Gentoo    female                 4700 
+7 Gentoo    male                   5500 
+8 Gentoo    &lt;NA&gt;                   4688.
+```
+
+---
+
+### 5. Create a 2x2 table of number of penguins measured in each year by each island.
+
+
+```r
+penguins %&gt;% tabyl(island, year)
+```
+
+```
+    island 2007 2008 2009
+    Biscoe   44   64   59
+     Dream   46   34   44
+ Torgersen   19   16   16
+```
+
+---
+
+# Practice 4 (old practice 2)
+
+1. Create a new script and save it as `Practice2.R`
+
+1. Create data frames for males and females separately.
+
+1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+
+---
+
+# Practice 4 Answers
+
+__#2__ Create data frames for males and females separately.
+
+
+```r
+boys &lt;- mydata[mydata$sex == "Male", ]
+dim(boys)
+```
+
+```
+[1]  8 11
+```
+
+```r
+girls &lt;- mydata[mydata$sex == "Female", ]
+dim(girls)
+```
+
+```
+[1] 12 11
+```
+
+Check number of boys &amp; girls:
+
+```r
+summary(mydata$sex)
+```
+
+```
+   Length     Class      Mode 
+       20 character character 
+```
+
+
+---
+
+__#3__ Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+.pull-left-60[
+
+```r
+summary(boys$bmi); sd(boys$bmi)
+```
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  18.18   19.57   20.90   20.63   21.58   22.46 
+```
+
+```
+[1] 1.466896
+```
+
+```r
+summary(girls$bmi); sd(girls$bmi)
+```
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  17.48   21.95   25.80   24.59   27.47   29.35 
+```
+
+```
+[1] 3.70739
+```
+
+]
+.pull-right-40[
+
+
+```r
+boxplot(mydata$bmi ~ mydata$sex)
+```
+
+&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+__#4__ Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+.pull-left[
+
+```r
+plot(boys$bmi, boys$weight)
+```
+
+&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+
+```r
+plot(girls$bmi, girls$weight)
+```
+
+&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
+__#5__ Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+.pull-left[
+
+```r
+bullied_boys &lt;- 
+  boys[boys$bullied_past_12mo == TRUE,]
+nrow(bullied_boys)
+```
+
+```
+[1] 3
+```
+
+```r
+bullied_boys_prct &lt;- 
+  nrow(bullied_boys) / nrow(boys) * 100
+bullied_boys_prct
+```
+
+```
+[1] 37.5
+```
+
+```r
+# alternative
+mean(boys$bullied_past_12mo, na.rm=TRUE)
+```
+
+```
+[1] 0.375
+```
+]
+.pull-right[
+
+```r
+# Apply the same method for girls:
+bullied_girls &lt;- 
+  girls[girls$bullied_past_12mo == TRUE,]
+nrow(bullied_girls)
+```
+
+```
+[1] 6
+```
+
+```r
+bullied_girls_prct &lt;- 
+  nrow(bullied_girls) / nrow(girls) * 100
+bullied_girls_prct
+```
+
+```
+[1] 50
+```
+
+```r
+# alternative. Answers don't match. Why???
+mean(girls$bullied_past_12mo, na.rm=TRUE)
+```
+
+```
+[1] 0.4
+```
+
+
+]
+
+
+---
+
+__#5__ cont'd
+
+On the previous slide we saw that our two methods for calculating the percentage of girls that were bullied in the past 12 months did not match. What went wrong?
+
+
+
+```r
+nrow(bullied_girls)
+```
+
+```
+[1] 6
+```
+
+```r
+girls$bullied_past_12mo
+```
+
+```
+ [1]    NA    NA  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE
+```
+
+
+To get the number of girls that were bullied we need to make sure the missing values (NA) are not included.
+
+---
+
+__#5__ cont'd - working with NA's
+
+
+```r
+# values of bullied_past_12mo
+girls$bullied_past_12mo
+```
+
+```
+ [1]    NA    NA  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE
+```
+
+```r
+# which are missing (logical)
+is.na(girls$bullied_past_12mo)
+```
+
+```
+ [1]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+```
+
+```r
+# which are NOT missing (logical)
+!is.na(girls$bullied_past_12mo)
+```
+
+```
+ [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+```
+
+---
+
+__#5__ cont'd - fix girls' code
+
+Exclude the missing values from the `bullied_girls`:
+
+
+```r
+girls2 &lt;- girls[!is.na(girls$bullied_past_12mo),]
+nrow(girls2)
+```
+
+```
+[1] 10
+```
+
+```r
+bullied_girls2 &lt;- girls2[girls2$bullied_past_12mo == TRUE,]
+nrow(bullied_girls2)
+```
+
+```
+[1] 4
+```
+
+```r
+# from girls dataset, total number bullied
+sum(girls$bullied_past_12mo, na.rm = TRUE)
+```
+
+```
+[1] 4
+```
+
+---
+
+__#5__ cont'd - Calculate percentage girls bullied
+
+
+```r
+bullied_girls_prct2 &lt;- nrow(bullied_girls2) / nrow(girls2) * 100
+bullied_girls_prct2
+```
+
+```
+[1] 40
+```
+
+```r
+# Compare to alternative
+mean(girls$bullied_past_12mo, na.rm=TRUE)
+```
+
+```
+[1] 0.4
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,3 +1,6 @@
+
+
+
 ---
 
 class: inverse, center, middle
@@ -13,7 +16,7 @@ Suppose we want to single out the column of BMI values.
 .pull-left[
 * How did we previously learn to do this?
 ```{r}
-mydata[, 6]
+penguins[, 4]
 ```
 ]
 .pull-right[
@@ -22,7 +25,7 @@ The problem with this method, is that we need to know the column number which ca
 * Use the `$` instead: `DatSetName$VariableName`
 
 ```{r}
-mydata$bmi
+penguins$bill_length_mm
 ```
 ]
 ---

@@ -1,0 +1,450 @@
+---
+title: Practice Solutions to <br> Intro to R and Rstudio for EDA
+author: Jessica Minnier, PhD & Meike Niederhausen, PhD
+date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2020/09/16'
+output: 
+  xaringan::moon_reader:
+    css: [css/xaringan-themer-solns.css, css/my-theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:9"
+    includes:
+      in_header: ../header.html   
+editor_options: 
+  chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+library(lubridate)
+library(janitor)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  #fig.width=10.5, 
+  #fig.height=4,
+  fig.align = "center",
+  rows.print=7,
+  echo=TRUE,
+  highlight = TRUE,
+  prompt = FALSE, # IF TRUE adds a > before each code input
+  comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  #comment=NA
+  )
+
+# set ggplot theme
+theme_set(theme_bw(base_size = 24))
+```
+
+
+
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#518c66", ## OHSU Marquam
+  code_highlight_color = "#c0e8f5",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = NULL,
+  text_font_size = "24px",
+  code_font_size = "20px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
+  outfile = "css/xaringan-themer-solns.css"
+)
+```
+
+```{r, echo = FALSE}
+penguins <- read_csv(here::here("01-intro-r-eda","data","penguins.csv"))
+```
+
+
+
+# Practice questions 1
+
+1. Open a new R script and type code/answers for next tasks in it. Save as `Practice1.R`
+
+1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+1. What is the sum of `a1` and `a2`? 
+
+1. What does the command `sum(a1)` do?
+
+1. What does the command `length(a1)` do?
+
+1. Use the commands to calculate the average of the values in `a1`.
+
+1. The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
+
+1. Compute the sum of the squares of all integers from 1 to 100.
+
+1. Take a break!
+
+---
+
+# Answers to practice questions 1
+
+__#2__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+__#3__ Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+```{r}
+a1 <- 4:10
+a2 <- c(4, 6, 8, 10)
+# the following works as well:
+a2 <- 2*(2:5)
+# or
+a2 <- seq(4, 10, by=2)
+```
+
+---
+
+__#4__ What is the sum of `a1` and `a2`? 
+
+````{r warning=TRUE}
+a1+a2
+````
+
+Note that instead of giving an error, the terms of `a1` are repeated as needed since `a2` is longer than `a1`
+
+
+---
+
+__#5__ What does the command `sum(a1)` do?
+
+```{r}
+sum(a1)
+```
+
+`sum` adds up the values in the vector
+
+<br>
+
+__#6__ What does the command `length(a1)` do?
+
+```{r}
+length(a1)
+```
+
+`length` is the number of values in the vector
+
+---
+
+__#7__ Use the commands to calculate the average of the values in `a1`.
+
+```{r}
+sum(a1) / length(a1)
+
+# this is equivalent
+mean(a1)
+```
+
+---
+
+__#8__ The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
+
+```{r}
+sum(1:100)
+# verify formula for n=100:
+n=100
+n * (n+1) / 2
+```
+
+
+---
+
+__#9__ Compute the sum of the squares of all integers from 1 to 100.
+
+```{r}
+# The following code creates a vector of the squares of all integers from 1 to 100
+(1:100)^2
+
+# Now add the squares:
+sum((1:100)^2)
+```
+
+
+---
+
+```{r echo=FALSE}
+mydata <- read.csv(here::here("01-getting-started-v2","data","yrbss_demo.csv"))
+# mydata <- read.csv("data/yrbss_demo.csv")
+
+# Add height column to data frame
+mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi)
+
+```
+
+# Practice 2
+
+# Practice 2 Answers
+
+---
+
+# Practice 3
+
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+
+1. How many different years are in the data? (Hint: use `tabyl()` or `n_distinct()`)
+
+1. Count the number of penguins measured each year.
+
+1. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+
+1. Create a 2x2 table of number of penguins measured in each year by each island.
+
+---
+
+# Practice 3 Answers
+
+### 2. How many different years are in the data? (Hint: use `tabyl()` or `n_distinct()`)
+
+.pull-left[
+Option 1:
+```{r}
+penguins %>% 
+  summarize(n_distinct(year))
+```
+]
+.pull-right[
+Option 2:
+```{r}
+penguins %>% tabyl(year)
+penguins %>% tabyl(year) %>% nrow
+```
+]
+
+---
+
+### 3. Count the number of penguins measured each year.
+
+.pull-left[
+Option 1:
+```{r}
+penguins %>% count(year)
+```
+]
+.pull-right[
+Option 2:
+```{r}
+penguins %>% tabyl(year)
+```
+]
+
+---
+
+### 4. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+
+```{r}
+penguins %>% 
+  group_by(species, sex) %>%
+  summarize(median(body_mass_g))
+```
+
+---
+
+### 5. Create a 2x2 table of number of penguins measured in each year by each island.
+
+```{r}
+penguins %>% tabyl(island, year)
+```
+
+---
+
+# Practice 4 (old practice 2)
+
+1. Create a new script and save it as `Practice2.R`
+
+1. Create data frames for males and females separately.
+
+1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+
+---
+
+# Practice 4 Answers
+
+__#2__ Create data frames for males and females separately.
+
+```{r}
+boys <- mydata[mydata$sex == "Male", ]
+dim(boys)
+girls <- mydata[mydata$sex == "Female", ]
+dim(girls)
+```
+
+Check number of boys & girls:
+```{r}
+summary(mydata$sex)
+```
+
+
+---
+
+__#3__ Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+.pull-left-60[
+```{r}
+summary(boys$bmi); sd(boys$bmi)
+summary(girls$bmi); sd(girls$bmi)
+```
+
+]
+.pull-right-40[
+
+```{r fig.height=5}
+boxplot(mydata$bmi ~ mydata$sex)
+```
+]
+
+---
+
+
+__#4__ Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+.pull-left[
+```{r fig.height=5, fig.width=4}
+plot(boys$bmi, boys$weight)
+```
+
+]
+
+.pull-right[
+
+```{r fig.height=5, fig.width=4}
+plot(girls$bmi, girls$weight)
+```
+
+]
+
+
+
+---
+
+__#5__ Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+.pull-left[
+```{r}
+bullied_boys <- 
+  boys[boys$bullied_past_12mo == TRUE,]
+nrow(bullied_boys)
+bullied_boys_prct <- 
+  nrow(bullied_boys) / nrow(boys) * 100
+bullied_boys_prct
+
+# alternative
+mean(boys$bullied_past_12mo, na.rm=TRUE)
+```
+]
+.pull-right[
+```{r}
+# Apply the same method for girls:
+bullied_girls <- 
+  girls[girls$bullied_past_12mo == TRUE,]
+nrow(bullied_girls)
+bullied_girls_prct <- 
+  nrow(bullied_girls) / nrow(girls) * 100
+bullied_girls_prct
+
+# alternative. Answers don't match. Why???
+mean(girls$bullied_past_12mo, na.rm=TRUE)
+```
+
+
+]
+
+
+---
+
+__#5__ cont'd
+
+On the previous slide we saw that our two methods for calculating the percentage of girls that were bullied in the past 12 months did not match. What went wrong?
+
+
+```{r}
+nrow(bullied_girls)
+girls$bullied_past_12mo
+```
+
+
+To get the number of girls that were bullied we need to make sure the missing values (NA) are not included.
+
+---
+
+__#5__ cont'd - working with NA's
+
+```{r}
+# values of bullied_past_12mo
+girls$bullied_past_12mo
+
+# which are missing (logical)
+is.na(girls$bullied_past_12mo)
+
+# which are NOT missing (logical)
+!is.na(girls$bullied_past_12mo)
+```
+
+---
+
+__#5__ cont'd - fix girls' code
+
+Exclude the missing values from the `bullied_girls`:
+
+```{r}
+girls2 <- girls[!is.na(girls$bullied_past_12mo),]
+nrow(girls2)
+
+bullied_girls2 <- girls2[girls2$bullied_past_12mo == TRUE,]
+nrow(bullied_girls2)
+
+# from girls dataset, total number bullied
+sum(girls$bullied_past_12mo, na.rm = TRUE)
+```
+
+---
+
+__#5__ cont'd - Calculate percentage girls bullied
+
+```{r}
+bullied_girls_prct2 <- nrow(bullied_girls2) / nrow(girls2) * 100
+bullied_girls_prct2
+
+# Compare to alternative
+mean(girls$bullied_past_12mo, na.rm=TRUE)
+```
+
+
+
+
+
+```{r, include=FALSE}
+#knitr::purl("01-getting-started-v2/01_getting_started_Practice_Answers.Rmd")
+pagedown::chrome_print(here::here("01-getting-started-v2","01_getting_started_Practice_Answers.html"))
+
+```
+
