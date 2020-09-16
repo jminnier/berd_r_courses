@@ -43,5 +43,12 @@ install.packages("janitor")
 * After running the code, comment out the code with `#` in front of the commands so that they do not run when knitting the file. 
     + *We only need to install packages once* and thus do not need to run this code again.
 
+Check that it worked by running this code with no errors:
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(janitor)
+```
+
 
 * __Take a break!__

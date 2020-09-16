@@ -73,6 +73,11 @@ mono_light(
 )
 ```
 
+```{r, include=FALSE}
+library(tidyverse)
+library(janitor)
+penguins <- read_csv(here::here("01-intro-r-eda","data","penguins.csv"))
+```
 
 
 ---

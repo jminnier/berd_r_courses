@@ -125,6 +125,19 @@ Currently it is still just a file in your folder.
  
 ---
 
+## Now What? Coding! Recall the workflow:
+
+**Steps for a new data analysis project or homework:**
+
+1. Create a folder to contain all your files.
+2. Move data file (`penguins.csv`) into this folder.
+3. Create an RStudio project inside this folder.
+4. **Create a new Rmd for your analyses/homework.**
+
+<center><img src="img/new_rmd_gif.gif" width="75%" height="70%"></center>
+
+---
+
 # To run and save your code: Create a new Rmd!
 
 - Then save it with a meaningful filename.
@@ -177,8 +190,7 @@ mydata <- read_csv(here::here("01-intro-r-eda","data","yrbss.csv"))
 
 
 ```{r, eval=FALSE}
-# Run in console:
-View(penguins) 
+View(penguins)     # Run in console
 # Can also view the data by clicking on its name in the Environment tab
 ```
 
@@ -289,6 +301,11 @@ We showed this already, very handy to see *all* data. Run in console since it's 
 ```{r, eval = FALSE}
 View(penguins)
 ```
+
+*or* click on window pane next to data frame name in Environment tab.
+
+<img src="img/view_penguins_env.png" width="60%" height="80%">
+
 
 ---
 

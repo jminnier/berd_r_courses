@@ -100,7 +100,7 @@ penguins %>%
 ```
 
 ---
-# Advanced `summarize(across())` (1/2)
+# Advanced `summarize(across())` (1/3)
 
 - Can also use `across()` to summarize multiple variables ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
 
@@ -117,16 +117,34 @@ penguins %>%
 ```
 
 ---
+# Advanced `summarize(across())` (2/3)
 
-# Advanced `summarize(across())` (2/2)
-
-- Can also use `across()` to summarize multiple variables ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
+- Can also use `across()` to summarize multiple variables *and* functions ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
 
 ```{r}
-penguins %>%
-  summarize(across(where(is.character), n_distinct))
+penguins %>% 
+  summarize(across(c(body_mass_g, bill_depth_mm), 
+                   c(m = mean, sd = sd))) #<<
 ```
 
+
+---
+
+# Advanced `summarize(across())` (3/3)
+
+- Can also use `across()` to summarize based on true/false conditions ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
+
+.pull-left[
+```{r}
+penguins %>%
+  summarize(
+    across(where(is.character), #<<
+           n_distinct))
+```
+]
+.pull-right[
+<center><img src="img/dplyr_across.png" width="100%" height="75%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
+]
 ---
 
 # Frequency tables: simple `count()`

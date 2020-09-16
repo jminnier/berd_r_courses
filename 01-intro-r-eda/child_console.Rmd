@@ -5,9 +5,10 @@
 
 class: inverse, middle, center
 
-# Let's code!
+# Let's code! R Basics
 
-## R Basics
+![](https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/exploder.gif)
+<center><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
 
 ---
 

@@ -5,7 +5,7 @@
 
 class: inverse, center, middle
 
-# Coding with R Markdown (Rmd)
+# Saving your code with R Markdown (Rmd)
 
 ## or, creating reproducible reports
 

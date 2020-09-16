@@ -139,19 +139,27 @@ RStudio is an integrated development environment (IDE) = an interface to use R (
 
 # Installing and using packages
 
-- Packages are to R like apps are to your phone/OS
+.pull-left[<center><img src="img/r_vs_r_packages.png" width="55%" height="30%"><a href="https://moderndive.com/1-getting-started.html#r-rstudio"><br>Modern Dive</a></center>
 - Packages contain additional functions and data
 - Install packages with `install.packages()`
-  + Also can use the "Packages" tab in Files/Plots/Packages/Help/Viewer window
+  + Or use "Packages" tab in Files/Plots/Packages/Help/Viewer window
   + *Only install once (unless you want to update)*
   + Installs from [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) = package mothership
-
+  ]
+.pull-right[
+- **"Install the app"** = **Install** package once
 ```{r, eval = FALSE}
-install.packages("dplyr")   # only do this ONCE, use quotes
+# only do this ONCE, use quotes
+install.packages("dplyr")   
 ```
 
-- Load packages: At the top of your script include `library()` commands to load each required package *every* time you open Rstudio.
+- **"Open the app"** = **Load** package to use: At the top of your script or Rmd include **`library()`** commands to load each required package *every* time you open Rstudio or knit your Rmd.
 
 ```{r}
-library(dplyr)    # run this every time you open Rstudio
+# keep in Rmd
+# run every time you open Rstudio
+library(dplyr)    
 ```
+]
+
+
