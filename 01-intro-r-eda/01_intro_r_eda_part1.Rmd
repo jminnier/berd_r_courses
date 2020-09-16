@@ -101,14 +101,16 @@ mono_light(
 ```{r child=here::here("01-intro-r-eda","child_practice2.Rmd")}
 # Meike
 ```
+---
 
-```{r child=here::here("01-intro-r-eda","child_pipe_summaries.Rmd")}
-# Jessica
-```
+# End of Day 1
 
-```{r child=here::here("01-intro-r-eda","child_practice3.Rmd")}
-# Jessica - with pipe/summaries; stop day 1
-```
+- [Practice Solution Link](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_practice_answers_part1)
+
+# Part 2 slides
+
+- Link for slides for day 2: [bit.ly/berd_intro_part2](http://bit.ly/berd_intro_part2)
+
 
 ```{r, eval=FALSE, echo=FALSE}
 # RUN THESE AFTER KNITTING

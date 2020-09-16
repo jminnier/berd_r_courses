@@ -99,6 +99,13 @@ Instructors: Meike Niederhausen, PhD & Jessica Minnier, PhD<br>
   + Double click on the `.Rproj` file.
   + All your files should be there.
 
+```{r child=here::here("01-intro-r-eda","child_pipe_summaries.Rmd")}
+# Jessica
+```
+
+```{r child=here::here("01-intro-r-eda","child_practice3.Rmd")}
+# Jessica - with pipe/summaries; stop day 1
+```
 
 ```{r child=here::here("01-intro-r-eda","child_wrangling.Rmd")}
 # Meike
