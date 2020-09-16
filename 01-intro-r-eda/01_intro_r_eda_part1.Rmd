@@ -109,3 +109,11 @@ mono_light(
 ```{r child=here::here("01-intro-r-eda","child_practice3.Rmd")}
 # Jessica - with pipe/summaries; stop day 1
 ```
+
+```{r, eval=FALSE, echo=FALSE}
+# RUN THESE AFTER KNITTING
+knitr::purl(here::here("01-intro-r-eda","01_intro_r_eda_part1.Rmd"), 
+            out = here::here("01-intro-r-eda","01_intro_r_eda_part1.R"))
+# remotes::install_github('rstudio/pagedown')
+pagedown::chrome_print(here::here("01-intro-r-eda","01_intro_r_eda_part1.html"))
+```
