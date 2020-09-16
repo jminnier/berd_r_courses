@@ -1,0 +1,29 @@
+---
+
+class: center, inverse, middle
+
+# Practice time!
+
+---
+
+# Practice 1
+
+1. Create a new Rmd file and type the code and answers for tasks below in it. Save as `Practice1.Rmd`
+
+1. Remove any template text you don't need (starting with line 12), and create a new code chunk.
+
+1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
+
+1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+
+1. What do you get when you add `a1` to `a2`? 
+
+1. What does the command `sum(a1)` do?
+
+1. What does the command `length(a1)` do?
+
+1. Use the `sum` and `length` commands to calculate the average of the values in `a1`.
+
+1. Knit the Rmd file.
+
+1. Take a break!

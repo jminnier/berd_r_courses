@@ -1,0 +1,197 @@
+---
+title: An Introduction to R and RStudio for Exploratory Data Analysis
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+date: "<span style = 'font-size: 80%;'>Part 1: 2020/09/16 & Part 2: 2020/09/17 <br><br><br> slides: [bit.ly/berd_intro_part2](http://bit.ly/berd_intro_part2) <br> pdf: [bit.ly/berd_intro_part2_pdf](http://bit.ly/berd_intro_part2_pdf)</span>"
+output: 
+  xaringan::moon_reader:
+    css: [css/xaringan-themer.css, css/my-theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:10"
+    includes:
+      in_header: ../header.html   
+editor_options: 
+  chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(emo)
+library(here)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  #fig.width=10.5, 
+  #fig.height=4,
+  fig.align = "center",
+  rows.print=7,
+  echo=TRUE,
+  highlight = TRUE,
+  # prompt = TRUE, # IF TRUE adds a > before each code input
+  # comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  comment = '##'
+  )
+
+# set ggplot theme
+# theme_set(theme_bw(base_size = 24))
+```
+
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#3A6185", ## OHSU Marquam
+  code_highlight_color = "#cbdded",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = NULL,
+  text_font_size = "24px",
+  code_font_size = "20px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
+  outfile = "css/xaringan-themer.css"
+)
+```
+
+
+
+---
+
+```{r child=here::here("01-intro-r-eda","child_wrangling.Rmd")}
+# Meike
+```
+
+```{r child=here::here("01-intro-r-eda","child_practice3.Rmd")}
+# Meike - mutate/filter etc
+```
+
+```{r child=here::here("01-intro-r-eda","child_ggplot.Rmd")}
+```
+
+```{r child=here::here("01-intro-r-eda","child_factors.Rmd")}
+```
+
+---
+
+# Save data frame
+
+* Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
+```{r, eval=FALSE}
+save(mydata, file = "data/mydata.RData")  # saving mydata within the data folder
+```
+
+You can load .RData files using the load() command:
+
+```{r, eval=FALSE}
+load("data/mydata.RData")
+```
+  
+
+<br>
+
+* Save __csv__ file: comma-separated values
+
+```{r, eval=FALSE}
+write.csv(mydata, file = "data/mydata.csv", col.names = TRUE, row.names = FALSE)
+```
+
+---
+
+class: center, middle, inverse
+
+# More commands to filter rows
+
+<!-- TO-DO: rename? -->
+
+---
+
+# Remove rows with missing data
+
+`drop_na()` (or `na.omit()`) removes *all* rows with *any* missing (`NA`) values in *any* column
+
+```{r}
+mydata %>% drop_na()
+```
+
+For more on dealing with missing data, see [Tidyverse part 2 workshop](https://jminnier-berd-r-courses.netlify.app/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html#35)
+
+---
+
+# Remove rows with duplicated data
+
+`distinct()` removes rows that are duplicates of other rows
+
+```{r}
+data_dups <- tibble(
+  name = c("Ana","Bob","Cara", "Ana"),
+  race = c("Hispanic","Other", "White", "Hispanic")
+)
+```
+
+.pull-left[
+```{r}
+data_dups
+```
+]
+.pull-right[
+```{r}
+data_dups %>% distinct()
+```
+]
+
+---
+
+# Order rows: `arrange()`
+
+Use `arrange()` to order the rows by the values in specified columns
+
+```{r}
+mydata %>% arrange(bmi, weight_kg) %>% head(n=3)
+
+mydata %>% arrange(desc(bmi), weight_kg) %>% head(n=3)
+```
+
+
+
+---
+
+# Combine `summarize()` with other tidy functions
+
+```{r}
+mydata %>% 
+  group_by(grade) %>% 
+  summarize(n_per_group = n(), 
+            bmi_mean =mean(bmi),
+            bmi_sd = sd(bmi, na.rm = TRUE)) %>%
+  mutate(bmi_cv = bmi_sd/bmi_mean) %>% #<<
+  filter(bmi_cv > .2)  #<<
+```
+
+
+
+
+---
+
+```{r child=here::here("01-intro-r-eda","child_closing.Rmd")}
+```
+

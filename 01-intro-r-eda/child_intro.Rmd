@@ -1,0 +1,114 @@
+
+# 1. Open slides: [bit.ly/berd_eda](http://bit.ly/berd_eda)
+
+## 2. Install R & Rstudio: instructions [bit.ly/berd_install](http://bit.ly/berd_install)
+
+## 4. Download folder of data (unzip completely)
+
+CHANGE TO DOWNLOAD CSV OF DATA?
+
+- Go to [bit.ly/intro_rproj](http://bit.ly/intro_rproj) and **unzip** folder
+- Open (double click on) `berd_intro_project.Rproj` file.
+
+---
+
+# Learning Objectives
+
+.pull-left[
+- Basic operations in R/RStudio
+- Understand data structures
+- Be able to load in data
+- Basic operations on data
+]
+.pull-right[
+- Some data wrangling
+- Use Rstudio projects
+- Be able to make a plot
+- Basics of tidyverse and ggplot
+- Know how to get help
+]
+
+<center><img src="img/horst_monster_support.jpg" width="70%" height="75%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
+---
+class: center, inverse, middle
+
+# Introduction
+
+Rrrrrr?
+
+---
+
+# What is R? 
+
+.pull-left-60[
+- A programming language
+- Focus on statistical modeling and data analysis
+    + import data, manipulate data, run statistics, make plots
+- Useful for "Data Science"
+- Great visualizations
+- Also useful for most anything else you'd want to tell a computer to do
+- Interfaces with other languages i.e. python, C++, bash
+
+]
+
+
+.pull-right-40[
+![](img/R_logo.png)
+]
+
+
+For the history and details: [Wikipedia](https://bit.ly/1efFmaY)
+
+- an interpreted language (run it through a command line)
+- procedural programming with functions
+- Why "R"?? Scheme (?) inspired S (invented at Bell Labs in 1976) which inspired R (**free and open source!** in 1992)
+
+---
+
+# Why R?
+.pull-left[
+- Free + Cross-platform (Mac/Windows)
+- Flexible, fun, many more modern statistics methods, large community for learning and help
+- One of the most popular data science tools for statistics in academia and industry
+- SAS and STATA (and SPSS) are still used but becoming less popular (expensive, not as versatile/comprehensive)
+- Constantly evolving and improving
+- If you want a job doing stats and not be limited to specific research groups or some pharma companies, you absolutely *need to know R*
+]
+
+.pull-right[
+
+<center><img src="img/r4stats_popularity_articles_trend.png" width="100%%" height="100%"><a href="http://r4stats.com/articles/popularity/"><br>r4stats Robert A. Muenchen</a></center>
+]
+
+---
+
+# What is RStudio?
+
+.pull-left[
+R is a programming language]
+.pull-right[
+RStudio is an integrated development environment (IDE) = an interface to use R (with perks!)
+]
+
+<center><img src="img/01_md_rstudio.png" width="78%" height="78%"><a href="https://moderndive.com/1-getting-started.html#r-rstudio"><br>Modern Dive</a></center>
+
+---
+
+# Start RStudio
+
+
+<center><img src="img/01_md_r.png" width="78%" height="78%"><a href="https://moderndive.com/1-getting-started.html#using-r-via-rstudio"><br>Modern Dive</a></center>
+---
+
+<center><img src="img/RStudio_Anatomy.svg" width="100%" height="100%"><a href="http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html#what_are_r_and_rstudio"><br>Emma Rand</a></center>
+
+---
+
+# RStudio demo
+
+- Start RStudio and explore
+
+
+**Bonus lessons**
+
+- [gifs showing how to adjust panels, personalize how Rstudio looks, etc](https://www.pipinghotdata.com/posts/2020-09-07-introducing-the-rstudio-ide-and-r-markdown/#background)

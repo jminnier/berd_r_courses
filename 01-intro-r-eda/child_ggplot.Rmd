@@ -1,0 +1,101 @@
+
+---
+class: center, middle, inverse
+
+# Making prettier plots
+
+<center><img src="img/ggplotlogo.png" width="40%" height="40%"><a href="https://ggplot2.tidyverse.org/index.html"></a></center>
+
+---
+
+# Basics of ggplot
+
+- For a full treatment, watch our [BERD workshop "Data Visualization with R and ggplot2"](https://github.com/jminnier/berd_r_courses)
+
+<center><img src="img/ggplot_basics_from_ppt.png" width="90%" height="100%"></center>
+
+---
+
+# Simple
+
+.pull-left[
+```{r}
+ggplot(data = mydata, 
+       aes(x = weight_kg, y = bmi)) +
+  geom_point()
+```
+]
+.pull-right[
+```{r}
+ggplot(data = mydata, 
+       aes(x = weight_kg)) +
+  geom_histogram()
+```
+]
+
+---
+
+# Improved scatterplot (watch [BERD ggplot video](https://github.com/jminnier/berd_r_courses) for many customizations)
+
+.pull-left[
+```{r scatter_nice, eval=FALSE}
+ggplot(data = mydata, 
+       aes(x = weight_kg, 
+           y = bmi, 
+           color = sex)) +
+  geom_point()+
+  labs(title = "Weight vs BMI by Sex", 
+       x = "Weight (kg)", 
+       y = "BMI (kg/m^2)")
+  theme_bw()
+```
+]
+.pull-right[
+```{r scatter_nice_out, ref.label="scatter_nice", echo=FALSE, fig.keep = "first"}
+```
+]
+
+---
+
+# Bar plots - counts
+
+.pull-left[
+```{r}
+ggplot(data = mydata,
+       aes(x = grade, 
+           fill = sex)) +
+  geom_bar()
+```
+]
+.pull-right[
+
+```{r}
+ggplot(data = mydata,
+       aes(x = grade, 
+           fill = sex)) +
+  geom_bar(position = "dodge")
+```
+]
+
+---
+
+# Bar plots - percentages
+
+.pull-left[
+```{r bar_pct}
+pct_data <- mydata %>% 
+  count(grade, sex) %>% 
+  group_by(grade) %>% 
+  mutate(pct = 100*n/sum(n))
+pct_data
+```
+]
+.pull-right[
+```{r}
+ggplot(data = pct_data, 
+       aes(x = grade, y = pct, 
+           fill = sex)) +
+  geom_col(position = "dodge")+
+  ylab("Percent")
+```
+]

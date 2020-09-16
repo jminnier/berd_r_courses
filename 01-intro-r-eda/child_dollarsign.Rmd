@@ -1,0 +1,134 @@
+---
+
+class: inverse, center, middle
+
+# Working with the data
+
+---
+
+# The $
+
+Suppose we want to single out the column of BMI values.
+
+.pull-left[
+* How did we previously learn to do this?
+```{r}
+mydata[, 6]
+```
+]
+.pull-right[
+The problem with this method, is that we need to know the column number which can change as we make changes to the data set. 
+
+* Use the `$` instead: `DatSetName$VariableName`
+
+```{r}
+mydata$bmi
+```
+]
+---
+
+# Basic plots of numeric data: Histogram
+
+```{r fig.height=2.5, fig.width=7}
+hist(mydata$bmi)
+```
+
+With extra features: 
+
+```{r fig.height=2.5, fig.width=7}
+hist(mydata$bmi, xlab = "BMI", main="BMIs of students")
+```
+
+---
+
+# Basic plots of numeric data: Boxplot
+
+.pull-left[
+```{r fig.height=5, fig.width=5}
+boxplot(mydata$bmi)
+```
+
+]
+
+--
+
+.pull-right[
+```{r fig.height=5, fig.width=5}
+boxplot(mydata$bmi ~ mydata$sex, 
+  horizontal = TRUE, 
+  xlab = "BMI", ylab = "sex",
+  main = "BMIs of students by sex")
+```
+]
+
+---
+
+# Basic plots of numeric data: Scatterplot
+
+.pull-left[
+```{r fig.height=5, fig.width=5}
+plot(mydata$weight_kg, mydata$bmi)
+```
+]
+
+.pull-right[
+```{r fig.height=5, fig.width=5}
+plot(mydata$weight_kg, mydata$bmi, 
+   xlab = "weight (kg)", ylab = "BMI", 
+   main = "BMI vs. Weight")
+```
+]
+
+---
+
+# Summary stats of numeric data (1/2)
+
+* Standard R `summary` command
+
+```{r}
+summary(mydata$bmi)
+```
+
+* Mean and standard deviation
+
+```{r}
+mean(mydata$bmi)
+sd(mydata$bmi)
+```
+
+---
+
+# Summary stats of numeric data (2/2)
+<!-- QQ: Why is (2/2) being cut off? It's not cut off for (1/2).-->
+* Min, max, & median
+
+.pull-left[
+```{r}
+min(mydata$bmi)
+max(mydata$bmi)
+
+```
+]
+
+.pull-right[
+```{r}
+median(mydata$bmi)
+```
+]
+
+* Quantiles
+
+```{r}
+quantile(mydata$bmi, prob=c(0, .25, .5, .75, 1))  
+```
+
+
+<!-- # Add height column to data frame -->
+
+<!-- Since $\textrm{BMI} = \frac{kg}{m^2}$, we have -->
+<!-- $\textrm{height}(m) = \sqrt{\frac{\textrm{weight}(kg)}{\textrm{BMI}}}$ -->
+
+
+<!-- mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi ) -->
+<!-- mydata$height_m -->
+

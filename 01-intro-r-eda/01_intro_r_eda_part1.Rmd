@@ -1,0 +1,108 @@
+---
+title: An Introduction to R and RStudio for Exploratory Data Analysis
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+date: "<span style = 'font-size: 80%;'>Part 1: 2020/09/16 & Part 2: 2020/09/17 <br><br><br> slides: [bit.ly/berd_intro_part1](http://bit.ly/berd_intro_part1) <br> pdf: [bit.ly/berd_intro_part1_pdf](http://bit.ly/berd_intro_part1_pdf)</span>"
+output: 
+  xaringan::moon_reader:
+    css: [css/xaringan-themer.css, css/my-theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: tomorrow #http://arm.rbind.io/slides/xaringan.html#77
+      highlightLines: true
+      highlightLanguage: r
+      countIncrementalSlides: false
+      titleSlideClass: ["left", "middle", "inverse"]
+      ratio: "16:10"
+    includes:
+      in_header: ../header.html   
+editor_options: 
+  chunk_output_type: console
+---
+
+layout: true
+  
+<!-- <div class="my-footer"><span>bit.ly/berd_tidy</span></div>  -->
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(emo)
+library(here)
+
+knitr::opts_chunk$set(
+  warning=FALSE, 
+  message=FALSE, 
+  #fig.width=10.5, 
+  #fig.height=4,
+  fig.align = "center",
+  rows.print=7,
+  echo=TRUE,
+  highlight = TRUE,
+  # prompt = TRUE, # IF TRUE adds a > before each code input
+  # comment = NA # PRINTS IN FRONT OF OUTPUT, default is '##' which comments out output
+  comment = '##'
+  )
+
+# set ggplot theme
+# theme_set(theme_bw(base_size = 24))
+```
+
+```{r xaringan-themer, include = FALSE}
+# creates xaringan theme
+# devtools::install_github("gadenbuie/xaringanthemer")
+library(xaringanthemer)
+mono_light(
+  base_color =  "#3A6185", ## OHSU Marquam
+  code_highlight_color = "#cbdded",
+  link_color = "#38BDDE",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i","400i","700"),
+  code_font_google   = NULL,
+  text_font_size = "24px",
+  code_font_size = "20px",
+  header_h1_font_size = "45px",
+  header_h2_font_size = "40px",
+  header_h3_font_size = "35px",
+  padding = "0em 2em 1em 2em",
+  outfile = "css/xaringan-themer.css"
+)
+```
+
+---
+
+```{r child=here::here("01-intro-r-eda","child_intro.Rmd")}
+# Jessica
+```
+
+```{r child=here::here("01-intro-r-eda","child_console.Rmd")}
+# Meike
+```
+
+```{r child=here::here("01-intro-r-eda","child_rmd.Rmd")}
+# Meike
+```
+
+```{r child=here::here("01-intro-r-eda","child_practice1.Rmd")}
+# Meike
+```
+
+```{r child=here::here("01-intro-r-eda","child_data_load.Rmd")}
+# Jessica
+```
+
+```{r child=here::here("01-intro-r-eda","child_dollarsign.Rmd")}
+# Meike; possibly end day 1 at end of this?
+```
+
+```{r child=here::here("01-intro-r-eda","child_pipe_summaries.Rmd")}
+# Jessica
+```
+
+```{r child=here::here("01-intro-r-eda","child_practice2.Rmd")}
+# Jessica - with pipe/summaries; stop day 1
+```

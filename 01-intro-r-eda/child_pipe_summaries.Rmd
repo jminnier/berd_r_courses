@@ -1,0 +1,182 @@
+
+---
+
+# Working with data, we will use the pipe `%>%`
+
+The pipe operator `%>%` is part of the tidyverse, and strings together commands to be performed sequentially
+
+```{r}
+mydata %>% head(n=3)      # prounounce %>% as "then"
+```
+
+- Always _first list the tibble_ that the commands are being applied to
+- Can use __multiple pipes__ to run multiple commands in sequence
+    + What does the following code do?
+
+```{r, eval=FALSE}
+mydata %>% head(n=2) %>% summary()
+```
+---
+class: center, inverse, middle
+
+# Quick tips on summarizing data
+
+## categorical data
+## numerical data
+
+<center>
+<img src="img/janitor_logo_small.png" width="20%" height="20%">
+<img src="img/hex-dplyr.png" width="20%" height="20%">  
+</center>
+
+[janitor](https://cran.r-project.org/web/packages/janitor/readme/README.html),   [dplyr](https://dplyr.tidyverse.org/)
+
+
+---
+
+# Numerical data summaries: Using `$` vs `summarize()`
+
+We saw how to summarize a vector pulled with `$`, but there are easier ways to summarize multiple columns at once.
+
+.pull-left-40[
+```{r}
+mean(mydata$bmi)
+mean(mydata$weight_kg)
+```
+]
+.pull-right-60[
+```{r}
+mydata %>%
+  summarize(mean(bmi), mean(weight_kg)) #<<
+```
+]
+---
+
+# Numerical data summaries: `summarize()`
+
+- We can summarize data as a whole, or in groups with `group_by()`
+- `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+.pull-left[
+```{r}
+# summary of all data as a whole
+mydata %>% 
+  summarize(bmi_mean =mean(bmi), #<<
+            bmi_sd = sd(bmi),  #<<
+            bmi_cv = sd(bmi)/mean(bmi)) #<<
+```
+]
+
+.pull-right[
+```{r}
+# summary by group variable
+mydata %>% 
+  group_by(grade) %>% #<<
+  summarize(n_per_group = n(), 
+            bmi_mean =mean(bmi),
+            bmi_sd = sd(bmi),
+            bmi_cv = sd(bmi)/mean(bmi))
+```
+]
+
+---
+# Advanced `summarize(across())`
+
+- Can also use `across()` to summarize multiple variables ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
+
+.pull-left[
+```{r}
+mydata %>% 
+  summarize(across(c(bmi, weight_kg), mean))
+```
+]   
+.pull-right[
+```{r}
+mydata %>%
+  summarize(across(where(is.numeric), mean, na.rm=TRUE))
+```
+]
+```{r}
+mydata %>%
+  summarize(across(where(is.character), n_distinct))
+```
+
+
+---
+
+# Frequency tables: simple `count()`
+
+.pull-left[
+```{r}
+mydata %>% count(grade)
+```
+]
+.pull-right[
+```{r}
+mydata %>% count(grade, sex)
+```
+]
+
+---
+
+# Fancier frequency tables: `janitor` package's `tabyl` function 
+
+.pull-left[
+
+```{r}
+# default table
+mydata %>% tabyl(grade)
+```
+
+```{r}
+# output can be treated as tibble
+mydata %>% tabyl(grade) %>% select(-n)
+```
+]
+.pull-right[
+
+`adorn_` your table!
+```{r}
+mydata %>%
+  tabyl(grade) %>%
+  adorn_totals("row") %>% #<<
+  adorn_pct_formatting(digits=2)  #<<
+```
+
+]
+
+
+---
+
+# 2x2 `tabyl`s
+
+.pull-left-40[
+```{r}
+# default 2x2 table
+mydata %>% tabyl(grade, sex)
+```
+
+What adornments does the tabyl to right have?
+]
+.pull-right-60[
+```{r}
+mydata %>% tabyl(grade, sex) %>%
+  adorn_percentages(denominator = "col") %>% #<<
+  adorn_totals("row") %>% #<<
+  adorn_pct_formatting(digits = 1) %>% #<<
+  adorn_ns() #<<
+```
+]
+
+- Notice `grade` is not sorted in a pleasing way. We will learn how to deal with this when we discuss `factors` as a data type in R.
+- Base R has a `table` function, but it is clunkier and the output is not a data frame. 
+- See the [tabyl vignette](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html) for more information, adorn options, & 3-way `tabyl`s
+
+
+---
+# 3 way tabyls are possible
+
+```{r}
+mydata %>% tabyl(grade, race4, sex)
+```

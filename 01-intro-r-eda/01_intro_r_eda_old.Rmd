@@ -917,7 +917,7 @@ mydata <- read_csv("yrbss.csv")
 ```
 
 ```{r, echo=FALSE}
-mydata <- read_csv(here::here("01-getting-started-v2","data","yrbss_demo.csv"))
+mydata <- read_csv(here::here("01-intro-r-eda","data","yrbss.csv"))
 ```
 
 * Or, open saved file using Import Dataset button in Environment window:  ![](img/01_Import_Dataset.png) + From Text(readr). 

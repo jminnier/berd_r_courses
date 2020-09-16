@@ -1,0 +1,131 @@
+
+class: inverse, center, middle
+
+# The more you know
+
+---
+
+# Installing and using packages
+
+- Packages are to R like apps are to your phone/OS
+- Packages contain additional functions and data
+- Install packages with `install.packages()`
+  + Also can use the "Packages" tab in Files/Plots/Packages/Help/Viewer window
+  + *Only install once (unless you want to update)*
+  + Installs from [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) = package mothership
+
+```{r, eval = FALSE}
+install.packages("dplyr")   # only do this ONCE, use quotes
+```
+
+- Load packages: At the top of your script include `library()` commands to load each required package *every* time you open Rstudio.
+```{r}
+library(dplyr)    # run this every time you open Rstudio
+```
+
+- Use a function without loading the package with `::`
+```{r}
+dplyr::arrange(mydata, bmi)
+```
+
+---
+
+# Installing packages from other places (i.e. github, URLs)
+
+- Need to have [remotes](https://github.com/r-lib/remotes#readme) package installed first:
+```{r, eval=FALSE}
+install.packages("remotes") 
+```
+
+- To install a package from github (often in development) use `install_github()` from the remotes package
+
+```{r, eval=FALSE}
+# https://github.com/hadley/yrbss
+remotes::install_github("hadley/yrbss")
+
+# Load it the same way
+library(yrbss)
+```
+
+
+
+---
+
+# How to get help (1/2)
+
+Use `?` in front of function name in console. Try this:
+
+![](img/01_help_screenshot.png)
+---
+
+# How to get help (2/2)
+
+- Use `??` (i.e `??dplyr` or `??read_csv`) for searching all documentation in installed packages (including unloaded packages)
+- search [Stack Overflow #r tag](https://stackoverflow.com/questions/tagged/r)
+- googlequestion + rcran or + r (i.e. "make a boxplot rcran" "make a boxplot r")
+- google error in quotes (i.e. `"Evaluation error: invalid type (closure) for variable '***'"`)
+- search [github](https://github.com/search/advanced?q=language:R) for your function name (to see examples) or error
+- [Rstudio community](https://community.rstudio.com/)
+- [twitter #rstats](https://twitter.com/search?q=%23rstats&src=typd)
+
+---
+
+# Resources
+
+- Click on this [List of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
+- Watch [recordings of our other workshops](https://github.com/jminnier/berd_r_courses)
+- __Highly recommend *Data Wrangling in R with Tidyverse*__
+
+Getting started:
+
+- [RStudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
+- Install R/RStudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&feature=youtu.be)
+- [Basic Basics](http://rladiessydney.org/post/2018/11/05/basicbasics/)
+
+Some of this is drawn from materials in online books/lessons:
+
+- [Intro to R/RStudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
+- [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+
+---
+
+# Local resources
+
+.pull-left[
+- OHSU's [BioData club](https://biodata-club.github.io/) + active slack channel
+- Portland's [R user meetup group](https://www.meetup.com/portland-r-user-group/) + active slack channel
+- [R-ladies PDX](https://www.meetup.com/R-Ladies-PDX/) meetup group
+- [Cascadia R Conf - May 31, 2020 in Eugene with workshops](https://cascadiarconf.org/)
+]
+.pull-right[
+<center><img src="img/horst_welcome_to_rstats_twitter.png" width="100%" height="100%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
+]
+
+---
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.pdf)
+- The project folder of examples can be downloaded at [github.com/jminnier/berd_intro_project](https://github.com/jminnier/berd_intro_project) & the solutions are in the `solns/` folder.
+
+
+
+
+```{r, eval=FALSE, echo=FALSE}
+# RUN THESE AFTER KNITTING
+knitr::purl(here::here("01-getting-started-v2","01_getting_started_slides.Rmd"), 
+            out = here::here("01-getting-started-v2","01_getting_started_slides.R"))
+# remotes::install_github('rstudio/pagedown')
+pagedown::chrome_print(here::here("01-getting-started-v2","01_getting_started_slides.html"))
+```
+

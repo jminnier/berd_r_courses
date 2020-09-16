@@ -1,0 +1,311 @@
+
+
+---
+
+class: inverse, middle, center
+
+# Intro to Data
+
+---
+
+# How is data stored, how do we use it?
+
+- Often, data is in an excel sheet, or a plain text file (.csv, .txt)
+- .csv files open in Excel automatically, but actually are plain text
+- Usually, columns are variables/measures and rows are observations (i.e. a person's measurements)
+
+**Open the data file `yrbss.csv` and look at it**
+
+**Move the data file `yrbss.csv` into the Rstudio project folder** 
+<center><img src="img/01_filestruc.png" width="87%" height="70%"></center>
+
+---
+
+# Data in R/Rstudio
+
+**Open `yrbss.csv` in Rstudio and look at it**
+
+- Click on `yrbss.csv` in the Files pane, click *View File*
+<center><img src="img/01_filestruc2.png" width="87%" height="70%"></center>
+
+**We will show you how to store and use this data in R as a data frame**
+ 
+---
+
+# First, load the packages we need
+
+We will be using functions within the `tidyverse` package in R.
+
+- In the console, run the installation code
+  + if you get a message about restarting R, click Yes
+  + if you get an error message IN RED (warnings in orange or black text are ok), ask a TA
+
+```{r eval=FALSE}
+install.packages("tidyverse")
+install.packages("janitor")
+```
+
+- Then add this code to the setup chunk in the Rmd and run that chunk:
+
+.pull-left[
+```{r}
+library(tidyverse)
+library(janitor)
+```
+]
+.pull-right[
+<center><img src="img/rmd_library.png" width="87%" height="70%"></center>
+]
+
+- Now we can use functions in these packages, such as `read_csv()` and `%>%` and `mutate()` and `tabyl()`
+
+---
+
+class: inverse, middle, center
+
+# Object types
+
+---
+
+# Data frames (aka "tibbles" in tidyverse)
+
+.pull-left-60[
+__Vectors__ vs. __data frames__: a data frame is a collection (or array or table) of vectors
+
+```{r}
+df <- tibble(
+  IDs=1:3, 
+  gender=c("male", "female", "Male"), 
+  age=c(28, 35.5, 31),
+  trt = c("control", "1", "1"),
+  Veteran = c(FALSE, TRUE, TRUE)
+  )
+df
+```
+
+]
+.pull-right-40[
+
+* Allows different columns to be of different data types (i.e. numeric vs. text)
+* Both numeric and text can be stored within a column (stored together as *text*).
+
+* Vectors and data frames are examples of _**objects**_ in R. 
+  + There are other types of R objects to store data, such as matrices, lists.
+  + These will be discussed in future R workshops.
+]
+
+
+---
+
+# Variable (column) types
+
+type | description
+---|---
+integer | integer-valued numbers
+numeric | numbers that are decimals
+factor | categorical variables stored with levels (groups)
+character | text, "strings"
+logical | boolean (TRUE, FALSE)
+
+<!-- Each variable (column) in a data frame can be of a different type. -->
+
+* View the __structure__ of our data frame to see what the variable types are:
+
+```{r}
+str(df)
+```
+
+<!-- * Note that the ID column is _integer_ type since the values are all whole numbers, although we likely would think of it as being a categorical variable and thus prefer it to be a factor. -->
+
+---
+
+# Data frame cells, rows, or columns
+
+
+<!-- * Our data frame `df` -->
+.pull-left[
+Show whole data frame
+```{r}
+df
+```
+
+Specific cell: `DatSetName[row#, column#]`
+
+```{r}
+# Second row, Third column
+df[2, 3]
+```
+]
+
+.pull-right[
+Entire col: `DatSetName[, column#]`
+```{r}
+# Third column
+df[, 3]
+```
+
+Entire row: `DatSetName[row#, ]`
+```{r}
+# Second row
+df[2,]
+```
+]
+
+
+---
+
+class: inverse, center, middle
+
+# Getting the data into Rstudio
+
+---
+
+---
+
+# R Projects (.Rproj file) & Good Practices
+
+__Use projects to keep everything together__ ([read this](https://r4ds.had.co.nz/workflow-projects.html))
+- A project keeps track of your coding environment and file structure.
+- Create an RStudio project for each data analysis project, for each homework assignment, etc.
+- A project is associated with a directory folder
+    + Keep data files there
+    + Keep code scripts there; edit them, run them in bits or as a whole
+    + Save your outputs (plots and cleaned data) there
+- Only use relative paths, never absolute paths
+    + relative (good): `read.csv("data/mydata.csv")`
+    + absolute (bad): `read.csv("/home/yourname/Documents/stuff/mydata.csv")`
+    
+__Advantages of using projects__
+- standardizes file paths
+- keep everything together
+- a whole folder can be easily shared and run on another computer
+- when you open the project everything is as you left it
+
+
+---
+
+# Create a new R project
+
+Let's go through it together. ([Read this for more](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects))
+
+File -> New Project -> New Directory
+
+**Bonus lessons**
+
+- [Video on projects in R, most useful info in minutes 2:00-13:00](https://rstudio.com/resources/webinars/managing-part-1-projects-in-rstudio/)
+
+
+---
+
+
+# Load a data set
+
+* Read in csv file from file path with code (filepath relative to Rproj directory)
+
+```{r, eval=FALSE}
+mydata <- read_csv("yrbss.csv")
+```
+
+```{r, echo=FALSE}
+mydata <- read_csv(here::here("01-intro-r-eda","data","yrbss.csv"))
+```
+
+* Or, open saved file using Import Dataset button in Environment window:  ![](img/01_Import_Dataset.png) + From Text(readr). 
+  + If you use this option, **then copy and paste the importing code to your Rmd** so you have a record of from where and how you loaded the data set.
+
+
+```{r, eval=FALSE}
+# Run in console:
+View(mydata) 
+# Can also view the data by clicking on its name in the Environment tab
+```
+
+
+<!-- ![](img/01_View_data_screenshot.png) -->
+
+<img src="img/01_View_data_screenshot2.png" width="110%" height="110%">
+
+
+---
+
+# Load a data set: bonus lessons
+
+- [Importing Data, Rstudio support topic](https://support.rstudio.com/hc/en-us/articles/218611977-Importing-Data-with-RStudio)
+
+![](https://support.rstudio.com/hc/article_attachments/360017333414/data-import-rstudio-overview.gif)
+---
+
+# About the data
+
+Data from the CDC's [Youth Risk Behavior Surveillance System (YRBSS) ](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+
+- small subset (20 rows) of the full complex survey data
+- national school-based survey conducted by CDC and state, territorial, tribal, and local surveys conducted by state, territorial, and local education and health agencies and tribal governments
+- monitors health-related behaviors (including alcohol & drug use, unhealthy & dangerous behaviors, sexuality, physical activity); see [Questionnaires](https://www.cdc.gov/healthyyouth/data/yrbs/questionnaires.htm)
+- original data in the R package [`yrbss`](https://github.com/hadley/yrbss) which includes YRBSS from 1991-2013
+
+<img src="img/01_yrbss.png" width="110%" height="110%">
+
+---
+
+# Data set summary
+
+```{r}
+summary(mydata)
+```
+
+---
+
+# Data set info
+
+.pull-left-40[
+```{r}
+dim(mydata)
+nrow(mydata)
+ncol(mydata)
+```
+]
+
+.pull-right-60[
+```{r}
+names(mydata)
+```
+]
+
+
+---
+
+# Data structure
+
+* What are the different __variable types__ in this data set?
+
+
+```{r}
+str(mydata)   # structure of data
+```
+
+
+---
+
+# View the beginning of a data set
+
+```{r}
+head(mydata)
+```
+
+---
+
+# View the end of a data set
+
+```{r}
+tail(mydata)
+```
+
+---
+
+# Specify how many rows to view at beginning or end of a data set
+
+```{r}
+head(mydata, 3)
+tail(mydata, 1)
+```
