@@ -131,3 +131,12 @@ Instructors: Meike Niederhausen, PhD & Jessica Minnier, PhD<br>
 ```{r child=here::here("01-intro-r-eda","child_closing.Rmd")}
 ```
 
+
+
+```{r, eval=FALSE, echo=FALSE}
+# RUN THESE AFTER KNITTING
+knitr::purl(here::here("01-intro-r-eda","01_intro_r_eda_part2.Rmd"), 
+            out = here::here("01-intro-r-eda","01_intro_r_eda_part2.R"))
+# remotes::install_github('rstudio/pagedown')
+pagedown::chrome_print(here::here("01-intro-r-eda","01_intro_r_eda_part2.html"))
+```

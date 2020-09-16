@@ -105,7 +105,7 @@ mono_light(
 
 # End of Day 1
 
-- [Practice Solution Link](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_practice_answers_part1)
+- [Practice Solutions Link](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_practice_answers_part1)
 
 # Part 2 slides
 

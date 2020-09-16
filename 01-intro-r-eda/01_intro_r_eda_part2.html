@@ -51,6 +51,431 @@ Instructors: Meike Niederhausen, PhD &amp; Jessica Minnier, PhD&lt;br&gt;
 
 
 
+---
+
+# Working with data, we will use the pipe `%&gt;%`
+
+The pipe operator `%&gt;%` is part of the tidyverse, and strings together commands to be performed sequentially
+
+
+```r
+penguins %&gt;% head(n=3)      # prounounce %&gt;% as "then"
+```
+
+```
+## # A tibble: 3 x 9
+##      id species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+## 1  1689 Adelie  Torge…           39.1          18.7              181        3750
+## 2  4274 Adelie  Torge…           NA            17.4              186        3800
+## 3  4539 Adelie  Torge…           40.3          18                195        3250
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
+```
+
+- Always _first list the tibble_ that the commands are being applied to
+- Can use __multiple pipes__ to run multiple commands in sequence
+    + What does the following code do?
+
+
+```r
+penguins %&gt;% head(n=2) %&gt;% summary()
+```
+---
+class: center, inverse, middle
+
+# Quick tips on summarizing data
+
+## categorical data
+## numerical data
+
+&lt;center&gt;
+&lt;img src="img/janitor_logo_small.png" width="20%" height="20%"&gt;
+&lt;img src="img/hex-dplyr.png" width="20%" height="20%"&gt;  
+&lt;/center&gt;
+
+[janitor](https://cran.r-project.org/web/packages/janitor/readme/README.html),   [dplyr](https://dplyr.tidyverse.org/)
+
+
+---
+
+# Numerical data summaries: `$` vs `summarize()`
+
+We saw how to summarize a vector pulled with `$`, but there are easier ways to summarize multiple columns at once.
+
+.pull-left-40[
+
+```r
+mean(penguins$body_mass_g)
+```
+
+```
+## [1] 4201.754
+```
+
+```r
+median(penguins$body_mass_g)
+```
+
+```
+## [1] 4050
+```
+]
+.pull-right-60[
+
+```r
+penguins %&gt;%
+* summarize(mean(body_mass_g),
+*           median(body_mass_g))
+```
+
+```
+## # A tibble: 1 x 2
+##   `mean(body_mass_g)` `median(body_mass_g)`
+##                 &lt;dbl&gt;                 &lt;dbl&gt;
+## 1               4202.                  4050
+```
+]
+
+---
+
+# `summarize()` with `NA`
+
+- Don't forget `na.rm = TRUE` if you need it.
+- You can also name these columns.
+
+
+```r
+penguins %&gt;%
+  summarize(mean_mass = mean(body_mass_g), 
+*           mean_len = mean(bill_length_mm, na.rm = TRUE))
+```
+
+```
+## # A tibble: 1 x 2
+##   mean_mass mean_len
+##       &lt;dbl&gt;    &lt;dbl&gt;
+## 1     4202.     44.0
+```
+
+
+---
+
+# By group `summarize()` (1/2)
+
+- We can summarize data as a whole, or in groups with `group_by()`
+- `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+```r
+# summary of all data as a whole
+penguins %&gt;% 
+* summarize(mass_mean =mean(body_mass_g),
+*           mass_sd = sd(body_mass_g),
+*           mass_cv = sd(body_mass_g)/mean(body_mass_g))
+```
+
+```
+## # A tibble: 1 x 3
+##   mass_mean mass_sd mass_cv
+##       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1     4202.    802.   0.191
+```
+
+---
+
+
+# By group `summarize()` (2/2)
+
+- We can summarize data as a whole, or in groups with `group_by()`
+- `group_by()` is very powerful, see [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+```r
+# summary by group variable
+penguins %&gt;% 
+* group_by(species) %&gt;%
+  summarize(n_per_group = n(), 
+            mass_mean =mean(body_mass_g),
+            mass_sd = sd(body_mass_g),
+            mass_cv = sd(body_mass_g)/mean(body_mass_g))
+```
+
+```
+## # A tibble: 3 x 5
+##   species   n_per_group mass_mean mass_sd mass_cv
+##   &lt;chr&gt;           &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Adelie            151     3701.    459.  0.124 
+## 2 Chinstrap          68     3733.    384.  0.103 
+## 3 Gentoo            123     5076.    504.  0.0993
+```
+
+---
+# Advanced `summarize(across())` (1/3)
+
+- Can also use `across()` to summarize multiple variables ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
+
+
+
+```r
+penguins %&gt;% 
+  summarize(across(c(body_mass_g, bill_depth_mm), mean))
+```
+
+```
+## # A tibble: 1 x 2
+##   body_mass_g bill_depth_mm
+##         &lt;dbl&gt;         &lt;dbl&gt;
+## 1       4202.          17.2
+```
+ 
+
+
+```r
+penguins %&gt;%
+  summarize(across(where(is.numeric), mean, na.rm=TRUE))
+```
+
+```
+## # A tibble: 1 x 6
+##      id bill_length_mm bill_depth_mm flipper_length_mm body_mass_g  year
+##   &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 3031.           44.0          17.2              201.       4202. 2008.
+```
+
+---
+# Advanced `summarize(across())` (2/3)
+
+- Can also use `across()` to summarize multiple variables *and* functions ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
+
+
+```r
+penguins %&gt;% 
+  summarize(across(c(body_mass_g, bill_depth_mm), 
+*                  c(m = mean, sd = sd)))
+```
+
+```
+## # A tibble: 1 x 4
+##   body_mass_g_m body_mass_g_sd bill_depth_mm_m bill_depth_mm_sd
+##           &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+## 1         4202.           802.            17.2             1.97
+```
+
+
+---
+
+# Advanced `summarize(across())` (3/3)
+
+- Can also use `across()` to summarize based on true/false conditions ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
+
+.pull-left[
+
+```r
+penguins %&gt;%
+  summarize(
+*   across(where(is.character),
+           n_distinct))
+```
+
+```
+## # A tibble: 1 x 3
+##   species island   sex
+##     &lt;int&gt;  &lt;int&gt; &lt;int&gt;
+## 1       3      3     3
+```
+]
+.pull-right[
+&lt;center&gt;&lt;img src="img/dplyr_across.png" width="100%" height="75%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+]
+---
+
+# Frequency tables: simple `count()`
+
+.pull-left[
+
+```r
+penguins %&gt;% count(island)
+```
+
+```
+## # A tibble: 3 x 2
+##   island        n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 Biscoe      167
+## 2 Dream       124
+## 3 Torgersen    51
+```
+]
+.pull-right[
+
+```r
+penguins %&gt;% count(species, island)
+```
+
+```
+## # A tibble: 5 x 3
+##   species   island        n
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;int&gt;
+## 1 Adelie    Biscoe       44
+## 2 Adelie    Dream        56
+## 3 Adelie    Torgersen    51
+## 4 Chinstrap Dream        68
+## 5 Gentoo    Biscoe      123
+```
+]
+
+---
+
+# Fancier frequency tables: `janitor` package's `tabyl` function 
+
+.pull-left[
+
+
+```r
+# default table
+penguins %&gt;% tabyl(species)
+```
+
+```
+##    species   n   percent
+##     Adelie 151 0.4415205
+##  Chinstrap  68 0.1988304
+##     Gentoo 123 0.3596491
+```
+
+
+```r
+# output can be treated as tibble
+penguins%&gt;%tabyl(species)%&gt;%select(-n)
+```
+
+```
+##    species   percent
+##     Adelie 0.4415205
+##  Chinstrap 0.1988304
+##     Gentoo 0.3596491
+```
+]
+.pull-right[
+
+`adorn_` your table!
+
+```r
+penguins %&gt;% 
+  tabyl(species) %&gt;%
+* adorn_totals("row") %&gt;%
+* adorn_pct_formatting(digits=2)
+```
+
+```
+##    species   n percent
+##     Adelie 151  44.15%
+##  Chinstrap  68  19.88%
+##     Gentoo 123  35.96%
+##      Total 342 100.00%
+```
+
+]
+
+
+---
+
+# 2x2 `tabyl`s
+
+.pull-left-40[
+
+```r
+# default 2x2 table
+penguins %&gt;% 
+* tabyl(species, sex)
+```
+
+```
+##    species female male NA_
+##     Adelie     73   73   5
+##  Chinstrap     34   34   0
+##     Gentoo     58   61   4
+```
+
+What adornments does the tabyl to right have?
+]
+.pull-right-60[
+
+```r
+penguins %&gt;% tabyl(species, sex) %&gt;% 
+* adorn_percentages(denominator = "col") %&gt;%
+* adorn_totals("row") %&gt;%
+* adorn_pct_formatting(digits = 1) %&gt;%
+* adorn_ns()
+```
+
+```
+##    species       female         male        NA_
+##     Adelie  44.2%  (73)  43.5%  (73)  55.6% (5)
+##  Chinstrap  20.6%  (34)  20.2%  (34)   0.0% (0)
+##     Gentoo  35.2%  (58)  36.3%  (61)  44.4% (4)
+##      Total 100.0% (165) 100.0% (168) 100.0% (9)
+```
+]
+
+- Base R has a `table` function, but it is clunkier and the output is not a data frame. 
+- See the [tabyl vignette](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html) for more information, adorn options, &amp; 3-way `tabyl`s
+
+
+---
+# 3 way tabyls are possible
+
+
+```r
+penguins %&gt;% tabyl(species, island, sex)
+```
+
+```
+## $female
+##    species Biscoe Dream Torgersen
+##     Adelie     22    27        24
+##  Chinstrap      0    34         0
+##     Gentoo     58     0         0
+## 
+## $male
+##    species Biscoe Dream Torgersen
+##     Adelie     22    28        23
+##  Chinstrap      0    34         0
+##     Gentoo     61     0         0
+## 
+## $NA_
+##    species Biscoe Dream Torgersen
+##     Adelie      0     1         4
+##  Chinstrap      0     0         0
+##     Gentoo      4     0         0
+```
+
+
+
+
+
+
+---
+
+# Practice 3
+
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+
+1. How many different years are in the data? (Hint: use `tabyl()` or `n_distinct()`)
+
+1. Count the number of penguins measured each year.
+
+1. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+
+1. Create a 2x2 table of number of penguins measured in each year by each island.
+
+
+
+
+
+
+
+
 
 
 ---
@@ -626,9 +1051,6 @@ mydata %&gt;%
 
 
 
----
-
-
 
 
 
@@ -693,7 +1115,7 @@ ggplot(data = penguins,
 * geom_point()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-27-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-50-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -704,7 +1126,7 @@ ggplot(data = penguins,
 * geom_histogram()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-28-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-51-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -811,7 +1233,7 @@ ggplot(data = penguins,
   geom_bar()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-29-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-52-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -823,7 +1245,7 @@ ggplot(data = penguins,
   geom_bar(position = "dodge")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-30-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-53-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 ---
 
@@ -865,7 +1287,7 @@ ggplot(data = pct_data,
   ylab("Percent")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-31-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-54-1.png" height="380px" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -907,7 +1329,7 @@ ggplot(data = pct_data,
   ylab("Percent")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-32-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-55-1.png" height="380px" style="display: block; margin: auto;" /&gt;
 ]
 
 
