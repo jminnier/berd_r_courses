@@ -1,6 +1,6 @@
 ---
 title: An Introduction to R and RStudio for Exploratory Data Analysis
-author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/xd/research/centers-institutes/octri/education-training/octri-research-forum.cfm) </span>"
+author: "Jessica Minnier, PhD & Meike Niederhausen, PhD<br><span style = 'font-size: 80%;'>[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/octri/octri-research-forum-your-monthly-clinical-and-translational-research-event) </span>"
 date: "<span style = 'font-size: 80%;'>Part 1: 2020/09/16 & Part 2: 2020/09/17 <br><br><br> slides: [bit.ly/berd_intro_part2](http://bit.ly/berd_intro_part2) <br> pdf: [bit.ly/berd_intro_part2_pdf](http://bit.ly/berd_intro_part2_pdf)</span>"
 output: 
   xaringan::moon_reader:

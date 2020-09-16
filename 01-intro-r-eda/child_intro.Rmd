@@ -1,5 +1,10 @@
 
-### Do this now:
+## An Introduction to R and RStudio for Exploratory Data Analysis (Part 1)
+
+Instructors: Meike Niederhausen, PhD & Jessica Minnier, PhD<br>
+[OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop](https://www.ohsu.edu/octri/octri-research-forum-your-monthly-clinical-and-translational-research-event)
+
+### *Do this now:*
 
 1. **Open html slides**: [bit.ly/berd_intro_part1](http://bit.ly/berd_intro_part1)
   + You will be able to copy and paste code/links from here
