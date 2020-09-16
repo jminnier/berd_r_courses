@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>An Introduction to R and RStudio for Exploratory Data Analysis</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# An Introduction to R and RStudio for Exploratory Data Analysis
+### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD<br><span style="font-size: 80%;"><a href="https://www.ohsu.edu/octri/octri-research-forum-your-monthly-clinical-and-translational-research-event">OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop</a> </span>
+### <span style="font-size: 80%;">Part 1: 2020/09/16 &amp; Part 2: 2020/09/17 <br><br><br> slides: <a href="http://bit.ly/berd_intro_part2">bit.ly/berd_intro_part2</a> <br> pdf: <a href="http://bit.ly/berd_intro_part2_pdf">bit.ly/berd_intro_part2_pdf</a></span>
+
+---
+
+
+layout: true
+  
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/berd_tidy&lt;/span&gt;&lt;/div&gt;  --&gt;
+
+---
+
+
+
+
+
+
+
+
+## An Introduction to R and RStudio for Exploratory Data Analysis (Part 2)
+
+Instructors: Meike Niederhausen, PhD &amp; Jessica Minnier, PhD&lt;br&gt;
+[OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop](https://www.ohsu.edu/octri/octri-research-forum-your-monthly-clinical-and-translational-research-event)
+
+### *Do this now:*
+
+1. **Open html slides**: [bit.ly/berd_intro_part2](http://bit.ly/berd_intro_part2)
+
+1. **Open google doc** for asking questions: [bit.ly/berd_doc](https://bit.ly/berd_doc)
+  + Helpers will be monitoring this, you can ask questions, copy code or screenshots.
+
+1. **Open Rstudio with these steps:**
+  + Open the folder from yesterday
+  + Double click on the `.Rproj` file.
+  + All your files should be there.
+
+
+
+
+
+---
+
+class: center, middle, inverse
+
+# Data Wrangling
+
+&lt;center&gt;&lt;img src="img/horst_data_cowboy.png" width="70%" height="75%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+
+
+---
+
+class: center, middle, inverse
+
+# Subsetting data
+
+&lt;img src="img/datawrangle_cheatsheet_subset_rows.png" width="75%" height="75%"&gt;
+
+&lt;img src="img/datawrangle_cheatsheet_subset_cols.png" width="75%" height="75%"&gt;
+
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+---
+
+# `filter()` `\(\sim\)` rows
+
+filter data based on rows
+.pull-left-40[
+- math: `&gt;`,  `&lt;`,  `&gt;=`,  `&lt;=`
+-  double = for "is equal to":  `==`
+-  `&amp;` (and) 
+-  `|` (or)
+- != (not equal)
+]
+.pull-right-60[
+- `is.na()` to filter based on missing values
+- `%in%` to filter based on group membership
+- `!` in front negates the statement, as in 
+    + `!is.na(age)` 
+    + `!(grade %in% c("9th","10th"))`
+]
+
+
+
+```r
+mydata %&gt;% filter(bmi &gt; 20)
+```
+
+```
+## # A tibble: 15 x 10
+##        id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+##  1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+##  2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+##  3 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
+##  4 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
+##  5 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
+##  6 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
+##  7 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
+##  8 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
+##  9 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+## 10 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 11 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 12 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 13 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 14 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
+## 15 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+
+---
+
+# `filter()` practice
+
+What do these commands do? Try them out:
+
+
+```r
+mydata %&gt;% filter(age == "14 years old")
+mydata %&gt;% filter(bmi/weight_kg &lt; 0.5)    # can do math
+mydata %&gt;% filter((bmi &lt; 15) | (bmi &gt; 25))
+mydata %&gt;% filter(bmi &lt; 20, weight_kg &lt; 60, sex == "Female") # filter on multiple variables
+
+mydata %&gt;% filter(id == 923122)      # note the use of == instead of just =
+mydata %&gt;% filter(sex == "Female")
+mydata %&gt;% filter(!(grade == "9th"))
+mydata %&gt;% filter(grade %in% c("10th", "11th"))
+
+mydata %&gt;% filter(is.na(bmi))
+mydata %&gt;% filter(!is.na(bmi))
+```
+
+---
+
+# `select()` `\(\sim\)` columns
+
+- select columns (variables)
+- no quotes needed around variable names
+- can be used to rearrange columns
+- uses special syntax that is flexible and has many options
+
+
+```r
+mydata %&gt;% select(id, grade)
+```
+
+```
+## # A tibble: 20 x 2
+##         id grade
+##      &lt;dbl&gt; &lt;chr&gt;
+##  1  335340 10th 
+##  2  638618 9th  
+##  3  922382 9th  
+##  4  923122 9th  
+##  5  923963 10th 
+##  6  925603 10th 
+##  7  933724 10th 
+##  8  935435 12th 
+##  9 1096564 10th 
+## 10 1108114 9th  
+## 11 1306150 10th 
+## 12 1307481 12th 
+## 13 1307872 11th 
+## 14 1311617 10th 
+## 15 1313153 11th 
+## 16 1313291 11th 
+## 17 1313477 10th 
+## 18 1315121 11th 
+## 19 1315850 12th 
+## 20 1316123 12th
+```
+
+---
+
+# Column selection syntax options
+
+There are many ways to select a set of variable names (columns):
+
+- `var1:var20`: all columns from `var1` to `var20`
+- `one_of(c("a", "b", "c"))`: all columns with names in the specified character vector of names
+- __Removing columns__
+    + `-var1`: remove the column`var1`
+    + `-(var1:var20)`: remove all columns from `var1` to `var20`
+- __Select using text within column names__
+    + `contains("date")`, `contains("_")`: all variable names that contain the specified string
+    + `starts_with("a")` or `ends_with("last")`: all variable names that start or end with the specificed string
+- __Rearranging columns__
+    + use `everything()` to select all columns not already named
+    + example: `select(var1, var20, everything())` moves the column `var20` to the second position
+
+See other examples in the [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
+
+
+---
+
+# `select()` practice
+
+Which columns are selected &amp; in what order using these commands?  
+First guess and then try them out.
+
+
+```r
+mydata %&gt;% select(id:sex)
+mydata %&gt;% select(one_of(c("age","weight_kg")))
+
+mydata %&gt;% select(-grade,-sex)
+mydata %&gt;% select(-(id:sex))
+
+mydata %&gt;% select(contains("race"))
+mydata %&gt;% select(starts_with("r"))
+mydata %&gt;% select(-contains("r"))
+
+mydata %&gt;% select(id, race4, everything())
+```
+
+---
+
+class: center, middle, inverse
+
+# Changing the data
+
+&lt;center&gt;&lt;img src="img/horst_mutate.jpg" width="50%" height="50%"&gt;&lt;/center&gt;
+
+[Alison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# Save a new data frame, or overwrite existing one
+
+Use a new variable name on left side of `&lt;-` assignment to save updated data frames:
+
+
+```r
+mydata_new &lt;- mydata %&gt;% select(id:sex)
+mydata_new
+```
+
+```
+## # A tibble: 20 x 3
+##         id age                   sex   
+##      &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
+##  1  335340 17 years old          Female
+##  2  638618 16 years old          Female
+##  3  922382 14 years old          Male  
+##  4  923122 15 years old          Male  
+##  5  923963 15 years old          Male  
+##  6  925603 16 years old          Male  
+##  7  933724 16 years old          Female
+##  8  935435 17 years old          Female
+##  9 1096564 15 years old          Male  
+## 10 1108114 17 years old          Female
+## 11 1306150 16 years old          Male  
+## 12 1307481 17 years old          Male  
+## 13 1307872 17 years old          Male  
+## 14 1311617 15 years old          Female
+## 15 1313153 16 years old          Female
+## 16 1313291 16 years old          Female
+## 17 1313477 16 years old          Female
+## 18 1315121 17 years old          Female
+## 19 1315850 17 years old          Female
+## 20 1316123 18 years old or older Female
+```
+
+---
+
+# `rename()` `\(\sim\)` columns
+
+- renames column variables
+- `%&gt;% rename(new_name = old_name)`
+
+.pull-left[
+Renames the column, just prints the output
+
+```r
+# This does not save the new name
+mydata %&gt;% rename(record = id)
+```
+
+```
+## # A tibble: 20 x 10
+##    record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+##  1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+##  2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+##  3 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+##  4 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
+##  5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
+##  6 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
+##  7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
+##  8 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
+##  9 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
+## 10 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
+## 11 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
+## 12 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+## 13 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+## 14 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 15 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 16 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 17 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 18 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
+## 19 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
+## 20 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+]
+.pull-right[
+
+Renames the column *and* overwrites `mydata` with renamed column:
+
+
+```r
+mydata &lt;- mydata %&gt;% rename(record = id)
+mydata
+```
+
+```
+## # A tibble: 20 x 10
+##    record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+##  1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+##  2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+##  3 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+##  4 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
+##  5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
+##  6 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
+##  7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
+##  8 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
+##  9 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
+## 10 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
+## 11 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
+## 12 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+## 13 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+## 14 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 15 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 16 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 17 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 18 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
+## 19 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
+## 20 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+]
+
+---
+
+# Make new variables
+
+&lt;img src="img/datawrangle_cheatsheet_makenewvars.png" width="100%" height="100%"&gt;
+[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+
+---
+
+# `mutate()`
+
+Use `mutate()` to add new columns to a tibble
+* many options in how to define new column of data
+
+
+
+```r
+newdata &lt;- mydata %&gt;% 
+   mutate(height_m = sqrt(weight_kg / bmi))   # use = (not &lt;- or ==) to define new variable
+
+newdata %&gt;% select(bmi, weight_kg, height_m)
+```
+
+```
+## # A tibble: 20 x 3
+##      bmi weight_kg height_m
+##    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1  27.6      66.2     1.55
+##  2  29.3      84.8     1.70
+##  3  18.2      57.6     1.78
+##  4  21.4      60.3     1.68
+##  5  19.6      63.5     1.80
+##  6  22.2      70.3     1.78
+##  7  21.0      45.4     1.47
+##  8  17.5      43.1     1.57
+##  9  22.5      79.4     1.88
+## 10  26.6      68.0     1.60
+## 11  21.2      67.1     1.78
+## 12  19.5      56.2     1.70
+## 13  20.6      61.7     1.73
+## 14  27.5      70.3     1.60
+## 15  26.6      68.0     1.60
+## 16  24.8      63.5     1.60
+## 17  25.0      76.7     1.75
+## 18  22.3      54.9     1.57
+## 19  19.5      49.9     1.60
+## 20  27.5      74.8     1.65
+```
+
+
+---
+
+# `mutate()` practice
+
+What do the following commands do?  
+First guess and then try them out.
+
+
+```r
+mydata %&gt;% mutate(bmi_high = (bmi &gt; 30))
+
+mydata %&gt;% mutate(male = (sex == "Male"))
+mydata %&gt;% mutate(male = 1 * (sex == "Male"))
+
+mydata %&gt;% mutate(grade_num = as.numeric(str_remove(grade, "th")))
+```
+
+
+
+
+
+
+
+---
+
+# Practice 3
+
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+
+1. How many different years are in the data? (Hint: use `tabyl()` or `n_distinct()`)
+
+1. Count the number of penguins measured each year.
+
+1. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+
+1. Create a 2x2 table of number of penguins measured in each year by each island.
+
+
+
+
+
+
+
+
+
+
+
+---
+
+# Save data frame
+
+* Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
+
+```r
+save(mydata, file = "data/mydata.RData")  # saving mydata within the data folder
+```
+
+You can load .RData files using the load() command:
+
+
+```r
+load("data/mydata.RData")
+```
+  
+
+&lt;br&gt;
+
+* Save __csv__ file: comma-separated values
+
+
+```r
+write.csv(mydata, file = "data/mydata.csv", col.names = TRUE, row.names = FALSE)
+```
+
+---
+
+class: center, middle, inverse
+
+# More commands to filter rows
+
+&lt;!-- TO-DO: rename? --&gt;
+
+---
+
+# Remove rows with missing data
+
+`drop_na()` (or `na.omit()`) removes *all* rows with *any* missing (`NA`) values in *any* column
+
+
+```r
+mydata %&gt;% drop_na()
+```
+
+```
+## # A tibble: 7 x 10
+##   record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+## 2 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+## 3 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 4 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 5 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 6 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 7 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+For more on dealing with missing data, see [Tidyverse part 2 workshop](https://jminnier-berd-r-courses.netlify.app/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html#35)
+
+---
+
+# Remove rows with duplicated data
+
+`distinct()` removes rows that are duplicates of other rows
+
+
+```r
+data_dups &lt;- tibble(
+  name = c("Ana","Bob","Cara", "Ana"),
+  race = c("Hispanic","Other", "White", "Hispanic")
+)
+```
+
+.pull-left[
+
+```r
+data_dups
+```
+
+```
+## # A tibble: 4 x 2
+##   name  race    
+##   &lt;chr&gt; &lt;chr&gt;   
+## 1 Ana   Hispanic
+## 2 Bob   Other   
+## 3 Cara  White   
+## 4 Ana   Hispanic
+```
+]
+.pull-right[
+
+```r
+data_dups %&gt;% distinct()
+```
+
+```
+## # A tibble: 3 x 2
+##   name  race    
+##   &lt;chr&gt; &lt;chr&gt;   
+## 1 Ana   Hispanic
+## 2 Bob   Other   
+## 3 Cara  White
+```
+]
+
+---
+
+# Order rows: `arrange()`
+
+Use `arrange()` to order the rows by the values in specified columns
+
+
+```r
+mydata %&gt;% arrange(bmi, weight_kg) %&gt;% head(n=3)
+```
+
+```
+## # A tibble: 3 x 10
+##   record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
+## 2 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+## 3 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+```r
+mydata %&gt;% arrange(desc(bmi), weight_kg) %&gt;% head(n=3)
+```
+
+```
+## # A tibble: 3 x 10
+##   record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+## 1 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+## 2 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+## 3 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+
+
+---
+
+# Combine `summarize()` with other tidy functions
+
+
+```r
+mydata %&gt;% 
+  group_by(grade) %&gt;% 
+  summarize(n_per_group = n(), 
+            bmi_mean =mean(bmi),
+            bmi_sd = sd(bmi, na.rm = TRUE)) %&gt;%
+* mutate(bmi_cv = bmi_sd/bmi_mean) %&gt;%
+* filter(bmi_cv &gt; .2)
+```
+
+```
+## # A tibble: 2 x 5
+##   grade n_per_group bmi_mean bmi_sd bmi_cv
+##   &lt;chr&gt;       &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 12th            4     21.0   4.44  0.212
+## 2 9th             4     23.9   5.03  0.211
+```
+
+
+
+
+---
+
+
+
+
+
+---
+class: center, middle, inverse
+
+# Making prettier plots
+
+&lt;center&gt;&lt;img src="img/ggplotlogo.png" width="40%" height="40%"&gt;&lt;a href="https://ggplot2.tidyverse.org/index.html"&gt;&lt;img src="img/horst_ggplot2_exploratory.png" width="50%" height="100%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+
+---
+
+# Basics of ggplot
+
+- For a full treatment, watch our [BERD workshop "Data Visualization with R and ggplot2"](https://github.com/jminnier/berd_r_courses)
+
+&lt;center&gt;&lt;img src="img/ggplot_basics_from_ppt.png" width="90%" height="100%"&gt;&lt;/center&gt;
+
+---
+
+# Grammar of ggplot2
+
+&lt;center&gt;&lt;img src="img/khealy_ggplot1.png" width="100%" height="100%"&gt;&lt;a href="https://github.com/rstudio-conf-2020/dataviz"&gt;&lt;br&gt;Kieran Healy&lt;/a&gt;&lt;/center&gt;
+
+---
+
+# Back to ggplot code
+
+&lt;center&gt;&lt;img src="img/ggplot_basics_from_ppt.png" width="90%" height="100%"&gt;&lt;/center&gt;
+
+---
+
+## Ggplot needs tidy data
+
+What are __tidy__ data?
+
+1. Each variable forms a column
+2. Each observation forms a row 
+3. Each value has its own cell
+
+![](img/r4ds_tidy_data.png)
+[G. Grolemond &amp; H. Wickham's R for Data Science](https://r4ds.had.co.nz/tidy-data.html)
+
+See BERD workshop [Data Wrangling Part 1](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#14) slides for more info.
+
+---
+
+## Is our data tidy?
+
+![](img/view_penguins.png)
+
+---
+
+# Simple plots
+
+.pull-left[
+
+```r
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm, 
+           y = bill_length_mm)) +
+* geom_point()
+```
+
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-27-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+
+```r
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm)) +
+* geom_histogram()
+```
+
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-28-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Improved plots - tips
+
+- **Start with simple**, slowly add in additions/colors/etc
+
+- You are building a plot layer by layer! ++++++
+
+- At the beginning, **just copy and paste examples** that you want to edit until you understand what each function does
+
+- It will take some trial and error!
+
+- **Watch [BERD ggplot video](https://github.com/jminnier/berd_r_courses)** for more instruction, and many customizations
+
+---
+
+# Improved scatterplot
+
+.pull-left[
+
+```r
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm, 
+           y = bill_length_mm,
+*          color = species)) +
+  geom_point()+
+* labs(
+    title = "Flipper and bill length",
+    subtitle = "Dimensions for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER",
+    x = "Flipper length(mm)", 
+    y = "Bill length(mm)") + 
+* scale_color_viridis_d(name = "Penguin species") +
+* theme_bw()
+```
+]
+.pull-right[
+&lt;img src="01_intro_r_eda_part2_files/figure-html/scatter_nice_out-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Improved histogram
+
+.pull-left[
+
+```r
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm, 
+*          fill = species)) +
+  geom_histogram(
+    alpha = 0.5,
+    position = "identity") +
+  labs(title = "Penguin flipper length",
+       x = "Flipper length(mm)",
+       y = "Frequency") + 
+* scale_fill_viridis_d(
+*   name = "Penguin species") +
+  theme_minimal()
+```
+]
+.pull-right[
+&lt;img src="01_intro_r_eda_part2_files/figure-html/hist_nice_out-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+
+# Boxplot + jitter
+
+.pull-left[
+
+```r
+ggplot(data = penguins, 
+       aes(x = species, 
+           y = flipper_length_mm)) +
+  geom_boxplot(color="darkgrey", 
+               width = 0.3, 
+               show.legend = FALSE) +
+  geom_jitter(aes(color = species), 
+              alpha = 0.5, 
+              show.legend = FALSE, 
+              position = position_jitter(width = 0.2, seed = 0)) +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  theme_minimal() +
+  labs(x = "Species",
+       y = "Flipper length (mm)")
+```
+]
+.pull-right[
+&lt;img src="01_intro_r_eda_part2_files/figure-html/box_nice_out-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Bar plots - counts
+
+.pull-left[
+
+```r
+ggplot(data = penguins,
+       aes(x = species, 
+           fill = sex)) +
+  geom_bar()
+```
+
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-29-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+
+```r
+ggplot(data = penguins,
+       aes(x = species, 
+           fill = sex)) +
+  geom_bar(position = "dodge")
+```
+
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-30-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+]
+---
+
+# Bar plots - percentages
+
+.pull-left[
+
+```r
+pct_data &lt;- penguins %&gt;% 
+  count(species, sex) %&gt;% 
+  group_by(species) %&gt;% 
+  mutate(pct = 100*n/sum(n))
+pct_data
+```
+
+```
+## # A tibble: 8 x 4
+## # Groups:   species [3]
+##   species   sex        n   pct
+##   &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt;
+## 1 Adelie    female    73 48.3 
+## 2 Adelie    male      73 48.3 
+## 3 Adelie    &lt;NA&gt;       5  3.31
+## 4 Chinstrap female    34 50   
+## 5 Chinstrap male      34 50   
+## 6 Gentoo    female    58 47.2 
+## 7 Gentoo    male      61 49.6 
+## 8 Gentoo    &lt;NA&gt;       4  3.25
+```
+]
+
+.pull-right[
+
+```r
+ggplot(data = pct_data, 
+       aes(x = species, y = pct, 
+           fill = sex)) +
+* geom_col()+
+  ylab("Percent")
+```
+
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-31-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Bar plots - percentages
+
+.pull-left[
+
+```r
+pct_data &lt;- penguins %&gt;% 
+  count(species, sex) %&gt;% 
+  group_by(species) %&gt;% 
+  mutate(pct = 100*n/sum(n))
+pct_data
+```
+
+```
+## # A tibble: 8 x 4
+## # Groups:   species [3]
+##   species   sex        n   pct
+##   &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt;
+## 1 Adelie    female    73 48.3 
+## 2 Adelie    male      73 48.3 
+## 3 Adelie    &lt;NA&gt;       5  3.31
+## 4 Chinstrap female    34 50   
+## 5 Chinstrap male      34 50   
+## 6 Gentoo    female    58 47.2 
+## 7 Gentoo    male      61 49.6 
+## 8 Gentoo    &lt;NA&gt;       4  3.25
+```
+]
+.pull-right[
+
+```r
+ggplot(data = pct_data, 
+       aes(x = species, y = pct, 
+           fill = sex)) +
+* geom_col(position = "dodge") +
+  ylab("Percent")
+```
+
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-32-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Factor data types
+
+
+
+
+
+class: inverse, center, middle
+
+# The more you know
+
+---
+
+# Installing and using packages
+
+- Packages are to R like apps are to your phone/OS
+- Packages contain additional functions and data
+- Install packages with `install.packages()`
+  + Also can use the "Packages" tab in Files/Plots/Packages/Help/Viewer window
+  + *Only install once (unless you want to update)*
+  + Installs from [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) = package mothership
+
+
+```r
+install.packages("dplyr")   # only do this ONCE, use quotes
+```
+
+- Load packages: At the top of your script include `library()` commands to load each required package *every* time you open Rstudio.
+
+```r
+library(dplyr)    # run this every time you open Rstudio
+```
+
+- Use a function without loading the package with `::`
+
+```r
+dplyr::arrange(mydata, bmi)
+```
+
+```
+## # A tibble: 20 x 10
+##    record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
+##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
+##  1 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
+##  2 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
+##  3 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
+##  4 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
+##  5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
+##  6 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
+##  7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
+##  8 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
+##  9 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
+## 10 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
+## 11 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
+## 12 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
+## 13 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
+## 14 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
+## 15 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
+## 16 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
+## 17 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
+## 18 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
+## 19 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
+## 20 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
+## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+```
+
+---
+
+# Installing packages from other places (i.e. github, URLs)
+
+- Need to have [remotes](https://github.com/r-lib/remotes#readme) package installed first:
+
+```r
+install.packages("remotes") 
+```
+
+- To install a package from github (often in development) use `install_github()` from the remotes package
+
+
+```r
+# https://github.com/hadley/yrbss
+remotes::install_github("hadley/yrbss")
+
+# Load it the same way
+library(yrbss)
+```
+
+
+
+---
+
+# How to get help (1/2)
+
+Use `?` in front of function name in console. Try this:
+
+![](img/01_help_screenshot.png)
+---
+
+# How to get help (2/2)
+
+- Use `??` (i.e `??dplyr` or `??read_csv`) for searching all documentation in installed packages (including unloaded packages)
+- search [Stack Overflow #r tag](https://stackoverflow.com/questions/tagged/r)
+- googlequestion + rcran or + r (i.e. "make a boxplot rcran" "make a boxplot r")
+- google error in quotes (i.e. `"Evaluation error: invalid type (closure) for variable '***'"`)
+- search [github](https://github.com/search/advanced?q=language:R) for your function name (to see examples) or error
+- [Rstudio community](https://community.rstudio.com/)
+- [twitter #rstats](https://twitter.com/search?q=%23rstats&amp;src=typd)
+
+---
+
+# Resources
+
+- Click on this [List of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
+- Watch [recordings of our other workshops](https://github.com/jminnier/berd_r_courses)
+- __Highly recommend *Data Wrangling in R with Tidyverse*__
+
+Getting started:
+
+- [RStudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
+- Install R/RStudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&amp;feature=youtu.be)
+- [Basic Basics](http://rladiessydney.org/post/2018/11/05/basicbasics/)
+
+Some of this is drawn from materials in online books/lessons:
+
+- [Intro to R/RStudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
+- [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
+- [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
+
+---
+
+# Local resources
+
+.pull-left[
+- OHSU's [BioData club](https://biodata-club.github.io/) + active slack channel
+- Portland's [R user meetup group](https://www.meetup.com/portland-r-user-group/) + active slack channel
+- [R-ladies PDX](https://www.meetup.com/R-Ladies-PDX/) meetup group
+- [Cascadia R Conf - May 31, 2020 in Eugene with workshops](https://cascadiarconf.org/)
+]
+.pull-right[
+&lt;center&gt;&lt;img src="img/horst_welcome_to_rstats_twitter.png" width="100%" height="100%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+]
+
+---
+
+## Contact info:
+
+Jessica Minnier: _minnier@ohsu.edu_
+
+Meike Niederhausen: _niederha@ohsu.edu_
+
+
+## This workshop info:
+
+- Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
+- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.R)
+- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.pdf)
+- The project folder of examples can be downloaded at [github.com/jminnier/berd_intro_project](https://github.com/jminnier/berd_intro_project) &amp; the solutions are in the `solns/` folder.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:10"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

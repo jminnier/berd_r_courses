@@ -5,7 +5,7 @@ class: center, middle, inverse
 
 # Making prettier plots
 
-<center><img src="img/ggplotlogo.png" width="40%" height="40%"><a href="https://ggplot2.tidyverse.org/index.html"></a></center>
+<center><img src="img/ggplotlogo.png" width="40%" height="40%"><a href="https://ggplot2.tidyverse.org/index.html"><img src="img/horst_ggplot2_exploratory.png" width="50%" height="100%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
 
 ---
 
@@ -17,38 +17,90 @@ class: center, middle, inverse
 
 ---
 
-# Simple
+# Grammar of ggplot2
+
+<center><img src="img/khealy_ggplot1.png" width="100%" height="100%"><a href="https://github.com/rstudio-conf-2020/dataviz"><br>Kieran Healy</a></center>
+
+---
+
+# Back to ggplot code
+
+<center><img src="img/ggplot_basics_from_ppt.png" width="90%" height="100%"></center>
+
+---
+
+## Ggplot needs tidy data
+
+What are __tidy__ data?
+
+1. Each variable forms a column
+2. Each observation forms a row 
+3. Each value has its own cell
+
+![](img/r4ds_tidy_data.png)
+[G. Grolemond & H. Wickham's R for Data Science](https://r4ds.had.co.nz/tidy-data.html)
+
+See BERD workshop [Data Wrangling Part 1](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.html#14) slides for more info.
+
+---
+
+## Is our data tidy?
+
+![](img/view_penguins.png)
+
+---
+
+# Simple plots
 
 .pull-left[
-```{r}
-ggplot(data = mydata, 
-       aes(x = weight_kg, y = bmi)) +
-  geom_point()
+```{r, out.height="400px"}
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm, 
+           y = bill_length_mm)) +
+  geom_point() #<<
 ```
 ]
 .pull-right[
-```{r}
-ggplot(data = mydata, 
-       aes(x = weight_kg)) +
-  geom_histogram()
+
+```{r, out.height="400px"}
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm)) +
+  geom_histogram() #<<
 ```
 ]
 
 ---
 
-# Improved scatterplot (watch [BERD ggplot video](https://github.com/jminnier/berd_r_courses) for many customizations)
+# Improved plots - tips
+
+- **Start with simple**, slowly add in additions/colors/etc
+
+- You are building a plot layer by layer! ++++++
+
+- At the beginning, **just copy and paste examples** that you want to edit until you understand what each function does
+
+- It will take some trial and error!
+
+- **Watch [BERD ggplot video](https://github.com/jminnier/berd_r_courses)** for more instruction, and many customizations
+
+---
+
+# Improved scatterplot
 
 .pull-left[
 ```{r scatter_nice, eval=FALSE}
-ggplot(data = mydata, 
-       aes(x = weight_kg, 
-           y = bmi, 
-           color = sex)) +
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm, 
+           y = bill_length_mm,
+           color = species)) + #<<
   geom_point()+
-  labs(title = "Weight vs BMI by Sex", 
-       x = "Weight (kg)", 
-       y = "BMI (kg/m^2)")
-  theme_bw()
+  labs( #<<
+    title = "Flipper and bill length",
+    subtitle = "Dimensions for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER",
+    x = "Flipper length(mm)", 
+    y = "Bill length(mm)") + 
+  scale_color_viridis_d(name = "Penguin species") + #<<
+  theme_bw() #<<
 ```
 ]
 .pull-right[
@@ -58,23 +110,98 @@ ggplot(data = mydata,
 
 ---
 
+# Improved histogram
+
+.pull-left[
+```{r hist_nice, eval=FALSE}
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm, 
+           fill = species)) + #<<
+  geom_histogram(
+    alpha = 0.5,
+    position = "identity") +
+  labs(title = "Penguin flipper length",
+       x = "Flipper length(mm)",
+       y = "Frequency") + 
+  scale_fill_viridis_d( #<<
+    name = "Penguin species") + #<<
+  theme_minimal()
+```
+]
+.pull-right[
+```{r hist_nice_out, ref.label="hist_nice", echo=FALSE, fig.keep = "first"}
+```
+]
+---
+
+# Boxplot + jitter
+
+.pull-left[
+```{r box_nice, eval=FALSE}
+ggplot(data = penguins, 
+       aes(x = species, 
+           y = flipper_length_mm)) +
+  geom_boxplot(color="darkgrey", 
+               width = 0.3, 
+               show.legend = FALSE) +
+  geom_jitter(aes(color = species), 
+              alpha = 0.5, 
+              show.legend = FALSE, 
+              position = position_jitter(width = 0.2, seed = 0)) +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  theme_minimal() +
+  labs(x = "Species",
+       y = "Flipper length (mm)")
+```
+]
+.pull-right[
+```{r box_nice_out, ref.label="box_nice", echo=FALSE, fig.keep = "first"}
+```
+]
+
+
+---
+
 # Bar plots - counts
 
 .pull-left[
-```{r}
-ggplot(data = mydata,
-       aes(x = grade, 
+```{r, out.height="400px"}
+ggplot(data = penguins,
+       aes(x = species, 
            fill = sex)) +
   geom_bar()
 ```
 ]
 .pull-right[
 
-```{r}
-ggplot(data = mydata,
-       aes(x = grade, 
+```{r, out.height="400px"}
+ggplot(data = penguins,
+       aes(x = species, 
            fill = sex)) +
   geom_bar(position = "dodge")
+```
+]
+---
+
+# Bar plots - percentages
+
+.pull-left[
+```{r bar_pct}
+pct_data <- penguins %>% 
+  count(species, sex) %>% 
+  group_by(species) %>% 
+  mutate(pct = 100*n/sum(n))
+pct_data
+```
+]
+
+.pull-right[
+```{r, out.height="380px"}
+ggplot(data = pct_data, 
+       aes(x = species, y = pct, 
+           fill = sex)) +
+  geom_col()+ #<<
+  ylab("Percent")
 ```
 ]
 
@@ -83,20 +210,20 @@ ggplot(data = mydata,
 # Bar plots - percentages
 
 .pull-left[
-```{r bar_pct}
-pct_data <- mydata %>% 
-  count(grade, sex) %>% 
-  group_by(grade) %>% 
+```{r bar_pct_calc}
+pct_data <- penguins %>% 
+  count(species, sex) %>% 
+  group_by(species) %>% 
   mutate(pct = 100*n/sum(n))
 pct_data
 ```
 ]
 .pull-right[
-```{r}
+```{r, out.height="380px"}
 ggplot(data = pct_data, 
-       aes(x = grade, y = pct, 
+       aes(x = species, y = pct, 
            fill = sex)) +
-  geom_col(position = "dodge")+
+  geom_col(position = "dodge") + #<<
   ylab("Percent")
 ```
 ]

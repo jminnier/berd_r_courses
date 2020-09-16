@@ -1,0 +1,99 @@
+
+
+---
+
+# Save data frame
+
+* Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
+```{r, eval=FALSE}
+save(mydata, file = "data/mydata.RData")  # saving mydata within the data folder
+```
+
+You can load .RData files using the load() command:
+
+```{r, eval=FALSE}
+load("data/mydata.RData")
+```
+  
+
+<br>
+
+* Save __csv__ file: comma-separated values
+
+```{r, eval=FALSE}
+write.csv(mydata, file = "data/mydata.csv", col.names = TRUE, row.names = FALSE)
+```
+
+---
+
+class: center, middle, inverse
+
+# More commands to filter rows
+
+<!-- TO-DO: rename? -->
+
+---
+
+# Remove rows with missing data
+
+`drop_na()` (or `na.omit()`) removes *all* rows with *any* missing (`NA`) values in *any* column
+
+```{r}
+mydata %>% drop_na()
+```
+
+For more on dealing with missing data, see [Tidyverse part 2 workshop](https://jminnier-berd-r-courses.netlify.app/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html#35)
+
+---
+
+# Remove rows with duplicated data
+
+`distinct()` removes rows that are duplicates of other rows
+
+```{r}
+data_dups <- tibble(
+  name = c("Ana","Bob","Cara", "Ana"),
+  race = c("Hispanic","Other", "White", "Hispanic")
+)
+```
+
+.pull-left[
+```{r}
+data_dups
+```
+]
+.pull-right[
+```{r}
+data_dups %>% distinct()
+```
+]
+
+---
+
+# Order rows: `arrange()`
+
+Use `arrange()` to order the rows by the values in specified columns
+
+```{r}
+mydata %>% arrange(bmi, weight_kg) %>% head(n=3)
+
+mydata %>% arrange(desc(bmi), weight_kg) %>% head(n=3)
+```
+
+
+
+---
+
+# Combine `summarize()` with other tidy functions
+
+```{r}
+mydata %>% 
+  group_by(grade) %>% 
+  summarize(n_per_group = n(), 
+            bmi_mean =mean(bmi),
+            bmi_sd = sd(bmi, na.rm = TRUE)) %>%
+  mutate(bmi_cv = bmi_sd/bmi_mean) %>% #<<
+  filter(bmi_cv > .2)  #<<
+```
+
+

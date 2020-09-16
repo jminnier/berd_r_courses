@@ -1,4 +1,14 @@
 
+
+---
+
+class: center, middle, inverse
+
+# Data Wrangling
+
+<center><img src="img/horst_data_cowboy.png" width="70%" height="75%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
+
+
 ---
 
 class: center, middle, inverse
