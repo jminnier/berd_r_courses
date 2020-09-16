@@ -32,7 +32,7 @@ class: inverse, middle, center
 - A data set about penguins at Palmer Station, Antarctica! More info at [github.com/allisonhorst/palmerpenguins](https://github.com/allisonhorst/palmerpenguins)
 - Data were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network.
 - Each row is a penguin measurement
-- Some false missingness was induced for this practice.
+- Some false missingness was induced for practice in this workshop.
 
 <center><img src="img/penguins_pic.png" width="50%" height="50%"><img src="img/penguins_bill.png" width="50%" height="50%"></center>
 
@@ -45,7 +45,7 @@ class: inverse, middle, center
 
 1. Create a folder to contain all your files.
 2. Move data file (`penguins.csv`) into this folder.
-3. Create an Rstudio project inside this folder. (next slides)
+3. Create an RStudio project inside this folder. (next slides)
 4. Create a new Rmd for your analyses/homework.
 
 ## Do steps 1 & 2 now!
@@ -224,12 +224,11 @@ penguins
 ]
 .pull-right-40[
 
-* Allows different columns to be of different data types (i.e. numeric vs. text)
+* Different columns can be of different data types (i.e. numeric vs. text)
 * Both numeric and text can be stored within a column (stored together as *text*).
 
 * Vectors and data frames are examples of _**objects**_ in R. 
   + There are other types of R objects to store data, such as matrices, lists.
-  + These will be discussed in future R workshops.
 ]
 
 

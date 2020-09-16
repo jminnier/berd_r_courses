@@ -35,68 +35,35 @@ layout: true
 
 
 
-# Practice questions 1
+# Practice 1 (pg. 1)
 
-1. Open a new R script and type code/answers for next tasks in it. Save as `Practice1.R`
+1. Create a new Rmd file to type the code and answers for the tasks below in it. 
+
+1. Remove the template text starting with line 12 (keep the YAML header and setup code chunk), and save the file as `Practice1.Rmd`
+
+1. Create a new code chunk. 
 
 1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
-1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+1. What does the command `sum(a1)` do? 
 
-1. What is the sum of `a1` and `a2`? 
+1. What does the command `length(a1)` do? 
 
-1. What does the command `sum(a1)` do?
+1. Use the `sum` and `length` commands to calculate the average of the values in `a1`.
 
-1. What does the command `length(a1)` do?
+1. Knit the Rmd file.
 
-1. Use the commands to calculate the average of the values in `a1`.
-
-1. The formula for the first `\(n\)` integers is `\(n(n+1)/2\)`. Compute the sum of all integers from 1 to 100 to verify that this formula holds for `\(n=100\)`. 
-
-1. Compute the sum of the squares of all integers from 1 to 100.
-
-1. Take a break!
 
 ---
 
-# Answers to practice questions 1
+# Answers to Practice 1 questions
 
-__#2__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
-
-__#3__ Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+__#4__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
 
 ```r
 a1 &lt;- 4:10
-a2 &lt;- c(4, 6, 8, 10)
-# the following works as well:
-a2 &lt;- 2*(2:5)
-# or
-a2 &lt;- seq(4, 10, by=2)
 ```
-
----
-
-__#4__ What is the sum of `a1` and `a2`? 
-
-
-```r
-a1+a2
-```
-
-```
-Warning in a1 + a2: longer object length is not a multiple of shorter object
-length
-```
-
-```
-[1]  8 11 14 17 12 15 18
-```
-
-Note that instead of giving an error, the terms of `a1` are repeated as needed since `a2` is longer than `a1`
-
-
----
 
 __#5__ What does the command `sum(a1)` do?
 
@@ -111,7 +78,7 @@ sum(a1)
 
 `sum` adds up the values in the vector
 
-&lt;br&gt;
+---
 
 __#6__ What does the command `length(a1)` do?
 
@@ -125,8 +92,6 @@ length(a1)
 ```
 
 `length` is the number of values in the vector
-
----
 
 __#7__ Use the commands to calculate the average of the values in `a1`.
 
@@ -150,59 +115,23 @@ mean(a1)
 
 ---
 
-__#8__ The formula for the first `\(n\)` integers is `\(n(n+1)/2\)`. Compute the sum of all integers from 1 to 100 to verify that this formula holds for `\(n=100\)`. 
+# Practice 1 (pg. 2)
+
+* Run the code below to install the `tidyverse` and `janitor` packages in R, which we will be using in upcoming slides.
+  + If you get a message about restarting R, click Yes.
+  + If you get an error message (warnings are ok), ask a helper.
 
 
 ```r
-sum(1:100)
+# install.packages("tidyverse")
+# install.packages("janitor")
 ```
 
-```
-[1] 5050
-```
-
-```r
-# verify formula for n=100:
-n=100
-n * (n+1) / 2
-```
-
-```
-[1] 5050
-```
+* After running the code, comment out the code with `#` in front of the commands so that they do not run when knitting the file. 
+    + *We only need to install packages once* and thus do not need to run this code again.
 
 
----
-
-__#9__ Compute the sum of the squares of all integers from 1 to 100.
-
-
-```r
-# The following code creates a vector of the squares of all integers from 1 to 100
-(1:100)^2
-```
-
-```
-  [1]     1     4     9    16    25    36    49    64    81   100   121   144
- [13]   169   196   225   256   289   324   361   400   441   484   529   576
- [25]   625   676   729   784   841   900   961  1024  1089  1156  1225  1296
- [37]  1369  1444  1521  1600  1681  1764  1849  1936  2025  2116  2209  2304
- [49]  2401  2500  2601  2704  2809  2916  3025  3136  3249  3364  3481  3600
- [61]  3721  3844  3969  4096  4225  4356  4489  4624  4761  4900  5041  5184
- [73]  5329  5476  5625  5776  5929  6084  6241  6400  6561  6724  6889  7056
- [85]  7225  7396  7569  7744  7921  8100  8281  8464  8649  8836  9025  9216
- [97]  9409  9604  9801 10000
-```
-
-```r
-# Now add the squares:
-sum((1:100)^2)
-```
-
-```
-[1] 338350
-```
-
+* __Take a break!__
 
 ---
 
@@ -210,7 +139,123 @@ sum((1:100)^2)
 
 # Practice 2
 
+Create a new Rmd for Practice 2 or continue in your current Rmd.
+
+1. Find the median bill length. Is the median bill length similar to the mean?
+
+1. What is the distance between the smallest and largest bill *depths*?
+
+1. What does the `range()` command do? Try it out on the bill depths.
+
+1. Make a scatterplot with bill length on the x-axis and bill depth on the y-axis. What is the relationship between bill length and depth?
+
+1. Knit your Rmd file. 
+
+1. If you have time, 
+    * install the package `skimr`
+    * load the package
+    * run the command `skim(penguins)`
+    * what does the `skim` command do?
+
+---
+
+
 # Practice 2 Answers
+
+__#1__ Find the median bill length. Is the median bill length similar to the mean?
+
+
+```r
+median(penguins$bill_length_mm, na.rm = TRUE)
+```
+
+```
+[1] 44.7
+```
+
+```r
+mean(penguins$bill_length_mm, na.rm = TRUE)
+```
+
+```
+[1] 44.00387
+```
+
+The mean and median bill lengths are similar to each other. 
+
+---
+
+__#2__ What is the distance between the smallest and largest bill *depths*?
+
+
+```r
+max(penguins$bill_depth_mm) - min(penguins$bill_depth_mm)
+```
+
+```
+[1] 8.4
+```
+
+The distance between the smallest and largest bill depths is 8.4 mm.  
+
+*Note that we do not need to use `na.rm = TRUE` for bill depths since there are no missing values.
+
+__#3__ What does the `range()` command do? Try it out on the bill depths.
+
+
+```r
+range(penguins$bill_depth_mm)
+```
+
+```
+[1] 13.1 21.5
+```
+
+The `range()` command gives the minimum and maximum values.
+
+---
+
+__#4__ Make a scatterplot with bill length on the x-axis and bill depth on the y-axis. What is the relationship between bill length and depth?
+
+
+```r
+plot(penguins$bill_length_mm, 
+     penguins$bill_depth_mm, 
+   xlab = "Length", ylab = "Depth", 
+   main = "Bill depth vs. length")
+```
+
+&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+__#6__ If you have time, 
+
+* install the package `skimr`
+* load the package
+* run the command `skim(penguins)`
+* what does the `skim` command do?
+
+
+.pull-left-40[
+
+```r
+# install.packages("skimr")
+library(skimr)
+skim(penguins)
+```
+
+The `skim()` command gives summaries of each of the variables in the dataset.
+]
+
+.pull-right-60[
+&lt;center&gt;
+&lt;img src="img/skim_penguins.png" width="100%" height="100%"&gt;
+&lt;/center&gt;
+
+]
+
+
 
 ---
 
@@ -375,7 +420,7 @@ dim(boys)
 ```
 
 ```
-[1]  8 11
+[1]  8 10
 ```
 
 ```r
@@ -384,7 +429,7 @@ dim(girls)
 ```
 
 ```
-[1] 12 11
+[1] 12 10
 ```
 
 Check number of boys &amp; girls:
@@ -439,7 +484,7 @@ summary(girls$bmi); sd(girls$bmi)
 boxplot(mydata$bmi ~ mydata$sex)
 ```
 
-&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -453,7 +498,7 @@ __#4__ Plot BMI vs. weight for each gender separately. Do they have similar rela
 plot(boys$bmi, boys$weight)
 ```
 
-&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -464,7 +509,7 @@ plot(boys$bmi, boys$weight)
 plot(girls$bmi, girls$weight)
 ```
 
-&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_Practice_Answers_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 

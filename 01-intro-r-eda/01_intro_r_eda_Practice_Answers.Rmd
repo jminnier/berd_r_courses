@@ -79,57 +79,34 @@ penguins <- read_csv(here::here("01-intro-r-eda","data","penguins.csv"))
 
 
 
-# Practice questions 1
+# Practice 1 (pg. 1)
 
-1. Open a new R script and type code/answers for next tasks in it. Save as `Practice1.R`
+1. Create a new Rmd file to type the code and answers for the tasks below in it. 
+
+1. Remove the template text starting with line 12 (keep the YAML header and setup code chunk), and save the file as `Practice1.Rmd`
+
+1. Create a new code chunk. 
 
 1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
-1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+1. What does the command `sum(a1)` do? 
 
-1. What is the sum of `a1` and `a2`? 
+1. What does the command `length(a1)` do? 
 
-1. What does the command `sum(a1)` do?
+1. Use the `sum` and `length` commands to calculate the average of the values in `a1`.
 
-1. What does the command `length(a1)` do?
+1. Knit the Rmd file.
 
-1. Use the commands to calculate the average of the values in `a1`.
-
-1. The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
-
-1. Compute the sum of the squares of all integers from 1 to 100.
-
-1. Take a break!
 
 ---
 
-# Answers to practice questions 1
+# Answers to Practice 1 questions
 
-__#2__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
-
-__#3__ Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+__#4__ Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
 ```{r}
 a1 <- 4:10
-a2 <- c(4, 6, 8, 10)
-# the following works as well:
-a2 <- 2*(2:5)
-# or
-a2 <- seq(4, 10, by=2)
 ```
-
----
-
-__#4__ What is the sum of `a1` and `a2`? 
-
-````{r warning=TRUE}
-a1+a2
-````
-
-Note that instead of giving an error, the terms of `a1` are repeated as needed since `a2` is longer than `a1`
-
-
----
 
 __#5__ What does the command `sum(a1)` do?
 
@@ -139,7 +116,7 @@ sum(a1)
 
 `sum` adds up the values in the vector
 
-<br>
+---
 
 __#6__ What does the command `length(a1)` do?
 
@@ -148,8 +125,6 @@ length(a1)
 ```
 
 `length` is the number of values in the vector
-
----
 
 __#7__ Use the commands to calculate the average of the values in `a1`.
 
@@ -162,43 +137,123 @@ mean(a1)
 
 ---
 
-__#8__ The formula for the first $n$ integers is $n(n+1)/2$. Compute the sum of all integers from 1 to 100 to verify that this formula holds for $n=100$. 
+# Practice 1 (pg. 2)
 
-```{r}
-sum(1:100)
-# verify formula for n=100:
-n=100
-n * (n+1) / 2
+* Run the code below to install the `tidyverse` and `janitor` packages in R, which we will be using in upcoming slides.
+  + If you get a message about restarting R, click Yes.
+  + If you get an error message (warnings are ok), ask a helper.
+
+```{r eval=FALSE}
+# install.packages("tidyverse")
+# install.packages("janitor")
 ```
 
+* After running the code, comment out the code with `#` in front of the commands so that they do not run when knitting the file. 
+    + *We only need to install packages once* and thus do not need to run this code again.
 
----
 
-__#9__ Compute the sum of the squares of all integers from 1 to 100.
-
-```{r}
-# The following code creates a vector of the squares of all integers from 1 to 100
-(1:100)^2
-
-# Now add the squares:
-sum((1:100)^2)
-```
-
+* __Take a break!__
 
 ---
 
 ```{r echo=FALSE}
-mydata <- read.csv(here::here("01-getting-started-v2","data","yrbss_demo.csv"))
-# mydata <- read.csv("data/yrbss_demo.csv")
-
-# Add height column to data frame
-mydata$height_m <- sqrt( mydata$weight_kg / mydata$bmi)
-
+penguins <- read_csv(here::here("01-intro-r-eda","data","penguins.csv"))
+mydata <- read_csv(here::here("01-intro-r-eda","data","yrbss.csv"))
 ```
 
 # Practice 2
 
+Create a new Rmd for Practice 2 or continue in your current Rmd.
+
+1. Find the median bill length. Is the median bill length similar to the mean?
+
+1. What is the distance between the smallest and largest bill *depths*?
+
+1. What does the `range()` command do? Try it out on the bill depths.
+
+1. Make a scatterplot with bill length on the x-axis and bill depth on the y-axis. What is the relationship between bill length and depth?
+
+1. Knit your Rmd file. 
+
+1. If you have time, 
+    * install the package `skimr`
+    * load the package
+    * run the command `skim(penguins)`
+    * what does the `skim` command do?
+
+---
+
+
 # Practice 2 Answers
+
+__#1__ Find the median bill length. Is the median bill length similar to the mean?
+
+```{r}
+median(penguins$bill_length_mm, na.rm = TRUE)
+mean(penguins$bill_length_mm, na.rm = TRUE)
+```
+
+The mean and median bill lengths are similar to each other. 
+
+---
+
+__#2__ What is the distance between the smallest and largest bill *depths*?
+
+```{r}
+max(penguins$bill_depth_mm) - min(penguins$bill_depth_mm)
+```
+
+The distance between the smallest and largest bill depths is 8.4 mm.  
+
+*Note that we do not need to use `na.rm = TRUE` for bill depths since there are no missing values.
+
+__#3__ What does the `range()` command do? Try it out on the bill depths.
+
+```{r}
+range(penguins$bill_depth_mm)
+```
+
+The `range()` command gives the minimum and maximum values.
+
+---
+
+__#4__ Make a scatterplot with bill length on the x-axis and bill depth on the y-axis. What is the relationship between bill length and depth?
+
+```{r fig.height=5, fig.width=5}
+plot(penguins$bill_length_mm, 
+     penguins$bill_depth_mm, 
+   xlab = "Length", ylab = "Depth", 
+   main = "Bill depth vs. length")
+```
+
+---
+
+__#6__ If you have time, 
+
+* install the package `skimr`
+* load the package
+* run the command `skim(penguins)`
+* what does the `skim` command do?
+
+
+.pull-left-40[
+```{r eval=FALSE}
+# install.packages("skimr")
+library(skimr)
+skim(penguins)
+```
+
+The `skim()` command gives summaries of each of the variables in the dataset.
+]
+
+.pull-right-60[
+<center>
+<img src="img/skim_penguins.png" width="100%" height="100%">
+</center>
+
+]
+
+
 
 ---
 

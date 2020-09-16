@@ -40,7 +40,7 @@ layout: true
 
 ### Zoom rules:
 
-1. **Change your name in Zoom** to a made up name/animal/word if you *do not want your name in recording* (show participants list, next to your name at the top there are options to rename yourself). **Turn off your video.** 
+1. **[Change your name in Zoom](https://teaching.nmc.edu/knowledgebase/changing-your-name-in-a-zoom-meeting/)** to a made up name/animal/word if you *do not want your name in recording* (show participants list, next to your name at the top there are options to rename yourself). **Turn off your video.** 
 1. **No private messages to instructors**, we won’t see them. **Chat message “Helpers” for help or to go to a breakout room**. The # of your breakout room corresponds to “your” helper. During breaks and exercises, helpers will be in breakout rooms.
 1. **Breakout rooms** are for getting help with R issues or with exercises. You won’t be able to see what is going on in the main room while you are in your breakout room. You can stay in main room during exercises if you wish, and can ask questions to the presenters in the main room during that time (unmute and speak, or in chat).
 
@@ -206,7 +206,7 @@ __Typing and executing code in the console __
 
 ---
 
-# We can do math
+# Math calculations using R
 
 
 .pull-left[
@@ -363,7 +363,8 @@ Math using variables with just one value
 --
 
 .pull-right[
-Math on vectors of values: __element-wise__ computation
+Math on vectors of values:  
+__element-wise__ computation
 
 ```r
 &gt; a &lt;- 3:6
@@ -481,62 +482,7 @@ Arguments not specified, but listed in order:
 
 ---
 
-# Missing values
 
-Missing values are denoted as `NA` and are handled differently depending on the operation. There are special functions for `NA` (i.e. `is.na()`, `na.omit()`).
-.pull-left[
-
-```r
-&gt; x &lt;- c(1, 2, NA, 5)
-&gt; is.na(x)
-```
-
-```
-[1] FALSE FALSE  TRUE FALSE
-```
-
-```r
-&gt; mean(x)
-```
-
-```
-[1] NA
-```
-
-```r
-&gt; mean(x, na.rm=TRUE)
-```
-
-```
-[1] 2.666667
-```
-]
-.pull-right[
-
-```r
-&gt; x &lt;- c("a", "a", NA, "b")
-&gt; table(x)
-```
-
-```
-x
-a b 
-2 1 
-```
-
-```r
-&gt; table(x, useNA = "always")
-```
-
-```
-x
-   a    b &lt;NA&gt; 
-   2    1    1 
-```
-
-]
-
----
 
 # Common console errors (1/2)
  
@@ -599,6 +545,20 @@ Error in install.packages(dplyr): object 'dplyr' not found
 
 
 
+
+
+---
+
+class: inverse, center, middle
+
+# Coding with R Markdown (Rmd)
+
+## or, creating reproducible reports
+
+&lt;center&gt;&lt;img src="img/horst_rmarkdown_wizards.png" width="60%" height="100%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+
+---
+
 #  Create an R Markdown file (`.Rmd`) 
 
 &lt;!-- * Note that both of these options show the keyboard shortcut for your operating system   --&gt;
@@ -611,7 +571,7 @@ Two options:
 Pop-up window:
 * Enter a title and your name
 * Keep default HTML output format
-* Then click OK.
+* Then click OK
 
 &lt;!-- ![](img/01_rmd_screenshot_popup.png)   --&gt;
 &lt;center&gt;&lt;img src="img/01_rmd_screenshot_popup.png" width="60%" height="100%"&gt;&lt;/center&gt;
@@ -684,24 +644,24 @@ To **knit** the .Rmd file, either
 * A new window will open with the html output.
 * You will now see both .Rmd and .html files in the folder where you saved the .Rmd file.
 
-__Remarks:__
+__Note:__
 * The template .Rmd file that RStudio creates will knit to an html file by default
-* Watch the [Reproducible Reports with R Markdown](https://github.com/jminnier/berd_r_courses) workshop for more customization and output formats (Word, pdf, slides).
-    + Slides at https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown_slides.html.
 
 
 
 ---
 
-class: middle, inverse
 
 # 3 types of R Markdown content
 
-1. &lt;span style="color:darkorange"&gt; *Code chunks*&lt;/span&gt;: type R code and execute it to see code output
-2. Text: write about your analyses
-3. YAML metadata: customize the report
+1. &lt;span style="color:darkorange"&gt;__Code chunks__&lt;/span&gt;: type R code and execute it to see code output
+2. __Text__: write about your analyses
+3. __YAML metadata__: customize the report
 
-We will first focus on using code chunks.
+* This workshop will focus on using &lt;span style="color:darkorange"&gt;code chunks&lt;/span&gt;. 
+* Watch the [Reproducible Reports with R Markdown](https://github.com/jminnier/berd_r_courses) workshop for  customization options and different output formats (Word, pdf, slides).
+    + Slides at https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown_slides.html.
+
 
 ---
 
@@ -808,32 +768,32 @@ class: center, inverse, middle
 
 ---
 
-# Practice 1
+# Practice 1 (pg. 1)
 
-1. Create a new Rmd file and type the code and answers for tasks below in it. Save as `Practice1.Rmd`
+1. Create a new Rmd file to type the code and answers for the tasks below in it. 
 
-1. Remove any template text you don't need (starting with line 12), and create a new code chunk.
+1. Remove the template text starting with line 12 (keep the YAML header and setup code chunk), and save the file as `Practice1.Rmd`
+
+1. Create a new code chunk. 
 
 1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
-1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+1. What does the command `sum(a1)` do? 
 
-1. What do you get when you add `a1` to `a2`? 
-
-1. What does the command `sum(a1)` do?
-
-1. What does the command `length(a1)` do?
+1. What does the command `length(a1)` do? 
 
 1. Use the `sum` and `length` commands to calculate the average of the values in `a1`.
 
 1. Knit the Rmd file.
 
-We will be using functions within the `tidyverse` package in R.
 
-- Copy the following installation code
-  + run in Rmd - only run this once, then comment it out with `#` in front
-  + if you get a message about restarting R, click Yes
-  + if you get an error message IN RED (warnings in orange or black text are ok), ask a TA
+---
+
+# Practice 1 (pg. 2)
+
+* Run the code below to install the `tidyverse` and `janitor` packages in R, which we will be using in upcoming slides.
+  + If you get a message about restarting R, click Yes.
+  + If you get an error message (warnings are ok), ask a helper.
 
 
 ```r
@@ -841,8 +801,11 @@ install.packages("tidyverse")
 install.packages("janitor")
 ```
 
+* After running the code, comment out the code with `#` in front of the commands so that they do not run when knitting the file. 
+    + *We only need to install packages once* and thus do not need to run this code again.
 
-1. Take a break!
+
+* __Take a break!__
 
 
 
@@ -879,7 +842,7 @@ class: inverse, middle, center
 - A data set about penguins at Palmer Station, Antarctica! More info at [github.com/allisonhorst/palmerpenguins](https://github.com/allisonhorst/palmerpenguins)
 - Data were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network.
 - Each row is a penguin measurement
-- Some false missingness was induced for this practice.
+- Some false missingness was induced for practice in this workshop.
 
 &lt;center&gt;&lt;img src="img/penguins_pic.png" width="50%" height="50%"&gt;&lt;img src="img/penguins_bill.png" width="50%" height="50%"&gt;&lt;/center&gt;
 
@@ -892,7 +855,7 @@ class: inverse, middle, center
 
 1. Create a folder to contain all your files.
 2. Move data file (`penguins.csv`) into this folder.
-3. Create an Rstudio project inside this folder. (next slides)
+3. Create an RStudio project inside this folder. (next slides)
 4. Create a new Rmd for your analyses/homework.
 
 ## Do steps 1 &amp; 2 now!
@@ -1090,12 +1053,11 @@ penguins
 ]
 .pull-right-40[
 
-* Allows different columns to be of different data types (i.e. numeric vs. text)
+* Different columns can be of different data types (i.e. numeric vs. text)
 * Both numeric and text can be stored within a column (stored together as *text*).
 
 * Vectors and data frames are examples of _**objects**_ in R. 
   + There are other types of R objects to store data, such as matrices, lists.
-  + These will be discussed in future R workshops.
 ]
 
 
@@ -1411,7 +1373,6 @@ penguins[, 3]
 
 
 ---
-
 class: inverse, center, middle
 
 # Working with the data
@@ -1420,7 +1381,7 @@ class: inverse, center, middle
 
 # The $
 
-Suppose we want to single out the column of BMI values.
+Suppose we want to single out the column of bill length values.
 
 .pull-left[
 * How did we previously learn to do this?
@@ -1488,19 +1449,19 @@ penguins$bill_length_mm
 
 
 ```r
-hist(mydata$bmi)
+hist(penguins$bill_length_mm)
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
 
 With extra features: 
 
 
 ```r
-hist(mydata$bmi, xlab = "BMI", main="BMIs of students")
+hist(penguins$bill_length_mm, xlab = "Length (mm)", main="Penguin bills")
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1509,10 +1470,10 @@ hist(mydata$bmi, xlab = "BMI", main="BMIs of students")
 .pull-left[
 
 ```r
-boxplot(mydata$bmi)
+boxplot(penguins$bill_length_mm)
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1521,13 +1482,14 @@ boxplot(mydata$bmi)
 .pull-right[
 
 ```r
-boxplot(mydata$bmi ~ mydata$sex, 
+boxplot(penguins$bill_length_mm ~ 
+          penguins$sex, 
   horizontal = TRUE, 
-  xlab = "BMI", ylab = "sex",
-  main = "BMIs of students by sex")
+  xlab = "Length (mm)", ylab = "Sex",
+  main = "Penguin bills by sex")
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1537,91 +1499,93 @@ boxplot(mydata$bmi ~ mydata$sex,
 .pull-left[
 
 ```r
-plot(mydata$weight_kg, mydata$bmi)
+plot(penguins$flipper_length_mm, 
+     penguins$bill_length_mm)
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
 
 ```r
-plot(mydata$weight_kg, mydata$bmi, 
-   xlab = "weight (kg)", ylab = "BMI", 
-   main = "BMI vs. Weight")
+plot(penguins$flipper_length_mm, 
+     penguins$bill_length_mm, 
+   xlab = "Flipper", ylab = "Bill", 
+   main = "Bill vs. flipper length")
 ```
 
-&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-56-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part1_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-# Summary stats of numeric data (1/2)
+# Summary stats of numeric data (1/3)
 
 * Standard R `summary` command
 
 
 ```r
-summary(mydata$bmi)
+summary(penguins$flipper_length_mm)
 ```
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   17.48   20.36   22.23   23.01   26.58   29.35
+##   172.0   190.0   197.0   200.9   213.0   231.0
 ```
 
 * Mean and standard deviation
 
 
 ```r
-mean(mydata$bmi)
+mean(penguins$flipper_length_mm)
 ```
 
 ```
-## [1] 23.00838
+## [1] 200.9152
 ```
 
 ```r
-sd(mydata$bmi)
+sd(penguins$flipper_length_mm)
 ```
 
 ```
-## [1] 3.56471
+## [1] 14.06171
 ```
 
 ---
 
-# Summary stats of numeric data (2/2)
+# Summary stats of numeric data (2/3)
 &lt;!-- QQ: Why is (2/2) being cut off? It's not cut off for (1/2).--&gt;
 * Min, max, &amp; median
 
 .pull-left[
 
 ```r
-min(mydata$bmi)
+min(penguins$flipper_length_mm)
 ```
 
 ```
-## [1] 17.4814
+## [1] 172
 ```
 
 ```r
-max(mydata$bmi)
+max(penguins$flipper_length_mm)
 ```
 
 ```
-## [1] 29.3495
+## [1] 231
 ```
 ]
 
 .pull-right[
 
 ```r
-median(mydata$bmi)
+median(penguins$flipper_length_mm)
 ```
 
 ```
-## [1] 22.22985
+## [1] 197
 ```
 ]
 
@@ -1629,23 +1593,62 @@ median(mydata$bmi)
 
 
 ```r
-quantile(mydata$bmi, prob=c(0, .25, .5, .75, 1))  
+quantile(penguins$flipper_length_mm, prob=c(0, .25, .5, .75, 1))  
 ```
 
 ```
-##       0%      25%      50%      75%     100% 
-## 17.48140 20.35878 22.22985 26.57810 29.34950
+##   0%  25%  50%  75% 100% 
+##  172  190  197  213  231
 ```
 
 
-&lt;!-- # Add height column to data frame --&gt;
 
-&lt;!-- Since `\(\textrm{BMI} = \frac{kg}{m^2}\)`, we have --&gt;
-&lt;!-- `\(\textrm{height}(m) = \sqrt{\frac{\textrm{weight}(kg)}{\textrm{BMI}}}\)` --&gt;
+---
+
+# Summary stats of numeric data (3/3)
+
+.pull-left-60[
+* Find the mean bill length
 
 
-&lt;!-- mydata$height_m &lt;- sqrt( mydata$weight_kg / mydata$bmi ) --&gt;
-&lt;!-- mydata$height_m --&gt;
+```r
+mean(penguins$bill_length_mm)
+```
+
+```
+## [1] NA
+```
+
+*Why did we get `NA` for the mean?*
+
+]
+
+.pull-right-40[
+
+Since there are missing values (`NA`), we need to tell R to remove them from the data when calculating the mean.
+
+
+```r
+mean(penguins$bill_length_mm, 
+*    na.rm = TRUE)
+```
+
+```
+## [1] 44.00387
+```
+]
+
+
+
+```r
+summary(penguins$bill_length_mm)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##   32.10   39.45   44.70   44.00   48.52   59.60       6
+```
+
 
 
 
@@ -1655,8 +1658,23 @@ quantile(mydata$bmi, prob=c(0, .25, .5, .75, 1))
 
 # Practice 2
 
-1. Create a new Rmd or continue in your current Rmd.
+Create a new Rmd for Practice 2 or continue in your current Rmd.
 
+1. Find the median bill length. Is the median bill length similar to the mean?
+
+1. What is the distance between the smallest and largest bill *depths*?
+
+1. What does the `range()` command do? Try it out on the bill depths.
+
+1. Make a scatterplot with bill length on the x-axis and bill depth on the y-axis. What is the relationship between bill length and depth?
+
+1. Knit your Rmd file. 
+
+1. If you have time: 
+    * install the package `skimr`
+    * load the package 
+    * run the command `skim(penguins)`
+    * what does the `skim` command do?
 
 
 
@@ -1931,7 +1949,7 @@ penguins %&gt;% tabyl(species)
 
 ```r
 # output can be treated as tibble
-penguins %&gt;% tabyl(species) %&gt;% select(-n)
+penguins%&gt;%tabyl(species)%&gt;%select(-n)
 ```
 
 ```

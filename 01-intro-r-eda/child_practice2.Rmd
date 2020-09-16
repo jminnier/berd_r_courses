@@ -4,7 +4,22 @@
 
 # Practice 2
 
-1. Create a new Rmd or continue in your current Rmd.
+Create a new Rmd for Practice 2 or continue in your current Rmd.
 
+1. Find the median bill length. Is the median bill length similar to the mean?
+
+1. What is the distance between the smallest and largest bill *depths*?
+
+1. What does the `range()` command do? Try it out on the bill depths.
+
+1. Make a scatterplot with bill length on the x-axis and bill depth on the y-axis. What is the relationship between bill length and depth?
+
+1. Knit your Rmd file. 
+
+1. If you have time: 
+    * install the package `skimr`
+    * load the package 
+    * run the command `skim(penguins)`
+    * what does the `skim` command do?
 
 

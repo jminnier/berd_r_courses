@@ -155,7 +155,7 @@ penguins %>% tabyl(species)
 
 ```{r}
 # output can be treated as tibble
-penguins %>% tabyl(species) %>% select(-n)
+penguins%>%tabyl(species)%>%select(-n)
 ```
 ]
 .pull-right[

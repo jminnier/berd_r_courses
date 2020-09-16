@@ -8,37 +8,40 @@ class: center, inverse, middle
 
 ---
 
-# Practice 1
+# Practice 1 (pg. 1)
 
-1. Create a new Rmd file and type the code and answers for tasks below in it. Save as `Practice1.Rmd`
+1. Create a new Rmd file to type the code and answers for the tasks below in it. 
 
-1. Remove any template text you don't need (starting with line 12), and create a new code chunk.
+1. Remove the template text starting with line 12 (keep the YAML header and setup code chunk), and save the file as `Practice1.Rmd`
+
+1. Create a new code chunk. 
 
 1. Create a vector of all integers from 4 to 10, and save it as `a1`. 
 
-1. Create a vector of _even_ integers from 4 to 10, and save it as `a2`. 
+1. What does the command `sum(a1)` do? 
 
-1. What do you get when you add `a1` to `a2`? 
-
-1. What does the command `sum(a1)` do?
-
-1. What does the command `length(a1)` do?
+1. What does the command `length(a1)` do? 
 
 1. Use the `sum` and `length` commands to calculate the average of the values in `a1`.
 
 1. Knit the Rmd file.
 
-We will be using functions within the `tidyverse` package in R.
 
-- Copy the following installation code
-  + run in Rmd - only run this once, then comment it out with `#` in front
-  + if you get a message about restarting R, click Yes
-  + if you get an error message IN RED (warnings in orange or black text are ok), ask a TA
+---
+
+# Practice 1 (pg. 2)
+
+* Run the code below to install the `tidyverse` and `janitor` packages in R, which we will be using in upcoming slides.
+  + If you get a message about restarting R, click Yes.
+  + If you get an error message (warnings are ok), ask a helper.
 
 ```{r eval=FALSE}
 install.packages("tidyverse")
 install.packages("janitor")
 ```
 
+* After running the code, comment out the code with `#` in front of the commands so that they do not run when knitting the file. 
+    + *We only need to install packages once* and thus do not need to run this code again.
 
-1. Take a break!
+
+* __Take a break!__

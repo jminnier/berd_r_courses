@@ -25,7 +25,7 @@ Two options:
 Pop-up window:
 * Enter a title and your name
 * Keep default HTML output format
-* Then click OK.
+* Then click OK
 
 <!-- ![](img/01_rmd_screenshot_popup.png)   -->
 <center><img src="img/01_rmd_screenshot_popup.png" width="60%" height="100%"></center>
@@ -98,24 +98,24 @@ To **knit** the .Rmd file, either
 * A new window will open with the html output.
 * You will now see both .Rmd and .html files in the folder where you saved the .Rmd file.
 
-__Remarks:__
+__Note:__
 * The template .Rmd file that RStudio creates will knit to an html file by default
-* Watch the [Reproducible Reports with R Markdown](https://github.com/jminnier/berd_r_courses) workshop for more customization and output formats (Word, pdf, slides).
-    + Slides at https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown_slides.html.
 
 
 
 ---
 
-class: middle, inverse
 
 # 3 types of R Markdown content
 
-1. <span style="color:darkorange"> *Code chunks*</span>: type R code and execute it to see code output
-2. Text: write about your analyses
-3. YAML metadata: customize the report
+1. <span style="color:darkorange">__Code chunks__</span>: type R code and execute it to see code output
+2. __Text__: write about your analyses
+3. __YAML metadata__: customize the report
 
-We will first focus on using code chunks.
+* This workshop will focus on using <span style="color:darkorange">code chunks</span>. 
+* Watch the [Reproducible Reports with R Markdown](https://github.com/jminnier/berd_r_courses) workshop for  customization options and different output formats (Word, pdf, slides).
+    + Slides at https://jminnier-berd-r-courses.netlify.com/03-rmarkdown/03_rmarkdown_slides.html.
+
 
 ---
 

@@ -7,7 +7,7 @@
 
 ### Zoom rules:
 
-1. **Change your name in Zoom** to a made up name/animal/word if you *do not want your name in recording* (show participants list, next to your name at the top there are options to rename yourself). **Turn off your video.** 
+1. **[Change your name in Zoom](https://teaching.nmc.edu/knowledgebase/changing-your-name-in-a-zoom-meeting/)** to a made up name/animal/word if you *do not want your name in recording* (show participants list, next to your name at the top there are options to rename yourself). **Turn off your video.** 
 1. **No private messages to instructors**, we won’t see them. **Chat message “Helpers” for help or to go to a breakout room**. The # of your breakout room corresponds to “your” helper. During breaks and exercises, helpers will be in breakout rooms.
 1. **Breakout rooms** are for getting help with R issues or with exercises. You won’t be able to see what is going on in the main room while you are in your breakout room. You can stay in main room during exercises if you wish, and can ask questions to the presenters in the main room during that time (unmute and speak, or in chat).
 

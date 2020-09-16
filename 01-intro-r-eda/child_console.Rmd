@@ -33,7 +33,7 @@ __Typing and executing code in the console __
 
 ---
 
-# We can do math
+# Math calculations using R
 
 
 .pull-left[
@@ -120,7 +120,8 @@ y
 --
 
 .pull-right[
-Math on vectors of values: __element-wise__ computation
+Math on vectors of values:  
+__element-wise__ computation
 ```{r prompt = TRUE, comment = NA}
 a <- 3:6
 a
@@ -179,27 +180,7 @@ seq(1,12,3)
 
 ---
 
-# Missing values
 
-Missing values are denoted as `NA` and are handled differently depending on the operation. There are special functions for `NA` (i.e. `is.na()`, `na.omit()`).
-.pull-left[
-```{r prompt = TRUE, comment = NA}
-x <- c(1, 2, NA, 5)
-is.na(x)
-mean(x)
-mean(x, na.rm=TRUE)
-```
-]
-.pull-right[
-```{r prompt = TRUE, comment = NA}
-x <- c("a", "a", NA, "b")
-table(x)
-table(x, useNA = "always")
-```
-
-]
-
----
 
 # Common console errors (1/2)
  
