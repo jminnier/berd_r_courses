@@ -113,7 +113,7 @@ penguins %>%
 
 ```{r}
 penguins %>%
-  summarize(across(where(is.numeric), mean, na.rm=TRUE))
+  summarize(across(c(bill_length_mm, bill_depth_mm), mean, na.rm=TRUE))
 ```
 
 ---
@@ -132,19 +132,25 @@ penguins %>%
 
 # Advanced `summarize(across())` (3/3)
 
+
+.pull-left-40[
 - Can also use `across()` to summarize based on true/false conditions ([more examples](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/))
 
-.pull-left[
+<center><img src="img/dplyr_across.png" width="100%" height="75%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
+]
+.pull-right-60[
 ```{r}
 penguins %>%
   summarize(
     across(where(is.character), #<<
            n_distinct))
+
+penguins %>%
+  summarize(across(where(is.numeric), #<<
+            min, na.rm=TRUE))
 ```
 ]
-.pull-right[
-<center><img src="img/dplyr_across.png" width="100%" height="75%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
-]
+
 ---
 
 # Frequency tables: simple `count()`

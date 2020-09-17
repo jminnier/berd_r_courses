@@ -16,6 +16,8 @@
 
 1. Create a 2x2 table of number of penguins measured in each year by each island.
 
+- **Take a break!**
+
 ```{r, include = FALSE}
 penguins %>% summarize(n_distinct(year))
 
