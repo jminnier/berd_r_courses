@@ -440,7 +440,7 @@ penguins %&gt;% tabyl(species, sex) %&gt;%
 ```
 ]
 
-- Base R has a `table` function, but it is clunkier and the output is not a data frame. 
+- Base R has a `table` function, but it is clunkier and the output is not a data frame (or tibble). 
 - See the [tabyl vignette](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html) for more information, adorn options, &amp; 3-way `tabyl`s
 
 
@@ -524,9 +524,16 @@ class: center, middle, inverse
 
 ---
 
-# `filter()` `\(\sim\)` rows
+# `filter()` rows that satisfy specified conditions
 
-filter data based on rows
+&lt;center&gt;&lt;img src="img/horst_dplyr_filter.jpg" width="80%" height="80%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+
+
+---
+
+# `filter()` options
+
+Subset rows of data by specifying conditions within `filter()`
 .pull-left-40[
 - math: `&gt;`,  `&lt;`,  `&gt;=`,  `&lt;=`
 -  double = for "is equal to":  `==`
@@ -538,36 +545,26 @@ filter data based on rows
 - `is.na()` to filter based on missing values
 - `%in%` to filter based on group membership
 - `!` in front negates the statement, as in 
-    + `!is.na(age)` 
-    + `!(grade %in% c("9th","10th"))`
+    + `!is.na(sex)` 
+    + `!(species %in% c("Adelie", "Gentoo"))`
 ]
 
 
 
 ```r
-mydata %&gt;% filter(bmi &gt; 20)
+penguins %&gt;% filter(bill_length_mm &gt; 55)
 ```
 
 ```
-## # A tibble: 15 x 10
-##        id age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-##  1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
-##  2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
-##  3 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
-##  4 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
-##  5 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
-##  6 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
-##  7 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
-##  8 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
-##  9 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
-## 10 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
-## 11 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
-## 12 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
-## 13 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
-## 14 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
-## 15 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
+## # A tibble: 5 x 9
+##      id species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+## 1  4026 Gentoo  Biscoe           59.6          17                230        6050
+## 2  2415 Gentoo  Biscoe           55.9          17                228        5600
+## 3  4629 Gentoo  Biscoe           55.1          16                230        5850
+## 4  2009 Chinst… Dream            58            17.8              181        3700
+## 5  4452 Chinst… Dream            55.8          19.8              207        4000
+## # … with 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
 ```
 
 
@@ -579,58 +576,54 @@ What do these commands do? Try them out:
 
 
 ```r
-mydata %&gt;% filter(age == "14 years old")
-mydata %&gt;% filter(bmi/weight_kg &lt; 0.5)    # can do math
-mydata %&gt;% filter((bmi &lt; 15) | (bmi &gt; 25))
-mydata %&gt;% filter(bmi &lt; 20, weight_kg &lt; 60, sex == "Female") # filter on multiple variables
+penguins %&gt;% filter(island == "Torgersen")
+penguins %&gt;% filter(bill_length_mm/bill_depth_mm &gt; 3)    # can do math
+penguins %&gt;% filter((body_mass_g &lt; 3000) | (body_mass_g &gt; 6000))
 
-mydata %&gt;% filter(id == 923122)      # note the use of == instead of just =
-mydata %&gt;% filter(sex == "Female")
-mydata %&gt;% filter(!(grade == "9th"))
-mydata %&gt;% filter(grade %in% c("10th", "11th"))
+# filter on multiple variables:
+penguins %&gt;% filter(body_mass_g &lt; 3000, bill_depth_mm &lt; 20, sex == "female") 
+penguins %&gt;% filter(body_mass_g &lt; 3000 &amp; bill_depth_mm &lt; 20 &amp; sex == "female") 
+penguins %&gt;% filter(body_mass_g &lt; 3000 | bill_depth_mm &lt; 20 | sex == "female") 
 
-mydata %&gt;% filter(is.na(bmi))
-mydata %&gt;% filter(!is.na(bmi))
+penguins %&gt;% filter(year == 2008)      # note the use of == instead of just =
+penguins %&gt;% filter(sex == "female")
+
+penguins %&gt;% filter(!(species == "Adelie"))
+penguins %&gt;% filter(species %in% c("Chinstrap", "Gentoo"))
+
+penguins %&gt;% filter(is.na(sex))
+penguins %&gt;% filter(!is.na(sex))
 ```
 
 ---
 
-# `select()` `\(\sim\)` columns
+# `select()` columns
 
 - select columns (variables)
 - no quotes needed around variable names
 - can be used to rearrange columns
-- uses special syntax that is flexible and has many options
+- syntax is flexible and has many options
 
 
 ```r
-mydata %&gt;% select(id, grade)
+penguins %&gt;% select(id, island, species, body_mass_g)
 ```
 
 ```
-## # A tibble: 20 x 2
-##         id grade
-##      &lt;dbl&gt; &lt;chr&gt;
-##  1  335340 10th 
-##  2  638618 9th  
-##  3  922382 9th  
-##  4  923122 9th  
-##  5  923963 10th 
-##  6  925603 10th 
-##  7  933724 10th 
-##  8  935435 12th 
-##  9 1096564 10th 
-## 10 1108114 9th  
-## 11 1306150 10th 
-## 12 1307481 12th 
-## 13 1307872 11th 
-## 14 1311617 10th 
-## 15 1313153 11th 
-## 16 1313291 11th 
-## 17 1313477 10th 
-## 18 1315121 11th 
-## 19 1315850 12th 
-## 20 1316123 12th
+## # A tibble: 342 x 4
+##       id island    species body_mass_g
+##    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;
+##  1  1689 Torgersen Adelie         3750
+##  2  4274 Torgersen Adelie         3800
+##  3  4539 Torgersen Adelie         3250
+##  4  2435 Torgersen Adelie         3450
+##  5  2326 Torgersen Adelie         3650
+##  6  2637 Torgersen Adelie         3625
+##  7  4443 Torgersen Adelie         4675
+##  8  2102 Torgersen Adelie         3475
+##  9  2975 Torgersen Adelie         4250
+## 10  3966 Torgersen Adelie         3300
+## # … with 332 more rows
 ```
 
 ---
@@ -640,16 +633,12 @@ mydata %&gt;% select(id, grade)
 There are many ways to select a set of variable names (columns):
 
 - `var1:var20`: all columns from `var1` to `var20`
-- `one_of(c("a", "b", "c"))`: all columns with names in the specified character vector of names
 - __Removing columns__
     + `-var1`: remove the column`var1`
     + `-(var1:var20)`: remove all columns from `var1` to `var20`
-- __Select using text within column names__
-    + `contains("date")`, `contains("_")`: all variable names that contain the specified string
-    + `starts_with("a")` or `ends_with("last")`: all variable names that start or end with the specificed string
-- __Rearranging columns__
-    + use `everything()` to select all columns not already named
-    + example: `select(var1, var20, everything())` moves the column `var20` to the second position
+- __Select by specifying text within column names__
+    + `contains("mm")`, `contains("_")`: all variable names that contain the specified string
+    + `starts_with("a")` or `ends_with("last")`: all variable names that start or end with the specified string
 
 See other examples in the [data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
 
@@ -663,24 +652,114 @@ First guess and then try them out.
 
 
 ```r
-mydata %&gt;% select(id:sex)
-mydata %&gt;% select(one_of(c("age","weight_kg")))
+penguins %&gt;% select(id:bill_length_mm)
 
-mydata %&gt;% select(-grade,-sex)
-mydata %&gt;% select(-(id:sex))
+penguins %&gt;% select(where(is.character))
+penguins %&gt;% select(where(is.numeric))
 
-mydata %&gt;% select(contains("race"))
-mydata %&gt;% select(starts_with("r"))
-mydata %&gt;% select(-contains("r"))
+penguins %&gt;% select(-id,-species)
+penguins %&gt;% select(-(id:island))
 
-mydata %&gt;% select(id, race4, everything())
+penguins %&gt;% select(contains("bill"))
+penguins %&gt;% select(starts_with("s"))
+penguins %&gt;% select(-contains("mm"))
+```
+
+
+---
+
+# `relocate()` columns to move them around
+
+&lt;center&gt;&lt;img src="img/horst_dplyr_relocate.png" width="60%" height="60%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
+
+
+---
+
+# `relocate()` columns
+
+- change the order of columns in dataset
+- default action is to list specified column names first
+- no quotes needed around variable names
+- similar options as with `select()`, plus special ones such as `.before` and `.after`
+
+
+```r
+penguins %&gt;% relocate(year, body_mass_g)
+```
+
+```
+## # A tibble: 342 x 9
+##     year body_mass_g    id species island bill_length_mm bill_depth_mm
+##    &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1  2007        3750  1689 Adelie  Torge…           39.1          18.7
+##  2  2007        3800  4274 Adelie  Torge…           NA            17.4
+##  3  2007        3250  4539 Adelie  Torge…           40.3          18  
+##  4  2007        3450  2435 Adelie  Torge…           36.7          19.3
+##  5  2007        3650  2326 Adelie  Torge…           39.3          20.6
+##  6  2007        3625  2637 Adelie  Torge…           38.9          17.8
+##  7  2007        4675  4443 Adelie  Torge…           NA            19.6
+##  8  2007        3475  2102 Adelie  Torge…           34.1          18.1
+##  9  2007        4250  2975 Adelie  Torge…           42            20.2
+## 10  2007        3300  3966 Adelie  Torge…           37.8          17.1
+## # … with 332 more rows, and 2 more variables: flipper_length_mm &lt;dbl&gt;,
+## #   sex &lt;chr&gt;
+```
+
+---
+
+# `relocate()` practice
+
+What order are the columns in using these commands?  
+First guess and then try them out.
+
+
+```r
+penguins %&gt;% relocate(species:bill_length_mm)
+
+penguins %&gt;% relocate(where(is.character))
+penguins %&gt;% relocate(where(is.numeric))
+
+penguins %&gt;% relocate(flipper_length_mm,.before = bill_length_mm)
+penguins %&gt;% relocate(species, .after = island)
+penguins %&gt;% relocate(species, .after = last_col())
+```
+
+
+---
+
+# Save your modified data
+
+* Use a new variable name and the `&lt;-` assignment operator to save a modified data frame
+* You can save the modified data using the same name, but it will replace the previous dataset
+
+
+```r
+penguins_sub &lt;- penguins %&gt;% select(id:island, sex)
+penguins_sub
+```
+
+```
+## # A tibble: 342 x 4
+##       id species island    sex   
+##    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt; 
+##  1  1689 Adelie  Torgersen male  
+##  2  4274 Adelie  Torgersen female
+##  3  4539 Adelie  Torgersen female
+##  4  2435 Adelie  Torgersen female
+##  5  2326 Adelie  Torgersen male  
+##  6  2637 Adelie  Torgersen female
+##  7  4443 Adelie  Torgersen male  
+##  8  2102 Adelie  Torgersen &lt;NA&gt;  
+##  9  2975 Adelie  Torgersen &lt;NA&gt;  
+## 10  3966 Adelie  Torgersen &lt;NA&gt;  
+## # … with 332 more rows
 ```
 
 ---
 
 class: center, middle, inverse
 
-# Changing the data
+# Make new variables
 
 &lt;center&gt;&lt;img src="img/horst_mutate.jpg" width="50%" height="50%"&gt;&lt;/center&gt;
 
@@ -688,170 +767,35 @@ class: center, middle, inverse
 
 ---
 
-# Save a new data frame, or overwrite existing one
-
-Use a new variable name on left side of `&lt;-` assignment to save updated data frames:
-
-
-```r
-mydata_new &lt;- mydata %&gt;% select(id:sex)
-mydata_new
-```
-
-```
-## # A tibble: 20 x 3
-##         id age                   sex   
-##      &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt; 
-##  1  335340 17 years old          Female
-##  2  638618 16 years old          Female
-##  3  922382 14 years old          Male  
-##  4  923122 15 years old          Male  
-##  5  923963 15 years old          Male  
-##  6  925603 16 years old          Male  
-##  7  933724 16 years old          Female
-##  8  935435 17 years old          Female
-##  9 1096564 15 years old          Male  
-## 10 1108114 17 years old          Female
-## 11 1306150 16 years old          Male  
-## 12 1307481 17 years old          Male  
-## 13 1307872 17 years old          Male  
-## 14 1311617 15 years old          Female
-## 15 1313153 16 years old          Female
-## 16 1313291 16 years old          Female
-## 17 1313477 16 years old          Female
-## 18 1315121 17 years old          Female
-## 19 1315850 17 years old          Female
-## 20 1316123 18 years old or older Female
-```
-
----
-
-# `rename()` `\(\sim\)` columns
-
-- renames column variables
-- `%&gt;% rename(new_name = old_name)`
-
-.pull-left[
-Renames the column, just prints the output
-
-```r
-# This does not save the new name
-mydata %&gt;% rename(record = id)
-```
-
-```
-## # A tibble: 20 x 10
-##    record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-##  1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
-##  2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
-##  3 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
-##  4 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
-##  5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
-##  6 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
-##  7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
-##  8 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
-##  9 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
-## 10 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
-## 11 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
-## 12 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
-## 13 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
-## 14 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
-## 15 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
-## 16 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
-## 17 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
-## 18 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
-## 19 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
-## 20 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
-```
-]
-.pull-right[
-
-Renames the column *and* overwrites `mydata` with renamed column:
-
-
-```r
-mydata &lt;- mydata %&gt;% rename(record = id)
-mydata
-```
-
-```
-## # A tibble: 20 x 10
-##    record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-##  1 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
-##  2 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
-##  3 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
-##  4 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
-##  5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
-##  6 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
-##  7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
-##  8 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
-##  9 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
-## 10 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
-## 11 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
-## 12 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
-## 13 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
-## 14 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
-## 15 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
-## 16 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
-## 17 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
-## 18 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
-## 19 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
-## 20 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
-```
-]
-
----
-
-# Make new variables
-
-&lt;img src="img/datawrangle_cheatsheet_makenewvars.png" width="100%" height="100%"&gt;
-[tidyverse data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
-
-
----
-
-# `mutate()`
+# `mutate()` the data
 
 Use `mutate()` to add new columns to a tibble
-* many options in how to define new column of data
-
+* Many options for how to define new column of data
 
 
 ```r
-newdata &lt;- mydata %&gt;% 
-   mutate(height_m = sqrt(weight_kg / bmi))   # use = (not &lt;- or ==) to define new variable
+penguins &lt;- penguins %&gt;% 
+*  mutate(bill_ratio = bill_length_mm / bill_depth_mm)
+# use = (not &lt;- or ==) to define new variable
 
-newdata %&gt;% select(bmi, weight_kg, height_m)
+penguins %&gt;% select(bill_ratio, bill_length_mm, bill_depth_mm)
 ```
 
 ```
-## # A tibble: 20 x 3
-##      bmi weight_kg height_m
-##    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1  27.6      66.2     1.55
-##  2  29.3      84.8     1.70
-##  3  18.2      57.6     1.78
-##  4  21.4      60.3     1.68
-##  5  19.6      63.5     1.80
-##  6  22.2      70.3     1.78
-##  7  21.0      45.4     1.47
-##  8  17.5      43.1     1.57
-##  9  22.5      79.4     1.88
-## 10  26.6      68.0     1.60
-## 11  21.2      67.1     1.78
-## 12  19.5      56.2     1.70
-## 13  20.6      61.7     1.73
-## 14  27.5      70.3     1.60
-## 15  26.6      68.0     1.60
-## 16  24.8      63.5     1.60
-## 17  25.0      76.7     1.75
-## 18  22.3      54.9     1.57
-## 19  19.5      49.9     1.60
-## 20  27.5      74.8     1.65
+## # A tibble: 342 x 3
+##    bill_ratio bill_length_mm bill_depth_mm
+##         &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+##  1       2.09           39.1          18.7
+##  2      NA              NA            17.4
+##  3       2.24           40.3          18  
+##  4       1.90           36.7          19.3
+##  5       1.91           39.3          20.6
+##  6       2.19           38.9          17.8
+##  7      NA              NA            19.6
+##  8       1.88           34.1          18.1
+##  9       2.08           42            20.2
+## 10       2.21           37.8          17.1
+## # … with 332 more rows
 ```
 
 
@@ -864,14 +808,74 @@ First guess and then try them out.
 
 
 ```r
-mydata %&gt;% mutate(bmi_high = (bmi &gt; 30))
+penguins &lt;- penguins %&gt;% mutate(bill_long = (bill_length_mm &gt; 45))
 
-mydata %&gt;% mutate(male = (sex == "Male"))
-mydata %&gt;% mutate(male = 1 * (sex == "Male"))
-
-mydata %&gt;% mutate(grade_num = as.numeric(str_remove(grade, "th")))
+penguins &lt;- penguins %&gt;% mutate(male = (sex == "male"))
+penguins &lt;- penguins %&gt;% mutate(male2 = 1 * (sex == "male"))
 ```
 
+
+---
+
+# `rename()` columns
+
+* `rename(new_name = old_name)`
+
+.pull-left[
+Code renames the column, but just prints output without saving the rename:
+
+```r
+# This does not save the new name
+penguins %&gt;% rename(record = id)
+```
+
+```
+## # A tibble: 342 x 10
+##    record species island bill_length_mm bill_depth_mm flipper_length_…
+##     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+##  1   1689 Adelie  Torge…           39.1          18.7              181
+##  2   4274 Adelie  Torge…           NA            17.4              186
+##  3   4539 Adelie  Torge…           40.3          18                195
+##  4   2435 Adelie  Torge…           36.7          19.3              193
+##  5   2326 Adelie  Torge…           39.3          20.6              190
+##  6   2637 Adelie  Torge…           38.9          17.8              181
+##  7   4443 Adelie  Torge…           NA            19.6              195
+##  8   2102 Adelie  Torge…           34.1          18.1              193
+##  9   2975 Adelie  Torge…           42            20.2              190
+## 10   3966 Adelie  Torge…           37.8          17.1              186
+## # … with 332 more rows, and 4 more variables: body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;, bill_ratio &lt;dbl&gt;
+```
+]
+.pull-right[
+
+Code renames the column *and* overwrites `penguins` with renamed column:
+
+
+```r
+*penguins &lt;- penguins %&gt;%
+    rename(record = id)
+penguins
+```
+
+```
+## # A tibble: 342 x 10
+##    record species island bill_length_mm bill_depth_mm flipper_length_…
+##     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+##  1   1689 Adelie  Torge…           39.1          18.7              181
+##  2   4274 Adelie  Torge…           NA            17.4              186
+##  3   4539 Adelie  Torge…           40.3          18                195
+##  4   2435 Adelie  Torge…           36.7          19.3              193
+##  5   2326 Adelie  Torge…           39.3          20.6              190
+##  6   2637 Adelie  Torge…           38.9          17.8              181
+##  7   4443 Adelie  Torge…           NA            19.6              195
+##  8   2102 Adelie  Torge…           34.1          18.1              193
+##  9   2975 Adelie  Torge…           42            20.2              190
+## 10   3966 Adelie  Torge…           37.8          17.1              186
+## # … with 332 more rows, and 4 more variables: body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   year &lt;dbl&gt;, bill_ratio &lt;dbl&gt;
+```
+]
 
 
 
@@ -881,165 +885,21 @@ mydata %&gt;% mutate(grade_num = as.numeric(str_remove(grade, "th")))
 
 # Practice 4
 
-1. Create a new Rmd or continue in your current Rmd.
+Create a new Rmd or continue in your current Rmd.
 
-1. Create data frames for males and females separately.
+1. Create a dataset for just the Torgersen island penguins that are female.
 
-1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+1. Restrict the data to just Torgersen female penguins that weigh more than 3500 g.
 
-1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+1. Restrict the dataset from the previous step to include just the columns with the original body measurements.
 
-1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+1. Add a column for the difference in the flipper and bill lengths, and call it `flipper_bill_diff`.
 
-
-
-
-
-
----
+1. How many rows and columns does your final dataset have?
 
 
 
-class: center, middle, inverse
-
-# More commands to filter rows
-
-&lt;!-- TO-DO: rename? --&gt;
-
----
-
-# Remove rows with missing data
-
-`drop_na()` (or `na.omit()`) removes *all* rows with *any* missing (`NA`) values in *any* column
-
-
-```r
-mydata %&gt;% drop_na()
-```
-
-```
-## # A tibble: 7 x 10
-##   record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-## 1 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
-## 2 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
-## 3 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
-## 4 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
-## 5 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
-## 6 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
-## 7 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
-```
-
-For more on dealing with missing data, see [Tidyverse part 2 workshop](https://jminnier-berd-r-courses.netlify.app/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html#35)
-
----
-
-# Remove rows with duplicated data
-
-`distinct()` removes rows that are duplicates of other rows
-
-
-```r
-data_dups &lt;- tibble(
-  name = c("Ana","Bob","Cara", "Ana"),
-  race = c("Hispanic","Other", "White", "Hispanic")
-)
-```
-
-.pull-left[
-
-```r
-data_dups
-```
-
-```
-## # A tibble: 4 x 2
-##   name  race    
-##   &lt;chr&gt; &lt;chr&gt;   
-## 1 Ana   Hispanic
-## 2 Bob   Other   
-## 3 Cara  White   
-## 4 Ana   Hispanic
-```
-]
-.pull-right[
-
-```r
-data_dups %&gt;% distinct()
-```
-
-```
-## # A tibble: 3 x 2
-##   name  race    
-##   &lt;chr&gt; &lt;chr&gt;   
-## 1 Ana   Hispanic
-## 2 Bob   Other   
-## 3 Cara  White
-```
-]
-
----
-
-# Order rows: `arrange()`
-
-Use `arrange()` to order the rows by the values in specified columns
-
-
-```r
-mydata %&gt;% arrange(bmi, weight_kg) %&gt;% head(n=3)
-```
-
-```
-## # A tibble: 3 x 10
-##   record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-## 1 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
-## 2 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
-## 3 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
-```
-
-```r
-mydata %&gt;% arrange(desc(bmi), weight_kg) %&gt;% head(n=3)
-```
-
-```
-## # A tibble: 3 x 10
-##   record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-## 1 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
-## 2 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
-## 3 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
-```
-
-
-
----
-
-# Combine `summarize()` with other tidy functions
-
-
-```r
-mydata %&gt;% 
-  group_by(grade) %&gt;% 
-  summarize(n_per_group = n(), 
-            bmi_mean =mean(bmi),
-            bmi_sd = sd(bmi, na.rm = TRUE)) %&gt;%
-* mutate(bmi_cv = bmi_sd/bmi_mean) %&gt;%
-* filter(bmi_cv &gt; .2)
-```
-
-```
-## # A tibble: 2 x 5
-##   grade n_per_group bmi_mean bmi_sd bmi_cv
-##   &lt;chr&gt;       &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 12th            4     21.0   4.44  0.212
-## 2 9th             4     23.9   5.03  0.211
-```
-
-
+* __Take a break!__
 
 
 
@@ -1106,7 +966,7 @@ ggplot(data = penguins,
 * geom_point()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-48-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-43-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -1117,7 +977,7 @@ ggplot(data = penguins,
 * geom_histogram()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-49-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-44-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1230,7 +1090,7 @@ ggplot(data = penguins,
   geom_bar()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-50-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-45-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -1242,7 +1102,7 @@ ggplot(data = penguins,
   geom_bar(position = "dodge")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-51-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-46-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 ---
 
@@ -1285,7 +1145,7 @@ ggplot(data = pct_data,
   ylab("Percent")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-52-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-47-1.png" height="380px" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1328,7 +1188,7 @@ ggplot(data = pct_data,
   ylab("Percent")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-53-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-48-1.png" height="380px" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -1355,9 +1215,131 @@ ggplot(data = pct_data,
 
 
 
+
+
+
 ---
 
-# Factor data types
+# Factors for categorical data
+
+.pull-left-40[
+- `factor` is a data type that saves character variables as categories (factor levels)
+
+- Using factor data types are useful for making plots and necessary for some statistical modeling functions
+
+- We recommend using commands from the `forcats` package to work with factor data
+
+- See [`forcats` cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+and [`forcats` vignette](https://cran.r-project.org/web/packages/forcats/vignettes/forcats.html)
+]
+.pull-right-60[
+&lt;center&gt;&lt;img src="img/forcats_cheatsheet.png" width="90%" height="90%"&gt;&lt;/center&gt;
+]
+
+---
+
+# Create a factor variable using `factor()`
+
+
+
+```r
+penguins &lt;- penguins %&gt;%
+* mutate(sex_fac = factor(sex))
+levels(penguins$sex_fac)  # factor levels are in alphanumeric order by default
+```
+
+```
+## [1] "female" "male"
+```
+
+```r
+penguins %&gt;% select(sex, sex_fac) %&gt;% summary()  # character vs. factor types
+```
+
+```
+##      sex              sex_fac   
+##  Length:342         female:165  
+##  Class :character   male  :168  
+##  Mode  :character   NA's  :  9
+```
+
+```r
+penguins %&gt;% select(sex, sex_fac) %&gt;% str()  # str for structure
+```
+
+```
+## tibble [342 × 2] (S3: tbl_df/tbl/data.frame)
+##  $ sex    : chr [1:342] "male" "female" "female" "female" ...
+##  $ sex_fac: Factor w/ 2 levels "female","male": 2 1 1 1 2 1 2 NA NA NA ...
+```
+
+
+
+
+---
+
+# Specify order of factor levels: `fct_relevel()`
+
+
+
+```r
+penguins &lt;- penguins %&gt;%
+* mutate(species_fac = factor(species))
+
+summary(penguins$species_fac)  # levels are in alphanumeric order by default
+```
+
+```
+##    Adelie Chinstrap    Gentoo 
+##       151        68       123
+```
+
+```r
+penguins &lt;- penguins %&gt;%
+* mutate(species_fac = fct_relevel(species_fac,
+*                                  c("Adelie", "Gentoo", "Chinstrap")))
+
+summary(penguins$species_fac)  # levels are specified order
+```
+
+```
+##    Adelie    Gentoo Chinstrap 
+##       151       123        68
+```
+
+
+---
+
+# Collapse factor levels
+
+
+```r
+penguins &lt;- penguins %&gt;%
+* mutate(species_fac2 = fct_collapse(species_fac, # collapse levels
+*                                   Adelie = c("Adelie"),
+*                                   Other = c("Gentoo", "Chinstrap"))
+         )
+
+penguins %&gt;% select(species_fac, species_fac2) %&gt;% summary()
+```
+
+```
+##     species_fac  species_fac2
+##  Adelie   :151   Adelie:151  
+##  Gentoo   :123   Other :191  
+##  Chinstrap: 68
+```
+
+```r
+penguins %&gt;% tabyl(species_fac, species_fac2) 
+```
+
+```
+##  species_fac Adelie Other
+##       Adelie    151     0
+##       Gentoo      0   123
+##    Chinstrap      0    68
+```
 
 
 

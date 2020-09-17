@@ -212,7 +212,7 @@ penguins %>% tabyl(species, sex) %>%
 ```
 ]
 
-- Base R has a `table` function, but it is clunkier and the output is not a data frame. 
+- Base R has a `table` function, but it is clunkier and the output is not a data frame (or tibble). 
 - See the [tabyl vignette](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html) for more information, adorn options, & 3-way `tabyl`s
 
 

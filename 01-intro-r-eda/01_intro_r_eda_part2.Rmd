@@ -137,11 +137,6 @@ penguins <- read_csv("penguins")
 ```
 
 
-```{r child=here::here("01-intro-r-eda","child_wrangling2.Rmd")}
-# Meike
-```
-
-
 ```{r child=here::here("01-intro-r-eda","child_ggplot.Rmd")}
 #Jessica
 ```

@@ -5,13 +5,18 @@
 
 # Practice 4
 
-1. Create a new Rmd or continue in your current Rmd.
+Create a new Rmd or continue in your current Rmd.
 
-1. Create data frames for males and females separately.
+1. Create a dataset for just the Torgersen island penguins that are female.
 
-1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+1. Restrict the data to just Torgersen female penguins that weigh more than 3500 g.
 
-1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+1. Restrict the dataset from the previous step to include just the columns with the original body measurements.
 
-1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+1. Add a column for the difference in the flipper and bill lengths, and call it `flipper_bill_diff`.
 
+1. How many rows and columns does your final dataset have?
+
+
+
+* __Take a break!__

@@ -153,171 +153,77 @@ penguins %>% tabyl(island, year)
 
 ---
 
-# Practice 4 (old practice 2)
+# Practice 4
 
-1. Create a new script and save it as `Practice2.R`
+Create a new Rmd or continue in your current Rmd.
 
-1. Create data frames for males and females separately.
+1. Create a dataset for just the Torgersen island penguins that are female.
 
-1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+1. Restrict the data to just Torgersen female penguins that weigh more than 3500 g.
 
-1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+1. Restrict the dataset from the previous step to just the columns with the original body measurements.
 
-1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+1. Add a column for the difference in the flipper and bill lengths, and call it `flipper_bill_diff`.
+
+1. How many rows and columns does your final dataset have?
 
 
 ---
 
 # Practice 4 Answers
 
-__#2__ Create data frames for males and females separately.
+__#1__ Create a dataset for just the Torgersen island penguins that are female.
 
 ```{r}
-boys <- mydata[mydata$sex == "Male", ]
-dim(boys)
-girls <- mydata[mydata$sex == "Female", ]
-dim(girls)
+Torg_female <- penguins %>% 
+  filter(island == "Torgersen" & sex == "female")
 ```
 
-Check number of boys & girls:
+__#2__ Restrict the data to just Torgersen female penguins that weigh more than 3500 g.
+
 ```{r}
-summary(mydata$sex)
+Torg_female2 <- Torg_female %>% 
+  filter(body_mass_g > 3500)
 ```
 
+__#3__ Restrict the dataset from the previous step to include just the columns with the original body measurements.
 
----
-
-__#3__ Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
-
-.pull-left-60[
 ```{r}
-summary(boys$bmi); sd(boys$bmi)
-summary(girls$bmi); sd(girls$bmi)
+Torg_female3 <- Torg_female2 %>% 
+  select(bill_length_mm:body_mass_g)
 ```
-
-]
-.pull-right-40[
-
-```{r fig.height=5}
-boxplot(mydata$bmi ~ mydata$sex)
-```
-]
 
 ---
 
 
-__#4__ Plot BMI vs. weight for each gender separately. Do they have similar relationships?
-
-.pull-left[
-```{r fig.height=5, fig.width=4}
-plot(boys$bmi, boys$weight)
-```
-
-]
-
-.pull-right[
-
-```{r fig.height=5, fig.width=4}
-plot(girls$bmi, girls$weight)
-```
-
-]
-
-
-
----
-
-__#5__ Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
-
-.pull-left[
-```{r}
-bullied_boys <- 
-  boys[boys$bullied_past_12mo == TRUE,]
-nrow(bullied_boys)
-bullied_boys_prct <- 
-  nrow(bullied_boys) / nrow(boys) * 100
-bullied_boys_prct
-
-# alternative
-mean(boys$bullied_past_12mo, na.rm=TRUE)
-```
-]
-.pull-right[
-```{r}
-# Apply the same method for girls:
-bullied_girls <- 
-  girls[girls$bullied_past_12mo == TRUE,]
-nrow(bullied_girls)
-bullied_girls_prct <- 
-  nrow(bullied_girls) / nrow(girls) * 100
-bullied_girls_prct
-
-# alternative. Answers don't match. Why???
-mean(girls$bullied_past_12mo, na.rm=TRUE)
-```
-
-
-]
-
-
----
-
-__#5__ cont'd
-
-On the previous slide we saw that our two methods for calculating the percentage of girls that were bullied in the past 12 months did not match. What went wrong?
-
+__#4__ Add a column for the difference in the flipper and bill lengths, and call it `flipper_bill_diff`.
 
 ```{r}
-nrow(bullied_girls)
-girls$bullied_past_12mo
+Torg_female4 <- Torg_female3 %>% 
+  mutate(flipper_bill_diff = flipper_length_mm - bill_length_mm)
 ```
 
-
-To get the number of girls that were bullied we need to make sure the missing values (NA) are not included.
-
----
-
-__#5__ cont'd - working with NA's
+__#5__ How many rows and columns does your final dataset have?
 
 ```{r}
-# values of bullied_past_12mo
-girls$bullied_past_12mo
-
-# which are missing (logical)
-is.na(girls$bullied_past_12mo)
-
-# which are NOT missing (logical)
-!is.na(girls$bullied_past_12mo)
+dim(Torg_female4)
 ```
 
----
+9 rows and 5 columns.
 
-__#5__ cont'd - fix girls' code
-
-Exclude the missing values from the `bullied_girls`:
+__Note:__ Steps 1-4 could have been done with consecutive pipes:
 
 ```{r}
-girls2 <- girls[!is.na(girls$bullied_past_12mo),]
-nrow(girls2)
+Torg_female5 <- penguins %>% 
+  filter(island == "Torgersen" & sex == "female" & body_mass_g > 3500) %>%
+  select(bill_length_mm:body_mass_g) %>% 
+  mutate(flipper_bill_diff = flipper_length_mm - bill_length_mm)
 
-bullied_girls2 <- girls2[girls2$bullied_past_12mo == TRUE,]
-nrow(bullied_girls2)
-
-# from girls dataset, total number bullied
-sum(girls$bullied_past_12mo, na.rm = TRUE)
+dim(Torg_female5)
 ```
 
----
 
-__#5__ cont'd - Calculate percentage girls bullied
 
-```{r}
-bullied_girls_prct2 <- nrow(bullied_girls2) / nrow(girls2) * 100
-bullied_girls_prct2
-
-# Compare to alternative
-mean(girls$bullied_past_12mo, na.rm=TRUE)
-```
 
 ---
 

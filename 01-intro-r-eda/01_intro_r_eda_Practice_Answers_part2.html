@@ -170,313 +170,91 @@ penguins %&gt;% tabyl(island, year)
 
 ---
 
-# Practice 4 (old practice 2)
+# Practice 4
 
-1. Create a new script and save it as `Practice2.R`
+Create a new Rmd or continue in your current Rmd.
 
-1. Create data frames for males and females separately.
+1. Create a dataset for just the Torgersen island penguins that are female.
 
-1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+1. Restrict the data to just Torgersen female penguins that weigh more than 3500 g.
 
-1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+1. Restrict the dataset from the previous step to just the columns with the original body measurements.
 
-1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+1. Add a column for the difference in the flipper and bill lengths, and call it `flipper_bill_diff`.
+
+1. How many rows and columns does your final dataset have?
 
 
 ---
 
 # Practice 4 Answers
 
-__#2__ Create data frames for males and females separately.
+__#1__ Create a dataset for just the Torgersen island penguins that are female.
 
 
 ```r
-boys &lt;- mydata[mydata$sex == "Male", ]
-dim(boys)
+Torg_female &lt;- penguins %&gt;% 
+  filter(island == "Torgersen" &amp; sex == "female")
 ```
 
-```
-[1]  8 10
-```
-
-```r
-girls &lt;- mydata[mydata$sex == "Female", ]
-dim(girls)
-```
-
-```
-[1] 12 10
-```
-
-Check number of boys &amp; girls:
-
-```r
-summary(mydata$sex)
-```
-
-```
-   Length     Class      Mode 
-       20 character character 
-```
-
-
----
-
-__#3__ Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
-
-.pull-left-60[
-
-```r
-summary(boys$bmi); sd(boys$bmi)
-```
-
-```
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  18.18   19.57   20.90   20.63   21.58   22.46 
-```
-
-```
-[1] 1.466896
-```
-
-```r
-summary(girls$bmi); sd(girls$bmi)
-```
-
-```
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  17.48   21.95   25.80   24.59   27.47   29.35 
-```
-
-```
-[1] 3.70739
-```
-
-]
-.pull-right-40[
+__#2__ Restrict the data to just Torgersen female penguins that weigh more than 3500 g.
 
 
 ```r
-boxplot(mydata$bmi ~ mydata$sex)
+Torg_female2 &lt;- Torg_female %&gt;% 
+  filter(body_mass_g &gt; 3500)
 ```
 
-&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
-]
+__#3__ Restrict the dataset from the previous step to include just the columns with the original body measurements.
+
+
+```r
+Torg_female3 &lt;- Torg_female2 %&gt;% 
+  select(bill_length_mm:body_mass_g)
+```
 
 ---
 
 
-__#4__ Plot BMI vs. weight for each gender separately. Do they have similar relationships?
-
-.pull-left[
-
-```r
-plot(boys$bmi, boys$weight)
-```
-
-&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
-.pull-right[
+__#4__ Add a column for the difference in the flipper and bill lengths, and call it `flipper_bill_diff`.
 
 
 ```r
-plot(girls$bmi, girls$weight)
+Torg_female4 &lt;- Torg_female3 %&gt;% 
+  mutate(flipper_bill_diff = flipper_length_mm - bill_length_mm)
 ```
 
-&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
-
-
----
-
-__#5__ Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
-
-.pull-left[
-
-```r
-bullied_boys &lt;- 
-  boys[boys$bullied_past_12mo == TRUE,]
-nrow(bullied_boys)
-```
-
-```
-[1] 3
-```
-
-```r
-bullied_boys_prct &lt;- 
-  nrow(bullied_boys) / nrow(boys) * 100
-bullied_boys_prct
-```
-
-```
-[1] 37.5
-```
-
-```r
-# alternative
-mean(boys$bullied_past_12mo, na.rm=TRUE)
-```
-
-```
-[1] 0.375
-```
-]
-.pull-right[
-
-```r
-# Apply the same method for girls:
-bullied_girls &lt;- 
-  girls[girls$bullied_past_12mo == TRUE,]
-nrow(bullied_girls)
-```
-
-```
-[1] 6
-```
-
-```r
-bullied_girls_prct &lt;- 
-  nrow(bullied_girls) / nrow(girls) * 100
-bullied_girls_prct
-```
-
-```
-[1] 50
-```
-
-```r
-# alternative. Answers don't match. Why???
-mean(girls$bullied_past_12mo, na.rm=TRUE)
-```
-
-```
-[1] 0.4
-```
-
-
-]
-
-
----
-
-__#5__ cont'd
-
-On the previous slide we saw that our two methods for calculating the percentage of girls that were bullied in the past 12 months did not match. What went wrong?
-
+__#5__ How many rows and columns does your final dataset have?
 
 
 ```r
-nrow(bullied_girls)
+dim(Torg_female4)
 ```
 
 ```
-[1] 6
+[1] 9 5
 ```
 
-```r
-girls$bullied_past_12mo
-```
+9 rows and 5 columns.
 
-```
- [1]    NA    NA  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE
-```
-
-
-To get the number of girls that were bullied we need to make sure the missing values (NA) are not included.
-
----
-
-__#5__ cont'd - working with NA's
+__Note:__ Steps 1-4 could have been done with consecutive pipes:
 
 
 ```r
-# values of bullied_past_12mo
-girls$bullied_past_12mo
+Torg_female5 &lt;- penguins %&gt;% 
+  filter(island == "Torgersen" &amp; sex == "female" &amp; body_mass_g &gt; 3500) %&gt;%
+  select(bill_length_mm:body_mass_g) %&gt;% 
+  mutate(flipper_bill_diff = flipper_length_mm - bill_length_mm)
+
+dim(Torg_female5)
 ```
 
 ```
- [1]    NA    NA  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE
+[1] 9 5
 ```
 
-```r
-# which are missing (logical)
-is.na(girls$bullied_past_12mo)
-```
-
-```
- [1]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-```
-
-```r
-# which are NOT missing (logical)
-!is.na(girls$bullied_past_12mo)
-```
-
-```
- [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-```
-
----
-
-__#5__ cont'd - fix girls' code
-
-Exclude the missing values from the `bullied_girls`:
 
 
-```r
-girls2 &lt;- girls[!is.na(girls$bullied_past_12mo),]
-nrow(girls2)
-```
-
-```
-[1] 10
-```
-
-```r
-bullied_girls2 &lt;- girls2[girls2$bullied_past_12mo == TRUE,]
-nrow(bullied_girls2)
-```
-
-```
-[1] 4
-```
-
-```r
-# from girls dataset, total number bullied
-sum(girls$bullied_past_12mo, na.rm = TRUE)
-```
-
-```
-[1] 4
-```
-
----
-
-__#5__ cont'd - Calculate percentage girls bullied
-
-
-```r
-bullied_girls_prct2 &lt;- nrow(bullied_girls2) / nrow(girls2) * 100
-bullied_girls_prct2
-```
-
-```
-[1] 40
-```
-
-```r
-# Compare to alternative
-mean(girls$bullied_past_12mo, na.rm=TRUE)
-```
-
-```
-[1] 0.4
-```
 
 ---
 
