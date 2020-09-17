@@ -49,6 +49,21 @@ Instructors: Meike Niederhausen, PhD &amp; Jessica Minnier, PhD&lt;br&gt;
   + Double click on the `.Rproj` file.
   + All your files should be there.
 
+---
+
+# Working with data, continued
+
+- Open your old Rmd file
+- If you make a new Rmd file, make sure you have this code:
+
+
+```r
+library(tidyverse)
+library(janitor)
+penguins &lt;- read_csv("penguins")
+```
+
+
 
 
 ---
@@ -855,25 +870,19 @@ mydata %&gt;% mutate(grade_num = as.numeric(str_remove(grade, "th")))
 
 
 
-
 ---
 
-# Practice 3
+# Practice 4
 
-1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+1. Create a new Rmd or continue in your current Rmd.
 
-1. How many different years are in the data? (Hint: use `tabyl()` or `n_distinct()`)
+1. Create data frames for males and females separately.
 
-1. Count the number of penguins measured each year.
+1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
 
-1. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
 
-1. Create a 2x2 table of number of penguins measured in each year by each island.
-
-
-
-
-
+1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
 
 
 
@@ -1115,7 +1124,7 @@ ggplot(data = penguins,
 * geom_point()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-50-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-51-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -1126,7 +1135,7 @@ ggplot(data = penguins,
 * geom_histogram()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-51-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-52-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1156,11 +1165,12 @@ ggplot(data = penguins,
 *          color = species)) +
   geom_point()+
 * labs(
-    title = "Flipper and bill length",
-    subtitle = "Dimensions for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER",
+    title = "Flipper &amp; bill length",
+    subtitle = "Palmer Station LTER",
     x = "Flipper length(mm)", 
     y = "Bill length(mm)") + 
-* scale_color_viridis_d(name = "Penguin species") +
+* scale_color_viridis_d(
+    name = "Penguin species") + 
 * theme_bw()
 ```
 ]
@@ -1181,9 +1191,10 @@ ggplot(data = penguins,
   geom_histogram(
     alpha = 0.5,
     position = "identity") +
-  labs(title = "Penguin flipper length",
-       x = "Flipper length(mm)",
-       y = "Frequency") + 
+  labs(
+    title = "Flipper length",
+    x = "Flipper length(mm)",
+    y = "Frequency") + 
 * scale_fill_viridis_d(
 *   name = "Penguin species") +
   theme_minimal()
@@ -1205,11 +1216,15 @@ ggplot(data = penguins,
   geom_boxplot(color="darkgrey", 
                width = 0.3, 
                show.legend = FALSE) +
-  geom_jitter(aes(color = species), 
-              alpha = 0.5, 
-              show.legend = FALSE, 
-              position = position_jitter(width = 0.2, seed = 0)) +
-  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  geom_jitter(
+    aes(color = species), 
+    alpha = 0.5, 
+    show.legend = FALSE, 
+    position = position_jitter(
+      width = 0.2, seed = 0)) +
+  scale_color_manual(
+    values = c("darkorange","purple",
+               "cyan4")) +
   theme_minimal() +
   labs(x = "Species",
        y = "Flipper length (mm)")
@@ -1233,7 +1248,7 @@ ggplot(data = penguins,
   geom_bar()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-52-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-53-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -1245,7 +1260,7 @@ ggplot(data = penguins,
   geom_bar(position = "dodge")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-53-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-54-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 ---
 
@@ -1256,6 +1271,7 @@ ggplot(data = penguins,
 ```r
 pct_data &lt;- penguins %&gt;% 
   count(species, sex) %&gt;% 
+  # filter(!is.na(sex)) %&gt;%
   group_by(species) %&gt;% 
   mutate(pct = 100*n/sum(n))
 pct_data
@@ -1287,7 +1303,7 @@ ggplot(data = pct_data,
   ylab("Percent")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-54-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-55-1.png" height="380px" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1299,6 +1315,7 @@ ggplot(data = pct_data,
 ```r
 pct_data &lt;- penguins %&gt;% 
   count(species, sex) %&gt;% 
+  # filter(!is.na(sex)) %&gt;%
   group_by(species) %&gt;% 
   mutate(pct = 100*n/sum(n))
 pct_data
@@ -1329,8 +1346,31 @@ ggplot(data = pct_data,
   ylab("Percent")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-55-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-56-1.png" height="380px" style="display: block; margin: auto;" /&gt;
 ]
+
+
+
+
+
+
+---
+
+# Practice 5
+
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+
+1. Make a scatter plot of bill depth vs bill length.
+
+1. Add `+ geom_smooth(method="lm")` to the plot. What is this saying about the association between bill depth and length?
+
+1. Now add `color = species` to the aesthetic `aes()`. Keep `geom_smooth`. How do the associations look now?
+
+
+
+
+
+
 
 
 ---
@@ -1339,7 +1379,7 @@ ggplot(data = pct_data,
 
 
 
-
+---
 
 class: inverse, center, middle
 

@@ -95,11 +95,12 @@ ggplot(data = penguins,
            color = species)) + #<<
   geom_point()+
   labs( #<<
-    title = "Flipper and bill length",
-    subtitle = "Dimensions for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER",
+    title = "Flipper & bill length",
+    subtitle = "Palmer Station LTER",
     x = "Flipper length(mm)", 
     y = "Bill length(mm)") + 
-  scale_color_viridis_d(name = "Penguin species") + #<<
+  scale_color_viridis_d( #<<
+    name = "Penguin species") + 
   theme_bw() #<<
 ```
 ]
@@ -120,9 +121,10 @@ ggplot(data = penguins,
   geom_histogram(
     alpha = 0.5,
     position = "identity") +
-  labs(title = "Penguin flipper length",
-       x = "Flipper length(mm)",
-       y = "Frequency") + 
+  labs(
+    title = "Flipper length",
+    x = "Flipper length(mm)",
+    y = "Frequency") + 
   scale_fill_viridis_d( #<<
     name = "Penguin species") + #<<
   theme_minimal()
@@ -144,11 +146,15 @@ ggplot(data = penguins,
   geom_boxplot(color="darkgrey", 
                width = 0.3, 
                show.legend = FALSE) +
-  geom_jitter(aes(color = species), 
-              alpha = 0.5, 
-              show.legend = FALSE, 
-              position = position_jitter(width = 0.2, seed = 0)) +
-  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  geom_jitter(
+    aes(color = species), 
+    alpha = 0.5, 
+    show.legend = FALSE, 
+    position = position_jitter(
+      width = 0.2, seed = 0)) +
+  scale_color_manual(
+    values = c("darkorange","purple",
+               "cyan4")) +
   theme_minimal() +
   labs(x = "Species",
        y = "Flipper length (mm)")
@@ -189,6 +195,7 @@ ggplot(data = penguins,
 ```{r bar_pct}
 pct_data <- penguins %>% 
   count(species, sex) %>% 
+  # filter(!is.na(sex)) %>%
   group_by(species) %>% 
   mutate(pct = 100*n/sum(n))
 pct_data
@@ -213,6 +220,7 @@ ggplot(data = pct_data,
 ```{r bar_pct_calc}
 pct_data <- penguins %>% 
   count(species, sex) %>% 
+  # filter(!is.na(sex)) %>%
   group_by(species) %>% 
   mutate(pct = 100*n/sum(n))
 pct_data

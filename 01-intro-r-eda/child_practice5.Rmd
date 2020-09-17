@@ -1,0 +1,51 @@
+
+
+
+
+---
+
+# Practice 5
+
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+
+1. Make a scatter plot of bill depth vs bill length.
+
+1. Add `+ geom_smooth(method="lm")` to the plot. What is this saying about the association between bill depth and length?
+
+1. Now add `color = species` to the aesthetic `aes()`. Keep `geom_smooth`. How do the associations look now?
+
+```{r, include = FALSE}
+
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) + 
+  geom_point()+
+  geom_smooth(method="lm")+
+  labs( #<<
+    title = "Flipper & bill length",
+    subtitle = "Palmer Station LTER",
+    x = "Flipper length(mm)", 
+    y = "Bill length(mm)") + 
+  scale_color_viridis_d( 
+    name = "Penguin species") + 
+  theme_bw() #<<
+
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm,
+           color = species)) + 
+  geom_point()+
+  geom_smooth(method="lm")+
+  labs( 
+    title = "Flipper & bill length",
+    subtitle = "Palmer Station LTER",
+    x = "Flipper length(mm)", 
+    y = "Bill length(mm)") + 
+  scale_color_viridis_d( 
+    name = "Penguin species") + 
+  theme_bw() #<<
+```
+
+
+
+

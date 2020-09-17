@@ -1,5 +1,5 @@
 ---
-title: Practice Solutions to <br> Intro to R and Rstudio for EDA
+title: Practice Solutions to <br> Intro to R and Rstudio for EDA - Part 1
 author: Jessica Minnier, PhD & Meike Niederhausen, PhD
 date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2020/09/16'
 output: 
@@ -252,5 +252,14 @@ The `skim()` command gives summaries of each of the variables in the dataset.
 </center>
 
 ]
+
+
+
+
+```{r, include=FALSE}
+#knitr::purl("01-getting-started-v2/01_getting_started_Practice_Answers.Rmd")
+pagedown::chrome_print(here::here("01-intro-r-eda","01_intro_r_eda_Practice_Answers_part1.html"))
+
+```
 
 

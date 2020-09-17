@@ -99,6 +99,20 @@ Instructors: Meike Niederhausen, PhD & Jessica Minnier, PhD<br>
   + Double click on the `.Rproj` file.
   + All your files should be there.
 
+---
+
+# Working with data, continued
+
+- Open your old Rmd file
+- If you make a new Rmd file, make sure you have this code:
+
+```{r, eval = FALSE}
+library(tidyverse)
+library(janitor)
+penguins <- read_csv("penguins")
+```
+
+
 ```{r child=here::here("01-intro-r-eda","child_pipe_summaries.Rmd")}
 # Jessica
 ```
@@ -111,24 +125,29 @@ Instructors: Meike Niederhausen, PhD & Jessica Minnier, PhD<br>
 # Meike
 ```
 
-```{r child=here::here("01-intro-r-eda","child_practice3.Rmd")}
+```{r child=here::here("01-intro-r-eda","child_practice4.Rmd")}
 # Meike - mutate/filter etc
 ```
 
 
 ```{r child=here::here("01-intro-r-eda","child_wrangling2.Rmd")}
+# Meike
 ```
 
 
 ```{r child=here::here("01-intro-r-eda","child_ggplot.Rmd")}
+#Jessica
+```
+
+```{r child=here::here("01-intro-r-eda","child_practice5.Rmd")}
+# Jessica
 ```
 
 ```{r child=here::here("01-intro-r-eda","child_factors.Rmd")}
 ```
 
-
-
 ```{r child=here::here("01-intro-r-eda","child_closing.Rmd")}
+#Jessica
 ```
 
 
