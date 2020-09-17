@@ -898,32 +898,7 @@ mydata %&gt;% mutate(grade_num = as.numeric(str_remove(grade, "th")))
 
 ---
 
-# Save data frame
 
-* Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
-
-```r
-save(mydata, file = "data/mydata.RData")  # saving mydata within the data folder
-```
-
-You can load .RData files using the load() command:
-
-
-```r
-load("data/mydata.RData")
-```
-  
-
-&lt;br&gt;
-
-* Save __csv__ file: comma-separated values
-
-
-```r
-write.csv(mydata, file = "data/mydata.csv", col.names = TRUE, row.names = FALSE)
-```
-
----
 
 class: center, middle, inverse
 
@@ -1131,7 +1106,7 @@ ggplot(data = penguins,
 * geom_point()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-51-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-48-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -1142,7 +1117,7 @@ ggplot(data = penguins,
 * geom_histogram()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-52-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-49-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1255,7 +1230,7 @@ ggplot(data = penguins,
   geom_bar()
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-53-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-50-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -1267,7 +1242,7 @@ ggplot(data = penguins,
   geom_bar(position = "dodge")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-54-1.png" height="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-51-1.png" height="400px" style="display: block; margin: auto;" /&gt;
 ]
 ---
 
@@ -1310,7 +1285,7 @@ ggplot(data = pct_data,
   ylab("Percent")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-55-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-52-1.png" height="380px" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1353,7 +1328,7 @@ ggplot(data = pct_data,
   ylab("Percent")
 ```
 
-&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-56-1.png" height="380px" style="display: block; margin: auto;" /&gt;
+&lt;img src="01_intro_r_eda_part2_files/figure-html/unnamed-chunk-53-1.png" height="380px" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -1394,81 +1369,30 @@ class: inverse, center, middle
 
 ---
 
-# Installing and using packages
+# Save data frame
 
-- Packages are to R like apps are to your phone/OS
-- Packages contain additional functions and data
-- Install packages with `install.packages()`
-  + Also can use the "Packages" tab in Files/Plots/Packages/Help/Viewer window
-  + *Only install once (unless you want to update)*
-  + Installs from [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) = package mothership
+* Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
+
+```r
+save(penguins, file = "penguins.RData")  # saving mydata within the data folder
+```
+
+You can load .RData files using the load() command:
 
 
 ```r
-install.packages("dplyr")   # only do this ONCE, use quotes
+load("penguins.RData")
 ```
+  
 
-- Load packages: At the top of your script include `library()` commands to load each required package *every* time you open Rstudio.
+&lt;br&gt;
 
-```r
-library(dplyr)    # run this every time you open Rstudio
-```
-
-- Use a function without loading the package with `::`
-
-```r
-dplyr::arrange(mydata, bmi)
-```
-
-```
-## # A tibble: 20 x 10
-##    record age   sex   grade race4   bmi weight_kg text_while_driv… smoked_ever
-##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;      
-##  1 9.35e5 17 y… Fema… 12th  All …  17.5      43.1 &lt;NA&gt;             No         
-##  2 9.22e5 14 y… Male  9th   White  18.2      57.6 &lt;NA&gt;             Yes        
-##  3 1.31e6 17 y… Male  12th  Hisp…  19.5      56.2 1 or 2 days      No         
-##  4 1.32e6 17 y… Fema… 12th  Hisp…  19.5      49.9 0 days           &lt;NA&gt;       
-##  5 9.24e5 15 y… Male  10th  Blac…  19.6      63.5 &lt;NA&gt;             No         
-##  6 1.31e6 17 y… Male  11th  Hisp…  20.6      61.7 1 or 2 days      No         
-##  7 9.34e5 16 y… Fema… 10th  All …  21.0      45.4 &lt;NA&gt;             Yes        
-##  8 1.31e6 16 y… Male  10th  Hisp…  21.2      67.1 0 days           &lt;NA&gt;       
-##  9 9.23e5 15 y… Male  9th   White  21.4      60.3 &lt;NA&gt;             Yes        
-## 10 9.26e5 16 y… Male  10th  All …  22.2      70.3 &lt;NA&gt;             No         
-## 11 1.32e6 17 y… Fema… 11th  &lt;NA&gt;   22.3      54.9 I did not drive… Yes        
-## 12 1.10e6 15 y… Male  10th  All …  22.5      79.4 &lt;NA&gt;             &lt;NA&gt;       
-## 13 1.31e6 16 y… Fema… 11th  White  24.8      63.5 3 to 5 days      No         
-## 14 1.31e6 16 y… Fema… 10th  All …  25.0      76.7 0 days           No         
-## 15 1.11e6 17 y… Fema… 9th   Blac…  26.6      68.0 &lt;NA&gt;             No         
-## 16 1.31e6 16 y… Fema… 11th  Hisp…  26.6      68.0 0 days           No         
-## 17 1.31e6 15 y… Fema… 10th  Hisp…  27.5      70.3 0 days           No         
-## 18 1.32e6 18 y… Fema… 12th  Blac…  27.5      74.8 All 30 days      Yes        
-## 19 3.35e5 17 y… Fema… 10th  White  27.6      66.2 &lt;NA&gt;             &lt;NA&gt;       
-## 20 6.39e5 16 y… Fema… 9th   &lt;NA&gt;   29.3      84.8 &lt;NA&gt;             Yes        
-## # … with 1 more variable: bullied_past_12mo &lt;lgl&gt;
-```
-
----
-
-# Installing packages from other places (i.e. github, URLs)
-
-- Need to have [remotes](https://github.com/r-lib/remotes#readme) package installed first:
-
-```r
-install.packages("remotes") 
-```
-
-- To install a package from github (often in development) use `install_github()` from the remotes package
+* Save __csv__ file: comma-separated values
 
 
 ```r
-# https://github.com/hadley/yrbss
-remotes::install_github("hadley/yrbss")
-
-# Load it the same way
-library(yrbss)
+write_csv(mydata, path = "mydata.csv")
 ```
-
-
 
 ---
 
@@ -1493,11 +1417,33 @@ Use `?` in front of function name in console. Try this:
 
 # Resources
 
-- Click on this [List of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
-- Watch [recordings of our other workshops](https://github.com/jminnier/berd_r_courses)
-- __Highly recommend *Data Wrangling in R with Tidyverse*__
+- Click on this [*LONG LIST* of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
+- Watch [recordings of our other workshops](https://echo360.org/section/c84999b7-b62f-4fcd-8ddd-77ac4ae7c7b9/home) with **all slides/materials at [github.com/jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)**
+
+**Recommended viewing order of BERD workshops (since some are recorded multiple times):**
+
+- *Either* this workshop, or the older version: [*Getting Started with R and Rstudio*](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.html) (September 24, 2019, 3 hour version)
+  + no tidyverse, just base R introduction; The new version we are doing now is hopefully better!
+- [*Data Wrangling in R, Part 1A and 1B*](http://bit.ly/berd_tidy1) (April 18, 2019, 2 hours)
+  + more data wrangling, tidy data, removing missing data, arranging data
+- [*Data Wrangling in R, Part 2*](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html) (April 25, 2019, 2 hours)
+  + even more data wrangling, adding columns, summarizing, joining/merging two or more data sets together, reshaping data from wide to long format or vice versa, more methods for dealing with NAs, working with dates and factors, cleaning up messy column names
+- [*Data Visualization with R and ggplot2*](html) (May 20, 2020, 2.5 hours)
+  + additional ggplot examples, many more ways to customize your ggplots!
+
+
+---
+
+# Other Resources
 
 Getting started:
+
+- Again, check out this [*LONG LIST* of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
+- [R Bootcamp - by Ted Laderas and Jessica Minnier](https://r-bootcamp.netlify.app/)
+- [Rstudio primers](https://rstudio.cloud/learn/primers)
+- [Teacup Giraffes for learning stats &amp; R](https://tinystats.github.io/teacups-giraffes-and-statistics/index.html)
+
+Basic help with installation and using Rstudio
 
 - [RStudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
 - Install R/RStudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&amp;feature=youtu.be)
@@ -1507,6 +1453,7 @@ Some of this is drawn from materials in online books/lessons:
 
 - [Intro to R/RStudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay &amp; Albert Kim
+- [R for Data Science](https://r4ds.had.co.nz/) - Hadley Wickham &amp; Garrett Grolemund
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
 
 ---
@@ -1517,7 +1464,7 @@ Some of this is drawn from materials in online books/lessons:
 - OHSU's [BioData club](https://biodata-club.github.io/) + active slack channel
 - Portland's [R user meetup group](https://www.meetup.com/portland-r-user-group/) + active slack channel
 - [R-ladies PDX](https://www.meetup.com/R-Ladies-PDX/) meetup group
-- [Cascadia R Conf - May 31, 2020 in Eugene with workshops](https://cascadiarconf.org/)
+- [Cascadia R Conf - click on Years for old videos](https://cascadiarconf.org/)
 ]
 .pull-right[
 &lt;center&gt;&lt;img src="img/horst_welcome_to_rstats_twitter.png" width="100%" height="100%"&gt;&lt;a href="https://github.com/allisonhorst/stats-illustrations"&gt;&lt;br&gt;Allison Horst&lt;/a&gt;&lt;/center&gt;
@@ -1535,9 +1482,9 @@ Meike Niederhausen: _niederha@ohsu.edu_
 ## This workshop info:
 
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.R)
-- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.pdf)
-- The project folder of examples can be downloaded at [github.com/jminnier/berd_intro_project](https://github.com/jminnier/berd_intro_project) &amp; the solutions are in the `solns/` folder.
+- Link to html: [part 1](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_part1) &amp; [part 2](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_part2)
+- all the R code in an R script: [part 1](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_part1.R) &amp; [part 2](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_part2.R)
+- answers to practice problems can be found here: [part 1](https://jminnier-berd-r-courses.netlify.com/01-intro-r-eda/01_intro_r_eda_Practice_Answers_part1) &amp; [part 2](https://jminnier-berd-r-courses.netlify.com/01-intro-r-eda/01_intro_r_eda_Practice_Answers_part2)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

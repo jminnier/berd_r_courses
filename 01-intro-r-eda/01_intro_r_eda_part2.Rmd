@@ -151,6 +151,7 @@ penguins <- read_csv("penguins")
 ```
 
 ```{r child=here::here("01-intro-r-eda","child_factors.Rmd")}
+# Meike
 ```
 
 ```{r child=here::here("01-intro-r-eda","child_closing.Rmd")}

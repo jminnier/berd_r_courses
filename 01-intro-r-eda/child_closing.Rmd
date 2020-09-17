@@ -7,49 +7,27 @@ class: inverse, center, middle
 
 ---
 
-# Installing and using packages
+# Save data frame
 
-- Packages are to R like apps are to your phone/OS
-- Packages contain additional functions and data
-- Install packages with `install.packages()`
-  + Also can use the "Packages" tab in Files/Plots/Packages/Help/Viewer window
-  + *Only install once (unless you want to update)*
-  + Installs from [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) = package mothership
-
-```{r, eval = FALSE}
-install.packages("dplyr")   # only do this ONCE, use quotes
-```
-
-- Load packages: At the top of your script include `library()` commands to load each required package *every* time you open Rstudio.
-```{r}
-library(dplyr)    # run this every time you open Rstudio
-```
-
-- Use a function without loading the package with `::`
-```{r}
-dplyr::arrange(mydata, bmi)
-```
-
----
-
-# Installing packages from other places (i.e. github, URLs)
-
-- Need to have [remotes](https://github.com/r-lib/remotes#readme) package installed first:
+* Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
 ```{r, eval=FALSE}
-install.packages("remotes") 
+save(penguins, file = "penguins.RData")  # saving mydata within the data folder
 ```
 
-- To install a package from github (often in development) use `install_github()` from the remotes package
+You can load .RData files using the load() command:
 
 ```{r, eval=FALSE}
-# https://github.com/hadley/yrbss
-remotes::install_github("hadley/yrbss")
-
-# Load it the same way
-library(yrbss)
+load("penguins.RData")
 ```
+  
 
+<br>
 
+* Save __csv__ file: comma-separated values
+
+```{r, eval=FALSE}
+write_csv(mydata, path = "mydata.csv")
+```
 
 ---
 
@@ -74,11 +52,33 @@ Use `?` in front of function name in console. Try this:
 
 # Resources
 
-- Click on this [List of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
-- Watch [recordings of our other workshops](https://github.com/jminnier/berd_r_courses)
-- __Highly recommend *Data Wrangling in R with Tidyverse*__
+- Click on this [*LONG LIST* of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
+- Watch [recordings of our other workshops](https://echo360.org/section/c84999b7-b62f-4fcd-8ddd-77ac4ae7c7b9/home) with **all slides/materials at [github.com/jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)**
+
+**Recommended viewing order of BERD workshops (since some are recorded multiple times):**
+
+- *Either* this workshop, or the older version: [*Getting Started with R and Rstudio*](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.html) (September 24, 2019, 3 hour version)
+  + no tidyverse, just base R introduction; The new version we are doing now is hopefully better!
+- [*Data Wrangling in R, Part 1A and 1B*](http://bit.ly/berd_tidy1) (April 18, 2019, 2 hours)
+  + more data wrangling, tidy data, removing missing data, arranging data
+- [*Data Wrangling in R, Part 2*](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html) (April 25, 2019, 2 hours)
+  + even more data wrangling, adding columns, summarizing, joining/merging two or more data sets together, reshaping data from wide to long format or vice versa, more methods for dealing with NAs, working with dates and factors, cleaning up messy column names
+- [*Data Visualization with R and ggplot2*](html) (May 20, 2020, 2.5 hours)
+  + additional ggplot examples, many more ways to customize your ggplots!
+
+
+---
+
+# Other Resources
 
 Getting started:
+
+- Again, check out this [*LONG LIST* of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
+- [R Bootcamp - by Ted Laderas and Jessica Minnier](https://r-bootcamp.netlify.app/)
+- [Rstudio primers](https://rstudio.cloud/learn/primers)
+- [Teacup Giraffes for learning stats & R](https://tinystats.github.io/teacups-giraffes-and-statistics/index.html)
+
+Basic help with installation and using Rstudio
 
 - [RStudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
 - Install R/RStudio [help video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&feature=youtu.be)
@@ -88,6 +88,7 @@ Some of this is drawn from materials in online books/lessons:
 
 - [Intro to R/RStudio](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html) by Emma Rand
 - [Modern Dive](https://moderndive.com/) - An Introduction to Statistical and Data Sciences via R by Chester Ismay & Albert Kim
+- [R for Data Science](https://r4ds.had.co.nz/) - Hadley Wickham & Garrett Grolemund
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang
 
 ---
@@ -98,7 +99,7 @@ Some of this is drawn from materials in online books/lessons:
 - OHSU's [BioData club](https://biodata-club.github.io/) + active slack channel
 - Portland's [R user meetup group](https://www.meetup.com/portland-r-user-group/) + active slack channel
 - [R-ladies PDX](https://www.meetup.com/R-Ladies-PDX/) meetup group
-- [Cascadia R Conf - May 31, 2020 in Eugene with workshops](https://cascadiarconf.org/)
+- [Cascadia R Conf - click on Years for old videos](https://cascadiarconf.org/)
 ]
 .pull-right[
 <center><img src="img/horst_welcome_to_rstats_twitter.png" width="100%" height="100%"><a href="https://github.com/allisonhorst/stats-illustrations"><br>Allison Horst</a></center>
@@ -116,18 +117,8 @@ Meike Niederhausen: _niederha@ohsu.edu_
 ## This workshop info:
 
 - Code for these slides on github: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-- all the [R code in an R script](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.R)
-- answers to practice problems can be found here: [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_Practice_Answers.pdf)
-- The project folder of examples can be downloaded at [github.com/jminnier/berd_intro_project](https://github.com/jminnier/berd_intro_project) & the solutions are in the `solns/` folder.
+- Link to html: [part 1](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_part1) & [part 2](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_part2)
+- all the R code in an R script: [part 1](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_part1.R) & [part 2](https://jminnier-berd-r-courses.netlify.app/01-intro-r-eda/01_intro_r_eda_part2.R)
+- answers to practice problems can be found here: [part 1](https://jminnier-berd-r-courses.netlify.com/01-intro-r-eda/01_intro_r_eda_Practice_Answers_part1) & [part 2](https://jminnier-berd-r-courses.netlify.com/01-intro-r-eda/01_intro_r_eda_Practice_Answers_part2)
 
-
-
-
-```{r, eval=FALSE, echo=FALSE}
-# RUN THESE AFTER KNITTING
-knitr::purl(here::here("01-getting-started-v2","01_getting_started_slides.Rmd"), 
-            out = here::here("01-getting-started-v2","01_getting_started_slides.R"))
-# remotes::install_github('rstudio/pagedown')
-pagedown::chrome_print(here::here("01-getting-started-v2","01_getting_started_slides.html"))
-```
 

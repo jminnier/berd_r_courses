@@ -2,29 +2,7 @@
 
 ---
 
-# Save data frame
 
-* Save __.RData__ file: the standard R format, which is recommended if saving data for future use in R
-```{r, eval=FALSE}
-save(mydata, file = "data/mydata.RData")  # saving mydata within the data folder
-```
-
-You can load .RData files using the load() command:
-
-```{r, eval=FALSE}
-load("data/mydata.RData")
-```
-  
-
-<br>
-
-* Save __csv__ file: comma-separated values
-
-```{r, eval=FALSE}
-write.csv(mydata, file = "data/mydata.csv", col.names = TRUE, row.names = FALSE)
-```
-
----
 
 class: center, middle, inverse
 
