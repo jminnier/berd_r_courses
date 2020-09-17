@@ -1,0 +1,458 @@
+---
+title: "Day 2 R code for Intro to R EDA workshop"
+author: "J Minnier & M Niederhausen"
+date: "9/17/2020"
+output:
+  html_document:
+    number_sections: yes
+    theme: lumen
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(janitor)
+```
+
+* This file contains just the R code for Day 2 of the workshop.
+* fyi, EDA = Exploratory Data Analysis
+
+# Load the data
+
+```{r}
+# This chunk will only load the data if the penguins.csv file is in the same directory as this Rmd file.
+penguins <- read_csv("penguins.csv")
+```
+
+# Working with data: the pipe `%>%`
+
+```{r}
+penguins %>% head(n=3)      # prounounce %>% as "then"
+
+penguins %>% head(n=2) %>% summary()
+```
+
+```{r}
+mean(penguins$body_mass_g)
+median(penguins$body_mass_g)
+
+penguins %>%
+  summarize(mean(body_mass_g), 
+            median(body_mass_g)) 
+
+penguins %>%
+  summarize(mean_mass = mean(body_mass_g), 
+            mean_len = mean(bill_length_mm, na.rm = TRUE)) 
+
+```
+
+```{r}
+# summary of all data as a whole
+penguins %>% 
+  summarize(mass_mean =mean(body_mass_g), 
+            mass_sd = sd(body_mass_g),  
+            mass_cv = sd(body_mass_g)/mean(body_mass_g)) 
+```
+
+```{r}
+# summary by group variable
+penguins %>% 
+  group_by(species) %>% 
+  summarize(n_per_group = n(), 
+            mass_mean =mean(body_mass_g),
+            mass_sd = sd(body_mass_g),
+            mass_cv = sd(body_mass_g)/mean(body_mass_g))
+
+```
+
+## `accross()`
+
+```{r}
+penguins %>% 
+  summarize(across(c(body_mass_g, bill_depth_mm), mean))
+
+```
+
+```{r}
+penguins %>%
+  summarize(across(c(bill_length_mm, bill_depth_mm), mean, na.rm=TRUE))
+
+```
+
+```{r}
+penguins %>% 
+  summarize(across(c(body_mass_g, bill_depth_mm), 
+                   c(m = mean, sd = sd))) 
+
+```
+
+```{r}
+penguins %>%
+  summarize(across(where(is.character), n_distinct)
+            )
+
+```
+
+```{r}
+penguins %>%
+  summarize(across(where(is.numeric), min, na.rm=TRUE))
+```
+
+
+## `count()`
+```{r}
+penguins %>% count(island)
+
+penguins %>% count(species, island)
+```
+
+
+## `tabyl()`
+
+```{r}
+# default table
+penguins %>% tabyl(species)
+
+```
+
+```{r}
+# output can be treated as tibble
+penguins %>% tabyl(species) %>% select(-n)
+
+```
+
+```{r}
+penguins %>% 
+  tabyl(species) %>%
+  adorn_totals("row") %>% 
+  adorn_pct_formatting(digits=2)  
+
+```
+
+
+```{r}
+# default 2x2 table
+penguins %>% 
+  tabyl(species, sex) 
+```
+
+
+```{r}
+penguins %>% tabyl(species, sex) %>% 
+  adorn_percentages(denominator = "col") %>% 
+  adorn_totals("row") %>% 
+  adorn_pct_formatting(digits = 1) %>% 
+  adorn_ns() 
+
+```
+
+
+```{r}
+penguins %>% tabyl(species, island, sex)
+```
+
+
+```{r}
+penguins %>% summarize(n_distinct(year))
+```
+
+```{r}
+penguins %>% count(year)
+```
+
+```{r}
+penguins %>% 
+  group_by(species, sex) %>%
+  summarize(median(body_mass_g))
+
+```
+
+```{r}
+penguins %>% tabyl(island, year)
+```
+
+# Data Wrangling
+
+## `filter()`
+
+```{r}
+penguins %>% filter(bill_length_mm > 55)
+
+
+penguins %>% filter(island == "Torgersen")
+penguins %>% filter(bill_length_mm/bill_depth_mm > 3)    # can do math
+penguins %>% filter((body_mass_g < 3000) | (body_mass_g > 6000))
+
+# filter on multiple variables:
+penguins %>% filter(body_mass_g < 3000, bill_depth_mm < 20, sex == "female")
+penguins %>% filter(body_mass_g < 3000 & bill_depth_mm < 20 & sex == "female")
+penguins %>% filter(body_mass_g < 3000 | bill_depth_mm < 20 | sex == "female")
+
+penguins %>% filter(year == 2008)      # note the use of == instead of just =
+penguins %>% filter(sex == "female")
+
+penguins %>% filter(!(species == "Adelie"))
+penguins %>% filter(species %in% c("Chinstrap", "Gentoo"))
+
+penguins %>% filter(is.na(sex))
+penguins %>% filter(!is.na(sex))
+```
+
+## `select()`
+
+```{r}
+penguins %>% select(id, island, species, body_mass_g)
+
+
+penguins %>% select(id:bill_length_mm)
+
+penguins %>% select(where(is.character))
+penguins %>% select(where(is.numeric))
+
+penguins %>% select(-id,-species)
+penguins %>% select(-(id:island))
+
+penguins %>% select(contains("bill"))
+penguins %>% select(starts_with("s"))
+penguins %>% select(-contains("mm"))
+
+```
+
+## `relocate()`
+
+```{r}
+penguins %>% relocate(year, body_mass_g)
+
+penguins %>% relocate(species:bill_length_mm)
+
+penguins %>% relocate(where(is.character))
+penguins %>% relocate(where(is.numeric))
+
+penguins %>% relocate(flipper_length_mm,.before = bill_length_mm)
+penguins %>% relocate(species, .after = island)
+penguins %>% relocate(species, .after = last_col())
+
+```
+
+## Save new dataset
+
+```{r}
+penguins_sub <- penguins %>% select(id:island, sex)
+penguins_sub
+
+```
+
+## `mutate()`
+
+```{r}
+penguins <- penguins %>% 
+  mutate(bill_ratio = bill_length_mm / bill_depth_mm)   
+# use = (not <- or ==) to define new variable
+
+penguins %>% select(bill_ratio, bill_length_mm, bill_depth_mm)
+
+
+penguins <- penguins %>% mutate(bill_long = (bill_length_mm > 45))
+
+penguins <- penguins %>% mutate(male = (sex == "male"))
+penguins <- penguins %>% mutate(male2 = 1 * (sex == "male"))
+```
+
+## `rename()`
+
+```{r}
+# This does not save the new name
+penguins %>% rename(record = id)
+
+
+penguins <- penguins %>% 
+  rename(record = id)
+penguins
+
+```
+
+# Figures with ggplot
+
+## Simple plots
+
+```{r}
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm, 
+           y = bill_length_mm)) +
+  geom_point() 
+
+
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm)) +
+  geom_histogram() 
+```
+
+## Scatterplot
+
+```{r}
+ggplot(data = penguins,
+       aes(x = flipper_length_mm,
+           y = bill_length_mm,
+           color = species)) +
+  geom_point()+
+  labs(
+    title = "Flipper & bill length",
+    subtitle = "Palmer Station LTER",
+    x = "Flipper length(mm)",
+    y = "Bill length(mm)") +
+  scale_color_viridis_d(
+    name = "Penguin species") +
+  theme_bw()
+```
+
+## Histogram
+
+```{r}
+ggplot(data = penguins,
+       aes(x = flipper_length_mm,
+           fill = species)) +
+  geom_histogram(
+    alpha = 0.5,
+    position = "identity") +
+  labs(
+    title = "Flipper length",
+    x = "Flipper length(mm)",
+    y = "Frequency") +
+  scale_fill_viridis_d(
+    name = "Penguin species") +
+  theme_minimal()
+
+```
+
+## Boxplot + jitter
+
+```{r}
+ggplot(data = penguins,
+       aes(x = species,
+           y = flipper_length_mm)) +
+  geom_boxplot(color="darkgrey",
+               width = 0.3,
+               show.legend = FALSE) +
+  geom_jitter(
+    aes(color = species),
+    alpha = 0.5,
+    show.legend = FALSE,
+    position = position_jitter(
+      width = 0.2, seed = 0)) +
+  scale_color_manual(
+    values = c("darkorange","purple",
+               "cyan4")) +
+  theme_minimal() +
+  labs(x = "Species",
+       y = "Flipper length (mm)")
+```
+
+## Bar plots
+
+### With counts
+
+```{r}
+ggplot(data = penguins,
+       aes(x = species, 
+           fill = sex)) +
+  geom_bar()
+```
+
+```{r}
+ggplot(data = penguins,
+       aes(x = species, 
+           fill = sex)) +
+  geom_bar(position = "dodge")
+
+```
+
+
+### With percentages
+
+```{r}
+pct_data <- penguins %>% 
+  count(species, sex) %>% 
+  # filter(!is.na(sex)) %>%
+  group_by(species) %>% 
+  mutate(pct = 100*n/sum(n))
+pct_data
+
+ggplot(data = pct_data, 
+       aes(x = species, y = pct, 
+           fill = sex)) +
+  geom_col()+ 
+  ylab("Percent")
+```
+
+```{r}
+pct_data <- penguins %>% 
+  count(species, sex) %>% 
+  # filter(!is.na(sex)) %>%
+  group_by(species) %>% 
+  mutate(pct = 100*n/sum(n))
+pct_data
+
+ggplot(data = pct_data, 
+       aes(x = species, y = pct, 
+           fill = sex)) +
+  geom_col(position = "dodge") + 
+  ylab("Percent")
+```
+
+
+# Factor variables
+
+```{r}
+penguins <- penguins %>%
+  mutate(sex_fac = factor(sex)) 
+levels(penguins$sex_fac)  # factor levels are in alphanumeric order by default
+penguins %>% select(sex, sex_fac) %>% summary()  # character vs. factor types
+penguins %>% select(sex, sex_fac) %>% str()  # str for structure
+```
+
+## relevel 
+
+```{r}
+penguins <- penguins %>%
+  mutate(species_fac = factor(species)) 
+
+summary(penguins$species_fac)  # levels are in alphanumeric order by default
+
+penguins <- penguins %>%
+  mutate(species_fac = fct_relevel(species_fac,   
+                                   c("Adelie", "Gentoo", "Chinstrap"))) 
+
+summary(penguins$species_fac)  # levels are specified order
+
+```
+
+## collapse factor levels
+
+```{r}
+penguins <- penguins %>%
+  mutate(species_fac2 = fct_collapse(species_fac, # collapse levels 
+                                     Adelie = c("Adelie"), 
+                                     Other = c("Gentoo", "Chinstrap")) 
+  )
+
+penguins %>% select(species_fac, species_fac2) %>% summary()
+penguins %>% tabyl(species_fac, species_fac2) 
+```
+
+
+# Save data frame
+```{r}
+save(penguins, file = "penguins.RData")  # saving mydata within the data folder
+
+load("penguins.RData")
+
+write_csv(penguins, path = "penguins.csv")
+
+```
+
