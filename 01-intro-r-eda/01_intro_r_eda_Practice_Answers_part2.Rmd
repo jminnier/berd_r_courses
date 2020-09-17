@@ -1,7 +1,7 @@
 ---
 title: Practice Solutions to <br> Intro to R and Rstudio for EDA - Part 2
 author: Jessica Minnier, PhD & Meike Niederhausen, PhD
-date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2020/09/16'
+date: 'OCTRI Biostatistics, Epidemiology, Research & Design (BERD) Workshop <br><br> 2020/09/17'
 output: 
   xaringan::moon_reader:
     css: [css/xaringan-themer-solns.css, css/my-theme.css]
@@ -47,7 +47,7 @@ knitr::opts_chunk$set(
   )
 
 # set ggplot theme
-theme_set(theme_bw(base_size = 24))
+#theme_set(theme_bw(base_size = 24))
 ```
 
 
@@ -73,11 +73,15 @@ mono_light(
 )
 ```
 
-```{r, echo = FALSE}
+
+```{r, include=FALSE}
+library(tidyverse)
+library(janitor)
 penguins <- read_csv(here::here("01-intro-r-eda","data","penguins.csv"))
+mydata <- read_csv(here::here("01-intro-r-eda","data","yrbss.csv"))
+
 ```
 
----
 
 # Practice 3
 
@@ -318,6 +322,105 @@ mean(girls$bullied_past_12mo, na.rm=TRUE)
 ---
 
 # Practice 5
+
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+
+1. Make a scatter plot of bill depth vs bill length.
+
+1. Add `+ geom_smooth(method="lm")` to the plot. What is this saying about the association between bill depth and length?
+
+1. Now add `color = species` to the aesthetic `aes()`. Keep `geom_smooth`. How do the associations look now?
+
+
+---
+
+### 2. Make a scatter plot of bill depth vs bill length.
+
+.pull-left[
+```{r ex5_2, eval = FALSE}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) + 
+  geom_point()
+```
+]
+.pull-right[
+```{r ex5_2_out, ref.label="ex5_2", echo=FALSE, fig.keep = "first"}
+```
+]
+
+---
+
+### 3. Add `+ geom_smooth(method="lm")` to the plot. What is this saying about the association between bill depth and length?
+
+.pull-left[
+It looks like as bill length increases, bill depth decreases. This is a negative association. But there is a wide variation and a lot of noise.
+
+```{r ex5_3, eval = FALSE}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) + 
+  geom_point()+
+  geom_smooth(method="lm")
+```
+]
+.pull-right[
+```{r ex5_3_out, ref.label="ex5_3", echo=FALSE, fig.keep = "first"}
+```
+]
+
+---
+
+### 4. Now add `color = species` to the aesthetic `aes()`. Keep `geom_smooth`. How do the associations look now?
+
+.pull-left[
+The association reverses, when we look inside species. As bill length increases, bill depth increases. This is an example of [Simpson's paradox!](https://en.wikipedia.org/wiki/Simpson%27s_paradox#:~:text=Simpson's%20paradox%2C%20which%20goes%20by,when%20these%20groups%20are%20combined.)
+
+```{r ex5_4, eval = FALSE}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm,
+           color = species)) + #<<
+  geom_point()+
+  geom_smooth(method="lm")
+```
+]
+.pull-right[
+```{r ex5_4_out, ref.label="ex5_4", echo=FALSE, fig.keep = "first"}
+```
+]
+
+---
+
+### Here's a prettier version:
+
+.pull-left[
+```{r ex4_p, eval = FALSE}
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm,
+           color = species)) + 
+  geom_point()+
+  geom_smooth(method="lm")+
+  labs( 
+    title = "Flipper vs bill length",
+    subtitle = "Palmer Station LTER",
+    x = "Flipper length(mm)", 
+    y = "Bill length(mm)") + 
+  scale_color_viridis_d( 
+    name = "Species") + 
+  theme(legend.position = "bottom")+
+  theme_bw()
+```
+]
+.pull-right[
+```{r ex4_p_out, ref.label="ex4_p", echo=FALSE, fig.keep = "first", fig.width = 8, fig.height = 8}
+```
+]
+
+
+
+
 
 
 

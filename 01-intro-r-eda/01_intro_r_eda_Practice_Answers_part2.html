@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Practice Solutions to   Intro to R and Rstudio for EDA - Part 2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jessica Minnier, PhD &amp; Meike Niederhausen, PhD" />
+    <script src="https://use.fontawesome.com/5235085b15.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer-solns.css" type="text/css" />
+    <link rel="stylesheet" href="css/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
+
+# Practice Solutions to <br> Intro to R and Rstudio for EDA - Part 2
+### Jessica Minnier, PhD &amp; Meike Niederhausen, PhD
+### OCTRI Biostatistics, Epidemiology, Research &amp; Design (BERD) Workshop <br><br> 2020/09/17
+
+---
+
+
+layout: true
+  
+&lt;!-- &lt;div class="my-footer"&gt;&lt;span&gt;bit.ly/berd_tidy&lt;/span&gt;&lt;/div&gt;  --&gt;
+
+---
+
+
+
+
+
+
+
+
+
+
+
+# Practice 3
+
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+
+1. How many different years are in the data? (Hint: use `tabyl()` or `n_distinct()`)
+
+1. Count the number of penguins measured each year.
+
+1. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+
+1. Create a 2x2 table of number of penguins measured in each year by each island.
+
+---
+
+# Practice 3 Answers
+
+### 2. How many different years are in the data? (Hint: use `tabyl()` or `n_distinct()`)
+
+.pull-left[
+Option 1:
+
+```r
+penguins %&gt;% 
+  summarize(n_distinct(year))
+```
+
+```
+# A tibble: 1 x 1
+  `n_distinct(year)`
+               &lt;int&gt;
+1                  3
+```
+]
+.pull-right[
+Option 2:
+
+```r
+penguins %&gt;% tabyl(year)
+```
+
+```
+ year   n   percent
+ 2007 109 0.3187135
+ 2008 114 0.3333333
+ 2009 119 0.3479532
+```
+
+```r
+penguins %&gt;% tabyl(year) %&gt;% nrow
+```
+
+```
+[1] 3
+```
+]
+
+---
+
+### 3. Count the number of penguins measured each year.
+
+.pull-left[
+Option 1:
+
+```r
+penguins %&gt;% count(year)
+```
+
+```
+# A tibble: 3 x 2
+   year     n
+  &lt;dbl&gt; &lt;int&gt;
+1  2007   109
+2  2008   114
+3  2009   119
+```
+]
+.pull-right[
+Option 2:
+
+```r
+penguins %&gt;% tabyl(year)
+```
+
+```
+ year   n   percent
+ 2007 109 0.3187135
+ 2008 114 0.3333333
+ 2009 119 0.3479532
+```
+]
+
+---
+
+### 4. Calculate the median body mass by each species and sex subgroup. Use `summarize()` and `group_by()` to do this.
+
+
+```r
+penguins %&gt;% 
+  group_by(species, sex) %&gt;%
+  summarize(median(body_mass_g))
+```
+
+```
+# A tibble: 8 x 3
+# Groups:   species [3]
+  species   sex    `median(body_mass_g)`
+  &lt;chr&gt;     &lt;chr&gt;                  &lt;dbl&gt;
+1 Adelie    female                 3400 
+2 Adelie    male                   4000 
+3 Adelie    &lt;NA&gt;                   3475 
+4 Chinstrap female                 3550 
+5 Chinstrap male                   3950 
+6 Gentoo    female                 4700 
+7 Gentoo    male                   5500 
+8 Gentoo    &lt;NA&gt;                   4688.
+```
+
+---
+
+### 5. Create a 2x2 table of number of penguins measured in each year by each island.
+
+
+```r
+penguins %&gt;% tabyl(island, year)
+```
+
+```
+    island 2007 2008 2009
+    Biscoe   44   64   59
+     Dream   46   34   44
+ Torgersen   19   16   16
+```
+
+---
+
+# Practice 4 (old practice 2)
+
+1. Create a new script and save it as `Practice2.R`
+
+1. Create data frames for males and females separately.
+
+1. Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+1. Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+1. Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+
+---
+
+# Practice 4 Answers
+
+__#2__ Create data frames for males and females separately.
+
+
+```r
+boys &lt;- mydata[mydata$sex == "Male", ]
+dim(boys)
+```
+
+```
+[1]  8 10
+```
+
+```r
+girls &lt;- mydata[mydata$sex == "Female", ]
+dim(girls)
+```
+
+```
+[1] 12 10
+```
+
+Check number of boys &amp; girls:
+
+```r
+summary(mydata$sex)
+```
+
+```
+   Length     Class      Mode 
+       20 character character 
+```
+
+
+---
+
+__#3__ Do males and females have similar BMIs? Weights? Compares means, standard deviations, range, and boxplots.
+
+.pull-left-60[
+
+```r
+summary(boys$bmi); sd(boys$bmi)
+```
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  18.18   19.57   20.90   20.63   21.58   22.46 
+```
+
+```
+[1] 1.466896
+```
+
+```r
+summary(girls$bmi); sd(girls$bmi)
+```
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  17.48   21.95   25.80   24.59   27.47   29.35 
+```
+
+```
+[1] 3.70739
+```
+
+]
+.pull-right-40[
+
+
+```r
+boxplot(mydata$bmi ~ mydata$sex)
+```
+
+&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+__#4__ Plot BMI vs. weight for each gender separately. Do they have similar relationships?
+
+.pull-left[
+
+```r
+plot(boys$bmi, boys$weight)
+```
+
+&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+
+```r
+plot(girls$bmi, girls$weight)
+```
+
+&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
+__#5__ Are males or females more likely to be bullied in the past 12 months? Calculate the percentage bullied for each gender.
+
+.pull-left[
+
+```r
+bullied_boys &lt;- 
+  boys[boys$bullied_past_12mo == TRUE,]
+nrow(bullied_boys)
+```
+
+```
+[1] 3
+```
+
+```r
+bullied_boys_prct &lt;- 
+  nrow(bullied_boys) / nrow(boys) * 100
+bullied_boys_prct
+```
+
+```
+[1] 37.5
+```
+
+```r
+# alternative
+mean(boys$bullied_past_12mo, na.rm=TRUE)
+```
+
+```
+[1] 0.375
+```
+]
+.pull-right[
+
+```r
+# Apply the same method for girls:
+bullied_girls &lt;- 
+  girls[girls$bullied_past_12mo == TRUE,]
+nrow(bullied_girls)
+```
+
+```
+[1] 6
+```
+
+```r
+bullied_girls_prct &lt;- 
+  nrow(bullied_girls) / nrow(girls) * 100
+bullied_girls_prct
+```
+
+```
+[1] 50
+```
+
+```r
+# alternative. Answers don't match. Why???
+mean(girls$bullied_past_12mo, na.rm=TRUE)
+```
+
+```
+[1] 0.4
+```
+
+
+]
+
+
+---
+
+__#5__ cont'd
+
+On the previous slide we saw that our two methods for calculating the percentage of girls that were bullied in the past 12 months did not match. What went wrong?
+
+
+
+```r
+nrow(bullied_girls)
+```
+
+```
+[1] 6
+```
+
+```r
+girls$bullied_past_12mo
+```
+
+```
+ [1]    NA    NA  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE
+```
+
+
+To get the number of girls that were bullied we need to make sure the missing values (NA) are not included.
+
+---
+
+__#5__ cont'd - working with NA's
+
+
+```r
+# values of bullied_past_12mo
+girls$bullied_past_12mo
+```
+
+```
+ [1]    NA    NA  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE
+```
+
+```r
+# which are missing (logical)
+is.na(girls$bullied_past_12mo)
+```
+
+```
+ [1]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+```
+
+```r
+# which are NOT missing (logical)
+!is.na(girls$bullied_past_12mo)
+```
+
+```
+ [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+```
+
+---
+
+__#5__ cont'd - fix girls' code
+
+Exclude the missing values from the `bullied_girls`:
+
+
+```r
+girls2 &lt;- girls[!is.na(girls$bullied_past_12mo),]
+nrow(girls2)
+```
+
+```
+[1] 10
+```
+
+```r
+bullied_girls2 &lt;- girls2[girls2$bullied_past_12mo == TRUE,]
+nrow(bullied_girls2)
+```
+
+```
+[1] 4
+```
+
+```r
+# from girls dataset, total number bullied
+sum(girls$bullied_past_12mo, na.rm = TRUE)
+```
+
+```
+[1] 4
+```
+
+---
+
+__#5__ cont'd - Calculate percentage girls bullied
+
+
+```r
+bullied_girls_prct2 &lt;- nrow(bullied_girls2) / nrow(girls2) * 100
+bullied_girls_prct2
+```
+
+```
+[1] 40
+```
+
+```r
+# Compare to alternative
+mean(girls$bullied_past_12mo, na.rm=TRUE)
+```
+
+```
+[1] 0.4
+```
+
+---
+
+# Practice 5
+
+1. Continue adding code chunks to your Rmd (or, start a new one! But remember to load the libraries and data at the top.)
+
+1. Make a scatter plot of bill depth vs bill length.
+
+1. Add `+ geom_smooth(method="lm")` to the plot. What is this saying about the association between bill depth and length?
+
+1. Now add `color = species` to the aesthetic `aes()`. Keep `geom_smooth`. How do the associations look now?
+
+
+---
+
+### 2. Make a scatter plot of bill depth vs bill length.
+
+.pull-left[
+
+```r
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) + 
+  geom_point()
+```
+]
+.pull-right[
+&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/ex5_2_out-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+### 3. Add `+ geom_smooth(method="lm")` to the plot. What is this saying about the association between bill depth and length?
+
+.pull-left[
+It looks like as bill length increases, bill depth decreases. This is a negative association. But there is a wide variation and a lot of noise.
+
+
+```r
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm)) + 
+  geom_point()+
+  geom_smooth(method="lm")
+```
+]
+.pull-right[
+&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/ex5_3_out-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+### 4. Now add `color = species` to the aesthetic `aes()`. Keep `geom_smooth`. How do the associations look now?
+
+.pull-left[
+The association reverses, when we look inside species. As bill length increases, bill depth increases. This is an example of [Simpson's paradox!](https://en.wikipedia.org/wiki/Simpson%27s_paradox#:~:text=Simpson's%20paradox%2C%20which%20goes%20by,when%20these%20groups%20are%20combined.)
+
+
+```r
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm,
+*          color = species)) +
+  geom_point()+
+  geom_smooth(method="lm")
+```
+]
+.pull-right[
+&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/ex5_4_out-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+### Here's a prettier version:
+
+.pull-left[
+
+```r
+ggplot(data = penguins, 
+       aes(x = bill_length_mm, 
+           y = bill_depth_mm,
+           color = species)) + 
+  geom_point()+
+  geom_smooth(method="lm")+
+  labs( 
+    title = "Flipper vs bill length",
+    subtitle = "Palmer Station LTER",
+    x = "Flipper length(mm)", 
+    y = "Bill length(mm)") + 
+  scale_color_viridis_d( 
+    name = "Species") + 
+  theme(legend.position = "bottom")+
+  theme_bw()
+```
+]
+.pull-right[
+&lt;img src="01_intro_r_eda_Practice_Answers_part2_files/figure-html/ex4_p_out-1.png" style="display: block; margin: auto;" /&gt;
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "tomorrow",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

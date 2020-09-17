@@ -103,8 +103,9 @@ Instructors: Meike Niederhausen, PhD & Jessica Minnier, PhD<br>
 
 # Working with data, continued
 
+.pull-left[
 - Open your old Rmd file
-- If you make a new Rmd file, make sure you have this code:
+- If you make a new Rmd file, make sure you have this code in a code chunk at the top of the Rmd:
 
 ```{r, eval = FALSE}
 library(tidyverse)
@@ -112,6 +113,12 @@ library(janitor)
 penguins <- read_csv("penguins")
 ```
 
+- Remember we need to load (open) the package every time we want to use it in a new Rstudio instance *or* knit an Rmd
+- When you knit an Rmd, it is blind to what you have done in the console or in the R enivronment. It starts completely from scratch.
+]
+.pull-right[
+<img src="img/rmd_penguins.png" width="100%" height="80%">
+]
 
 ```{r child=here::here("01-intro-r-eda","child_pipe_summaries.Rmd")}
 # Jessica
