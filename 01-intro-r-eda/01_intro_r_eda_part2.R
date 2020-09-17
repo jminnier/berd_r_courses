@@ -112,7 +112,7 @@ penguins %>%
 
 ## -----------------------------------------------------------------------------------------------
 penguins %>%
-  summarize(across(where(is.numeric), mean, na.rm=TRUE))
+  summarize(across(c(bill_length_mm, bill_depth_mm), mean, na.rm=TRUE))
 
 
 ## -----------------------------------------------------------------------------------------------
@@ -126,6 +126,10 @@ penguins %>%
   summarize(
     across(where(is.character), #<<
            n_distinct))
+
+penguins %>%
+  summarize(across(where(is.numeric), #<<
+            min, na.rm=TRUE))
 
 
 ## -----------------------------------------------------------------------------------------------

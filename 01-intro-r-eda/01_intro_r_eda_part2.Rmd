@@ -89,11 +89,10 @@ Instructors: Meike Niederhausen, PhD & Jessica Minnier, PhD<br>
 
 ### *Do this now:*
 
-1. **Open html slides**: [bit.ly/berd_intro_part2](http://bit.ly/berd_intro_part2)
-
+1. **Open html slides**: [http://bit.ly/berd_intro_part2](http://bit.ly/berd_intro_part2)
+1. **Download Rmd file** to follow along: [bit.ly/berd_intro_rmd](http://bit.ly/berd_intro_rmd)
 1. **Open google doc** for asking questions: [bit.ly/berd_doc2](https://bit.ly/berd_doc2)
   + Helpers will be monitoring this, you can ask questions, copy code or screenshots.
-
 1. **Open Rstudio with these steps:**
   + Open the folder from yesterday
   + Double click on the `.Rproj` file.

@@ -244,8 +244,8 @@ penguins %>% rename(record = id)
 Code renames the column *and* overwrites `penguins` with renamed column:
 
 ```{r}
-penguins <- penguins %>% #<<
+penguins2 <- penguins %>% #<<
     rename(record = id)
-penguins
+penguins2
 ```
 ]
