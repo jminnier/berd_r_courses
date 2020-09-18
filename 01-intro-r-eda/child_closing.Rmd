@@ -26,7 +26,7 @@ load("penguins.RData")
 * Save __csv__ file: comma-separated values
 
 ```{r, eval=FALSE}
-write_csv(mydata, path = "mydata.csv")
+write_csv(penguins, path = "my_penguin_data.csv")
 ```
 
 ---
