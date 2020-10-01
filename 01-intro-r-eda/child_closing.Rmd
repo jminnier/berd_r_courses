@@ -50,12 +50,12 @@ Use `?` in front of function name in console. Try this:
 
 ---
 
-# Resources
+## Resources
 
 - Click on this [*LONG LIST* of resources for learning R](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
 - Watch [recordings of our other workshops](https://echo360.org/section/c84999b7-b62f-4fcd-8ddd-77ac4ae7c7b9/home) with **all slides/materials at [github.com/jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)**
 
-**Recommended viewing order of BERD workshops (since some are recorded multiple times):**
+**Recommended viewing order of BERD workshops:**
 
 - *Either* this workshop, or the older version: [*Getting Started with R and Rstudio*](https://jminnier-berd-r-courses.netlify.com/01-getting-started-v2/01_getting_started_slides.html) (September 24, 2019, 3 hour version)
   + no tidyverse, just base R introduction; The new version we are doing now is hopefully better!
@@ -63,7 +63,7 @@ Use `?` in front of function name in console. Try this:
   + more data wrangling, tidy data, removing missing data, arranging data
 - [*Data Wrangling in R, Part 2*](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part2.html) (April 25, 2019, 2 hours)
   + even more data wrangling, adding columns, summarizing, joining/merging two or more data sets together, reshaping data from wide to long format or vice versa, more methods for dealing with NAs, working with dates and factors, cleaning up messy column names
-- [*Data Visualization with R and ggplot2*](html) (May 20, 2020, 2.5 hours)
+- [*Data Visualization with R and ggplot2*](https://jminnier-berd-r-courses.netlify.app/04-ggplot/04_ggplot_slides.html) (May 20, 2020, 2.5 hours)
   + additional ggplot examples, many more ways to customize your ggplots!
 
 

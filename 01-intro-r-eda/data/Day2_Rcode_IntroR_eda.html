@@ -2046,35 +2046,39 @@ penguins %&gt;% filter(body_mass_g &lt; 3000, bill_depth_mm &lt; 20, sex == &quo
 ##  9  2975           42            20.2               190        4250  2007
 ## 10  3966           37.8          17.1               186        3300  2007
 ## # … with 332 more rows</code></pre>
-<pre class="r"><code>penguins %&gt;% select(-id,-species)</code></pre>
-<pre><code>## # A tibble: 342 x 7
-##    island  bill_length_mm bill_depth_mm flipper_length_… body_mass_g sex    year
-##    &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
-##  1 Torger…           39.1          18.7              181        3750 male   2007
-##  2 Torger…           NA            17.4              186        3800 fema…  2007
-##  3 Torger…           40.3          18                195        3250 fema…  2007
-##  4 Torger…           36.7          19.3              193        3450 fema…  2007
-##  5 Torger…           39.3          20.6              190        3650 male   2007
-##  6 Torger…           38.9          17.8              181        3625 fema…  2007
-##  7 Torger…           NA            19.6              195        4675 male   2007
-##  8 Torger…           34.1          18.1              193        3475 &lt;NA&gt;   2007
-##  9 Torger…           42            20.2              190        4250 &lt;NA&gt;   2007
-## 10 Torger…           37.8          17.1              186        3300 &lt;NA&gt;   2007
-## # … with 332 more rows</code></pre>
-<pre class="r"><code>penguins %&gt;% select(-(id:island))</code></pre>
-<pre><code>## # A tibble: 342 x 6
-##    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
-##             &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
-##  1           39.1          18.7               181        3750 male    2007
-##  2           NA            17.4               186        3800 female  2007
-##  3           40.3          18                 195        3250 female  2007
-##  4           36.7          19.3               193        3450 female  2007
-##  5           39.3          20.6               190        3650 male    2007
-##  6           38.9          17.8               181        3625 female  2007
-##  7           NA            19.6               195        4675 male    2007
-##  8           34.1          18.1               193        3475 &lt;NA&gt;    2007
-##  9           42            20.2               190        4250 &lt;NA&gt;    2007
-## 10           37.8          17.1               186        3300 &lt;NA&gt;    2007
+<pre class="r"><code>penguins %&gt;% select(-species)</code></pre>
+<pre><code>## # A tibble: 342 x 8
+##       id island bill_length_mm bill_depth_mm flipper_length_… body_mass_g sex  
+##    &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;
+##  1  1689 Torge…           39.1          18.7              181        3750 male 
+##  2  4274 Torge…           NA            17.4              186        3800 fema…
+##  3  4539 Torge…           40.3          18                195        3250 fema…
+##  4  2435 Torge…           36.7          19.3              193        3450 fema…
+##  5  2326 Torge…           39.3          20.6              190        3650 male 
+##  6  2637 Torge…           38.9          17.8              181        3625 fema…
+##  7  4443 Torge…           NA            19.6              195        4675 male 
+##  8  2102 Torge…           34.1          18.1              193        3475 &lt;NA&gt; 
+##  9  2975 Torge…           42            20.2              190        4250 &lt;NA&gt; 
+## 10  3966 Torge…           37.8          17.1              186        3300 &lt;NA&gt; 
+## # … with 332 more rows, and 1 more variable: year &lt;dbl&gt;</code></pre>
+<pre class="r"><code>names(penguins)</code></pre>
+<pre><code>## [1] &quot;id&quot;                &quot;species&quot;           &quot;island&quot;           
+## [4] &quot;bill_length_mm&quot;    &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot;
+## [7] &quot;body_mass_g&quot;       &quot;sex&quot;               &quot;year&quot;</code></pre>
+<pre class="r"><code>penguins %&gt;% select(-(island:sex))</code></pre>
+<pre><code>## # A tibble: 342 x 3
+##       id species  year
+##    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1  1689 Adelie   2007
+##  2  4274 Adelie   2007
+##  3  4539 Adelie   2007
+##  4  2435 Adelie   2007
+##  5  2326 Adelie   2007
+##  6  2637 Adelie   2007
+##  7  4443 Adelie   2007
+##  8  2102 Adelie   2007
+##  9  2975 Adelie   2007
+## 10  3966 Adelie   2007
 ## # … with 332 more rows</code></pre>
 <pre class="r"><code>penguins %&gt;% select(contains(&quot;bill&quot;))</code></pre>
 <pre><code>## # A tibble: 342 x 2
@@ -2298,9 +2302,9 @@ penguins %&gt;% rename(record = id)</code></pre>
 ## 10   3966 Adelie  Torge…           37.8          17.1              186
 ## # … with 332 more rows, and 7 more variables: body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;,
 ## #   year &lt;dbl&gt;, bill_ratio &lt;dbl&gt;, bill_long &lt;lgl&gt;, male &lt;lgl&gt;, male2 &lt;dbl&gt;</code></pre>
-<pre class="r"><code>penguins &lt;- penguins %&gt;% 
+<pre class="r"><code>penguins2 &lt;- penguins %&gt;% 
   rename(record = id)
-penguins</code></pre>
+penguins2</code></pre>
 <pre><code>## # A tibble: 342 x 13
 ##    record species island bill_length_mm bill_depth_mm flipper_length_…
 ##     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
@@ -2517,7 +2521,7 @@ penguins %&gt;% select(species_fac, species_fac2) %&gt;% summary()</code></pre>
 
 load(&quot;penguins.RData&quot;)
 
-write_csv(penguins, path = &quot;penguins.csv&quot;)</code></pre>
+write_csv(penguins, path = &quot;penguins_new.csv&quot;)</code></pre>
 </div>
 
 

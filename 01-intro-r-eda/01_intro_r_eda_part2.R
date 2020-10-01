@@ -1,4 +1,4 @@
-## ----setup, include=FALSE-----------------------------------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------
 options(htmltools.dir.version = FALSE)
 
 library(tidyverse)
@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 # theme_set(theme_bw(base_size = 24))
 
 
-## ----xaringan-themer, include = FALSE-----------------------------------------------------------
+## ----xaringan-themer, include = FALSE-----------------------------------
 # creates xaringan theme
 # devtools::install_github("gadenbuie/xaringanthemer")
 library(xaringanthemer)
@@ -46,7 +46,7 @@ mono_light(
 )
 
 
-## ---- include=FALSE-----------------------------------------------------------------------------
+## ---- include=FALSE-----------------------------------------------------
 library(tidyverse)
 library(janitor)
 penguins <- read_csv(here::here("01-intro-r-eda","data","penguins.csv"))
@@ -54,40 +54,40 @@ mydata <- read_csv(here::here("01-intro-r-eda","data","yrbss.csv"))
 
 
 
-## ---- eval = FALSE------------------------------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------
 ## library(tidyverse)
 ## library(janitor)
 ## penguins <- read_csv("penguins")
 
 
-## ----child=here::here("01-intro-r-eda","child_pipe_summaries.Rmd")------------------------------
+## ----child=here::here("01-intro-r-eda","child_pipe_summaries.Rmd")------
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% head(n=3)      # prounounce %>% as "then"
 
 
-## ---- eval=FALSE--------------------------------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------
 ## penguins %>% head(n=2) %>% summary()
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 mean(penguins$body_mass_g)
 median(penguins$body_mass_g)
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>%
   summarize(mean(body_mass_g), #<<
             median(body_mass_g)) #<<
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>%
   summarize(mean_mass = mean(body_mass_g), 
             mean_len = mean(bill_length_mm, na.rm = TRUE)) #<<
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 # summary of all data as a whole
 penguins %>% 
   summarize(mass_mean =mean(body_mass_g), #<<
@@ -95,7 +95,7 @@ penguins %>%
             mass_cv = sd(body_mass_g)/mean(body_mass_g)) #<<
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 # summary by group variable
 penguins %>% 
   group_by(species) %>% #<<
@@ -105,23 +105,23 @@ penguins %>%
             mass_cv = sd(body_mass_g)/mean(body_mass_g))
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% 
   summarize(across(c(body_mass_g, bill_depth_mm), mean))
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>%
   summarize(across(c(bill_length_mm, bill_depth_mm), mean, na.rm=TRUE))
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% 
   summarize(across(c(body_mass_g, bill_depth_mm), 
                    c(m = mean, sd = sd))) #<<
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>%
   summarize(
     across(where(is.character), #<<
@@ -132,38 +132,38 @@ penguins %>%
             min, na.rm=TRUE))
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% count(island)
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% count(species, island)
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 # default table
 penguins %>% tabyl(species)
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 # output can be treated as tibble
 penguins%>%tabyl(species)%>%select(-n)
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% 
   tabyl(species) %>%
   adorn_totals("row") %>% #<<
   adorn_pct_formatting(digits=2)  #<<
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 # default 2x2 table
 penguins %>% 
   tabyl(species, sex) #<<
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% tabyl(species, sex) %>% 
   adorn_percentages(denominator = "col") %>% #<<
   adorn_totals("row") %>% #<<
@@ -171,14 +171,14 @@ penguins %>% tabyl(species, sex) %>%
   adorn_ns() #<<
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% tabyl(species, island, sex)
 
 
 
-## ----child=here::here("01-intro-r-eda","child_practice3.Rmd")-----------------------------------
+## ----child=here::here("01-intro-r-eda","child_practice3.Rmd")-----------
 
-## ---- include = FALSE---------------------------------------------------------------------------
+## ---- include = FALSE---------------------------------------------------
 penguins %>% summarize(n_distinct(year))
 
 penguins %>% count(year)
@@ -191,13 +191,13 @@ penguins %>% tabyl(island, year)
 
 
 
-## ----child=here::here("01-intro-r-eda","child_wrangling.Rmd")-----------------------------------
+## ----child=here::here("01-intro-r-eda","child_wrangling.Rmd")-----------
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% filter(bill_length_mm > 55)
 
 
-## ---- eval=FALSE--------------------------------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------
 ## penguins %>% filter(island == "Torgersen")
 ## penguins %>% filter(bill_length_mm/bill_depth_mm > 3)    # can do math
 ## penguins %>% filter((body_mass_g < 3000) | (body_mass_g > 6000))
@@ -217,11 +217,11 @@ penguins %>% filter(bill_length_mm > 55)
 ## penguins %>% filter(!is.na(sex))
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% select(id, island, species, body_mass_g)
 
 
-## ---- eval=FALSE--------------------------------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------
 ## penguins %>% select(id:bill_length_mm)
 ## 
 ## penguins %>% select(where(is.character))
@@ -236,11 +236,11 @@ penguins %>% select(id, island, species, body_mass_g)
 ## 
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins %>% relocate(year, body_mass_g)
 
 
-## ---- eval=FALSE--------------------------------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------
 ## penguins %>% relocate(species:bill_length_mm)
 ## 
 ## penguins %>% relocate(where(is.character))
@@ -251,12 +251,12 @@ penguins %>% relocate(year, body_mass_g)
 ## penguins %>% relocate(species, .after = last_col())
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins_sub <- penguins %>% select(id:island, sex)
 penguins_sub
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins <- penguins %>% 
    mutate(bill_ratio = bill_length_mm / bill_depth_mm)   #<<
 # use = (not <- or ==) to define new variable
@@ -264,46 +264,46 @@ penguins <- penguins %>%
 penguins %>% select(bill_ratio, bill_length_mm, bill_depth_mm)
 
 
-## ---- eval=FALSE--------------------------------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------
 ## penguins <- penguins %>% mutate(bill_long = (bill_length_mm > 45))
 ## 
 ## penguins <- penguins %>% mutate(male = (sex == "male"))
 ## penguins <- penguins %>% mutate(male2 = 1 * (sex == "male"))
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 # This does not save the new name
 penguins %>% rename(record = id)
 
 
-## -----------------------------------------------------------------------------------------------
-penguins <- penguins %>% #<<
+## -----------------------------------------------------------------------
+penguins2 <- penguins %>% #<<
     rename(record = id)
-penguins
+penguins2
 
 
 
-## ----child=here::here("01-intro-r-eda","child_practice4.Rmd")-----------------------------------
+## ----child=here::here("01-intro-r-eda","child_practice4.Rmd")-----------
 
 
 
 
-## ----child=here::here("01-intro-r-eda","child_ggplot.Rmd")--------------------------------------
+## ----child=here::here("01-intro-r-eda","child_ggplot.Rmd")--------------
 
-## ---- out.height="400px"------------------------------------------------------------------------
+## ---- out.height="400px"------------------------------------------------
 ggplot(data = penguins, 
        aes(x = flipper_length_mm, 
            y = bill_length_mm)) +
   geom_point() #<<
 
 
-## ---- out.height="400px"------------------------------------------------------------------------
+## ---- out.height="400px"------------------------------------------------
 ggplot(data = penguins, 
        aes(x = flipper_length_mm)) +
   geom_histogram() #<<
 
 
-## ----scatter_nice, eval=FALSE-------------------------------------------------------------------
+## ----scatter_nice, eval=FALSE-------------------------------------------
 ## ggplot(data = penguins,
 ##        aes(x = flipper_length_mm,
 ##            y = bill_length_mm,
@@ -319,10 +319,10 @@ ggplot(data = penguins,
 ##   theme_bw() #<<
 
 
-## ----scatter_nice_out, ref.label="scatter_nice", echo=FALSE, fig.keep = "first"-----------------
+## ----scatter_nice_out, ref.label="scatter_nice", echo=FALSE, fig.keep = "first"----
 
 
-## ----hist_nice, eval=FALSE----------------------------------------------------------------------
+## ----hist_nice, eval=FALSE----------------------------------------------
 ## ggplot(data = penguins,
 ##        aes(x = flipper_length_mm,
 ##            fill = species)) + #<<
@@ -338,10 +338,10 @@ ggplot(data = penguins,
 ##   theme_minimal()
 
 
-## ----hist_nice_out, ref.label="hist_nice", echo=FALSE, fig.keep = "first"-----------------------
+## ----hist_nice_out, ref.label="hist_nice", echo=FALSE, fig.keep = "first"----
 
 
-## ----box_nice, eval=FALSE-----------------------------------------------------------------------
+## ----box_nice, eval=FALSE-----------------------------------------------
 ## ggplot(data = penguins,
 ##        aes(x = species,
 ##            y = flipper_length_mm)) +
@@ -362,24 +362,24 @@ ggplot(data = penguins,
 ##        y = "Flipper length (mm)")
 
 
-## ----box_nice_out, ref.label="box_nice", echo=FALSE, fig.keep = "first"-------------------------
+## ----box_nice_out, ref.label="box_nice", echo=FALSE, fig.keep = "first"----
 
 
-## ---- out.height="400px"------------------------------------------------------------------------
+## ---- out.height="400px"------------------------------------------------
 ggplot(data = penguins,
        aes(x = species, 
            fill = sex)) +
   geom_bar()
 
 
-## ---- out.height="400px"------------------------------------------------------------------------
+## ---- out.height="400px"------------------------------------------------
 ggplot(data = penguins,
        aes(x = species, 
            fill = sex)) +
   geom_bar(position = "dodge")
 
 
-## ----bar_pct------------------------------------------------------------------------------------
+## ----bar_pct------------------------------------------------------------
 pct_data <- penguins %>% 
   count(species, sex) %>% 
   # filter(!is.na(sex)) %>%
@@ -388,7 +388,7 @@ pct_data <- penguins %>%
 pct_data
 
 
-## ---- out.height="380px"------------------------------------------------------------------------
+## ---- out.height="380px"------------------------------------------------
 ggplot(data = pct_data, 
        aes(x = species, y = pct, 
            fill = sex)) +
@@ -396,7 +396,7 @@ ggplot(data = pct_data,
   ylab("Percent")
 
 
-## ----bar_pct_calc-------------------------------------------------------------------------------
+## ----bar_pct_calc-------------------------------------------------------
 pct_data <- penguins %>% 
   count(species, sex) %>% 
   # filter(!is.na(sex)) %>%
@@ -405,7 +405,7 @@ pct_data <- penguins %>%
 pct_data
 
 
-## ---- out.height="380px"------------------------------------------------------------------------
+## ---- out.height="380px"------------------------------------------------
 ggplot(data = pct_data, 
        aes(x = species, y = pct, 
            fill = sex)) +
@@ -414,9 +414,9 @@ ggplot(data = pct_data,
 
 
 
-## ----child=here::here("01-intro-r-eda","child_practice5.Rmd")-----------------------------------
+## ----child=here::here("01-intro-r-eda","child_practice5.Rmd")-----------
 
-## ---- include = FALSE---------------------------------------------------------------------------
+## ---- include = FALSE---------------------------------------------------
 
 ggplot(data = penguins, 
        aes(x = bill_length_mm, 
@@ -449,9 +449,9 @@ ggplot(data = penguins,
 
 
 
-## ----child=here::here("01-intro-r-eda","child_factors.Rmd")-------------------------------------
+## ----child=here::here("01-intro-r-eda","child_factors.Rmd")-------------
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins <- penguins %>%
   mutate(sex_fac = factor(sex)) #<<
 levels(penguins$sex_fac)  # factor levels are in alphanumeric order by default
@@ -459,7 +459,7 @@ penguins %>% select(sex, sex_fac) %>% summary()  # character vs. factor types
 penguins %>% select(sex, sex_fac) %>% str()  # str for structure
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins <- penguins %>%
   mutate(species_fac = factor(species)) #<<
 
@@ -472,7 +472,7 @@ penguins <- penguins %>%
 summary(penguins$species_fac)  # levels are specified order
 
 
-## -----------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------
 penguins <- penguins %>%
   mutate(species_fac2 = fct_collapse(species_fac, # collapse levels #<<
                                     Adelie = c("Adelie"), #<<
@@ -484,22 +484,22 @@ penguins %>% tabyl(species_fac, species_fac2)
 
 
 
-## ----child=here::here("01-intro-r-eda","child_closing.Rmd")-------------------------------------
+## ----child=here::here("01-intro-r-eda","child_closing.Rmd")-------------
 
-## ---- eval=FALSE--------------------------------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------
 ## save(penguins, file = "penguins.RData")  # saving mydata within the data folder
 
 
-## ---- eval=FALSE--------------------------------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------
 ## load("penguins.RData")
 
 
-## ---- eval=FALSE--------------------------------------------------------------------------------
-## write_csv(mydata, path = "mydata.csv")
+## ---- eval=FALSE--------------------------------------------------------
+## write_csv(penguins, path = "my_penguin_data.csv")
 
 
 
-## ---- eval=FALSE, echo=FALSE--------------------------------------------------------------------
+## ---- eval=FALSE, echo=FALSE--------------------------------------------
 ## # RUN THESE AFTER KNITTING
 ## knitr::purl(here::here("01-intro-r-eda","01_intro_r_eda_part2.Rmd"),
 ##             out = here::here("01-intro-r-eda","01_intro_r_eda_part2.R"))

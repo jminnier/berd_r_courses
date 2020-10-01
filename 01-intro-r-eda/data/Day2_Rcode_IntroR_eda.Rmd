@@ -215,8 +215,9 @@ penguins %>% select(id:bill_length_mm)
 penguins %>% select(where(is.character))
 penguins %>% select(where(is.numeric))
 
-penguins %>% select(-id,-species)
-penguins %>% select(-(id:island))
+penguins %>% select(-species)
+names(penguins)
+penguins %>% select(-(island:sex))
 
 penguins %>% select(contains("bill"))
 penguins %>% select(starts_with("s"))
@@ -271,9 +272,9 @@ penguins <- penguins %>% mutate(male2 = 1 * (sex == "male"))
 penguins %>% rename(record = id)
 
 
-penguins <- penguins %>% 
+penguins2 <- penguins %>% 
   rename(record = id)
-penguins
+penguins2
 
 ```
 
@@ -452,7 +453,7 @@ save(penguins, file = "penguins.RData")  # saving mydata within the data folder
 
 load("penguins.RData")
 
-write_csv(penguins, path = "penguins.csv")
+write_csv(penguins, path = "penguins_new.csv")
 
 ```
 
