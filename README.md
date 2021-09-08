@@ -23,7 +23,7 @@ Parts of workshops 1-4 have been reworked into a new workshop (Sept 2020) for be
 
 ### Materials
 
-Date | Session # | Title | Video | Slides | Slide Code
+Date | Session # | Title | Video ([all](https://echo360.org/section/ffe141ee-01ee-4895-bdfc-ed179b922d17/public) | Slides | Slide Code
 ---|---|---|---|---|---
 2019/02/26 & 2019/03/07 | 1 | Introduction to R and Rstudio | | [html](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.html), [pdf](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_slides.pdf), [practice answers](https://jminnier-berd-r-courses.netlify.com/01-getting-started/01_getting_started_Practice_Answers.html) | [Rmd](01-getting-started/01_getting_started_slides.Rmd) 
 2019/04/18 | 2 - Part 1 | Data Wrangling in R with the Tidyverse | | [html](http://bit.ly/berd_tidy1), [pdf](http://bit.ly/berd_tidy1_pdf), [practice answers](https://jminnier-berd-r-courses.netlify.com/02-data-wrangling-tidyverse/02_data_wrangling_slides_part1_practice_solutions.html) | [Rmd](02-data-wrangling-tidyverse/02_data_wrangling_slides_part1.Rmd)
