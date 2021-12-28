@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## If you prefer to use PSU's VLAB
 
-You can run R and Rstudio through PSU's virtual computing environment.
+You can run R and Rstudio through PSU's virtual computing environment if you have PSU credentials (i.e. SPH students).
 
 - Go to [vlab.pdx.edu](http://vlab.pdx.edu/)
 - Sign in with your PSU (pdx.edu) credentials.
@@ -43,15 +43,24 @@ You can run R and Rstudio through PSU's virtual computing environment.
     
 ### Install **RStudio Desktop** Open Source License (second)
 
-- Select download file corresponding to your operating system  from https://www.rstudio.com/products/rstudio/download/#download
+- Go to https://www.rstudio.com/products/rstudio/download/#download
+- Click the blue box which contains the download file corresponding to your operating system, i.e.
+
+<a href="https://www.rstudio.com/products/rstudio/download/#download"><img src="img/install_rstudio.png" width="40%" height="40%"></a>
 
 ## Open Rstudio
 
 After installation, open Rstudio by clicking on the Rstudio icon, a round blue ball with R in it, that should look something like this:
 
-![](rstudiologo.png)
+![](img/rstudiologo.png)
 
 Do not open the regular R software, it is just working in the background when you use Rstudio.
+
+## Install useful packages
+
+Download [this file](https://drive.google.com/file/d/1DWG2xcwJpEasakadbxCVVs1NEbkCYIaY/view?usp=sharing) to your computer, open in Rstudio, and click "source" to run the entire document, or run each line of code. See instructions in top comments.
+
+
 
 # Prepare for the course
 
