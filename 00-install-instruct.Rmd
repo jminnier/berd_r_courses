@@ -22,12 +22,26 @@ knitr::opts_chunk$set(echo = TRUE)
 - Even if you have R installed already, we highly recommend installing the latest version if it has been a while since you installed it. Just follow the instructions as below to update everything.
 - **TRY TO DO THIS YOURSELF BEFORE THE WORKSHOP** If you have tried it at home and still have questions, come to the workshop 30 minutes early and the instructors will try to help.
 
-## Install **R** (first)
+## If you prefer to use PSU's VLAB
 
-- Windows: Download from https://cran.rstudio.com/bin/windows/base/ from the link "Download R 4.0.2 for Windows"
-- Mac OS X: Download the latest .pkg file (top link, currently R-4.0.2.pkg) from https://cran.rstudio.com/bin/macosx/
+You can run R and Rstudio through PSU's virtual computing environment.
 
-## Install **RStudio Desktop** Open Source License (second)
+- Go to [vlab.pdx.edu](http://vlab.pdx.edu/)
+- Sign in with your PSU (pdx.edu) credentials.
+- Open/launch "Computer Lab"
+- Sign in with your PSU (pdx.edu) credentials, again.
+- Open Rstudio
+- Read more about VLAB [here](https://www.pdx.edu/technology/vlab)
+
+## Install R and Rstudio on your computer
+
+### Install **R** (first)
+
+- Windows: Download from https://cran.rstudio.com/bin/windows/base/ from the link "Download R 4.1.2 for Windows"
+- Mac OS X: Download the latest .pkg file (top link, currently R-4.1.2.pkg) from https://cran.rstudio.com/bin/macosx/
+    * If you have a Mac, it's also useful to download XQuartz https://www.xquartz.org/
+    
+### Install **RStudio Desktop** Open Source License (second)
 
 - Select download file corresponding to your operating system  from https://www.rstudio.com/products/rstudio/download/#download
 
@@ -54,7 +68,7 @@ Do not open the regular R software, it is just working in the background when yo
 - **Very Useful**: [Rstudio interactive lessons](https://rstudio.cloud/learn/primers)
 - View previous OHSU OCTRI BERD workshops that have been recorded, including an earlier version of "Getting Started with R and Rstudio"
     + Slides at [github.com/jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-    + [Recordings are on echo](https://echo360.org/section/aefe4e1c-c635-4a3b-bf99-ce6439184f5f/public). Search for BERD.
+    + [Recordings are on echo](https://echo360.org/section/ffe141ee-01ee-4895-bdfc-ed179b922d17/public) Search for BERD.
 - Long list of other resources [here](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
 - [Rstudio IDE cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
 - [Modern Dive textbook chapter getting started](https://moderndive.com/1-getting-started.html)
