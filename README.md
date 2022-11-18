@@ -7,7 +7,7 @@ Oregon Health & Science University
 
 ### Recordings
 
-Most sessions have been recorded and can be found at this public [link](https://echo360.org/section/ffe141ee-01ee-4895-bdfc-ed179b922d17/public) and the [OCTRI BERD Research Forum website](https://www.ohsu.edu/octri/octri-research-forum-your-monthly-clinical-and-translational-research-event).
+Most sessions have been recorded and can be found at this public [link](https://echo360.org/section/5bb1b2d6-aa4b-4703-a890-376180d177f5/public) and the [OCTRI BERD Research Forum website](https://www.ohsu.edu/octri/octri-research-forum-your-monthly-clinical-and-translational-research-event).
 
 Recommended viewing order (since some are recorded multiple times, and some have been redeveloped):
 
