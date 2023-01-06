@@ -15,12 +15,11 @@ urlcolor: blue
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Pre-course installation
+# Pre-course installation for your computer
 
 - R and Rstudio are two separate programs. You must install R first. Then install Rstudio desktop. 
 - For help, try [watching this video](https://www.youtube.com/watch?v=kOQDdJZ7Hl4&feature=youtu.be)
 - Even if you have R installed already, we highly recommend installing the latest version if it has been a while since you installed it. Just follow the instructions as below to update everything.
-- **TRY TO DO THIS YOURSELF BEFORE THE WORKSHOP** If you have tried it at home and still have questions, come to the workshop 30 minutes early and the instructors will try to help.
 
 ## If you prefer to use PSU's VLAB
 
@@ -35,20 +34,21 @@ You can run R and Rstudio through PSU's virtual computing environment if you hav
 
 ## Install R and Rstudio on your computer
 
-### Install **R** (first)
+### 1. Install **R** (also do this if you need to update R to version > 4.0)
 
 - Windows: Download from https://cran.rstudio.com/bin/windows/base/ from the link "Download R-4.2.2 for Windows"
 - Mac OS X: Download the latest .pkg file that works with your type of Mac (R-4.2.2.pkg or R-4.2.2-arm64.pkg, only one will work for you) from https://cran.rstudio.com/bin/macosx/
     * If you have a Mac, it's also useful to download XQuartz https://www.xquartz.org/ and Xcode (mac app store)
     
-### Install **RStudio Desktop** Open Source License (second)
+### 2. Install **RStudio Desktop** from Posit website (also do this if you wish to update Rstudio)
 
 - Go to https://posit.co/download/rstudio-desktop/
 - Click the blue box after Step 2 which contains the download file corresponding to your operating system, i.e.
 
-<a href="https://www.rstudio.com/products/rstudio/download/#download"><img src="img/install_rstudio.png" width="40%" height="40%"></a>
+<a href="https://posit.co/download/rstudio-desktop/"><img src="img/install_rstudio.png" width="40%" height="40%"></a>
+- Open the downloaded file and run the installation software.
 
-## Open Rstudio
+## Open Rstudio Desktop
 
 After installation, open Rstudio by clicking on the Rstudio icon, a round blue ball with R in it, that should look something like this:
 
@@ -56,38 +56,39 @@ After installation, open Rstudio by clicking on the Rstudio icon, a round blue b
 
 Do not open the regular R software, it is just working in the background when you use Rstudio.
 
-## Install useful packages
+## Download class materials from dropbox
 
-Download [this file](https://drive.google.com/file/d/1DWG2xcwJpEasakadbxCVVs1NEbkCYIaY/view?usp=sharing) to your computer, open in Rstudio, and click "source" to run the entire document, or run each line of code. See instructions in top comments.
+Once you have installed R and Rstudio, [download the part1 class materials folder](http://bit.ly/bsta504_dropbox_2023). Open Rstudio by double clicking on `part1.rproj` file. Open the file `00-install-packages.R` by clicking on that file name in the "Files" pane. When the file opens, click "Source" at the top of the code to run the entire script.
 
+[Here's a quick video](https://www.youtube.com/watch?v=GU22sKHn9uc) showing you how to do all of that if you have trouble (PC users watch to 5:27 minute mark; note dropbox download may look different using other browsers).
 
 
 # Prepare for the course
 
 ## *Highly recommended*
 
-- Get acquainted with Rstudio (and R) prior to the workshop. You will get much more out of the workshop if you have opened the software and explored the interface first.
+- Get acquainted with Rstudio (and R) prior to the first class. You will feel more comfortable following along with coding if you have opened the software and explored the interface on your own first.
 
 ## *Recommended*
-- Try out the [Programming basics](https://rstudio.cloud/learn/primers/1.2) interactive lesson from Rstudio.
-- Look over [slides from a previous version of this workshop](https://jminnier-berd-r-courses.netlify.app/01-getting-started-v2/01_getting_started_slides.html)
+
+- Try out the [interactive lessons/primers](https://posit.cloud/learn/primers) (start with The Basics) from Posit/Rstudio.
+
 
 ## Still want more preparation?
 
-- **Very Useful**: [Rstudio interactive lessons](https://rstudio.cloud/learn/primers)
-- View previous OHSU OCTRI BERD workshops that have been recorded, including an earlier version of "Getting Started with R and Rstudio"
+- View OHSU OCTRI BERD workshops that have been recorded, including "Getting Started with R and Rstudio" and "Data Wrangling with the Tidyverse"
     + Slides at [github.com/jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
-    + [Recordings are on echo](https://echo360.org/section/ffe141ee-01ee-4895-bdfc-ed179b922d17/public) Search for BERD.
+    + [Recordings are on echo](https://echo360.org/section/5bb1b2d6-aa4b-4703-a890-376180d177f5/public)
 - Long list of other resources [here](https://github.com/jminnier/awesome-rstats/blob/master/learn-r.md)
 - [Rstudio IDE cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
 - [Modern Dive textbook chapter getting started](https://moderndive.com/1-getting-started.html)
 - [R bootcamp - interactive tutorial](https://r-bootcamp.netlify.com/) Ted Laderas & Jessica Minnier
 - [Introduction to module and RStudio by Emma Rand](http://www-users.york.ac.uk/~er13/17C%20-%202018/pracs/01IntroductionToModuleAndRStudio.html)
-- [Basic Basics opinionated tour of Rstudio](http://rladiessydney.org/post/2018/11/05/basicbasics-1/)
+- [Basic Basics opinionated tour of Rstudio](https://rladiessydney.org/courses/ryouwithme/01-basicbasics-0/)
 
 # Instructor Info
 
-[Jessica Minnier, PhD](http://jessicaminnier.com/) & [Meike Niederhausen, PhD](https://ohsu-psu-sph.org/faculty-2/faculty-directory/?cn-s=niederhausen&cn-cat=), 
+[Jessica Minnier, PhD](http://jessicaminnier.com/)
 Oregon Health & Science University
 
 Slides and code for BERD workshop materials: [jminnier/berd_r_courses](https://github.com/jminnier/berd_r_courses)
