@@ -1,6 +1,6 @@
 ---
-title: "BERD Getting Started with R and Rstudio"
-author: "Pre-workshop Installation Instructions"
+title: "BSTA 504: Topics in R Programming"
+author: "Pre-course Installation Instructions"
 date: "Updated: `r Sys.Date()`"
 output: 
   html_document: 
@@ -48,7 +48,7 @@ You can run R and Rstudio through PSU's virtual computing environment if you hav
 <a href="https://posit.co/download/rstudio-desktop/"><img src="img/install_rstudio.png" width="40%" height="40%"></a>
 - Open the downloaded file and run the installation software.
 
-## Open Rstudio Desktop
+## 3. Open Rstudio Desktop
 
 After installation, open Rstudio by clicking on the Rstudio icon, a round blue ball with R in it, that should look something like this:
 
@@ -56,7 +56,7 @@ After installation, open Rstudio by clicking on the Rstudio icon, a round blue b
 
 Do not open the regular R software, it is just working in the background when you use Rstudio.
 
-## Download class materials from dropbox
+## 4. Download class materials from dropbox
 
 Once you have installed R and Rstudio, [download the part1 class materials folder](http://bit.ly/bsta504_dropbox_2023). Open Rstudio by double clicking on `part1.rproj` file. Open the file `00-install-packages.R` by clicking on that file name in the "Files" pane. When the file opens, click "Source" at the top of the code to run the entire script.
 
