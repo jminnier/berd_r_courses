@@ -34,7 +34,7 @@ You can run R and Rstudio through PSU's virtual computing environment if you hav
 
 ## Install R and Rstudio on your computer
 
-### 1. Install **R** (also do this if you need to update R to version > 4.0)
+### 1. Install **R** (also do this if you need to update R to version > 4.0, > 4.2 preferred)
 
 - Windows: Download from https://cran.rstudio.com/bin/windows/base/ from the link "Download R-4.2.2 for Windows"
 - Mac OS X: Download the latest .pkg file that works with your type of Mac (R-4.2.2.pkg or R-4.2.2-arm64.pkg, only one will work for you) from https://cran.rstudio.com/bin/macosx/
